@@ -1,0 +1,97 @@
+---
+interface Props {
+  replayId?: string;
+  wide?: boolean;
+  tall?: boolean;
+  noPad?: boolean;
+  dark?: boolean;
+}
+const { replayId, wide, tall, noPad, dark } = Astro.props;
+---
+
+<div class="demo-wrap">
+  <div class:list={["demo-stage", { wide, tall, "no-pad": noPad, dark }]}>
+    <slot />
+  </div>
+  {
+    replayId && (
+      <div class="demo-bar">
+        <button class="replay-btn" data-replay={replayId}>
+          ↺ Replay
+        </button>
+      </div>
+    )
+  }
+</div>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>("[data-replay]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const id = btn.dataset.replay!;
+      (document.getElementById(id) as any)?.replay();
+    });
+  });
+</script>
+
+<style>
+  .demo-wrap {
+    display: block;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .demo-stage {
+    background: var(--color-surface);
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 140px;
+  }
+
+  .demo-stage.wide {
+    padding: 2rem;
+  }
+
+  .demo-stage.tall {
+    padding: 4rem 0;
+  }
+
+  .demo-stage.dark {
+    background: #0a0a0f;
+  }
+
+  .demo-stage.no-pad {
+    padding: 0;
+    display: block;
+  }
+
+  .demo-bar {
+    background: var(--color-surface-2);
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+  }
+
+  .replay-btn {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 0.25rem 0.65rem;
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    cursor: pointer;
+    font-family: var(--font-sans);
+    transition:
+      color 0.15s,
+      border-color 0.15s;
+  }
+
+  .replay-btn:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+</style>

@@ -1,0 +1,282 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-code — Motion Components" description="A syntax-highlighted code block with a macOS-style chrome, built-in tokenizer for multiple languages, typing animation, and compact mode." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-code</motion-split></h1>
+      <p class="lead">
+        A syntax-highlighted code block with a macOS-style chrome, built-in tokenizer for multiple languages, typing animation, and compact mode.
+      </p>
+
+      <h2>Preview</h2>
+      <DocsPreview>
+        <div class="demo-window">
+          <CodeWindow
+            filename="app.ts"
+            code={`import { animate, stagger } from "motion"
+
+animate(".card", {
+  y: [24, 0],
+  opacity: [0, 1],
+}, {
+  duration: 0.5,
+  delay: stagger(0.08),
+})`}
+          />
+        </div>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/code-window'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-code.html"
+        copy
+        code={`<motion-code filename="app.ts">
+  <script type="text/plain">
+    import { animate } from "motion"
+    animate(".box", { opacity: [0, 1] }, { duration: 0.5 })
+  <\/script>
+</motion-code>`}
+      />
+
+      <h2>Typing animation</h2>
+      <p>Add <code>type</code> to animate code appearing character by character — syntax highlighting applies as it types. Loops automatically by default. Control speed with <code>type-speed</code> (chars/sec, default&nbsp;80) and the pause between loops with <code>type-loop-delay</code> (ms).</p>
+      <DocsPreview>
+        <div class="demo-window">
+          <CodeWindow
+            filename="motion.ts"
+            type
+            typeSpeed={65}
+            typeLoopDelay={1200}
+            code={`const card = document.querySelector(".card")
+
+animate(card, {
+  scale: [0.95, 1],
+  opacity: [0, 1],
+}, { duration: 0.4 })`}
+          />
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-code.html"
+        copy
+        code={`<motion-code filename="app.ts" type type-speed="65">
+  <script type="text/plain">
+    animate(".card", { opacity: [0, 1] })
+  <\/script>
+</motion-code>`}
+      />
+
+      <h2>On reveal — no-loop</h2>
+      <p>Add <code>no-loop</code> to disable looping. The animation plays once when the element scrolls into the viewport instead of starting immediately.</p>
+      <DocsPreview replayId="cw-reveal-demo">
+        <div class="demo-window">
+          <CodeWindow
+            id="cw-reveal-demo"
+            filename="app.ts"
+            type
+            typeSpeed={60}
+            no-loop
+            code={`animate(".hero", {
+  opacity: [0, 1],
+  y: [20, 0],
+}, { duration: 0.5 })`}
+          />
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-code.html"
+        copy
+        code={`<motion-code filename="app.ts" type no-loop>
+  ...
+</motion-code>`}
+      />
+
+      <h2>Delayed typing</h2>
+      <p>Use <code>type-delay</code> (ms) to hold before typing starts — useful when the window animates into view.</p>
+      <DocsPreview replayId="cw-delay-demo">
+        <div class="demo-window">
+          <CodeWindow
+            id="cw-delay-demo"
+            filename="app.py"
+            type
+            no-loop
+            typeSpeed={55}
+            typeDelay={500}
+            code={`from motion import animate
+
+animate(".hero", {
+    "opacity": [0, 1],
+    "y": [20, 0],
+}, duration=0.5)`}
+          />
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-code.html"
+        copy
+        code={`<motion-code filename="app.py" type type-speed="55" type-delay="500">
+  ...
+</motion-code>`}
+      />
+
+      <h2>Compact</h2>
+      <p>Add <code>compact</code> for tighter padding, smaller font, and a slimmer title bar — useful inside cards or sidebars.</p>
+      <DocsPreview>
+        <div class="demo-window">
+          <CodeWindow
+            filename="config.json"
+            compact
+            code={`{
+  "name": "motion-components",
+  "version": "0.1.0",
+  "type": "module"
+}`}
+          />
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-code.html"
+        copy
+        code={`<motion-code filename="config.json" compact>
+  ...
+</motion-code>`}
+      />
+
+      <h2>Hide chrome</h2>
+      <p>Use <code>hide-chrome</code> to remove the title bar entirely — just the code body.</p>
+      <DocsPreview>
+        <div class="demo-window">
+          <CodeWindow
+            hide-chrome
+            code={`npm install motion-components`}
+          />
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-code.html"
+        copy
+        code={`<motion-code hide-chrome>
+  <script type="text/plain">
+    npm install motion-components
+  <\/script>
+</motion-code>`}
+      />
+
+      <h2>Languages</h2>
+      <p>Language is inferred from the <code>filename</code> extension. Override with the <code>lang</code> attribute.</p>
+      <div class="lang-grid">
+        {['HTML / Astro', 'JavaScript / TypeScript', 'CSS', 'JSON', 'Python', 'Shell'].map(l => (
+          <span class="lang-pill">{l}</span>
+        ))}
+      </div>
+      <CodeWindow
+        filename="motion-code.html"
+        copy
+        code={`<!-- Auto-detected from extension -->
+<motion-code filename="styles.css">...</motion-code>
+<motion-code filename="data.json">...</motion-code>
+<motion-code filename="script.py">...</motion-code>
+
+<!-- Override manually -->
+<motion-code lang="js">...</motion-code>`}
+      />
+
+      <h2>Theming</h2>
+      <p>Token colours are CSS custom properties that pierce the Shadow DOM. Map any external theme's palette to these variables on <code>:root</code>.</p>
+      <CodeWindow
+        filename="theme.css"
+        copy
+        code={`/* VS Code Dark+ */
+:root {
+  --cw-keyword: #569cd6;
+  --cw-string:  #ce9178;
+  --cw-tag:     #4ec9b0;
+  --cw-attr:    #9cdcfe;
+  --cw-num:     #b5cea8;
+  --cw-comment: #6a9955;
+}`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'filename',        type: 'string',  default: '"app.html"', description: 'Shown in the chrome bar; also used to infer the language' },
+        { name: 'lang',            type: 'string',  default: '""',         description: 'Override language: html · js · css · json · python · sh' },
+        { name: 'copy',            type: 'boolean', default: 'false',      description: 'Show a Copy button in the chrome bar' },
+        { name: 'hide-chrome',     type: 'boolean', default: 'false',      description: 'Remove the title bar entirely' },
+        { name: 'compact',         type: 'boolean', default: 'false',      description: 'Reduce padding, font size, border radius, and title bar height' },
+        { name: 'type',            type: 'boolean', default: 'false',      description: 'Animate code in character by character with a blinking cursor. Loops automatically.' },
+        { name: 'type-speed',      type: 'number',  default: '80',         description: 'Typing speed in characters per second' },
+        { name: 'type-delay',      type: 'number',  default: '0',          description: 'Delay in ms before typing starts' },
+        { name: 'no-loop',         type: 'boolean', default: 'false',      description: 'Disable looping — play once on viewport entry instead of repeating' },
+        { name: 'type-loop-delay', type: 'number',  default: '1500',       description: 'Pause in ms between the end of one loop and the start of the next' },
+      ]} />
+
+      <h2>CSS variables</h2>
+      <PropsTable nameLabel="Variable" rows={[
+        { name: '--cw-keyword', type: 'color', default: '#7c3aed',          description: 'Keywords, booleans, null' },
+        { name: '--cw-string',  type: 'color', default: '#16a34a',          description: 'String literals' },
+        { name: '--cw-tag',     type: 'color', default: '#0369a1',          description: 'HTML tags, CSS selectors' },
+        { name: '--cw-attr',    type: 'color', default: '#be123c',          description: 'Attributes, CSS properties, JSON keys, decorators' },
+        { name: '--cw-num',     type: 'color', default: '#b45309',          description: 'Numbers and units' },
+        { name: '--cw-comment', type: 'color', default: 'var(--color-muted)', description: 'Comments' },
+      ]} />
+
+      <h2>Methods</h2>
+      <PropsTable nameLabel="Method" rows={[
+        { name: 'setCode(raw)',  type: 'void', default: '—', description: 'Set code programmatically. Triggers typing if type is enabled.' },
+        { name: 'replay()',      type: 'void', default: '—', description: 'Restart the typing animation from the beginning.' },
+      ]} />
+      <h2>Accessibility</h2>
+      <p>Respects <code>prefers-reduced-motion</code>: when enabled, the cursor blink animation is disabled. The typing animation remains functional.</p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .demo-window {
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .lang-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 1rem;
+  }
+
+  .lang-pill {
+    font-size: 0.75rem;
+    font-family: var(--font-mono);
+    color: var(--color-muted);
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+  }
+</style>

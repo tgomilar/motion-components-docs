@@ -1,0 +1,93 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-progress — Motion Components" noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-progress</motion-split></h1>
+      <p class="lead">
+        Fixed scroll-progress bar driven by Motion One's <code>scroll()</code>. Spring-eased <code>scaleX</code>, so the bar settles past its target instead of hard-snapping.
+      </p>
+
+      <h2>Preview</h2>
+      <p class="section-desc">
+        The bar pinned to the top of every docs page is a live <code>motion-progress</code> tracking your scroll. The mock below shows what the markup represents.
+      </p>
+      <DocsPreview>
+        <div class="bar-mock">
+          <div class="bar-mock-fill"></div>
+        </div>
+      </DocsPreview>
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-progress.html"
+        copy
+        code={`<!-- Document scroll progress, top of viewport -->
+<motion-progress color="#60a5fa" thickness="3"></motion-progress>
+
+<!-- Per-element progress, bottom of viewport -->
+<motion-progress
+  target="#article"
+  position="bottom"
+  color="currentColor"
+></motion-progress>`}
+      />
+
+      <h2>Per-element progress</h2>
+      <p>
+        Pass a CSS selector to <code>target</code> to track scroll progress through a specific element rather than the whole document.
+        Useful for long-form articles, sticky sections, or per-card readers.
+      </p>
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'position', type: '"top" | "bottom"', default: '"top"', description: 'Edge of the viewport the bar pins to' },
+        { name: 'color', type: 'string', default: 'var(--color-accent, #2563eb)', description: 'Bar color (any valid CSS color)' },
+        { name: 'thickness', type: 'number', default: '3', description: 'Bar thickness in pixels' },
+        { name: 'target', type: 'string', default: '—', description: 'CSS selector of the scroll target. Defaults to the document' },
+        { name: 'bounce', type: 'number', default: '0.15', description: 'Spring bounciness applied to the scaleX response' },
+        { name: 'duration', type: 'number', default: '0.4', description: 'Spring duration of the scaleX response, in seconds' },
+      ]} />
+
+      <h2>Accessibility</h2>
+      <p>
+        The bar is rendered with <code>role="progressbar"</code>. It does not steal focus or pointer events. Spring overshoot is deliberately small;
+        if you need a perfectly linear bar, set <code>bounce="0"</code>.
+      </p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .bar-mock {
+    width: 100%;
+    height: 6px;
+    background: var(--color-surface-2);
+    border-radius: 3px;
+    overflow: hidden;
+  }
+
+  .bar-mock-fill {
+    width: 60%;
+    height: 100%;
+    background: var(--color-accent);
+    border-radius: 3px;
+  }
+</style>

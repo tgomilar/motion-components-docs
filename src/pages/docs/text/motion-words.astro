@@ -1,0 +1,94 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-words — Motion Components" description="Cycles through an array of words with a spring-based vertical slide. Each word can have its own color. Designed to be used inline inside headings." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-words</motion-split></h1>
+      <p class="lead">
+        Cycles through an array of words with a spring-based vertical slide. Each word can have its own color. Designed to be used inline inside headings.
+      </p>
+
+      <h2>Preview</h2>
+      <DocsPreview>
+        <p class="demo-heading">
+          We help you
+          <motion-words words="design,build,ship" colors="#3b82f6,#8b5cf6,#10b981" interval="2000"></motion-words>
+          faster.
+        </p>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-words'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-words.html"
+        copy
+        code={`<h1>
+  We help you
+  <motion-words
+    words="design,build,ship"
+    colors="#3b82f6,#8b5cf6,#10b981"
+    interval="2000"
+  ></motion-words>
+  faster.
+</h1>`}
+      />
+
+      <h2>How it works</h2>
+      <p>
+        The component is <code>display: inline-block</code> with <code>overflow: hidden</code>, so it clips to one line of text. On each cycle interval, the
+        current word animates out upward with a fast ease-in (0.22s), then the next word springs in from below. Because it's inline, it sits naturally alongside
+        surrounding text in headings.
+      </p>
+      <p>
+        If words have different lengths, the container width adjusts naturally on each swap. Set a <code>min-width</code> on the element via CSS to prevent layout
+        shift if needed.
+      </p>
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'words', type: 'string', default: '—', description: 'Comma-separated list of words to cycle through' },
+        { name: 'colors', type: 'string', default: 'currentColor', description: 'Comma-separated colors, one per word. Any valid CSS color value.' },
+        { name: 'interval', type: 'number', default: '2000', description: 'Time in ms between word changes' },
+        { name: 'duration', type: 'number', default: '0.5', description: 'Spring animation duration hint in seconds' },
+      ]} />
+
+      <h2>Accessibility</h2>
+      <p>When <code>prefers-reduced-motion</code> is set, words swap instantly with no animation.</p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .demo-heading {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    line-height: 1.2;
+    margin: 0;
+  }
+</style>

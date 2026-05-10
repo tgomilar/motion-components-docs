@@ -1,0 +1,132 @@
+---
+import { SECTION_ORDER, SECTION_LABELS } from '../data/docs'
+
+type Entry = { name: string; href: string; section: string }
+
+const pageFiles = import.meta.glob('../pages/docs/*/*.astro')
+const bySection: Record<string, Entry[]> = {}
+
+for (const path of Object.keys(pageFiles)) {
+  const parts = path.split('/')
+  const section = parts.at(-2)!
+  const name = parts.at(-1)!.replace('.astro', '')
+  if (!SECTION_ORDER.includes(section as any)) continue
+  bySection[section] ??= []
+  bySection[section].push({ name, href: `/docs/${section}/${name}/`, section })
+}
+
+for (const items of Object.values(bySection)) {
+  items.sort((a, b) => a.name.localeCompare(b.name))
+}
+
+const linear: Entry[] = SECTION_ORDER.flatMap(s => bySection[s] ?? [])
+const current = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`
+const idx = linear.findIndex(e => e.href === current)
+const prev = idx > 0 ? linear[idx - 1] : null
+const next = idx >= 0 && idx < linear.length - 1 ? linear[idx + 1] : null
+---
+
+{(prev || next) && (
+  <nav class="docs-pagination" aria-label="Docs pagination">
+    {prev ? (
+      <motion-spotlight class="pg-spot" size="320" color="rgba(96,165,250,0.22)">
+        <a href={prev.href} class="pg pg-prev" rel="prev">
+          <span class="pg-direction">← Previous</span>
+          <span class="pg-section">{SECTION_LABELS[prev.section as keyof typeof SECTION_LABELS]}</span>
+          <span class="pg-name">{prev.name}</span>
+        </a>
+      </motion-spotlight>
+    ) : <span class="pg pg-empty" aria-hidden="true" />}
+
+    {next ? (
+      <motion-spotlight class="pg-spot" size="320" color="rgba(96,165,250,0.22)">
+        <a href={next.href} class="pg pg-next" rel="next">
+          <span class="pg-direction">Next →</span>
+          <span class="pg-section">{SECTION_LABELS[next.section as keyof typeof SECTION_LABELS]}</span>
+          <span class="pg-name">{next.name}</span>
+        </a>
+      </motion-spotlight>
+    ) : <span class="pg pg-empty" aria-hidden="true" />}
+  </nav>
+)}
+
+<style>
+  .docs-pagination {
+    margin: 4rem 0 1rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--color-border);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .docs-pagination {
+    align-items: start;
+  }
+
+  .pg-spot {
+    display: block;
+    border-radius: 12px;
+  }
+
+  .pg {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    text-decoration: none;
+    transition: border-color 0.18s, transform 0.18s;
+    min-height: 80px;
+  }
+
+  .pg-spot:hover .pg {
+    border-color: color-mix(in srgb, var(--color-accent) 50%, var(--color-border));
+    transform: translateY(-2px);
+    text-decoration: none;
+  }
+
+  .pg-empty {
+    border: 1px dashed var(--color-border);
+    background: transparent;
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  .pg-prev { text-align: left; }
+  .pg-next { text-align: right; align-items: flex-end; }
+
+  .pg-direction {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-accent);
+  }
+
+  .pg-section {
+    font-size: 0.68rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+  }
+
+  .pg-name {
+    font-family: var(--font-mono);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--color-text);
+    letter-spacing: -0.01em;
+  }
+
+  @media (max-width: 560px) {
+    .docs-pagination {
+      grid-template-columns: 1fr;
+    }
+    .pg-empty { display: none; }
+  }
+</style>

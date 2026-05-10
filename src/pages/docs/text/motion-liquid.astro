@@ -1,0 +1,125 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-liquid — Motion Components" description="Applies an animated SVG displacement filter to text, giving it a living, fluid quality — like ink in water or hot air shimmer. No WebGL required." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-liquid</motion-split></h1>
+      <p class="lead">Applies an animated SVG displacement filter to text, giving it a living, fluid quality — like ink in water or hot air shimmer. No WebGL required.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview>
+        <motion-liquid class="demo-large" text="LIQUID" intensity="12" speed="1.5"></motion-liquid>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-liquid'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-liquid.html"
+        copy
+        code={`<motion-liquid
+  text="LIQUID"
+  intensity="12"
+  speed="1.5"
+></motion-liquid>`}
+      />
+
+      <h2>Intensity</h2>
+      <p><code>intensity</code> sets the maximum displacement in pixels. Higher values create more dramatic distortion.</p>
+      <DocsPreview>
+        <div style="display:flex; flex-direction:column; gap:1.5rem; align-items:flex-start">
+          <motion-liquid class="demo-large" text="SUBTLE" intensity="5" speed="1.5"></motion-liquid>
+          <motion-liquid class="demo-large" text="INTENSE" intensity="24" speed="1.5"></motion-liquid>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-liquid.html"
+        copy
+        code={`<motion-liquid text="SUBTLE" intensity="5"></motion-liquid>
+<motion-liquid text="INTENSE" intensity="24"></motion-liquid>`}
+      />
+
+      <h2>Speed</h2>
+      <p><code>speed</code> controls how fast the fluid motion evolves. Slow speeds feel like a gentle shimmer; higher speeds feel chaotic.</p>
+      <DocsPreview>
+        <div style="display:flex; flex-direction:column; gap:1.5rem; align-items:flex-start">
+          <motion-liquid class="demo-large" text="SLOW" intensity="14" speed="0.5"></motion-liquid>
+          <motion-liquid class="demo-large" text="FAST" intensity="14" speed="4"></motion-liquid>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-liquid.html"
+        copy
+        code={`<motion-liquid text="SLOW" intensity="14" speed="0.5"></motion-liquid>
+<motion-liquid text="FAST" intensity="14" speed="4"></motion-liquid>`}
+      />
+
+      <h2>Pause on hover</h2>
+      <p>Add <code>pause-on-hover</code> to freeze the fluid motion when the cursor enters.</p>
+      <DocsPreview>
+        <motion-liquid class="demo-large" text="HOVER ME" intensity="14" speed="1.5" pause-on-hover></motion-liquid>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-liquid.html"
+        copy
+        code={`<motion-liquid
+  text="HOVER ME"
+  intensity="14"
+  speed="1.5"
+  pause-on-hover
+></motion-liquid>`}
+      />
+
+      <h2>How it works</h2>
+      <p>
+        An inline SVG <code>&lt;filter&gt;</code> containing <code>&lt;feTurbulence&gt;</code> and <code>&lt;feDisplacementMap&gt;</code> is defined in the shadow root and applied to the text span via <code>filter: url(#liquid-filter)</code>. A <code>requestAnimationFrame</code> loop updates the turbulence <code>baseFrequency</code> and displacement <code>scale</code> attributes over time using sine and cosine curves, creating a continuously evolving organic distortion.
+      </p>
+      <p>
+        Because the filter is scoped to the shadow root, multiple <code>motion-liquid</code> instances on the same page do not interfere with each other.
+      </p>
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'text', type: 'string', default: '—', description: 'Text to render with the liquid effect' },
+        { name: 'intensity', type: 'number', default: '10', description: 'Maximum displacement in px' },
+        { name: 'speed', type: 'number', default: '2', description: 'How fast the fluid motion evolves' },
+        { name: 'pause-on-hover', type: 'boolean', default: 'false', description: 'Freeze motion on mouseenter, resume on mouseleave' },
+      ]} />
+
+      <h2>Accessibility</h2>
+      <p>When <code>prefers-reduced-motion</code> is set, the animation loop does not start and the text renders without distortion.</p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .demo-large {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+  }
+</style>

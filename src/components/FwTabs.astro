@@ -1,0 +1,186 @@
+---
+import CodeWindow from "./CodeWindow.astro";
+
+interface Tab {
+  id: string;
+  label: string;
+  desc?: string;
+  filename: string;
+  code: string;
+}
+
+interface Props {
+  tabs: Tab[];
+  group?: string;
+}
+
+const { tabs, group = "default" } = Astro.props;
+---
+
+<div class="fw-tabs" data-fw-tabs data-group={group}>
+  <div class="fw-tab-list" role="tablist">
+    {tabs.map((tab, i) => (
+      <button class:list={["fw-tab", { active: i === 0 }]} data-tab={tab.id} role="tab" aria-selected={i === 0}>
+        {tab.label}
+      </button>
+    ))}
+    <span class="fw-tab-indicator no-transition" data-indicator></span>
+  </div>
+  {tabs.map((tab, i) => (
+    <div class:list={["fw-panel", { active: i === 0 }]} data-panel={tab.id}>
+      {tab.desc && <p class="fw-desc" set:html={tab.desc} />}
+      <CodeWindow filename={tab.filename} copy compact code={tab.code} />
+    </div>
+  ))}
+</div>
+
+<script>
+  const STORAGE_PREFIX = "fw-tabs:";
+
+  function moveIndicator(container: HTMLElement, active: HTMLButtonElement | null) {
+    const indicator = container.querySelector<HTMLElement>("[data-indicator]");
+    if (!indicator || !active) return;
+    indicator.style.transform = `translateX(${active.offsetLeft}px)`;
+    indicator.style.width = `${active.offsetWidth}px`;
+  }
+
+  function activate(container: HTMLElement, tabId: string) {
+    const tabs = container.querySelectorAll<HTMLButtonElement>(".fw-tab");
+    const panels = container.querySelectorAll<HTMLElement>(".fw-panel");
+    let activeTab: HTMLButtonElement | null = null;
+    tabs.forEach(t => {
+      const isActive = t.dataset.tab === tabId;
+      t.classList.toggle("active", isActive);
+      t.setAttribute("aria-selected", String(isActive));
+      if (isActive) activeTab = t;
+    });
+    panels.forEach(p => p.classList.toggle("active", p.dataset.panel === tabId));
+    moveIndicator(container, activeTab);
+  }
+
+  function init(container: HTMLElement) {
+    const group = container.dataset.group ?? "default";
+    const tabs = Array.from(container.querySelectorAll<HTMLButtonElement>(".fw-tab"));
+    if (tabs.length === 0) return;
+
+    const saved = localStorage.getItem(STORAGE_PREFIX + group);
+    const initialId = (saved && tabs.some(t => t.dataset.tab === saved))
+      ? saved
+      : tabs[0].dataset.tab!;
+
+    activate(container, initialId);
+
+    requestAnimationFrame(() => requestAnimationFrame(() => {
+      container.querySelector<HTMLElement>("[data-indicator]")?.classList.remove("no-transition");
+    }));
+
+    tabs.forEach(t => {
+      t.addEventListener("click", () => {
+        const id = t.dataset.tab!;
+        activate(container, id);
+        try { localStorage.setItem(STORAGE_PREFIX + group, id); } catch {}
+      });
+    });
+
+    const list = container.querySelector<HTMLElement>(".fw-tab-list");
+    const reposition = () => {
+      const active = container.querySelector<HTMLButtonElement>(".fw-tab.active");
+      moveIndicator(container, active);
+    };
+    list?.addEventListener("scroll", reposition);
+    window.addEventListener("resize", reposition);
+  }
+
+  function start() {
+    document.querySelectorAll<HTMLElement>("[data-fw-tabs]").forEach(init);
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", start, { once: true });
+  } else {
+    start();
+  }
+</script>
+
+<style>
+  .fw-tabs {
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+  }
+
+  .fw-tab-list {
+    display: flex;
+    position: relative;
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-surface-2);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .fw-tab-list::-webkit-scrollbar { display: none; }
+
+  .fw-tab {
+    all: unset;
+    padding: 0.6rem 1rem;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--color-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.15s;
+  }
+
+  .fw-tab:hover { color: var(--color-text); }
+
+  .fw-tab.active { color: var(--color-text); }
+
+  .fw-tab-indicator {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    height: 2px;
+    width: 0;
+    background: var(--color-accent);
+    transform: translateX(0);
+    transition: transform 0.24s cubic-bezier(0.4, 0, 0.2, 1), width 0.24s cubic-bezier(0.4, 0, 0.2, 1);
+    pointer-events: none;
+    will-change: transform, width;
+  }
+
+  .fw-tab-indicator.no-transition {
+    transition: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .fw-tab-indicator {
+      transition: none;
+    }
+  }
+
+  .fw-panel {
+    display: none;
+    padding: 1rem 1.25rem;
+    background: var(--color-surface);
+  }
+
+  .fw-panel.active { display: block; }
+
+  .fw-desc {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text);
+    line-height: 1.65;
+    margin: 0 0 0.75rem;
+  }
+
+  .fw-desc :global(code) {
+    font-family: var(--font-mono), monospace;
+    font-size: 0.82rem;
+    color: var(--color-accent);
+    background: var(--color-accent-dim);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+  }
+</style>

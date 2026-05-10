@@ -1,0 +1,69 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-blur-in — Motion Components" noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-blur-in</motion-split></h1>
+      <p class="lead">Viewport-triggered blur reveal. Starts blurred and translated, snaps to focus once the element enters the viewport.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview replayId="blur-in-demo">
+        <motion-blur-in id="blur-in-demo" blur="12" y="8" duration="0.7">
+          <div class="demo-card">Scroll to reveal</div>
+        </motion-blur-in>
+      </DocsPreview>
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-blur-in.html"
+        copy
+        code={`<motion-blur-in blur="12" y="8" duration="0.7">
+  <h1>Headline</h1>
+</motion-blur-in>`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable rows={[
+        { name: 'duration', type: 'number', default: '0.7', description: 'Spring duration of the reveal animation, in seconds' },
+        { name: 'blur', type: 'number', default: '10', description: 'Initial blur in pixels; animates to 0 on reveal' },
+        { name: 'y', type: 'number', default: '12', description: 'Initial vertical offset in pixels; animates to 0 on reveal' },
+        { name: 'threshold', type: 'number', default: '0.1', description: 'IntersectionObserver threshold (0–1) at which the reveal triggers' },
+        { name: 'once', type: 'boolean', default: 'true', description: 'Animate only the first time the element enters view' },
+      ]} />
+
+      <h2>Accessibility</h2>
+      <p>Respects <code>prefers-reduced-motion</code>: content appears immediately at full opacity with no blur or translation.</p>
+
+      <DocsPagination />
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .demo-card {
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 2rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-align: center;
+  }
+</style>

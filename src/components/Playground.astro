@@ -1,0 +1,253 @@
+---
+export interface Control {
+  attr: string
+  type: 'number' | 'boolean'
+  default: number | boolean
+  min?: number
+  max?: number
+  step?: number
+  unit?: string
+}
+
+interface Props {
+  component: string
+  controls: Control[]
+}
+
+const { component, controls } = Astro.props
+const uid = `pg-${Math.random().toString(36).slice(2, 7)}`
+
+const defaultAttrs = controls
+  .map(c => `  ${c.attr}="${c.default}"`)
+  .join('\n')
+const defaultCode = `<${component}\n${defaultAttrs}>\n  <!-- content -->\n</${component}>`
+---
+
+<div class="playground" id={uid} data-component={component}>
+  <div class="preview">
+    <slot />
+  </div>
+
+  <div class="controls">
+    {controls.map(ctrl => (
+      <div class="control">
+        <code class="ctrl-name">{ctrl.attr}</code>
+        {ctrl.type === 'number' ? (
+          <div class="input-wrap">
+            <input
+              type="number"
+              data-attr={ctrl.attr}
+              min={ctrl.min}
+              max={ctrl.max}
+              step={ctrl.step ?? 0.01}
+              value={ctrl.default as number}
+            />
+            <span class="unit">{ctrl.unit ?? ''}</span>
+          </div>
+        ) : (
+          <label class="toggle">
+            <input
+              type="checkbox"
+              data-attr={ctrl.attr}
+              checked={ctrl.default as boolean}
+            />
+            <span class="track" />
+          </label>
+        )}
+      </div>
+    ))}
+  </div>
+
+  <div class="code-wrap">
+    <pre class="code-preview"><code data-code>{defaultCode}</code></pre>
+    <button class="copy-btn" aria-label="Copy code">Copy</button>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.playground').forEach(pg => {
+    const tag = pg.getAttribute('data-component')!
+    const el = pg.querySelector<HTMLElement>(tag)
+    if (!el) return
+
+    const codeEl = pg.querySelector<HTMLElement>('[data-code]')!
+
+    function updateCode() {
+      const attrs = Array.from(el!.attributes)
+        .filter(a => !['id', 'class', 'style'].includes(a.name))
+        .map(a => `  ${a.name}="${a.value}"`)
+        .join('\n')
+      codeEl.textContent = `<${tag}\n${attrs}>\n  <!-- content -->\n</${tag}>`
+    }
+
+    const copyBtn = pg.querySelector<HTMLButtonElement>('.copy-btn')!
+    copyBtn.addEventListener('click', () => {
+      navigator.clipboard.writeText(codeEl.textContent ?? '')
+      copyBtn.textContent = 'Copied!'
+      setTimeout(() => copyBtn.textContent = 'Copy', 1500)
+    })
+
+    pg.querySelectorAll<HTMLInputElement>('input[data-attr]').forEach(input => {
+      const attr = input.getAttribute('data-attr')!
+
+      input.addEventListener('input', () => {
+        if (input.type === 'checkbox') {
+          if (input.checked) el.setAttribute(attr, '')
+          else el.removeAttribute(attr)
+        } else {
+          el.setAttribute(attr, input.value)
+        }
+        updateCode()
+      })
+    })
+  })
+</script>
+
+<style>
+  .playground {
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .preview {
+    background: var(--color-surface);
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  @media (max-width: 640px) {
+    .preview {
+      padding: 1.5rem 1rem;
+    }
+  }
+
+  .controls {
+    background: var(--color-surface-2);
+  }
+
+  .control {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.6rem 1.25rem;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .ctrl-name {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-accent);
+    background: var(--color-accent-dim);
+    padding: 0.1rem 0.4rem;
+    border-radius: 4px;
+  }
+
+  .input-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  input[type="number"] {
+    width: 80px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    color: var(--color-text);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    padding: 0.3rem 0.5rem;
+    text-align: right;
+    outline: none;
+    -moz-appearance: textfield;
+  }
+
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button { opacity: 1; }
+
+  input[type="number"]:focus {
+    border-color: var(--color-accent);
+  }
+
+  .unit {
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    width: 1.5rem;
+  }
+
+  /* Toggle */
+  .toggle {
+    position: relative;
+    display: inline-flex;
+    cursor: pointer;
+  }
+
+  .toggle input { opacity: 0; width: 0; height: 0; position: absolute; }
+
+  .track {
+    width: 36px;
+    height: 20px;
+    background: var(--color-border);
+    border-radius: 99px;
+    position: relative;
+    transition: background 0.2s;
+  }
+
+  .track::after {
+    content: '';
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 14px;
+    height: 14px;
+    background: #fff;
+    border-radius: 99px;
+    transition: transform 0.2s;
+  }
+
+  .toggle input:checked + .track { background: var(--color-accent); }
+  .toggle input:checked + .track::after { transform: translateX(16px); }
+
+  .code-wrap {
+    position: relative;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .code-preview {
+    background: var(--color-surface);
+    padding: 1rem 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    line-height: 1.7;
+    color: var(--color-muted);
+    margin: 0;
+    overflow-x: auto;
+  }
+
+  .code-preview code { color: var(--color-text); }
+
+  .copy-btn {
+    position: absolute;
+    top: 0.6rem;
+    right: 0.75rem;
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    cursor: pointer;
+    transition: color 0.15s, border-color 0.15s;
+  }
+
+  .copy-btn:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+</style>

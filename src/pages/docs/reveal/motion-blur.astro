@@ -1,0 +1,400 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-blur — Motion Components" description="Animates slotted content with blur, opacity, and translateY driven directly by scroll position. Three directions: in, out, and both." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-blur</motion-split></h1>
+      <p class="lead">
+        Animates slotted content with <code>filter:blur</code> + <code>opacity</code> + <code>translateY</code>, driven directly by scroll position. Three
+        directions: <code>in</code> (reveals as it enters), <code>out</code> (blurs as it exits), and <code>both</code> (in and out as it crosses the viewport).
+      </p>
+
+      <h2>Blur in — default</h2>
+      <p>Content sharpens as it scrolls into the center of the viewport. Scroll down to this demo to see it reveal.</p>
+      <DocsPreview replayId="blur-in-demo">
+        <motion-blur id="blur-in-demo">
+          <div class="demo-announce">
+            <span class="demo-badge">Scroll-driven</span>
+            <p class="demo-announce-title">Blur reveal</p>
+            <p class="demo-announce-sub">Sharpens as it enters the viewport</p>
+          </div>
+        </motion-blur>
+      </DocsPreview>
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-blur'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <CodeWindow
+        filename="motion-blur.html"
+        copy
+        code={`<motion-blur>
+  <h2>Your headline</h2>
+</motion-blur>`}
+      />
+
+      <h2>Blur out</h2>
+      <p>Starts sharp and blurs out as it scrolls past the center of the viewport. Scroll past this demo to see the effect.</p>
+      <DocsPreview replayId="blur-out-demo" tall>
+        <motion-blur id="blur-out-demo" direction="out">
+          <div class="demo-section-head">
+            <p class="demo-eyebrow">Scroll down</p>
+            <p class="demo-section-title">Disappears on exit</p>
+            <p class="demo-section-sub">Blurs and fades as it leaves the viewport</p>
+          </div>
+        </motion-blur>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-blur-out.html"
+        copy
+        code={`<motion-blur direction="out">
+  <h2>Disappears on scroll</h2>
+</motion-blur>`}
+      />
+
+      <h2>Both directions</h2>
+      <p>Blurs in on entry and out on exit — visible only while centered in the viewport.</p>
+      <DocsPreview replayId="blur-both-demo" tall>
+        <motion-blur id="blur-both-demo" direction="both">
+          <figure class="demo-quote">
+            <p class="demo-quote-text">"Motion that follows the scroll"</p>
+            <figcaption class="demo-quote-author">Blurs in and out as you scroll</figcaption>
+          </figure>
+        </motion-blur>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-blur-both.html"
+        copy
+        code={`<motion-blur direction="both">
+  <h2>Scroll through me</h2>
+</motion-blur>`}
+      />
+
+      <h2>Tuning the blur</h2>
+      <p>Compare <code>blur</code> and <code>y</code> values side by side — scroll to this row to see them all reveal.</p>
+      <DocsPreview replayId="blur-tuning-demo">
+        <div id="blur-tuning-demo" class="blur-compare">
+          <div class="blur-compare-item">
+            <motion-blur id="blur-subtle" blur="3" y="6">
+              <div class="compare-swatch">Aa</div>
+            </motion-blur>
+            <code>blur=3</code>
+          </div>
+          <div class="blur-compare-item">
+            <motion-blur id="blur-default">
+              <div class="compare-swatch">Aa</div>
+            </motion-blur>
+            <code>blur=10</code>
+          </div>
+          <div class="blur-compare-item">
+            <motion-blur id="blur-dreamy" blur="24" y="20">
+              <div class="compare-swatch">Aa</div>
+            </motion-blur>
+            <code>blur=24</code>
+          </div>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-blur-tuning.html"
+        copy
+        code={`<!-- Subtle -->
+<motion-blur blur="3" y="6">...</motion-blur>
+
+<!-- Default -->
+<motion-blur>...</motion-blur>
+
+<!-- Dreamy -->
+<motion-blur blur="24" y="20">...</motion-blur>`}
+      />
+
+      <h2>Wrapping content blocks</h2>
+      <p>Works around any block content. Stagger the effect naturally by giving each card a slightly higher <code>blur</code> value.</p>
+      <DocsPreview replayId="blur-cards-demo">
+        <div class="demo-cards" id="blur-cards-demo">
+          <motion-blur data-replay-group="blur-cards-demo" blur="10" y="16">
+            <div class="demo-feature-card">
+              <div class="demo-feature-icon">◆</div>
+              <div class="demo-feature-name">Scroll-driven</div>
+              <div class="demo-feature-desc">Animation tied directly to scroll position.</div>
+            </div>
+          </motion-blur>
+          <motion-blur data-replay-group="blur-cards-demo" blur="14" y="20">
+            <div class="demo-feature-card">
+              <div class="demo-feature-icon">◈</div>
+              <div class="demo-feature-name">Zero layout shift</div>
+              <div class="demo-feature-desc">Animates opacity and filter only.</div>
+            </div>
+          </motion-blur>
+          <motion-blur data-replay-group="blur-cards-demo" blur="18" y="24">
+            <div class="demo-feature-card">
+              <div class="demo-feature-icon">◉</div>
+              <div class="demo-feature-name">Accessible</div>
+              <div class="demo-feature-desc">Respects prefers-reduced-motion.</div>
+            </div>
+          </motion-blur>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-blur-cards.html"
+        copy
+        code={`<motion-blur blur="10" y="16">
+  <div class="card">Scroll-driven</div>
+</motion-blur>
+<motion-blur blur="14" y="20">
+  <div class="card">Zero layout shift</div>
+</motion-blur>
+<motion-blur blur="18" y="24">
+  <div class="card">Accessible</div>
+</motion-blur>`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable
+        nameLabel="Attribute"
+        rows={[
+          {
+            name: "direction",
+            type: "string",
+            default: "'in'",
+            description: "<code>'in'</code> — reveals on entry &nbsp;|&nbsp; <code>'out'</code> — blurs on exit &nbsp;|&nbsp; <code>'both'</code> — in and out",
+          },
+          {
+            name: "blur",
+            type: "number",
+            default: "10",
+            description: "Blur radius in px at the start (<code>in</code>) or end (<code>out</code>) of the scroll range",
+          },
+          { name: "y", type: "number", default: "12", description: "Vertical offset in px — shifts down on entry, up on exit" },
+          {
+            name: "once",
+            type: "boolean",
+            default: "true",
+            description:
+              'For <code>direction="in"</code>: latch at fully-visible state and stop scroll tracking. Has no effect on <code>out</code> or <code>both</code>.',
+          },
+        ]}
+      />
+
+      <h2>Methods</h2>
+      <PropsTable
+        nameLabel="Method"
+        rows={[{ name: "replay()", type: "void", default: "—", description: "Reset to initial state and re-bind scroll tracking." }]}
+      />
+
+      <h2>Accessibility</h2>
+      <p>Respects <code>prefers-reduced-motion</code>: content appears immediately at its final visible state with no blur or translation.</p>
+      <DocsPagination />
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+
+  document.addEventListener("click", (e) => {
+    const btn = (e.target as HTMLElement).closest("[data-replay]");
+    if (!btn) return;
+    const id = btn.getAttribute("data-replay");
+    if (id === "blur-tuning-demo") {
+      document.querySelectorAll("#blur-tuning-demo motion-blur")
+        .forEach((el) => (el as any).replay?.());
+    } else if (id === "blur-cards-demo") {
+      document.querySelectorAll(`[data-replay-group="${id}"]`)
+        .forEach((el) => (el as any).replay?.());
+    }
+  });
+</script>
+
+<style>
+  /* ── Blur in demo ──────────────────────────────── */
+  .demo-announce {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    text-align: center;
+  }
+
+  .demo-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    background: var(--color-accent-dim);
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+  }
+
+  .demo-announce-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .demo-announce-sub {
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  /* ── Blur out demo ─────────────────────────────── */
+  .demo-section-head {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .demo-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  .demo-section-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  .demo-section-sub {
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  /* ── Both directions demo ──────────────────────── */
+  .demo-quote {
+    max-width: 340px;
+    text-align: center;
+    margin: 0;
+    padding: 1.5rem 2rem;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    background: var(--color-surface-2);
+  }
+
+  .demo-quote-text {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.5;
+    margin: 0 0 0.75rem;
+  }
+
+  .demo-quote-author {
+    font-size: 0.8rem;
+    color: var(--color-muted);
+    margin: 0;
+  }
+
+  /* ── Tuning comparison ─────────────────────────── */
+  .blur-compare {
+    display: flex;
+    gap: 2rem;
+    align-items: flex-end;
+  }
+
+  .blur-compare-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .compare-swatch {
+    width: 72px;
+    height: 72px;
+    border-radius: 14px;
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--color-text);
+    letter-spacing: -0.03em;
+  }
+
+  .compare-replay-btn {
+    display: block;
+    margin: 1.25rem auto 0;
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    padding: 0.3rem 0.75rem;
+    font-size: 0.75rem;
+    color: var(--color-muted);
+    cursor: pointer;
+    font-family: var(--font-sans);
+    transition:
+      color 0.15s,
+      border-color 0.15s;
+  }
+
+  .compare-replay-btn:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  /* ── Cards demo ────────────────────────────────── */
+  .demo-cards {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .demo-feature-card {
+    width: 160px;
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1.25rem;
+    text-align: left;
+  }
+
+  .demo-feature-icon {
+    font-size: 1.1rem;
+    color: var(--color-accent);
+    margin-bottom: 0.6rem;
+  }
+
+  .demo-feature-name {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--color-text);
+    margin-bottom: 0.35rem;
+  }
+
+  .demo-feature-desc {
+    font-size: 0.78rem;
+    color: var(--color-muted);
+    line-height: 1.5;
+  }
+</style>

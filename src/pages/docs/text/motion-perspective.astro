@@ -1,0 +1,144 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-perspective — Motion Components" description="Scales characters progressively to simulate a vanishing-point perspective — text that recedes into the distance. Static by default, with an optional animated rotation mode." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-perspective</motion-split></h1>
+      <p class="lead">Scales characters progressively to simulate a vanishing-point perspective — text that recedes into the distance. Static by default, with an optional animated rotation mode.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview>
+        <motion-perspective class="demo-large" text="PERSPECTIVE" depth="0.7" vanish="left"></motion-perspective>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-perspective'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-perspective.html"
+        copy
+        code={`<motion-perspective
+  text="PERSPECTIVE"
+  depth="0.7"
+  vanish="left"
+></motion-perspective>`}
+      />
+
+      <h2>Vanish right</h2>
+      <p>Set <code>vanish="right"</code> to flip the direction — text grows from left to right.</p>
+      <DocsPreview>
+        <motion-perspective class="demo-large" text="RECEDING" depth="0.7" vanish="right"></motion-perspective>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-perspective.html"
+        copy
+        code={`<motion-perspective
+  text="RECEDING"
+  depth="0.7"
+  vanish="right"
+></motion-perspective>`}
+      />
+
+      <h2>Depth</h2>
+      <p>Increase <code>depth</code> toward <code>1</code> for a more extreme effect, or reduce it for a subtle optical refinement.</p>
+      <DocsPreview>
+        <div style="display:flex; flex-direction:column; gap:1rem; align-items:flex-start">
+          <motion-perspective class="demo-large" text="SHALLOW" depth="0.3" vanish="left"></motion-perspective>
+          <motion-perspective class="demo-large" text="DEEP" depth="0.85" vanish="left"></motion-perspective>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-perspective.html"
+        copy
+        code={`<motion-perspective text="SHALLOW" depth="0.3" vanish="left"></motion-perspective>
+<motion-perspective text="DEEP" depth="0.85" vanish="left"></motion-perspective>`}
+      />
+
+      <h2>Animated rotation</h2>
+      <p>Add <code>animate</code> to continuously rotate the perspective illusion back and forth. <code>speed</code> sets cycles per second.</p>
+      <DocsPreview>
+        <motion-perspective class="demo-large" text="ROTATING" depth="0.7" vanish="left" animate speed="0.6"></motion-perspective>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-perspective.html"
+        copy
+        code={`<motion-perspective
+  text="ROTATING"
+  depth="0.7"
+  animate
+  speed="0.6"
+></motion-perspective>`}
+      />
+
+      <h2>Pause on hover</h2>
+      <p>Add <code>pause-on-hover</code> to freeze the animation when the cursor enters.</p>
+      <DocsPreview>
+        <motion-perspective class="demo-large" text="HOVER ME" depth="0.7" animate speed="0.5" pause-on-hover></motion-perspective>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-perspective.html"
+        copy
+        code={`<motion-perspective
+  text="HOVER ME"
+  depth="0.7"
+  animate
+  speed="0.5"
+  pause-on-hover
+></motion-perspective>`}
+      />
+
+      <h2>How it works</h2>
+      <p>
+        Characters are laid out in a bottom-aligned flex row. Each character's <code>font-size</code> is scaled from <code>(1 - depth)em</code> at the vanishing end to <code>1em</code> at the foreground end. Because all characters share the same baseline, the result mimics text on a flat plane receding into the distance.
+      </p>
+      <p>
+        In animated mode, a <code>requestAnimationFrame</code> loop drives a cosine wave across the character positions, continuously cycling the perspective illusion through a full rotation.
+      </p>
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'text', type: 'string', default: '—', description: 'Text to render with the perspective effect' },
+        { name: 'depth', type: 'number', default: '0.65', description: 'Effect intensity — how small the vanishing end gets (0–1)' },
+        { name: 'vanish', type: '"left" | "right"', default: '"left"', description: 'Which end of the text is the vanishing point' },
+        { name: 'animate', type: 'boolean', default: 'false', description: 'Continuously rotate the perspective back and forth' },
+        { name: 'speed', type: 'number', default: '1.5', description: 'Rotation cycles per second (only applies when animate is set)' },
+        { name: 'pause-on-hover', type: 'boolean', default: 'false', description: 'Freeze animation on mouseenter, resume on mouseleave' },
+      ]} />
+
+      <h2>Accessibility</h2>
+      <p>When <code>prefers-reduced-motion</code> is set, the animated mode falls back to the static perspective layout.</p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .demo-large {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+  }
+</style>

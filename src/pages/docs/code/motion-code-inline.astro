@@ -1,0 +1,143 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-code-inline — Motion Components" description="Inline code tag with a styled background, monospace font, and an optional copy button. Colours are controllable via CSS custom properties." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-code-inline</motion-split></h1>
+      <p class="lead">
+        Inline <code>&lt;code&gt;</code> tag with a styled background, monospace font, and an optional copy button. The accent, background, and icon colours are all controllable via CSS custom properties.
+      </p>
+
+      <h2>Preview</h2>
+      <DocsPreview>
+        <p class="demo-text">
+          Run <motion-code-inline copy>npm install motion-components</motion-code-inline>
+          to get started, then wrap any tag like
+          <motion-code-inline copy-visible>&lt;motion-reveal&gt;</motion-code-inline>.
+        </p>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/code-inline'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-code-inline.html"
+        copy
+        code={`<p>Import <motion-code-inline>motion-components</motion-code-inline> once.</p>`}
+      />
+
+      <h2>Copy on hover</h2>
+      <p>Add <code>copy</code> — a copy icon appears on hover and copies the text content on click. The icon briefly switches to a checkmark as feedback.</p>
+      <DocsPreview>
+        <motion-code-inline copy>npm install motion-components</motion-code-inline>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-code-inline.html"
+        copy
+        code={`<motion-code-inline copy>npm install motion-components</motion-code-inline>`}
+      />
+
+      <h2>Always visible copy</h2>
+      <p>Use <code>copy-visible</code> to keep the copy button always visible — no hover required.</p>
+      <DocsPreview>
+        <motion-code-inline copy-visible>npm install motion-components</motion-code-inline>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-code-inline.html"
+        copy
+        code={`<motion-code-inline copy-visible>npm install motion-components</motion-code-inline>`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'copy', type: 'boolean', default: 'false', description: 'Show a copy button on hover. Copies text content on click and shows a checkmark briefly.' },
+        { name: 'copy-visible', type: 'boolean', default: 'false', description: 'Keep the copy button always visible instead of only on hover.' },
+      ]} />
+
+      <h2>CSS variables</h2>
+      <PropsTable nameLabel="Variable" rows={[
+        { name: '--color-accent', type: 'color', default: '#2563eb', description: 'Text colour and icon hover colour' },
+        { name: '--color-accent-dim', type: 'color', default: '#2563eb18', description: 'Background fill behind the code text' },
+        { name: '--color-muted', type: 'color', default: '#60608a', description: 'Copy icon default colour' },
+      ]} />
+
+      <h2>Theming</h2>
+      <p>All colours are CSS custom properties that pierce the Shadow DOM. Override them on any parent to match your brand.</p>
+      <div class="theme-grid">
+        <DocsPreview dark noPad>
+          <div class="theme-block">
+            <p class="demo-text">Import <motion-code-inline>motion-components</motion-code-inline>.</p>
+            <p class="demo-text">Run <motion-code-inline copy>npm install</motion-code-inline> to install.</p>
+          </div>
+        </DocsPreview>
+        <CodeWindow
+          filename="theme.css"
+          copy
+          compact
+          code={`/* Dark theme example */
+.theme-block {
+  --color-accent: #60a5fa;
+  --color-accent-dim: #60a5fa20;
+  --color-muted: #94a3b8;
+}`}
+        />
+      </div>
+      <h2>Accessibility</h2>
+      <p>No motion or animation — the component is purely visual and fully functional with all accessibility settings. Respects system colours via CSS custom properties.</p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .demo-text {
+    font-size: 1rem;
+    color: var(--color-text);
+  }
+
+  .theme-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+    align-items: start;
+    margin-bottom: 1.5rem;
+  }
+
+  @media (max-width: 640px) {
+    .theme-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .theme-block {
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .theme-block p {
+    margin: 0;
+    line-height: 2;
+  }
+</style>

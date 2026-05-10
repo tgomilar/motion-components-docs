@@ -1,0 +1,50 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-press — Motion Components" noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-press</motion-split></h1>
+      <p class="lead">Wraps any element and applies a spring-based compression on pointer press. Snaps back on release.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview>
+        <motion-press>
+          <button class="demo-btn">Press me</button>
+        </motion-press>
+      </DocsPreview>
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-press.html"
+        copy
+        code={`<motion-press scale="0.95">
+  <button>Press me</button>
+</motion-press>`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable rows={[
+        { name: 'scale', type: 'number', default: '0.95', description: 'Target scale on press' },
+        { name: 'duration', type: 'number', default: '0.15', description: 'Spring duration hint in seconds' },
+      ]} />
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+

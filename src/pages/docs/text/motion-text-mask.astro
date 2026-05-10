@@ -1,0 +1,114 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-text-mask — Motion Components" description="Mask-clip reveal primitive. Clips slotted content behind an overflow-hidden boundary and springs it upward into view. A standalone composable wrapper for any content." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-text-mask</motion-split></h1>
+      <p class="lead">
+        Mask-clip reveal primitive. Clips slotted content behind an <code>overflow:hidden</code> boundary and springs it upward into view.
+        This is the same technique used inside <code>motion-headline</code>, exposed as a standalone composable wrapper for any content.
+      </p>
+
+      <h2>Preview</h2>
+      <DocsPreview replayId="text-mask-demo">
+        <motion-text-mask id="text-mask-demo" class="mask-demo">Revealed from below</motion-text-mask>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-text-mask'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-text-mask.html"
+        copy
+        code={`<motion-text-mask>
+  Your headline or any block content
+</motion-text-mask>`}
+      />
+
+      <h2>Composing with motion-stagger</h2>
+      <p>Wrap each line or word in its own <code>motion-text-mask</code> inside a <code>motion-stagger</code> to build a custom headline reveal without using <code>motion-headline</code>.</p>
+      <DocsPreview replayId="text-mask-compose">
+        <div class="mask-compose-demo">
+          <motion-stagger id="text-mask-compose" interval="0.1">
+            <motion-text-mask delay="0">Craft</motion-text-mask>
+            <motion-text-mask delay="0">award-winning</motion-text-mask>
+            <motion-text-mask delay="0">motion.</motion-text-mask>
+          </motion-stagger>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-text-mask-compose.html"
+        copy
+        code={`<motion-stagger interval="0.1">
+  <motion-text-mask>Craft</motion-text-mask>
+  <motion-text-mask>award-winning</motion-text-mask>
+  <motion-text-mask>motion.</motion-text-mask>
+</motion-stagger>`}
+      />
+
+      <h2>How it works</h2>
+      <p>
+        The host element has <code>overflow:hidden</code> set via Shadow DOM styles and <code>vertical-align:bottom</code> so the clip boundary sits at the text baseline.
+        An inner <code>div</code> starts at <code>translateY(110%)</code> — the extra 10% prevents sub-pixel bleed-through — and spring-animates to <code>translateY(0%)</code>.
+        The content appears to rise from behind an invisible floor.
+      </p>
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'duration', type: 'number', default: '0.9', description: 'Spring duration hint in seconds' },
+        { name: 'delay', type: 'number', default: '0', description: 'Initial delay in seconds before the reveal' },
+        { name: 'threshold', type: 'number', default: '0.2', description: 'IntersectionObserver visibility threshold (0–1)' },
+        { name: 'once', type: 'boolean', default: 'true', description: 'Reveal only on first intersection' },
+      ]} />
+      <h2>Accessibility</h2>
+      <p>Respects <code>prefers-reduced-motion</code>: when enabled, the mask reveal animates instantly and the text is fully visible.</p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .mask-demo {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+  }
+
+  .mask-compose-demo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .mask-compose-demo motion-text-mask {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    color: var(--color-text);
+  }
+</style>

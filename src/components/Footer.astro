@@ -1,0 +1,232 @@
+<footer class="site-footer">
+  <div class="footer-inner">
+    <!-- Brand -->
+    <div class="footer-brand">
+      <span class="footer-logo">
+        <span class="footer-logo-bracket">&lt;</span><span class="footer-logo-motion">motion</span
+        ><span class="footer-logo-dash">-</span><span class="footer-logo-comp">components</span
+        ><span class="footer-logo-bracket">&gt;</span>
+      </span>
+      <p class="footer-tagline"
+        >Physics-based web components for every framework. Drop in a tag — the spring comes free.</p
+      >
+      <div class="footer-links">
+        <a
+          href="https://github.com/tgomilar/motion-components"
+          class="footer-icon-link"
+          target="_blank"
+          rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+            ><path
+              d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.604-3.369-1.341-3.369-1.341-.454-1.155-1.11-1.463-1.11-1.463-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.529 2.341 1.087 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.943 0-1.091.39-1.984 1.029-2.683-.103-.253-.446-1.27.098-2.647 0 0 .84-.269 2.75 1.025A9.578 9.578 0 0 1 12 6.836a9.59 9.59 0 0 1 2.504.337c1.909-1.294 2.747-1.025 2.747-1.025.546 1.377.202 2.394.1 2.647.64.699 1.028 1.592 1.028 2.683 0 3.842-2.339 4.687-4.566 4.935.359.309.678.919.678 1.852 0 1.336-.012 2.415-.012 2.743 0 .267.18.578.688.48C19.138 20.163 22 16.418 22 12c0-5.523-4.477-10-10-10z"
+            ></path></svg
+          >
+          GitHub
+        </a>
+        <a
+          href="https://www.npmjs.com/package/motion-components"
+          class="footer-icon-link"
+          target="_blank"
+          rel="noopener">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"
+            ><path
+              d="M0 0v24h24V0H0zm19.2 19.2H4.8V4.8h14.4v14.4zM8.4 8.4H6v7.2h2.4V10.8h2.4v4.8h2.4V8.4H8.4z"
+            ></path></svg
+          >
+          npm
+        </a>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <nav class="footer-nav">
+      <div class="footer-col">
+        <p class="footer-col-label">Docs</p>
+        <a href="/docs/">Get started</a>
+        <a href="/docs/reveal/motion-reveal/">Reveal</a>
+        <a href="/docs/respond/motion-hover/">Respond</a>
+        <a href="/docs/text/motion-headline/">Text</a>
+        <a href="/docs/scroll/motion-parallax/">Scroll</a>
+        <a href="/docs/components/motion-dialog/">Components</a>
+        <a href="/docs/code/motion-code/">Code</a>
+      </div>
+
+      <div class="footer-col">
+        <p class="footer-col-label">Project</p>
+        <a href="/about/">About</a>
+        <a href="/showcase">Showcase</a>
+        <a href="/docs/#frameworks">Frameworks</a>
+        <a href="/docs/#flash">Flash prevention</a>
+        <a href="https://motion.dev" target="_blank" rel="noopener">Motion ↗</a>
+        <a href="https://lit.dev" target="_blank" rel="noopener">Lit ↗</a>
+      </div>
+    </nav>
+  </div>
+
+  <div class="footer-bottom">
+    <p>
+      Built with <a href="https://lit.dev" target="_blank" rel="noopener">Lit</a> and <a
+        href="https://motion.dev"
+        target="_blank"
+        rel="noopener">Motion</a
+      > by <a href="https://github.com/tgomilar" target="_blank" rel="noopener">tgomilar</a>.
+    </p>
+    <p>MIT License &nbsp;·&nbsp; &copy; 2026</p>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    border-top: 1px solid var(--color-border);
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 4rem 2rem 3rem;
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  @media (max-width: 860px) {
+    .footer-inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .footer-inner {
+      padding: 2.5rem 1rem 2rem;
+    }
+  }
+
+  /* ── Brand ── */
+  .footer-logo {
+    font-size: 1.05rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    font-family: var(--font-mono);
+    display: block;
+    margin-bottom: 0.65rem;
+  }
+
+  .footer-logo-bracket {
+    color: var(--color-yellow);
+  }
+  .footer-logo-motion {
+    color: var(--color-accent);
+  }
+  .footer-logo-dash {
+    color: var(--color-yellow);
+  }
+  .footer-logo-comp {
+    color: var(--color-accent);
+  }
+
+  .footer-tagline {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    line-height: 1.65;
+    max-width: 240px;
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .footer-icon-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--color-muted);
+    text-decoration: none;
+    padding: 0.35rem 0.7rem;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    transition:
+      color 0.15s,
+      border-color 0.15s,
+      background 0.15s;
+  }
+
+  .footer-icon-link:hover {
+    color: var(--color-text);
+    border-color: var(--color-muted);
+    background: var(--color-surface-2);
+    text-decoration: none;
+  }
+
+  /* ── Nav ── */
+  .footer-nav {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  .footer-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .footer-col-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-muted);
+    margin-bottom: 0.25rem;
+  }
+
+  .footer-col a {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .footer-col a:hover {
+    color: var(--color-text);
+    text-decoration: none;
+  }
+
+  /* ── Bottom ── */
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.25rem 2rem;
+    border-top: 1px solid var(--color-border);
+    font-size: 0.78rem;
+    color: var(--color-muted);
+  }
+
+  .footer-bottom a {
+    color: var(--color-yellow);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .footer-bottom a:hover {
+    color: var(--color-text);
+  }
+
+  @media (max-width: 480px) {
+    .footer-bottom {
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: center;
+    }
+  }
+</style>

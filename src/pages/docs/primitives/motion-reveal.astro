@@ -1,0 +1,64 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-reveal — Motion Components" noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-reveal</motion-split></h1>
+      <p class="lead">Animates its content in when it enters the viewport. Uses IntersectionObserver with spring-based fade and lift.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview replayId="reveal-demo">
+        <motion-reveal id="reveal-demo" duration="0.6" y="24">
+          <div class="demo-card">Scroll to reveal</div>
+        </motion-reveal>
+      </DocsPreview>
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-reveal.html"
+        copy
+        code={`<motion-reveal duration="0.6" y="24">
+  <h2>Fades into view</h2>
+</motion-reveal>`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable rows={[
+        { name: 'duration', type: 'number', default: '0.6', description: 'Spring duration hint in seconds' },
+        { name: 'y', type: 'number', default: '24', description: 'Initial vertical offset in px' },
+        { name: 'threshold', type: 'number', default: '0.1', description: 'IntersectionObserver visibility threshold (0–1)' },
+        { name: 'once', type: 'boolean', default: 'true', description: 'Animate only on first intersection' },
+      ]} />
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .demo-card {
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 2rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-align: center;
+  }
+</style>

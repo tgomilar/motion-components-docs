@@ -1,0 +1,130 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-gravity — Motion Components" description="Characters fall in from above with staggered spring-physics timing — each one bouncing to a rest at the baseline. Built for hero text and section titles." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-gravity</motion-split></h1>
+      <p class="lead">
+        Characters fall in from above with staggered spring-physics timing — each one bouncing to a rest at the baseline. An entrance animation built for hero
+        text and section titles.
+      </p>
+
+      <h2>Preview</h2>
+      <DocsPreview replayId="gravity-demo">
+        <motion-gravity id="gravity-demo" class="demo-large" text="GRAVITY"></motion-gravity>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-gravity'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <h2>Usage</h2>
+      <CodeWindow filename="motion-gravity.html" copy code={`<motion-gravity text="GRAVITY"></motion-gravity>`} />
+
+      <h2>Height</h2>
+      <p><code>height</code> sets how far each character falls before landing. Larger values give a more dramatic entrance.</p>
+      <DocsPreview replayId="gravity-height">
+        <div id="gravity-height" style="display:flex; flex-direction:column; gap:2rem; align-items:flex-start">
+          <motion-gravity class="demo-large" text="SHORT DROP" height="20"></motion-gravity>
+          <motion-gravity class="demo-large" text="LONG DROP" height="120"></motion-gravity>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-gravity.html"
+        copy
+        code={`<motion-gravity text="SHORT DROP" height="20"></motion-gravity>
+<motion-gravity text="LONG DROP" height="120"></motion-gravity>`}
+      />
+
+      <h2>Stagger</h2>
+      <p><code>stagger</code> is the delay in seconds between each character landing. Tighten it for snappy cascades; spread it out for a slow reveal.</p>
+      <DocsPreview replayId="gravity-stagger">
+        <div id="gravity-stagger" style="display:flex; flex-direction:column; gap:2rem; align-items:flex-start">
+          <motion-gravity class="demo-large" text="FAST CASCADE" stagger="0.02"></motion-gravity>
+          <motion-gravity class="demo-large" text="SLOW REVEAL" stagger="0.15"></motion-gravity>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-gravity.html"
+        copy
+        code={`<motion-gravity text="FAST CASCADE" stagger="0.02"></motion-gravity>
+<motion-gravity text="SLOW REVEAL" stagger="0.15"></motion-gravity>`}
+      />
+
+      <h2>Delay</h2>
+      <p>Use <code>delay</code> to hold the animation until after other elements have entered — useful when composing multiple animated elements.</p>
+      <DocsPreview replayId="gravity-delay">
+        <div id="gravity-delay" style="display:flex; flex-direction:column; gap:2rem; align-items:flex-start">
+          <motion-gravity class="demo-large" text="FIRST" delay="0"></motion-gravity>
+          <motion-gravity class="demo-large" text="SECOND" delay="0.5"></motion-gravity>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-gravity.html"
+        copy
+        code={`<motion-gravity text="FIRST" delay="0"></motion-gravity>
+<motion-gravity text="SECOND" delay="0.5"></motion-gravity>`}
+      />
+
+      <h2>How it works</h2>
+      <p>
+        Each character is wrapped in an inline-block <code>span</code>. On first render (and whenever <code>text</code> changes), all characters are set to <code
+          >opacity: 0</code
+        > and <code>translateY(-height)</code>. Motion One then animates them back to their natural position using a spring (<code
+          >stiffness: 380, damping: 22</code
+        >), staggered by the <code>stagger</code> interval, with an optional leading <code>delay</code>.
+      </p>
+
+      <h2>Properties</h2>
+      <PropsTable
+        nameLabel="Attribute"
+        rows={[
+          { name: "text", type: "string", default: "—", description: "Text to animate in" },
+          { name: "height", type: "number", default: "60", description: "Fall distance in px" },
+          { name: "stagger", type: "number", default: "0.05", description: "Seconds between each character landing" },
+          { name: "duration", type: "number", default: "0.6", description: "Spring duration hint per character" },
+          { name: "delay", type: "number", default: "0", description: "Seconds to wait before the first character falls" },
+        ]}
+      />
+
+      <h2>Accessibility</h2>
+      <p>When <code>prefers-reduced-motion</code> is set, characters render immediately in their final position with no animation.</p>
+      <DocsPagination />
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+
+  ["gravity-height", "gravity-stagger", "gravity-delay"].forEach((id) => {
+    const el = document.getElementById(id);
+    if (el) (el as any).replay = () => el.querySelectorAll("motion-gravity").forEach((c: any) => c.replay());
+  });
+</script>
+
+<style>
+  .demo-large {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+  }
+
+</style>

@@ -1,0 +1,145 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-flip-card — Motion Components" noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-flip-card</motion-split></h1>
+      <p class="lead">
+        Two-sided card that flips between a <code>front</code> and <code>back</code> slot with spring physics. Trigger on hover or click; choose the rotation axis.
+      </p>
+
+      <h2>Preview — Hover, Y axis</h2>
+      <DocsPreview wide tall>
+        <motion-flip-card class="flip-demo" trigger="hover" axis="y">
+          <div slot="front" class="flip-face flip-front">Hover</div>
+          <div slot="back"  class="flip-face flip-back">Hello!</div>
+        </motion-flip-card>
+      </DocsPreview>
+
+      <h2>Preview — Click, X axis</h2>
+      <DocsPreview wide tall>
+        <motion-flip-card class="flip-demo" trigger="click" axis="x" duration="0.85" bounce="0.35">
+          <div slot="front" class="flip-face flip-front">Click me</div>
+          <div slot="back"  class="flip-face flip-back">Bouncier</div>
+        </motion-flip-card>
+      </DocsPreview>
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-flip-card.html"
+        copy
+        code={`<motion-flip-card trigger="click" axis="y">
+  <div slot="front" class="card">Tap me</div>
+  <div slot="back"  class="card">Hello, back side.</div>
+</motion-flip-card>`}
+      />
+
+      <h2>Sizing</h2>
+      <p>
+        The host is <code>inline-block</code> by default. Give it an explicit width and height (or set <code>display: block</code>) — both faces fill the host.
+      </p>
+      <CodeWindow
+        filename="styles.css"
+        copy
+        code={`motion-flip-card {
+  display: block;
+  width: 240px;
+  height: 320px;
+}`}
+      />
+
+      <h2>Programmatic flip</h2>
+      <p>Call <code>flip()</code> on the element to toggle from script:</p>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import type { MotionFlipCard } from 'motion-components'
+
+const card = document.querySelector<MotionFlipCard>('motion-flip-card')!
+card.flip()`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'trigger', type: '"hover" | "click"', default: '"hover"', description: 'What flips the card' },
+        { name: 'axis', type: '"y" | "x"', default: '"y"', description: 'Rotation axis: <code>y</code> (around vertical) or <code>x</code> (around horizontal)' },
+        { name: 'duration', type: 'number', default: '0.7', description: 'Spring duration of the flip, in seconds' },
+        { name: 'bounce', type: 'number', default: '0.2', description: 'Spring bounciness (0 = critically damped, higher = more elastic)' },
+        { name: 'perspective', type: 'number', default: '1000', description: 'CSS perspective applied to the host, in pixels' },
+      ]} />
+
+      <h2>Slots</h2>
+      <PropsTable nameLabel="Slot" rows={[
+        { name: 'front', type: 'element', default: '—', description: 'The face shown at rest' },
+        { name: 'back',  type: 'element', default: '—', description: 'The face revealed after flipping' },
+      ]} />
+
+      <h2>Methods</h2>
+      <div class="methods-table">
+        <table>
+          <thead><tr><th>Method</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>flip()</code></td><td>Toggles the card between front and back.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Accessibility</h2>
+      <p>
+        When <code>trigger="click"</code> the host is given <code>role="button"</code>, <code>tabindex="0"</code>, and responds to <kbd>Space</kbd> / <kbd>Enter</kbd>.
+        Both faces stay in the DOM at all times — the back face is rotated 180° and hidden via <code>backface-visibility</code>, so screen readers can still find its content.
+      </p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  motion-flip-card.flip-demo {
+    display: block;
+    width: 240px;
+    height: 160px;
+    margin: 0 auto;
+  }
+
+  .flip-face {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 1.4rem;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border: 1px solid var(--color-border);
+  }
+
+  .flip-front {
+    background: var(--color-surface);
+    color: var(--color-text);
+  }
+
+  .flip-back {
+    background: linear-gradient(135deg, #2563eb, #60a5fa);
+    color: white;
+    border-color: transparent;
+  }
+</style>

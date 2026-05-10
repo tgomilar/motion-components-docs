@@ -1,0 +1,333 @@
+---
+interface Props {
+  backHref?: string
+  backLabel?: string
+}
+
+import { SECTION_ORDER, SECTION_LABELS } from '../data/docs'
+
+const { backHref = '/docs/', backLabel = '← Docs' } = Astro.props
+
+type NavItem = { name: string; href: string }
+
+const pageFiles = import.meta.glob('../pages/docs/*/*.astro')
+const sections: Record<string, NavItem[]> = {}
+
+for (const path of Object.keys(pageFiles)) {
+  const parts = path.split('/')
+  const section = parts.at(-2)!
+  const name = parts.at(-1)!.replace('.astro', '')
+  if (!SECTION_ORDER.includes(section as any)) continue
+  sections[section] ??= []
+  sections[section].push({ name, href: `/docs/${section}/${name}/` })
+}
+
+for (const items of Object.values(sections)) {
+  items.sort((a, b) => a.name.localeCompare(b.name))
+}
+
+const current = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`
+const activeSection = SECTION_ORDER.find(s => sections[s]?.some(item => item.href === current))
+---
+
+<aside id="docs-sidebar">
+  <div class="sidebar-header">
+    <a href={backHref} class="back">{backLabel}</a>
+    <button class="sidebar-close" id="sidebar-close" aria-label="Close menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  </div>
+
+  <nav>
+    {SECTION_ORDER.map(section => sections[section] && (
+      <details {...(activeSection === undefined || section === activeSection ? { open: true } : {})}>
+        <summary>
+          <span class="section-label">{SECTION_LABELS[section]}</span>
+          <span class="count">{sections[section].length}</span>
+          <svg class="chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <polyline points="4 6 8 10 12 6"/>
+          </svg>
+        </summary>
+        {sections[section].map(item => (
+          <a href={item.href} class={`nav-item${item.href === current ? ' active' : ''}`}>
+            {item.name}
+          </a>
+        ))}
+      </details>
+    ))}
+  </nav>
+
+  <div class="footer-nav">
+    <p class="footer-label">Getting started</p>
+    <a href="/docs/" class={`footer-link${current === '/docs/' ? ' active' : ''}`}>Usage</a>
+    <a href="/docs/#frameworks" class="footer-link">Frameworks</a>
+  </div>
+</aside>
+
+<div class="sidebar-backdrop" id="sidebar-backdrop"></div>
+<button class="sidebar-toggle" id="sidebar-toggle" aria-label="Open sidebar menu">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  <span>Menu</span>
+</button>
+
+<script>
+  const sidebar = document.getElementById("docs-sidebar");
+  const backdrop = document.getElementById("sidebar-backdrop");
+  const toggle = document.getElementById("sidebar-toggle");
+  const closeBtn = document.getElementById("sidebar-close");
+
+  if (sidebar && backdrop && toggle && closeBtn) {
+    function openSidebar() {
+      sidebar!.classList.add("open");
+      backdrop!.classList.add("visible");
+      document.body.classList.add("sidebar-open");
+    }
+
+    function closeSidebar() {
+      sidebar!.classList.remove("open");
+      backdrop!.classList.remove("visible");
+      document.body.classList.remove("sidebar-open");
+    }
+
+    toggle.addEventListener("click", openSidebar);
+    closeBtn.addEventListener("click", closeSidebar);
+    backdrop.addEventListener("click", closeSidebar);
+
+    sidebar.querySelectorAll("a").forEach(a => {
+      a.addEventListener("click", closeSidebar);
+    });
+  }
+</script>
+
+<style>
+  aside {
+    padding: 2rem 1rem 0 0;
+    border-right: 1px solid var(--color-border);
+    position: sticky;
+    top: 56px;
+    height: calc(100vh - 56px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    text-decoration: none;
+    margin-bottom: 1.5rem;
+    transition: color 0.15s;
+    flex-shrink: 0;
+  }
+
+  .back:hover { color: var(--color-text); }
+
+  nav {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+    padding-bottom: 1rem;
+  }
+
+  nav::-webkit-scrollbar { width: 3px; }
+  nav::-webkit-scrollbar-track { background: transparent; }
+  nav::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 2px; }
+
+  /* ── Section toggle ── */
+  details {
+    margin-bottom: 0.125rem;
+  }
+
+  summary {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.3rem 0;
+    cursor: pointer;
+    list-style: none;
+    user-select: none;
+  }
+
+  summary::-webkit-details-marker { display: none; }
+
+  .section-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-muted);
+    flex: 1;
+  }
+
+  .count {
+    font-size: 0.6rem;
+    font-weight: 600;
+    font-family: var(--font-mono);
+    color: var(--color-muted);
+    opacity: 0.55;
+    line-height: 1;
+  }
+
+  .chevron {
+    width: 11px;
+    height: 11px;
+    color: var(--color-muted);
+    opacity: 0.4;
+    transition: transform 0.18s ease;
+    flex-shrink: 0;
+  }
+
+  details[open] > summary .chevron {
+    transform: rotate(180deg);
+  }
+
+  /* ── Nav items ── */
+  .nav-item {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    padding: 0.28rem 0 0.28rem 0.75rem;
+    text-decoration: none;
+    transition: color 0.12s;
+    line-height: 1.4;
+  }
+
+  .nav-item:hover { color: var(--color-text); }
+
+  .nav-item.active {
+    color: var(--color-text);
+    font-weight: 600;
+  }
+
+  /* ── Footer nav ── */
+  .footer-nav {
+    flex-shrink: 0;
+    padding: 1rem 0 2.5rem;
+    border-top: 1px solid var(--color-border);
+  }
+
+  .footer-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-muted);
+    margin: 0 0 0.4rem;
+  }
+
+  .footer-link {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--color-muted);
+    padding: 0.28rem 0;
+    text-decoration: none;
+    transition: color 0.12s;
+  }
+
+  .footer-link:hover,
+  .footer-link.active {
+    color: var(--color-text);
+  }
+
+  .footer-link.active {
+    font-weight: 600;
+  }
+
+  .sidebar-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .sidebar-close {
+    all: unset;
+    display: none;
+    cursor: pointer;
+    color: var(--color-muted);
+    padding: 0.25rem;
+    border-radius: 6px;
+    transition: color 0.15s;
+  }
+
+  .sidebar-close:hover { color: var(--color-text); }
+
+  .sidebar-toggle {
+    display: none;
+    position: fixed;
+    bottom: 1.25rem;
+    left: 1.25rem;
+    z-index: 40;
+    align-items: center;
+    gap: 0.4rem;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 0.55rem 0.85rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--color-text);
+    cursor: pointer;
+    font-family: var(--font-sans);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+
+  .sidebar-toggle:hover {
+    border-color: var(--color-accent);
+  }
+
+  .sidebar-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 51;
+    opacity: 0;
+    transition: opacity 0.25s;
+    pointer-events: none;
+  }
+
+  .sidebar-backdrop.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  @media (max-width: 768px) {
+    aside {
+      position: fixed;
+      top: 56px;
+      left: 0;
+      z-index: 52;
+      width: 280px;
+      height: calc(100dvh - 56px);
+      background: var(--color-bg);
+      border-right: 1px solid var(--color-border);
+      padding: 1.25rem 0.75rem 1rem;
+      transform: translateX(-100%);
+      transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    aside.open {
+      transform: translateX(0);
+    }
+
+    .sidebar-close {
+      display: flex;
+    }
+
+    .sidebar-backdrop {
+      display: block;
+    }
+
+    .sidebar-toggle {
+      display: inline-flex;
+    }
+  }
+</style>

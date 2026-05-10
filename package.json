@@ -1,0 +1,43 @@
+{
+  "name": "motion-components-docs",
+  "description": "Documentation site for motion-components — a library of web components built on the Motion animation library.",
+  "type": "module",
+  "private": true,
+  "author": {
+    "name": "tgomilar",
+    "email": "tanja.gomilar@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tgomilar/motion-components-docs.git"
+  },
+  "homepage": "https://github.com/tgomilar/motion-components-docs#readme",
+  "bugs": {
+    "url": "https://github.com/tgomilar/motion-components-docs/issues"
+  },
+  "keywords": [
+    "motion",
+    "web-components",
+    "animation",
+    "astro",
+    "docs"
+  ],
+  "engines": {
+    "node": ">=18.17.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "astro": "^6.0.7",
+    "motion-components": "^0.1.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.9",
+    "typescript": "^5.9.3"
+  }
+}

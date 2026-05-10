@@ -1,0 +1,161 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-headline — Motion Components" description="Wraps each word, character, or line in an overflow-hidden mask and springs them into view. A Locomotive-style reveal built on Motion One. Fully accessible." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-headline</motion-split></h1>
+      <p class="lead">Wraps each word, character, or line in an overflow-hidden mask and springs them into view — a Locomotive-style reveal built on Motion One. Fully accessible via <code>aria-label</code>.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview replayId="headline-demo">
+        <motion-headline id="headline-demo" by="words" interval="0.06" duration="1">Craft award-winning motion</motion-headline>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-headline'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-headline.html"
+        copy
+        code={`<motion-headline by="words" interval="0.06" duration="1">
+  Craft award-winning motion
+</motion-headline>`}
+      />
+
+      <h2>by="chars"</h2>
+      <p>Split into characters for a more expressive per-letter mask reveal.</p>
+      <DocsPreview replayId="headline-chars">
+        <motion-headline id="headline-chars" by="chars" interval="0.04" duration="0.9">Motion</motion-headline>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-headline-chars.html"
+        copy
+        code={`<motion-headline by="chars" interval="0.04" duration="0.9">
+  Motion
+</motion-headline>`}
+      />
+
+      <h2>by="lines"</h2>
+      <p>Groups words into detected layout lines using <code>getBoundingClientRect</code>, then reveals each line as a unit. Ideal for multi-line hero headings.</p>
+      <DocsPreview replayId="headline-lines">
+        <motion-headline id="headline-lines" by="lines" interval="0.12" duration="1.1" class="headline-lines-demo">Craft motion that earns attention</motion-headline>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-headline-lines.html"
+        copy
+        code={`<motion-headline by="lines" interval="0.12" duration="1.1">
+  Craft motion that earns attention
+</motion-headline>`}
+      />
+
+      <h2>variant="flip"</h2>
+      <p>Each unit starts rotated 90° around the X axis and springs forward into place — a 3D card-flip entrance. Works with <code>by="words"</code> or <code>by="chars"</code>.</p>
+      <DocsPreview replayId="headline-flip">
+        <motion-headline id="headline-flip" variant="flip" by="words" interval="0.07" duration="0.9">Flip into view</motion-headline>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-headline-flip.html"
+        copy
+        code={`<motion-headline variant="flip" by="words" interval="0.07" duration="0.9">
+  Flip into view
+</motion-headline>`}
+      />
+
+      <h2>delay</h2>
+      <DocsPreview replayId="headline-delay">
+        <motion-headline id="headline-delay" by="words" interval="0.08" duration="1" delay="0.3">Motion that feels alive</motion-headline>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-headline-delay.html"
+        copy
+        code={`<motion-headline by="words" interval="0.08" duration="1" delay="0.3">
+  Motion that feels alive
+</motion-headline>`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable
+        nameLabel="Attribute"
+        rows={[
+          { name: "by", type: "string", default: "'words'", description: "<code>'words'</code>, <code>'chars'</code>, or <code>'lines'</code> — unit to animate" },
+          { name: "variant", type: "string", default: "'slide'", description: "<code>'slide'</code> (mask-clip Y reveal) or <code>'flip'</code> (3D rotateX card flip)" },
+          { name: "interval", type: "number", default: "0.06", description: "Stagger delay between each unit in seconds" },
+          { name: "duration", type: "number", default: "1", description: "Spring duration hint in seconds" },
+          { name: "delay", type: "number", default: "0", description: "Initial delay before the stagger begins, in seconds" },
+          { name: "threshold", type: "number", default: "0.2", description: "IntersectionObserver threshold (0–1) that triggers the reveal" },
+          { name: "once", type: "boolean", default: "true", description: "When <code>true</code>, the reveal fires only on the first intersection" },
+        ]}
+      />
+
+      <h2>Accessibility</h2>
+      <p>
+        Sets <code>aria-label</code> on the host with the full original text and <code>aria-hidden="true"</code> on all child spans.
+        Screen readers receive the complete phrase without interruption by individual letter spans.
+        Respects <code>prefers-reduced-motion</code>: content snaps to its final visible state with no animation.
+      </p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  motion-headline#headline-demo {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+  }
+
+  motion-headline#headline-chars {
+    font-size: 2.25rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: var(--color-text);
+  }
+
+  .headline-lines-demo {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.25;
+    color: var(--color-text);
+    max-width: 320px;
+    text-align: center;
+  }
+
+  motion-headline#headline-flip {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+  }
+
+  motion-headline#headline-delay {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+  }
+</style>

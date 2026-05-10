@@ -1,0 +1,280 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-dialog — Motion Components" noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-dialog</motion-split></h1>
+      <p class="lead">
+        Modal dialog with spring-physics animation. Slides up on open, springs back down on close. Built on the native <code>&lt;dialog&gt;</code> element for top-layer
+        stacking and keyboard accessibility.
+      </p>
+
+      <h2>Preview</h2>
+      <DocsPreview>
+        <div class="demo-trigger-area">
+          <button class="demo-btn" id="open-dialog-btn">Open dialog</button>
+          <motion-dialog id="demo-dialog" duration="0.5" bounce="0.25" y="40">
+            <div class="demo-panel">
+              <h2 class="demo-title">Spring dialog</h2>
+              <p class="demo-body">Slides up with spring physics. The backdrop fades in simultaneously. Press <kbd>Esc</kbd> or use the button to close.</p>
+              <div class="demo-actions">
+                <button class="demo-btn" id="close-dialog-btn">Close</button>
+              </div>
+            </div>
+          </motion-dialog>
+        </div>
+      </DocsPreview>
+
+      <h2>No backdrop</h2>
+      <p>Set <code>backdrop="false"</code> to remove the dimmed overlay. The dialog floats without any overlay.</p>
+      <DocsPreview>
+        <div class="demo-trigger-area">
+          <button class="demo-btn" id="open-no-backdrop-btn">Open without backdrop</button>
+          <motion-dialog id="demo-no-backdrop" no-backdrop duration="0.5" bounce="0.3">
+            <div class="demo-panel">
+              <h2 class="demo-title">No backdrop</h2>
+              <p class="demo-body">Floating dialog with no dimmed overlay. Press <kbd>Esc</kbd> or use the button to close.</p>
+              <div class="demo-actions">
+                <button class="demo-btn" id="close-no-backdrop-btn">Close</button>
+              </div>
+            </div>
+          </motion-dialog>
+        </div>
+      </DocsPreview>
+
+      <h2>Light dismiss</h2>
+      <p>Add <code>light-dismiss</code> to let users close by clicking the backdrop. By default, only <kbd>Esc</kbd> and explicit close actions work.</p>
+      <DocsPreview>
+        <div class="demo-trigger-area">
+          <button class="demo-btn" id="open-persistent-btn">Open with light dismiss</button>
+          <motion-dialog id="demo-persistent" light-dismiss duration="0.5" bounce="0.2">
+            <div class="demo-panel">
+              <h2 class="demo-title">Light dismiss</h2>
+              <p class="demo-body">Click the backdrop or press <kbd>Esc</kbd> to close. Without <code>light-dismiss</code>, only <kbd>Esc</kbd> and an explicit close button work.</p>
+              <div class="demo-actions">
+                <button class="demo-btn" id="close-persistent-btn">Close</button>
+              </div>
+            </div>
+          </motion-dialog>
+        </div>
+      </DocsPreview>
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-dialog.html"
+        copy
+        code={`<button onclick="document.querySelector('#dlg').show()">Open</button>
+
+<motion-dialog id="dlg">
+  <h2>Dialog title</h2>
+  <p>Dialog content goes here.</p>
+  <button onclick="this.closest('motion-dialog').close()">Close</button>
+</motion-dialog>`}
+      />
+
+      <h2>Declarative open</h2>
+      <p>Set the <code>open</code> attribute to control the dialog from markup or frameworks that bind attributes:</p>
+      <CodeWindow
+        filename="motion-dialog-open.html"
+        copy
+        code={`<!-- opens on mount -->
+<motion-dialog open>
+  <p>Shown immediately on page load.</p>
+</motion-dialog>`}
+      />
+
+      <h2>Listening for close</h2>
+      <p>The <code>motion-close</code> event fires after the exit animation completes — use it to sync state:</p>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import type { MotionDialog } from 'motion-components'
+
+const dialog = document.querySelector<MotionDialog>('motion-dialog')!
+
+dialog.addEventListener('motion-close', () => {
+  console.log('dialog closed')
+})`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable
+        nameLabel="Attribute"
+        rows={[
+          { name: "open", type: "boolean", default: "false", description: "Opens the dialog when present; reflects to attribute" },
+          { name: "duration", type: "number", default: "0.5", description: "Spring duration for enter/exit animations, in seconds" },
+          { name: "bounce", type: "number", default: "0.25", description: "Spring bounciness (0 = critically damped, higher = more elastic)" },
+          { name: "y", type: "number", default: "40", description: "Initial vertical offset for the slide-up entrance, in pixels" },
+          {
+            name: "no-backdrop",
+            type: "boolean",
+            default: "false",
+            description: "When present, hides the dimmed/blurred overlay — the dialog floats without any overlay",
+          },
+          { name: "light-dismiss", type: "boolean", default: "false", description: "When present, clicking the backdrop outside the panel closes the dialog" },
+        ]}
+      />
+
+      <h2>CSS custom properties</h2>
+      <p>Style the panel and backdrop without reaching into shadow DOM:</p>
+      <PropsTable
+        nameLabel="Property"
+        rows={[
+          { name: "--dialog-bg", type: "color", default: "var(--color-surface)", description: "Panel background color" },
+          { name: "--dialog-color", type: "color", default: "var(--color-text)", description: "Panel text color" },
+          { name: "--dialog-radius", type: "length", default: "16px", description: "Panel border radius" },
+          { name: "--dialog-padding", type: "length", default: "2rem", description: "Panel inner padding" },
+          { name: "--dialog-max-width", type: "length", default: "min(560px, 100vw - 2rem)", description: "Maximum panel width" },
+          { name: "--dialog-max-height", type: "length", default: "calc(100dvh - 4rem)", description: "Maximum panel height" },
+          { name: "--dialog-shadow", type: "shadow", default: "0 8px 32px …", description: "Panel box shadow" },
+          { name: "--dialog-backdrop-color", type: "color", default: "rgba(0,0,0,0.48)", description: "Backdrop overlay color" },
+          { name: "--dialog-backdrop-blur", type: "filter", default: "blur(6px)", description: "Backdrop CSS backdrop-filter" },
+        ]}
+      />
+      <CodeWindow
+        filename="custom-dialog.css"
+        copy
+        code={`motion-dialog {
+  --dialog-bg: #1a1a2e;
+  --dialog-color: #e2e2ff;
+  --dialog-radius: 24px;
+  --dialog-backdrop-color: rgba(10, 10, 30, 0.6);
+  --dialog-backdrop-blur: blur(12px);
+}`}
+      />
+
+      <h2>Methods</h2>
+      <div class="methods-table">
+        <table>
+          <thead><tr><th>Method</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>show()</code></td><td>Opens the dialog with the entrance animation.</td></tr>
+            <tr><td><code>close()</code></td><td>Closes the dialog with the exit animation.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Events</h2>
+      <div class="methods-table">
+        <table>
+          <thead><tr><th>Event</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>motion-close</code></td><td>Fired after the close animation completes. Bubbles and is composed.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Accessibility</h2>
+      <p>
+        Uses the native <code>&lt;dialog&gt;</code> element opened via <code>showModal()</code>, which places it in the browser's top layer. Focus is
+        automatically trapped inside the dialog while open, and <kbd>Esc</kbd> always closes it. By default, clicking the backdrop does
+        <em>not</em> close the dialog — add <code>light-dismiss</code> to enable that. Screen readers announce the dialog via the browser's built-in
+        <code>role="dialog"</code> and <code>aria-modal</code> semantics. With <code>prefers-reduced-motion</code> active, all animations are skipped
+        and the dialog appears instantly.
+      </p>
+
+      <DocsPagination />
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+
+  function wire(openId: string, closeId: string, dialogId: string) {
+    const openBtn = document.getElementById(openId);
+    const closeBtn = document.getElementById(closeId);
+    const dialog = document.getElementById(dialogId) as any;
+    openBtn?.addEventListener("click", () => dialog?.show());
+    closeBtn?.addEventListener("click", () => dialog?.close());
+  }
+
+  wire("open-dialog-btn", "close-dialog-btn", "demo-dialog");
+  wire("open-no-backdrop-btn", "close-no-backdrop-btn", "demo-no-backdrop");
+  wire("open-persistent-btn", "close-persistent-btn", "demo-persistent");
+</script>
+
+<style>
+  .demo-trigger-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .demo-btn {
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    color: var(--color-text);
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    padding: 0.6rem 1.2rem;
+    transition: background 0.15s;
+  }
+
+  .demo-btn:hover {
+    background: var(--color-border);
+  }
+
+  .demo-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .demo-title {
+    margin: 0;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .demo-body {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    line-height: 1.6;
+  }
+
+  .demo-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 0.5rem;
+  }
+
+  .methods-table {
+    overflow-x: auto;
+  }
+
+  .methods-table table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.875rem;
+  }
+
+  .methods-table th,
+  .methods-table td {
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--color-border);
+    text-align: left;
+  }
+
+  .methods-table th {
+    background: var(--color-surface-2);
+    font-weight: 600;
+  }
+</style>

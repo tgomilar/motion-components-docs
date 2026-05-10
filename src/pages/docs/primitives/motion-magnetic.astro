@@ -1,0 +1,50 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-magnetic — Motion Components" noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-magnetic</motion-split></h1>
+      <p class="lead">Pulls the element toward the cursor as it moves across it. Springs back smoothly on leave.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview>
+        <motion-magnetic>
+          <button class="demo-btn">Move over me</button>
+        </motion-magnetic>
+      </DocsPreview>
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-magnetic.html"
+        copy
+        code={`<motion-magnetic strength="0.4">
+  <button>Magnetic</button>
+</motion-magnetic>`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable rows={[
+        { name: 'strength', type: 'number', default: '0.4', description: 'Fraction of cursor offset to apply (0 = none, 1 = full)' },
+        { name: 'duration', type: 'number', default: '0.5', description: 'Spring duration hint in seconds' },
+      ]} />
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+

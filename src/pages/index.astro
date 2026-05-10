@@ -1,0 +1,1513 @@
+---
+import Layout from '../layouts/Layout.astro'
+import CodeWindow from '../components/CodeWindow.astro'
+---
+
+<Layout title="Motion Components — Motion-first web components" description="Drop physics-based motion into any framework without rewriting your markup. Spring physics, interruptible animations, framework-agnostic web components powered by Motion One.">
+  <!-- ── Hero ─────────────────────────────── -->
+  <section class="hero">
+    <div class="inner">
+      <a href="/docs/" class="hero-circle" aria-label="Framework-agnostic motion components">
+        <motion-circle text="INTERRUPT ME · I DARE YOU · " radius="120" speed="14" pause-on-hover>
+          <span class="hero-circle-icon">✦</span>
+        </motion-circle>
+      </a>
+      <div class="hero-badge">Declarative motion · Spring physics · Interruptible</div>
+      <h1>
+        <motion-stretch text="Motion first" spread="15" stiffness="120" damping="28"
+        ></motion-stretch>
+        <span class="accent">
+          <motion-stretch text="web components" spread="15" stiffness="120" damping="28"
+          ></motion-stretch>
+        </span>
+      </h1>
+      <p class="hero-sub">
+        Drop physics-based motion into any framework without rewriting your markup.<br />
+        Built on <span class="motion">Motion</span>.
+      </p>
+      <div class="actions">
+        <motion-hover>
+          <a href="/docs/" class="btn-primary">Get started</a>
+        </motion-hover>
+        <motion-hover>
+          <a href="https://github.com/tgomilar/motion-components" class="btn-ghost"
+            >View on GitHub</a
+          >
+        </motion-hover>
+      </div>
+      <div class="hero-install">
+        <span class="install-label">Quick install</span>
+        <motion-press
+          ><motion-code-inline copy>npm install motion-components</motion-code-inline></motion-press
+        >
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Ticker ────────────────────────────── -->
+  <section class="ticker-section">
+    <motion-curve
+      text="Spring physics · Physics-based · Zero CSS · Fully interruptible · TypeScript ready · Drop-in components · Framework-agnostic · Reduced motion support · Gesture-driven · Viewport-aware · No rewrites needed · Spring snap · Web Components standard ·"
+      loop
+      amplitude="22"
+      wave-length="420"
+      speed="0.1"
+      loop-gap="0"
+      loop-speed="70"></motion-curve>
+
+    <!-- <section class="ticker-section">
+    <div class="ticker-track">
+      <motion-ticker speed="55" gap="8" class="ticker">
+        <span class="chip chip--yellow">Spring physics</span>
+        <span class="chip">Zero config</span>
+        <span class="chip">Fully interruptible</span>
+        <span class="chip chip--yellow">No janky cuts</span>
+        <span class="chip">Drop-in components</span>
+        <span class="chip">TypeScript ready</span>
+        <span class="chip chip--yellow">Composable primitives</span>
+        <span class="chip">Reduced motion support</span>
+        <span class="chip">Framework-agnostic</span>
+        <span class="chip chip--yellow">Viewport-aware</span>
+        <span class="chip">Gesture-driven</span>
+        <span class="chip">No rewrites needed</span>
+        <span class="chip chip--yellow">Spring snap</span>
+        <span class="chip">Web Components standard</span>
+      </motion-ticker>
+    </div> -->
+    <div class="inner ticker-caption">
+      <p class="section-sub">
+        <motion-press><motion-code-inline copy>motion-curve</motion-code-inline></motion-press
+        >smoothly looping text with wave animation
+      </p>
+    </div>
+  </section>
+
+  <!-- ── Usage ─────────────────────────────── -->
+  <section class="usage-section">
+    <div class="inner usage-inner">
+      <div class="usage-text">
+        <p class="section-eyebrow">How it works</p>
+        <h2 class="usage-heading">
+          One tag.<br />Works in <motion-words
+            words="native HTML,React,Vue,Svelte,SolidJS,Alpine,Astro"
+            colors="inherit, #61DAFB,#42B883,#FF3E00,#4F81C7,#77C1D2,#BC52EE"
+            interval="3600"
+            duration="0.8"></motion-words>.
+        </h2>
+        <p class="usage-sub">Drop a tag anywhere. No config, no wrappers, no boilerplate.</p>
+        <ol class="steps">
+          <motion-stagger interval="0.1" duration="0.65" y="24">
+            <li>
+              <span class="step-num">1</span>
+              <div>
+                <strong>Install</strong>
+                <p
+                  >Run <motion-code-inline copy-visible
+                    >npm install motion-components</motion-code-inline
+                  ></p
+                >
+              </div>
+            </li>
+            <li>
+              <span class="step-num">2</span>
+              <div>
+                <strong>Import once</strong>
+                <p
+                  ><motion-code-inline copy-visible>import 'motion-components'</motion-code-inline> registers
+                  all custom elements globally.</p
+                >
+              </div>
+            </li>
+            <li>
+              <span class="step-num">3</span>
+              <div>
+                <strong>Wrap anything</strong>
+                <p>
+                  Compose <motion-code-inline>motion-hover</motion-code-inline>, <motion-code-inline
+                    >motion-reveal</motion-code-inline
+                  >, and friends around your existing markup.
+                </p>
+              </div>
+            </li>
+          </motion-stagger>
+        </ol>
+      </div>
+
+      <CodeWindow
+        filename="example.html"
+        copy
+        code={`// 1. install
+npm install motion-components
+
+// 2. import once — works in any framework
+import 'motion-components'
+
+// 3. wrap anything
+<motion-hover scale="1.1" y="-6">
+  <button>Hover me</button>
+</motion-hover>
+
+<motion-reveal>
+  <h2>Smooth entrance</h2>
+</motion-reveal>
+
+<motion-stagger>
+  <div>One</div>
+  <div>Two</div>
+  <div>Three</div>
+</motion-stagger>`}
+      />
+    </div>
+  </section>
+
+  <!-- ── Primitives ────────────────────────── -->
+  <section class="primitives">
+    <div class="inner">
+      <div class="section-head">
+        <p class="section-eyebrow">Primitives</p>
+        <h2>Feel the difference</h2>
+        <p class="section-sub">Composable primitives. Each one is interactive — try them.</p>
+      </div>
+    </div>
+    <div class="inner inner--wide">
+      <div class="demo-grid">
+        <motion-stagger interval="0.09" duration="0.65" y="32">
+          <div class="card">
+            <motion-code-inline>motion-hover</motion-code-inline>
+            <div class="stage">
+              <motion-hover scale="1.12" y="-8">
+                <div class="hover-chip">
+                  <span class="chip-dot"></span>
+                  Hover me
+                </div>
+              </motion-hover>
+            </div>
+            <p class="card-desc">Spring scale and lift on hover</p>
+          </div>
+
+          <div class="card">
+            <motion-code-inline>motion-press</motion-code-inline>
+            <div class="stage">
+              <motion-press>
+                <button class="press-btn">Press me</button>
+              </motion-press>
+            </div>
+            <p class="card-desc">Tactile spring compression on press</p>
+          </div>
+
+          <div class="card">
+            <motion-code-inline>motion-reveal</motion-code-inline>
+            <div class="stage stage--col">
+              <motion-reveal id="reveal-demo" duration="0.75" y="28" once="false">
+                <div class="reveal-block">Fades into view</div>
+              </motion-reveal>
+              <button class="replay-btn" id="replay-reveal">↺ Replay</button>
+            </div>
+            <p class="card-desc">Fade and lift on viewport entry</p>
+          </div>
+
+          <div class="card">
+            <motion-code-inline>motion-stagger</motion-code-inline>
+            <div class="stage stage--col">
+              <div class="stagger-wrap">
+                <motion-stagger id="stagger-demo" interval="0.1" duration="0.5" once="false">
+                  <div class="stagger-row">Design</div>
+                  <div class="stagger-row">Develop</div>
+                  <div class="stagger-row">Delight</div>
+                </motion-stagger>
+              </div>
+              <button class="replay-btn" id="replay-stagger">↺ Replay</button>
+            </div>
+            <p class="card-desc">Sequence children in on scroll entry</p>
+          </div>
+
+          <div class="card">
+            <motion-code-inline>motion-magnetic</motion-code-inline>
+            <div class="stage">
+              <motion-magnetic strength="0.5">
+                <button class="press-btn">Move over me</button>
+              </motion-magnetic>
+            </div>
+            <p class="card-desc">Element attracted to cursor with spring</p>
+          </div>
+
+          <div class="card">
+            <motion-code-inline>motion-tilt</motion-code-inline>
+            <div class="stage">
+              <motion-tilt max="18">
+                <div class="tilt-card">
+                  <span class="tilt-label">Tilt me</span>
+                </div>
+              </motion-tilt>
+            </div>
+            <p class="card-desc">3D perspective tilt following cursor</p>
+          </div>
+        </motion-stagger>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Text effects ──────────────────────── -->
+  <section class="text-section">
+    <div class="inner">
+      <div class="section-head">
+        <p class="section-eyebrow">Text Effects</p>
+        <h2>Words in motion</h2>
+        <p class="section-sub"
+          >Components for animated text — split, typewriter, counter, scramble, and ticker.</p
+        >
+      </div>
+    </div>
+    <div class="inner inner--wide">
+      <div class="text-grid">
+        <motion-stagger interval="0.1" duration="0.65" y="24">
+          <div class="card">
+            <motion-code-inline>motion-split</motion-code-inline>
+            <div class="stage">
+              <motion-split
+                id="split-demo"
+                by="words"
+                interval="0.07"
+                duration="0.6"
+                y="18"
+                once="false"
+                class="split-text">Feel the motion</motion-split
+              >
+            </div>
+            <div class="replay-row">
+              <button class="replay-btn" id="replay-split">↺ Replay</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <motion-code-inline>motion-typewriter</motion-code-inline>
+            <div class="stage">
+              <motion-typewriter id="tw-demo" speed="55" loop cursor class="typewriter-text">
+                Motion that feels alive.
+              </motion-typewriter>
+            </div>
+          </div>
+
+          <div class="card">
+            <motion-code-inline>motion-counter</motion-code-inline>
+            <div class="stage">
+              <div class="counter-row">
+                <motion-counter
+                  id="counter-demo"
+                  from="0"
+                  to="122"
+                  duration="1.8"
+                  suffix="k"
+                  class="counter-num"
+                  once="false"></motion-counter>
+                <span class="counter-label">users</span>
+              </div>
+            </div>
+            <div class="replay-row">
+              <button class="replay-btn" id="replay-counter">↺ Replay</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <motion-code-inline>motion-scramble</motion-code-inline>
+            <div class="stage">
+              <motion-scramble
+                id="scramble-demo"
+                speed="35"
+                iterations="3"
+                hover
+                class="scramble-text">
+                Hello, world.
+              </motion-scramble>
+            </div>
+            <p class="card-hint">Hover to scramble</p>
+          </div>
+
+          <div class="card">
+            <motion-code-inline>motion-words</motion-code-inline>
+            <div class="stage">
+              <p class="words-demo-text">
+                We
+                <motion-words
+                  words="design,build,ship"
+                  colors="#3b82f6,#8b5cf6,#10b981"
+                  interval="1600"></motion-words>
+                fast.
+              </p>
+            </div>
+            <p class="card-desc">Cycle words with per-word color</p>
+          </div>
+        </motion-stagger>
+      </div>
+      <div class="inner">
+        <a href="/docs/#text" class="view-all-link">View all text effects →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Features ──────────────────────────── -->
+  <section class="features-section">
+    <div class="inner">
+      <div class="section-head">
+        <p class="section-eyebrow">Why motion-components</p>
+        <h2>Built different</h2>
+      </div>
+    </div>
+    <div class="inner">
+      <div class="features-grid">
+        <motion-stagger interval="0.07" duration="0.6" y="20">
+          <motion-hover scale="1.02" y="-4">
+            <div class="feature">
+              <div class="feature-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg
+                >
+              </div>
+              <h3>Spring physics</h3>
+              <p
+                >Every animation uses spring dynamics — naturally interruptible, no jarring cuts or
+                fixed durations.</p
+              >
+            </div>
+          </motion-hover>
+          <motion-hover scale="1.02" y="-4">
+            <div class="feature">
+              <div class="feature-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"
+                  ></polyline></svg
+                >
+              </div>
+              <h3>Framework-agnostic</h3>
+              <p
+                >Standard web components work anywhere — React, Vue, Svelte, Astro, or raw HTML. No
+                adapter needed.</p
+              >
+            </div>
+          </motion-hover>
+          <motion-hover scale="1.02" y="-4">
+            <div class="feature">
+              <div class="feature-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><rect x="3" y="3" width="7" height="7"></rect><rect
+                    x="14"
+                    y="3"
+                    width="7"
+                    height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><path
+                    d="M14 17.5h3m3 0h-3m0 0v-3m0 3v3"></path></svg
+                >
+              </div>
+              <h3>Composable primitives</h3>
+              <p>
+                Build complex interactions by wrapping — nest <motion-code-inline
+                  >motion-hover</motion-code-inline
+                > inside <motion-code-inline>motion-stagger</motion-code-inline> effortlessly.
+              </p>
+            </div>
+          </motion-hover>
+          <motion-hover scale="1.02" y="-4">
+            <div class="feature">
+              <div class="feature-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg
+                >
+              </div>
+              <h3>Zero config</h3>
+              <p
+                >Sensible defaults out of the box. Attributes let you tune — but you never have to.</p
+              >
+            </div>
+          </motion-hover>
+          <motion-hover scale="1.02" y="-4">
+            <div class="feature">
+              <div class="feature-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg
+                >
+              </div>
+              <h3>TypeScript ready</h3>
+              <p
+                >Full type declarations included. Attribute names and values are typed for IDE
+                autocomplete.</p
+              >
+            </div>
+          </motion-hover>
+          <motion-hover scale="1.02" y="-4">
+            <div class="feature">
+              <div class="feature-icon">
+                <svg
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  ><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"></path><circle
+                    cx="12"
+                    cy="12"
+                    r="3"></circle></svg
+                >
+              </div>
+              <h3>Accessible by default</h3>
+              <p
+                >Respects <motion-code-inline>prefers-reduced-motion</motion-code-inline>.
+                Animations skip cleanly — no flashes, no layout shift.</p
+              >
+            </div>
+          </motion-hover>
+        </motion-stagger>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Flashcards: category discovery ────── -->
+  <section class="flips-section">
+    <div class="inner">
+      <div class="section-head">
+        <p class="section-eyebrow">Pick a goal. Find the tag.</p>
+        <h2>Still want more?</h2>
+        <p class="section-sub">Three more areas to explore — hover to reveal what's inside.</p>
+      </div>
+    </div>
+    <div class="inner">
+      <div class="flips-grid">
+        <motion-flip-card trigger="hover" axis="y" duration="0.85" bounce="0.25" class="flip">
+          <div slot="front" class="flip-face flip-face--ask">
+            <div class="flip-eyebrow">I want to…</div>
+            <p class="flip-q">Add scroll-driven <em>parallax</em> and motion.</p>
+            <div class="flip-meta">Hover for the answer →</div>
+          </div>
+          <a slot="back" class="flip-face flip-face--ans" href="/docs/scroll/motion-parallax/">
+            <div class="flip-eyebrow flip-eyebrow--inv">Category</div>
+            <span class="flip-cat-big">Scroll</span>
+            <p class="flip-blurb">
+              Parallax depth, progress-driven animation, scroll-linked scenes — two components that
+              unlock scroll-based motion without any scroll library.
+            </p>
+            <span class="flip-link">Explore →</span>
+          </a>
+        </motion-flip-card>
+
+        <motion-flip-card trigger="hover" axis="y" duration="0.85" bounce="0.25" class="flip">
+          <div slot="front" class="flip-face flip-face--ask">
+            <div class="flip-eyebrow">I want to…</div>
+            <p class="flip-q">Build a <em>dialog, gallery, or slider</em> fast.</p>
+            <div class="flip-meta">Hover for the answer →</div>
+          </div>
+          <a slot="back" class="flip-face flip-face--ans" href="/docs/components/motion-dialog/">
+            <div class="flip-eyebrow flip-eyebrow--inv">Category</div>
+            <span class="flip-cat-big">Components</span>
+            <p class="flip-blurb">
+              Dialogs, galleries, sliders, image comparison, countdowns, progress rings, flip-cards,
+              spotlights — interactive widgets that animate themselves.
+            </p>
+            <span class="flip-link">Explore →</span>
+          </a>
+        </motion-flip-card>
+
+        <motion-flip-card trigger="hover" axis="y" duration="0.85" bounce="0.25" class="flip">
+          <div slot="front" class="flip-face flip-face--ask">
+            <div class="flip-eyebrow">I want to…</div>
+            <p class="flip-q">Display code with <em>syntax highlighting</em>.</p>
+            <div class="flip-meta">Hover for the answer →</div>
+          </div>
+          <a slot="back" class="flip-face flip-face--ans" href="/docs/code/motion-code/">
+            <div class="flip-eyebrow flip-eyebrow--inv">Category</div>
+            <span class="flip-cat-big">Code</span>
+            <p class="flip-blurb">
+              Syntax-highlighted code blocks with copy buttons, optional typing animation, and
+              chrome-style title bars — drop in for docs, tutorials, and live demos.
+            </p>
+            <span class="flip-link">Explore →</span>
+          </a>
+        </motion-flip-card>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ──────────────────────────────── -->
+  <section class="cta-section">
+    <div class="inner">
+      <motion-reveal duration="0.7" y="24">
+        <div class="cta-inner">
+          <h2 class="cta-heading">
+            Start shipping motion
+            <motion-liquid text="today" intensity="12" speed="1.5"></motion-liquid>.
+          </h2>
+          <p class="cta-sub">Drop a tag in your HTML and you're done.</p>
+          <div class="cta-actions">
+            <motion-hover>
+              <a href="/docs/" class="btn-primary">Read the docs</a>
+            </motion-hover>
+            <motion-hover>
+              <a
+                href="https://github.com/tgomilar/motion-components"
+                class="btn-ghost"
+                target="_blank"
+                rel="noopener">Star on GitHub</a
+              >
+            </motion-hover>
+          </div>
+        </div>
+      </motion-reveal>
+    </div>
+  </section>
+
+  <script>
+    import 'motion-components'
+
+    document.getElementById('replay-reveal')?.addEventListener('click', () => {
+      ;(document.getElementById('reveal-demo') as any)?.replay()
+    })
+
+    document.getElementById('replay-stagger')?.addEventListener('click', () => {
+      ;(document.getElementById('stagger-demo') as any)?.replay()
+    })
+
+    document.getElementById('replay-split')?.addEventListener('click', () => {
+      ;(document.getElementById('split-demo') as any)?.replay()
+    })
+
+    document.getElementById('replay-counter')?.addEventListener('click', () => {
+      ;(document.getElementById('counter-demo') as any)?.replay()
+    })
+  </script>
+
+  <style>
+    /* ── Layout ───────────────────────────── */
+    .inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    .inner--wide {
+      max-width: 1600px;
+    }
+
+    section {
+      padding: 6rem 0;
+    }
+
+    @media (max-width: 640px) {
+      .inner {
+        padding: 0 1rem;
+      }
+      section {
+        padding: 3rem 0;
+      }
+    }
+
+    /* ── Hero ─────────────────────────────── */
+    .hero {
+      padding: 9rem 0 7rem;
+      position: relative;
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        padding: 4rem 0 3rem;
+      }
+    }
+
+    .hero-circle {
+      position: absolute;
+      top: 3rem;
+      right: 4rem;
+      text-decoration: none;
+      color: var(--color-muted);
+      font-size: 0.9rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+
+    @media (max-width: 640px) {
+      .hero-circle {
+        display: none;
+      }
+    }
+
+    .hero-circle:hover {
+      opacity: 1;
+    }
+
+    .hero-circle-icon {
+      font-size: 2.25rem;
+      color: var(--color-yellow);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-accent);
+      background: var(--color-accent-dim);
+      padding: 0.3rem 0.85rem;
+      border-radius: 99px;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 motion-split {
+      display: block;
+    }
+
+    h1 .accent {
+      color: var(--color-accent);
+      display: block;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--color-muted);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      line-height: 1.75;
+    }
+
+    .motion {
+      color: var(--color-yellow);
+      font-weight: 600;
+    }
+
+    .actions {
+      display: flex;
+      gap: 0.875rem;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+
+    @media (max-width: 640px) {
+      .actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .actions a {
+        text-align: center;
+      }
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--color-accent);
+      color: #fff;
+      padding: 0.8rem 1.75rem;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+    }
+
+    .btn-ghost {
+      display: inline-block;
+      background: transparent;
+      border: 1px solid var(--color-yellow);
+      padding: 0.8rem 1.75rem;
+      border-radius: 10px;
+      color: var(--color-text);
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-decoration: none;
+    }
+
+    .install-label {
+      font-size: 0.78rem;
+      color: var(--color-muted);
+      font-weight: 500;
+    }
+
+    /* ── Section head ─────────────────────── */
+    .section-head {
+      margin-bottom: 3.5rem;
+    }
+
+    @media (max-width: 640px) {
+      .section-head {
+        margin-bottom: 2rem;
+      }
+    }
+
+    .section-eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--color-accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-head h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--color-muted);
+    }
+
+    /* ── Ticker ───────────────────────────── */
+    .ticker-section {
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    .ticker-caption {
+      padding-top: 1.25rem;
+      padding-bottom: 1.25rem;
+      text-align: center;
+    }
+
+    .ticker-track {
+      position: relative;
+      border-top: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--color-border);
+      background: var(--color-surface-2);
+      overflow: hidden;
+    }
+
+    .ticker-track::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        ellipse 60% 100% at 50% 50%,
+        var(--color-surface-2) 0%,
+        transparent 70%
+      );
+      pointer-events: none;
+    }
+
+    .ticker-track::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to right,
+        var(--color-surface-2) 0%,
+        transparent 8%,
+        transparent 92%,
+        var(--color-surface-2) 100%
+      );
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .ticker {
+      padding: 0.875rem 0;
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.35rem 0.875rem;
+      border: 1px solid var(--color-border);
+      border-radius: 99px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--color-text);
+      background: var(--color-surface-2);
+      white-space: nowrap;
+    }
+
+    .chip--yellow {
+      border-color: color-mix(in srgb, var(--color-yellow) 35%, var(--color-border));
+      background: color-mix(in srgb, var(--color-yellow) 10%, var(--color-surface-2));
+      color: var(--color-yellow);
+      font-weight: 600;
+    }
+
+    /* ── Cards (shared) ───────────────────── */
+    .card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.04),
+        0 8px 32px rgba(0, 0, 0, 0.06);
+      transition:
+        border-color 0.25s,
+        box-shadow 0.25s;
+    }
+
+    .card::after,
+    .feature::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.055) 0%, transparent 55%);
+      pointer-events: none;
+    }
+
+    .card:hover {
+      border-color: color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 4px 16px rgba(0, 0, 0, 0.07),
+        0 16px 48px rgba(0, 0, 0, 0.09);
+    }
+
+    [data-theme='dark'] .card,
+    [data-theme='dark'] .feature {
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.1),
+        0 2px 8px rgba(0, 0, 0, 0.2),
+        0 8px 32px rgba(0, 0, 0, 0.35);
+    }
+
+    [data-theme='dark'] .card::after,
+    [data-theme='dark'] .feature::after {
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.07) 0%, transparent 55%);
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme='light']) .card,
+      :root:not([data-theme='light']) .feature {
+        box-shadow:
+          inset 0 1px 0 rgba(255, 255, 255, 0.1),
+          0 2px 8px rgba(0, 0, 0, 0.2),
+          0 8px 32px rgba(0, 0, 0, 0.35);
+      }
+      :root:not([data-theme='light']) .card::after,
+      :root:not([data-theme='light']) .feature::after {
+        background: linear-gradient(160deg, rgba(255, 255, 255, 0.07) 0%, transparent 55%);
+      }
+    }
+
+    /* ── Demo grid ────────────────────────── */
+    .demo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .stage {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 120px;
+      background: var(--color-bg);
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      padding: 1.5rem;
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .stage--col {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .card-desc {
+      font-size: 0.82rem;
+      color: var(--color-muted);
+      line-height: 1.5;
+    }
+
+    .hover-chip {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 99px;
+      padding: 0.55rem 1.1rem;
+      font-size: 0.88rem;
+      font-weight: 500;
+      cursor: default;
+      white-space: nowrap;
+    }
+
+    .chip-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      flex-shrink: 0;
+    }
+
+    .press-btn {
+      background: var(--color-accent);
+      color: #fff;
+      border: none;
+      padding: 0.7rem 1.4rem;
+      border-radius: 10px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .reveal-block {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 8px;
+      padding: 0.15rem 0.25rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--color-muted);
+      text-align: center;
+      width: 100%;
+    }
+
+    .stagger-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      width: 100%;
+    }
+
+    .stagger-row {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 7px;
+      padding: 0.45rem 0.875rem;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--color-text);
+    }
+
+    .replay-btn {
+      background: transparent;
+      border: 1px solid var(--color-border);
+      border-radius: 6px;
+      padding: 0.25rem 0.65rem;
+      font-size: 0.75rem;
+      color: var(--color-muted);
+      cursor: pointer;
+      font-family: var(--font-sans);
+      transition:
+        color 0.15s,
+        border-color 0.15s;
+      align-self: center;
+    }
+
+    .replay-btn:hover {
+      color: var(--color-accent);
+      border-color: var(--color-accent);
+    }
+
+    .tilt-card {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 12px;
+      padding: 1.5rem 2rem;
+      cursor: default;
+      text-align: center;
+    }
+
+    .tilt-label {
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--color-text);
+    }
+
+    /* ── Text grid ────────────────────────── */
+    .text-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .split-text {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    .typewriter-text {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+    }
+
+    .counter-row {
+      display: flex;
+      align-items: baseline;
+      gap: 0.4rem;
+    }
+
+    .counter-num {
+      font-size: 2.5rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      color: var(--color-accent);
+      line-height: 1;
+    }
+
+    .counter-label {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-muted);
+    }
+
+    .scramble-text {
+      font-size: 1.3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      font-family: var(--font-mono);
+      cursor: default;
+    }
+
+    .words-demo-text {
+      font-size: 1.5rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--color-text);
+      margin: 0;
+      line-height: 1.2;
+      display: flex;
+      align-items: bottom;
+      gap: 0.35em;
+    }
+
+    .view-all-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--color-muted);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+
+    .view-all-link:hover {
+      color: var(--color-text);
+    }
+
+    .replay-row {
+      display: flex;
+      justify-content: center;
+    }
+
+    .card-hint {
+      font-size: 0.78rem;
+      color: var(--color-muted);
+      text-align: center;
+      margin: 0;
+    }
+
+    /* ── Usage ────────────────────────────── */
+    .usage-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    @media (max-width: 720px) {
+      .usage-inner {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+    .usage-heading {
+      font-size: clamp(2rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+
+    .usage-sub {
+      font-size: 0.95rem;
+      color: var(--color-muted);
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .steps {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .steps li {
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--color-accent-dim);
+      color: var(--color-accent);
+      font-size: 0.78rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 0.1rem;
+    }
+
+    .steps strong {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-text);
+      display: block;
+      margin-bottom: 0.3rem;
+    }
+
+    .steps p {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .usage-code-wrap {
+      display: block;
+      min-width: 0;
+    }
+
+    motion-code {
+      display: block;
+      margin-bottom: 0.875rem;
+    }
+
+    .compat-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+
+    .compat-label {
+      font-size: 0.78rem;
+      color: var(--color-muted);
+      margin-right: 0.25rem;
+    }
+
+    .compat-chip {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-muted);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 99px;
+      padding: 0.2rem 0.65rem;
+    }
+
+    /* ── Features ─────────────────────────── */
+    .features-section {
+      padding-bottom: 8rem;
+    }
+
+    @media (max-width: 640px) {
+      .features-section {
+        padding-bottom: 4rem;
+      }
+    }
+
+    .flips-section {
+      padding: 4rem 0 6rem;
+    }
+
+    @media (max-width: 640px) {
+      .flips-section {
+        padding: 2rem 0 3rem;
+      }
+    }
+
+    .flips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .flip {
+      display: block;
+      width: 100%;
+      height: 220px;
+      perspective: 1200px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 640px) {
+      .flip {
+        height: 200px;
+      }
+    }
+
+    .flip-face {
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      border-radius: 16px;
+      padding: 1.25rem 1.35rem 1.1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      overflow: hidden;
+      text-decoration: none;
+    }
+
+    .flip-face--ask {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+      justify-content: space-between;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 8px 28px rgba(0, 0, 0, 0.05);
+    }
+
+    .flip-face--ans {
+      background: linear-gradient(
+        150deg,
+        var(--color-accent),
+        color-mix(in srgb, var(--color-accent) 55%, #1e3a8a)
+      );
+      color: white;
+      justify-content: space-between;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.18),
+        0 12px 32px color-mix(in srgb, var(--color-accent) 30%, transparent);
+    }
+
+    .flip-eyebrow {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--color-muted);
+    }
+
+    .flip-eyebrow--inv {
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .flip-q {
+      font-size: 1.1rem;
+      font-weight: 700;
+      line-height: 1.32;
+      letter-spacing: -0.01em;
+      color: var(--color-text);
+      margin: 0;
+    }
+
+    .flip-q em {
+      font-style: normal;
+      color: var(--color-accent);
+    }
+
+    .flip-meta {
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--color-muted);
+    }
+
+    .flip-tag-big {
+      font-family: var(--font-mono);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      color: white;
+      background: rgba(0, 0, 0, 0.2);
+      padding: 0.35rem 0.6rem;
+      border-radius: 8px;
+      align-self: flex-start;
+    }
+
+    .flip-cat-big {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: white;
+      align-self: flex-start;
+    }
+
+    .flip-blurb {
+      font-size: 0.82rem;
+      line-height: 1.5;
+      color: rgba(255, 255, 255, 0.92);
+      margin: 0;
+      flex-grow: 1;
+    }
+
+    .flip-link {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: white;
+      opacity: 0.9;
+    }
+
+    .flip-face--ans:hover .flip-link {
+      opacity: 1;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+
+    .features-grid motion-hover {
+      display: block;
+    }
+
+    .feature {
+      background: var(--color-surface);
+      padding: 1.75rem;
+      border: 1px solid var(--color-border);
+      border-radius: 14px;
+      cursor: default;
+      height: 100%;
+      box-sizing: border-box;
+      position: relative;
+      overflow: hidden;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 2px 8px rgba(0, 0, 0, 0.04),
+        0 8px 32px rgba(0, 0, 0, 0.06);
+      transition:
+        border-color 0.25s,
+        box-shadow 0.25s;
+    }
+
+    .feature-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: var(--color-accent-dim);
+      color: var(--color-accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 1rem;
+    }
+
+    .feature h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--color-text);
+    }
+
+    .feature p {
+      color: var(--color-muted);
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+
+    /* ── CTA ──────────────────────────────── */
+    .cta-section {
+      padding: 8rem 0;
+    }
+
+    @media (max-width: 640px) {
+      .cta-section {
+        padding: 4rem 0;
+      }
+    }
+
+    .cta-inner {
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .cta-heading {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .cta-heading motion-liquid {
+      color: var(--color-yellow);
+    }
+
+    .cta-sub {
+      font-size: 1rem;
+      color: var(--color-muted);
+      margin-bottom: 2.5rem;
+      line-height: 1.7;
+    }
+
+    .cta-actions {
+      display: flex;
+      gap: 0.875rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  </style>
+</Layout>

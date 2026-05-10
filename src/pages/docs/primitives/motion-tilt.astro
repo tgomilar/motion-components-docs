@@ -1,0 +1,93 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-tilt — Motion Components" noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-tilt</motion-split></h1>
+      <p class="lead">3D perspective tilt that follows the cursor. Springs back on leave with a glossy specular highlight and dynamic shadow.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview>
+        <motion-tilt max="15" gloss>
+          <div class="demo-card">
+            <p class="card-label">Tilt me</p>
+            <p class="card-sub">Move cursor within</p>
+          </div>
+        </motion-tilt>
+      </DocsPreview>
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-tilt.html"
+        copy
+        code={`<motion-tilt max="15" gloss>
+  <div class="card">
+    <p class="card-label">Tilt me</p>
+    <p class="card-sub">Move cursor within</p>
+  </div>
+</motion-tilt>
+
+<style>
+  .card {
+    background: linear-gradient(135deg, #f0f0f8 0%, #ffffff 100%);
+    border: 1px solid #dddde8;
+    border-radius: 16px;
+    padding: 2.5rem 3.5rem;
+    text-align: center;
+    cursor: default;
+  }
+  .card-label { font-weight: 700; font-size: 1rem; }
+  .card-sub { font-size: 0.82rem; color: #60608a; }
+</style>`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable rows={[
+        { name: 'max', type: 'number', default: '15', description: 'Maximum tilt angle in degrees' },
+        { name: 'scale', type: 'number', default: '1.04', description: 'Scale factor applied on hover' },
+        { name: 'gloss', type: 'boolean', default: 'false', description: 'Show specular gloss highlight tracking the cursor' },
+        { name: 'duration', type: 'number', default: '0.5', description: 'Spring duration hint in seconds' },
+      ]} />
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .demo-card {
+    background: linear-gradient(135deg, var(--color-surface-2) 0%, var(--color-surface) 100%);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 2.5rem 3.5rem;
+    text-align: center;
+    cursor: default;
+  }
+
+  .card-label {
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--color-text);
+    margin-bottom: 0.25rem;
+  }
+
+  .card-sub {
+    font-size: 0.82rem;
+    color: var(--color-muted);
+  }
+</style>

@@ -1,0 +1,71 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-typewriter — Motion Components" description="Types out its text content character by character when it scrolls into view. Supports looping, a blinking cursor, and configurable speed." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-typewriter</motion-split></h1>
+      <p class="lead">
+        Types out its text content character by character when it scrolls into view. Supports looping, a blinking cursor, and configurable speed.
+      </p>
+
+      <h2>Preview</h2>
+      <DocsPreview replayId="tw-demo">
+        <motion-typewriter id="tw-demo" speed="55" loop cursor class="demo-text"> Motion that feels alive. </motion-typewriter>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-typewriter'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-typewriter.html"
+        copy
+        code={`<motion-typewriter speed="50" loop>
+  Hello, world.
+</motion-typewriter>`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'speed', type: 'number', default: '50', description: 'Milliseconds per character' },
+        { name: 'delay', type: 'number', default: '0', description: 'Delay before typing starts (ms)' },
+        { name: 'pause', type: 'number', default: '1800', description: 'Pause at end before erasing (ms, loop only)' },
+        { name: 'loop', type: 'boolean', default: 'false', description: 'Erase and retype continuously' },
+        { name: 'cursor', type: 'boolean', default: 'true', description: 'Show blinking cursor' },
+      ]} />
+      <h2>Accessibility</h2>
+      <p>Respects <code>prefers-reduced-motion</code>: when enabled, the typing animation is skipped and the full text appears immediately.</p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .demo-text {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+  }
+</style>

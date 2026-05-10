@@ -1,0 +1,148 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-parallax — Motion Components" description="Scroll-linked depth shift. Wrap any element to make it move slower or faster than the page scroll — no JavaScript required." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-parallax</motion-split></h1>
+      <p class="lead">Scroll-linked depth shift. Wrap any element to make it move slower or faster than the page scroll — no JavaScript required.</p>
+
+      <a href="/showcase/parallax/" class="showcase-link">
+        <span class="showcase-link-label">Live showcase</span>
+        <span class="showcase-link-arrow">→</span>
+        <span class="showcase-link-sub">Depth layers · Horizontal drift · Cards</span>
+      </a>
+
+      <h2>Preview</h2>
+      <p class="section-desc">Scroll the page to see the layers move at different speeds.</p>
+      <DocsPreview tall>
+        <div class="demo-scene">
+          <motion-parallax speed="0.2" class="demo-layer demo-layer--back">BACKGROUND</motion-parallax>
+          <motion-parallax speed="0.6" class="demo-layer demo-layer--mid">MIDGROUND</motion-parallax>
+          <motion-parallax speed="1.3" class="demo-layer demo-layer--front">FOREGROUND</motion-parallax>
+        </div>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-parallax'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <CodeWindow
+        filename="motion-parallax.html"
+        copy
+        code={`<!-- subtle parallax drift (background depth) -->
+<motion-parallax speed="0.3">
+  <img src="bg.jpg" />
+</motion-parallax>
+
+<!-- moderate parallax drift -->
+<motion-parallax speed="0.8">
+  <h2>Midground</h2>
+</motion-parallax>
+
+<!-- strong parallax drift (foreground feel) -->
+<motion-parallax speed="1.5">
+  <span>Foreground</span>
+</motion-parallax>`}
+      />
+
+      <h2>Horizontal</h2>
+      <p class="section-desc">Set <code>axis="x"</code> to shift horizontally as you scroll vertically.</p>
+      <DocsPreview>
+        <div class="demo-row">
+          <motion-parallax speed="0.3" axis="x" class="demo-label">◀ slow</motion-parallax>
+          <motion-parallax speed="1.4" axis="x" class="demo-label">fast ▶</motion-parallax>
+        </div>
+      </DocsPreview>
+
+      <CodeWindow
+        filename="motion-parallax-x.html"
+        copy
+        code={`<motion-parallax speed="0.3" axis="x">◀ slow drift</motion-parallax>
+<motion-parallax speed="1.4" axis="x">fast drift ▶</motion-parallax>`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable
+        nameLabel="Attribute"
+        rows={[
+          { name: "speed", type: "number", default: "0.5", description: "Parallax intensity. <code>0</code> = no drift (scrolls with page), <code>0.5</code> = moderate, <code>1</code> = strong drift, <code>2</code> = double intensity." },
+          { name: "axis", type: "string", default: "'y'", description: "<code>'y'</code> for vertical parallax, <code>'x'</code> for horizontal." },
+        ]}
+      />
+
+      <p class="note">
+        <strong>Reduced motion:</strong> when <code>prefers-reduced-motion: reduce</code> is set, all parallax movement is disabled.
+      </p>
+      <h2>Accessibility</h2>
+      <p>Respects <code>prefers-reduced-motion</code>: when enabled, all parallax movement is disabled and the element renders at its natural position.</p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .lead {
+    margin-bottom: 1.25rem;
+  }
+
+  .demo-scene {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+  }
+
+  .demo-layer {
+    font-family: var(--font-mono);
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    user-select: none;
+  }
+
+  .demo-layer--back {
+    font-size: 0.85rem;
+    color: var(--color-muted);
+    opacity: 0.4;
+    letter-spacing: 0.2em;
+  }
+
+  .demo-layer--mid {
+    font-size: 1.2rem;
+    color: var(--color-muted);
+    opacity: 0.65;
+    letter-spacing: 0.12em;
+  }
+
+  .demo-layer--front {
+    font-size: 2rem;
+    color: var(--color-text);
+  }
+
+  .demo-label {
+    font-family: var(--font-mono);
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--color-muted);
+    letter-spacing: 0.06em;
+  }
+</style>

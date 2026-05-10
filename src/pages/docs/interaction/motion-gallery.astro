@@ -1,0 +1,117 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-gallery — Motion Components" noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-gallery</motion-split></h1>
+      <p class="lead">CSS grid gallery with spring hover lift and FLIP-based lightbox expand. Click any item — it springs to full screen and back. Navigate with arrows or keyboard.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview>
+        <motion-gallery columns="3" gap="12" aspect-ratio="4/3">
+          <div class="demo-item item-1" data-caption="Spring physics"><span>01</span></div>
+          <div class="demo-item item-2" data-caption="FLIP-based expand"><span>02</span></div>
+          <div class="demo-item item-3" data-caption="Interruptible"><span>03</span></div>
+          <div class="demo-item item-4" data-caption="Navigate with ← →"><span>04</span></div>
+          <div class="demo-item item-5" data-caption="Press Escape to close"><span>05</span></div>
+          <div class="demo-item item-6" data-caption="Works with any content"><span>06</span></div>
+        </motion-gallery>
+      </DocsPreview>
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-gallery.html"
+        copy
+        code={`<motion-gallery columns="3" gap="16" aspect-ratio="4/3">
+  <img src="photo-1.jpg" alt="…" data-caption="Optional caption" />
+  <img src="photo-2.jpg" alt="…" />
+  <img src="photo-3.jpg" alt="…" />
+</motion-gallery>`}
+      />
+
+      <h2>Captions</h2>
+      <p>Add <code>data-caption</code> to any item and it will appear below the expanded view.</p>
+      <CodeWindow
+        filename="motion-gallery.html"
+        copy
+        code={`<motion-gallery columns="3" gap="16">
+  <img src="photo.jpg" alt="…" data-caption="A beautiful sunset" />
+</motion-gallery>`}
+      />
+
+      <h2>Aspect ratio</h2>
+      <p>Set <code>aspect-ratio</code> on the gallery to enforce a uniform size across all grid items — useful for photo grids.</p>
+      <CodeWindow
+        filename="motion-gallery.html"
+        copy
+        code={`<motion-gallery columns="4" gap="8" aspect-ratio="1/1">
+  …
+</motion-gallery>`}
+      />
+
+      <h2>How it works</h2>
+      <p>On click, the component records the item's <code>getBoundingClientRect()</code> — the <em>First</em> position in FLIP terminology. A fixed-position clone springs to a centered, aspect-ratio-preserved target while a blurred backdrop fades in. Navigation fades out the current clone and springs the next item in from its grid position. On collapse, the spring reverses to the original rect.</p>
+      <p>Because expand, navigate, and collapse all use the same spring clone, interrupting mid-animation is naturally smooth.</p>
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'columns', type: 'string | number', default: '3', description: 'Grid column count. Accepts any valid CSS repeat() value or a plain number.' },
+        { name: 'gap', type: 'number', default: '16', description: 'Gap between grid items in px' },
+        { name: 'aspect-ratio', type: 'string', default: '—', description: 'Enforces a uniform aspect ratio on all items, e.g. "4/3", "1/1", "16/9"' },
+        { name: 'stagger', type: 'boolean', default: 'true', description: 'Set to "false" to disable the entrance stagger animation' },
+      ]} />
+
+      <h2>Dismiss &amp; navigate</h2>
+      <p>Click the expanded item, the backdrop, or the ✕ button to collapse. Use the ← → buttons or arrow keys to move between items.</p>
+
+      <h2>Accessibility</h2>
+      <p>When <code>prefers-reduced-motion</code> is set, expand and collapse are instant. The backdrop and UI still appear normally.</p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  /* ── Demo gallery items ── */
+  .demo-item {
+    height: 100px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: var(--font-mono);
+  }
+
+  .item-1 { background: linear-gradient(135deg, #1e3a8a, #3b82f6); }
+  .item-2 { background: linear-gradient(135deg, #4c1d95, #8b5cf6); }
+  .item-3 { background: linear-gradient(135deg, #064e3b, #10b981); }
+  .item-4 { background: linear-gradient(135deg, #7c2d12, #f97316); }
+  .item-5 { background: linear-gradient(135deg, #1e1b4b, #6366f1); }
+  .item-6 { background: linear-gradient(135deg, #831843, #ec4899); }
+</style>

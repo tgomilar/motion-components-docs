@@ -1,0 +1,521 @@
+---
+import Layout from '../layouts/Layout.astro'
+import CodeWindow from '../components/CodeWindow.astro'
+---
+
+<Layout
+  title="About — Motion Components"
+  description="Learn how motion-components is built, what web components are, and how to use the library in your framework.">
+  <div class="about-wrap">
+    <header class="about-hero">
+      <p class="eyebrow">About</p>
+      <h1>
+        The motion layer<br /> your <motion-liquid text="UI" intensity="12" speed="1.5"
+        ></motion-liquid> is missing
+      </h1>
+
+      <p class="lead">
+        <motion-code-inline copy-visible>motion-components</motion-code-inline> is an open-source library
+        of physics-based web components. Drop them into any framework and get smooth, interruptible animation
+        out of the box — or extend and compose them to build your own.
+      </p>
+    </header>
+
+    <!-- ── Manifesto ────────────────────────── -->
+    <section class="manifesto">
+      <h2 class="manifesto-statement">
+        Motion is not only <motion-headline by="chars" interval="0.04" duration="0.9"
+          >decoration
+        </motion-headline>.</h2
+      >
+
+      <p>
+        We live in an era of instantaneous interfaces. Pages snap in. Modals appear. Content jumps
+        into place. Every interaction is a hard cut — and every hard cut teaches the brain that this
+        world has no physics, no weight, no continuity.
+      </p>
+
+      <p>
+        Motion is the connective tissue of experience. When an element moves with mass — when it
+        overshoots and settles, when it carries velocity from one state into the next — it stops
+        being a component and starts being something you can trust. Your finger knows the
+        difference. Your eye knows the difference.
+      </p>
+    </section>
+    <p>
+      motion-components exists because good motion shouldn't require a dedicated animation engineer
+      or a working knowledge of bezier curves. It should be a tag you drop in. The physics come
+      free.
+    </p>
+
+    <ul class="stat-strip">
+      <li>
+        <strong><motion-counter from="0" to="37" duration="1.4"></motion-counter></strong>
+        <span>composable components</span>
+      </li>
+      <li>
+        <strong><motion-counter from="0" to="1" duration="1"></motion-counter></strong>
+        <span>import. registers everything.</span>
+      </li>
+      <li>
+        <strong
+          >~<motion-counter from="0" to="20" duration="1.4" suffix=" KB"></motion-counter></strong
+        >
+        <span>brotlied, all 37 — tree-shake from there.</span>
+      </li>
+    </ul>
+
+    <!-- ── What are web components ─────────── -->
+    <section>
+      <h2>What are web components?</h2>
+      <p>
+        Web components are native browser APIs for defining custom HTML elements. A tag like <motion-code-inline
+          copy-visible>motion-hover</motion-code-inline
+        > is registered once and behaves like any built-in HTML element. All major browsers support them
+        without polyfills.
+      </p>
+      <p>
+        Most frameworks work with custom elements, but some require a small amount of configuration
+        to prevent their compilers treating unknown tags as errors. See the <a
+          href="#framework-setup">framework setup</a
+        > section below.
+      </p>
+      <div class="link-list">
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components"
+          target="_blank"
+          rel="noopener">MDN — Web Components guide ↗</a
+        >
+        <a href="https://caniuse.com/custom-elementsv1" target="_blank" rel="noopener"
+          >Can I Use — Custom Elements ↗</a
+        >
+      </div>
+    </section>
+
+    <!-- ── Framework setup ─────────────────── -->
+    <section id="framework-setup">
+      <h2>Framework setup</h2>
+
+      <h3>Vanilla HTML / Astro / Svelte / SolidJS / Alpine</h3>
+      <p>No configuration needed. Import the library once and use the tags directly.</p>
+      <CodeWindow filename="app.js" copy code={`import 'motion-components'`} />
+
+      <h3>Vue 3</h3>
+      <p>
+        Vue's template compiler warns on unknown tags by default. Tell it to treat any <code
+          >motion-*</code
+        > tag as a custom element:
+      </p>
+      <CodeWindow
+        filename="vite.config.js"
+        copy
+        code={`import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+
+export default defineConfig({
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: tag => tag.startsWith('motion-')
+        }
+      }
+    })
+  ]
+})`}
+      />
+
+      <h3>Angular</h3>
+      <p>
+        Angular's template compiler errors on unknown elements. Add <code
+          >CUSTOM_ELEMENTS_SCHEMA</code
+        > to any module or standalone component that uses motion-components:
+      </p>
+      <CodeWindow
+        filename="app.module.ts"
+        copy
+        code={`import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
+@NgModule({
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+})
+export class AppModule {}`}
+      />
+      <p>For standalone components:</p>
+      <CodeWindow
+        filename="app.component.ts"
+        copy
+        code={`import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: \`<motion-hover><button>Hover</button></motion-hover>\`
+})
+export class AppComponent {}`}
+      />
+
+      <h3>React</h3>
+      <p>
+        React 19 has full custom element support. For React 18 and earlier, boolean attributes and
+        custom events require extra handling. Full React wrappers are coming soon.
+      </p>
+      <CodeWindow
+        filename="App.jsx"
+        copy
+        code={`// React 19+
+import 'motion-components'
+
+export function App() {
+  return (
+    <motion-hover scale="1.08">
+      <button>Hover me</button>
+    </motion-hover>
+  )
+}`}
+      />
+    </section>
+
+    <!-- ── Customising components ──────────── -->
+    <section>
+      <h2>Customising components</h2>
+
+      <h3>1. HTML attributes</h3>
+      <p>
+        The primary API is plain HTML attributes. Every tunable value — spring duration, scale,
+        direction — is exposed as an attribute with a sensible default.
+      </p>
+      <CodeWindow
+        filename="example.html"
+        copy
+        code={`<!-- tighter spring, more lift -->
+<motion-hover scale="1.08" y="-12" duration="0.2">
+  <button>Hover me</button>
+</motion-hover>
+
+<!-- reveal from further down, slower -->
+<motion-reveal y="48" duration="1.2">
+  <h2>Smooth entrance</h2>
+</motion-reveal>
+
+<!-- stagger children with custom interval -->
+<motion-stagger interval="0.12" duration="0.6">
+  <div>One</div>
+  <div>Two</div>
+  <div>Three</div>
+</motion-stagger>`}
+      />
+
+      <h3>2. CSS custom properties</h3>
+      <p>
+        CSS custom properties inherit across the shadow DOM boundary. Components that render visible
+        UI expose custom properties you can override from the outside. For example, <motion-code-inline
+          copy-visible>motion-code</motion-code-inline
+        > exposes syntax highlight tokens:
+      </p>
+      <CodeWindow
+        filename="theme.css"
+        copy
+        code={`:root {
+  --cw-keyword: #c084fc;
+  --cw-string:  #86efac;
+  --cw-tag:     #67e8f9;
+}`}
+      />
+
+      <h3>3. Extending components</h3>
+      <p
+        >Each component is a standard custom element class. Subclass it to change defaults or add
+        behaviour:</p
+      >
+      <CodeWindow
+        filename="my-hover.js"
+        copy
+        code={`import { MotionHover } from 'motion-components'
+
+class MyHover extends MotionHover {
+  scale = 1.1
+
+  connectedCallback() {
+    super.connectedCallback()
+    this.style.cursor = 'pointer'
+  }
+}
+
+customElements.define('my-hover', MyHover)`}
+      />
+
+      <h3>4. Composing primitives</h3>
+      <p>Wrap primitives inside each other — they each do one thing and never interfere:</p>
+      <CodeWindow
+        filename="composed.html"
+        copy
+        code={`<motion-stagger interval="0.1">
+  <motion-hover scale="1.04" y="-6">
+    <div class="card">Card one</div>
+  </motion-hover>
+  <motion-hover scale="1.04" y="-6">
+    <div class="card">Card two</div>
+  </motion-hover>
+  <motion-hover scale="1.04" y="-6">
+    <div class="card">Card three</div>
+  </motion-hover>
+</motion-stagger>`}
+      />
+    </section>
+
+    <!-- ── Stack ────────────────────────────── -->
+    <section>
+      <h2>How it's built</h2>
+      <p>
+        Components are authored with <a href="https://lit.dev" target="_blank" rel="noopener">Lit</a
+        > — a small library that adds reactive properties and declarative templates on top of the native
+        custom element APIs. Lit is bundled into the output and never appears as a peer dependency.
+      </p>
+      <p>
+        All animations go through <a href="https://motion.dev" target="_blank" rel="noopener"
+          >Motion</a
+        > — a spring physics animation library. Springs replace cubic-bezier easing curves, so animations
+        are naturally interruptible: interrupt one mid-flight and it continues from its current velocity
+        rather than snapping.
+      </p>
+    </section>
+
+    <!-- ── Philosophy ──────────────────────── -->
+    <section>
+      <h2>Design philosophy</h2>
+      <ul class="philosophy-list">
+        <li>
+          <strong>Motion-first.</strong> Animation is not a coating applied after the fact — it is a core
+          part of how interfaces communicate. Every component is designed from that premise.
+        </li>
+        <li>
+          <strong>No janky animations.</strong> Springs replace duration-based easing. An interrupted
+          spring continues from its current velocity; an interrupted cubic-bezier snaps. The difference
+          is felt immediately.
+        </li>
+        <li>
+          <strong>One responsibility per component.</strong> Primitives do one thing well. Complexity
+          comes from composition, not configuration.
+        </li>
+        <li>
+          <strong>Accessibility is not optional.</strong>
+          <code>prefers-reduced-motion</code> is checked at the animation layer. Components degrade gracefully
+          without any extra work from the consumer.
+        </li>
+      </ul>
+    </section>
+  </div>
+
+  <script>
+    import 'motion-components'
+  </script>
+
+  <style>
+    .about-wrap {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 5rem 2rem 6rem;
+    }
+
+    .eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--color-accent);
+      margin-bottom: 1rem;
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 motion-liquid {
+      color: var(--color-yellow);
+    }
+
+    .lead {
+      font-size: 1.1rem;
+      color: var(--color-muted);
+      line-height: 1.75;
+      margin-bottom: 0;
+    }
+
+    section {
+      margin-top: 3rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .manifesto {
+      border-top: none;
+      padding-top: 0;
+      margin-top: 3rem;
+    }
+
+    .manifesto-statement {
+      display: block;
+      font-size: clamp(1.8rem, 4vw, 2.6rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      color: var(--color-text);
+      margin-bottom: 1.75rem;
+    }
+
+    .manifesto-statement motion-headline {
+      color: var(--color-yellow);
+      display: inline-block;
+    }
+
+    .stat-strip {
+      list-style: none;
+      padding: 1.75rem 0 0;
+      margin: 2rem 0 0;
+      border-top: 1px solid var(--color-border);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .stat-strip li {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      padding: 0;
+      background: none;
+      border: none;
+      border-radius: 0;
+      font-size: inherit;
+    }
+
+    .stat-strip strong {
+      font-size: clamp(1.6rem, 3vw, 2.1rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--color-accent);
+      line-height: 1;
+      font-feature-settings: 'tnum';
+    }
+
+    .stat-strip span {
+      font-size: 0.82rem;
+      color: var(--color-muted);
+      line-height: 1.45;
+    }
+
+    @media (max-width: 560px) {
+      .stat-strip {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+
+    .manifesto p:not(.manifesto-statement) {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--color-muted);
+      margin-bottom: 1rem;
+      max-width: 640px;
+    }
+
+    h2 {
+      font-size: 1.4rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.75rem;
+    }
+
+    h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--color-text);
+      margin: 1.75rem 0 0.5rem;
+    }
+
+    h3:first-of-type {
+      margin-top: 1.25rem;
+    }
+
+    p {
+      color: var(--color-muted);
+      font-size: 0.97rem;
+      line-height: 1.75;
+      margin-bottom: 0.75rem;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    a {
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    ul {
+      color: var(--color-muted);
+      font-size: 0.97rem;
+      line-height: 1.75;
+      padding-left: 1.25rem;
+      margin: 0.75rem 0 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    ul li strong {
+      color: var(--color-text);
+    }
+
+    code {
+      font-family: var(--font-mono);
+      font-size: 0.85em;
+      color: var(--color-accent);
+      background: var(--color-accent-dim);
+      padding: 0.1em 0.4em;
+      border-radius: 4px;
+    }
+
+    .link-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      margin-top: 1rem;
+    }
+
+    .link-list a {
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    .philosophy-list {
+      list-style: none;
+      padding: 0;
+      gap: 0.75rem;
+    }
+
+    .philosophy-list li {
+      padding: 0.875rem 1.1rem;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 10px;
+      font-size: 0.95rem;
+    }
+
+    motion-code {
+      display: block;
+      margin: 0.75rem 0 1.25rem;
+    }
+  </style>
+</Layout>

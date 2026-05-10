@@ -1,0 +1,122 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-image-compare — Motion Components" noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-image-compare</motion-split></h1>
+      <p class="lead">
+        Before/after slider with a draggable, spring-damped handle. Drop two images into the <code>before</code> and <code>after</code> slots
+        — drag, click, or use the arrow keys to reveal.
+      </p>
+
+      <h2>Preview — Horizontal</h2>
+      <DocsPreview wide tall>
+        <motion-image-compare class="compare-demo" start="50">
+          <div slot="before" class="compare-pane compare-before">Before</div>
+          <div slot="after"  class="compare-pane compare-after">After</div>
+        </motion-image-compare>
+      </DocsPreview>
+
+      <h2>Preview — Vertical</h2>
+      <DocsPreview wide tall>
+        <motion-image-compare class="compare-demo" orientation="vertical" start="40">
+          <div slot="before" class="compare-pane compare-before">Top</div>
+          <div slot="after"  class="compare-pane compare-after">Bottom</div>
+        </motion-image-compare>
+      </DocsPreview>
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-image-compare.html"
+        copy
+        code={`<motion-image-compare start="50">
+  <img slot="before" src="before.jpg" alt="Before retouch" />
+  <img slot="after"  src="after.jpg"  alt="After retouch"  />
+</motion-image-compare>`}
+      />
+
+      <h2>Sizing</h2>
+      <p>
+        The host fills its container's width and clips overflow. Give it an explicit <code>height</code> (or use an aspect-ratio container) — slotted images stretch to <code>100% × 100%</code> with <code>object-fit: cover</code>.
+      </p>
+      <CodeWindow
+        filename="styles.css"
+        copy
+        code={`motion-image-compare {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+}`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'start', type: 'number', default: '50', description: 'Initial split position as a percentage (0–100)' },
+        { name: 'orientation', type: '"horizontal" | "vertical"', default: '"horizontal"', description: 'Drag axis' },
+        { name: 'bounce', type: 'number', default: '0.25', description: 'Spring bounciness of the snap-to-cursor animation' },
+        { name: 'duration', type: 'number', default: '0.45', description: 'Spring duration of the snap-to-cursor animation, in seconds' },
+      ]} />
+
+      <h2>Slots</h2>
+      <PropsTable nameLabel="Slot" rows={[
+        { name: 'before', type: 'element', default: '—', description: 'The left/top image (visible behind the clip)' },
+        { name: 'after',  type: 'element', default: '—', description: 'The right/bottom image (revealed by dragging)' },
+      ]} />
+
+      <h2>Accessibility</h2>
+      <p>
+        The handle is a focusable <code>role="slider"</code> with <code>aria-valuemin/max/now</code>.
+        Use <kbd>←</kbd> / <kbd>→</kbd> (or <kbd>↑</kbd> / <kbd>↓</kbd> in vertical mode) to nudge the split by 2%, hold <kbd>Shift</kbd> for 10% jumps.
+        Slotted images are kept as the source of truth; remember to write meaningful <code>alt</code> text.
+      </p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  motion-image-compare.compare-demo {
+    width: 100%;
+    height: 280px;
+    border-radius: 12px;
+    border: 1px solid var(--color-border);
+  }
+
+  .compare-pane {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: white;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .compare-before {
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  }
+
+  .compare-after {
+    background: linear-gradient(135deg, #facc15, #f59e0b);
+    color: #18181e;
+  }
+</style>

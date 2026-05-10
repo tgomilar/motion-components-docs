@@ -1,0 +1,172 @@
+---
+import Layout from '../../../layouts/Layout.astro'
+import DocsPreview from '../../../components/DocsPreview.astro'
+import DocsSidebar from '../../../components/DocsSidebar.astro'
+import DocsTOC from '../../../components/DocsTOC.astro'
+import DocsPagination from '../../../components/DocsPagination.astro'
+import CodeWindow from '../../../components/CodeWindow.astro'
+import PropsTable from '../../../components/PropsTable.astro'
+import '../../../styles/docs.css'
+---
+
+<Layout title="motion-glitch — Motion Components" description="RGB channel split effect triggered on hover, auto, or loop — powered by Motion One." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-glitch</motion-split></h1>
+      <p class="lead"
+        >RGB channel split effect triggered on hover, auto, or loop — powered by Motion One.</p
+      >
+
+      <h2>Preview</h2>
+      <DocsPreview>
+        <motion-glitch id="glitch-hover" intensity="5" class="demo-text">GLITCH</motion-glitch>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-glitch'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <CodeWindow
+        filename="motion-glitch.html"
+        copy
+        code={`<motion-glitch>
+  GLITCH
+</motion-glitch>`}
+      />
+
+      <h2>Hover</h2>
+      <p class="section-desc">Use <code>trigger="hover"</code> to fire the glitch on mouseenter.</p>
+      <DocsPreview>
+        <motion-glitch trigger="hover" interval="1800" intensity="5" class="demo-text"
+          >ERROR_404</motion-glitch
+        >
+      </DocsPreview>
+
+      <CodeWindow
+        filename="motion-glitch-hover.html"
+        copy
+        code={`<motion-glitch trigger="hover" interval="1800">
+  ERROR_404
+</motion-glitch>`}
+      />
+
+      <h2>Intensity</h2>
+      <p class="section-desc"
+        >Control how far the red and blue channels shift. Low values are subtle; high values are
+        aggressive.</p
+      >
+      <DocsPreview>
+        <div class="intensity-row">
+          <div class="intensity-item">
+            <span class="intensity-label">intensity="2"</span>
+            <motion-glitch intensity="2" class="demo-text demo-text--small"
+              >SYSTEM_FAILURE</motion-glitch
+            >
+          </div>
+          <div class="intensity-item">
+            <span class="intensity-label">intensity="9"</span>
+            <motion-glitch intensity="9" class="demo-text demo-text--small"
+              >SYSTEM_FAILURE</motion-glitch
+            >
+          </div>
+        </div>
+      </DocsPreview>
+
+      <CodeWindow
+        filename="motion-glitch-intensity.html"
+        copy
+        code={`<!-- subtle -->
+<motion-glitch intensity="2">SYSTEM_FAILURE</motion-glitch>
+
+<!-- aggressive -->
+<motion-glitch intensity="9">SYSTEM_FAILURE</motion-glitch>`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable
+        nameLabel="Attribute"
+        rows={[
+          {
+            name: 'intensity',
+            type: 'number',
+            default: '5',
+            description:
+              'Channel split distance in px. Higher values produce a more extreme glitch.',
+          },
+          {
+            name: 'trigger',
+            type: 'string',
+            default: "'loop'",
+            description:
+              "<code>'loop'</code> — repeat on interval &nbsp;|&nbsp; <code>'hover'</code> — on mouseenter &nbsp;|&nbsp; <code>'auto'</code> — once on mount",
+          },
+          {
+            name: 'interval',
+            type: 'number',
+            default: '2000',
+            description: 'Milliseconds between each glitch when <code>trigger="loop"</code>',
+          },
+        ]}
+      />
+
+      <p class="note">
+        <strong>Public method:</strong> call <code>el.glitch()</code> on the element reference to fire
+        the animation imperatively at any time, regardless of the <code>trigger</code> setting.
+      </p>
+      <h2>Accessibility</h2>
+      <p
+        >Respects <code>prefers-reduced-motion</code>: when enabled, the channel split effect is
+        disabled and the text renders without distortion.</p
+      >
+      <DocsPagination />
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import 'motion-components'
+</script>
+
+<style>
+  .demo-text {
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    font-family: var(--font-mono);
+    color: var(--color-text);
+    cursor: default;
+    user-select: none;
+  }
+
+  .demo-text--small {
+    font-size: 1.4rem;
+  }
+
+  .intensity-row {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .intensity-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .intensity-label {
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    color: #888;
+    letter-spacing: 0.04em;
+  }
+</style>

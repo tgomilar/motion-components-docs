@@ -1,0 +1,129 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+
+const target = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
+---
+
+<Layout title="motion-countdown — Motion Components" description="Animated countdown timer with per-digit transitions. Choose between a smooth flip or a slot-machine roll for each digit." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-countdown</motion-split></h1>
+      <p class="lead">Animated countdown timer with per-digit transitions. Choose between a smooth flip or a slot-machine roll for each digit.</p>
+
+      <h2>Preview — Flip (default)</h2>
+      <DocsPreview>
+        <div class="demo-wrap">
+          <motion-countdown to={target} labels></motion-countdown>
+        </div>
+      </DocsPreview>
+
+      <h2>Preview — Roll</h2>
+      <DocsPreview>
+        <div class="demo-wrap">
+          <motion-countdown to={target} labels roll></motion-countdown>
+        </div>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <p>Two ways — pick whichever fits your bundle.</p>
+      <CodeWindow
+        filename="app.js"
+        copy
+        compact
+        code={`// just this component — bundler pulls in nothing else
+import 'motion-components/motion-countdown'
+
+// or the whole library, if you use lots of tags
+import 'motion-components'`}
+      />
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-countdown.html"
+        copy
+        code={`<!-- Flip (default) -->
+<motion-countdown to="2027-01-01T00:00:00" labels></motion-countdown>
+
+<!-- Slot machine roll -->
+<motion-countdown to="2027-01-01T00:00:00" labels roll></motion-countdown>`}
+      />
+
+      <h2>Format</h2>
+      <p>Control which units appear with the <code>format</code> attribute — a space-separated list of <code>days</code>, <code>hours</code>, <code>minutes</code>, <code>seconds</code>.</p>
+      <CodeWindow
+        filename="motion-countdown.html"
+        copy
+        code={`<motion-countdown
+  to="2027-06-01T00:00:00"
+  format="hours minutes seconds"
+  labels
+></motion-countdown>`}
+      />
+
+      <h2>Theming</h2>
+      <p>Style via CSS custom properties — they pierce the shadow DOM.</p>
+      <CodeWindow
+        filename="styles.css"
+        copy
+        code={`motion-countdown {
+  --countdown-color: #60a5fa;
+  --countdown-label-color: #8888a8;
+  --countdown-size: 4rem;
+  --countdown-label-size: 0.65rem;
+  --countdown-gap: 1rem;
+}`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'to', type: 'string', default: '—', description: 'Target date/time. Any value parseable by <code>new Date()</code>' },
+        { name: 'format', type: 'string', default: '"days hours minutes seconds"', description: 'Space-separated list of units to display' },
+        { name: 'labels', type: 'boolean', default: 'false', description: 'Show unit labels below each digit group' },
+        { name: 'roll', type: 'boolean', default: 'false', description: 'Use slot-machine roll instead of flip animation' },
+      ]} />
+
+      <h2>CSS variables</h2>
+      <PropsTable nameLabel="Variable" rows={[
+        { name: '--countdown-color', type: 'color', default: 'currentColor', description: 'Digit color' },
+        { name: '--countdown-label-color', type: 'color', default: 'currentColor', description: 'Label color' },
+        { name: '--countdown-size', type: 'length', default: '3.5rem', description: 'Digit font size' },
+        { name: '--countdown-label-size', type: 'length', default: '0.65rem', description: 'Label font size' },
+        { name: '--countdown-gap', type: 'length', default: '0.75rem', description: 'Gap between digit groups' },
+      ]} />
+
+      <h2>Accessibility</h2>
+      <p>When <code>prefers-reduced-motion</code> is set, digit transitions are instant with no animation.</p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .demo-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 1rem;
+  }
+
+  motion-countdown {
+    --countdown-color: var(--color-text);
+    --countdown-label-color: var(--color-muted);
+    --countdown-size: 2.75rem;
+    --countdown-gap: 0.75rem;
+  }
+</style>

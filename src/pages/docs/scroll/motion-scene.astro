@@ -1,0 +1,239 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-scene — Motion Components" description="Scroll-driven animation timeline. Pin a stage while scroll progress drives children through keyframes — purely declarative via data attributes." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-scene</motion-split></h1>
+      <p class="lead">Scroll-driven animation timeline. Pin a stage while scroll progress drives children through keyframes — purely declarative via data attributes.</p>
+
+      <a href="/showcase/scene/" class="showcase-link">
+        <span class="showcase-link-label">Live showcase</span>
+        <span class="showcase-link-arrow">→</span>
+        <span class="showcase-link-sub">Declare · Sequence · Compose</span>
+      </a>
+
+      <h2>How it works</h2>
+      <p class="section-desc">
+        Wrap a scene in a tall container. The inner stage sticks while the user scrolls. Children with <code>data-from</code>/<code>data-to</code> are scrubbed from their start keyframe to their end keyframe as scroll advances through <code>data-start</code>–<code>data-end</code> (0–1 progress values).
+      </p>
+
+      <h2>Preview</h2>
+      <p class="section-desc">Scroll inside the box to drive the animation.</p>
+      <DocsPreview tall noPad>
+        <div class="scene-scroll" id="scene-scroll-demo">
+          <motion-scene height="600px" container="#scene-scroll-demo" class="demo-scene">
+            <div class="demo-stack">
+              <div
+                class="demo-chip"
+                data-from='{"opacity":0}'
+                data-to='{"opacity":1}'
+                data-start="0.05"
+                data-end="0.35"
+              >
+                STEP_01
+              </div>
+              <div
+                class="demo-chip demo-chip--b"
+                data-from='{"opacity":0}'
+                data-to='{"opacity":1}'
+                data-start="0.35"
+                data-end="0.65"
+              >
+                STEP_02
+              </div>
+              <div
+                class="demo-chip demo-chip--c"
+                data-from='{"opacity":0}'
+                data-to='{"opacity":1}'
+                data-start="0.65"
+                data-end="0.95"
+              >
+                STEP_03
+              </div>
+            </div>
+          </motion-scene>
+        </div>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-scene'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <CodeWindow
+        filename="motion-scene.html"
+        copy
+        code={`<motion-scene height="300vh">
+  <h2
+    data-from='{"opacity":0,"y":"-30px"}'
+    data-to='{"opacity":1,"y":"0px"}'
+    data-start="0"
+    data-end="0.4"
+  >
+    Appears first
+  </h2>
+
+  <p
+    data-from='{"opacity":0}'
+    data-to='{"opacity":1}'
+    data-start="0.3"
+    data-end="0.7"
+  >
+    Fades in mid-scroll
+  </p>
+
+  <span
+    data-from='{"opacity":0,"scale":"0.8"}'
+    data-to='{"opacity":1,"scale":"1"}'
+    data-start="0.6"
+    data-end="1"
+  >
+    Scales in last
+  </span>
+</motion-scene>`}
+      />
+
+      <h2>CSS variable</h2>
+      <p class="section-desc">
+        The scene exposes <code>--progress</code> (0–1) so you can drive your own CSS effects off scroll position.
+      </p>
+      <CodeWindow
+        filename="scene-progress.css"
+        copy
+        code={`motion-scene {
+  --hue: calc(var(--progress) * 200);
+  background: hsl(var(--hue) 40% 8%);
+}`}
+      />
+
+      <h2>Custom scroll container</h2>
+      <p class="section-desc">
+        By default the scene tracks document scroll. Pass a CSS selector via <code>container</code> to use an overflow element instead.
+      </p>
+      <CodeWindow
+        filename="motion-scene-container.html"
+        copy
+        code={`<div id="my-scroll-box" style="height:500px;overflow-y:auto">
+  <motion-scene height="200%" container="#my-scroll-box">
+    <h2
+      data-from='{"opacity":0}'
+      data-to='{"opacity":1}'
+      data-start="0"
+      data-end="0.5"
+    >
+      Tracks the box scroll
+    </h2>
+  </motion-scene>
+</div>`}
+      />
+
+      <h2>Without pinning</h2>
+      <p class="section-desc">Set the <code>pin</code> attribute to false (omit it) if you want scrubbed children but no sticky stage.</p>
+      <CodeWindow
+        filename="motion-scene-no-pin.html"
+        copy
+        code={`<!-- omit pin attribute to disable sticky -->
+<motion-scene height="200vh">
+  <div
+    data-from='{"scale":"0.8","opacity":0}'
+    data-to='{"scale":"1","opacity":1}'
+    data-start="0"
+    data-end="1"
+  >
+    Scales in over the full scroll
+  </div>
+</motion-scene>`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable
+        nameLabel="Attribute"
+        rows={[
+          { name: "height", type: "string", default: "'200vh'", description: "Height of the scroll container — controls how much scroll the scene consumes." },
+          { name: "pin", type: "boolean", default: "true", description: "When present, the inner stage sticks to the viewport while scrolling. Omit to disable." },
+          { name: "container", type: "string", default: "''", description: "CSS selector for a custom scroll container. Defaults to document scroll when empty." },
+        ]}
+      />
+
+      <h2>Child data attributes</h2>
+      <PropsTable
+        rows={[
+          { name: "data-from", type: "JSON", default: "—", description: "Starting keyframe — e.g. <code>{\"opacity\":0,\"y\":\"-20px\"}</code>. Supports <code>x</code>, <code>y</code>, <code>scale</code>, <code>rotate</code>, and any CSS property." },
+          { name: "data-to", type: "JSON", default: "—", description: "Ending keyframe — same shape as <code>data-from</code>." },
+          { name: "data-start", type: "number", default: "0", description: "Scene progress (0–1) at which this child's animation begins." },
+          { name: "data-end", type: "number", default: "1", description: "Scene progress (0–1) at which this child's animation ends." },
+        ]}
+      />
+
+      <h2>Accessibility</h2>
+      <p>Respects <code>prefers-reduced-motion</code>: when enabled, all scroll-driven animations are disabled and children render at their end state immediately.</p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .lead {
+    margin-bottom: 1.25rem;
+  }
+
+  /* position:relative required so motion-one's offsetParent walk finds this container */
+  .scene-scroll {
+    height: 300px;
+    overflow-y: auto;
+    width: 100%;
+    position: relative;
+    border-radius: 12px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+
+  .demo-scene {
+    width: 100%;
+  }
+
+  .demo-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .demo-chip {
+    font-family: var(--font-mono);
+    font-size: 1.1rem;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    color: var(--color-text);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .demo-chip--b {
+    color: var(--color-accent);
+  }
+
+  .demo-chip--c {
+    color: var(--color-muted);
+  }
+
+</style>

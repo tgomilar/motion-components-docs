@@ -1,0 +1,120 @@
+---
+interface PropRow {
+  name: string;
+  type: string;
+  default: string;
+  description: string;
+  property?: string;
+}
+
+interface Props {
+  rows: PropRow[];
+  nameLabel?: string;
+}
+
+const { rows, nameLabel = "Property" } = Astro.props;
+
+const showPropertyColumn = nameLabel === "Attribute";
+
+const kebabToCamel = (s: string) => s.replace(/-([a-z0-9])/g, (_, c) => c.toUpperCase());
+---
+
+<div class="props-table">
+  <table>
+    <thead>
+      <tr>
+        <th>{nameLabel}</th>
+        {showPropertyColumn && <th>Property</th>}
+        <th>Type</th>
+        <th>Default</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        rows.map((row) => (
+          <tr>
+            <td>
+              <motion-code-inline copy>{row.name}</motion-code-inline>
+            </td>
+            {showPropertyColumn && (
+              <td>
+                <motion-code-inline copy>{row.property ?? kebabToCamel(row.name)}</motion-code-inline>
+              </td>
+            )}
+            <td>{row.type}</td>
+            <td>{row.default}</td>
+            <td set:html={row.description} />
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .props-table {
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .props-table :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    background: var(--color-surface);
+  }
+
+  .props-table :global(th) {
+    text-align: left;
+    padding: 0.65rem 1rem;
+    background: var(--color-surface-2);
+    color: var(--color-muted);
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .props-table :global(td) {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--color-border);
+    color: var(--color-text);
+    transition: background 0.15s;
+  }
+
+  .props-table :global(tr:nth-child(even) td) {
+    background: color-mix(in srgb, var(--color-surface-2) 45%, transparent);
+  }
+
+  .props-table :global(tbody tr:hover td) {
+    background: var(--color-accent-dim);
+  }
+
+  .props-table :global(tr:last-child td) {
+    border-bottom: none;
+  }
+
+  .props-table :global(td:nth-child(2)),
+  .props-table :global(td:nth-child(3)),
+  .props-table:has(th:nth-child(5)) :global(td:nth-child(4)) {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--color-muted);
+    white-space: nowrap;
+  }
+
+  .props-table :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--color-accent);
+    background: var(--color-accent-dim);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+  }
+</style>

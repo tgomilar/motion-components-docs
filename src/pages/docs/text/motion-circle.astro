@@ -1,0 +1,168 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-circle — Motion Components" description="Positions text characters evenly around a circle and spins them continuously. Great for badges, labels, and decorative type." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-circle</motion-split></h1>
+      <p class="lead">Positions text characters evenly around a circle and spins them continuously. Great for badges, labels, and decorative type.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview>
+        <motion-circle class="demo-accent" text="MOTION COMPONENTS · SPIN IT · " radius="90" speed="8"></motion-circle>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-circle'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-circle.html"
+        copy
+        code={`<motion-circle
+  text="MOTION COMPONENTS · SPIN IT · "
+  radius="90"
+  speed="8"
+></motion-circle>`}
+      />
+
+      <h2>Counterclockwise</h2>
+      <p>Set <code>direction="ccw"</code> to reverse the spin direction.</p>
+      <DocsPreview>
+        <motion-circle class="demo-accent" text="COUNTERCLOCKWISE · REVERSE · " radius="90" speed="10" direction="ccw"></motion-circle>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-circle.html"
+        copy
+        code={`<motion-circle
+  text="COUNTERCLOCKWISE · REVERSE · "
+  radius="90"
+  speed="10"
+  direction="ccw"
+></motion-circle>`}
+      />
+
+      <h2>Upright characters</h2>
+      <p>Add <code>upright</code> to keep each character vertically oriented instead of radiating outward from the center.</p>
+      <DocsPreview>
+        <motion-circle class="demo-accent" text="UPRIGHT · READABLE · TEXT · " radius="90" speed="9" upright></motion-circle>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-circle.html"
+        copy
+        code={`<motion-circle
+  text="UPRIGHT · READABLE · TEXT · "
+  radius="90"
+  speed="9"
+  upright
+></motion-circle>`}
+      />
+
+      <h2>With slotted content</h2>
+      <p>Place any element inside <code>motion-circle</code> to anchor it at the center. The slot content is stationary — only the text ring rotates.</p>
+      <DocsPreview>
+        <motion-circle class="demo-accent" text="MOTION COMPONENTS · SPIN IT · " radius="90" speed="8">
+          <div class="demo-avatar"><span class="y">&lt;</span>mc<span class="y">&gt;</span></div>
+        </motion-circle>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-circle.html"
+        copy
+        code={`<motion-circle text="AVAILABLE FOR WORK · HIRE ME · " radius="80" speed="10">
+  <img src="avatar.jpg" width="80" height="80" alt="Avatar" />
+</motion-circle>`}
+      />
+
+      <h2>Pause on hover</h2>
+      <p>Add <code>pause-on-hover</code> to freeze the rotation when the cursor enters and resume it on leave.</p>
+      <DocsPreview>
+        <motion-circle class="demo-accent" text="HOVER TO PAUSE · SPIN IT · " radius="90" speed="8" pause-on-hover></motion-circle>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-circle.html"
+        copy
+        code={`<motion-circle
+  text="HOVER TO PAUSE · SPIN IT · "
+  radius="90"
+  speed="8"
+  pause-on-hover
+></motion-circle>`}
+      />
+
+      <h2>How it works</h2>
+      <p>
+        Each character is wrapped in an absolutely positioned <code>span</code> centered in the container. A CSS transform chain — <code
+          >rotate(angle) translateY(-radius)</code
+        > — places each character at its position on the ring. The <code>.ring</code> container then spins continuously via Motion One's <code>animate</code> with
+        <code>repeat: Infinity</code> and
+        <code>ease: "linear"</code>.
+      </p>
+      <p>
+        When <code>upright</code> is set, a counter-rotation (<code>rotate(-angle)</code>) is appended to each character's transform so characters stay
+        axis-aligned regardless of their position on the ring.
+      </p>
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'text', type: 'string', default: '—', description: 'Text to arrange around the circle' },
+        { name: 'radius', type: 'number', default: '80', description: 'Circle radius in px' },
+        { name: 'speed', type: 'number', default: '8', description: 'Seconds per full rotation' },
+        { name: 'direction', type: '"cw" | "ccw"', default: '"cw"', description: 'Clockwise or counterclockwise spin' },
+        { name: 'upright', type: 'boolean', default: 'false', description: 'Keep characters vertically oriented' },
+        { name: 'pause-on-hover', type: 'boolean', default: 'false', description: 'Pause the rotation on mouseenter, resume on mouseleave' },
+      ]} />
+
+      <h2>Accessibility</h2>
+      <p>When <code>prefers-reduced-motion</code> is set, the ring does not animate and the text renders statically around the circle.</p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .demo-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--color-accent-dim);
+    border: 2px solid var(--color-yellow);
+    color: var(--color-accent);
+    font-size: 1rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .demo-avatar .y {
+    color: var(--color-yellow);
+  }
+
+  .demo-accent {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--color-accent);
+  }
+</style>

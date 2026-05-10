@@ -1,0 +1,142 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-ticker — Motion Components" description="Continuously scrolls its children horizontally in a seamless loop. Accepts any content — text, tags, logos. Pauses on hover. Keyboard accessible." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-ticker</motion-split></h1>
+      <p class="lead">
+        Continuously scrolls its children horizontally in a seamless loop. Accepts any content — text, tags, logos. Pauses on hover by default. Keyboard accessible — tab to focus and press <kbd>Space</kbd> to pause.
+      </p>
+
+      <h2>Preview</h2>
+      <DocsPreview wide>
+        <motion-ticker speed="60" gap="12">
+          <span class="chip">Item one</span>
+          <span class="chip">Item two</span>
+          <span class="chip">Item three</span>
+          <span class="chip">Spring physics</span>
+          <span class="chip">Framework-agnostic</span>
+          <span class="chip">Web Components</span>
+        </motion-ticker>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-ticker'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <h2>Usage</h2>
+      <p class="usage-note">Place any inline content as children — the ticker duplicates it seamlessly.</p>
+      <CodeWindow
+        filename="motion-ticker.html"
+        copy
+        code={`<motion-ticker speed="60" gap="48">
+  <span>Item one</span>
+  <span>Item two</span>
+  <span>Item three</span>
+  ...
+</motion-ticker>`}
+      />
+
+      <h2>Wave mode</h2>
+      <p>
+        Add the <code>wave</code> attribute to animate items along a sine-wave curve as they scroll. Control the height with <code>wave-amplitude</code> and the frequency with <code>wave-length</code>.
+      </p>
+      <DocsPreview wide tall>
+        <motion-ticker speed="60" gap="32" wave wave-amplitude="10" wave-length="320" pause-on-hover="false">
+          <span>⚙️</span>
+          <span>🎨</span>
+          <span>⚡</span>
+          <span>🔧</span>
+          <span>🧩</span>
+          <span>✨</span>
+        </motion-ticker>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-ticker-wave.html"
+        copy
+        code={`<motion-ticker wave wave-amplitude="10" wave-length="320">
+  <span>Spring physics</span>
+  <span>Zero CSS required</span>
+  <span>Fully interruptible</span>
+</motion-ticker>`}
+      />
+
+      <h2>Keyboard &amp; accessibility</h2>
+      <p>
+        The ticker is focusable (<code>tabindex="0"</code>) and carries <code>role="region"</code> with a descriptive <code>aria-label</code>.
+        Focusing pauses the scroll; blurring resumes it. While focused, <kbd>Space</kbd> or <kbd>Enter</kbd> toggles a persistent pause so keyboard-only
+        users can read the content at their own pace — satisfying WCAG 2.1 SC 2.2.2 (Pause, Stop, Hide).
+        The duplicated set used for seamless looping carries <code>aria-hidden="true"</code> to avoid duplicate announcements.
+      </p>
+
+      <h2>Properties</h2>
+      <PropsTable
+        nameLabel="Attribute"
+        rows={[
+          { name: "speed", type: "number", default: "60", description: "Scroll speed in pixels per second" },
+          { name: "direction", type: "string", default: "'left'", description: "<code>'left'</code> or <code>'right'</code>" },
+          { name: "gap", type: "number", default: "32", description: "Space between items in px" },
+          { name: "pause-on-hover", type: "boolean", default: "true", description: "Smoothly decelerates to a stop on hover" },
+          { name: "wave", type: "boolean", default: "false", description: "Animate items along a sine-wave curve" },
+          { name: "wave-amplitude", type: "number", default: "10", description: "Peak vertical displacement of the wave in px" },
+          { name: "wave-length", type: "number", default: "300", description: "Horizontal distance of one full wave cycle in px" },
+        ]}
+      />
+      <h2>Reduced motion</h2>
+      <p>Respects <code>prefers-reduced-motion</code>: when enabled, the ticker does not scroll and content is static. Keyboard controls remain active.</p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.35rem 0.875rem;
+    border: 1px solid var(--color-border);
+    border-radius: 99px;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--color-text);
+    background: var(--color-surface-2);
+    white-space: nowrap;
+  }
+
+  .usage-note {
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  kbd {
+    display: inline-block;
+    padding: 0.1em 0.4em;
+    font-size: 0.82em;
+    font-family: var(--font-mono);
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    line-height: 1.4;
+  }
+</style>

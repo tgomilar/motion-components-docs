@@ -1,0 +1,54 @@
+---
+interface Props {
+  id?: string;
+  filename?: string;
+  lang?: string;
+  copy?: boolean;
+  compact?: boolean;
+  "hide-chrome"?: boolean;
+  type?: boolean;
+  typeSpeed?: number;
+  typeDelay?: number;
+  "no-loop"?: boolean;
+  typeLoopDelay?: number;
+  code: string;
+}
+
+const {
+  id: customId,
+  filename = "app.html",
+  lang = "",
+  copy = false,
+  compact = false,
+  "hide-chrome": hideChrome = false,
+  type = false,
+  typeSpeed,
+  typeDelay,
+  "no-loop": noLoop = false,
+  typeLoopDelay,
+  code,
+} = Astro.props;
+
+const elId = customId ?? `cw-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<motion-code
+  id={elId}
+  filename={filename}
+  lang={lang || undefined}
+  copy={copy || undefined}
+  compact={compact || undefined}
+  hide-chrome={hideChrome || undefined}
+  type={type || undefined}
+  type-speed={typeSpeed}
+  type-delay={typeDelay}
+  no-loop={noLoop || undefined}
+  type-loop-delay={typeLoopDelay}
+></motion-code>
+
+<script define:vars={{ elId, code }}>
+  customElements.whenDefined("motion-code").then(() => {
+    const el = document.getElementById(elId);
+    if (el) el.setCode(code);
+  });
+</script>

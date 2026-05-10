@@ -1,0 +1,152 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-curve — Motion Components" description="Animates each character of a sentence along a continuous sine-wave curve. Letters rotate to follow the tangent, giving the text a natural, fluid motion." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-curve</motion-split></h1>
+      <p class="lead">
+        Animates each character of a sentence along a continuous sine-wave curve. Letters rotate to follow the tangent, giving the text a natural, fluid motion.
+      </p>
+
+      <h2>Preview</h2>
+      <DocsPreview>
+        <p class="demo-heading">
+          <motion-curve text="Make it wave." amplitude="28" wave-length="260" speed="0.4"></motion-curve>
+        </p>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-curve'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-curve.html"
+        copy
+        code={`<motion-curve
+  text="Make it wave."
+  amplitude="28"
+  wave-length="260"
+  speed="0.4"
+></motion-curve>`}
+      />
+
+      <h2>Loop mode</h2>
+      <p>
+        Add <code>loop</code> to scroll the text continuously like a ticker, with the wave applied as it travels. The text is duplicated for a seamless loop.
+      </p>
+      <DocsPreview wide tall>
+        <motion-curve text="Make it wave · Physics-based · Zero CSS · " loop amplitude="22" wave-length="320" speed="0.3" loop-speed="70"></motion-curve>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-curve.html"
+        copy
+        code={`<motion-curve
+  text="Make it wave · Physics-based · Zero CSS · "
+  loop
+  amplitude="22"
+  wave-length="320"
+  speed="0.3"
+  loop-speed="70"
+></motion-curve>`}
+      />
+
+      <h2>Loop gap</h2>
+      <p>By default a <code>48px</code> gap separates each repetition. Set <code>loop-gap="0"</code> for continuous text with no visible break.</p>
+      <DocsPreview wide tall>
+        <motion-curve text="Spring physics · No CSS · Framework-free · " loop amplitude="22" wave-length="320" speed="0.3" loop-speed="70" loop-gap="0"
+        ></motion-curve>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-curve.html"
+        copy
+        code={`<motion-curve
+  text="Spring physics · No CSS · Framework-free · "
+  loop
+  loop-gap="0"
+></motion-curve>`}
+      />
+
+      <h2>Pause on hover</h2>
+      <p>Add <code>pause-on-hover</code> to freeze the wave (and scroll in loop mode) when the cursor enters, resuming on leave.</p>
+      <DocsPreview wide tall>
+        <motion-curve text="Make it wave · Hover to pause · Zero CSS · " loop amplitude="22" wave-length="320" speed="0.3" loop-speed="70" pause-on-hover></motion-curve>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-curve.html"
+        copy
+        code={`<motion-curve
+  text="Make it wave · Hover to pause · Zero CSS · "
+  loop
+  pause-on-hover
+></motion-curve>`}
+      />
+
+      <h2>How it works</h2>
+      <p>
+        Each character is wrapped in an <code>inline-block</code> span. After render, the component measures each span's pixel x-offset. A
+        <code>requestAnimationFrame</code> loop then computes a sine value and tangent angle for each character based on its x-position and the current phase, applying
+        <code>translateY</code> + <code>rotate</code>. The phase advances each frame, making the wave travel through the text.
+      </p>
+      <p>
+        The rotation is derived from the curve's tangent: <code>angle = atan(A · k · cos(kx − phase))</code>, so letters lean naturally into the curve rather
+        than staying upright.
+      </p>
+
+      <h2>Properties</h2>
+      <PropsTable
+        nameLabel="Attribute"
+        rows={[
+          { name: "text", type: "string", default: "—", description: "The sentence to animate" },
+          { name: "amplitude", type: "number", default: "24", description: "Peak vertical offset in px" },
+          { name: "wave-length", type: "number", default: "280", description: "Horizontal distance of one full wave cycle in px" },
+          { name: "speed", type: "number", default: "0.4", description: "Wave cycles per second" },
+          { name: "loop", type: "boolean", default: "false", description: "Scroll the text in a seamless continuous loop" },
+          { name: "loop-speed", type: "number", default: "80", description: "Horizontal scroll speed in px/s (loop mode only)" },
+          {
+            name: "loop-gap",
+            type: "number",
+            default: "48",
+            description: "Space in px between the end of one loop repetition and the start of the next. Set to <code>0</code> for continuous text with no gap.",
+          },
+          { name: "no-pad", type: "boolean", default: "false", description: "Remove the vertical padding added to accommodate the wave." },
+          { name: "pause-on-hover", type: "boolean", default: "false", description: "Pause the wave and scroll on mouseenter, resume on mouseleave." },
+        ]}
+      />
+
+      <h2>Accessibility</h2>
+      <p>When <code>prefers-reduced-motion</code> is set, the animation does not start and the text renders flat.</p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .demo-heading {
+    font-size: 2.2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-accent);
+    margin: 0;
+  }
+</style>

@@ -1,0 +1,206 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-font — Motion Components" description="Animates one or more variable font axes using Motion One spring physics. Three trigger modes: auto, hover, and scroll. Requires a variable font." noMain>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet" />
+
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-font</motion-split></h1>
+      <p class="lead">
+        Animates one or more variable font axes — weight, optical size, width, or any custom axis — using Motion One spring physics.
+        Three trigger modes: <code>auto</code> (viewport entry), <code>hover</code> (mouse/focus), and <code>scroll</code> (axis tracks scroll position).
+        Requires a variable font with the targeted axes.
+      </p>
+
+      <a href="/showcase/motion-font/" class="showcase-link">
+        <span class="showcase-link-label">Live showcase</span>
+        <span class="showcase-link-arrow">→</span>
+        <span class="showcase-link-sub">Weight spectrum · Word cloud · Spring bounce</span>
+      </a>
+
+      <h2>Hover — weight</h2>
+      <p class="section-desc">The most common use: bold on hover with a spring-back on leave.</p>
+      <DocsPreview>
+        <motion-font axis="wght" from="300" to="800" trigger="hover" duration="0.5" class="vf-demo">
+          Hover to bold
+        </motion-font>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-font.html"
+        copy
+        code={`<motion-font axis="wght" from="300" to="800" trigger="hover">
+  Hover to bold
+</motion-font>`}
+      />
+
+      <h2>Auto — viewport reveal</h2>
+      <p class="section-desc">Animates the axis once when the element scrolls into view. Ideal for hero headings that gain weight on entrance.</p>
+      <DocsPreview replayId="vf-auto-demo">
+        <motion-font id="vf-auto-demo" axis="wght" from="100" to="900" duration="1.2" trigger="auto" class="vf-demo">
+          Weight reveal
+        </motion-font>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-font-auto.html"
+        copy
+        code={`<motion-font axis="wght" from="100" to="900" duration="1.2" trigger="auto">
+  Weight reveal
+</motion-font>`}
+      />
+
+      <h2>Scroll — tied to position</h2>
+      <p class="section-desc">The axis value maps directly to scroll progress — <code>from</code> when the element enters the viewport, <code>to</code> when it exits. No spring; direct 1:1 mapping. Works best in real page context — see the <a href="/showcase/motion-font/">showcase</a>.</p>
+      <CodeWindow
+        filename="motion-font-scroll.html"
+        copy
+        code={`<motion-font axis="wght" from="100" to="900" trigger="scroll">
+  Scroll weight
+</motion-font>`}
+      />
+
+      <h2>Multiple axes</h2>
+      <p class="section-desc">Use the <code>axes</code> prop to animate several axes at once. Format: space-separated <code>tag:from:to</code> triplets. Overrides <code>axis</code>, <code>from</code>, and <code>to</code>.</p>
+      <DocsPreview>
+        <motion-font axes="wght:200:800 opsz:8:32" trigger="hover" duration="0.5" class="vf-demo">
+          Hover — weight &amp; optical size
+        </motion-font>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-font-axes.html"
+        copy
+        code={`<!-- weight + optical size -->
+<motion-font axes="wght:200:800 opsz:8:32" trigger="hover">
+  Hover me
+</motion-font>`}
+      />
+
+      <h2>Bounce</h2>
+      <p class="section-desc">Control spring overshoot with <code>bounce</code> (0–1). Higher values overshoot and snap back.</p>
+      <DocsPreview>
+        <div class="vf-bounce-row">
+          <div class="vf-bounce-item">
+            <motion-font axis="wght" from="300" to="800" trigger="hover" bounce="0" duration="0.5" class="vf-demo vf-small">Aa</motion-font>
+            <code>bounce=0</code>
+          </div>
+          <div class="vf-bounce-item">
+            <motion-font axis="wght" from="300" to="800" trigger="hover" bounce="0.3" duration="0.6" class="vf-demo vf-small">Aa</motion-font>
+            <code>bounce=0.3</code>
+          </div>
+          <div class="vf-bounce-item">
+            <motion-font axis="wght" from="300" to="800" trigger="hover" bounce="0.6" duration="0.7" class="vf-demo vf-small">Aa</motion-font>
+            <code>bounce=0.6</code>
+          </div>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-font-bounce.html"
+        copy
+        code={`<motion-font axis="wght" from="300" to="800" trigger="hover" bounce="0.3">
+  Bouncy bold
+</motion-font>`}
+      />
+
+      <h2>Delay</h2>
+      <p class="section-desc">Delay the animation start in seconds — useful for staggering multiple reveals.</p>
+      <DocsPreview replayId="vf-delay-2">
+        <div class="vf-delay-stack">
+          <motion-font axis="wght" from="100" to="900" trigger="auto" delay="0" duration="0.8" class="vf-demo vf-small">
+            First line
+          </motion-font>
+          <motion-font id="vf-delay-2" axis="wght" from="100" to="900" trigger="auto" delay="0.15" duration="0.8" class="vf-demo vf-small">
+            Second line
+          </motion-font>
+          <motion-font axis="wght" from="100" to="900" trigger="auto" delay="0.3" duration="0.8" class="vf-demo vf-small">
+            Third line
+          </motion-font>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-font-delay.html"
+        copy
+        code={`<motion-font axis="wght" from="100" to="900" trigger="auto" delay="0">First line</motion-font>
+<motion-font axis="wght" from="100" to="900" trigger="auto" delay="0.15">Second line</motion-font>
+<motion-font axis="wght" from="100" to="900" trigger="auto" delay="0.3">Third line</motion-font>`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'axis',     type: 'string',  default: "'wght'", description: "Font axis tag — <code>'wght'</code>, <code>'wdth'</code>, <code>'opsz'</code>, or any custom axis. Ignored when <code>axes</code> is set." },
+        { name: 'axes',     type: 'string',  default: "''",     description: "Multi-axis: space-separated <code>tag:from:to</code> triplets, e.g. <code>\"wght:300:800 opsz:8:32\"</code>. Overrides <code>axis</code>, <code>from</code>, <code>to</code>." },
+        { name: 'from',     type: 'number',  default: '300',    description: 'Starting axis value. Ignored when <code>axes</code> is set.' },
+        { name: 'to',       type: 'number',  default: '700',    description: 'Target axis value. Ignored when <code>axes</code> is set.' },
+        { name: 'duration', type: 'number',  default: '0.6',    description: 'Spring duration hint in seconds.' },
+        { name: 'bounce',   type: 'number',  default: '0',      description: 'Spring bounciness 0–1. 0 = no overshoot, 1 = very bouncy.' },
+        { name: 'delay',    type: 'number',  default: '0',      description: 'Delay before animation starts in seconds.' },
+        { name: 'trigger',  type: 'string',  default: "'auto'", description: "<code>'auto'</code> — viewport entry &nbsp;|&nbsp; <code>'hover'</code> — mouseenter / focusin &nbsp;|&nbsp; <code>'scroll'</code> — axis tracks scroll position" },
+        { name: 'once',     type: 'boolean', default: 'true',   description: "For <code>trigger='auto'</code>: animate only on the first intersection." },
+      ]} />
+
+      <h2>Methods</h2>
+      <PropsTable nameLabel="Method" rows={[
+        { name: 'replay()', type: 'void', default: '—', description: 'Reset axis to <code>from</code> and re-run the entrance animation. Only has effect for <code>trigger="auto"</code>.' },
+      ]} />
+
+      <p class="note">
+        <strong>Variable font required:</strong> the targeted axis must exist in the loaded font. Inter supports <code>wght</code> (100–900) and <code>opsz</code> (14–32). For <code>wdth</code> use a font like Roboto Flex.
+      </p>
+      <h2>Accessibility</h2>
+      <p>Respects <code>prefers-reduced-motion</code>: when enabled, axis animations are skipped and the font renders at its target value immediately.</p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .vf-demo {
+    font-family: 'Inter', var(--font-sans);
+    font-size: 2rem;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    cursor: default;
+  }
+
+  .vf-demo.vf-small {
+    font-size: 1.5rem;
+  }
+
+  .vf-bounce-row {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .vf-bounce-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .vf-delay-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    align-items: flex-start;
+    line-height: 1.2;
+  }
+</style>

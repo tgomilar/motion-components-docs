@@ -1,0 +1,141 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-hover — Motion Components" noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-hover</motion-split></h1>
+      <p class="lead">Wraps any element and applies spring-based motion on hover. Scale, lift, rotate, skew — all interruptible.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview>
+        <motion-hover scale="1.08" y="-4">
+          <button class="demo-btn">Hover me</button>
+        </motion-hover>
+      </DocsPreview>
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-hover.html"
+        copy
+        code={`<motion-hover scale="1.05" y="-4">
+  <button>Hover me</button>
+</motion-hover>`}
+      />
+
+      <h2>Rotate</h2>
+      <p>Add <code>rotate</code> to spring-rotate the element on hover. Great for icons and decorative elements.</p>
+      <DocsPreview>
+        <div class="demo-row">
+          <motion-hover rotate="15" scale="1.1">
+            <div class="demo-icon">⚡</div>
+          </motion-hover>
+          <motion-hover rotate="-12" scale="1.1">
+            <div class="demo-icon">🧩</div>
+          </motion-hover>
+          <motion-hover rotate="180" scale="1.1" duration="0.6" bounce="0.4">
+            <div class="demo-icon">✦</div>
+          </motion-hover>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-hover.html"
+        copy
+        code={`<motion-hover rotate="15" scale="1.1">
+  <div>⚡</div>
+</motion-hover>`}
+      />
+
+      <h2>Skew</h2>
+      <p>Use <code>skew</code> for a distortion effect. Works well on text and card elements.</p>
+      <DocsPreview>
+        <div class="demo-row">
+          <motion-hover skew="8" scale="1.02">
+            <button class="demo-btn">Slanted</button>
+          </motion-hover>
+          <motion-hover skew="-8" scale="1.02">
+            <button class="demo-btn">Other way</button>
+          </motion-hover>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-hover.html"
+        copy
+        code={`<motion-hover skew="8" scale="1.02">
+  <button>Slanted</button>
+</motion-hover>`}
+      />
+
+      <h2>Bounce</h2>
+      <p>Control the spring's bounciness with <code>bounce</code> — from <code>0</code> (no overshoot) to <code>1</code> (very springy).</p>
+      <DocsPreview>
+        <div class="demo-row">
+          <motion-hover scale="1.15" bounce="0" duration="0.4">
+            <button class="demo-btn">Smooth</button>
+          </motion-hover>
+          <motion-hover scale="1.15" bounce="0.5" duration="0.5">
+            <button class="demo-btn">Bouncy</button>
+          </motion-hover>
+          <motion-hover scale="1.15" bounce="0.8" duration="0.6">
+            <button class="demo-btn">Very bouncy</button>
+          </motion-hover>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-hover.html"
+        copy
+        code={`<motion-hover scale="1.15" bounce="0.5" duration="0.5">
+  <button>Bouncy</button>
+</motion-hover>`}
+      />
+
+      <h2>Combining effects</h2>
+      <p>All properties compose freely.</p>
+      <DocsPreview>
+        <div class="demo-row">
+          <motion-hover scale="1.1" rotate="8" y="-6" bounce="0.4">
+            <button class="demo-btn demo-btn--accent">Lift + spin</button>
+          </motion-hover>
+          <motion-hover scale="1.05" skew="6" x="4" bounce="0.2">
+            <button class="demo-btn demo-btn--accent">Slide + skew</button>
+          </motion-hover>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-hover.html"
+        copy
+        code={`<motion-hover scale="1.1" rotate="8" y="-6" bounce="0.4">
+  <button>Lift + spin</button>
+</motion-hover>`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable rows={[
+        { name: 'scale', type: 'number', default: '1.05', description: 'Target scale on hover' },
+        { name: 'x', type: 'number', default: '0', description: 'Horizontal offset in px on hover' },
+        { name: 'y', type: 'number', default: '0', description: 'Vertical offset in px on hover' },
+        { name: 'rotate', type: 'number', default: '0', description: 'Rotation in degrees on hover' },
+        { name: 'skew', type: 'number', default: '0', description: 'SkewX in degrees on hover' },
+        { name: 'bounce', type: 'number', default: '0.3', description: 'Spring bounciness from 0 (smooth) to 1 (very springy)' },
+        { name: 'duration', type: 'number', default: '0.3', description: 'Spring duration hint in seconds' },
+      ]} />
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+

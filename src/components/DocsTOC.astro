@@ -1,0 +1,107 @@
+---
+// Renders an empty container; populated client-side from main h2 elements.
+// Slots in as the third column of .layout (see docs.css).
+---
+
+<aside class="docs-toc" aria-label="On this page">
+  <p class="toc-label">On this page</p>
+  <ul class="toc-list" data-toc-list></ul>
+</aside>
+
+<script>
+  function slugify(text: string): string {
+    return text
+      .toLowerCase()
+      .replace(/[^\w\s-]/g, '')
+      .replace(/\s+/g, '-')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '')
+  }
+
+  function buildTOC() {
+    const list = document.querySelector<HTMLUListElement>('[data-toc-list]')
+    const main = document.querySelector('main')
+    if (!list || !main) return
+
+    const headings = Array.from(main.querySelectorAll<HTMLHeadingElement>('h2'))
+      .filter(h => h.textContent && h.textContent.trim().length > 0)
+
+    if (headings.length < 2) {
+      ;(list.parentElement as HTMLElement | null)?.style.setProperty('display', 'none')
+      return
+    }
+
+    list.innerHTML = ''
+    for (const h of headings) {
+      if (!h.id) h.id = slugify(h.textContent ?? '')
+      h.style.scrollMarginTop = '80px'
+      const li = document.createElement('li')
+      li.className = 'toc-item'
+      const a = document.createElement('a')
+      a.href = `#${h.id}`
+      a.textContent = h.textContent
+      a.className = 'toc-link'
+      a.dataset.id = h.id
+      li.appendChild(a)
+      list.appendChild(li)
+    }
+
+    const links = Array.from(list.querySelectorAll<HTMLAnchorElement>('.toc-link'))
+    const linkById = new Map(links.map(a => [a.dataset.id!, a] as const))
+
+    let activeId: string | null = null
+    let lockUntil = 0
+    const setActive = (id: string | null) => {
+      if (id === activeId) return
+      if (activeId) linkById.get(activeId)?.classList.remove('active')
+      if (id) linkById.get(id)?.classList.add('active')
+      activeId = id
+    }
+
+    for (const a of links) {
+      a.addEventListener('click', () => {
+        lockUntil = performance.now() + 800
+        setActive(a.dataset.id ?? null)
+      })
+    }
+
+    const visible = new Map<string, number>()
+    const observer = new IntersectionObserver(
+      entries => {
+        for (const entry of entries) {
+          const id = (entry.target as HTMLElement).id
+          if (entry.isIntersecting) visible.set(id, entry.intersectionRatio)
+          else visible.delete(id)
+        }
+        if (performance.now() < lockUntil) return
+        if (visible.size > 0) {
+          let bestId: string | null = null
+          let bestTop = Infinity
+          for (const [id] of visible) {
+            const el = document.getElementById(id)
+            if (!el) continue
+            const top = el.getBoundingClientRect().top
+            if (top < bestTop) { bestTop = top; bestId = id }
+          }
+          setActive(bestId)
+        }
+      },
+      { rootMargin: '-80px 0px -60% 0px', threshold: [0, 1] },
+    )
+    for (const h of headings) observer.observe(h)
+
+    const syncFromHash = () => {
+      const id = decodeURIComponent(location.hash.slice(1))
+      if (id && linkById.has(id)) setActive(id)
+    }
+    window.addEventListener('hashchange', syncFromHash)
+    if (location.hash) syncFromHash()
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', buildTOC, { once: true })
+  } else {
+    buildTOC()
+  }
+</script>
+

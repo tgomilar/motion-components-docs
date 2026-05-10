@@ -1,0 +1,360 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import DocsSidebar from "../../components/DocsSidebar.astro";
+import DocsTOC from "../../components/DocsTOC.astro";
+import CodeWindow from "../../components/CodeWindow.astro";
+import FwTabs from "../../components/FwTabs.astro";
+import "../../styles/docs.css";
+
+const frameworkTabs = [
+  {
+    id: "vanilla",
+    label: "Vanilla / Astro / Svelte",
+    desc: "Import preload CSS and the library — works without configuration.",
+    filename: "app.js",
+    code: `import { preloadCSS } from 'motion-components/preload'
+import 'motion-components'
+
+const style = document.createElement('style')
+style.textContent = preloadCSS
+document.head.appendChild(style)`,
+  },
+  {
+    id: "react",
+    label: "React",
+    desc: "React 19 has full custom element support. Add preload and import in your entry file.",
+    filename: "main.tsx",
+    code: `import { preloadCSS } from 'motion-components/preload'
+import 'motion-components'
+
+const style = document.createElement('style')
+style.textContent = preloadCSS
+document.head.appendChild(style)
+
+export function App() {
+  return (
+    <motion-hover scale="1.08">
+      <button>Hover me</button>
+    </motion-hover>
+  )
+}`,
+  },
+  {
+    id: "vue",
+    label: "Vue 3",
+    desc: "Configure custom elements in Vite and add preload in your entry file.",
+    filename: "main.ts",
+    code: `import { preloadCSS } from 'motion-components/preload'
+import 'motion-components'
+
+const style = document.createElement('style')
+style.textContent = preloadCSS
+document.head.appendChild(style)
+
+// vite.config.ts — tell Vue to accept motion-* tags
+import { defineConfig } from 'vite'
+import vue from '@vitejs/plugin-vue'
+
+export default defineConfig({
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          isCustomElement: tag => tag.startsWith('motion-')
+        }
+      }
+    })
+  ]
+})`,
+  },
+  {
+    id: "angular",
+    label: "Angular",
+    desc: "Add <code>CUSTOM_ELEMENTS_SCHEMA</code> and the preload stylesheet to <code>angular.json</code>.",
+    filename: "angular.json",
+    code: `// angular.json — add preload.css to styles
+"styles": [
+  "node_modules/motion-components/dist/preload.css"
+]
+
+// app.component.ts — register schema
+import { Component, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core'
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  template: \`<motion-hover><button>Hover</button></motion-hover>\`
+})
+export class AppComponent {}`,
+  },
+];
+
+const foucTabs = [
+  {
+    id: "react",
+    label: "React / Vite",
+    desc: "Inline CSS in <code>main.tsx</code> — works before first paint.",
+    filename: "main.tsx",
+    code: `import { preloadCSS } from 'motion-components/preload'
+import 'motion-components'
+
+// Inject into <head> (framework-agnostic):
+const style = document.createElement('style')
+style.textContent = preloadCSS
+document.head.appendChild(style)`,
+  },
+  {
+    id: "next",
+    label: "Next.js",
+    desc: "Inline in <code>app/layout.tsx</code> (App Router) or <code>pages/_app.tsx</code>.",
+    filename: "app/layout.tsx",
+    code: `import { preloadCSS } from 'motion-components/preload'
+import 'motion-components'
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <head>
+        <style>{preloadCSS}</style>
+      </head>
+      <body>{children}</body>
+    </html>
+  )
+}`,
+  },
+  {
+    id: "astro",
+    label: "Astro",
+    desc: "Import in frontmatter, inline with <code>is:inline</code>.",
+    filename: "Layout.astro",
+    code: `---
+import { preloadCSS } from 'motion-components/preload'
+---
+<html>
+  <head>
+    <style is:inline set:html={preloadCSS}></style>
+  </head>
+  <body><slot /></body>
+</html>`,
+  },
+  {
+    id: "nuxt",
+    label: "Nuxt / Vue",
+    desc: "Use <code>useHead</code> in <code>app.vue</code> or your root layout.",
+    filename: "app.vue",
+    code: `<script setup>
+import { preloadCSS } from 'motion-components/preload'
+useHead({ style: [{ children: preloadCSS }] })
+</script>`,
+  },
+  {
+    id: "sveltekit",
+    label: "SvelteKit",
+    desc: "Inline in <code>+layout.svelte</code> via <code>&lt;svelte:head&gt;</code>.",
+    filename: "+layout.svelte",
+    code: `<script>
+  import { preloadCSS } from 'motion-components/preload'
+  import 'motion-components'
+</script>
+
+<svelte:head>
+  <style>{preloadCSS}</style>
+</svelte:head>`,
+  },
+  {
+    id: "angular",
+    label: "Angular",
+    desc: "Add <code>preload.css</code> to the <code>styles</code> array.",
+    filename: "angular.json",
+    code: `"styles": [
+  "node_modules/motion-components/dist/preload.css"
+]`,
+  },
+];
+---
+
+<Layout title="Docs — Motion Components" description="Explore the full Motion Components API. Animate, reveal, respond, and compose with spring-based web components — framework-agnostic, drop-in." noMain>
+  <div class="layout">
+    <DocsSidebar backHref="/" backLabel="← Home" />
+
+    <main>
+      <h1>Documentation</h1>
+      <p class="lead">Motion Components is a library of physics-based web components. Compose primitives to build natural, interruptible interactions.</p>
+
+      <h2>Installation</h2>
+      <CodeWindow filename="terminal" copy compact code={`npm install motion-components`} />
+      <p class="section-lead">Import once — all custom elements register themselves as a side effect:</p>
+      <CodeWindow filename="app.js" copy compact code={`import 'motion-components'`} />
+      <p class="section-lead">Import a specific class if you need the TypeScript type or want to call methods:</p>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        compact
+        code={`import { MotionReveal } from 'motion-components'
+
+const el = document.querySelector('motion-reveal') as MotionReveal
+el.replay()`}
+      />
+      <p class="section-lead">No bundler? Use the CDN directly:</p>
+      <CodeWindow
+        filename="index.html"
+        copy
+        compact
+        code={`<script type="module">
+  import 'https://cdn.jsdelivr.net/npm/motion-components/dist/index.js'
+</script>`}
+      />
+
+      <h2 id="tree-shake">Use only what you need</h2>
+      <p class="section-lead">
+        Every component ships as its own subpath export. Import a single tag and the bundler will only pull in that file — the rest of the library never reaches
+        your bundle. Pay only for what you use.
+      </p>
+      <p class="section-lead">Just one component:</p>
+      <CodeWindow
+        filename="app.js"
+        copy
+        compact
+        code={`// registers <motion-countdown> only
+import 'motion-components/motion-countdown'`}
+      />
+      <p class="section-lead">A handful of components:</p>
+      <CodeWindow
+        filename="app.js"
+        copy
+        compact
+        code={`import 'motion-components/motion-hover'
+import 'motion-components/motion-reveal'
+import 'motion-components/motion-stagger'`}
+      />
+      <p class="section-lead">Import the class for typing or method access:</p>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        compact
+        code={`import { MotionCountdown } from 'motion-components/motion-countdown'
+
+const el = document.querySelector<MotionCountdown>('motion-countdown')!
+console.log(el.to)`}
+      />
+      <p class="section-lead">CDN, single component:</p>
+      <CodeWindow
+        filename="index.html"
+        copy
+        compact
+        code={`<script type="module">
+  import 'https://cdn.jsdelivr.net/npm/motion-components/dist/motion-countdown.js'
+</script>`}
+      />
+      <p class="section-lead">
+        The full bundle (<code>import 'motion-components'</code>) is convenient and brotli-compresses to ~20&nbsp;KB for all 33 components. Per-component
+        imports drop straight to the cost of just the tags you use.
+      </p>
+
+      <h2 id="frameworks">Frameworks</h2>
+      <p class="section-lead">
+        Most frameworks work without configuration. A few need a small one-time setup so their compiler doesn't treat unknown tags as errors.
+      </p>
+      <FwTabs tabs={frameworkTabs} group="frameworks" />
+
+      <h2 id="flash">Flash prevention</h2>
+      <p class="section-lead">
+        Web components are undefined when the HTML first renders. The browser treats <code>&lt;motion-flip-card&gt;</code> as a plain <code>HTMLElement</code>
+        — its Light DOM children (<code>slot="back"</code> content, dialog panels, etc.) display as unstyled visible DOM before the JavaScript bundle
+        arrives and calls <code>customElements.define()</code>. Slot-based components are especially sensitive because they carry visible Light DOM.
+      </p>
+
+      <h3>Solution — inline CSS in <code>&lt;head&gt;</code></h3>
+      <p class="section-lead">
+        The only 100% reliable fix: inject a <code>&lt;style&gt;</code> tag in the document <code>&lt;head&gt;</code> that hides every component while
+        it's <code>:not(:defined)</code>. The CSS must be available <em>synchronously before the first paint</em>. A render-blocking CSS file (<code
+          >&lt;link&gt;</code
+        >) arrives after the HTML — there is a timing gap. Inline CSS has zero gap, zero flash risk.
+      </p>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        compact
+        code={`import { preloadCSS } from 'motion-components/preload'
+
+const style = document.createElement('style')
+style.textContent = preloadCSS
+document.head.appendChild(style)`}
+      />
+
+      <h3>Framework examples</h3>
+      <p class="section-lead">
+        Each example below inlines <code>preloadCSS</code> as a <code>&lt;style&gt;</code> tag in the document <code>&lt;head&gt;</code>. The
+        import uses the <code>motion-components/preload</code> subpath — this file has zero side effects and evaluates cleanly in Node.js during SSR.
+      </p>
+
+      <div class="fouc-tabs"><FwTabs tabs={foucTabs} group="fouc" /></div>
+
+      <h3>Alternative — CSS import</h3>
+      <p class="section-lead">
+        Simpler to set up, slightly less reliable: import the <code>preload.css</code> file. Most bundlers convert this to a render-blocking
+        <code>&lt;link&gt;</code> — the browser won't paint until the CSS arrives. The gap between receiving the HTML and fetching the CSS is small
+        but non-zero. Suitable for development and less flash-sensitive setups.
+      </p>
+      <CodeWindow filename="app.js" copy compact code={`import 'motion-components/preload.css'`} />
+      <p class="section-lead">Or link it from a CDN in <code>&lt;head&gt;</code>:</p>
+      <CodeWindow filename="index.html" copy compact code={`<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/motion-components/dist/preload.css">`} />
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.02em;
+    text-transform: none;
+  }
+
+  h3 {
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin: 1.5rem 0 0.75rem;
+  }
+
+  .lead {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  .section-lead {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .fouc-tabs {
+    margin-top: 2rem;
+  }
+
+  .section-lead code {
+    font-family: var(--font-mono), monospace;
+    font-size: 0.82rem;
+    color: var(--color-accent);
+    background: var(--color-accent-dim);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+  }
+</style>

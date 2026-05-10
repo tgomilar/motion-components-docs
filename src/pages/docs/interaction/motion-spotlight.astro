@@ -1,0 +1,98 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-spotlight — Motion Components" noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-spotlight</motion-split></h1>
+      <p class="lead">
+        Mouse-tracked radial gradient overlay. The spotlight fades in on hover or focus and lerps toward the cursor — soft, weighted, never locked 1:1 to the pointer.
+      </p>
+
+      <h2>Preview</h2>
+      <DocsPreview wide>
+        <div class="spot-grid">
+          <motion-spotlight size="320" color="rgba(96,165,250,0.35)">
+            <div class="spot-card">Hover me</div>
+          </motion-spotlight>
+          <motion-spotlight size="320" color="rgba(244,114,182,0.32)" smoothing="0.08">
+            <div class="spot-card">Smoother lag</div>
+          </motion-spotlight>
+          <motion-spotlight size="320" color="rgba(250,204,21,0.32)" smoothing="0.45">
+            <div class="spot-card">Snappier</div>
+          </motion-spotlight>
+        </div>
+      </DocsPreview>
+
+      <h2>Usage</h2>
+      <p>Wrap any element. The spotlight is rendered as an absolutely-positioned overlay inside the host — give the host a non-static layout if you need to nest it.</p>
+      <CodeWindow
+        filename="motion-spotlight.html"
+        copy
+        code={`<motion-spotlight size="500" color="rgba(96,165,250,0.25)">
+  <div class="card">…</div>
+</motion-spotlight>`}
+      />
+
+      <h2>Tuning the follow</h2>
+      <p>
+        <code>smoothing</code> is the lerp factor applied each frame: <code>0.18</code> is the default and feels weighted. Drop it toward
+        <code>0.05</code> for a long, lazy trail, or push it past <code>0.5</code> for near-instant follow.
+      </p>
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'size', type: 'number', default: '400', description: 'Diameter of the spotlight in pixels' },
+        { name: 'color', type: 'string', default: 'rgba(255,255,255,0.18)', description: 'Center color of the radial gradient' },
+        { name: 'smoothing', type: 'number', default: '0.18', description: 'Lerp factor (0–1). Lower = smoother lag, higher = snappier follow' },
+        { name: 'fade-duration', type: 'number', default: '0.3', description: 'Fade in/out duration in seconds' },
+      ]} />
+
+      <h2>Accessibility</h2>
+      <p>
+        The spotlight is purely decorative — marked <code>aria-hidden</code>. The host listens for <code>:focus-within</code> as well as hover, so keyboard
+        users get the effect when focusing slotted interactive content. Under <code>prefers-reduced-motion</code> the fade transition is removed.
+      </p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .spot-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .spot-card {
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    border-radius: 14px;
+    padding: 2.5rem 1rem;
+    text-align: center;
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  motion-spotlight {
+    border-radius: 14px;
+  }
+</style>

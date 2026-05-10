@@ -1,0 +1,143 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-stagger — Motion Components" noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-stagger</motion-split></h1>
+      <p class="lead">Animates slotted children in sequence with a configurable stagger interval. Each child enters with a spring-based fade and lift. Control the stagger origin with <code>from</code>.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview replayId="stagger-demo">
+        <div class="demo-list">
+          <motion-stagger id="stagger-demo">
+            <div class="demo-item">Item one</div>
+            <div class="demo-item">Item two</div>
+            <div class="demo-item">Item three</div>
+            <div class="demo-item">Item four</div>
+          </motion-stagger>
+        </div>
+      </DocsPreview>
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-stagger.html"
+        copy
+        code={`<motion-stagger interval="0.06">
+  <div>Item one</div>
+  <div>Item two</div>
+  <div>Item three</div>
+</motion-stagger>`}
+      />
+
+      <h2>from="center"</h2>
+      <p>Stagger radiates outward from the center item — ideal for symmetric lists and icon grids.</p>
+      <DocsPreview replayId="stagger-center">
+        <div class="demo-row">
+          <motion-stagger id="stagger-center" from="center" interval="0.08">
+            <div class="demo-icon">🌊</div>
+            <div class="demo-icon">⚡</div>
+            <div class="demo-icon">🎨</div>
+            <div class="demo-icon">⚙️</div>
+            <div class="demo-icon">✨</div>
+          </motion-stagger>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-stagger-center.html"
+        copy
+        code={`<motion-stagger from="center" interval="0.08">
+  <div>🌊</div>
+  <div>⚡</div>
+  <div>🎨</div>
+  <div>⚙️</div>
+  <div>✨</div>
+</motion-stagger>`}
+      />
+
+      <h2>from="last"</h2>
+      <p>Stagger runs from the last item backward — useful for exit animations or right-to-left contexts.</p>
+      <DocsPreview replayId="stagger-last">
+        <div class="demo-list">
+          <motion-stagger id="stagger-last" from="last" interval="0.07">
+            <div class="demo-item">Item one</div>
+            <div class="demo-item">Item two</div>
+            <div class="demo-item">Item three</div>
+          </motion-stagger>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-stagger-last.html"
+        copy
+        code={`<motion-stagger from="last" interval="0.07">
+  <div>Item one</div>
+  <div>Item two</div>
+  <div>Item three</div>
+</motion-stagger>`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable rows={[
+        { name: 'interval', type: 'number', default: '0.06', description: 'Delay between each child animation in seconds' },
+        { name: 'duration', type: 'number', default: '0.5', description: 'Spring duration hint in seconds' },
+        { name: 'y', type: 'number', default: '16', description: 'Initial vertical offset per child in px' },
+        { name: 'from', type: 'string', default: "'first'", description: "<code>'first'</code>, <code>'last'</code>, or <code>'center'</code> — where the stagger originates" },
+        { name: 'once', type: 'boolean', default: 'true', description: 'Animate only on first intersection' },
+      ]} />
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .demo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+    max-width: 320px;
+  }
+
+  .demo-item {
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 0.875rem 1.25rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--color-text);
+  }
+
+  .demo-row {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+  }
+
+  .demo-icon {
+    width: 52px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+  }
+</style>

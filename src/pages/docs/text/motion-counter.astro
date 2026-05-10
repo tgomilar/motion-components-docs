@@ -1,0 +1,200 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-counter — Motion Components" description="Animates a number from one value to another using spring physics when it enters the viewport. Great for stats, scores, and dashboards." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-counter</motion-split></h1>
+      <p class="lead">Animates a number from one value to another using spring physics when it enters the viewport. Great for stats, scores, and dashboards.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview replayId="counter-stats">
+        <div class="stats-grid" id="counter-stats">
+          <div class="stat">
+            <motion-counter class="stat-num" from="0" to="9847" duration="1.8" suffix="+"></motion-counter>
+            <span class="stat-label">Active users</span>
+          </div>
+          <div class="stat">
+            <span class="stat-prefix">$</span><motion-counter class="stat-num" from="0" to="2.4" duration="2" decimals="1"></motion-counter><span class="stat-suffix">M</span>
+            <span class="stat-label">Revenue</span>
+          </div>
+          <div class="stat">
+            <motion-counter class="stat-num accent" from="0" to="98" duration="1.5" suffix="%"></motion-counter>
+            <span class="stat-label">Satisfaction</span>
+          </div>
+        </div>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-counter'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-counter.html"
+        copy
+        code={`<motion-counter from="0" to="9847" duration="1.8" suffix="+"></motion-counter>`}
+      />
+
+      <h2>How it works</h2>
+      <p>The counter watches the viewport via <code>IntersectionObserver</code>. When 20% of the element is visible, it animates the number from <code>from</code> to <code>to</code> using a spring. By default (<code>once</code>), it only fires once and disconnects the observer.</p>
+
+      <h2>Prefix &amp; suffix</h2>
+      <p>Attach static text before or after the number — useful for currency symbols, units, and percentages.</p>
+      <CodeWindow
+        filename="motion-counter.html"
+        copy
+        code={`<!-- Currency -->
+<motion-counter from="0" to="2.4" decimals="1" prefix="$" suffix="M"></motion-counter>
+
+<!-- Percentage -->
+<motion-counter from="0" to="98" suffix="%"></motion-counter>
+
+<!-- Score -->
+<motion-counter from="0" to="9847" suffix="+"></motion-counter>`}
+      />
+
+      <h2>Decimals</h2>
+      <p>Control how many decimal places are displayed. The spring animates through fractional values so the decimal digits flow naturally.</p>
+      <CodeWindow
+        filename="motion-counter.html"
+        copy
+        code={`<motion-counter from="0" to="4.87" decimals="2" suffix=" GB"></motion-counter>`}
+      />
+
+      <h2>Repeat on re-entry</h2>
+      <p>Set <code>once="false"</code> to re-animate every time the element re-enters the viewport.</p>
+      <CodeWindow
+        filename="motion-counter.html"
+        copy
+        code={`<motion-counter from="0" to="100" once="false"></motion-counter>`}
+      />
+
+      <h2>Methods</h2>
+      <div class="methods-table">
+        <table>
+          <thead>
+            <tr><th>Method</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>replay()</code></td><td>Restart the animation from <code>from</code> immediately, regardless of viewport state.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <CodeWindow
+        filename="app.js"
+        copy
+        code={`const counter = document.querySelector('motion-counter')
+counter.replay()`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'from', type: 'number', default: '0', description: 'Starting value' },
+        { name: 'to', type: 'number', default: '100', description: 'End value' },
+        { name: 'duration', type: 'number', default: '1.5', description: 'Spring duration hint in seconds' },
+        { name: 'decimals', type: 'number', default: '0', description: 'Number of decimal places to display' },
+        { name: 'prefix', type: 'string', default: "''", description: 'Static text prepended to the number' },
+        { name: 'suffix', type: 'string', default: "''", description: 'Static text appended to the number' },
+        { name: 'once', type: 'boolean', default: 'true', description: 'Animate only on first intersection. Set to <code>false</code> to replay on every re-entry.' },
+      ]} />
+
+      <h2>Accessibility</h2>
+      <p>When <code>prefers-reduced-motion</code> is set, the counter jumps instantly to its final value with no animation.</p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+
+  // Replay button replays all counters in the stats grid
+  document.querySelector('[data-replay="counter-stats"]')?.addEventListener('click', () => {
+    document.querySelectorAll<any>('#counter-stats motion-counter').forEach(el => el.replay())
+  })
+</script>
+
+<style>
+  /* ── Stats preview ── */
+  .stats-grid {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.35rem;
+  }
+
+  .stat-num {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--color-text);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stat-num.accent {
+    color: var(--color-accent);
+  }
+
+  .stat-prefix,
+  .stat-suffix {
+    font-size: 3rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: var(--color-text);
+    line-height: 1;
+  }
+
+  .stat > div {
+    display: flex;
+    align-items: baseline;
+  }
+
+  .stat:nth-child(2) {
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .stat:nth-child(2) .stat-label {
+    flex-basis: 100%;
+    text-align: center;
+    margin-top: 0.35rem;
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--color-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .methods-table td:last-child {
+    color: var(--color-muted);
+  }
+</style>

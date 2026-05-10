@@ -1,0 +1,110 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-stretch — Motion Components" description="Spring-physics letter spacing on hover. Characters elastically spread apart when the cursor enters and snap back when it leaves." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-stretch</motion-split></h1>
+      <p class="lead">Spring-physics letter spacing on hover. Characters elastically spread apart when the cursor enters and snap back when it leaves.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview>
+        <motion-stretch class="demo-large" text="STRETCH"></motion-stretch>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-stretch'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-stretch.html"
+        copy
+        code={`<motion-stretch text="STRETCH"></motion-stretch>`}
+      />
+
+      <h2>Spread</h2>
+      <p><code>spread</code> controls how far the outermost characters move (in px per side). Higher values give a more dramatic stretch.</p>
+      <DocsPreview>
+        <div style="display:flex; flex-direction:column; gap:1.5rem; align-items:flex-start">
+          <motion-stretch class="demo-large" text="TIGHT" spread="6"></motion-stretch>
+          <motion-stretch class="demo-large" text="WIDE" spread="32"></motion-stretch>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-stretch.html"
+        copy
+        code={`<motion-stretch text="TIGHT" spread="6"></motion-stretch>
+<motion-stretch text="WIDE" spread="32"></motion-stretch>`}
+      />
+
+      <h2>Spring tuning</h2>
+      <p>Adjust <code>stiffness</code> and <code>damping</code> to change the character of the snap. High stiffness + low damping is bouncy; low stiffness + high damping is slow and smooth.</p>
+      <DocsPreview>
+        <div style="display:flex; flex-direction:column; gap:1.5rem; align-items:flex-start">
+          <motion-stretch class="demo-large" text="BOUNCY" spread="20" stiffness="400" damping="10"></motion-stretch>
+          <motion-stretch class="demo-large" text="SMOOTH" spread="20" stiffness="120" damping="28"></motion-stretch>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-stretch.html"
+        copy
+        code={`<motion-stretch text="BOUNCY" spread="20" stiffness="400" damping="10"></motion-stretch>
+<motion-stretch text="SMOOTH" spread="20" stiffness="120" damping="28"></motion-stretch>`}
+      />
+
+      <h2>How it works</h2>
+      <p>
+        Each character is wrapped in an inline-block <code>span</code>. On <code>mouseenter</code>, Motion One animates each character's <code>x</code> transform using a spring — characters at the edges travel furthest (<code>±spread</code>), characters near the center barely move. On <code>mouseleave</code>, a new spring animation returns all characters to <code>x: 0</code>.
+      </p>
+      <p>
+        Any in-progress animation is cancelled before starting the next, so fast hover transitions always feel responsive rather than lagging.
+      </p>
+
+      <h2>Accessibility</h2>
+      <p>
+        The animated per-character spans are marked <code>aria-hidden="true"</code>, and the full <code>text</code> string is exposed to assistive tech via a visually-hidden span inside the shadow DOM. Screen readers announce the word as a single phrase rather than letter-by-letter, regardless of the spring transforms applied to individual characters.
+      </p>
+      <p>
+        When composing inside another text component (e.g. <code>motion-scramble</code>), pass the text only once — either as the parent's content or as <code>motion-stretch</code>'s <code>text</code> attribute, not both — to avoid duplicate announcements.
+      </p>
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'text', type: 'string', default: '—', description: 'Text to render' },
+        { name: 'spread', type: 'number', default: '12', description: 'Max displacement of the outermost character on each side (px)' },
+        { name: 'stiffness', type: 'number', default: '320', description: 'Spring stiffness — higher is snappier' },
+        { name: 'damping', type: 'number', default: '16', description: 'Spring damping — lower is bouncier' },
+      ]} />
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .demo-large {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    color: var(--color-accent);
+  }
+</style>

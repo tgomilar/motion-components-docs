@@ -1,0 +1,120 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-split — Motion Components" description="Splits text into words, characters, or detected lines and staggers them in on viewport entry. Fully accessible — screen readers receive the original text via aria-label." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-split</motion-split></h1>
+      <p class="lead">Splits text into words, characters, or detected lines and staggers them in on viewport entry. Fully accessible — screen readers receive the original text via <code>aria-label</code>.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview replayId="split-demo">
+        <motion-split id="split-demo" by="words" interval="0.06" duration="0.6" y="20">Motion that feels alive</motion-split>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-split'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-split.html"
+        copy
+        code={`<motion-split by="words" interval="0.05">
+  Animate your heading
+</motion-split>`}
+      />
+
+      <h2>by="chars"</h2>
+      <p>Split into individual characters for fine-grained stagger control.</p>
+      <DocsPreview replayId="split-chars">
+        <motion-split id="split-chars" by="chars" interval="0.03" duration="0.5" y="16">Motion</motion-split>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-split-chars.html"
+        copy
+        code={`<motion-split by="chars" interval="0.03" duration="0.5">
+  Motion
+</motion-split>`}
+      />
+
+      <h2>by="lines"</h2>
+      <p>Groups words by their measured Y position to create true line-by-line reveals. Lines reflow naturally with the container width.</p>
+      <DocsPreview replayId="split-lines">
+        <motion-split id="split-lines" by="lines" interval="0.12" duration="0.7" y="24" class="split-lines-demo">Craft motion that earns attention, one line at a time</motion-split>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-split-lines.html"
+        copy
+        code={`<motion-split by="lines" interval="0.12" duration="0.7">
+  Craft motion that earns attention, one line at a time
+</motion-split>`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable
+        nameLabel="Attribute"
+        rows={[
+          { name: "by", type: "string", default: "'words'", description: "<code>'words'</code>, <code>'chars'</code>, or <code>'lines'</code> — granularity of the split" },
+          { name: "interval", type: "number", default: "0.05", description: "Delay between each unit in seconds" },
+          { name: "duration", type: "number", default: "0.6", description: "Spring duration hint in seconds" },
+          { name: "y", type: "number", default: "20", description: "Initial vertical offset in px" },
+          { name: "once", type: "boolean", default: "true", description: "Animate only on first intersection" },
+        ]}
+      />
+
+      <h2>Accessibility</h2>
+      <p>
+        The component sets <code>aria-label</code> on the host with the original unsplit text and <code>aria-hidden="true"</code> on all child spans.
+        Screen readers announce the full phrase — not individual letters or words.
+        Respects <code>prefers-reduced-motion</code>: when enabled, content appears immediately at its final state.
+      </p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  motion-split#split-demo {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+  }
+
+  motion-split#split-chars {
+    font-size: 2.5rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: var(--color-text);
+  }
+
+  .split-lines-demo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.3;
+    color: var(--color-text);
+    max-width: 360px;
+    text-align: center;
+  }
+</style>

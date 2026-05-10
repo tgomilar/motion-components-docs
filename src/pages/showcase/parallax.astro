@@ -1,0 +1,564 @@
+---
+import Layout from '../../layouts/Layout.astro'
+---
+
+<Layout title="Parallax — motion-parallax Showcase" noMain>
+  <div class="showcase">
+    <section class="hero">
+      <motion-parallax speed="0.03" class="hero-grid"></motion-parallax>
+
+      <motion-parallax speed="0.06" class="hero-blur"></motion-parallax>
+
+      <motion-parallax speed="0.08" class="hero-ghost">PARALLAX</motion-parallax>
+
+      <motion-parallax speed="0.10" class="hero-word hero-word--a">Every</motion-parallax>
+
+      <motion-parallax speed="2.55" class="hero-word hero-word--b">Layer</motion-parallax>
+
+      <motion-parallax speed="3" class="hero-word hero-word--c">Moves</motion-parallax>
+
+      <motion-parallax speed="1.6" class="hero-tag">
+        <span class="hero-dot"></span> motion-parallax
+      </motion-parallax>
+
+      <motion-parallax speed="2.0" class="hero-cue">↓ scroll</motion-parallax>
+    </section>
+
+    <section class="spectrum">
+      <div class="spectrum-head">
+        <p class="spectrum-eyebrow">The speed spectrum</p>
+        <h2 class="spectrum-title">Same scroll. Different speeds.</h2>
+      </div>
+
+      <div class="spectrum-demos">
+        <div class="spec spec-slow">
+          <motion-parallax speed="0.0" class="spec-block">
+            <div class="spec-inner spec-inner--still">
+              <span class="spec-label">speed="0"</span>
+              <span class="spec-desc">Fixed — scrolls with the page</span>
+            </div>
+          </motion-parallax>
+        </div>
+
+        <div class="spec spec-mid">
+          <motion-parallax speed="0.5" class="spec-block">
+            <div class="spec-inner spec-inner--mid">
+              <span class="spec-label">speed="0.5"</span>
+              <span class="spec-desc">Moderate — gentle drift</span>
+            </div>
+          </motion-parallax>
+        </div>
+
+        <div class="spec spec-fast">
+          <motion-parallax speed="1.5" class="spec-block">
+            <div class="spec-inner spec-inner--fast">
+              <span class="spec-label">speed="1.5"</span>
+              <span class="spec-desc">Fast — races past slower layers</span>
+            </div>
+          </motion-parallax>
+        </div>
+      </div>
+    </section>
+
+    <section class="layers">
+      <div class="layers-head">
+        <p class="spectrum-eyebrow">Composing depth</p>
+        <h2 class="spectrum-title">Three planes.<br />One scroll.</h2>
+      </div>
+
+      <div class="layers-stage">
+        <motion-parallax speed="0.08" class="plane plane-back">
+          <div class="plane-body">
+            <span class="plane-num">01</span>
+            <h3 class="plane-title">Deep<br />Background</h3>
+            <p class="plane-text">Barely moves. Anchors the scene — far away, calm, still.</p>
+          </div>
+        </motion-parallax>
+
+        <motion-parallax speed="0.5" class="plane plane-mid">
+          <div class="plane-body">
+            <span class="plane-num">02</span>
+            <h3 class="plane-title">Middle<br />Ground</h3>
+            <p class="plane-text">Natural movement. The eye follows here first.</p>
+          </div>
+        </motion-parallax>
+
+        <motion-parallax speed="1.5" class="plane plane-front">
+          <div class="plane-body">
+            <span class="plane-num">03</span>
+            <h3 class="plane-title">Near<br />Foreground</h3>
+            <p class="plane-text">Fast and close. Races past — demands attention.</p>
+          </div>
+        </motion-parallax>
+      </div>
+    </section>
+
+    <section class="drift">
+      <div class="drift-head">
+        <p class="spectrum-eyebrow">Horizontal parallax</p>
+        <h2 class="spectrum-title">Drift<br />sideways.</h2>
+      </div>
+
+      <div class="drift-stage">
+        <motion-parallax axis="x" speed="0.1" class="drift-lane drift-lane--a">
+          <span>BACKGROUND</span>
+        </motion-parallax>
+        <motion-parallax axis="x" speed="0.6" class="drift-lane drift-lane--b">
+          <span>MIDGROUND</span>
+        </motion-parallax>
+        <motion-parallax axis="x" speed="1.8" class="drift-lane drift-lane--c">
+          <span>FOREGROUND</span>
+        </motion-parallax>
+      </div>
+
+      <p class="drift-note"><code>axis="x"</code> — horizontal movement on vertical scroll</p>
+    </section>
+
+    <section class="outro">
+      <motion-parallax speed="0.3" class="outro-text">
+        <p>Parallax is the space between layers.<br />Scroll reveals what was always there.</p>
+      </motion-parallax>
+      <div class="outro-nav">
+        <a href="/docs/scroll/motion-parallax/" class="btn-ghost">← Docs</a>
+        <a href="/showcase/scene/" class="btn-solid">Scene showcase →</a>
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<script>
+  import 'motion-components'
+</script>
+
+<style>
+  .showcase {
+    color: var(--color-text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Shared heading style ─────────────────────────────── */
+  .spectrum-eyebrow {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-yellow);
+    opacity: 0.7;
+  }
+  .spectrum-title {
+    font-size: clamp(44px, 10vw, 140px);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    line-height: 0.88;
+    color: var(--color-text);
+  }
+
+  /* ════════════════════════════════════════════════════════
+     HERO
+     ════════════════════════════════════════════════════════ */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr;
+    overflow: hidden;
+    position: relative;
+  }
+  .hero > * {
+    grid-area: 1 / 1;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .hero-grid {
+    align-self: stretch;
+    justify-self: stretch;
+    background-image:
+      linear-gradient(var(--color-border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+    background-size: 80px 80px;
+    opacity: 0.04;
+  }
+
+  .hero-blur {
+    align-self: center;
+    justify-self: center;
+    width: clamp(400px, 60vw, 800px);
+    height: clamp(400px, 60vw, 800px);
+    border-radius: 50%;
+    background: radial-gradient(circle, var(--color-yellow) 0%, transparent 70%);
+    opacity: 0.06;
+    filter: blur(60px);
+  }
+
+  .hero-ghost {
+    align-self: center;
+    justify-self: center;
+    font-size: clamp(70px, 12vw, 180px);
+    font-weight: 900;
+    letter-spacing: 0.06em;
+    color: var(--color-text);
+    opacity: 0.25;
+    white-space: nowrap;
+  }
+
+  .hero-word {
+    font-size: clamp(40px, 7vw, 100px);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    justify-self: center;
+  }
+
+  .hero-word--a {
+    align-self: center;
+    color: var(--color-text);
+    margin-top: -6.5em;
+    margin-left: -5em;
+  }
+
+  .hero-word--b {
+    align-self: center;
+    color: var(--color-yellow);
+    margin-top: 0.4em;
+  }
+
+  .hero-word--c {
+    align-self: center;
+    color: var(--color-text);
+    opacity: 0.4;
+    margin-top: 7.4em;
+    margin-left: 5em;
+  }
+
+  .hero-tag {
+    align-self: end;
+    justify-self: start;
+    padding: 0 0 3.5rem 8vw;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    color: var(--color-text);
+    opacity: 0.35;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    text-transform: uppercase;
+  }
+  .hero-dot {
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--color-yellow);
+  }
+
+  .hero-cue {
+    align-self: end;
+    justify-self: center;
+    padding-bottom: 1.4rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    opacity: 0.6;
+  }
+
+  /* ════════════════════════════════════════════════════════
+     SPEED SPECTRUM
+     ════════════════════════════════════════════════════════ */
+  .spectrum {
+    padding: 10rem 8vw 14rem;
+  }
+  .spectrum-head {
+    margin-bottom: 5rem;
+  }
+
+  .spectrum-demos {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .spec {
+    display: flex;
+    flex-direction: column;
+  }
+  .spec + .spec {
+    border-top: 1px solid var(--color-border);
+  }
+
+  .spec-block {
+    display: block;
+    padding: 2.5rem 0;
+  }
+
+  .spec-inner {
+    display: flex;
+    align-items: baseline;
+    gap: 1.5rem;
+    padding: 1.5rem 2rem;
+    border-radius: 16px;
+    border: 1px solid transparent;
+  }
+  .spec-inner--still {
+    background: var(--color-surface);
+    border-color: var(--color-border);
+  }
+  .spec-inner--mid {
+    background: var(--color-surface-2);
+    border-color: var(--color-border);
+  }
+  .spec-inner--fast {
+    background: var(--color-surface);
+    border-color: var(--color-yellow);
+  }
+
+  .spec-label {
+    font-family: var(--font-mono);
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: var(--color-text);
+    white-space: nowrap;
+  }
+  .spec-desc {
+    font-size: 0.9rem;
+    color: var(--color-text);
+    opacity: 0.55;
+    line-height: 1.5;
+  }
+
+  /* ════════════════════════════════════════════════════════
+     LAYERED COMPOSITION
+     ════════════════════════════════════════════════════════ */
+  .layers {
+    padding: 8rem 2rem 14rem;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+  }
+  .layers-head {
+    padding: 0 6vw 5rem;
+  }
+
+  .layers-stage {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .plane {
+    border-radius: 24px;
+    overflow: hidden;
+  }
+  .plane-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    padding: 2.2rem;
+    border-radius: 24px;
+    border: 1px solid;
+    height: 100%;
+  }
+
+  .plane-back .plane-body {
+    background: var(--color-bg);
+    border-color: var(--color-border);
+    transform: scale(0.92);
+    transform-origin: center top;
+  }
+  .plane-mid .plane-body {
+    background: var(--color-surface-2);
+    border-color: var(--color-border);
+    transform: scale(0.96);
+    transform-origin: center top;
+  }
+  .plane-front .plane-body {
+    background: var(--color-surface);
+    border-color: var(--color-yellow);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
+  }
+
+  .plane-num {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    color: var(--color-text);
+    opacity: 0.3;
+  }
+  .plane-front .plane-num {
+    color: var(--color-yellow);
+    opacity: 1;
+  }
+
+  .plane-title {
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 0.9;
+    color: var(--color-text);
+  }
+
+  .plane-text {
+    font-size: 0.85rem;
+    color: var(--color-text);
+    opacity: 0.55;
+    line-height: 1.7;
+    flex: 1;
+  }
+
+  /* ════════════════════════════════════════════════════════
+     HORIZONTAL DRIFT
+     ════════════════════════════════════════════════════════ */
+  .drift {
+    padding: 10rem 0 12rem;
+    overflow: hidden;
+  }
+  .drift-head {
+    padding: 0 8vw;
+    margin-bottom: 5rem;
+  }
+
+  .drift-stage {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .drift-lane {
+    display: block;
+    border-top: 1px solid var(--color-border);
+    padding: 2rem 0;
+    overflow: hidden;
+  }
+  .drift-lane:last-child {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .drift-lane span {
+    display: block;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    white-space: nowrap;
+    padding: 0 8vw;
+  }
+
+  .drift-lane--a span {
+    font-size: clamp(18px, 3vw, 42px);
+    color: var(--color-text);
+    opacity: 0.12;
+  }
+  .drift-lane--b span {
+    font-size: clamp(14px, 2.2vw, 30px);
+    color: var(--color-text);
+    opacity: 0.3;
+    padding-left: 16vw;
+  }
+  .drift-lane--c span {
+    font-size: clamp(11px, 1.5vw, 20px);
+    color: var(--color-yellow);
+    opacity: 0.7;
+    padding-left: 26vw;
+  }
+
+  .drift-note {
+    text-align: center;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--color-text);
+    opacity: 0.4;
+    margin-top: 3.5rem;
+  }
+  .drift-note code {
+    font-family: var(--font-mono);
+    font-size: inherit;
+    color: var(--color-yellow);
+  }
+
+  /* ════════════════════════════════════════════════════════
+     OUTRO
+     ════════════════════════════════════════════════════════ */
+  .outro {
+    padding: 14rem 2rem 8rem;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    text-align: center;
+  }
+
+  .outro-text p {
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    font-weight: 500;
+    color: var(--color-text);
+    opacity: 0.5;
+    line-height: 1.8;
+    max-width: 420px;
+    letter-spacing: -0.01em;
+  }
+
+  .outro-nav {
+    display: flex;
+    gap: 1.25rem;
+    align-items: center;
+  }
+
+  .btn-ghost,
+  .btn-solid {
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    padding: 0.6rem 1.3rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition:
+      background 0.15s,
+      color 0.15s;
+  }
+
+  .btn-ghost {
+    color: var(--color-text);
+    opacity: 0.5;
+    border: 1px solid var(--color-border);
+    background: transparent;
+  }
+  .btn-ghost:hover {
+    opacity: 0.85;
+    color: var(--color-text);
+    background: var(--color-surface-2);
+    text-decoration: none;
+  }
+
+  .btn-solid {
+    color: var(--color-bg);
+    background: var(--color-yellow);
+    border: 1px solid transparent;
+  }
+  .btn-solid:hover {
+    opacity: 0.85;
+    text-decoration: none;
+  }
+
+  @media (max-width: 720px) {
+    .layers-stage {
+      grid-template-columns: 1fr;
+    }
+    .spec-inner {
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+    .hero-word--a {
+      margin-left: -2em;
+    }
+    .hero-word--c {
+      margin-left: 2em;
+    }
+  }
+</style>

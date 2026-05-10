@@ -1,0 +1,431 @@
+---
+import Layout from "../../layouts/Layout.astro";
+---
+
+<Layout title="motion-font — Variable Font Showcase" noMain>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet" />
+
+  <div class="showcase">
+
+    <!-- ── Hero ─────────────────────────────────────────────────── -->
+    <section class="hero">
+      <p class="hero-eyebrow">motion-font</p>
+      <h1 class="hero-headline">
+        <motion-font axis="wght" from="100" to="900" trigger="scroll" class="hero-word">Type</motion-font>
+        <motion-font axis="wght" from="900" to="100" trigger="scroll" class="hero-word hero-word-inv">in</motion-font>
+        <motion-font axis="wght" from="100" to="900" trigger="scroll" class="hero-word">Motion</motion-font>
+      </h1>
+      <p class="hero-sub">Variable font axes animated with spring physics — weight, width, optical size.</p>
+      <div class="hero-scroll-cue">↓ scroll</div>
+    </section>
+
+    <!-- ── Weight spectrum ──────────────────────────────────────── -->
+    <section class="spectrum">
+      <p class="section-label">Weight spectrum — scroll to reveal</p>
+      <div class="spectrum-stack">
+        <motion-font axis="wght" from="100" to="100" trigger="scroll" class="spec-word spec-thin">Thin</motion-font>
+        <motion-font axis="wght" from="100" to="300" trigger="scroll" class="spec-word spec-light">Light</motion-font>
+        <motion-font axis="wght" from="100" to="400" trigger="scroll" class="spec-word spec-regular">Regular</motion-font>
+        <motion-font axis="wght" from="100" to="600" trigger="scroll" class="spec-word spec-medium">Medium</motion-font>
+        <motion-font axis="wght" from="100" to="700" trigger="scroll" class="spec-word spec-bold">Bold</motion-font>
+        <motion-font axis="wght" from="100" to="900" trigger="scroll" class="spec-word spec-black">Black</motion-font>
+      </div>
+    </section>
+
+    <!-- ── Hover word cloud ─────────────────────────────────────── -->
+    <section class="word-cloud">
+      <p class="section-label">Hover any word — weight springs to bold</p>
+      <div class="cloud-grid">
+        {[
+          { text: "Interface", from: 200, to: 800, bounce: 0.1 },
+          { text: "Motion", from: 300, to: 900, bounce: 0.3 },
+          { text: "Design", from: 150, to: 700, bounce: 0 },
+          { text: "Spring", from: 300, to: 800, bounce: 0.5 },
+          { text: "Variable", from: 200, to: 900, bounce: 0.2 },
+          { text: "Fluid", from: 250, to: 800, bounce: 0.4 },
+          { text: "Kinetic", from: 200, to: 750, bounce: 0.15 },
+          { text: "Type", from: 300, to: 900, bounce: 0.35 },
+          { text: "Physics", from: 200, to: 800, bounce: 0.25 },
+          { text: "Animate", from: 300, to: 850, bounce: 0.1 },
+          { text: "Bold", from: 200, to: 900, bounce: 0.45 },
+          { text: "Glyphs", from: 250, to: 700, bounce: 0 },
+        ].map(({ text, from, to, bounce }) => (
+          <motion-font
+            axis="wght"
+            from={from}
+            to={to}
+            trigger="hover"
+            duration="0.5"
+            bounce={bounce}
+            class="cloud-word"
+          >{text}</motion-font>
+        ))}
+      </div>
+    </section>
+
+    <!-- ── Optical size ──────────────────────────────────────────── -->
+    <section class="optical">
+      <p class="section-label">Scroll — optical size tracks scroll</p>
+      <div class="optical-row">
+        <div class="optical-item">
+          <motion-font axes="wght:200:800 opsz:8:32" trigger="scroll" class="optical-demo">Aa</motion-font>
+          <span class="optical-caption">wght + opsz together</span>
+        </div>
+        <div class="optical-sep">vs</div>
+        <div class="optical-item">
+          <motion-font axis="wght" from="200" to="800" trigger="scroll" class="optical-demo">Aa</motion-font>
+          <span class="optical-caption">weight only</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Spring bounce comparison ─────────────────────────────── -->
+    <section class="bounce-section">
+      <p class="section-label">Hover each — different bounce values</p>
+      <div class="bounce-row">
+        <div class="bounce-item">
+          <motion-font axis="wght" from="200" to="900" trigger="hover" bounce="0" duration="0.5" class="bounce-demo">No bounce</motion-font>
+          <code class="bounce-tag">bounce=0</code>
+        </div>
+        <div class="bounce-item">
+          <motion-font axis="wght" from="200" to="900" trigger="hover" bounce="0.25" duration="0.6" class="bounce-demo">Light spring</motion-font>
+          <code class="bounce-tag">bounce=0.25</code>
+        </div>
+        <div class="bounce-item">
+          <motion-font axis="wght" from="200" to="900" trigger="hover" bounce="0.5" duration="0.7" class="bounce-demo">Springy</motion-font>
+          <code class="bounce-tag">bounce=0.5</code>
+        </div>
+        <div class="bounce-item">
+          <motion-font axis="wght" from="200" to="900" trigger="hover" bounce="0.8" duration="0.8" class="bounce-demo">Wild</motion-font>
+          <code class="bounce-tag">bounce=0.8</code>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Statement scroll section ─────────────────────────────── -->
+    <section class="statement">
+      <motion-font axis="wght" from="100" to="900" trigger="scroll" class="statement-text">
+        Variable fonts give every word its own gravity.
+      </motion-font>
+    </section>
+
+    <!-- ── Stagger reveal ────────────────────────────────────────── -->
+    <section class="stagger-section">
+      <p class="section-label">Viewport entry — staggered weight reveal</p>
+      <div class="stagger-lines">
+        <motion-font axis="wght" from="100" to="800" trigger="auto" delay="0"    duration="1.0" class="stagger-line">The quick</motion-font>
+        <motion-font axis="wght" from="100" to="800" trigger="auto" delay="0.12" duration="1.0" class="stagger-line">brown fox</motion-font>
+        <motion-font axis="wght" from="100" to="800" trigger="auto" delay="0.24" duration="1.0" class="stagger-line">jumps over</motion-font>
+        <motion-font axis="wght" from="100" to="800" trigger="auto" delay="0.36" duration="1.0" class="stagger-line">the lazy dog.</motion-font>
+      </div>
+    </section>
+
+    <!-- ── Outro ─────────────────────────────────────────────────── -->
+    <section class="outro">
+      <p class="outro-label">motion-font</p>
+      <p class="outro-sub">Spring-driven variable font animations for any web project.</p>
+      <div class="outro-links">
+        <a href="/docs/text/motion-font/" class="outro-link">View docs →</a>
+      </div>
+    </section>
+
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  * { box-sizing: border-box; }
+
+  .showcase {
+    font-family: 'Inter', var(--font-sans);
+    background: var(--color-bg);
+    color: var(--color-text);
+  }
+
+  /* ── Shared ───────────────────────────────────────────── */
+  section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 2rem;
+  }
+
+  .section-label {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+    margin: 0 0 3rem;
+  }
+
+  /* ── Hero ─────────────────────────────────────────────── */
+  .hero {
+    min-height: 100vh;
+    background: var(--color-bg);
+    position: relative;
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin: 0;
+  }
+
+  .hero-headline {
+    display: flex;
+    gap: 0.4em;
+    align-items: baseline;
+    flex-wrap: wrap;
+    justify-content: center;
+    font-size: clamp(4rem, 12vw, 10rem);
+    line-height: 1;
+    margin: 0;
+  }
+
+  .hero-word {
+    display: inline-block;
+    color: var(--color-text);
+    letter-spacing: -0.04em;
+  }
+
+  .hero-word-inv {
+    color: var(--color-muted);
+    font-size: 0.5em;
+    align-self: center;
+  }
+
+  .hero-sub {
+    font-size: 1rem;
+    color: var(--color-muted);
+    max-width: 420px;
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  .hero-scroll-cue {
+    position: absolute;
+    bottom: 2.5rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--color-muted);
+    text-transform: uppercase;
+  }
+
+  /* ── Weight spectrum ──────────────────────────────────── */
+  .spectrum {
+    background: var(--color-surface);
+  }
+
+  .spectrum-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    width: 100%;
+    max-width: 700px;
+  }
+
+  .spec-word {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    line-height: 1.15;
+    display: block;
+  }
+
+  /* ── Word cloud ───────────────────────────────────────── */
+  .word-cloud {
+    background: var(--color-bg);
+    min-height: 80vh;
+  }
+
+  .cloud-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem 1.5rem;
+    max-width: 720px;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .cloud-word {
+    font-size: clamp(1.5rem, 3.5vw, 2.75rem);
+    letter-spacing: -0.025em;
+    color: var(--color-text);
+    cursor: default;
+    user-select: none;
+    line-height: 1.2;
+  }
+
+  /* ── Optical size ─────────────────────────────────────── */
+  .optical {
+    background: var(--color-surface);
+    gap: 3rem;
+  }
+
+  .optical-row {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .optical-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .optical-demo {
+    font-size: clamp(5rem, 12vw, 9rem);
+    letter-spacing: -0.05em;
+    color: var(--color-text);
+    line-height: 1;
+  }
+
+  .optical-caption {
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    color: var(--color-muted);
+    letter-spacing: 0.04em;
+  }
+
+  .optical-sep {
+    font-size: 1rem;
+    color: var(--color-muted);
+    font-weight: 300;
+  }
+
+  /* ── Bounce section ───────────────────────────────────── */
+  .bounce-section {
+    background: var(--color-bg);
+    min-height: 70vh;
+  }
+
+  .bounce-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 3rem 4rem;
+    justify-content: center;
+    align-items: flex-end;
+  }
+
+  .bounce-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .bounce-demo {
+    font-size: clamp(1.75rem, 4vw, 3rem);
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    cursor: default;
+    user-select: none;
+  }
+
+  .bounce-tag {
+    font-size: 0.68rem;
+    font-family: var(--font-mono);
+    color: var(--color-muted);
+    letter-spacing: 0.04em;
+  }
+
+  /* ── Statement ────────────────────────────────────────── */
+  .statement {
+    background: var(--color-surface);
+    padding: 8rem 3rem;
+    text-align: center;
+  }
+
+  .statement-text {
+    display: block;
+    font-size: clamp(2rem, 5.5vw, 4.5rem);
+    letter-spacing: -0.04em;
+    color: var(--color-text);
+    line-height: 1.15;
+    max-width: 800px;
+  }
+
+  /* ── Stagger ──────────────────────────────────────────── */
+  .stagger-section {
+    background: var(--color-bg);
+  }
+
+  .stagger-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+    align-items: flex-start;
+    max-width: 600px;
+    width: 100%;
+  }
+
+  .stagger-line {
+    display: block;
+    font-size: clamp(2.5rem, 7vw, 5.5rem);
+    letter-spacing: -0.04em;
+    color: var(--color-text);
+    line-height: 1.1;
+  }
+
+  /* ── Outro ────────────────────────────────────────────── */
+  .outro {
+    background: var(--color-bg);
+    min-height: 60vh;
+    text-align: center;
+    gap: 1rem;
+  }
+
+  .outro-label {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin: 0;
+  }
+
+  .outro-sub {
+    font-size: 1.1rem;
+    color: var(--color-muted);
+    max-width: 380px;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .outro-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .outro-link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+
+  .outro-link:hover {
+    border-color: var(--color-accent);
+  }
+</style>

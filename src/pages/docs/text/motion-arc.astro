@@ -1,0 +1,201 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-arc — Motion Components" description="Distributes text characters along a partial arc. Perfect for badge lettering, stamps, logotype banners, and curved typographic layouts." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-arc</motion-split></h1>
+      <p class="lead">Distributes text characters along a partial arc. Perfect for badge lettering, stamps, logotype banners, and curved typographic layouts.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview>
+        <motion-arc class="demo-accent" text="MOTION COMPONENTS · ARC TEXT ·" radius="110" arc="200" align="top"></motion-arc>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-arc'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-arc.html"
+        copy
+        code={`<motion-arc
+  text="MOTION COMPONENTS · ARC TEXT ·"
+  radius="110"
+  arc="200"
+  align="top"
+></motion-arc>`}
+      />
+
+      <h2>Bottom arc</h2>
+      <p>Set <code>align="bottom"</code> to curve the text along the bottom of the arc instead.</p>
+      <DocsPreview>
+        <motion-arc class="demo-accent" text="BOTTOM ARC · CURVED TYPE ·" radius="110" arc="200" align="bottom"></motion-arc>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-arc.html"
+        copy
+        code={`<motion-arc
+  text="BOTTOM ARC · CURVED TYPE ·"
+  radius="110"
+  arc="200"
+  align="bottom"
+></motion-arc>`}
+      />
+
+      <h2>Narrow arc</h2>
+      <p>Reduce <code>arc</code> for a subtle curve — useful for short words or headline accents.</p>
+      <DocsPreview>
+        <motion-arc class="demo-accent" text="GENTLE ARC" radius="200" arc="60" align="top"></motion-arc>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-arc.html"
+        copy
+        code={`<motion-arc
+  text="GENTLE ARC"
+  radius="200"
+  arc="60"
+  align="top"
+></motion-arc>`}
+      />
+
+      <h2>Upright characters</h2>
+      <p>Add <code>upright</code> to keep characters vertically oriented rather than tangent to the arc.</p>
+      <DocsPreview>
+        <motion-arc class="demo-accent" text="UPRIGHT · STAMP TEXT ·" radius="110" arc="200" align="top" upright></motion-arc>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-arc.html"
+        copy
+        code={`<motion-arc
+  text="UPRIGHT · STAMP TEXT ·"
+  radius="110"
+  arc="200"
+  align="top"
+  upright
+></motion-arc>`}
+      />
+
+      <h2>Spinning arc</h2>
+      <p>Set <code>speed</code> to a non-zero value to rotate the arc continuously — like <code>motion-circle</code> but on a partial path.</p>
+      <DocsPreview>
+        <motion-arc class="demo-accent" text="SPINNING · ARC · TEXT · " radius="90" arc="270" align="top" speed="10"></motion-arc>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-arc.html"
+        copy
+        code={`<motion-arc
+  text="SPINNING · ARC · TEXT · "
+  radius="90"
+  arc="270"
+  align="top"
+  speed="10"
+></motion-arc>`}
+      />
+
+      <h2>With slotted content</h2>
+      <p>Place any element inside <code>motion-arc</code> to anchor it at the center of the arc.</p>
+      <DocsPreview>
+        <motion-arc class="demo-accent" text="AVAILABLE FOR WORK · HIRE ME ·" radius="110" arc="200" align="top" speed="12">
+          <div class="demo-avatar"><span class="y">&lt;</span>mc<span class="y">&gt;</span></div>
+        </motion-arc>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-arc.html"
+        copy
+        code={`<motion-arc text="AVAILABLE FOR WORK · HIRE ME ·" radius="110" arc="200" speed="12">
+  <img src="avatar.jpg" width="80" height="80" alt="Avatar" />
+</motion-arc>`}
+      />
+
+      <h2>Pause on hover</h2>
+      <p>Add <code>pause-on-hover</code> to freeze rotation on mouseenter and resume on mouseleave.</p>
+      <DocsPreview>
+        <motion-arc class="demo-accent" text="HOVER TO PAUSE · ARC SPIN ·" radius="90" arc="270" align="top" speed="10" pause-on-hover></motion-arc>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-arc.html"
+        copy
+        code={`<motion-arc
+  text="HOVER TO PAUSE · ARC SPIN ·"
+  radius="90"
+  arc="270"
+  speed="10"
+  pause-on-hover
+></motion-arc>`}
+      />
+
+      <h2>How it works</h2>
+      <p>
+        Characters are distributed evenly across the arc span. Each character is placed using a transform chain — <code>rotate(angle) translateY(-radius)</code> — which positions it at the correct point on the circle. The starting angle is computed from <code>align</code>: <code>"top"</code> centers the arc at 270° (the topmost point), <code>"bottom"</code> at 90°.
+      </p>
+      <p>
+        When <code>upright</code> is set, a counter-rotation is appended so characters remain axis-aligned. When <code>speed</code> is non-zero, the entire arc ring rotates continuously via Motion One's <code>animate</code> with <code>repeat: Infinity</code>.
+      </p>
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'text', type: 'string', default: '—', description: 'Text to arrange along the arc' },
+        { name: 'radius', type: 'number', default: '100', description: 'Arc radius in px' },
+        { name: 'arc', type: 'number', default: '180', description: 'Arc span in degrees (180 = semicircle, 360 = full circle)' },
+        { name: 'align', type: '"top" | "bottom"', default: '"top"', description: 'Whether the arc curves over the top or along the bottom' },
+        { name: 'speed', type: 'number', default: '0', description: 'Seconds per full rotation (0 = static)' },
+        { name: 'direction', type: '"cw" | "ccw"', default: '"cw"', description: 'Clockwise or counterclockwise spin (only applies when speed > 0)' },
+        { name: 'upright', type: 'boolean', default: 'false', description: 'Keep characters vertically oriented' },
+        { name: 'pause-on-hover', type: 'boolean', default: 'false', description: 'Pause rotation on mouseenter, resume on mouseleave' },
+      ]} />
+
+      <h2>Accessibility</h2>
+      <p>When <code>prefers-reduced-motion</code> is set, the arc does not rotate and text renders statically in its arc position.</p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .demo-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    background: var(--color-accent-dim);
+    border: 2px solid var(--color-yellow);
+    color: var(--color-accent);
+    font-size: 1rem;
+    font-weight: 800;
+    font-family: var(--font-mono);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .demo-avatar .y {
+    color: var(--color-yellow);
+  }
+
+  .demo-accent {
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--color-accent);
+  }
+</style>

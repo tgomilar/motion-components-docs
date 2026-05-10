@@ -1,0 +1,225 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-slider — Motion Components" noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-slider</motion-split></h1>
+      <p class="lead">Gesture-driven horizontal carousel with spring snap, velocity-based flicking, and rubber-band edges. Works with any child content.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview noPad>
+        <motion-slider class="demo-slider" gap="0" arrows="true">
+
+            <!-- Slide 1: motion-split chars -->
+            <div class="slide slide-1">
+              <span class="slide-eyebrow">motion-split</span>
+              <motion-split by="chars" interval="0.04" duration="0.55" y="28" class="slide-headline">
+                Spring motion.
+              </motion-split>
+              <p class="slide-body">Each character springs in independently — controllable interval and duration.</p>
+            </div>
+
+            <!-- Slide 2: motion-stagger pills -->
+            <div class="slide slide-2">
+              <span class="slide-eyebrow">motion-stagger</span>
+              <!-- motion-stagger is display:contents so the flex layout must live on a wrapper -->
+              <div class="stagger-pills-wrap">
+                <motion-stagger interval="0.09" y="18">
+                  <div class="feature-pill">Spring physics</div>
+                  <div class="feature-pill">Velocity flick</div>
+                  <div class="feature-pill">Gesture driven</div>
+                  <div class="feature-pill">Accessible</div>
+                </motion-stagger>
+              </div>
+              <p class="slide-body">Children reveal with cascading spring delay.</p>
+            </div>
+
+            <!-- Slide 3: motion-counter + motion-scramble -->
+            <div class="slide slide-3">
+              <span class="slide-eyebrow">motion-counter</span>
+              <motion-counter from="0" to="60" suffix=" fps" duration="1.4" class="slide-stat"></motion-counter>
+              <motion-scramble delay="0.6" class="slide-scramble">fluid · spring · native</motion-scramble>
+              <p class="slide-body">Numbers animate to their target with eased timing.</p>
+            </div>
+
+        </motion-slider>
+      </DocsPreview>
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-slider.html"
+        copy
+        code={`<motion-slider gap="24">
+  <div>Slide one</div>
+  <div>Slide two</div>
+  <div>Slide three</div>
+</motion-slider>`}
+      />
+
+      <h2>How it works</h2>
+      <p>Each direct child becomes a slide, sized to fill the slider width. Pointer events are tracked across the window so drag doesn't break when the cursor leaves the element. On release, velocity is sampled over the last 6 pointer events — a fast flick snaps to the adjacent slide; a slow drag snaps to the nearest.</p>
+      <p>The spring uses the captured velocity as its initial condition, so the snap animation feels like a physical continuation of the gesture rather than a teleport.</p>
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'gap', type: 'number', default: '24', description: 'Gap between slides in px' },
+        { name: 'arrows', type: 'boolean', default: 'true', description: 'Show prev/next arrow buttons. Set <code>arrows="false"</code> to hide.' },
+      ]} />
+
+      <h2>Methods</h2>
+      <div class="methods-table">
+        <table>
+          <thead>
+            <tr><th>Method</th><th>Description</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><code>goTo(index, velocity?)</code></td><td>Animate to a specific slide index. Optional initial velocity in px/s.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Keyboard</h2>
+      <p>Focus the slider and use <code>ArrowLeft</code> / <code>ArrowRight</code> to navigate.</p>
+
+      <h2>Accessibility</h2>
+      <p>When <code>prefers-reduced-motion</code> is set, transitions are instant with no animation.</p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+
+  const ANIM_TAGS = ['motion-split', 'motion-reveal', 'motion-stagger', 'motion-counter', 'motion-scramble'];
+
+  function replaySlide(slide: Element) {
+    // Clone and re-insert each motion-* component to force fresh IO initialization
+    slide.querySelectorAll<Element>(ANIM_TAGS.join(',')).forEach(el => {
+      const clone = el.cloneNode(true) as Element;
+      el.parentNode?.replaceChild(clone, el);
+    });
+  }
+
+  const slider = document.querySelector('.demo-slider');
+  if (slider) {
+    slider.addEventListener('slidechange', (e: Event) => {
+      const { index } = (e as CustomEvent<{ index: number }>).detail;
+      const slide = slider.querySelectorAll('.slide')[index];
+      if (slide) replaySlide(slide);
+    });
+  }
+</script>
+
+<style>
+  h1 {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    flex-wrap: wrap;
+  }
+
+  /* ── Demo slides ── */
+  .demo-slider {
+    min-height: 300px;
+  }
+
+  .slide {
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.85rem;
+    padding: 2rem;
+    /* text-align inherits through shadow DOM slots — centers all inline content */
+    text-align: center;
+    user-select: none;
+  }
+
+  .slide-1 { background: linear-gradient(140deg, #0f2460 0%, #1e40af 60%, #2563eb 100%); }
+  .slide-2 { background: linear-gradient(140deg, #2d0b6b 0%, #5b21b6 60%, #7c3aed 100%); }
+  .slide-3 { background: linear-gradient(140deg, #022c22 0%, #065f46 60%, #059669 100%); }
+
+  .slide-eyebrow {
+    font-size: 0.65rem;
+    font-weight: 700;
+    font-family: var(--font-mono);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .slide-headline {
+    display: block;
+    font-size: 2.4rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: #fff;
+    line-height: 1.1;
+  }
+
+  .slide-body {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.45);
+    max-width: 280px;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* Slide 2 — stagger pills
+     motion-stagger is display:contents so flex layout lives on this wrapper */
+  .stagger-pills-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: center;
+    max-width: 320px;
+  }
+
+  .feature-pill {
+    padding: 0.35rem 0.9rem;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 99px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.78rem;
+    font-weight: 600;
+    backdrop-filter: blur(6px);
+    letter-spacing: 0.01em;
+  }
+
+  /* Slide 3 — counter + scramble */
+  .slide-stat {
+    display: block;
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    color: #fff;
+    line-height: 1;
+    font-family: var(--font-sans);
+    text-align: center;
+  }
+
+  .slide-scramble {
+    display: block;
+    font-size: 0.72rem;
+    font-family: var(--font-mono);
+    letter-spacing: 0.1em;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    text-align: center;
+  }
+</style>

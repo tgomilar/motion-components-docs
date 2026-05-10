@@ -1,0 +1,10 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "include": ["src"],
+  "compilerOptions": {
+    "paths": {
+      "motion-components": ["../src/index.ts"],
+      "motion-components/preload": ["../src/preload.ts"]
+    }
+  }
+}

@@ -1,0 +1,126 @@
+---
+import Layout from "../layouts/Layout.astro";
+---
+
+<Layout title="404 — Page not found" noMain>
+  <main class="error-page">
+    <div class="error-inner">
+
+      <p class="error-code-label">ERROR</p>
+
+      <motion-glitch trigger="loop" interval="1400" intensity="10" class="error-404">
+        404
+      </motion-glitch>
+
+      <motion-glitch trigger="loop" interval="2200" intensity="4" class="error-message">
+        PAGE_NOT_FOUND
+      </motion-glitch>
+
+      <p class="error-desc">
+        The page you're looking for doesn't exist or has been moved.
+      </p>
+
+      <div class="error-actions">
+        <a href="/" class="error-btn error-btn--primary">← Home</a>
+        <a href="/docs/" class="error-btn error-btn--ghost">Browse docs</a>
+      </div>
+
+    </div>
+  </main>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .error-page {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .error-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+  }
+
+  .error-code-label {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.25em;
+    color: var(--color-accent);
+    margin: 0;
+  }
+
+  .error-404 {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: clamp(7rem, 22vw, 18rem);
+    font-weight: 700;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--color-text);
+    user-select: none;
+  }
+
+  .error-message {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: clamp(0.75rem, 2.5vw, 1.1rem);
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    color: var(--color-muted);
+    user-select: none;
+    margin-top: -0.5rem;
+  }
+
+  .error-desc {
+    font-size: 0.9rem;
+    color: var(--color-muted);
+    max-width: 320px;
+    line-height: 1.6;
+    margin: 0.5rem 0 0;
+  }
+
+  .error-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 0.5rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .error-btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.55rem 1.25rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity 0.15s;
+  }
+
+  .error-btn:hover {
+    opacity: 0.8;
+    text-decoration: none;
+  }
+
+  .error-btn--primary {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  .error-btn--ghost {
+    background: transparent;
+    border: 1px solid var(--color-border);
+    color: var(--color-text);
+  }
+</style>
