@@ -9,18 +9,21 @@ interface Props {
   ogImage?: string;
   ogType?: string;
   noMain?: boolean;
+  keywords?: string;
 }
 
 const {
   title,
   description = "A framework-agnostic web components library focused on high-quality motion and transitions",
   ogImage = "/og.png",
-  ogType = "website",
+  ogType,
   noMain = false,
+  keywords,
 } = Astro.props;
 const { pathname } = Astro.url;
 const showBg = !pathname.startsWith("/docs") && !pathname.startsWith("/showcase");
 const showProgress = pathname.startsWith("/docs");
+const resolvedOgType = ogType ?? (pathname.startsWith("/docs/") ? "article" : "website");
 
 const ogImageUrl = new URL(ogImage, Astro.url.origin).href;
 
@@ -62,12 +65,17 @@ const jsonLd =
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="author" content="tgomilar" />
+    <meta name="robots" content="index, follow" />
+    {keywords && <meta name="keywords" content={keywords} />}
     <title>{title}</title>
     <link rel="canonical" href={Astro.url.href} />
+    <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#2563eb" />
-    <meta property="og:type" content={ogType} />
+    <meta property="og:type" content={resolvedOgType} />
+    <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Motion Components" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
