@@ -1,5 +1,5 @@
 ---
-import { preloadCSS } from 'motion-components/preload'
+import { preloadCSS } from "motion-components/preload";
 import Footer from "../components/Footer.astro";
 import Nav from "../components/Nav.astro";
 
@@ -7,6 +7,7 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  ogImageAlt?: string;
   ogType?: string;
   noMain?: boolean;
   keywords?: string;
@@ -15,7 +16,8 @@ interface Props {
 const {
   title,
   description = "A framework-agnostic web components library focused on high-quality motion and transitions",
-  ogImage = "/og.png",
+  ogImage = "/og-template.png",
+  ogImageAlt = "Motion Components — Motion-first web components library",
   ogType,
   noMain = false,
   keywords,
@@ -83,14 +85,17 @@ const jsonLd =
     <meta property="og:image" content={ogImageUrl} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={ogImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
+    <meta name="twitter:image:alt" content={ogImageAlt} />
     {jsonLd && <script is:inline type="application/ld+json" set:html={jsonLd} />}
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+    <meta name="google-site-verification" content="8oCrUMilW9lL38eQjv8_OuGkx1qpLnu4hVR_9dW2sZ0" />
     <style is:inline set:html={preloadCSS}></style>
 
     <!-- Runs synchronously before first paint — no flash -->
@@ -446,7 +451,8 @@ const jsonLd =
         .bg::after {
           display: none;
         }
-        .blob, .orb {
+        .blob,
+        .orb {
           display: none;
         }
       }
