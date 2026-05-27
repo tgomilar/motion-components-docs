@@ -1,8 +1,8 @@
-import { defineConfig } from 'astro/config'
-import sitemap from '@astrojs/sitemap'
+import { defineConfig } from "astro/config";
+import sitemap from "@astrojs/sitemap";
 
 export default defineConfig({
-  site: 'https://motion-components-docs.vercel.app',
-  outDir: 'dist',
+  site: "https://motion-components.dev",
+  outDir: "dist",
   integrations: [sitemap()],
-})
+});

@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://motion-components-docs.vercel.app/sitemap-index.xml
+Sitemap: https://motion-components.dev/sitemap-index.xml

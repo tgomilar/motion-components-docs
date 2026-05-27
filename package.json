@@ -12,15 +12,23 @@
     "type": "git",
     "url": "git+https://github.com/tgomilar/motion-components-docs.git"
   },
-  "homepage": "https://github.com/tgomilar/motion-components-docs#readme",
+  "homepage": "https://motion-components.dev",
   "bugs": {
     "url": "https://github.com/tgomilar/motion-components-docs/issues"
   },
   "keywords": [
+    "motion-components",
+    "web-animation",
+    "typewriter",
+    "scroll",
+    "parallax",
+    "tilt",
+    "glitch",
+    "hover",
+    "counter",
     "motion",
     "web-components",
     "animation",
-    "astro",
     "docs"
   ],
   "engines": {
