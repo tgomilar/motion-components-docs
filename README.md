@@ -18,7 +18,7 @@
 </p>
 
 <p align="center">
-  <a href="https://motion-components.dev"><strong>Explore the docs →</strong></a>
+  <a href="https://www.motion-components.dev/"><strong>Explore the docs →</strong></a>
   ·
   <a href="https://github.com/tgomilar/motion-components"><strong>View on GitHub →</strong></a>
 </p>
@@ -47,7 +47,7 @@ npm install motion-components
 </motion-reveal>
 ```
 
-[→ Full installation guide & framework setup](https://motion-components.dev/docs/)
+[→ Full installation guide & framework setup](https://www.motion-components.dev/docs/)
 
 ---
 
@@ -55,72 +55,72 @@ npm install motion-components
 
 ### Reveal — entrance & transition effects
 
-| Component                                                                     | Does                                            |
-| ----------------------------------------------------------------------------- | ----------------------------------------------- |
-| [`motion-reveal`](https://motion-components.dev/docs/reveal/motion-reveal/)   | Fade + lift entrance on viewport entry          |
-| [`motion-stagger`](https://motion-components.dev/docs/reveal/motion-stagger/) | Sequenced children entrance (first/last/center) |
-| [`motion-blur`](https://motion-components.dev/docs/reveal/motion-blur/)       | Scroll-driven blur reveal (in/out/both)         |
-| [`motion-blur-in`](https://motion-components.dev/docs/reveal/motion-blur-in/) | Viewport-triggered blur-to-clear                |
+| Component                                                                         | Does                                            |
+| --------------------------------------------------------------------------------- | ----------------------------------------------- |
+| [`motion-reveal`](https://www.motion-components.dev/docs/reveal/motion-reveal/)   | Fade + lift entrance on viewport entry          |
+| [`motion-stagger`](https://www.motion-components.dev/docs/reveal/motion-stagger/) | Sequenced children entrance (first/last/center) |
+| [`motion-blur`](https://www.motion-components.dev/docs/reveal/motion-blur/)       | Scroll-driven blur reveal (in/out/both)         |
+| [`motion-blur-in`](https://www.motion-components.dev/docs/reveal/motion-blur-in/) | Viewport-triggered blur-to-clear                |
 
 ### Respond — input-driven interactivity
 
-| Component                                                                        | Does                                       |
-| -------------------------------------------------------------------------------- | ------------------------------------------ |
-| [`motion-hover`](https://motion-components.dev/docs/respond/motion-hover/)       | Spring scale, lift, rotate on hover        |
-| [`motion-press`](https://motion-components.dev/docs/respond/motion-press/)       | Tactile spring compression on press        |
-| [`motion-magnetic`](https://motion-components.dev/docs/respond/motion-magnetic/) | Element pulled toward cursor, springs back |
-| [`motion-tilt`](https://motion-components.dev/docs/respond/motion-tilt/)         | 3D perspective tilt with gloss highlight   |
+| Component                                                                            | Does                                       |
+| ------------------------------------------------------------------------------------ | ------------------------------------------ |
+| [`motion-hover`](https://www.motion-components.dev/docs/respond/motion-hover/)       | Spring scale, lift, rotate on hover        |
+| [`motion-press`](https://www.motion-components.dev/docs/respond/motion-press/)       | Tactile spring compression on press        |
+| [`motion-magnetic`](https://www.motion-components.dev/docs/respond/motion-magnetic/) | Element pulled toward cursor, springs back |
+| [`motion-tilt`](https://www.motion-components.dev/docs/respond/motion-tilt/)         | 3D perspective tilt with gloss highlight   |
 
 ### Text — typography & character effects
 
-| Component                                                                           | Does                                             |
-| ----------------------------------------------------------------------------------- | ------------------------------------------------ |
-| [`motion-split`](https://motion-components.dev/docs/text/motion-split/)             | Word/char/line split stagger reveal              |
-| [`motion-typewriter`](https://motion-components.dev/docs/text/motion-typewriter/)   | Typewriter typing effect with blinking cursor    |
-| [`motion-counter`](https://motion-components.dev/docs/text/motion-counter/)         | Animated number counter (prefix/suffix/decimals) |
-| [`motion-scramble`](https://motion-components.dev/docs/text/motion-scramble/)       | Text scramble reveal — scroll or hover trigger   |
-| [`motion-ticker`](https://motion-components.dev/docs/text/motion-ticker/)           | Seamless horizontal marquee, pauses on hover     |
-| [`motion-words`](https://motion-components.dev/docs/text/motion-words/)             | Rotating word cycler with per-word color         |
-| [`motion-headline`](https://motion-components.dev/docs/text/motion-headline/)       | Mask-clip headline reveal (slide or flip)        |
-| [`motion-curve`](https://motion-components.dev/docs/text/motion-curve/)             | Sine-wave text along a curve                     |
-| [`motion-circle`](https://motion-components.dev/docs/text/motion-circle/)           | Spinning circular text ring                      |
-| [`motion-arc`](https://motion-components.dev/docs/text/motion-arc/)                 | Curved arc text (static or spinning)             |
-| [`motion-glitch`](https://motion-components.dev/docs/text/motion-glitch/)           | RGB channel split glitch effect                  |
-| [`motion-gravity`](https://motion-components.dev/docs/text/motion-gravity/)         | Falling character entrance with spring bounce    |
-| [`motion-liquid`](https://motion-components.dev/docs/text/motion-liquid/)           | SVG displacement fluid distortion (no WebGL)     |
-| [`motion-perspective`](https://motion-components.dev/docs/text/motion-perspective/) | Vanishing-point perspective text                 |
-| [`motion-stretch`](https://motion-components.dev/docs/text/motion-stretch/)         | Elastic letter-spacing on hover                  |
-| [`motion-text-mask`](https://motion-components.dev/docs/text/motion-text-mask/)     | Standalone mask-clip reveal primitive            |
-| [`motion-font`](https://motion-components.dev/docs/text/motion-font/)               | Variable font axis animation (weight/width/opsz) |
+| Component                                                                               | Does                                             |
+| --------------------------------------------------------------------------------------- | ------------------------------------------------ |
+| [`motion-split`](https://www.motion-components.dev/docs/text/motion-split/)             | Word/char/line split stagger reveal              |
+| [`motion-typewriter`](https://www.motion-components.dev/docs/text/motion-typewriter/)   | Typewriter typing effect with blinking cursor    |
+| [`motion-counter`](https://www.motion-components.dev/docs/text/motion-counter/)         | Animated number counter (prefix/suffix/decimals) |
+| [`motion-scramble`](https://www.motion-components.dev/docs/text/motion-scramble/)       | Text scramble reveal — scroll or hover trigger   |
+| [`motion-ticker`](https://www.motion-components.dev/docs/text/motion-ticker/)           | Seamless horizontal marquee, pauses on hover     |
+| [`motion-words`](https://www.motion-components.dev/docs/text/motion-words/)             | Rotating word cycler with per-word color         |
+| [`motion-headline`](https://www.motion-components.dev/docs/text/motion-headline/)       | Mask-clip headline reveal (slide or flip)        |
+| [`motion-curve`](https://www.motion-components.dev/docs/text/motion-curve/)             | Sine-wave text along a curve                     |
+| [`motion-circle`](https://www.motion-components.dev/docs/text/motion-circle/)           | Spinning circular text ring                      |
+| [`motion-arc`](https://www.motion-components.dev/docs/text/motion-arc/)                 | Curved arc text (static or spinning)             |
+| [`motion-glitch`](https://www.motion-components.dev/docs/text/motion-glitch/)           | RGB channel split glitch effect                  |
+| [`motion-gravity`](https://www.motion-components.dev/docs/text/motion-gravity/)         | Falling character entrance with spring bounce    |
+| [`motion-liquid`](https://www.motion-components.dev/docs/text/motion-liquid/)           | SVG displacement fluid distortion (no WebGL)     |
+| [`motion-perspective`](https://www.motion-components.dev/docs/text/motion-perspective/) | Vanishing-point perspective text                 |
+| [`motion-stretch`](https://www.motion-components.dev/docs/text/motion-stretch/)         | Elastic letter-spacing on hover                  |
+| [`motion-text-mask`](https://www.motion-components.dev/docs/text/motion-text-mask/)     | Standalone mask-clip reveal primitive            |
+| [`motion-font`](https://www.motion-components.dev/docs/text/motion-font/)               | Variable font axis animation (weight/width/opsz) |
 
 ### Scroll — scroll-driven animation
 
-| Component                                                                       | Does                                     |
-| ------------------------------------------------------------------------------- | ---------------------------------------- |
-| [`motion-parallax`](https://motion-components.dev/docs/scroll/motion-parallax/) | Scroll-linked depth shift, no JS needed  |
-| [`motion-scene`](https://motion-components.dev/docs/scroll/motion-scene/)       | Scroll-timeline with pinning & keyframes |
+| Component                                                                           | Does                                     |
+| ----------------------------------------------------------------------------------- | ---------------------------------------- |
+| [`motion-parallax`](https://www.motion-components.dev/docs/scroll/motion-parallax/) | Scroll-linked depth shift, no JS needed  |
+| [`motion-scene`](https://www.motion-components.dev/docs/scroll/motion-scene/)       | Scroll-timeline with pinning & keyframes |
 
 ### Components — interactive widgets
 
-| Component                                                                                     | Does                                       |
-| --------------------------------------------------------------------------------------------- | ------------------------------------------ |
-| [`motion-slider`](https://motion-components.dev/docs/components/motion-slider/)               | Gesture-driven carousel with spring snap   |
-| [`motion-gallery`](https://motion-components.dev/docs/components/motion-gallery/)             | CSS grid gallery with FLIP lightbox expand |
-| [`motion-dialog`](https://motion-components.dev/docs/components/motion-dialog/)               | Spring-animated modal on native `<dialog>` |
-| [`motion-countdown`](https://motion-components.dev/docs/components/motion-countdown/)         | Animated timer — flip or slot-machine roll |
-| [`motion-spotlight`](https://motion-components.dev/docs/components/motion-spotlight/)         | Mouse-tracked radial gradient overlay      |
-| [`motion-progress`](https://motion-components.dev/docs/components/motion-progress/)           | Spring-eased scroll progress bar           |
-| [`motion-image-compare`](https://motion-components.dev/docs/components/motion-image-compare/) | Before/after slider, drag or keyboard      |
-| [`motion-flip-card`](https://motion-components.dev/docs/components/motion-flip-card/)         | Two-sided flip card (hover or click)       |
+| Component                                                                                         | Does                                       |
+| ------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| [`motion-slider`](https://www.motion-components.dev/docs/components/motion-slider/)               | Gesture-driven carousel with spring snap   |
+| [`motion-gallery`](https://www.motion-components.dev/docs/components/motion-gallery/)             | CSS grid gallery with FLIP lightbox expand |
+| [`motion-dialog`](https://www.motion-components.dev/docs/components/motion-dialog/)               | Spring-animated modal on native `<dialog>` |
+| [`motion-countdown`](https://www.motion-components.dev/docs/components/motion-countdown/)         | Animated timer — flip or slot-machine roll |
+| [`motion-spotlight`](https://www.motion-components.dev/docs/components/motion-spotlight/)         | Mouse-tracked radial gradient overlay      |
+| [`motion-progress`](https://www.motion-components.dev/docs/components/motion-progress/)           | Spring-eased scroll progress bar           |
+| [`motion-image-compare`](https://www.motion-components.dev/docs/components/motion-image-compare/) | Before/after slider, drag or keyboard      |
+| [`motion-flip-card`](https://www.motion-components.dev/docs/components/motion-flip-card/)         | Two-sided flip card (hover or click)       |
 
 ### Code — syntax-highlighted display
 
-| Component                                                                           | Does                                           |
-| ----------------------------------------------------------------------------------- | ---------------------------------------------- |
-| [`motion-code`](https://motion-components.dev/docs/code/motion-code/)               | Code window with chrome bar & typing animation |
-| [`motion-code-inline`](https://motion-components.dev/docs/code/motion-code-inline/) | Inline `<code>` tag with copy button           |
+| Component                                                                               | Does                                           |
+| --------------------------------------------------------------------------------------- | ---------------------------------------------- |
+| [`motion-code`](https://www.motion-components.dev/docs/code/motion-code/)               | Code window with chrome bar & typing animation |
+| [`motion-code-inline`](https://www.motion-components.dev/docs/code/motion-code-inline/) | Inline `<code>` tag with copy button           |
 
-**30+ components and counting.** → [Browse the full docs](https://motion-components.dev/docs/)
+**30+ components and counting.** → [Browse the full docs](https://www.motion-components.dev/docs/)
 
 ---
 
@@ -163,7 +163,7 @@ Automatically deployed to [Vercel](https://vercel.com) on push to `main`.
 ---
 
 <p align="center">
-  <a href="https://motion-components.dev">
+  <a href="https://www.motion-components.dev/">
     <strong>motion-components docs & showcase</strong>
   </a>
   <br>
