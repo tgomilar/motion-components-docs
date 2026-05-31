@@ -42,7 +42,7 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Intensity</h2>
-      <p><code>intensity</code> sets the maximum displacement in pixels. Higher values create more dramatic distortion.</p>
+      <p><motion-code-inline>intensity</motion-code-inline> sets the maximum displacement in pixels. Higher values create more dramatic distortion.</p>
       <DocsPreview>
         <div style="display:flex; flex-direction:column; gap:1.5rem; align-items:flex-start">
           <motion-liquid class="demo-large" text="SUBTLE" intensity="5" speed="1.5"></motion-liquid>
@@ -57,7 +57,7 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Speed</h2>
-      <p><code>speed</code> controls how fast the fluid motion evolves. Slow speeds feel like a gentle shimmer; higher speeds feel chaotic.</p>
+      <p><motion-code-inline>speed</motion-code-inline> controls how fast the fluid motion evolves. Slow speeds feel like a gentle shimmer; higher speeds feel chaotic.</p>
       <DocsPreview>
         <div style="display:flex; flex-direction:column; gap:1.5rem; align-items:flex-start">
           <motion-liquid class="demo-large" text="SLOW" intensity="14" speed="0.5"></motion-liquid>
@@ -72,7 +72,7 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Pause on hover</h2>
-      <p>Add <code>pause-on-hover</code> to freeze the fluid motion when the cursor enters.</p>
+      <p>Add <motion-code-inline>pause-on-hover</motion-code-inline> to freeze the fluid motion when the cursor enters.</p>
       <DocsPreview>
         <motion-liquid class="demo-large" text="HOVER ME" intensity="14" speed="1.5" pause-on-hover></motion-liquid>
       </DocsPreview>
@@ -89,10 +89,7 @@ import 'motion-components'               // or the whole library`}
 
       <h2>How it works</h2>
       <p>
-        An inline SVG <code>&lt;filter&gt;</code> containing <code>&lt;feTurbulence&gt;</code> and <code>&lt;feDisplacementMap&gt;</code> is defined in the shadow root and applied to the text span via <code>filter: url(#liquid-filter)</code>. A <code>requestAnimationFrame</code> loop updates the turbulence <code>baseFrequency</code> and displacement <code>scale</code> attributes over time using sine and cosine curves, creating a continuously evolving organic distortion.
-      </p>
-      <p>
-        Because the filter is scoped to the shadow root, multiple <code>motion-liquid</code> instances on the same page do not interfere with each other.
+        An SVG <motion-code-inline>&lt;filter&gt;</motion-code-inline> with <motion-code-inline>&lt;feTurbulence&gt;</motion-code-inline> and <motion-code-inline>&lt;feDisplacementMap&gt;</motion-code-inline> is applied to an SVG <motion-code-inline>&lt;text&gt;</motion-code-inline> element, and SMIL <motion-code-inline>&lt;animate&gt;</motion-code-inline> elements drive its <motion-code-inline>baseFrequency</motion-code-inline> and <motion-code-inline>scale</motion-code-inline> over time. Filtering SVG content (rather than an HTML element via CSS <motion-code-inline>filter: url()</motion-code-inline>) is what keeps it animating on WebKit/iOS, where a <motion-code-inline>url()</motion-code-inline> filter on HTML only repaints on scroll.
       </p>
 
       <h2>Properties</h2>
@@ -104,7 +101,7 @@ import 'motion-components'               // or the whole library`}
       ]} />
 
       <h2>Accessibility</h2>
-      <p>When <code>prefers-reduced-motion</code> is set, the animation loop does not start and the text renders without distortion.</p>
+      <p>When <motion-code-inline>prefers-reduced-motion</motion-code-inline> is set, the animation loop does not start and the text renders without distortion.</p>
       <DocsPagination />
     </main>
       <DocsTOC />
