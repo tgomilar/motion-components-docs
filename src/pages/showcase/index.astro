@@ -1,6 +1,6 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import CodeWindow from "../../components/CodeWindow.astro";
+import Layout from '../../layouts/Layout.astro'
+import CodeWindow from '../../components/CodeWindow.astro'
 ---
 
 <Layout
@@ -8,7 +8,11 @@ import CodeWindow from "../../components/CodeWindow.astro";
   description="An editorial showcase of motion-components in real composition. Physics-based motion, framework-agnostic, drop-in.">
   <main class="sc">
     <!-- ── COVER PLATE ─────────────────────────────────── -->
-    <motion-spotlight class="sc-hero-spot" size="900" color="rgba(192,38,211,0.22)" smoothing="0.08">
+    <motion-spotlight
+      class="sc-hero-spot"
+      size="900"
+      color="rgba(192,38,211,0.22)"
+      smoothing="0.08">
       <section class="sc-hero">
         <!-- thin parallax line, no orbs -->
         <div class="sc-hero-bg" aria-hidden="true">
@@ -19,7 +23,9 @@ import CodeWindow from "../../components/CodeWindow.astro";
         <div class="sc-hero-orn" aria-hidden="true">
           <motion-magnetic distance="160" strength="0.45">
             <span class="sc-orn">
-              <motion-circle text="MOTION SPECIMEN · 2026 ED. · " radius="62" speed="14"><span class="sc-orn-dot">✦</span></motion-circle>
+              <motion-circle text="MOTION SPECIMEN · 2026 ED. · " radius="62" speed="14"
+                ><span class="sc-orn-dot">✦</span></motion-circle
+              >
             </span>
           </motion-magnetic>
         </div>
@@ -54,30 +60,43 @@ import CodeWindow from "../../components/CodeWindow.astro";
 
         <motion-reveal duration="0.7" y="18">
           <p class="sc-eyebrow">
-            <motion-typewriter speed="40" cursor>A specimen book for motion in interface design</motion-typewriter>
+            <motion-typewriter speed="40" cursor
+              >A specimen book for motion in interface design</motion-typewriter
+            >
           </p>
         </motion-reveal>
 
         <h1 class="sc-h1">
           <motion-parallax speed="0.9" axis="x">
-            <motion-split by="words" interval="0.08" duration="0.85" y="34">An interface</motion-split>
+            <motion-split by="words" interval="0.08" duration="0.85" y="34"
+              >An interface</motion-split
+            >
           </motion-parallax>
           <motion-parallax speed="0.7" axis="x">
-            <motion-split by="words" interval="0.08" duration="0.85" y="34" class="sc-h1-italic">that breathes,</motion-split>
+            <motion-split by="words" interval="0.08" duration="0.85" y="34" class="sc-h1-italic"
+              >that breathes,</motion-split
+            >
           </motion-parallax>
           <motion-parallax speed="0.5" axis="x">
-            <motion-split by="words" interval="0.08" duration="0.85" y="34">overshoots,</motion-split>
+            <motion-split by="words" interval="0.08" duration="0.85" y="34"
+              >overshoots,</motion-split
+            >
           </motion-parallax>
           <motion-parallax speed="0.3" axis="x">
-            <motion-split by="words" interval="0.08" duration="0.85" y="34" class="sc-h1-and">and settles.</motion-split>
+            <motion-split by="words" interval="0.08" duration="0.85" y="34" class="sc-h1-and"
+              >and settles.</motion-split
+            >
           </motion-parallax>
         </h1>
 
         <!-- subtitle -->
         <motion-reveal duration="0.85" y="20" class="sc-hero-sub">
           <p>
-            Six plates. Thirty-three components. A library of physics-based motion — pressed, paginated, and presented like the artefact it is.
-            <motion-scramble class="sc-hero-scramble">Spring physics. Drop-in. Framework-agnostic.</motion-scramble>
+            Six plates. Thirty-three components. A library of physics-based motion — pressed,
+            paginated, and presented like the artefact it is.
+            <motion-scramble class="sc-hero-scramble"
+              >Spring physics. Drop-in. Framework-agnostic.</motion-scramble
+            >
           </p>
         </motion-reveal>
 
@@ -111,12 +130,30 @@ import CodeWindow from "../../components/CodeWindow.astro";
             <p class="sc-toc-label">Inside this issue</p>
             <ol class="sc-toc-list">
               <motion-stagger interval="0.09" duration="0.65" y="18">
-                <li><motion-parallax speed="0.85" axis="x"><span>I.</span></motion-parallax> Lab Note · the thesis</li>
-                <li><motion-parallax speed="0.7" axis="x"><span>II.</span></motion-parallax> Telemetry · the receipts</li>
-                <li><motion-parallax speed="0.55" axis="x"><span>III.</span></motion-parallax> Type Foundry · six specimens</li>
-                <li><motion-parallax speed="0.4" axis="x"><span>IV.</span></motion-parallax> Doctrines · six rules</li>
-                <li><motion-parallax speed="0.25" axis="x"><span>V.</span></motion-parallax> Cuts &amp; Springs · the slider</li>
-                <li><motion-parallax speed="0.1" axis="x"><span>VI.</span></motion-parallax> Colophon · how to acquire</li>
+                <li
+                  ><motion-parallax speed="0.85" axis="x"><span>I.</span></motion-parallax> Lab Note ·
+                  the thesis</li
+                >
+                <li
+                  ><motion-parallax speed="0.7" axis="x"><span>II.</span></motion-parallax> Telemetry
+                  · the receipts</li
+                >
+                <li
+                  ><motion-parallax speed="0.55" axis="x"><span>III.</span></motion-parallax> Type Foundry
+                  · six specimens</li
+                >
+                <li
+                  ><motion-parallax speed="0.4" axis="x"><span>IV.</span></motion-parallax> Doctrines
+                  · six rules</li
+                >
+                <li
+                  ><motion-parallax speed="0.25" axis="x"><span>V.</span></motion-parallax> Cuts &amp;
+                  Springs · the slider</li
+                >
+                <li
+                  ><motion-parallax speed="0.1" axis="x"><span>VI.</span></motion-parallax> Colophon ·
+                  how to acquire</li
+                >
               </motion-stagger>
             </ol>
           </motion-reveal>
@@ -125,7 +162,8 @@ import CodeWindow from "../../components/CodeWindow.astro";
             <p class="sc-toc-label">Issue N°02 · pressing</p>
             <p class="sc-countdown-cap">The next specimen drops in</p>
             <div class="sc-countdown-stage">
-              <motion-countdown to="2027-01-01T00:00:00" format="days hours minutes seconds" labels></motion-countdown>
+              <motion-countdown to="2027-01-01T00:00:00" format="days hours minutes seconds" labels
+              ></motion-countdown>
             </div>
             <p class="sc-countdown-foot">— typeset, prepped, &amp; spring-tuned</p>
           </motion-reveal>
@@ -136,8 +174,12 @@ import CodeWindow from "../../components/CodeWindow.astro";
     <!-- ── MANIFESTO ──────────────────────────────────── -->
     <section class="sc-manifesto">
       <div class="sc-manifesto-bg" aria-hidden="true">
-        <motion-parallax speed="0.4" axis="y"><div class="sc-blob sc-blob--magenta"></div></motion-parallax>
-        <motion-parallax speed="0.7" axis="y"><div class="sc-blob sc-blob--cyan"></div></motion-parallax>
+        <motion-parallax speed="0.4" axis="y"
+          ><div class="sc-blob sc-blob--magenta"></div></motion-parallax
+        >
+        <motion-parallax speed="0.7" axis="y"
+          ><div class="sc-blob sc-blob--cyan"></div></motion-parallax
+        >
       </div>
 
       <div class="sc-manifesto-grid">
@@ -148,19 +190,23 @@ import CodeWindow from "../../components/CodeWindow.astro";
           </p>
         </motion-reveal>
 
-        <motion-headline by="words" interval="0.07" duration="1" class="sc-statement"> Motion is not decoration. </motion-headline>
+        <motion-headline by="words" interval="0.07" duration="1" class="sc-statement">
+          Motion is not decoration.
+        </motion-headline>
 
         <div class="sc-manifesto-body">
           <motion-reveal duration="0.85" y="22">
             <p>
-              Hard cuts teach the brain that this world has no physics. Springs teach it the opposite — every shift carries velocity from one state into the
-              next, and an interrupted motion <em>continues</em> rather than snaps.
+              Hard cuts teach the brain that this world has no physics. Springs teach it the
+              opposite — every shift carries velocity from one state into the next, and an
+              interrupted motion <em>continues</em> rather than snaps.
             </p>
           </motion-reveal>
 
           <motion-reveal duration="0.85" y="22">
             <p>
-              Every motion you see is a tag inside a tag. No render functions. No animation library to wire up. No adapters per framework.
+              Every motion you see is a tag inside a tag. No render functions. No animation library
+              to wire up. No adapters per framework.
               <motion-words
                 words="composed, declarative, framework-free, on demand"
                 colors="#c026d3, #0891b2, #65a30d, #db2777"
@@ -227,7 +273,11 @@ import CodeWindow from "../../components/CodeWindow.astro";
       </motion-reveal>
 
       <div class="sc-arc-orn" aria-hidden="true">
-        <motion-arc text="SPECIMENS · OF · MOTION · IN · 33 · TAGS · ✦ · " radius="180" speed="6" class="sc-arc"></motion-arc>
+        <motion-arc
+          text="SPECIMENS · OF · MOTION · IN · 33 · TAGS · ✦ · "
+          radius="180"
+          speed="6"
+          class="sc-arc"></motion-arc>
       </div>
     </div>
 
@@ -247,12 +297,19 @@ import CodeWindow from "../../components/CodeWindow.astro";
         <motion-headline by="words" interval="0.07" duration="1">Read the dials.</motion-headline>
       </h2>
       <motion-reveal duration="0.85" y="22"
-        ><p class="sc-section-sub">A live receipt — not a sales sheet. Numbers that move because the page just loaded them.</p></motion-reveal
+        ><p class="sc-section-sub"
+          >A live receipt — not a sales sheet. Numbers that move because the page just loaded them.</p
+        ></motion-reveal
       >
 
       <motion-stagger interval="0.12" duration="0.7" y="32">
         <div class="sc-stat-row">
-          <motion-flip-card trigger="hover" axis="y" duration="0.85" bounce="0.25" class="sc-stat-flip">
+          <motion-flip-card
+            trigger="hover"
+            axis="y"
+            duration="0.85"
+            bounce="0.25"
+            class="sc-stat-flip">
             <div slot="front" class="sc-stat-face sc-stat-face--front">
               <span class="sc-stat-tick">N° 01</span>
               <strong><motion-counter from="0" to="33" duration="1.8"></motion-counter></strong>
@@ -272,10 +329,19 @@ import CodeWindow from "../../components/CodeWindow.astro";
             </div>
           </motion-flip-card>
 
-          <motion-flip-card trigger="hover" axis="y" duration="0.85" bounce="0.25" class="sc-stat-flip">
+          <motion-flip-card
+            trigger="hover"
+            axis="y"
+            duration="0.85"
+            bounce="0.25"
+            class="sc-stat-flip">
             <div slot="front" class="sc-stat-face sc-stat-face--front">
               <span class="sc-stat-tick">N° 02</span>
-              <strong>~<motion-counter from="0" to="20" duration="1.8"></motion-counter><span class="sc-stat-unit">KB</span></strong>
+              <strong
+                >~<motion-counter from="0" to="20" duration="1.8"></motion-counter><span
+                  class="sc-stat-unit">KB</span
+                ></strong
+              >
               <span class="sc-stat-cap">brotlied, full bundle</span>
               <span class="sc-stat-bar" data-bar="20"></span>
               <span class="sc-stat-flip-hint">hover for the bundle math ↺</span>
@@ -284,13 +350,19 @@ import CodeWindow from "../../components/CodeWindow.astro";
               <span class="sc-stat-tick sc-stat-tick--inv">N° 02 — pay only for what you use</span>
               <p class="sc-stat-back-h">Each tag is its own subpath export.</p>
               <p class="sc-stat-back-body">
-                The full bundle is convenient. <motion-code-inline copy>import 'motion-components/motion-headline'</motion-code-inline> drops to the cost of just
-                that one tag — bundlers tree-shake the rest.
+                The full bundle is convenient. <motion-code-inline copy
+                  >import 'motion-components/motion-headline'</motion-code-inline
+                > drops to the cost of just that one tag — bundlers tree-shake the rest.
               </p>
             </div>
           </motion-flip-card>
 
-          <motion-flip-card trigger="hover" axis="y" duration="0.85" bounce="0.25" class="sc-stat-flip">
+          <motion-flip-card
+            trigger="hover"
+            axis="y"
+            duration="0.85"
+            bounce="0.25"
+            class="sc-stat-flip">
             <div slot="front" class="sc-stat-face sc-stat-face--front">
               <span class="sc-stat-tick">N° 03</span>
               <strong><motion-counter from="0" to="0" duration="0.5"></motion-counter></strong>
@@ -302,7 +374,9 @@ import CodeWindow from "../../components/CodeWindow.astro";
               <span class="sc-stat-tick sc-stat-tick--inv">N° 03 — same HTML, every framework</span>
               <p class="sc-stat-back-h">The browser is the runtime.</p>
               <ul class="sc-stat-back-list sc-stat-back-list--row">
-                <li>React 19+</li><li>Vue 3</li><li>Svelte</li><li>SolidJS</li><li>Astro</li><li>Angular</li><li>Alpine</li><li>plain HTML</li>
+                <li>React 19+</li><li>Vue 3</li><li>Svelte</li><li>SolidJS</li><li>Astro</li><li
+                  >Angular</li
+                ><li>Alpine</li><li>plain HTML</li>
               </ul>
             </div>
           </motion-flip-card>
@@ -313,8 +387,12 @@ import CodeWindow from "../../components/CodeWindow.astro";
     <!-- ── SPECIMEN 03 · TYPE THAT MOVES ITSELF ───────── -->
     <section class="sc-words">
       <div class="sc-words-bg" aria-hidden="true">
-        <motion-parallax speed="0.25" axis="y"><div class="sc-shape sc-shape--diamond"></div></motion-parallax>
-        <motion-parallax speed="0.5" axis="y"><div class="sc-shape sc-shape--ring"></div></motion-parallax>
+        <motion-parallax speed="0.25" axis="y"
+          ><div class="sc-shape sc-shape--diamond"></div></motion-parallax
+        >
+        <motion-parallax speed="0.5" axis="y"
+          ><div class="sc-shape sc-shape--ring"></div></motion-parallax
+        >
       </div>
 
       <motion-reveal duration="0.7" y="14">
@@ -332,8 +410,9 @@ import CodeWindow from "../../components/CodeWindow.astro";
         </h2>
         <motion-reveal duration="0.85" y="22">
           <p class="sc-section-sub">
-            Six specimens. Every one auto-animates on its own clock — staggered intervals so the page never feels metronomic. Spring physics through Motion One;
-            no CSS keyframes; no setInterval that you write.
+            Six specimens. Every one auto-animates on its own clock — staggered intervals so the
+            page never feels metronomic. Spring physics through Motion One; no CSS keyframes; no
+            setInterval that you write.
           </p>
         </motion-reveal>
       </div>
@@ -341,10 +420,14 @@ import CodeWindow from "../../components/CodeWindow.astro";
       <motion-stagger interval="0.08" duration="0.65" y="24">
         <div class="sc-words-grid">
           <motion-tilt max="6" scale="1.02">
-            <motion-spotlight class="sc-word-card sc-word-card--feature" color="rgba(192,38,211,0.35)">
+            <motion-spotlight
+              class="sc-word-card sc-word-card--feature"
+              color="rgba(192,38,211,0.35)">
               <span class="sc-word-tag">specimen no. 1 · motion-typewriter</span>
               <div class="sc-word-stage">
-                <motion-typewriter speed="55" loop cursor class="sc-word-text">type. pause. resume.</motion-typewriter>
+                <motion-typewriter speed="55" loop cursor class="sc-word-text"
+                  >type. pause. resume.</motion-typewriter
+                >
               </div>
               <span class="sc-word-foot">loops · 55 cps · keyboard cursor</span>
             </motion-spotlight>
@@ -354,7 +437,9 @@ import CodeWindow from "../../components/CodeWindow.astro";
             <motion-spotlight class="sc-word-card" color="rgba(8,145,178,0.32)">
               <span class="sc-word-tag">specimen no. 2 · motion-scramble</span>
               <div class="sc-word-stage">
-                <motion-scramble id="sc-loop-scramble" class="sc-word-text">decode the future</motion-scramble>
+                <motion-scramble id="sc-loop-scramble" class="sc-word-text"
+                  >decode the future</motion-scramble
+                >
               </div>
               <span class="sc-word-foot">cypher reveal · auto-loops</span>
             </motion-spotlight>
@@ -371,7 +456,9 @@ import CodeWindow from "../../components/CodeWindow.astro";
           </motion-tilt>
 
           <motion-tilt max="6" scale="1.02">
-            <motion-spotlight class="sc-word-card sc-word-card--feature" color="rgba(168,85,247,0.32)">
+            <motion-spotlight
+              class="sc-word-card sc-word-card--feature"
+              color="rgba(168,85,247,0.32)">
               <span class="sc-word-tag">specimen no. 4 · motion-words</span>
               <div class="sc-word-stage">
                 <motion-words
@@ -389,7 +476,12 @@ import CodeWindow from "../../components/CodeWindow.astro";
             <motion-spotlight class="sc-word-card" color="rgba(244,114,182,0.30)">
               <span class="sc-word-tag">specimen no. 5 · motion-counter</span>
               <div class="sc-word-stage">
-                <motion-counter id="sc-loop-counter" from="0" to="2026" duration="2.1" class="sc-word-text"></motion-counter>
+                <motion-counter
+                  id="sc-loop-counter"
+                  from="0"
+                  to="2026"
+                  duration="2.1"
+                  class="sc-word-text"></motion-counter>
               </div>
               <span class="sc-word-foot">spring-eased numerals · auto-loops</span>
             </motion-spotlight>
@@ -399,8 +491,13 @@ import CodeWindow from "../../components/CodeWindow.astro";
             <motion-spotlight class="sc-word-card" color="rgba(56,189,248,0.30)">
               <span class="sc-word-tag">specimen no. 6 · motion-headline</span>
               <div class="sc-word-stage">
-                <motion-headline id="sc-loop-headline" by="chars" variant="flip" interval="0.05" duration="0.85" class="sc-word-text"
-                  >FLIP &amp; SETTLE</motion-headline
+                <motion-headline
+                  id="sc-loop-headline"
+                  by="chars"
+                  variant="flip"
+                  interval="0.05"
+                  duration="0.85"
+                  class="sc-word-text">FLIP &amp; SETTLE</motion-headline
                 >
               </div>
               <span class="sc-word-foot">char flip · spring · auto-loops</span>
@@ -425,7 +522,14 @@ import CodeWindow from "../../components/CodeWindow.astro";
 
     <!-- ── TICKER WAVE ────────────────────────────────── -->
     <section class="sc-marquee">
-      <motion-ticker speed="55" gap="40" wave wave-amplitude="12" wave-length="380" pause-on-hover="false" class="sc-ticker">
+      <motion-ticker
+        speed="55"
+        gap="40"
+        wave
+        wave-amplitude="12"
+        wave-length="380"
+        pause-on-hover="false"
+        class="sc-ticker">
         <span class="sc-ticker-word">Spring physics</span>
         <span class="sc-ticker-dot">✦</span>
         <span class="sc-ticker-word">Drop in. Compose.</span>
@@ -444,8 +548,12 @@ import CodeWindow from "../../components/CodeWindow.astro";
     <!-- ── SPECIMEN 04 · DOCTRINES ────────────────────── -->
     <section class="sc-touch">
       <div class="sc-touch-bg" aria-hidden="true">
-        <motion-parallax speed="0.2" axis="y"><div class="sc-shape sc-shape--square"></div></motion-parallax>
-        <motion-parallax speed="0.45" axis="y"><div class="sc-shape sc-shape--bar"></div></motion-parallax>
+        <motion-parallax speed="0.2" axis="y"
+          ><div class="sc-shape sc-shape--square"></div></motion-parallax
+        >
+        <motion-parallax speed="0.45" axis="y"
+          ><div class="sc-shape sc-shape--bar"></div></motion-parallax
+        >
       </div>
 
       <motion-reveal duration="0.7" y="14">
@@ -455,13 +563,15 @@ import CodeWindow from "../../components/CodeWindow.astro";
         </p>
       </motion-reveal>
       <h2 class="sc-section-h">
-        <motion-headline by="words" interval="0.07" duration="1">Six rules. No compromises.</motion-headline>
+        <motion-headline by="words" interval="0.07" duration="1"
+          >Six rules. No compromises.</motion-headline
+        >
       </h2>
       <motion-reveal duration="0.85" y="22">
         <p class="sc-section-sub">
-          Each tile is its own composition: <motion-code-inline copy>motion-tilt</motion-code-inline> wrapping <motion-code-inline copy
-            >motion-spotlight</motion-code-inline
-          >. Cursor-tracked light, physics-driven 3D — two primitives, six surfaces.
+          Each tile is its own composition: <motion-code-inline copy>motion-tilt</motion-code-inline
+          > wrapping <motion-code-inline copy>motion-spotlight</motion-code-inline>. Cursor-tracked
+          light, physics-driven 3D — two primitives, six surfaces.
         </p>
       </motion-reveal>
 
@@ -470,40 +580,40 @@ import CodeWindow from "../../components/CodeWindow.astro";
           {
             [
               {
-                num: "01",
-                title: "Springs over curves",
-                kicker: "Easing",
-                body: "Cubic-bezier snaps. Springs flow. Interrupt one mid-flight and it carries velocity into the next state.",
+                num: '01',
+                title: 'Springs over curves',
+                kicker: 'Easing',
+                body: 'Cubic-bezier snaps. Springs flow. Interrupt one mid-flight and it carries velocity into the next state.',
               },
               {
-                num: "02",
-                title: "Composition over config",
-                kicker: "Architecture",
-                body: "Wrap a tag inside another tag. No props bridges. No render functions. No adapters.",
+                num: '02',
+                title: 'Composition over config',
+                kicker: 'Architecture',
+                body: 'Wrap a tag inside another tag. No props bridges. No render functions. No adapters.',
               },
               {
-                num: "03",
-                title: "Standards over abstractions",
-                kicker: "Foundation",
-                body: "Custom elements are a browser API. The library is just a spring-physics layer over them.",
+                num: '03',
+                title: 'Standards over abstractions',
+                kicker: 'Foundation',
+                body: 'Custom elements are a browser API. The library is just a spring-physics layer over them.',
               },
               {
-                num: "04",
-                title: "Drop-in over rewrites",
-                kicker: "Adoption",
-                body: "Add motion to existing markup. Never refactor a component to make it move.",
+                num: '04',
+                title: 'Drop-in over rewrites',
+                kicker: 'Adoption',
+                body: 'Add motion to existing markup. Never refactor a component to make it move.',
               },
               {
-                num: "05",
-                title: "Interrupt, don’t snap",
-                kicker: "Behavior",
-                body: "Every animation is reversible. Hover, leave, hover again — the spring catches the velocity and continues.",
+                num: '05',
+                title: 'Interrupt, don’t snap',
+                kicker: 'Behavior',
+                body: 'Every animation is reversible. Hover, leave, hover again — the spring catches the velocity and continues.',
               },
               {
-                num: "06",
-                title: "One tag, every framework",
-                kicker: "Reach",
-                body: "Same HTML in React, Vue, Svelte, Solid, Angular, Astro, or plain pages. The browser is the runtime.",
+                num: '06',
+                title: 'One tag, every framework',
+                kicker: 'Reach',
+                body: 'Same HTML in React, Vue, Svelte, Solid, Angular, Astro, or plain pages. The browser is the runtime.',
               },
             ].map((card) => (
               <motion-tilt max="10" scale="1.02">
@@ -532,12 +642,15 @@ import CodeWindow from "../../components/CodeWindow.astro";
         </p>
       </motion-reveal>
       <h2 class="sc-section-h">
-        <motion-headline by="words" interval="0.07" duration="1">Drag to feel the difference.</motion-headline>
+        <motion-headline by="words" interval="0.07" duration="1"
+          >Drag to feel the difference.</motion-headline
+        >
       </h2>
       <motion-reveal duration="0.85" y="22">
         <p class="sc-section-sub">
-          Left: how UIs used to move — keyframes, fixed durations, sharp endings. Right: <em>this library</em>. Drag the handle, click anywhere, or hit it with
-          the arrow keys.
+          Left: how UIs used to move — keyframes, fixed durations, sharp endings. Right: <em
+            >this library</em
+          >. Drag the handle, click anywhere, or hit it with the arrow keys.
         </p>
       </motion-reveal>
 
@@ -562,8 +675,12 @@ import CodeWindow from "../../components/CodeWindow.astro";
     <!-- ── INSERT · CODE, ANIMATED (motion-code showcase) ─ -->
     <section class="sc-codeshow">
       <div class="sc-codeshow-bg" aria-hidden="true">
-        <motion-parallax speed="0.3" axis="y"><div class="sc-shape sc-shape--ring sc-shape--cs1"></div></motion-parallax>
-        <motion-parallax speed="0.55" axis="y"><div class="sc-shape sc-shape--diamond sc-shape--cs2"></div></motion-parallax>
+        <motion-parallax speed="0.3" axis="y"
+          ><div class="sc-shape sc-shape--ring sc-shape--cs1"></div></motion-parallax
+        >
+        <motion-parallax speed="0.55" axis="y"
+          ><div class="sc-shape sc-shape--diamond sc-shape--cs2"></div></motion-parallax
+        >
       </div>
 
       <motion-reveal duration="0.7" y="14">
@@ -574,15 +691,18 @@ import CodeWindow from "../../components/CodeWindow.astro";
       </motion-reveal>
 
       <h2 class="sc-section-h">
-        <motion-headline by="words" interval="0.07" duration="1"> Code that writes itself. </motion-headline>
+        <motion-headline by="words" interval="0.07" duration="1">
+          Code that writes itself.
+        </motion-headline>
       </h2>
 
       <motion-reveal duration="0.85" y="22">
         <p class="sc-section-sub">
-          The same component that powers the docs (<motion-code-inline copy>motion-code</motion-code-inline>) is itself animated. Three modes shown live: a
-          typing playback that keeps looping, a scroll-revealed snippet that draws in on view, and a quiet copy-block for the moments code should just <em
-            >be</em
-          > code.
+          The same component that powers the docs (<motion-code-inline copy
+            >motion-code</motion-code-inline
+          >) is itself animated. Three modes shown live: a typing playback that keeps looping, a
+          scroll-revealed snippet that draws in on view, and a quiet copy-block for the moments code
+          should just <em>be</em> code.
         </p>
       </motion-reveal>
 
@@ -663,13 +783,16 @@ import 'motion-components/motion-headline'`}
 
         <p class="sc-codeshow-prose">
           Hover any of these and a copy chip appears: install with
-          <motion-code-inline copy>npm install motion-components</motion-code-inline>, import the bulk via
-          <motion-code-inline copy>import 'motion-components'</motion-code-inline>, or a single tag with
+          <motion-code-inline copy>npm install motion-components</motion-code-inline>, import the
+          bulk via
+          <motion-code-inline copy>import 'motion-components'</motion-code-inline>, or a single tag
+          with
           <motion-code-inline copy>import 'motion-components/motion-hover'</motion-code-inline>.
         </p>
 
         <p class="sc-codeshow-prose">
-          With <motion-code-inline copy-visible>copy-visible</motion-code-inline> the button stays put — useful for terminal lines: run
+          With <motion-code-inline copy-visible>copy-visible</motion-code-inline> the button stays put
+          — useful for terminal lines: run
           <motion-code-inline copy-visible>npx tsc --noEmit</motion-code-inline> before a release, or
           <motion-code-inline copy-visible>npm run build</motion-code-inline> to press the bundle.
         </p>
@@ -677,7 +800,8 @@ import 'motion-components/motion-headline'`}
         <p class="sc-codeshow-prose">
           Plain mode reads as a chip — wrap a tag name like
           <motion-code-inline>&lt;motion-headline&gt;</motion-code-inline> or a method call like
-          <motion-code-inline>el.replay()</motion-code-inline>. No copy button, just the type treatment.
+          <motion-code-inline>el.replay()</motion-code-inline>. No copy button, just the type
+          treatment.
         </p>
 
         <div class="sc-codeshow-chips">
@@ -707,7 +831,11 @@ import 'motion-components/motion-headline'`}
 
     <!-- ── COLOPHON / ENCORE ──────────────────────────── -->
     <section class="sc-cta">
-      <motion-spotlight size="700" color="rgba(8,145,178,0.30)" smoothing="0.06" class="sc-cta-spot">
+      <motion-spotlight
+        size="700"
+        color="rgba(8,145,178,0.30)"
+        smoothing="0.06"
+        class="sc-cta-spot">
         <div class="sc-cta-inner">
           <p class="sc-chapter sc-chapter--centered">
             <span class="sc-chapter-num">PLATE 06 / 06</span>
@@ -716,7 +844,8 @@ import 'motion-components/motion-headline'`}
 
           <h2 class="sc-cta-h">
             Built for the
-            <motion-liquid text="web that moves" intensity="14" speed="1.4" class="sc-cta-liquid"></motion-liquid>
+            <motion-liquid text="web that moves" intensity="14" speed="1.4" class="sc-cta-liquid"
+            ></motion-liquid>
           </h2>
 
           <motion-reveal duration="0.85" y="20">
@@ -732,7 +861,13 @@ import 'motion-components/motion-headline'`}
 
             <motion-magnetic distance="80" strength="0.4">
               <motion-press>
-                <a href="https://github.com/tgomilar/motion-components" class="sc-cta-btn sc-cta-btn--ghost" target="_blank" rel="noopener"> Star on GitHub </a>
+                <a
+                  href="https://github.com/tgomilar/motion-components"
+                  class="sc-cta-btn sc-cta-btn--ghost"
+                  target="_blank"
+                  rel="noopener">
+                  Star on GitHub
+                </a>
               </motion-press>
             </motion-magnetic>
           </div>
@@ -771,18 +906,23 @@ import 'motion-components/motion-headline'`}
     <footer class="sc-colophon" aria-label="Showcase colophon">
       <div class="sc-colophon-inner">
         <div class="sc-colophon-mark" aria-hidden="true">
-          <motion-circle text="MOTION SPECIMEN · N°01 · 2026 · " radius="48" speed="10"><span class="sc-colophon-dot">✦</span></motion-circle>
+          <motion-circle text="MOTION SPECIMEN · N°01 · 2026 · " radius="48" speed="10"
+            ><span class="sc-colophon-dot">✦</span></motion-circle
+          >
         </div>
 
         <motion-reveal duration="0.85" y="18" class="sc-colophon-body">
           <p class="sc-colophon-eyebrow">Colophon</p>
           <p class="sc-colophon-text">
-            <em>Motion Specimen</em> N°01 was set entirely in the components it documents. Plates were pressed by Lit and animated by Motion One. The specimen was
-            first issued in May, 2026, with no print run, no edition cap, and no proprietary build. Compositions are reproduced as-is.
+            <em>Motion Specimen</em> N°01 was set entirely in the components it documents. Plates were
+            pressed by Lit and animated by Motion One. The specimen was first issued in May, 2026, with
+            no print run, no edition cap, and no proprietary build. Compositions are reproduced as-is.
           </p>
           <p class="sc-colophon-text sc-colophon-text--small">
-            Typeset in system sans + ui-serif italic. <motion-code-inline copy>motion-components</motion-code-inline> is open source, distributed under the MIT licence,
-            and may be reproduced, adapted, or torn out of the binding.
+            Typeset in system sans + ui-serif italic. <motion-code-inline copy
+              >motion-components</motion-code-inline
+            > is open source, distributed under the MIT licence, and may be reproduced, adapted, or torn
+            out of the binding.
           </p>
         </motion-reveal>
 
@@ -797,26 +937,32 @@ import 'motion-components/motion-headline'`}
   </main>
 
   <script>
-    import "motion-components";
+    import 'motion-components'
 
-    type Replayable = HTMLElement & { replay?: () => void };
+    type Replayable = HTMLElement & { replay?: () => void }
 
     function loopReplay(id: string, intervalMs: number, initialDelay = 0) {
-      const el = document.getElementById(id) as Replayable | null;
-      if (!el) return;
+      const el = document.getElementById(id) as Replayable | null
+      if (!el) return
       const tick = () => {
-        if (typeof el.replay === "function") el.replay();
-      };
+        if (typeof el.replay === 'function') el.replay()
+      }
       window.setTimeout(() => {
-        tick();
-        window.setInterval(tick, intervalMs);
-      }, initialDelay);
+        tick()
+        window.setInterval(tick, intervalMs)
+      }, initialDelay)
     }
 
     // wait for custom elements + first paint, then loop the non-auto effects
-    customElements.whenDefined("motion-scramble").then(() => loopReplay("sc-loop-scramble", 3200, 1500));
-    customElements.whenDefined("motion-counter").then(() => loopReplay("sc-loop-counter", 3600, 2500));
-    customElements.whenDefined("motion-headline").then(() => loopReplay("sc-loop-headline", 4200, 2000));
+    customElements
+      .whenDefined('motion-scramble')
+      .then(() => loopReplay('sc-loop-scramble', 3200, 1500))
+    customElements
+      .whenDefined('motion-counter')
+      .then(() => loopReplay('sc-loop-counter', 3600, 2500))
+    customElements
+      .whenDefined('motion-headline')
+      .then(() => loopReplay('sc-loop-headline', 4200, 2000))
   </script>
 
   <style>
@@ -844,11 +990,11 @@ import 'motion-components/motion-headline'`}
       --sc-glow-magenta: rgba(192, 38, 211, 0.3);
       --sc-glow-cyan: rgba(8, 145, 178, 0.3);
       --sc-glow-lime: rgba(101, 163, 13, 0.28);
-      --sc-serif: ui-serif, Georgia, "Times New Roman", serif;
+      --sc-serif: ui-serif, Georgia, 'Times New Roman', serif;
     }
 
     /* ── neon palette · dark (toggle or system) ── */
-    [data-theme="dark"] .sc {
+    [data-theme='dark'] .sc {
       --color-bg: #07070d;
       --color-surface: #0e0e18;
       --color-surface-2: #16162a;
@@ -866,7 +1012,7 @@ import 'motion-components/motion-headline'`}
     }
 
     @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) .sc {
+      :root:not([data-theme='light']) .sc {
         --color-bg: #07070d;
         --color-surface: #0e0e18;
         --color-surface-2: #16162a;
@@ -1011,7 +1157,9 @@ import 'motion-components/motion-headline'`}
     .sc-grid-fade {
       position: absolute;
       inset: 0;
-      background-image: linear-gradient(var(--sc-rule) 1px, transparent 1px), linear-gradient(90deg, var(--sc-rule) 1px, transparent 1px);
+      background-image:
+        linear-gradient(var(--sc-rule) 1px, transparent 1px),
+        linear-gradient(90deg, var(--sc-rule) 1px, transparent 1px);
       background-size: 80px 80px;
       mask-image: radial-gradient(ellipse at 50% 50%, black 0%, transparent 70%);
       -webkit-mask-image: radial-gradient(ellipse at 50% 50%, black 0%, transparent 70%);
@@ -1099,7 +1247,9 @@ import 'motion-components/motion-headline'`}
         grid-template-columns: 1fr;
         gap: 2rem;
       }
-      .sc-arc-orn { display: none }
+      .sc-arc-orn {
+        display: none;
+      }
     }
 
     .sc-arc-features {
@@ -1144,7 +1294,9 @@ import 'motion-components/motion-headline'`}
       letter-spacing: -0.01em;
       color: var(--sc-ink);
       text-decoration: none;
-      transition: color 0.15s, gap 0.18s;
+      transition:
+        color 0.15s,
+        gap 0.18s;
     }
 
     .sc-arc-link:hover {
@@ -1176,7 +1328,10 @@ import 'motion-components/motion-headline'`}
       letter-spacing: 0.04em;
       color: var(--sc-yellow);
       text-decoration: none;
-      transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+      transition:
+        background 0.18s,
+        color 0.18s,
+        box-shadow 0.18s;
     }
 
     .sc-arc-showcase:hover {
@@ -1560,7 +1715,11 @@ import 'motion-components/motion-headline'`}
     }
 
     .sc-stat-face--back {
-      background: linear-gradient(150deg, var(--sc-accent), color-mix(in srgb, var(--sc-accent) 50%, var(--sc-yellow)));
+      background: linear-gradient(
+        150deg,
+        var(--sc-accent),
+        color-mix(in srgb, var(--sc-accent) 50%, var(--sc-yellow))
+      );
       color: white;
       border-color: transparent;
     }
@@ -1679,7 +1838,7 @@ import 'motion-components/motion-headline'`}
       letter-spacing: -0.04em;
       line-height: 1;
       color: var(--sc-ink);
-      font-feature-settings: "tnum";
+      font-feature-settings: 'tnum';
       text-shadow: 0 0 24px var(--sc-glow-magenta);
     }
 
@@ -1707,7 +1866,7 @@ import 'motion-components/motion-headline'`}
     }
 
     .sc-stat-bar::after {
-      content: "";
+      content: '';
       position: absolute;
       inset: 0;
       width: var(--bar-w, 100%);
@@ -1716,13 +1875,13 @@ import 'motion-components/motion-headline'`}
       animation: sc-bar-fill 1.6s cubic-bezier(0.16, 1, 0.3, 1) both;
     }
 
-    .sc-stat-bar[data-bar="0"]::after {
+    .sc-stat-bar[data-bar='0']::after {
       --bar-w: 0%;
     }
-    .sc-stat-bar[data-bar="20"]::after {
+    .sc-stat-bar[data-bar='20']::after {
       --bar-w: 20%;
     }
-    .sc-stat-bar[data-bar="100"]::after {
+    .sc-stat-bar[data-bar='100']::after {
       --bar-w: 100%;
     }
 
@@ -2019,13 +2178,17 @@ import 'motion-components/motion-headline'`}
     }
 
     .sc-compare-before {
-      background: radial-gradient(circle at 30% 30%, rgba(34, 211, 238, 0.18) 0%, transparent 60%), linear-gradient(135deg, #0a0a14, #1a1a2e);
+      background:
+        radial-gradient(circle at 30% 30%, rgba(34, 211, 238, 0.18) 0%, transparent 60%),
+        linear-gradient(135deg, #0a0a14, #1a1a2e);
       color: #22d3ee;
       text-shadow: 0 0 20px rgba(34, 211, 238, 0.6);
     }
 
     .sc-compare-after {
-      background: radial-gradient(circle at 70% 70%, rgba(217, 70, 239, 0.3) 0%, transparent 60%), linear-gradient(135deg, #4c0a4c, #1a0a2e);
+      background:
+        radial-gradient(circle at 70% 70%, rgba(217, 70, 239, 0.3) 0%, transparent 60%),
+        linear-gradient(135deg, #4c0a4c, #1a0a2e);
       color: #f0abfc;
       text-shadow: 0 0 24px rgba(217, 70, 239, 0.7);
     }
@@ -2072,7 +2235,8 @@ import 'motion-components/motion-headline'`}
       text-align: center;
       background:
         radial-gradient(ellipse at 50% 0%, rgba(217, 70, 239, 0.18) 0%, transparent 60%),
-        radial-gradient(ellipse at 50% 100%, rgba(34, 211, 238, 0.12) 0%, transparent 60%), var(--color-surface);
+        radial-gradient(ellipse at 50% 100%, rgba(34, 211, 238, 0.12) 0%, transparent 60%),
+        var(--color-surface);
       border: 1px solid var(--sc-rule);
       border-radius: 24px;
       box-shadow:
@@ -2241,6 +2405,10 @@ import 'motion-components/motion-headline'`}
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.04),
         0 12px 36px rgba(0, 0, 0, 0.05);
+    }
+
+    .sc-codeshow-grid motion-code[type] {
+      min-height: 17rem;
     }
 
     .sc-codeshow-card--span {
@@ -2612,7 +2780,7 @@ import 'motion-components/motion-headline'`}
       letter-spacing: -0.02em;
       color: var(--sc-ink);
       text-shadow: 0 0 14px var(--sc-glow-magenta);
-      font-feature-settings: "tnum";
+      font-feature-settings: 'tnum';
     }
   </style>
 </Layout>
