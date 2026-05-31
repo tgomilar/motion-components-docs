@@ -22,8 +22,8 @@ import CodeWindow from '../components/CodeWindow.astro'
         </span>
       </h1>
       <p class="hero-sub">
-        Drop physics-based motion into any framework without rewriting your markup.<br />
-        Built on <span class="motion">Motion</span>.
+        Animate your content with HTML tags.<br />
+        Physics-based motion for any framework. Built on <span class="motion">Motion</span>.
       </p>
       <div class="actions">
         <motion-hover>
@@ -335,7 +335,17 @@ import 'motion-components'
                 fast.
               </p>
             </div>
-            <p class="card-desc">Cycle words with per-word color</p>
+            <p class="card-hint">Cycle words with per-word color</p>
+          </div>
+
+          <div class="card">
+            <motion-code-inline>motion-swap</motion-code-inline>
+            <div class="stage">
+              <motion-swap id="swap-demo" stagger-duration="0.04" class="swap-text"
+                >Smooth swaps</motion-swap
+              >
+            </div>
+            <p class="card-hint">Swaps on a loop</p>
           </div>
         </motion-stagger>
       </div>
@@ -612,6 +622,15 @@ import 'motion-components'
     document.getElementById('replay-counter')?.addEventListener('click', () => {
       ;(document.getElementById('counter-demo') as any)?.replay()
     })
+
+    const swapDemo = document.getElementById('swap-demo')
+    if (swapDemo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      let on = false
+      setInterval(() => {
+        on = !on
+        swapDemo.dispatchEvent(new MouseEvent(on ? 'mouseenter' : 'mouseleave'))
+      }, 1400)
+    }
   </script>
 
   <style>
@@ -961,6 +980,11 @@ import 'motion-components'
       gap: 0.75rem;
     }
 
+    .text-grid .stage {
+      flex: 0 0 auto;
+      height: 160px;
+    }
+
     .card-desc {
       font-size: 0.82rem;
       color: var(--color-muted);
@@ -1087,6 +1111,15 @@ import 'motion-components'
       color: var(--color-text);
     }
 
+    .swap-text {
+      font-size: 1.3rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      text-align: center;
+      line-height: 1.3;
+    }
+
     .counter-row {
       display: flex;
       align-items: baseline;
@@ -1124,7 +1157,8 @@ import 'motion-components'
       margin: 0;
       line-height: 1.2;
       display: flex;
-      align-items: bottom;
+      align-items: baseline;
+      justify-content: center;
       gap: 0.35em;
     }
 
