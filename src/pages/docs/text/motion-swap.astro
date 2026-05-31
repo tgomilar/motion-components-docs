@@ -1,0 +1,69 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-swap — Motion Components" description="Splits text into individual characters and swaps them vertically on hover or reveal trigger." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-swap</motion-split></h1>
+      <p class="lead">Splits text into individual characters and swaps them vertically on hover or scroll reveal. Each character has an original and duplicate that trade places with a spring animation.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview replayId="swap-demo">
+        <motion-swap class="demo-text">Hover me</motion-swap>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-swap'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="motion-swap.html"
+        copy
+        code={`<motion-swap>Hover me</motion-swap>`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'trigger', type: '"hover" | "reveal"', default: '"hover"', description: 'Animation trigger — hover swaps in/out on mouseenter/mouseleave; reveal plays once on viewport entry' },
+        { name: 'reverse', type: 'boolean', default: 'true', description: 'When true, letters swap bottom-to-top. When false, top-to-bottom.' },
+        { name: 'stagger-duration', type: 'number', default: '0.03', description: 'Delay in seconds between each character\'s animation start' },
+        { name: 'transition', type: 'object', default: '{ type: "spring", duration: 0.7 }', description: 'Motion animation options for each character pair' },
+        { name: 'once', type: 'boolean', default: 'true', description: 'Animate only on first intersection (reveal mode)' },
+        { name: 'delay', type: 'number', default: '0', description: 'Delay in seconds before animation starts' },
+      ]} />
+      <h2>Accessibility</h2>
+      <p>Respects <code>prefers-reduced-motion</code>: when enabled, the swap effect is skipped and the text appears at its default state.</p>
+      <DocsPagination />
+    </main>
+      <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .demo-text {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+    font-family: var(--font-mono);
+  }
+</style>
