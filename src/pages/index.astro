@@ -172,76 +172,83 @@ import 'motion-components'
     <div class="inner inner--wide">
       <div class="demo-grid">
         <motion-stagger interval="0.09" duration="0.65" y="32">
-          <div class="card">
-            <motion-code-inline>motion-hover</motion-code-inline>
-            <div class="stage">
-              <motion-hover scale="1.12" y="-8">
-                <div class="hover-chip">
-                  <span class="chip-dot"></span>
-                  Hover me
-                </div>
-              </motion-hover>
-            </div>
-            <p class="card-desc">Spring scale and lift on hover</p>
-          </div>
-
-          <div class="card">
-            <motion-code-inline>motion-press</motion-code-inline>
-            <div class="stage">
-              <motion-press>
-                <button class="press-btn">Press me</button>
-              </motion-press>
-            </div>
-            <p class="card-desc">Tactile spring compression on press</p>
-          </div>
-
-          <div class="card">
-            <motion-code-inline>motion-reveal</motion-code-inline>
-            <div class="stage stage--col">
-              <motion-reveal id="reveal-demo" duration="0.75" y="28" once="false">
-                <div class="reveal-block">Fades into view</div>
-              </motion-reveal>
-              <button class="replay-btn" id="replay-reveal">↺ Replay</button>
-            </div>
-            <p class="card-desc">Fade and lift on viewport entry</p>
-          </div>
-
-          <div class="card">
-            <motion-code-inline>motion-stagger</motion-code-inline>
-            <div class="stage stage--col">
-              <div class="stagger-wrap">
-                <motion-stagger id="stagger-demo" interval="0.1" duration="0.5" once="false">
-                  <div class="stagger-row">Design</div>
-                  <div class="stagger-row">Develop</div>
-                  <div class="stagger-row">Delight</div>
-                </motion-stagger>
+          <a href="/docs/primitives/motion-hover/" class="card-link">
+            <div class="card">
+              <motion-code-inline>motion-hover</motion-code-inline>
+              <div class="stage">
+                <motion-hover scale="1.12" y="-8">
+                  <div class="hover-chip">
+                    <span class="chip-dot"></span>
+                    Hover me
+                  </div>
+                </motion-hover>
               </div>
-              <button class="replay-btn" id="replay-stagger">↺ Replay</button>
+              <p class="card-desc">Spring scale and lift on hover</p>
             </div>
-            <p class="card-desc">Sequence children in on scroll entry</p>
-          </div>
-
-          <div class="card">
-            <motion-code-inline>motion-magnetic</motion-code-inline>
-            <div class="stage">
-              <motion-magnetic strength="0.5">
-                <button class="press-btn">Move over me</button>
-              </motion-magnetic>
+          </a>
+          <a href="/docs/primitives/motion-press/" class="card-link">
+            <div class="card">
+              <motion-code-inline>motion-press</motion-code-inline>
+              <div class="stage">
+                <motion-press>
+                  <button class="press-btn">Press me</button>
+                </motion-press>
+              </div>
+              <p class="card-desc">Tactile spring compression on press</p>
             </div>
-            <p class="card-desc">Element attracted to cursor with spring</p>
-          </div>
-
-          <div class="card">
-            <motion-code-inline>motion-tilt</motion-code-inline>
-            <div class="stage">
-              <motion-tilt max="18">
-                <div class="tilt-card">
-                  <span class="tilt-label">Tilt me</span>
+          </a>
+          <a href="/docs/primitives/motion-reveal/" class="card-link">
+            <div class="card">
+              <motion-code-inline>motion-reveal</motion-code-inline>
+              <div class="stage stage--col">
+                <motion-reveal id="reveal-demo" duration="0.75" y="28" once="false">
+                  <div class="reveal-block">Fades into view</div>
+                </motion-reveal>
+                <button class="replay-btn" id="replay-reveal">↺ Replay</button>
+              </div>
+              <p class="card-desc">Fade and lift on viewport entry</p>
+            </div>
+          </a>
+          <a href="/docs/primitives/motion-stagger/" class="card-link">
+            <div class="card">
+              <motion-code-inline>motion-stagger</motion-code-inline>
+              <div class="stage stage--col">
+                <div class="stagger-wrap">
+                  <motion-stagger id="stagger-demo" interval="0.1" duration="0.5" once="false">
+                    <div class="stagger-row">Design</div>
+                    <div class="stagger-row">Develop</div>
+                    <div class="stagger-row">Delight</div>
+                  </motion-stagger>
                 </div>
-              </motion-tilt>
+                <button class="replay-btn" id="replay-stagger">↺ Replay</button>
+              </div>
+              <p class="card-desc">Sequence children in on scroll entry</p>
             </div>
-            <p class="card-desc">3D perspective tilt following cursor</p>
-          </div>
+          </a>
+          <a href="/docs/primitives/motion-magnetic/" class="card-link">
+            <div class="card">
+              <motion-code-inline>motion-magnetic</motion-code-inline>
+              <div class="stage">
+                <motion-magnetic strength="0.5">
+                  <button class="press-btn">Move over me</button>
+                </motion-magnetic>
+              </div>
+              <p class="card-desc">Element attracted to cursor with spring</p>
+            </div>
+          </a>
+          <a href="/docs/primitives/motion-tilt/" class="card-link">
+            <div class="card">
+              <motion-code-inline>motion-tilt</motion-code-inline>
+              <div class="stage">
+                <motion-tilt max="18">
+                  <div class="tilt-card">
+                    <span class="tilt-label">Tilt me</span>
+                  </div>
+                </motion-tilt>
+              </div>
+              <p class="card-desc">3D perspective tilt following cursor</p>
+            </div>
+          </a>
         </motion-stagger>
       </div>
     </div>
@@ -261,92 +268,99 @@ import 'motion-components'
     <div class="inner inner--wide">
       <div class="text-grid">
         <motion-stagger interval="0.1" duration="0.65" y="24">
-          <div class="card">
-            <motion-code-inline>motion-split</motion-code-inline>
-            <div class="stage">
-              <motion-split
-                id="split-demo"
-                by="words"
-                interval="0.07"
-                duration="0.6"
-                y="18"
-                once="false"
-                class="split-text">Feel the motion</motion-split
-              >
-            </div>
-            <div class="replay-row">
-              <button class="replay-btn" id="replay-split">↺ Replay</button>
-            </div>
-          </div>
-
-          <div class="card">
-            <motion-code-inline>motion-typewriter</motion-code-inline>
-            <div class="stage">
-              <motion-typewriter id="tw-demo" speed="55" loop cursor class="typewriter-text">
-                Motion that feels alive.
-              </motion-typewriter>
-            </div>
-          </div>
-
-          <div class="card">
-            <motion-code-inline>motion-counter</motion-code-inline>
-            <div class="stage">
-              <div class="counter-row">
-                <motion-counter
-                  id="counter-demo"
-                  from="0"
-                  to="122"
-                  duration="1.8"
-                  suffix="k"
-                  class="counter-num"
-                  once="false"></motion-counter>
-                <span class="counter-label">users</span>
+          <a href="/docs/text/motion-split/" class="card-link">
+            <div class="card">
+              <motion-code-inline>motion-split</motion-code-inline>
+              <div class="stage">
+                <motion-split
+                  id="split-demo"
+                  by="words"
+                  interval="0.07"
+                  duration="0.6"
+                  y="18"
+                  once="false"
+                  class="split-text">Feel the motion</motion-split
+                >
+              </div>
+              <div class="replay-row">
+                <button class="replay-btn" id="replay-split">↺ Replay</button>
               </div>
             </div>
-            <div class="replay-row">
-              <button class="replay-btn" id="replay-counter">↺ Replay</button>
+          </a>
+          <a href="/docs/text/motion-typewriter/" class="card-link">
+            <div class="card">
+              <motion-code-inline>motion-typewriter</motion-code-inline>
+              <div class="stage">
+                <motion-typewriter id="tw-demo" speed="55" loop cursor class="typewriter-text">
+                  Motion that feels alive.
+                </motion-typewriter>
+              </div>
             </div>
-          </div>
-
-          <div class="card">
-            <motion-code-inline>motion-scramble</motion-code-inline>
-            <div class="stage">
-              <motion-scramble
-                id="scramble-demo"
-                speed="35"
-                iterations="3"
-                hover
-                class="scramble-text">
-                Hello, world.
-              </motion-scramble>
+          </a>
+          <a href="/docs/text/motion-counter/" class="card-link">
+            <div class="card">
+              <motion-code-inline>motion-counter</motion-code-inline>
+              <div class="stage">
+                <div class="counter-row">
+                  <motion-counter
+                    id="counter-demo"
+                    from="0"
+                    to="122"
+                    duration="1.8"
+                    suffix="k"
+                    class="counter-num"
+                    once="false"></motion-counter>
+                  <span class="counter-label">users</span>
+                </div>
+              </div>
+              <div class="replay-row">
+                <button class="replay-btn" id="replay-counter">↺ Replay</button>
+              </div>
             </div>
-            <p class="card-hint">Hover to scramble</p>
-          </div>
-
-          <div class="card">
-            <motion-code-inline>motion-words</motion-code-inline>
-            <div class="stage">
-              <p class="words-demo-text">
-                We
-                <motion-words
-                  words="design,build,ship"
-                  colors="#3b82f6,#8b5cf6,#10b981"
-                  interval="1600"></motion-words>
-                fast.
-              </p>
+          </a>
+          <a href="/docs/text/motion-scramble/" class="card-link">
+            <div class="card">
+              <motion-code-inline>motion-scramble</motion-code-inline>
+              <div class="stage">
+                <motion-scramble
+                  id="scramble-demo"
+                  speed="35"
+                  iterations="3"
+                  hover
+                  class="scramble-text">
+                  Hello, world.
+                </motion-scramble>
+              </div>
+              <p class="card-hint">Hover to scramble</p>
             </div>
-            <p class="card-hint">Cycle words with per-word color</p>
-          </div>
-
-          <div class="card">
-            <motion-code-inline>motion-swap</motion-code-inline>
-            <div class="stage">
-              <motion-swap id="swap-demo" stagger-duration="0.04" class="swap-text"
-                >Smooth swaps</motion-swap
-              >
+          </a>
+          <a href="/docs/text/motion-words/" class="card-link">
+            <div class="card">
+              <motion-code-inline>motion-words</motion-code-inline>
+              <div class="stage">
+                <p class="words-demo-text">
+                  We
+                  <motion-words
+                    words="design,build,ship"
+                    colors="#3b82f6,#8b5cf6,#10b981"
+                    interval="1600"></motion-words>
+                  fast.
+                </p>
+              </div>
+              <p class="card-hint">Cycle words with per-word color</p>
             </div>
-            <p class="card-hint">Swaps on a loop</p>
-          </div>
+          </a>
+          <a href="/docs/text/motion-swap/" class="card-link">
+            <div class="card">
+              <motion-code-inline>motion-swap</motion-code-inline>
+              <div class="stage">
+                <motion-swap id="swap-demo" stagger-duration="0.04" class="swap-text"
+                  >Smooth swaps</motion-swap
+                >
+              </div>
+              <p class="card-hint">Swaps on a loop</p>
+            </div>
+          </a>
         </motion-stagger>
       </div>
       <div class="inner">
@@ -920,13 +934,6 @@ import 'motion-components'
       pointer-events: none;
     }
 
-    .card:hover {
-      border-color: color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
-      box-shadow:
-        inset 0 1px 0 rgba(255, 255, 255, 0.08),
-        0 4px 16px rgba(0, 0, 0, 0.07),
-        0 16px 48px rgba(0, 0, 0, 0.09);
-    }
 
     [data-theme='dark'] .card,
     [data-theme='dark'] .feature {
@@ -983,6 +990,24 @@ import 'motion-components'
     .text-grid .stage {
       flex: 0 0 auto;
       height: 160px;
+    }
+
+    .card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
+    .card-link:hover {
+      text-decoration: none;
+    }
+
+    .card-link:hover .card {
+      border-color: color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 4px 16px rgba(0, 0, 0, 0.07),
+        0 16px 48px rgba(0, 0, 0, 0.09);
     }
 
     .card-desc {
@@ -1091,7 +1116,7 @@ import 'motion-components'
     /* ── Text grid ────────────────────────── */
     .text-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
       gap: 1.25rem;
     }
 
