@@ -73,18 +73,33 @@ const { pathname } = Astro.url;
   const navLinks = document.getElementById("nav-links");
 
   if (hamburger && navLinks) {
-    hamburger.addEventListener("click", () => {
+    function closeNav() {
+      navLinks!.classList.remove("open");
+      hamburger!.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("nav-open");
+    }
+
+    hamburger.addEventListener("click", e => {
+      e.stopPropagation();
       const open = navLinks.classList.toggle("open");
       hamburger.setAttribute("aria-expanded", String(open));
       document.body.classList.toggle("nav-open", open);
     });
 
     navLinks.querySelectorAll("a").forEach(a => {
-      a.addEventListener("click", () => {
-        navLinks.classList.remove("open");
-        hamburger.setAttribute("aria-expanded", "false");
-        document.body.classList.remove("nav-open");
-      });
+      a.addEventListener("click", closeNav);
+    });
+
+    // Close when clicking outside the drawer (e.g. on the backdrop)
+    document.addEventListener("click", e => {
+      if (!navLinks.classList.contains("open")) return;
+      if (navLinks.contains(e.target as Node)) return;
+      closeNav();
+    });
+
+    // Close on Escape
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape") closeNav();
     });
   }
 </script>
@@ -242,8 +257,12 @@ const { pathname } = Astro.url;
       position: fixed;
       top: 56px;
       right: 0;
-      width: 260px;
+      /* The header gets `backdrop-filter` on scroll, which makes it the
+         containing block for this fixed drawer — so `bottom: 0` would
+         resolve against the 56px header and collapse it. Size by height
+         instead; `dvh` stays viewport-relative regardless. */
       height: calc(100dvh - 56px);
+      width: 260px;
       background: var(--color-surface);
       border-left: 1px solid var(--color-border);
       flex-direction: column;

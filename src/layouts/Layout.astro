@@ -171,6 +171,11 @@ const jsonLd =
 
       html {
         background: var(--color-bg);
+        /* Off-canvas drawers sit just outside the viewport edges; clip the
+           horizontal overflow they create so a sideways swipe can't scroll
+           the page over and reveal them. `clip` (not `hidden`) keeps the
+           sticky header working. */
+        overflow-x: clip;
       }
 
       body {
@@ -179,6 +184,7 @@ const jsonLd =
         font-family: var(--font-sans);
         line-height: 1.6;
         min-height: 100vh;
+        overflow-x: clip;
       }
 
       main {

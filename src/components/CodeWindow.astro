@@ -46,9 +46,49 @@ const elId = customId ?? `cw-${Math.random().toString(36).slice(2, 9)}`;
   type-loop-delay={typeLoopDelay}
 ></motion-code>
 
-<script define:vars={{ elId, code }}>
+<script define:vars={{ elId, code, isType: type }}>
   customElements.whenDefined("motion-code").then(() => {
     const el = document.getElementById(elId);
-    if (el) el.setCode(code);
+    if (!el) return;
+    el.setCode(code);
+    if (!isType) return;
+
+    // In `type` mode the component types its code in line by line and loops
+    // forever, so the box grows from one line to full height on every cycle —
+    // shoving everything below it and making the page jump while scrolling.
+    // Reserve the fully-typed height up front so the animation grows *within*
+    // the box. The code never wraps (white-space: pre), so the final height is
+    // simply lineCount × lineHeight, plus the constant chrome/padding overhead.
+    const lineCount = (() => {
+      const lines = code.split("\n");
+      while (lines.length && !lines[0].trim()) lines.shift();
+      while (lines.length && !lines[lines.length - 1].trim()) lines.pop();
+      return lines.length;
+    })();
+
+    function reserveHeight() {
+      const pre = el.shadowRoot && el.shadowRoot.querySelector("pre");
+      if (!pre) return;
+      el.style.minHeight = ""; // measure natural overhead with no reservation
+      const lh = parseFloat(getComputedStyle(pre).lineHeight);
+      if (!lh) return;
+      // overhead = everything that isn't the <pre> (chrome bar, body padding,
+      // borders) — independent of how much has been typed so far.
+      const overhead = el.getBoundingClientRect().height - pre.getBoundingClientRect().height;
+      el.style.minHeight = Math.ceil(overhead + lineCount * lh) + "px";
+    }
+
+    requestAnimationFrame(() => requestAnimationFrame(reserveHeight));
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(reserveHeight);
+
+    let resizeTimer;
+    addEventListener(
+      "resize",
+      () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(reserveHeight, 150);
+      },
+      { passive: true },
+    );
   });
 </script>

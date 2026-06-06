@@ -2398,6 +2398,11 @@ import 'motion-components/motion-headline'`}
 
     .sc-codeshow-card {
       display: block;
+      /* Grid items default to min-width:auto, so the code window's long
+         (non-wrapping) lines force the track wider than the viewport and the
+         card overflows the screen on mobile. min-width:0 lets the track shrink
+         and the code scroll inside its own box instead. */
+      min-width: 0;
       padding: 1.25rem;
       border: 1px solid var(--sc-rule);
       border-radius: 14px;
