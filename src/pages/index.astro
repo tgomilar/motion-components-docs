@@ -1,9 +1,11 @@
 ---
-import Layout from '../layouts/Layout.astro'
-import CodeWindow from '../components/CodeWindow.astro'
+import Layout from "../layouts/Layout.astro";
+import CodeWindow from "../components/CodeWindow.astro";
 ---
 
-<Layout title="Motion Components — Motion-first web components" description="Drop physics-based motion into any framework without rewriting your markup. Spring physics, interruptible animations, framework-agnostic web components powered by Motion One.">
+<Layout
+  title="Motion Components — Motion-first web components"
+  description="Drop physics-based motion into any framework without rewriting your markup. Spring physics, interruptible animations, framework-agnostic web components powered by Motion One.">
   <!-- ── Hero ─────────────────────────────── -->
   <section class="hero">
     <div class="inner">
@@ -14,15 +16,13 @@ import CodeWindow from '../components/CodeWindow.astro'
       </a>
       <div class="hero-badge">Declarative motion · Spring physics · Interruptible</div>
       <h1>
-        <motion-stretch text="Motion first" spread="15" stiffness="120" damping="28"
-        ></motion-stretch>
+        <motion-stretch text="Animate" spread="20" stiffness="400" damping="10"></motion-stretch>
         <span class="accent">
-          <motion-stretch text="web components" spread="15" stiffness="120" damping="28"
-          ></motion-stretch>
+          <motion-stretch text="with HTML tags" spread="20" stiffness="400" damping="10"></motion-stretch>
         </span>
       </h1>
       <p class="hero-sub">
-        Animate your content with HTML tags.<br />
+        No animation hooks. No JavaScript configuration.<br />
         Physics-based motion for any framework. Built on <span class="motion">Motion</span>.
       </p>
       <div class="actions">
@@ -30,16 +30,12 @@ import CodeWindow from '../components/CodeWindow.astro'
           <a href="/docs/" class="btn-primary">Get started</a>
         </motion-hover>
         <motion-hover>
-          <a href="https://github.com/tgomilar/motion-components" class="btn-ghost"
-            >View on GitHub</a
-          >
+          <a href="https://github.com/tgomilar/motion-components" class="btn-ghost">View on GitHub</a>
         </motion-hover>
       </div>
       <div class="hero-install">
         <span class="install-label">Quick install</span>
-        <motion-press
-          ><motion-code-inline copy>npm install motion-components</motion-code-inline></motion-press
-        >
+        <motion-press><motion-code-inline copy>npm install motion-components</motion-code-inline></motion-press>
       </div>
     </div>
   </section>
@@ -76,8 +72,7 @@ import CodeWindow from '../components/CodeWindow.astro'
     </div> -->
     <div class="inner ticker-caption">
       <p class="section-sub">
-        <motion-press><motion-code-inline copy>motion-curve</motion-code-inline></motion-press
-        >smoothly looping text with wave animation
+        <motion-press><motion-code-inline copy>motion-curve</motion-code-inline></motion-press>smoothly looping text with wave animation
       </p>
     </div>
   </section>
@@ -101,21 +96,14 @@ import CodeWindow from '../components/CodeWindow.astro'
               <span class="step-num">1</span>
               <div>
                 <strong>Install</strong>
-                <p
-                  >Run <motion-code-inline copy-visible
-                    >npm install motion-components</motion-code-inline
-                  ></p
-                >
+                <p>Run <motion-code-inline copy-visible>npm install motion-components</motion-code-inline></p>
               </div>
             </li>
             <li>
               <span class="step-num">2</span>
               <div>
                 <strong>Import once</strong>
-                <p
-                  ><motion-code-inline copy-visible>import 'motion-components'</motion-code-inline> registers
-                  all custom elements globally.</p
-                >
+                <p><motion-code-inline copy-visible>import 'motion-components'</motion-code-inline> registers all custom elements globally.</p>
               </div>
             </li>
             <li>
@@ -123,9 +111,8 @@ import CodeWindow from '../components/CodeWindow.astro'
               <div>
                 <strong>Wrap anything</strong>
                 <p>
-                  Compose <motion-code-inline>motion-hover</motion-code-inline>, <motion-code-inline
-                    >motion-reveal</motion-code-inline
-                  >, and friends around your existing markup.
+                  Compose <motion-code-inline>motion-hover</motion-code-inline>, <motion-code-inline>motion-reveal</motion-code-inline>, and friends around your
+                  existing markup.
                 </p>
               </div>
             </li>
@@ -165,7 +152,7 @@ import 'motion-components'
     <div class="inner">
       <div class="section-head">
         <p class="section-eyebrow">Primitives</p>
-        <h2>Feel the difference</h2>
+        <h2>Feel the difference.</h2>
         <p class="section-sub">Composable primitives. Each one is interactive — try them.</p>
       </div>
     </div>
@@ -259,10 +246,8 @@ import 'motion-components'
     <div class="inner">
       <div class="section-head">
         <p class="section-eyebrow">Text Effects</p>
-        <h2>Words in motion</h2>
-        <p class="section-sub"
-          >Components for animated text — split, typewriter, counter, scramble, and ticker.</p
-        >
+        <h2>Words in motion.</h2>
+        <p class="section-sub">Components for animated text — split, typewriter, counter, scramble, and ticker.</p>
       </div>
     </div>
     <div class="inner inner--wide">
@@ -272,15 +257,7 @@ import 'motion-components'
             <div class="card">
               <motion-code-inline>motion-split</motion-code-inline>
               <div class="stage">
-                <motion-split
-                  id="split-demo"
-                  by="words"
-                  interval="0.07"
-                  duration="0.6"
-                  y="18"
-                  once="false"
-                  class="split-text">Feel the motion</motion-split
-                >
+                <motion-split id="split-demo" by="words" interval="0.07" duration="0.6" y="18" once="false" class="split-text">Feel the motion</motion-split>
               </div>
               <div class="replay-row">
                 <button class="replay-btn" id="replay-split">↺ Replay</button>
@@ -291,9 +268,7 @@ import 'motion-components'
             <div class="card">
               <motion-code-inline>motion-typewriter</motion-code-inline>
               <div class="stage">
-                <motion-typewriter id="tw-demo" speed="55" loop cursor class="typewriter-text">
-                  Motion that feels alive.
-                </motion-typewriter>
+                <motion-typewriter id="tw-demo" speed="55" loop cursor class="typewriter-text"> Motion that feels alive. </motion-typewriter>
               </div>
             </div>
           </a>
@@ -302,14 +277,7 @@ import 'motion-components'
               <motion-code-inline>motion-counter</motion-code-inline>
               <div class="stage">
                 <div class="counter-row">
-                  <motion-counter
-                    id="counter-demo"
-                    from="0"
-                    to="122"
-                    duration="1.8"
-                    suffix="k"
-                    class="counter-num"
-                    once="false"></motion-counter>
+                  <motion-counter id="counter-demo" from="0" to="122" duration="1.8" suffix="k" class="counter-num" once="false"></motion-counter>
                   <span class="counter-label">users</span>
                 </div>
               </div>
@@ -322,14 +290,7 @@ import 'motion-components'
             <div class="card">
               <motion-code-inline>motion-scramble</motion-code-inline>
               <div class="stage">
-                <motion-scramble
-                  id="scramble-demo"
-                  speed="35"
-                  iterations="3"
-                  hover
-                  class="scramble-text">
-                  Hello, world.
-                </motion-scramble>
+                <motion-scramble id="scramble-demo" speed="35" iterations="3" hover class="scramble-text"> Hello, world. </motion-scramble>
               </div>
               <p class="card-hint">Hover to scramble</p>
             </div>
@@ -340,10 +301,7 @@ import 'motion-components'
               <div class="stage">
                 <p class="words-demo-text">
                   We
-                  <motion-words
-                    words="design,build,ship"
-                    colors="#3b82f6,#8b5cf6,#10b981"
-                    interval="1600"></motion-words>
+                  <motion-words words="design,build,ship" colors="#3b82f6,#8b5cf6,#10b981" interval="1600"></motion-words>
                   fast.
                 </p>
               </div>
@@ -354,9 +312,7 @@ import 'motion-components'
             <div class="card">
               <motion-code-inline>motion-swap</motion-code-inline>
               <div class="stage">
-                <motion-swap id="swap-demo" stagger-duration="0.04" class="swap-text"
-                  >Smooth swaps</motion-swap
-                >
+                <motion-swap id="swap-demo" stagger-duration="0.04" class="swap-text">Smooth swaps</motion-swap>
               </div>
               <p class="card-hint">Swaps on a loop</p>
             </div>
@@ -374,7 +330,7 @@ import 'motion-components'
     <div class="inner">
       <div class="section-head">
         <p class="section-eyebrow">Why motion-components</p>
-        <h2>Built different</h2>
+        <h2>Built different.</h2>
       </div>
     </div>
     <div class="inner">
@@ -391,15 +347,11 @@ import 'motion-components'
                   stroke="currentColor"
                   stroke-width="2"
                   stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg
+                  stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg
                 >
               </div>
               <h3>Spring physics</h3>
-              <p
-                >Every animation uses spring dynamics — naturally interruptible, no jarring cuts or
-                fixed durations.</p
-              >
+              <p>Every animation uses spring dynamics — naturally interruptible, no jarring cuts or fixed durations.</p>
             </div>
           </motion-hover>
           <motion-hover scale="1.02" y="-4">
@@ -413,16 +365,11 @@ import 'motion-components'
                   stroke="currentColor"
                   stroke-width="2"
                   stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"
-                  ></polyline></svg
+                  stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg
                 >
               </div>
               <h3>Framework-agnostic</h3>
-              <p
-                >Standard web components work anywhere — React, Vue, Svelte, Astro, or raw HTML. No
-                adapter needed.</p
-              >
+              <p>Standard web components work anywhere — React, Vue, Svelte, Astro, or raw HTML. No adapter needed.</p>
             </div>
           </motion-hover>
           <motion-hover scale="1.02" y="-4">
@@ -437,19 +384,15 @@ import 'motion-components'
                   stroke-width="2"
                   stroke-linecap="round"
                   stroke-linejoin="round"
-                  ><rect x="3" y="3" width="7" height="7"></rect><rect
-                    x="14"
-                    y="3"
-                    width="7"
-                    height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><path
-                    d="M14 17.5h3m3 0h-3m0 0v-3m0 3v3"></path></svg
+                  ><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"
+                  ></rect><path d="M14 17.5h3m3 0h-3m0 0v-3m0 3v3"></path></svg
                 >
               </div>
               <h3>Composable primitives</h3>
               <p>
-                Build complex interactions by wrapping — nest <motion-code-inline
-                  >motion-hover</motion-code-inline
-                > inside <motion-code-inline>motion-stagger</motion-code-inline> effortlessly.
+                Build complex interactions by wrapping — nest <motion-code-inline>motion-hover</motion-code-inline> inside <motion-code-inline
+                  >motion-stagger</motion-code-inline
+                > effortlessly.
               </p>
             </div>
           </motion-hover>
@@ -468,9 +411,7 @@ import 'motion-components'
                 >
               </div>
               <h3>Zero config</h3>
-              <p
-                >Sensible defaults out of the box. Attributes let you tune — but you never have to.</p
-              >
+              <p>Sensible defaults out of the box. Attributes let you tune — but you never have to.</p>
             </div>
           </motion-hover>
           <motion-hover scale="1.02" y="-4">
@@ -484,15 +425,11 @@ import 'motion-components'
                   stroke="currentColor"
                   stroke-width="2"
                   stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg
+                  stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg
                 >
               </div>
               <h3>TypeScript ready</h3>
-              <p
-                >Full type declarations included. Attribute names and values are typed for IDE
-                autocomplete.</p
-              >
+              <p>Full type declarations included. Attribute names and values are typed for IDE autocomplete.</p>
             </div>
           </motion-hover>
           <motion-hover scale="1.02" y="-4">
@@ -506,18 +443,11 @@ import 'motion-components'
                   stroke="currentColor"
                   stroke-width="2"
                   stroke-linecap="round"
-                  stroke-linejoin="round"
-                  ><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"></path><circle
-                    cx="12"
-                    cy="12"
-                    r="3"></circle></svg
+                  stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7z"></path><circle cx="12" cy="12" r="3"></circle></svg
                 >
               </div>
               <h3>Accessible by default</h3>
-              <p
-                >Respects <motion-code-inline>prefers-reduced-motion</motion-code-inline>.
-                Animations skip cleanly — no flashes, no layout shift.</p
-              >
+              <p>Respects <motion-code-inline>prefers-reduced-motion</motion-code-inline>. Animations skip cleanly — no flashes, no layout shift.</p>
             </div>
           </motion-hover>
         </motion-stagger>
@@ -546,8 +476,7 @@ import 'motion-components'
             <div class="flip-eyebrow flip-eyebrow--inv">Category</div>
             <span class="flip-cat-big">Scroll</span>
             <p class="flip-blurb">
-              Parallax depth, progress-driven animation, scroll-linked scenes — two components that
-              unlock scroll-based motion without any scroll library.
+              Parallax depth, progress-driven animation, scroll-linked scenes — two components that unlock scroll-based motion without any scroll library.
             </p>
             <span class="flip-link">Explore →</span>
           </a>
@@ -563,8 +492,7 @@ import 'motion-components'
             <div class="flip-eyebrow flip-eyebrow--inv">Category</div>
             <span class="flip-cat-big">Components</span>
             <p class="flip-blurb">
-              Dialogs, galleries, sliders, image comparison, countdowns, progress rings, flip-cards,
-              spotlights — interactive widgets that animate themselves.
+              Dialogs, galleries, sliders, image comparison, countdowns, progress rings, flip-cards, spotlights — interactive widgets that animate themselves.
             </p>
             <span class="flip-link">Explore →</span>
           </a>
@@ -580,8 +508,8 @@ import 'motion-components'
             <div class="flip-eyebrow flip-eyebrow--inv">Category</div>
             <span class="flip-cat-big">Code</span>
             <p class="flip-blurb">
-              Syntax-highlighted code blocks with copy buttons, optional typing animation, and
-              chrome-style title bars — drop in for docs, tutorials, and live demos.
+              Syntax-highlighted code blocks with copy buttons, optional typing animation, and chrome-style title bars — drop in for docs, tutorials, and live
+              demos.
             </p>
             <span class="flip-link">Explore →</span>
           </a>
@@ -605,12 +533,7 @@ import 'motion-components'
               <a href="/docs/" class="btn-primary">Read the docs</a>
             </motion-hover>
             <motion-hover>
-              <a
-                href="https://github.com/tgomilar/motion-components"
-                class="btn-ghost"
-                target="_blank"
-                rel="noopener">Star on GitHub</a
-              >
+              <a href="https://github.com/tgomilar/motion-components" class="btn-ghost" target="_blank" rel="noopener">Star on GitHub</a>
             </motion-hover>
           </div>
         </div>
@@ -619,31 +542,31 @@ import 'motion-components'
   </section>
 
   <script>
-    import 'motion-components'
+    import "motion-components";
 
-    document.getElementById('replay-reveal')?.addEventListener('click', () => {
-      ;(document.getElementById('reveal-demo') as any)?.replay()
-    })
+    document.getElementById("replay-reveal")?.addEventListener("click", () => {
+      (document.getElementById("reveal-demo") as any)?.replay();
+    });
 
-    document.getElementById('replay-stagger')?.addEventListener('click', () => {
-      ;(document.getElementById('stagger-demo') as any)?.replay()
-    })
+    document.getElementById("replay-stagger")?.addEventListener("click", () => {
+      (document.getElementById("stagger-demo") as any)?.replay();
+    });
 
-    document.getElementById('replay-split')?.addEventListener('click', () => {
-      ;(document.getElementById('split-demo') as any)?.replay()
-    })
+    document.getElementById("replay-split")?.addEventListener("click", () => {
+      (document.getElementById("split-demo") as any)?.replay();
+    });
 
-    document.getElementById('replay-counter')?.addEventListener('click', () => {
-      ;(document.getElementById('counter-demo') as any)?.replay()
-    })
+    document.getElementById("replay-counter")?.addEventListener("click", () => {
+      (document.getElementById("counter-demo") as any)?.replay();
+    });
 
-    const swapDemo = document.getElementById('swap-demo')
-    if (swapDemo && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      let on = false
+    const swapDemo = document.getElementById("swap-demo");
+    if (swapDemo && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      let on = false;
       setInterval(() => {
-        on = !on
-        swapDemo.dispatchEvent(new MouseEvent(on ? 'mouseenter' : 'mouseleave'))
-      }, 1400)
+        on = !on;
+        swapDemo.dispatchEvent(new MouseEvent(on ? "mouseenter" : "mouseleave"));
+      }, 1400);
     }
   </script>
 
@@ -854,28 +777,18 @@ import 'motion-components'
     }
 
     .ticker-track::before {
-      content: '';
+      content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(
-        ellipse 60% 100% at 50% 50%,
-        var(--color-surface-2) 0%,
-        transparent 70%
-      );
+      background: radial-gradient(ellipse 60% 100% at 50% 50%, var(--color-surface-2) 0%, transparent 70%);
       pointer-events: none;
     }
 
     .ticker-track::after {
-      content: '';
+      content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(
-        to right,
-        var(--color-surface-2) 0%,
-        transparent 8%,
-        transparent 92%,
-        var(--color-surface-2) 100%
-      );
+      background: linear-gradient(to right, var(--color-surface-2) 0%, transparent 8%, transparent 92%, var(--color-surface-2) 100%);
       pointer-events: none;
       z-index: 1;
     }
@@ -913,6 +826,9 @@ import 'motion-components'
       display: flex;
       flex-direction: column;
       gap: 1rem;
+      /* Grid stretches .card-link to the row height; let the card fill it so
+         every card in a row matches (equal-height cards, no fixed values). */
+      flex: 1;
       position: relative;
       overflow: hidden;
       box-shadow:
@@ -926,7 +842,7 @@ import 'motion-components'
 
     .card::after,
     .feature::after {
-      content: '';
+      content: "";
       position: absolute;
       inset: 0;
       border-radius: inherit;
@@ -934,30 +850,29 @@ import 'motion-components'
       pointer-events: none;
     }
 
-
-    [data-theme='dark'] .card,
-    [data-theme='dark'] .feature {
+    [data-theme="dark"] .card,
+    [data-theme="dark"] .feature {
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.1),
         0 2px 8px rgba(0, 0, 0, 0.2),
         0 8px 32px rgba(0, 0, 0, 0.35);
     }
 
-    [data-theme='dark'] .card::after,
-    [data-theme='dark'] .feature::after {
+    [data-theme="dark"] .card::after,
+    [data-theme="dark"] .feature::after {
       background: linear-gradient(160deg, rgba(255, 255, 255, 0.07) 0%, transparent 55%);
     }
 
     @media (prefers-color-scheme: dark) {
-      :root:not([data-theme='light']) .card,
-      :root:not([data-theme='light']) .feature {
+      :root:not([data-theme="light"]) .card,
+      :root:not([data-theme="light"]) .feature {
         box-shadow:
           inset 0 1px 0 rgba(255, 255, 255, 0.1),
           0 2px 8px rgba(0, 0, 0, 0.2),
           0 8px 32px rgba(0, 0, 0, 0.35);
       }
-      :root:not([data-theme='light']) .card::after,
-      :root:not([data-theme='light']) .feature::after {
+      :root:not([data-theme="light"]) .card::after,
+      :root:not([data-theme="light"]) .feature::after {
         background: linear-gradient(160deg, rgba(255, 255, 255, 0.07) 0%, transparent 55%);
       }
     }
@@ -995,7 +910,8 @@ import 'motion-components'
     .card-link {
       text-decoration: none;
       color: inherit;
-      display: block;
+      display: flex;
+      flex-direction: column;
     }
 
     .card-link:hover {
@@ -1386,11 +1302,7 @@ import 'motion-components'
     }
 
     .flip-face--ans {
-      background: linear-gradient(
-        150deg,
-        var(--color-accent),
-        color-mix(in srgb, var(--color-accent) 55%, #1e3a8a)
-      );
+      background: linear-gradient(150deg, var(--color-accent), color-mix(in srgb, var(--color-accent) 55%, #1e3a8a));
       color: white;
       justify-content: space-between;
       box-shadow:

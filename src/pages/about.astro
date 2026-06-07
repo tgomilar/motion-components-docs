@@ -48,22 +48,7 @@ import CodeWindow from '../components/CodeWindow.astro'
       free.
     </p>
 
-    <ul class="stat-strip">
-      <li>
-        <strong><motion-counter from="0" to="37" duration="1.4"></motion-counter></strong>
-        <span>composable components</span>
-      </li>
-      <li>
-        <strong><motion-counter from="0" to="1" duration="1"></motion-counter></strong>
-        <span>import. registers everything.</span>
-      </li>
-      <li>
-        <strong
-          >~<motion-counter from="0" to="20" duration="1.4" suffix=" KB"></motion-counter></strong
-        >
-        <span>brotlied, all 37 — tree-shake from there.</span>
-      </li>
-    </ul>
+    <p class="tagline">The simplicity of HTML. <span>The power of Motion.</span></p>
 
     <!-- ── What are web components ─────────── -->
     <section>
@@ -374,47 +359,17 @@ customElements.define('my-hover', MyHover)`}
       display: inline-block;
     }
 
-    .stat-strip {
-      list-style: none;
-      padding: 1.75rem 0 0;
-      margin: 2rem 0 0;
-      border-top: 1px solid var(--color-border);
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1.5rem;
-    }
-
-    .stat-strip li {
-      display: flex;
-      flex-direction: column;
-      gap: 0.35rem;
-      padding: 0;
-      background: none;
-      border: none;
-      border-radius: 0;
-      font-size: inherit;
-    }
-
-    .stat-strip strong {
-      font-size: clamp(1.6rem, 3vw, 2.1rem);
+    .tagline {
+      font-size: clamp(1.3rem, 3vw, 1.7rem);
       font-weight: 800;
       letter-spacing: -0.03em;
-      color: var(--color-accent);
-      line-height: 1;
-      font-feature-settings: 'tnum';
+      line-height: 1.2;
+      color: var(--color-text);
+      margin: 2rem 0 0;
     }
 
-    .stat-strip span {
-      font-size: 0.82rem;
-      color: var(--color-muted);
-      line-height: 1.45;
-    }
-
-    @media (max-width: 560px) {
-      .stat-strip {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-      }
+    .tagline span {
+      color: var(--color-yellow);
     }
 
     .manifesto p:not(.manifesto-statement) {
