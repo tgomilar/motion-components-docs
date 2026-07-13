@@ -90,6 +90,7 @@ npm install motion-components
 | [`motion-liquid`](https://www.motion-components.dev/docs/text/motion-liquid/)           | SVG displacement fluid distortion (no WebGL)     |
 | [`motion-perspective`](https://www.motion-components.dev/docs/text/motion-perspective/) | Vanishing-point perspective text                 |
 | [`motion-stretch`](https://www.motion-components.dev/docs/text/motion-stretch/)         | Elastic letter-spacing on hover                  |
+| [`motion-swap`](https://www.motion-components.dev/docs/text/motion-swap/)               | Per-character vertical swap on hover or reveal   |
 | [`motion-text-mask`](https://www.motion-components.dev/docs/text/motion-text-mask/)     | Standalone mask-clip reveal primitive            |
 | [`motion-font`](https://www.motion-components.dev/docs/text/motion-font/)               | Variable font axis animation (weight/width/opsz) |
 
@@ -122,6 +123,8 @@ npm install motion-components
 
 **30+ components and counting.** → [Browse the full docs](https://www.motion-components.dev/docs/)
 
+Every component is also scriptable — play, pause, and inspect instances from JavaScript, or control everything at once with `pauseAll()` / `resumeAll()` / `cancelAll()`. → [JS API guide](https://www.motion-components.dev/docs/js-api/)
+
 ---
 
 ## ✦ Why motion-components
@@ -147,6 +150,8 @@ npm install motion-components
 | [motion-components](https://github.com/tgomilar/motion-components) | The library being documented |
 
 ## ✦ Development
+
+Requires Node.js ≥ 22.12.0 (`nvm use` picks it up from `.nvmrc`).
 
 ```bash
 npm install

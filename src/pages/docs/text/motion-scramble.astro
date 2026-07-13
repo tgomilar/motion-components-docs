@@ -6,6 +6,7 @@ import DocsTOC from "../../../components/DocsTOC.astro";
 import DocsPagination from "../../../components/DocsPagination.astro";
 import CodeWindow from "../../../components/CodeWindow.astro";
 import PropsTable from "../../../components/PropsTable.astro";
+import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
 
@@ -47,6 +48,12 @@ import 'motion-components'               // or the whole library`}
         { name: 'hover', type: 'boolean', default: 'false', description: 'Trigger on mouseenter instead of scroll' },
         { name: 'once', type: 'boolean', default: 'true', description: 'Animate only on first intersection' },
       ]} />
+      <h2>JavaScript API</h2>
+      <p class="section-desc">Trigger the scramble programmatically with <code>play()</code> and <code>cancel()</code>.</p>
+      <JsApiDemo target="api-scramble-demo" mode="one-shot" wide>
+        <motion-scramble id="api-scramble-demo">JavaScript API</motion-scramble>
+      </JsApiDemo>
+
       <h2>Accessibility</h2>
       <p>Respects <code>prefers-reduced-motion</code>: when enabled, the scramble effect is skipped and the text appears at its final state immediately.</p>
       <DocsPagination />

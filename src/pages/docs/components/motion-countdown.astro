@@ -6,6 +6,7 @@ import DocsTOC from "../../../components/DocsTOC.astro";
 import DocsPagination from "../../../components/DocsPagination.astro";
 import CodeWindow from "../../../components/CodeWindow.astro";
 import PropsTable from "../../../components/PropsTable.astro";
+import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 
 const target = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
@@ -100,6 +101,12 @@ import 'motion-components'`}
         { name: '--countdown-gap', type: 'length', default: '0.75rem', description: 'Gap between digit groups' },
       ]} />
 
+      <h2>JavaScript API</h2>
+      <p>Control the countdown programmatically with <code>play()</code>, <code>pause()</code>, <code>finish()</code>, and <code>cancel()</code>.</p>
+      <JsApiDemo mode="looper" target="api-countdown-demo">
+        <motion-countdown id="api-countdown-demo" format="minutes seconds" style="font-size:2rem;font-weight:800;font-variant-numeric:tabular-nums"></motion-countdown>
+      </JsApiDemo>
+
       <h2>Accessibility</h2>
       <p>When <code>prefers-reduced-motion</code> is set, digit transitions are instant with no animation.</p>
       <DocsPagination />
@@ -110,6 +117,10 @@ import 'motion-components'`}
 
 <script>
   import "motion-components";
+
+  document
+    .getElementById("api-countdown-demo")
+    ?.setAttribute("to", new Date(Date.now() + 90_000).toISOString());
 </script>
 
 <style>

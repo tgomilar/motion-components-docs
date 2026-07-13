@@ -61,6 +61,7 @@ const activeSection = SECTION_ORDER.find(s => sections[s]?.some(item => item.hre
     <p class="footer-label">Getting started</p>
     <a href="/docs/" class={`footer-link${current === '/docs/' ? ' active' : ''}`}>Usage</a>
     <a href="/docs/#frameworks" class="footer-link">Frameworks</a>
+    <a href="/docs/js-api/" class={`footer-link${current === '/docs/js-api/' ? ' active' : ''}`}>JavaScript API</a>
   </div>
 </aside>
 
@@ -272,8 +273,6 @@ const activeSection = SECTION_ORDER.find(s => sections[s]?.some(item => item.hre
     padding: 0.55rem 0.85rem;
     font-size: 0.82rem;
     font-weight: 600;
-    /* --color-bg inverts opposite the yellow token, so it stays readable
-       on the dark-amber (light theme) and bright-yellow (dark theme) fills */
     color: var(--color-bg);
     cursor: pointer;
     font-family: var(--font-sans);

@@ -6,6 +6,7 @@ import DocsTOC from "../../../components/DocsTOC.astro";
 import DocsPagination from "../../../components/DocsPagination.astro";
 import CodeWindow from "../../../components/CodeWindow.astro";
 import PropsTable from "../../../components/PropsTable.astro";
+import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
 
@@ -69,6 +70,13 @@ import 'motion-components'               // or the whole library`}
         { name: 'interval', type: 'number', default: '2000', description: 'Time in ms between word changes' },
         { name: 'duration', type: 'number', default: '0.5', description: 'Spring animation duration hint in seconds' },
       ]} />
+
+      <h2>JavaScript API</h2>
+      <p class="section-desc">Control the words programmatically with <code>play()</code>, <code>pause()</code>, <code>finish()</code>, and <code>cancel()</code>.</p>
+      <JsApiDemo target="api-words-demo" wide>
+        <motion-words id="api-words-demo" words="JavaScript, API, controls">
+        </motion-words>
+      </JsApiDemo>
 
       <h2>Accessibility</h2>
       <p>When <code>prefers-reduced-motion</code> is set, words swap instantly with no animation.</p>

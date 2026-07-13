@@ -6,6 +6,7 @@ import DocsTOC from "../../../components/DocsTOC.astro";
 import DocsPagination from "../../../components/DocsPagination.astro";
 import CodeWindow from "../../../components/CodeWindow.astro";
 import PropsTable from "../../../components/PropsTable.astro";
+import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
 
@@ -179,6 +180,24 @@ import 'motion-components'               // or the whole library`}
         ]}
       />
 
+      <h2>JavaScript API</h2>
+      <p>Control the scene programmatically with <code>play()</code>, <code>pause()</code>, <code>finish()</code>, and <code>cancel()</code>. Pause unbinds the scroll listener so the card freezes mid-scrub, finish snaps to the end keyframe, cancel resets to the start. Scroll the box while running to drive the card.</p>
+      <JsApiDemo mode="looper" target="api-scene-demo">
+        <div class="scene-scroll" id="api-scene-scroll">
+          <motion-scene id="api-scene-demo" height="600px" container="#api-scene-scroll" class="demo-scene">
+            <div
+              class="api-scene-card"
+              data-from='{"opacity":0,"scale":0.85}'
+              data-to='{"opacity":1,"scale":1}'
+              data-start="0.1"
+              data-end="0.9"
+            >
+              Scene API demo
+            </div>
+          </motion-scene>
+        </div>
+      </JsApiDemo>
+
       <h2>Accessibility</h2>
       <p>Respects <code>prefers-reduced-motion</code>: when enabled, all scroll-driven animations are disabled and children render at their end state immediately.</p>
       <DocsPagination />
@@ -234,6 +253,17 @@ import 'motion-components'               // or the whole library`}
 
   .demo-chip--c {
     color: var(--color-muted);
+  }
+
+  .api-scene-card {
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 2rem 3rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-align: center;
+    opacity: 0;
   }
 
 </style>

@@ -6,6 +6,7 @@ import DocsTOC from "../../../components/DocsTOC.astro";
 import DocsPagination from "../../../components/DocsPagination.astro";
 import CodeWindow from "../../../components/CodeWindow.astro";
 import PropsTable from "../../../components/PropsTable.astro";
+import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
 
@@ -76,6 +77,14 @@ import 'motion-components'               // or the whole library`}
           { name: "once", type: "boolean", default: "true", description: "Animate only on first intersection" },
         ]}
       />
+
+      <h2>JavaScript API</h2>
+      <p class="section-desc">Trigger the split programmatically with <code>play()</code> and <code>cancel()</code>.</p>
+      <JsApiDemo target="api-split-demo" mode="one-shot" wide>
+        <motion-split id="api-split-demo" by="chars" interval="0.025" duration="0.5">
+          JavaScript API
+        </motion-split>
+      </JsApiDemo>
 
       <h2>Accessibility</h2>
       <p>

@@ -1,0 +1,66 @@
+---
+interface Props {
+  wide?: boolean;
+  tall?: boolean;
+  noPad?: boolean;
+  dark?: boolean;
+  showBar?: boolean;
+}
+const { wide, tall, noPad, dark, showBar = false } = Astro.props;
+---
+
+<div class="demo-wrap">
+  <div class:list={["demo-stage", { wide, tall, "no-pad": noPad, dark }]}>
+    <slot name="default" />
+  </div>
+  {showBar && (
+    <div class="demo-bar">
+      <slot name="bar" />
+    </div>
+  )}
+</div>
+
+<style>
+  .demo-wrap {
+    display: block;
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 1.5rem;
+  }
+
+  .demo-stage {
+    background: var(--color-surface);
+    padding: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 140px;
+  }
+
+  .demo-stage.wide {
+    padding: 2rem;
+  }
+
+  .demo-stage.tall {
+    padding: 4rem 0;
+  }
+
+  .demo-stage.dark {
+    background: #0a0a0f;
+  }
+
+  .demo-stage.no-pad {
+    padding: 0;
+    display: block;
+  }
+
+  .demo-bar {
+    background: var(--color-surface-2);
+    padding: 0.75rem 1.25rem;
+    border-top: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+</style>

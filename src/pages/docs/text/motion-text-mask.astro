@@ -6,6 +6,7 @@ import DocsTOC from "../../../components/DocsTOC.astro";
 import DocsPagination from "../../../components/DocsPagination.astro";
 import CodeWindow from "../../../components/CodeWindow.astro";
 import PropsTable from "../../../components/PropsTable.astro";
+import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
 
@@ -77,6 +78,12 @@ import 'motion-components'               // or the whole library`}
         { name: 'threshold', type: 'number', default: '0.2', description: 'IntersectionObserver visibility threshold (0–1)' },
         { name: 'once', type: 'boolean', default: 'true', description: 'Reveal only on first intersection' },
       ]} />
+      <h2>JavaScript API</h2>
+      <p class="section-desc">Trigger the text mask programmatically with <code>play()</code> and <code>cancel()</code>.</p>
+      <JsApiDemo target="api-text-mask-demo" mode="one-shot" wide>
+        <motion-text-mask id="api-text-mask-demo" duration="0.5">JavaScript API</motion-text-mask>
+      </JsApiDemo>
+
       <h2>Accessibility</h2>
       <p>Respects <code>prefers-reduced-motion</code>: when enabled, the mask reveal animates instantly and the text is fully visible.</p>
       <DocsPagination />
