@@ -6,6 +6,7 @@ import DocsTOC from '../../../components/DocsTOC.astro'
 import DocsPagination from '../../../components/DocsPagination.astro'
 import CodeWindow from '../../../components/CodeWindow.astro'
 import PropsTable from '../../../components/PropsTable.astro'
+import JsApiDemo from '../../../components/JsApiDemo.astro'
 import '../../../styles/docs.css'
 ---
 
@@ -119,6 +120,13 @@ import 'motion-components'               // or the whole library`}
         <strong>Public method:</strong> call <code>el.glitch()</code> on the element reference to fire
         the animation imperatively at any time, regardless of the <code>trigger</code> setting.
       </p>
+
+      <h2>JavaScript API</h2>
+      <p class="section-desc">Control the glitch programmatically with <code>play()</code>, <code>pause()</code>, <code>finish()</code>, and <code>cancel()</code>.</p>
+      <JsApiDemo target="api-glitch-demo" wide>
+        <motion-glitch id="api-glitch-demo" trigger="loop">JS API</motion-glitch>
+      </JsApiDemo>
+
       <h2>Accessibility</h2>
       <p
         >Respects <code>prefers-reduced-motion</code>: when enabled, the channel split effect is

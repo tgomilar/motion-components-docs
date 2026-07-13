@@ -1,0 +1,167 @@
+---
+import DemoCard from "./DemoCard.astro";
+
+interface Props {
+  target: string;
+  mode?: "looper" | "one-shot" | "pause-all";
+  wide?: boolean;
+  showLog?: boolean;
+}
+const { target, mode = "looper", wide, showLog = false } = Astro.props;
+---
+
+<div
+  class="js-api-demo"
+  data-target={target}
+  data-mode={mode}
+  data-show-log={String(showLog)}
+>
+  <DemoCard {wide} showBar>
+    <slot />
+    <div slot="bar" class="transport">
+      {mode === "looper" && (
+        <>
+          <button data-verb="play">Play</button>
+          <button data-verb="pause">Pause</button>
+          <button data-verb="finish">Finish</button>
+          <button data-verb="cancel">Cancel</button>
+          <span class="state-chip">playState: <code class="state-readout">–</code></span>
+        </>
+      )}
+      {mode === "one-shot" && (
+        <>
+          <button class="trigger-btn">Trigger from JS</button>
+          <span class="state-chip status-readout">–</span>
+        </>
+      )}
+      {mode === "pause-all" && (
+        <>
+          <button class="pause-all-btn">Pause all</button>
+          <button class="resume-all-btn">Resume all</button>
+        </>
+      )}
+    </div>
+  </DemoCard>
+  {mode === "looper" && showLog && (
+    <div class="event-log" aria-live="polite"></div>
+  )}
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>(".js-api-demo").forEach((demo) => {
+    const targetId = demo.dataset.target!;
+    const mode = demo.dataset.mode!;
+    const showLog = demo.dataset.showLog === "true";
+    const el = document.getElementById(targetId);
+    if (!el) return;
+
+    type Controllable = HTMLElement & {
+      play(): Promise<void>;
+      pause(): void;
+      finish(): void;
+      cancel(): void;
+      playState: string;
+    };
+    const ctrl = el as unknown as Controllable;
+
+    if (mode === "looper") {
+      const stateEl = demo.querySelector<HTMLElement>(".state-readout");
+      if (stateEl) {
+        demo.querySelectorAll<HTMLButtonElement>("[data-verb]").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const verb = btn.dataset.verb as "play" | "pause" | "finish" | "cancel";
+            void ctrl[verb]();
+          });
+        });
+        setInterval(() => {
+          stateEl.textContent = ctrl.playState ?? "–";
+        }, 120);
+      }
+    }
+
+    if (mode === "one-shot") {
+      const trigger = demo.querySelector<HTMLButtonElement>(".trigger-btn");
+      const status = demo.querySelector<HTMLElement>(".status-readout");
+      trigger?.addEventListener("click", async () => {
+        if (!status) return;
+        ctrl.cancel();
+        status.textContent = "running…";
+        await ctrl.play();
+        status.textContent = "finished ✓";
+      });
+    }
+
+    if (mode === "pause-all") {
+      const pauseBtn = demo.querySelector<HTMLButtonElement>(".pause-all-btn");
+      const resumeBtn = demo.querySelector<HTMLButtonElement>(".resume-all-btn");
+      pauseBtn?.addEventListener("click", async () => {
+        const { pauseAll } = await import("motion-components");
+        pauseAll(demo);
+      });
+      resumeBtn?.addEventListener("click", async () => {
+        const { resumeAll } = await import("motion-components");
+        resumeAll(demo);
+      });
+    }
+
+    if (showLog) {
+      const log = demo.querySelector<HTMLElement>(".event-log");
+      if (log) {
+        for (const name of ["motion-start", "motion-finish", "motion-cancel"]) {
+          document.addEventListener(name, (e) => {
+            const t = e.target as HTMLElement;
+            if (!el.contains(t) && t !== el) return;
+            const line = document.createElement("div");
+            line.textContent = `${name} ← <${t.localName}>`;
+            log.prepend(line);
+            while (log.children.length > 6) log.lastChild?.remove();
+          });
+        }
+      }
+    }
+  });
+</script>
+
+<style>
+  .transport {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+
+  .transport button {
+    font: inherit;
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 0.4rem 0.9rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    background: var(--color-surface-2);
+    color: var(--color-text);
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+
+  .transport button:hover {
+    border-color: var(--color-text);
+  }
+
+  .state-chip {
+    margin-left: auto;
+    font-size: 0.8rem;
+    color: var(--color-muted);
+  }
+
+  .event-log {
+    width: 100%;
+    min-height: 80px;
+    padding: 1rem 1.25rem;
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    color: var(--color-muted);
+    background: var(--color-surface-2);
+    border-radius: 8px;
+  }
+</style>

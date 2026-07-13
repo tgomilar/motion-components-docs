@@ -6,6 +6,7 @@ import DocsTOC from "../../../components/DocsTOC.astro";
 import DocsPagination from "../../../components/DocsPagination.astro";
 import CodeWindow from "../../../components/CodeWindow.astro";
 import PropsTable from "../../../components/PropsTable.astro";
+import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
 
@@ -49,6 +50,14 @@ import 'motion-components'               // or the whole library`}
         { name: 'loop', type: 'boolean', default: 'false', description: 'Erase and retype continuously' },
         { name: 'cursor', type: 'boolean', default: 'true', description: 'Show blinking cursor' },
       ]} />
+      <h2>JavaScript API</h2>
+      <p class="section-desc">Control the typewriter programmatically with <code>play()</code>, <code>pause()</code>, <code>finish()</code>, and <code>cancel()</code>.</p>
+      <JsApiDemo mode="looper" target="api-typewriter-demo" wide>
+        <motion-typewriter id="api-typewriter-demo" loop>
+          JavaScript API demo
+        </motion-typewriter>
+      </JsApiDemo>
+
       <h2>Accessibility</h2>
       <p>Respects <code>prefers-reduced-motion</code>: when enabled, the typing animation is skipped and the full text appears immediately.</p>
       <DocsPagination />

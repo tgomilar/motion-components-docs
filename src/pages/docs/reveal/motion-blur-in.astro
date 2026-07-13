@@ -6,6 +6,7 @@ import DocsTOC from "../../../components/DocsTOC.astro";
 import DocsPagination from "../../../components/DocsPagination.astro";
 import CodeWindow from "../../../components/CodeWindow.astro";
 import PropsTable from "../../../components/PropsTable.astro";
+import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
 
@@ -52,6 +53,12 @@ import 'motion-components'               // or the whole library`}
           { name: "once", type: "boolean", default: "true", description: "Animate only the first time the element enters view" },
         ]}
       />
+
+      <h2>JavaScript API</h2>
+      <p>Trigger the blur-in entrance programmatically with <code>play()</code> and <code>cancel()</code>.</p>
+      <JsApiDemo mode="one-shot" target="api-blur-in-demo">
+        <motion-blur-in id="api-blur-in-demo" duration="0.6" y="16"><div class="demo-card" style="background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:10px;padding:2rem;font-weight:600;color:var(--color-text);text-align:center">Blur in from JS</div></motion-blur-in>
+      </JsApiDemo>
 
       <h2>Accessibility</h2>
       <p>Respects <code>prefers-reduced-motion</code>: content appears immediately at full opacity with no blur or translation.</p>

@@ -6,6 +6,7 @@ import DocsTOC from "../../../components/DocsTOC.astro";
 import DocsPagination from "../../../components/DocsPagination.astro";
 import CodeWindow from "../../../components/CodeWindow.astro";
 import PropsTable from "../../../components/PropsTable.astro";
+import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
 
@@ -112,6 +113,12 @@ counter.replay()`}
         { name: 'suffix', type: 'string', default: "''", description: 'Static text appended to the number' },
         { name: 'once', type: 'boolean', default: 'true', description: 'Animate only on first intersection. Set to <code>false</code> to replay on every re-entry.' },
       ]} />
+
+      <h2>JavaScript API</h2>
+      <p class="section-desc">Trigger the counter programmatically with <code>play()</code> and <code>cancel()</code>.</p>
+      <JsApiDemo target="api-counter-demo" mode="one-shot" wide>
+        <motion-counter id="api-counter-demo" text="12345" duration="2"></motion-counter>
+      </JsApiDemo>
 
       <h2>Accessibility</h2>
       <p>When <code>prefers-reduced-motion</code> is set, the counter jumps instantly to its final value with no animation.</p>

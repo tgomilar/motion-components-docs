@@ -6,6 +6,7 @@ import DocsTOC from "../../../components/DocsTOC.astro";
 import DocsPagination from "../../../components/DocsPagination.astro";
 import CodeWindow from "../../../components/CodeWindow.astro";
 import PropsTable from "../../../components/PropsTable.astro";
+import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
 
@@ -68,6 +69,16 @@ import 'motion-components'               // or the whole library`}
         { name: 'duration', type: 'number', default: '0.4', description: 'Spring duration of the scaleX response, in seconds' },
       ]} />
 
+      <h2>JavaScript API</h2>
+      <p>
+        Control the progress indicator programmatically with <code>play()</code>, <code>pause()</code>, <code>finish()</code>, and <code>cancel()</code>.
+        The instance below pins an amber bar to the <strong>bottom edge of the viewport</strong> (the top bar is this page's own progress).
+      </p>
+      <JsApiDemo mode="looper" target="api-progress-demo">
+        <motion-progress id="api-progress-demo" position="bottom" color="#f59e0b" thickness="4"></motion-progress>
+        <p class="api-demo-hint">Look at the bottom of the viewport — scroll while playing to see the bar track, then try the transport controls.</p>
+      </JsApiDemo>
+
       <h2>Accessibility</h2>
       <p>
         The bar is rendered with <code>role="progressbar"</code>. It does not steal focus or pointer events. Spring overshoot is deliberately small;
@@ -97,5 +108,11 @@ import 'motion-components'               // or the whole library`}
     height: 100%;
     background: var(--color-accent);
     border-radius: 3px;
+  }
+
+  .api-demo-hint {
+    margin: 0;
+    font-size: 0.85rem;
+    color: var(--color-muted);
   }
 </style>

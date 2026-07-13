@@ -6,6 +6,7 @@ import DocsTOC from "../../../components/DocsTOC.astro";
 import DocsPagination from "../../../components/DocsPagination.astro";
 import CodeWindow from "../../../components/CodeWindow.astro";
 import PropsTable from "../../../components/PropsTable.astro";
+import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
 
@@ -82,12 +83,25 @@ import 'motion-components'               // or the whole library`}
         rows={[
           { name: "speed", type: "number", default: "0.5", description: "Parallax intensity. <code>0</code> = no drift (scrolls with page), <code>0.5</code> = moderate, <code>1</code> = strong drift, <code>2</code> = double intensity." },
           { name: "axis", type: "string", default: "'y'", description: "<code>'y'</code> for vertical parallax, <code>'x'</code> for horizontal." },
+          { name: "container", type: "string", default: "''", description: "CSS selector for a custom scroll container. Defaults to document scroll when empty." },
         ]}
       />
 
       <p class="note">
         <strong>Reduced motion:</strong> when <code>prefers-reduced-motion: reduce</code> is set, all parallax movement is disabled.
       </p>
+      <h2>JavaScript API</h2>
+      <p>Control the parallax effect programmatically with <code>play()</code>, <code>pause()</code>, <code>finish()</code>, and <code>cancel()</code>. Pause unbinds the scroll listener so the card freezes mid-drift, finish snaps to the end offset, cancel resets to the natural position. Scroll the box while running to drive the drift.</p>
+      <JsApiDemo mode="looper" target="api-parallax-demo">
+        <div class="api-scroll" id="api-parallax-scroll">
+          <div class="api-scroll-track">
+            <motion-parallax id="api-parallax-demo" speed="1.2" container="#api-parallax-scroll">
+              <div class="api-parallax-card">Parallax API</div>
+            </motion-parallax>
+          </div>
+        </div>
+      </JsApiDemo>
+
       <h2>Accessibility</h2>
       <p>Respects <code>prefers-reduced-motion</code>: when enabled, all parallax movement is disabled and the element renders at its natural position.</p>
       <DocsPagination />
@@ -103,6 +117,34 @@ import 'motion-components'               // or the whole library`}
 <style>
   .lead {
     margin-bottom: 1.25rem;
+  }
+
+  /* position:relative required so motion-one's offsetParent walk finds this container */
+  .api-scroll {
+    height: 300px;
+    overflow-y: auto;
+    width: 100%;
+    position: relative;
+    border-radius: 12px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-border) transparent;
+  }
+
+  .api-scroll-track {
+    height: 700px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .api-parallax-card {
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    padding: 2rem 3rem;
+    font-weight: 600;
+    color: var(--color-text);
+    text-align: center;
   }
 
   .demo-scene {
