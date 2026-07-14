@@ -24,8 +24,8 @@ const {
 } = Astro.props;
 const { pathname } = Astro.url;
 const showBg = !pathname.startsWith("/docs") && !pathname.startsWith("/showcase");
-const showProgress = pathname.startsWith("/docs");
-const resolvedOgType = ogType ?? (pathname.startsWith("/docs/") ? "article" : "website");
+const showProgress = pathname.startsWith("/docs") || pathname.startsWith("/blog");
+const resolvedOgType = ogType ?? (pathname.startsWith("/docs/") || pathname.startsWith("/blog/") ? "article" : "website");
 
 const ogImageUrl = new URL(ogImage, Astro.url.origin).href;
 

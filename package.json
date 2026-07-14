@@ -42,10 +42,10 @@
   },
   "dependencies": {
     "astro": "^6.4.2",
-    "motion-components": "^0.3.0"
+    "motion-components": "file:../motion-components"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.2",
+    "@astrojs/check": "^0.9.9",
     "@astrojs/sitemap": "^3.7.3",
     "typescript": "^5.9.3"
   }

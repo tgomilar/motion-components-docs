@@ -21,7 +21,7 @@ import CodeWindow from '../../components/CodeWindow.astro'
 
         <!-- printer's ornament -->
         <div class="sc-hero-orn" aria-hidden="true">
-          <motion-magnetic distance="160" strength="0.45">
+          <motion-magnetic strength="0.45">
             <span class="sc-orn">
               <motion-circle text="MOTION SPECIMEN · 2026 ED. · " radius="62" speed="14"
                 ><span class="sc-orn-dot">✦</span></motion-circle
@@ -449,7 +449,7 @@ import CodeWindow from '../../components/CodeWindow.astro'
             <motion-spotlight class="sc-word-card" color="rgba(101,163,13,0.30)">
               <span class="sc-word-tag">specimen no. 3 · motion-glitch</span>
               <div class="sc-word-stage">
-                <motion-glitch class="sc-word-text" loop>SYSTEM ONLINE</motion-glitch>
+                <motion-glitch class="sc-word-text" trigger="loop">SYSTEM ONLINE</motion-glitch>
               </div>
               <span class="sc-word-foot">channel decay · 1.4s loop</span>
             </motion-spotlight>
@@ -658,7 +658,7 @@ import CodeWindow from '../../components/CodeWindow.astro'
         <div slot="before" class="sc-compare-pane sc-compare-before">
           <span class="sc-compare-tag">// before</span>
           <span class="sc-compare-label">
-            <motion-glitch loop>HARD CUT</motion-glitch>
+            <motion-glitch trigger="loop">HARD CUT</motion-glitch>
           </span>
           <span class="sc-compare-meta">cubic-bezier · fixed · 200ms</span>
         </div>
@@ -853,13 +853,13 @@ import 'motion-components/motion-headline'`}
           </motion-reveal>
 
           <div class="sc-cta-actions">
-            <motion-magnetic distance="80" strength="0.5">
+            <motion-magnetic strength="0.5">
               <motion-press>
                 <a href="/docs/" class="sc-cta-btn sc-cta-btn--primary">Read the docs</a>
               </motion-press>
             </motion-magnetic>
 
-            <motion-magnetic distance="80" strength="0.4">
+            <motion-magnetic strength="0.4">
               <motion-press>
                 <a
                   href="https://github.com/tgomilar/motion-components"

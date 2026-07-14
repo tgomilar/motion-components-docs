@@ -19,7 +19,7 @@ import "../../../styles/docs.css";
 
       <h2>Preview</h2>
       <DocsPreview>
-        <motion-stretch class="demo-large" text="STRETCH"></motion-stretch>
+        <motion-stretch class="demo-large">STRETCH</motion-stretch>
       </DocsPreview>
 
       <h2>Import</h2>
@@ -31,40 +31,54 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Usage</h2>
+      <h3>Static content</h3>
+      <p>Write the text as a child. The browser shows it as plain text before the element is defined, so the page never paints an empty gap while the library loads.</p>
       <CodeWindow
         filename="motion-stretch.html"
         copy
-        code={`<motion-stretch text="STRETCH"></motion-stretch>`}
+        code={`<motion-stretch>STRETCH</motion-stretch>`}
       />
+
+      <h3>Dynamic content</h3>
+      <p>Use the <code>text</code> attribute when text changes at runtime. Setting the property restarts the animation automatically.</p>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`const el = document.querySelector('motion-stretch')
+el.text = 'UPDATED'   // animation restarts`}
+      />
+      <p>
+        If both are present, the attribute wins and the child text stays as the pre-upgrade fallback.
+      </p>
 
       <h2>Spread</h2>
       <p><code>spread</code> controls how far the outermost characters move (in px per side). Higher values give a more dramatic stretch.</p>
       <DocsPreview>
         <div style="display:flex; flex-direction:column; gap:1.5rem; align-items:flex-start">
-          <motion-stretch class="demo-large" text="TIGHT" spread="6"></motion-stretch>
-          <motion-stretch class="demo-large" text="WIDE" spread="32"></motion-stretch>
+          <motion-stretch class="demo-large" spread="6">TIGHT</motion-stretch>
+          <motion-stretch class="demo-large" spread="32">WIDE</motion-stretch>
         </div>
       </DocsPreview>
       <CodeWindow
         filename="motion-stretch.html"
         copy
-        code={`<motion-stretch text="TIGHT" spread="6"></motion-stretch>
-<motion-stretch text="WIDE" spread="32"></motion-stretch>`}
+        code={`<motion-stretch spread="6">TIGHT</motion-stretch>
+<motion-stretch spread="32">WIDE</motion-stretch>`}
       />
 
       <h2>Spring tuning</h2>
       <p>Adjust <code>stiffness</code> and <code>damping</code> to change the character of the snap. High stiffness + low damping is bouncy; low stiffness + high damping is slow and smooth.</p>
       <DocsPreview>
         <div style="display:flex; flex-direction:column; gap:1.5rem; align-items:flex-start">
-          <motion-stretch class="demo-large" text="BOUNCY" spread="20" stiffness="400" damping="10"></motion-stretch>
-          <motion-stretch class="demo-large" text="SMOOTH" spread="20" stiffness="120" damping="28"></motion-stretch>
+          <motion-stretch class="demo-large" spread="20" stiffness="400" damping="10">BOUNCY</motion-stretch>
+          <motion-stretch class="demo-large" spread="20" stiffness="120" damping="28">SMOOTH</motion-stretch>
         </div>
       </DocsPreview>
       <CodeWindow
         filename="motion-stretch.html"
         copy
-        code={`<motion-stretch text="BOUNCY" spread="20" stiffness="400" damping="10"></motion-stretch>
-<motion-stretch text="SMOOTH" spread="20" stiffness="120" damping="28"></motion-stretch>`}
+        code={`<motion-stretch spread="20" stiffness="400" damping="10">BOUNCY</motion-stretch>
+<motion-stretch spread="20" stiffness="120" damping="28">SMOOTH</motion-stretch>`}
       />
 
       <h2>How it works</h2>
@@ -85,7 +99,7 @@ import 'motion-components'               // or the whole library`}
 
       <h2>Properties</h2>
       <PropsTable nameLabel="Attribute" rows={[
-        { name: 'text', type: 'string', default: '—', description: 'Text to render' },
+        { name: 'text', type: 'string', default: '—', description: 'Text to render. Falls back to the child text when unset' },
         { name: 'spread', type: 'number', default: '12', description: 'Max displacement of the outermost character on each side (px)' },
         { name: 'stiffness', type: 'number', default: '320', description: 'Spring stiffness — higher is snappier' },
         { name: 'damping', type: 'number', default: '16', description: 'Spring damping — lower is bouncier' },

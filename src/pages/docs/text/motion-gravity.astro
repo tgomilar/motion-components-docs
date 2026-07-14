@@ -23,7 +23,7 @@ import "../../../styles/docs.css";
 
       <h2>Preview</h2>
       <DocsPreview replayId="gravity-demo">
-        <motion-gravity id="gravity-demo" class="demo-large" text="GRAVITY"></motion-gravity>
+        <motion-gravity id="gravity-demo" class="demo-large">GRAVITY</motion-gravity>
       </DocsPreview>
 
       <h2>Import</h2>
@@ -35,51 +35,65 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Usage</h2>
-      <CodeWindow filename="motion-gravity.html" copy code={`<motion-gravity text="GRAVITY"></motion-gravity>`} />
+      <h3>Static content</h3>
+      <p>Write the text as a child. The browser shows it as plain text before the element is defined, so the page never paints an empty gap while the library loads.</p>
+      <CodeWindow filename="motion-gravity.html" copy code={`<motion-gravity>GRAVITY</motion-gravity>`} />
+
+      <h3>Dynamic content</h3>
+      <p>Use the <code>text</code> attribute when text changes at runtime. Setting the property restarts the animation automatically.</p>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`const el = document.querySelector('motion-gravity')
+el.text = 'UPDATED'   // animation restarts`}
+      />
+      <p>
+        If both are present, the attribute wins and the child text stays as the pre-upgrade fallback.
+      </p>
 
       <h2>Height</h2>
       <p><code>height</code> sets how far each character falls before landing. Larger values give a more dramatic entrance.</p>
       <DocsPreview replayId="gravity-height">
         <div id="gravity-height" style="display:flex; flex-direction:column; gap:2rem; align-items:flex-start">
-          <motion-gravity class="demo-large" text="SHORT DROP" height="20"></motion-gravity>
-          <motion-gravity class="demo-large" text="LONG DROP" height="120"></motion-gravity>
+          <motion-gravity class="demo-large" height="20">SHORT DROP</motion-gravity>
+          <motion-gravity class="demo-large" height="120">LONG DROP</motion-gravity>
         </div>
       </DocsPreview>
       <CodeWindow
         filename="motion-gravity.html"
         copy
-        code={`<motion-gravity text="SHORT DROP" height="20"></motion-gravity>
-<motion-gravity text="LONG DROP" height="120"></motion-gravity>`}
+        code={`<motion-gravity height="20">SHORT DROP</motion-gravity>
+<motion-gravity height="120">LONG DROP</motion-gravity>`}
       />
 
       <h2>Stagger</h2>
       <p><code>stagger</code> is the delay in seconds between each character landing. Tighten it for snappy cascades; spread it out for a slow reveal.</p>
       <DocsPreview replayId="gravity-stagger">
         <div id="gravity-stagger" style="display:flex; flex-direction:column; gap:2rem; align-items:flex-start">
-          <motion-gravity class="demo-large" text="FAST CASCADE" stagger="0.02"></motion-gravity>
-          <motion-gravity class="demo-large" text="SLOW REVEAL" stagger="0.15"></motion-gravity>
+          <motion-gravity class="demo-large" stagger="0.02">FAST CASCADE</motion-gravity>
+          <motion-gravity class="demo-large" stagger="0.15">SLOW REVEAL</motion-gravity>
         </div>
       </DocsPreview>
       <CodeWindow
         filename="motion-gravity.html"
         copy
-        code={`<motion-gravity text="FAST CASCADE" stagger="0.02"></motion-gravity>
-<motion-gravity text="SLOW REVEAL" stagger="0.15"></motion-gravity>`}
+        code={`<motion-gravity stagger="0.02">FAST CASCADE</motion-gravity>
+<motion-gravity stagger="0.15">SLOW REVEAL</motion-gravity>`}
       />
 
       <h2>Delay</h2>
       <p>Use <code>delay</code> to hold the animation until after other elements have entered — useful when composing multiple animated elements.</p>
       <DocsPreview replayId="gravity-delay">
         <div id="gravity-delay" style="display:flex; flex-direction:column; gap:2rem; align-items:flex-start">
-          <motion-gravity class="demo-large" text="FIRST" delay="0"></motion-gravity>
-          <motion-gravity class="demo-large" text="SECOND" delay="0.5"></motion-gravity>
+          <motion-gravity class="demo-large" delay="0">FIRST</motion-gravity>
+          <motion-gravity class="demo-large" delay="0.5">SECOND</motion-gravity>
         </div>
       </DocsPreview>
       <CodeWindow
         filename="motion-gravity.html"
         copy
-        code={`<motion-gravity text="FIRST" delay="0"></motion-gravity>
-<motion-gravity text="SECOND" delay="0.5"></motion-gravity>`}
+        code={`<motion-gravity delay="0">FIRST</motion-gravity>
+<motion-gravity delay="0.5">SECOND</motion-gravity>`}
       />
 
       <h2>How it works</h2>
@@ -95,7 +109,7 @@ import 'motion-components'               // or the whole library`}
       <PropsTable
         nameLabel="Attribute"
         rows={[
-          { name: "text", type: "string", default: "—", description: "Text to animate in" },
+          { name: "text", type: "string", default: "—", description: "Text to animate in. Falls back to the child text when unset" },
           { name: "height", type: "number", default: "60", description: "Fall distance in px" },
           { name: "stagger", type: "number", default: "0.05", description: "Seconds between each character landing" },
           { name: "duration", type: "number", default: "0.6", description: "Spring duration hint per character" },
