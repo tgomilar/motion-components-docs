@@ -23,7 +23,7 @@ import "../../../styles/docs.css";
       <h2>Preview</h2>
       <DocsPreview>
         <p class="demo-heading">
-          <motion-curve text="Make it wave." amplitude="28" wave-length="260" speed="0.4"></motion-curve>
+          <motion-curve amplitude="28" wave-length="260" speed="0.4">Make it wave.</motion-curve>
         </p>
       </DocsPreview>
 
@@ -36,16 +36,27 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Usage</h2>
+      <h3>Static content</h3>
+      <p>Write the text as a child. The browser shows it as plain text before the element is defined, so the page never paints an empty gap while the library loads.</p>
       <CodeWindow
         filename="motion-curve.html"
         copy
-        code={`<motion-curve
-  text="Make it wave."
-  amplitude="28"
-  wave-length="260"
-  speed="0.4"
-></motion-curve>`}
+        code={`<motion-curve amplitude="28" wave-length="260" speed="0.4">
+  Make it wave.
+</motion-curve>`}
       />
+
+      <h3>Dynamic content</h3>
+      <p>Use the <code>text</code> attribute when text changes at runtime. Setting the property restarts the animation automatically.</p>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`const el = document.querySelector('motion-curve')
+el.text = 'UPDATED'   // animation restarts`}
+      />
+      <p>
+        If both are present, the attribute wins and the child text stays as the pre-upgrade fallback. For long marquee strings in loop mode, prefer the attribute: a long fallback would wrap across several lines before the element upgrades.
+      </p>
 
       <h2>Loop mode</h2>
       <p>
@@ -113,7 +124,7 @@ import 'motion-components'               // or the whole library`}
       <PropsTable
         nameLabel="Attribute"
         rows={[
-          { name: "text", type: "string", default: "—", description: "The sentence to animate" },
+          { name: "text", type: "string", default: "—", description: "The sentence to animate. Falls back to the child text when unset" },
           { name: "amplitude", type: "number", default: "24", description: "Peak vertical offset in px" },
           { name: "wave-length", type: "number", default: "280", description: "Horizontal distance of one full wave cycle in px" },
           { name: "speed", type: "number", default: "0.4", description: "Wave cycles per second" },

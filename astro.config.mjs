@@ -1,10 +1,21 @@
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
+import { remarkMotionCode } from "./plugins/remark-motion-code.mjs";
+import { rehypeTableWrap } from "./plugins/rehype-md-table.mjs";
+import { rehypeInlineCode } from "./plugins/rehype-inline-code.mjs";
 
 export default defineConfig({
   site: "https://www.motion-components.dev",
   outDir: "dist",
   integrations: [sitemap()],
+  markdown: {
+    remarkPlugins: [remarkMotionCode],
+    rehypePlugins: [rehypeTableWrap, rehypeInlineCode],
+    // Shiki still highlights fences that opt out via the `plain` meta flag.
+    shikiConfig: {
+      theme: "github-dark-default",
+    },
+  },
   redirects: {
     // /docs/interaction/* moved to /docs/components/*
     "/docs/interaction/motion-countdown": "/docs/components/motion-countdown",

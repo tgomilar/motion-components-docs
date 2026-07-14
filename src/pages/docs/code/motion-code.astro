@@ -220,7 +220,7 @@ animate(".hero", {
 <motion-code filename="script.py">...</motion-code>
 
 <!-- Override manually -->
-<motion-code lang="js">...</motion-code>`}
+<motion-code code-lang="js">...</motion-code>`}
       />
 
       <h2>Theming</h2>
@@ -242,7 +242,7 @@ animate(".hero", {
       <h2>Properties</h2>
       <PropsTable nameLabel="Attribute" rows={[
         { name: 'filename',        type: 'string',  default: '"app.html"', description: 'Shown in the chrome bar; also used to infer the language' },
-        { name: 'lang',            type: 'string',  default: '""',         description: 'Override language: html · js · css · json · python · sh' },
+        { name: 'code-lang',       type: 'string',  default: '""',         description: 'Override language: html · js · css · json · python · sh' },
         { name: 'copy',            type: 'boolean', default: 'false',      description: 'Show a copy icon button in the chrome bar' },
         { name: 'copy-label',      type: 'boolean', default: 'false',      description: 'Show a "Copy" text label next to the copy icon' },
         { name: 'hide-chrome',     type: 'boolean', default: 'false',      description: 'Remove the title bar entirely' },

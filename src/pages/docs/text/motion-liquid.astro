@@ -20,7 +20,7 @@ import "../../../styles/docs.css";
 
       <h2>Preview</h2>
       <DocsPreview>
-        <motion-liquid class="demo-large" text="LIQUID" intensity="12" speed="1.5"></motion-liquid>
+        <motion-liquid class="demo-large" intensity="12" speed="1.5">LIQUID</motion-liquid>
       </DocsPreview>
 
       <h2>Import</h2>
@@ -32,60 +32,67 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Usage</h2>
+      <h3>Static content</h3>
+      <p>Write the text as a child. The browser shows it as plain text before the element is defined, so the page never paints an empty gap while the library loads.</p>
       <CodeWindow
         filename="motion-liquid.html"
         copy
-        code={`<motion-liquid
-  text="LIQUID"
-  intensity="12"
-  speed="1.5"
-></motion-liquid>`}
+        code={`<motion-liquid intensity="12" speed="2">LIQUID</motion-liquid>`}
       />
+
+      <h3>Dynamic content</h3>
+      <p>Use the <code>text</code> attribute when text changes at runtime. Setting the property restarts the animation automatically.</p>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`const el = document.querySelector('motion-liquid')
+el.text = 'UPDATED'   // animation restarts`}
+      />
+      <p>
+        If both are present, the attribute wins and the child text stays as the pre-upgrade fallback.
+      </p>
 
       <h2>Intensity</h2>
       <p><motion-code-inline>intensity</motion-code-inline> sets the maximum displacement in pixels. Higher values create more dramatic distortion.</p>
       <DocsPreview>
         <div style="display:flex; flex-direction:column; gap:1.5rem; align-items:flex-start">
-          <motion-liquid class="demo-large" text="SUBTLE" intensity="5" speed="1.5"></motion-liquid>
-          <motion-liquid class="demo-large" text="INTENSE" intensity="24" speed="1.5"></motion-liquid>
+          <motion-liquid class="demo-large" intensity="5" speed="1.5">SUBTLE</motion-liquid>
+          <motion-liquid class="demo-large" intensity="24" speed="1.5">INTENSE</motion-liquid>
         </div>
       </DocsPreview>
       <CodeWindow
         filename="motion-liquid.html"
         copy
-        code={`<motion-liquid text="SUBTLE" intensity="5"></motion-liquid>
-<motion-liquid text="INTENSE" intensity="24"></motion-liquid>`}
+        code={`<motion-liquid intensity="5">SUBTLE</motion-liquid>
+<motion-liquid intensity="24">INTENSE</motion-liquid>`}
       />
 
       <h2>Speed</h2>
       <p><motion-code-inline>speed</motion-code-inline> controls how fast the fluid motion evolves. Slow speeds feel like a gentle shimmer; higher speeds feel chaotic.</p>
       <DocsPreview>
         <div style="display:flex; flex-direction:column; gap:1.5rem; align-items:flex-start">
-          <motion-liquid class="demo-large" text="SLOW" intensity="14" speed="0.5"></motion-liquid>
-          <motion-liquid class="demo-large" text="FAST" intensity="14" speed="4"></motion-liquid>
+          <motion-liquid class="demo-large" intensity="14" speed="0.5">SLOW</motion-liquid>
+          <motion-liquid class="demo-large" intensity="14" speed="4">FAST</motion-liquid>
         </div>
       </DocsPreview>
       <CodeWindow
         filename="motion-liquid.html"
         copy
-        code={`<motion-liquid text="SLOW" intensity="14" speed="0.5"></motion-liquid>
-<motion-liquid text="FAST" intensity="14" speed="4"></motion-liquid>`}
+        code={`<motion-liquid intensity="14" speed="0.5">SLOW</motion-liquid>
+<motion-liquid intensity="14" speed="4">FAST</motion-liquid>`}
       />
 
       <h2>Pause on hover</h2>
       <p>Add <motion-code-inline>pause-on-hover</motion-code-inline> to freeze the fluid motion when the cursor enters.</p>
       <DocsPreview>
-        <motion-liquid class="demo-large" text="HOVER ME" intensity="14" speed="1.5" pause-on-hover></motion-liquid>
+        <motion-liquid class="demo-large" intensity="14" speed="1.5" pause-on-hover>HOVER ME</motion-liquid>
       </DocsPreview>
       <CodeWindow
         filename="motion-liquid.html"
         copy
-        code={`<motion-liquid
-  text="HOVER ME"
-  intensity="14"
-  speed="1.5"
-  pause-on-hover
-></motion-liquid>`}
+        code={`<motion-liquid intensity="14" speed="1.5" pause-on-hover>
+  HOVER ME
+</motion-liquid>`}
       />
 
       <h2>How it works</h2>
@@ -95,7 +102,7 @@ import 'motion-components'               // or the whole library`}
 
       <h2>Properties</h2>
       <PropsTable nameLabel="Attribute" rows={[
-        { name: 'text', type: 'string', default: '—', description: 'Text to render with the liquid effect' },
+        { name: 'text', type: 'string', default: '—', description: 'Text to render with the liquid effect. Falls back to the child text when unset' },
         { name: 'intensity', type: 'number', default: '10', description: 'Maximum displacement in px' },
         { name: 'speed', type: 'number', default: '2', description: 'How fast the fluid motion evolves' },
         { name: 'pause-on-hover', type: 'boolean', default: 'false', description: 'Freeze motion on mouseenter, resume on mouseleave' },
