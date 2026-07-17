@@ -2,6 +2,7 @@
 title: "Fixing the Flash: Why Animated Components Need preload.css"
 description: "Custom elements upgrade after your JavaScript loads, and entrance animations flash their finished state in the gap. How :defined and one small stylesheet fix it."
 pubDate: 2026-07-12
+author: Tanja Gomilar
 tags: ["performance", "web-components"]
 ---
 
@@ -109,4 +110,3 @@ The flip side of the bargain: because the hidden state is plain CSS keyed to upg
 
 - [motion-reveal](/docs/reveal/motion-reveal/) · [motion-stagger](/docs/reveal/motion-stagger/) · [motion-dialog](/docs/components/motion-dialog/): the components doing the hiding
 - [Recipe: An Animated Hero Section](/blog/animated-hero-section-recipe/): where getting this wrong is most visible
-- [MDN: `:defined`](https://developer.mozilla.org/en-US/docs/Web/CSS/:defined)
