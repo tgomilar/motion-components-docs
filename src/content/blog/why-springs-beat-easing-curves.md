@@ -2,6 +2,7 @@
 title: Why Springs Beat Easing Curves (and What Bounce Actually Means)
 description: Cubic-beziers are drawings; springs are simulations. What that difference means for interruptible UI motion, and how to read the duration and bounce parameters.
 pubDate: 2026-06-05T00:00:00.000Z
+author: Tanja Gomilar
 tags:
   - springs
   - motion-theory
@@ -325,7 +326,7 @@ Motion uses a perceptual parameterization instead. motion-components does too. S
 - **`duration`**: how long the motion takes to visually settle, in seconds. Under the hood, it converts into physical spring constants. It is a hint rather than a hard cutoff. A very bouncy spring keeps oscillating slightly past it. You reason in the same unit you already use everywhere else.
 - **`bounce`**: how much the spring overshoots, from `0` to `1`. Bounce does not make the animation faster or slower. It controls how much energy is left when the motion reaches the target. At `0` the spring is critically damped: it approaches the target and stops without ever crossing it. At `1` it is severely underdamped: it overshoots hard and oscillates before settling.
 
-Two numbers, both with intuitive meaning. If you've handed off designs from Figma, you've already used this exact model. That mapping is the subject of [the Figma handoff article](/blog/from-figma-to-the-browser/).
+Two numbers, both with intuitive meaning. If you've handed off designs from Figma, you've already used this exact model.
 
 ## What bounce values feel like
 
@@ -417,6 +418,5 @@ Once you think of animations as simulations instead of timelines, interruption s
 
 **Further reading**
 
-- [Motion's spring documentation](https://motion.dev): the engine underneath every component
-- [From Figma to the Browser](/blog/from-figma-to-the-browser/): shipping a designer's spring values verbatim
+- [Motion](https://motion.dev): the spring engine underneath every component
 - [motion-hover docs](/docs/respond/motion-hover/): every attribute, with live previews

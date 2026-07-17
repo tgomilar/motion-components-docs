@@ -2,6 +2,7 @@
 title: "From Figma to the Browser: Shipping a Design's Animation with Motion Components"
 description: "How to translate a Figma Smart Animate spec (spring, bounce, duration) directly into working code with motion-components. No eyeballed cubic-beziers in between."
 pubDate: 2026-05-18
+author: Tanja Gomilar
 tags: ["figma", "workflow", "springs"]
 draft: true
 ---

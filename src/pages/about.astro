@@ -17,7 +17,7 @@ import CodeWindow from '../components/CodeWindow.astro'
       <p class="lead">
         <motion-code-inline copy-visible>motion-components</motion-code-inline> is an open-source library
         of physics-based web components. Drop them into any framework and get smooth, interruptible animation
-        out of the box — or extend and compose them to build your own.
+        out of the box. Or extend and compose them to build your own.
       </p>
     </header>
 
@@ -31,24 +31,26 @@ import CodeWindow from '../components/CodeWindow.astro'
 
       <p>
         We live in an era of instantaneous interfaces. Pages snap in. Modals appear. Content jumps
-        into place. Every interaction is a hard cut — and every hard cut teaches the brain that this
+        into place. Every interaction is a hard cut, and every hard cut teaches the brain that this
         world has no physics, no weight, no continuity.
       </p>
 
       <p>
-        Motion is the connective tissue of experience. When an element moves with mass — when it
-        overshoots and settles, when it carries velocity from one state into the next — it stops
-        being a component and starts being something you can trust. Your finger knows the
-        difference. Your eye knows the difference.
+        Motion is the connective tissue of experience. When an element moves with mass, it overshoots
+        and settles. It carries velocity from one state into the next. It stops being a component and
+        starts being something you can trust. Your finger knows the difference. Your eye knows the
+        difference.
       </p>
     </section>
     <p>
-      motion-components exists because good motion shouldn't require a dedicated animation engineer
+      motion-components exists because good motion should not require a dedicated animation engineer
       or a working knowledge of bezier curves. It should be a tag you drop in. The physics come
       free.
     </p>
 
-    <p class="tagline">The simplicity of HTML. <span>The power of Motion.</span></p>
+    <p class="tagline">The simplicity of HTML. <span><motion-curve amplitude="8" wave-length="220" speed="0.2">
+  The power of Motion
+</motion-curve></span>.</p>
 
     <!-- ── What are web components ─────────── -->
     <section>
@@ -168,8 +170,8 @@ export function App() {
 
       <h3>1. HTML attributes</h3>
       <p>
-        The primary API is plain HTML attributes. Every tunable value — spring duration, scale,
-        direction — is exposed as an attribute with a sensible default.
+        The primary API is plain HTML attributes. Every tunable value, spring duration, scale,
+        direction, is exposed as an attribute with a sensible default.
       </p>
       <CodeWindow
         filename="example.html"
@@ -232,7 +234,7 @@ customElements.define('my-hover', MyHover)`}
       />
 
       <h3>4. Composing primitives</h3>
-      <p>Wrap primitives inside each other — they each do one thing and never interfere:</p>
+      <p>Wrap primitives inside each other. They each do one thing and never interfere:</p>
       <CodeWindow
         filename="composed.html"
         copy
@@ -255,14 +257,14 @@ customElements.define('my-hover', MyHover)`}
       <h2>How it's built</h2>
       <p>
         Components are authored with <a href="https://lit.dev" target="_blank" rel="noopener">Lit</a
-        > — a small library that adds reactive properties and declarative templates on top of the native
+        >, a small library that adds reactive properties and declarative templates on top of the native
         custom element APIs. Lit is bundled into the output and never appears as a peer dependency.
       </p>
       <p>
         All animations go through <a href="https://motion.dev" target="_blank" rel="noopener"
           >Motion</a
-        > — a spring physics animation library. Springs replace cubic-bezier easing curves, so animations
-        are naturally interruptible: interrupt one mid-flight and it continues from its current velocity
+        >, a spring physics animation library. Springs replace cubic-bezier easing curves, so animations
+        are naturally interruptible. Interrupt one mid-flight and it continues from its current velocity
         rather than snapping.
       </p>
     </section>
@@ -272,12 +274,12 @@ customElements.define('my-hover', MyHover)`}
       <h2>Design philosophy</h2>
       <ul class="philosophy-list">
         <li>
-          <strong>Motion-first.</strong> Animation is not a coating applied after the fact — it is a core
+          <strong>Motion-first.</strong> Animation is not a coating applied after the fact. It is a core
           part of how interfaces communicate. Every component is designed from that premise.
         </li>
         <li>
           <strong>No janky animations.</strong> Springs replace duration-based easing. An interrupted
-          spring continues from its current velocity; an interrupted cubic-bezier snaps. The difference
+          spring continues from its current velocity. An interrupted cubic-bezier snaps. The difference
           is felt immediately.
         </li>
         <li>
@@ -286,7 +288,7 @@ customElements.define('my-hover', MyHover)`}
         </li>
         <li>
           <strong>Accessibility is not optional.</strong>
-          <code>prefers-reduced-motion</code> is checked at the animation layer. Components degrade gracefully
+          The animation layer checks <code>prefers-reduced-motion</code>. Components degrade gracefully
           without any extra work from the consumer.
         </li>
       </ul>

@@ -2,6 +2,7 @@
 title: "Recipe: An Animated Hero Section in 20 Lines of HTML"
 description: "A landing-page hero with a word-by-word headline reveal, fading subcopy, and staggered call-to-action buttons. No JavaScript beyond one import."
 pubDate: 2026-06-24
+author: Tanja Gomilar
 tags: ["recipes", "reveal", "text"]
 ---
 
@@ -103,4 +104,3 @@ Every component here respects `prefers-reduced-motion` at the animation layer. U
 **Related**
 
 - [motion-headline docs](/docs/text/motion-headline/) · [motion-reveal docs](/docs/reveal/motion-reveal/) · [motion-stagger docs](/docs/reveal/motion-stagger/) · [motion-hover docs](/docs/respond/motion-hover/)
-- [From Figma to the Browser](/blog/from-figma-to-the-browser/): the same composition pattern applied to a pricing grid

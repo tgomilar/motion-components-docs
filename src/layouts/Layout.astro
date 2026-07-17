@@ -11,6 +11,7 @@ interface Props {
   ogType?: string;
   noMain?: boolean;
   keywords?: string;
+  author?: string;
 }
 
 const {
@@ -21,6 +22,7 @@ const {
   ogType,
   noMain = false,
   keywords,
+  author,
 } = Astro.props;
 const { pathname } = Astro.url;
 const showBg = !pathname.startsWith("/docs") && !pathname.startsWith("/showcase");
@@ -67,7 +69,7 @@ const jsonLd =
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
-    <meta name="author" content="tgomilar" />
+    {author && <meta name="author" content={author} />}
     <meta name="robots" content="index, follow" />
     {keywords && <meta name="keywords" content={keywords} />}
     <title>{title}</title>
