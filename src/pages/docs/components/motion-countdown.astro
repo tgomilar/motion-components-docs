@@ -20,14 +20,14 @@ const target = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-countdown</motion-split></h1>
       <p class="lead">Animated countdown timer with per-digit transitions. Choose between a smooth flip or a slot-machine roll for each digit.</p>
 
-      <h2>Preview — Flip (default)</h2>
+      <h2>Preview: Flip (default)</h2>
       <DocsPreview>
         <div class="demo-wrap">
           <motion-countdown to={target} labels></motion-countdown>
         </div>
       </DocsPreview>
 
-      <h2>Preview — Roll</h2>
+      <h2>Preview: Roll</h2>
       <DocsPreview>
         <div class="demo-wrap">
           <motion-countdown to={target} labels roll></motion-countdown>
@@ -35,7 +35,7 @@ const target = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
       </DocsPreview>
 
       <h2>Import</h2>
-      <p>Two ways — pick whichever fits your bundle.</p>
+      <p>Two ways: pick whichever fits your bundle.</p>
       <CodeWindow
         filename="app.js"
         copy
@@ -59,7 +59,7 @@ import 'motion-components'`}
       />
 
       <h2>Format</h2>
-      <p>Control which units appear with the <code>format</code> attribute — a space-separated list of <code>days</code>, <code>hours</code>, <code>minutes</code>, <code>seconds</code>.</p>
+      <p>Control which units appear with the <code>format</code> attribute: a space-separated list of <code>days</code>, <code>hours</code>, <code>minutes</code>, <code>seconds</code>.</p>
       <CodeWindow
         filename="motion-countdown.html"
         copy
@@ -71,7 +71,7 @@ import 'motion-components'`}
       />
 
       <h2>Theming</h2>
-      <p>Style via CSS custom properties — they pierce the shadow DOM.</p>
+      <p>Style via CSS custom properties. They pierce the shadow DOM.</p>
       <CodeWindow
         filename="styles.css"
         copy

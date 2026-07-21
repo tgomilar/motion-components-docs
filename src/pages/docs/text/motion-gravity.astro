@@ -10,14 +10,14 @@ import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
 
-<Layout title="motion-gravity — Motion Components" description="Characters fall in from above with staggered spring-physics timing — each one bouncing to a rest at the baseline. Built for hero text and section titles." noMain>
+<Layout title="motion-gravity — Motion Components" description="Characters fall in from above with staggered spring-physics timing. Each one bounces to a rest at the baseline. Built for hero text and section titles." noMain>
   <div class="layout">
     <DocsSidebar />
 
     <main>
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-gravity</motion-split></h1>
       <p class="lead">
-        Characters fall in from above with staggered spring-physics timing — each one bouncing to a rest at the baseline. An entrance animation built for hero
+        Characters fall in from above with staggered spring-physics timing. Each one bounces to a rest at the baseline. An entrance animation built for hero
         text and section titles.
       </p>
 
@@ -82,7 +82,7 @@ el.text = 'UPDATED'   // animation restarts`}
       />
 
       <h2>Delay</h2>
-      <p>Use <code>delay</code> to hold the animation until after other elements have entered — useful when composing multiple animated elements.</p>
+      <p>Use <code>delay</code> to hold the animation until after other elements have entered. This is useful when composing multiple animated elements.</p>
       <DocsPreview replayId="gravity-delay">
         <div id="gravity-delay" style="display:flex; flex-direction:column; gap:2rem; align-items:flex-start">
           <motion-gravity class="demo-large" delay="0">FIRST</motion-gravity>

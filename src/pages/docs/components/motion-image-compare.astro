@@ -16,11 +16,11 @@ import "../../../styles/docs.css";
     <main>
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-image-compare</motion-split></h1>
       <p class="lead">
-        Before/after slider with a draggable, spring-damped handle. Drop two images into the <code>before</code> and <code>after</code> slots
-        — drag, click, or use the arrow keys to reveal.
+        Before/after slider with a draggable, spring-damped handle. Drop two images into the <code>before</code> and <code>after</code> slots.
+        Drag, click, or use the arrow keys to reveal.
       </p>
 
-      <h2>Preview — Horizontal</h2>
+      <h2>Preview: Horizontal</h2>
       <DocsPreview wide tall>
         <motion-image-compare class="compare-demo" start="50">
           <div slot="before" class="compare-pane compare-before">Before</div>
@@ -28,7 +28,7 @@ import "../../../styles/docs.css";
         </motion-image-compare>
       </DocsPreview>
 
-      <h2>Preview — Vertical</h2>
+      <h2>Preview: Vertical</h2>
       <DocsPreview wide tall>
         <motion-image-compare class="compare-demo" orientation="vertical" start="40">
           <div slot="before" class="compare-pane compare-before">Top</div>
@@ -56,7 +56,7 @@ import 'motion-components'               // or the whole library`}
 
       <h2>Sizing</h2>
       <p>
-        The host fills its container's width and clips overflow. Give it an explicit <code>height</code> (or use an aspect-ratio container) — slotted images stretch to <code>100% × 100%</code> with <code>object-fit: cover</code>.
+        The host fills its container's width and clips overflow. Give it an explicit <code>height</code> (or use an aspect-ratio container). Slotted images stretch to <code>100% × 100%</code> with <code>object-fit: cover</code>.
       </p>
       <CodeWindow
         filename="styles.css"

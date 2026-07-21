@@ -103,7 +103,7 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Listening for close</h2>
-      <p>The <code>motion-close</code> event fires after the exit animation completes — use it to sync state:</p>
+      <p>The <code>motion-close</code> event fires after the exit animation completes. Use it to sync state:</p>
       <CodeWindow
         filename="app.ts"
         copy
@@ -128,7 +128,7 @@ dialog.addEventListener('motion-close', () => {
             name: "no-backdrop",
             type: "boolean",
             default: "false",
-            description: "When present, hides the dimmed/blurred overlay — the dialog floats without any overlay",
+            description: "When present, hides the dimmed/blurred overlay. The dialog floats without any overlay",
           },
           { name: "light-dismiss", type: "boolean", default: "false", description: "When present, clicking the backdrop outside the panel closes the dialog" },
         ]}
@@ -187,7 +187,7 @@ dialog.addEventListener('motion-close', () => {
       <p>
         Uses the native <code>&lt;dialog&gt;</code> element opened via <code>showModal()</code>, which places it in the browser's top layer. Focus is
         automatically trapped inside the dialog while open, and <kbd>Esc</kbd> always closes it. By default, clicking the backdrop does
-        <em>not</em> close the dialog — add <code>light-dismiss</code> to enable that. Screen readers announce the dialog via the browser's built-in
+        <em>not</em> close the dialog. Add <code>light-dismiss</code> to enable that. Screen readers announce the dialog via the browser's built-in
         <code>role="dialog"</code> and <code>aria-modal</code> semantics. With <code>prefers-reduced-motion</code> active, all animations are skipped
         and the dialog appears instantly.
       </p>

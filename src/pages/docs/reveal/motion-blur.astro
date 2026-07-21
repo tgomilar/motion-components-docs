@@ -68,7 +68,7 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Both directions</h2>
-      <p>Blurs in on entry and out on exit — visible only while centered in the viewport.</p>
+      <p>Blurs in on entry and out on exit, visible only while centered in the viewport.</p>
       <DocsPreview replayId="blur-both-demo" tall>
         <motion-blur id="blur-both-demo" direction="both">
           <figure class="demo-quote">
@@ -86,7 +86,7 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Tuning the blur</h2>
-      <p>Compare <code>blur</code> and <code>y</code> values side by side — scroll to this row to see them all reveal.</p>
+      <p>Compare <code>blur</code> and <code>y</code> values side by side. Scroll to this row to see them all reveal.</p>
       <DocsPreview replayId="blur-tuning-demo">
         <div id="blur-tuning-demo" class="blur-compare">
           <div class="blur-compare-item">
@@ -179,7 +179,7 @@ import 'motion-components'               // or the whole library`}
             default: "10",
             description: "Blur radius in px at the start (<code>in</code>) or end (<code>out</code>) of the scroll range",
           },
-          { name: "y", type: "number", default: "12", description: "Vertical offset in px — shifts down on entry, up on exit" },
+          { name: "y", type: "number", default: "12", description: "Vertical offset in px. Shifts down on entry, up on exit" },
           {
             name: "once",
             type: "boolean",
@@ -197,7 +197,7 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>JavaScript API</h2>
-      <p>Control the scroll-driven blur programmatically with <code>play()</code>, <code>pause()</code>, <code>finish()</code>, and <code>cancel()</code>. Pause unbinds the scroll listener, play rebinds it.</p>
+      <p>Control the scroll-driven blur programmatically with <code>play()</code>, <code>pause()</code>, <code>finish()</code>, and <code>cancel()</code>. Pause unbinds the scroll listener. Play rebinds it.</p>
       <JsApiDemo mode="looper" target="api-blur-demo">
         <motion-blur id="api-blur-demo" direction="in" blur="10"><div class="demo-announce"><span class="demo-badge">Scroll-driven</span><p class="demo-announce-title">Blur API</p><p class="demo-announce-sub">Control with JavaScript</p></div></motion-blur>
       </JsApiDemo>

@@ -16,7 +16,7 @@ import "../../../styles/docs.css";
 
     <main>
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-headline</motion-split></h1>
-      <p class="lead">Wraps each word, character, or line in an overflow-hidden mask and springs them into view — a Locomotive-style reveal built on Motion One. Fully accessible via <code>aria-label</code>.</p>
+      <p class="lead">Wraps each word, character, or line in an overflow-hidden mask and springs them into view. A Locomotive-style reveal built on Motion One. Fully accessible via <code>aria-label</code>.</p>
 
       <h2>Preview</h2>
       <DocsPreview replayId="headline-demo">
@@ -67,7 +67,7 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>variant="flip"</h2>
-      <p>Each unit starts rotated 90° around the X axis and springs forward into place — a 3D card-flip entrance. Works with <code>by="words"</code> or <code>by="chars"</code>.</p>
+      <p>Each unit starts rotated 90° around the X axis and springs forward into place, like a 3D card flip. Works with <code>by="words"</code> or <code>by="chars"</code>.</p>
       <DocsPreview replayId="headline-flip">
         <motion-headline id="headline-flip" variant="flip" by="words" interval="0.07" duration="0.9">Flip into view</motion-headline>
       </DocsPreview>
@@ -95,7 +95,7 @@ import 'motion-components'               // or the whole library`}
       <PropsTable
         nameLabel="Attribute"
         rows={[
-          { name: "by", type: "string", default: "'words'", description: "<code>'words'</code>, <code>'chars'</code>, or <code>'lines'</code> — unit to animate" },
+          { name: "by", type: "string", default: "'words'", description: "<code>'words'</code>, <code>'chars'</code>, or <code>'lines'</code>: unit to animate" },
           { name: "variant", type: "string", default: "'slide'", description: "<code>'slide'</code> (mask-clip Y reveal) or <code>'flip'</code> (3D rotateX card flip)" },
           { name: "interval", type: "number", default: "0.06", description: "Stagger delay between each unit in seconds" },
           { name: "duration", type: "number", default: "1", description: "Spring duration hint in seconds" },

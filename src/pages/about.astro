@@ -31,7 +31,7 @@ import CodeWindow from '../components/CodeWindow.astro'
 
       <p>
         We live in an era of instantaneous interfaces. Pages snap in. Modals appear. Content jumps
-        into place. Every interaction is a hard cut, and every hard cut teaches the brain that this
+        into place. Every interaction is a hard cut. Every hard cut teaches the brain that this
         world has no physics, no weight, no continuity.
       </p>
 
@@ -71,10 +71,10 @@ import CodeWindow from '../components/CodeWindow.astro'
         <a
           href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components"
           target="_blank"
-          rel="noopener">MDN — Web Components guide ↗</a
+          rel="noopener">MDN: Web Components guide ↗</a
         >
         <a href="https://caniuse.com/custom-elementsv1" target="_blank" rel="noopener"
-          >Can I Use — Custom Elements ↗</a
+          >Can I Use: Custom Elements ↗</a
         >
       </div>
     </section>
@@ -170,8 +170,8 @@ export function App() {
 
       <h3>1. HTML attributes</h3>
       <p>
-        The primary API is plain HTML attributes. Every tunable value, spring duration, scale,
-        direction, is exposed as an attribute with a sensible default.
+        The primary API is plain HTML attributes. Every tunable value is exposed as an attribute
+        with a sensible default: spring duration, scale, direction, and more.
       </p>
       <CodeWindow
         filename="example.html"
@@ -279,8 +279,8 @@ customElements.define('my-hover', MyHover)`}
         </li>
         <li>
           <strong>No janky animations.</strong> Springs replace duration-based easing. An interrupted
-          spring continues from its current velocity. An interrupted cubic-bezier snaps. The difference
-          is felt immediately.
+          spring continues from its current velocity. An interrupted cubic-bezier snaps. You feel
+          the difference right away.
         </li>
         <li>
           <strong>One responsibility per component.</strong> Primitives do one thing well. Complexity

@@ -9,13 +9,13 @@ import PropsTable from "../../../components/PropsTable.astro";
 import "../../../styles/docs.css";
 ---
 
-<Layout title="motion-gallery — Motion Components" description="CSS grid gallery with spring hover lift and FLIP-based lightbox expand. Click any item — it springs to full screen and back. Navigate with arrows or keyboard." noMain>
+<Layout title="motion-gallery — Motion Components" description="CSS grid gallery with spring hover lift and FLIP-based lightbox expand. Click any item. It springs to full screen and back. Navigate with arrows or keyboard." noMain>
   <div class="layout">
     <DocsSidebar />
 
     <main>
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-gallery</motion-split></h1>
-      <p class="lead">CSS grid gallery with spring hover lift and FLIP-based lightbox expand. Click any item — it springs to full screen and back. Navigate with arrows or keyboard.</p>
+      <p class="lead">CSS grid gallery with spring hover lift and FLIP-based lightbox expand. Click any item. It springs to full screen and back. Navigate with arrows or keyboard.</p>
 
       <h2>Preview</h2>
       <DocsPreview>
@@ -59,7 +59,7 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Aspect ratio</h2>
-      <p>Set <code>aspect-ratio</code> on the gallery to enforce a uniform size across all grid items — useful for photo grids.</p>
+      <p>Set <code>aspect-ratio</code> on the gallery to enforce a uniform size across all grid items (useful for photo grids).</p>
       <CodeWindow
         filename="motion-gallery.html"
         copy
@@ -69,7 +69,7 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>How it works</h2>
-      <p>On click, the component records the item's <code>getBoundingClientRect()</code> — the <em>First</em> position in FLIP terminology. A fixed-position clone springs to a centered, aspect-ratio-preserved target while a blurred backdrop fades in. Navigation fades out the current clone and springs the next item in from its grid position. On collapse, the spring reverses to the original rect.</p>
+      <p>On click, the component records the item's <code>getBoundingClientRect()</code>: the <em>First</em> position in FLIP terminology. A fixed-position clone springs to a centered, aspect-ratio-preserved target while a blurred backdrop fades in. Navigation fades out the current clone and springs the next item in from its grid position. On collapse, the spring reverses to the original rect.</p>
       <p>Because expand, navigate, and collapse all use the same spring clone, interrupting mid-animation is naturally smooth.</p>
 
       <h2>Properties</h2>

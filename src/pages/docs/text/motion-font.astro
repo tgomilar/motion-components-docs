@@ -21,7 +21,7 @@ import "../../../styles/docs.css";
     <main>
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-font</motion-split></h1>
       <p class="lead">
-        Animates one or more variable font axes — weight, optical size, width, or any custom axis — using Motion One spring physics.
+        Animates one or more variable font axes (weight, optical size, width, or any custom axis) using Motion One spring physics.
         Three trigger modes: <code>auto</code> (viewport entry), <code>hover</code> (mouse/focus), and <code>scroll</code> (axis tracks scroll position).
         Requires a variable font with the targeted axes.
       </p>
@@ -32,7 +32,7 @@ import "../../../styles/docs.css";
         <span class="showcase-link-sub">Weight spectrum · Word cloud · Spring bounce</span>
       </a>
 
-      <h2>Hover — weight</h2>
+      <h2>Hover: weight</h2>
       <p class="section-desc">The most common use: bold on hover with a spring-back on leave.</p>
       <DocsPreview>
         <motion-font axis="wght" from="300" to="800" trigger="hover" duration="0.5" class="vf-demo">
@@ -47,7 +47,7 @@ import "../../../styles/docs.css";
 </motion-font>`}
       />
 
-      <h2>Auto — viewport reveal</h2>
+      <h2>Auto: viewport reveal</h2>
       <p class="section-desc">Animates the axis once when the element scrolls into view. Ideal for hero headings that gain weight on entrance.</p>
       <DocsPreview replayId="vf-auto-demo">
         <motion-font id="vf-auto-demo" axis="wght" from="100" to="900" duration="1.2" trigger="auto" class="vf-demo">
@@ -62,8 +62,8 @@ import "../../../styles/docs.css";
 </motion-font>`}
       />
 
-      <h2>Scroll — tied to position</h2>
-      <p class="section-desc">The axis value maps directly to scroll progress — <code>from</code> when the element enters the viewport, <code>to</code> when it exits. No spring; direct 1:1 mapping. Works best in real page context — see the <a href="/showcase/motion-font/">showcase</a>.</p>
+      <h2>Scroll: tied to position</h2>
+      <p class="section-desc">The axis value maps directly to scroll progress: <code>from</code> when the element enters the viewport, <code>to</code> when it exits. No spring; direct 1:1 mapping. Works best in real page context. See the <a href="/showcase/motion-font/">showcase</a>.</p>
       <CodeWindow
         filename="motion-font-scroll.html"
         copy
@@ -115,7 +115,7 @@ import "../../../styles/docs.css";
       />
 
       <h2>Delay</h2>
-      <p class="section-desc">Delay the animation start in seconds — useful for staggering multiple reveals.</p>
+      <p class="section-desc">Delay the animation start in seconds. This is useful for staggering multiple reveals.</p>
       <DocsPreview replayId="vf-delay-2">
         <div class="vf-delay-stack">
           <motion-font axis="wght" from="100" to="900" trigger="auto" delay="0" duration="0.8" class="vf-demo vf-small">
@@ -139,7 +139,7 @@ import "../../../styles/docs.css";
 
       <h2>Properties</h2>
       <PropsTable nameLabel="Attribute" rows={[
-        { name: 'axis',     type: 'string',  default: "'wght'", description: "Font axis tag — <code>'wght'</code>, <code>'wdth'</code>, <code>'opsz'</code>, or any custom axis. Ignored when <code>axes</code> is set." },
+        { name: 'axis',     type: 'string',  default: "'wght'", description: "Font axis tag: <code>'wght'</code>, <code>'wdth'</code>, <code>'opsz'</code>, or any custom axis. Ignored when <code>axes</code> is set." },
         { name: 'axes',     type: 'string',  default: "''",     description: "Multi-axis: space-separated <code>tag:from:to</code> triplets, e.g. <code>\"wght:300:800 opsz:8:32\"</code>. Overrides <code>axis</code>, <code>from</code>, <code>to</code>." },
         { name: 'from',     type: 'number',  default: '300',    description: 'Starting axis value. Ignored when <code>axes</code> is set.' },
         { name: 'to',       type: 'number',  default: '700',    description: 'Target axis value. Ignored when <code>axes</code> is set.' },

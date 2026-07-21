@@ -9,14 +9,14 @@ import PropsTable from "../../../components/PropsTable.astro";
 import "../../../styles/docs.css";
 ---
 
-<Layout title="motion-spotlight — Motion Components" description="Mouse-tracked radial gradient overlay. The spotlight fades in on hover or focus and lerps toward the cursor — soft, weighted, never locked 1:1 to the pointer." noMain>
+<Layout title="motion-spotlight — Motion Components" description="Mouse-tracked radial gradient overlay. The spotlight fades in on hover or focus and lerps toward the cursor: soft, weighted, never locked 1:1 to the pointer." noMain>
   <div class="layout">
     <DocsSidebar />
 
     <main>
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-spotlight</motion-split></h1>
       <p class="lead">
-        Mouse-tracked radial gradient overlay. The spotlight fades in on hover or focus and lerps toward the cursor — soft, weighted, never locked 1:1 to the pointer.
+        Mouse-tracked radial gradient overlay. The spotlight fades in on hover or focus and lerps toward the cursor: soft, weighted, never locked 1:1 to the pointer.
       </p>
 
       <h2>Preview</h2>
@@ -43,7 +43,7 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Usage</h2>
-      <p>Wrap any element. The spotlight is rendered as an absolutely-positioned overlay inside the host — give the host a non-static layout if you need to nest it.</p>
+      <p>Wrap any element. The spotlight is rendered as an absolutely-positioned overlay inside the host. Give the host a non-static layout if you need to nest it.</p>
       <CodeWindow
         filename="motion-spotlight.html"
         copy
@@ -68,7 +68,7 @@ import 'motion-components'               // or the whole library`}
 
       <h2>Accessibility</h2>
       <p>
-        The spotlight is purely decorative — marked <code>aria-hidden</code>. The host listens for <code>:focus-within</code> as well as hover, so keyboard
+        The spotlight is purely decorative. It is marked <code>aria-hidden</code>. The host listens for <code>:focus-within</code> as well as hover, so keyboard
         users get the effect when focusing slotted interactive content. Under <code>prefers-reduced-motion</code> the fade transition is removed.
       </p>
       <DocsPagination />
