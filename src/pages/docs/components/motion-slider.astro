@@ -27,7 +27,7 @@ import "../../../styles/docs.css";
               <motion-split by="chars" interval="0.04" duration="0.55" y="28" class="slide-headline">
                 Spring motion.
               </motion-split>
-              <p class="slide-body">Each character springs in independently — controllable interval and duration.</p>
+              <p class="slide-body">Each character springs in independently, with controllable interval and duration.</p>
             </div>
 
             <!-- Slide 2: motion-stagger pills -->
@@ -76,7 +76,7 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>How it works</h2>
-      <p>Each direct child becomes a slide, sized to fill the slider width. Pointer events are tracked across the window so drag doesn't break when the cursor leaves the element. On release, velocity is sampled over the last 6 pointer events — a fast flick snaps to the adjacent slide; a slow drag snaps to the nearest.</p>
+      <p>Each direct child becomes a slide, sized to fill the slider width. Pointer events are tracked across the window so drag doesn't break when the cursor leaves the element. On release, velocity is sampled over the last 6 pointer events: a fast flick snaps to the adjacent slide; a slow drag snaps to the nearest.</p>
       <p>The spring uses the captured velocity as its initial condition, so the snap animation feels like a physical continuation of the gesture rather than a teleport.</p>
 
       <h2>Properties</h2>

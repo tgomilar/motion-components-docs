@@ -75,7 +75,7 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>With slotted content</h2>
-      <p>Place any element inside <code>motion-circle</code> to anchor it at the center. The slot content is stationary — only the text ring rotates.</p>
+      <p>Place any element inside <code>motion-circle</code> to anchor it at the center. The slot content stays still. Only the text ring rotates.</p>
       <DocsPreview>
         <motion-circle class="demo-accent" text="MOTION COMPONENTS · SPIN IT · " radius="90" speed="8">
           <div class="demo-avatar"><span class="y">&lt;</span>mc<span class="y">&gt;</span></div>
@@ -107,9 +107,9 @@ import 'motion-components'               // or the whole library`}
 
       <h2>How it works</h2>
       <p>
-        Each character is wrapped in an absolutely positioned <code>span</code> centered in the container. A CSS transform chain — <code
+        Each character is wrapped in an absolutely positioned <code>span</code> centered in the container. A CSS transform chain places each character at its position on the ring: <code
           >rotate(angle) translateY(-radius)</code
-        > — places each character at its position on the ring. The <code>.ring</code> container then spins continuously via Motion One's <code>animate</code> with
+        >. The <code>.ring</code> container then spins continuously via Motion One's <code>animate</code> with
         <code>repeat: Infinity</code> and
         <code>ease: "linear"</code>.
       </p>

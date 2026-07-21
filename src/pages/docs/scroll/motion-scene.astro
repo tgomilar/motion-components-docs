@@ -10,13 +10,13 @@ import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
 
-<Layout title="motion-scene — Motion Components" description="Scroll-driven animation timeline. Pin a stage while scroll progress drives children through keyframes — purely declarative via data attributes." noMain>
+<Layout title="motion-scene — Motion Components" description="Scroll-driven animation timeline. Pin a stage while scroll progress drives children through keyframes. It's purely declarative, using data attributes." noMain>
   <div class="layout">
     <DocsSidebar />
 
     <main>
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-scene</motion-split></h1>
-      <p class="lead">Scroll-driven animation timeline. Pin a stage while scroll progress drives children through keyframes — purely declarative via data attributes.</p>
+      <p class="lead">Scroll-driven animation timeline. Pin a stage while scroll progress drives children through keyframes. It's purely declarative, using data attributes.</p>
 
       <a href="/showcase/scene/" class="showcase-link">
         <span class="showcase-link-label">Live showcase</span>
@@ -164,7 +164,7 @@ import 'motion-components'               // or the whole library`}
       <PropsTable
         nameLabel="Attribute"
         rows={[
-          { name: "height", type: "string", default: "'200vh'", description: "Height of the scroll container — controls how much scroll the scene consumes." },
+          { name: "height", type: "string", default: "'200vh'", description: "Height of the scroll container: controls how much scroll the scene consumes." },
           { name: "pin", type: "boolean", default: "true", description: "When present, the inner stage sticks to the viewport while scrolling. Omit to disable." },
           { name: "container", type: "string", default: "''", description: "CSS selector for a custom scroll container. Defaults to document scroll when empty." },
         ]}
@@ -173,15 +173,15 @@ import 'motion-components'               // or the whole library`}
       <h2>Child data attributes</h2>
       <PropsTable
         rows={[
-          { name: "data-from", type: "JSON", default: "—", description: "Starting keyframe — e.g. <code>{\"opacity\":0,\"y\":\"-20px\"}</code>. Supports <code>x</code>, <code>y</code>, <code>scale</code>, <code>rotate</code>, and any CSS property." },
-          { name: "data-to", type: "JSON", default: "—", description: "Ending keyframe — same shape as <code>data-from</code>." },
+          { name: "data-from", type: "JSON", default: "—", description: "Starting keyframe, e.g. <code>{\"opacity\":0,\"y\":\"-20px\"}</code>. Supports <code>x</code>, <code>y</code>, <code>scale</code>, <code>rotate</code>, and any CSS property." },
+          { name: "data-to", type: "JSON", default: "—", description: "Ending keyframe, same shape as <code>data-from</code>." },
           { name: "data-start", type: "number", default: "0", description: "Scene progress (0–1) at which this child's animation begins." },
           { name: "data-end", type: "number", default: "1", description: "Scene progress (0–1) at which this child's animation ends." },
         ]}
       />
 
       <h2>JavaScript API</h2>
-      <p>Control the scene programmatically with <code>play()</code>, <code>pause()</code>, <code>finish()</code>, and <code>cancel()</code>. Pause unbinds the scroll listener so the card freezes mid-scrub, finish snaps to the end keyframe, cancel resets to the start. Scroll the box while running to drive the card.</p>
+      <p>Control the scene programmatically with <code>play()</code>, <code>pause()</code>, <code>finish()</code>, and <code>cancel()</code>. Pause unbinds the scroll listener so the card freezes mid-scrub. Finish snaps to the end keyframe. Cancel resets to the start. Scroll the box while running to drive the card.</p>
       <JsApiDemo mode="looper" target="api-scene-demo">
         <div class="scene-scroll" id="api-scene-scroll">
           <motion-scene id="api-scene-demo" height="600px" container="#api-scene-scroll" class="demo-scene">

@@ -35,7 +35,7 @@ import CodeWindow from "../components/CodeWindow.astro";
       </div>
       <div class="hero-install">
         <span class="install-label">Quick install</span>
-        <motion-press><motion-code-inline copy>npm install motion-components</motion-code-inline></motion-press>
+        <motion-press><motion-code-inline copy-visible>npm install motion-components</motion-code-inline></motion-press>
       </div>
     </div>
   </section>
@@ -51,28 +51,9 @@ import CodeWindow from "../components/CodeWindow.astro";
       loop-gap="0"
       loop-speed="70"></motion-curve>
 
-    <!-- <section class="ticker-section">
-    <div class="ticker-track">
-      <motion-ticker speed="55" gap="8" class="ticker">
-        <span class="chip chip--yellow">Spring physics</span>
-        <span class="chip">Zero config</span>
-        <span class="chip">Fully interruptible</span>
-        <span class="chip chip--yellow">No janky cuts</span>
-        <span class="chip">Drop-in components</span>
-        <span class="chip">TypeScript ready</span>
-        <span class="chip chip--yellow">Composable primitives</span>
-        <span class="chip">Reduced motion support</span>
-        <span class="chip">Framework-agnostic</span>
-        <span class="chip chip--yellow">Viewport-aware</span>
-        <span class="chip">Gesture-driven</span>
-        <span class="chip">No rewrites needed</span>
-        <span class="chip chip--yellow">Spring snap</span>
-        <span class="chip">Web Components standard</span>
-      </motion-ticker>
-    </div> -->
     <div class="inner ticker-caption">
       <p class="section-sub">
-        <motion-press><motion-code-inline copy>motion-curve</motion-code-inline></motion-press>smoothly looping text with wave animation
+        <motion-press><motion-code-inline copy-visible>motion-curve</motion-code-inline></motion-press>smoothly looping text with wave animation
       </p>
     </div>
   </section>
@@ -153,7 +134,7 @@ import 'motion-components'
       <div class="section-head">
         <p class="section-eyebrow">Primitives</p>
         <h2>Feel the difference.</h2>
-        <p class="section-sub">Composable primitives. Each one is interactive — try them.</p>
+        <p class="section-sub">Composable primitives. Each one is interactive. Try them.</p>
       </div>
     </div>
     <div class="inner inner--wide">
@@ -247,7 +228,7 @@ import 'motion-components'
       <div class="section-head">
         <p class="section-eyebrow">Text Effects</p>
         <h2>Words in motion.</h2>
-        <p class="section-sub">Components for animated text — split, typewriter, counter, scramble, and ticker.</p>
+        <p class="section-sub">Components for animated text: split, typewriter, counter, scramble, and ticker.</p>
       </div>
     </div>
     <div class="inner inner--wide">
@@ -351,7 +332,7 @@ import 'motion-components'
                 >
               </div>
               <h3>Spring physics</h3>
-              <p>Every animation uses spring dynamics — naturally interruptible, no jarring cuts or fixed durations.</p>
+              <p>Every animation uses spring dynamics: naturally interruptible, with no jarring cuts or fixed durations.</p>
             </div>
           </motion-hover>
           <motion-hover scale="1.02" y="-4">
@@ -369,7 +350,7 @@ import 'motion-components'
                 >
               </div>
               <h3>Framework-agnostic</h3>
-              <p>Standard web components work anywhere — React, Vue, Svelte, Astro, or raw HTML. No adapter needed.</p>
+              <p>Standard web components work anywhere: React, Vue, Svelte, Astro, or raw HTML. No adapter needed.</p>
             </div>
           </motion-hover>
           <motion-hover scale="1.02" y="-4">
@@ -390,7 +371,7 @@ import 'motion-components'
               </div>
               <h3>Composable primitives</h3>
               <p>
-                Build complex interactions by wrapping — nest <motion-code-inline>motion-hover</motion-code-inline> inside <motion-code-inline
+                Build complex interactions by wrapping: nest <motion-code-inline>motion-hover</motion-code-inline> inside <motion-code-inline
                   >motion-stagger</motion-code-inline
                 > effortlessly.
               </p>
@@ -411,7 +392,7 @@ import 'motion-components'
                 >
               </div>
               <h3>Zero config</h3>
-              <p>Sensible defaults out of the box. Attributes let you tune — but you never have to.</p>
+              <p>Sensible defaults out of the box. Attributes let you tune, but you never have to.</p>
             </div>
           </motion-hover>
           <motion-hover scale="1.02" y="-4">
@@ -447,7 +428,7 @@ import 'motion-components'
                 >
               </div>
               <h3>Accessible by default</h3>
-              <p>Respects <motion-code-inline>prefers-reduced-motion</motion-code-inline>. Animations skip cleanly — no flashes, no layout shift.</p>
+              <p>Respects <motion-code-inline>prefers-reduced-motion</motion-code-inline>. Animations skip cleanly: no flashes, no layout shift.</p>
             </div>
           </motion-hover>
         </motion-stagger>
@@ -461,7 +442,7 @@ import 'motion-components'
       <div class="section-head">
         <p class="section-eyebrow">Pick a goal. Find the tag.</p>
         <h2>Still want more?</h2>
-        <p class="section-sub">Three more areas to explore — hover to reveal what's inside.</p>
+        <p class="section-sub">Three more areas to explore. Hover to reveal what's inside.</p>
       </div>
     </div>
     <div class="inner">
@@ -476,7 +457,7 @@ import 'motion-components'
             <div class="flip-eyebrow flip-eyebrow--inv">Category</div>
             <span class="flip-cat-big">Scroll</span>
             <p class="flip-blurb">
-              Parallax depth, progress-driven animation, scroll-linked scenes — two components that unlock scroll-based motion without any scroll library.
+              Parallax depth, progress-driven animation, and scroll-linked scenes: two components that unlock scroll-based motion without any scroll library.
             </p>
             <span class="flip-link">Explore →</span>
           </a>
@@ -492,7 +473,7 @@ import 'motion-components'
             <div class="flip-eyebrow flip-eyebrow--inv">Category</div>
             <span class="flip-cat-big">Components</span>
             <p class="flip-blurb">
-              Dialogs, galleries, sliders, image comparison, countdowns, progress rings, flip-cards, spotlights — interactive widgets that animate themselves.
+              Dialogs, galleries, sliders, image comparison, countdowns, progress rings, flip-cards, and spotlights: interactive widgets that animate themselves.
             </p>
             <span class="flip-link">Explore →</span>
           </a>
@@ -508,7 +489,7 @@ import 'motion-components'
             <div class="flip-eyebrow flip-eyebrow--inv">Category</div>
             <span class="flip-cat-big">Code</span>
             <p class="flip-blurb">
-              Syntax-highlighted code blocks with copy buttons, optional typing animation, and chrome-style title bars — drop in for docs, tutorials, and live
+              Syntax-highlighted code blocks with copy buttons, optional typing animation, and chrome-style title bars. Drop them in for docs, tutorials, and live
               demos.
             </p>
             <span class="flip-link">Explore →</span>

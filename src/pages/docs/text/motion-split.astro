@@ -10,13 +10,13 @@ import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
 
-<Layout title="motion-split — Motion Components" description="Splits text into words, characters, or detected lines and staggers them in on viewport entry. Fully accessible — screen readers receive the original text via aria-label." noMain>
+<Layout title="motion-split — Motion Components" description="Splits text into words, characters, or detected lines and staggers them in on viewport entry. Fully accessible: screen readers receive the original text via aria-label." noMain>
   <div class="layout">
     <DocsSidebar />
 
     <main>
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-split</motion-split></h1>
-      <p class="lead">Splits text into words, characters, or detected lines and staggers them in on viewport entry. Fully accessible — screen readers receive the original text via <code>aria-label</code>.</p>
+      <p class="lead">Splits text into words, characters, or detected lines and staggers them in on viewport entry. Fully accessible: screen readers receive the original text via <code>aria-label</code>.</p>
 
       <h2>Preview</h2>
       <DocsPreview replayId="split-demo">
@@ -70,7 +70,7 @@ import 'motion-components'               // or the whole library`}
       <PropsTable
         nameLabel="Attribute"
         rows={[
-          { name: "by", type: "string", default: "'words'", description: "<code>'words'</code>, <code>'chars'</code>, or <code>'lines'</code> — granularity of the split" },
+          { name: "by", type: "string", default: "'words'", description: "<code>'words'</code>, <code>'chars'</code>, or <code>'lines'</code>: granularity of the split" },
           { name: "interval", type: "number", default: "0.05", description: "Delay between each unit in seconds" },
           { name: "duration", type: "number", default: "0.6", description: "Spring duration hint in seconds" },
           { name: "y", type: "number", default: "20", description: "Initial vertical offset in px" },
@@ -89,7 +89,7 @@ import 'motion-components'               // or the whole library`}
       <h2>Accessibility</h2>
       <p>
         The component sets <code>aria-label</code> on the host with the original unsplit text and <code>aria-hidden="true"</code> on all child spans.
-        Screen readers announce the full phrase — not individual letters or words.
+        Screen readers announce the full phrase, not individual letters or words.
         Respects <code>prefers-reduced-motion</code>: when enabled, content appears immediately at its final state.
       </p>
       <DocsPagination />

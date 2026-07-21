@@ -10,7 +10,7 @@ const frameworkTabs = [
   {
     id: "vanilla",
     label: "Vanilla / Astro / Svelte",
-    desc: "Import preload CSS and the library — works without configuration.",
+    desc: "Import preload CSS and the library. Works without configuration.",
     filename: "app.js",
     code: `import { preloadCSS } from 'motion-components/preload'
 import 'motion-components'
@@ -94,7 +94,7 @@ const foucTabs = [
   {
     id: "react",
     label: "React / Vite",
-    desc: "Inline CSS in <code>main.tsx</code> — works before first paint.",
+    desc: "Inline CSS in <code>main.tsx</code>. Works before first paint.",
     filename: "main.tsx",
     code: `import { preloadCSS } from 'motion-components/preload'
 import 'motion-components'
@@ -174,7 +174,7 @@ useHead({ style: [{ children: preloadCSS }] })
 ];
 ---
 
-<Layout title="Docs — Motion Components" description="Explore the full Motion Components API. Animate, reveal, respond, and compose with spring-based web components — framework-agnostic, drop-in." noMain>
+<Layout title="Docs — Motion Components" description="Explore the full Motion Components API. Animate, reveal, respond, and compose with spring-based web components. Framework-agnostic and drop-in." noMain>
   <div class="layout">
     <DocsSidebar backHref="/" backLabel="← Home" />
 
@@ -184,7 +184,7 @@ useHead({ style: [{ children: preloadCSS }] })
 
       <h2>Installation</h2>
       <CodeWindow filename="terminal" copy compact code={`npm install motion-components`} />
-      <p class="section-lead">Import once — all custom elements register themselves as a side effect:</p>
+      <p class="section-lead">Import once. All custom elements register themselves as a side effect:</p>
       <CodeWindow filename="app.js" copy compact code={`import 'motion-components'`} />
       <p class="section-lead">Import a specific class if you need the TypeScript type or want to call methods:</p>
       <CodeWindow
@@ -208,8 +208,8 @@ el.replay()`}
 
       <h2 id="tree-shake">Use only what you need</h2>
       <p class="section-lead">
-        Every component ships as its own subpath export. Import a single tag and the bundler will only pull in that file — the rest of the library never reaches
-        your bundle. Pay only for what you use.
+        Every component ships as its own subpath export. Import a single tag and the bundler will only pull in that file. The rest of the library never reaches
+        your bundle, so you pay only for what you use.
       </p>
       <p class="section-lead">Just one component:</p>
       <CodeWindow
@@ -260,17 +260,17 @@ console.log(el.to)`}
 
       <h2 id="flash">Flash prevention</h2>
       <p class="section-lead">
-        Web components are undefined when the HTML first renders. The browser treats <code>&lt;motion-flip-card&gt;</code> as a plain <code>HTMLElement</code>
-        — its Light DOM children (<code>slot="back"</code> content, dialog panels, etc.) display as unstyled visible DOM before the JavaScript bundle
+        Web components are undefined when the HTML first renders. The browser treats <code>&lt;motion-flip-card&gt;</code> as a plain <code>HTMLElement</code>.
+        Its Light DOM children (<code>slot="back"</code> content, dialog panels, etc.) display as unstyled visible DOM before the JavaScript bundle
         arrives and calls <code>customElements.define()</code>. Slot-based components are especially sensitive because they carry visible Light DOM.
       </p>
 
-      <h3>Solution — inline CSS in <code>&lt;head&gt;</code></h3>
+      <h3>Solution: inline CSS in <code>&lt;head&gt;</code></h3>
       <p class="section-lead">
         The only 100% reliable fix: inject a <code>&lt;style&gt;</code> tag in the document <code>&lt;head&gt;</code> that hides every component while
         it's <code>:not(:defined)</code>. The CSS must be available <em>synchronously before the first paint</em>. A render-blocking CSS file (<code
           >&lt;link&gt;</code
-        >) arrives after the HTML — there is a timing gap. Inline CSS has zero gap, zero flash risk.
+        >) arrives after the HTML, leaving a timing gap. Inline CSS has zero gap, zero flash risk.
       </p>
       <CodeWindow
         filename="app.ts"
@@ -286,15 +286,15 @@ document.head.appendChild(style)`}
       <h3>Framework examples</h3>
       <p class="section-lead">
         Each example below inlines <code>preloadCSS</code> as a <code>&lt;style&gt;</code> tag in the document <code>&lt;head&gt;</code>. The
-        import uses the <code>motion-components/preload</code> subpath — this file has zero side effects and evaluates cleanly in Node.js during SSR.
+        import uses the <code>motion-components/preload</code> subpath. This file has zero side effects and evaluates cleanly in Node.js during SSR.
       </p>
 
       <div class="fouc-tabs"><FwTabs tabs={foucTabs} group="fouc" /></div>
 
-      <h3>Alternative — CSS import</h3>
+      <h3>Alternative: CSS import</h3>
       <p class="section-lead">
         Simpler to set up, slightly less reliable: import the <code>preload.css</code> file. Most bundlers convert this to a render-blocking
-        <code>&lt;link&gt;</code> — the browser won't paint until the CSS arrives. The gap between receiving the HTML and fetching the CSS is small
+        <code>&lt;link&gt;</code>. The browser won't paint until the CSS arrives. The gap between receiving the HTML and fetching the CSS is small
         but non-zero. Suitable for development and less flash-sensitive setups.
       </p>
       <CodeWindow filename="app.js" copy compact code={`import 'motion-components/preload.css'`} />

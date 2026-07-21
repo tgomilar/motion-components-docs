@@ -13,7 +13,7 @@ import "../../styles/docs.css";
 
     <main>
       <h1><motion-split by="chars" interval="0.025" duration="0.5">JavaScript API</motion-split></h1>
-      <p class="lead">Every animating component exposes a Web-Animations-style playback surface: <code>play()</code>, <code>pause()</code>, <code>finish()</code>, <code>cancel()</code>, a <code>playState</code> getter, and a <code>finished</code> promise — plus package-level helpers to control everything at once.</p>
+      <p class="lead">Every animating component exposes a Web-Animations-style playback surface: <code>play()</code>, <code>pause()</code>, <code>finish()</code>, <code>cancel()</code>, a <code>playState</code> getter, and a <code>finished</code> promise. It also exposes package-level helpers to control everything at once.</p>
 
       <h2>Controlling playback</h2>
       <JsApiDemo target="api-ticker" wide>
@@ -98,10 +98,10 @@ pauseAll(document.querySelector('#hero'))   // or scope to a subtree`}
       />
 
       <h2>Scroll-driven components</h2>
-      <p>For <code>motion-parallax</code>, <code>motion-scene</code>, <code>motion-progress</code>, and <code>motion-blur</code> the verbs adapt: <code>pause()</code> unbinds the scroll listener and freezes the effect at its current progress, <code>play()</code> rebinds, <code>finish()</code> applies the end-of-scroll state, and <code>cancel()</code> unbinds and resets styles. While bound, <code>playState</code> is <code>'running'</code>.</p>
+      <p>For <code>motion-parallax</code>, <code>motion-scene</code>, <code>motion-progress</code>, and <code>motion-blur</code>, the verbs adapt because these components track scroll position instead of a timeline. <code>pause()</code> unbinds the scroll listener and freezes the effect at its current progress. <code>play()</code> rebinds. <code>finish()</code> applies the end-of-scroll state. <code>cancel()</code> unbinds and resets styles. While bound, <code>playState</code> is <code>'running'</code>.</p>
 
       <h2>Accessibility</h2>
-      <p>The API always respects <code>prefers-reduced-motion</code>: a programmatic <code>play()</code> applies the final state instantly, still resolves <code>finished</code>, and still fires <code>motion-start</code> and <code>motion-finish</code> — so calling code never needs a reduced-motion branch.</p>
+      <p>The API always respects <code>prefers-reduced-motion</code>. A programmatic <code>play()</code> applies the final state instantly, still resolves <code>finished</code>, and still fires <code>motion-start</code> and <code>motion-finish</code>. So calling code never needs a reduced-motion branch.</p>
     </main>
   </div>
 </Layout>

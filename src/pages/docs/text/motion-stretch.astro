@@ -83,7 +83,7 @@ el.text = 'UPDATED'   // animation restarts`}
 
       <h2>How it works</h2>
       <p>
-        Each character is wrapped in an inline-block <code>span</code>. On <code>mouseenter</code>, Motion One animates each character's <code>x</code> transform using a spring — characters at the edges travel furthest (<code>±spread</code>), characters near the center barely move. On <code>mouseleave</code>, a new spring animation returns all characters to <code>x: 0</code>.
+        Each character is wrapped in an inline-block <code>span</code>. On <code>mouseenter</code>, Motion One animates each character's <code>x</code> transform using a spring. Characters at the edges travel furthest (<code>±spread</code>), and characters near the center barely move. On <code>mouseleave</code>, a new spring animation returns all characters to <code>x: 0</code>.
       </p>
       <p>
         Any in-progress animation is cancelled before starting the next, so fast hover transitions always feel responsive rather than lagging.
@@ -94,15 +94,15 @@ el.text = 'UPDATED'   // animation restarts`}
         The animated per-character spans are marked <code>aria-hidden="true"</code>, and the full <code>text</code> string is exposed to assistive tech via a visually-hidden span inside the shadow DOM. Screen readers announce the word as a single phrase rather than letter-by-letter, regardless of the spring transforms applied to individual characters.
       </p>
       <p>
-        When composing inside another text component (e.g. <code>motion-scramble</code>), pass the text only once — either as the parent's content or as <code>motion-stretch</code>'s <code>text</code> attribute, not both — to avoid duplicate announcements.
+        When composing inside another text component (e.g. <code>motion-scramble</code>), pass the text only once. Use either the parent's content or <code>motion-stretch</code>'s <code>text</code> attribute, not both, to avoid duplicate announcements.
       </p>
 
       <h2>Properties</h2>
       <PropsTable nameLabel="Attribute" rows={[
         { name: 'text', type: 'string', default: '—', description: 'Text to render. Falls back to the child text when unset' },
         { name: 'spread', type: 'number', default: '12', description: 'Max displacement of the outermost character on each side (px)' },
-        { name: 'stiffness', type: 'number', default: '320', description: 'Spring stiffness — higher is snappier' },
-        { name: 'damping', type: 'number', default: '16', description: 'Spring damping — lower is bouncier' },
+        { name: 'stiffness', type: 'number', default: '320', description: 'Spring stiffness: higher is snappier' },
+        { name: 'damping', type: 'number', default: '16', description: 'Spring damping: lower is bouncier' },
       ]} />
       <DocsPagination />
     </main>

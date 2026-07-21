@@ -10,13 +10,13 @@ import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
 
-<Layout title="motion-perspective — Motion Components" description="Scales characters progressively to simulate a vanishing-point perspective — text that recedes into the distance. Static by default, with an optional animated rotation mode." noMain>
+<Layout title="motion-perspective — Motion Components" description="Scales characters progressively to simulate a vanishing-point perspective: text that recedes into the distance. Static by default, with an optional animated rotation mode." noMain>
   <div class="layout">
     <DocsSidebar />
 
     <main>
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-perspective</motion-split></h1>
-      <p class="lead">Scales characters progressively to simulate a vanishing-point perspective — text that recedes into the distance. Static by default, with an optional animated rotation mode.</p>
+      <p class="lead">Scales characters progressively to simulate a vanishing-point perspective: text that recedes into the distance. Static by default, with an optional animated rotation mode.</p>
 
       <h2>Preview</h2>
       <DocsPreview>
@@ -55,7 +55,7 @@ el.text = 'UPDATED'   // animation restarts`}
       </p>
 
       <h2>Vanish right</h2>
-      <p>Set <code>vanish="right"</code> to flip the direction — text grows from left to right.</p>
+      <p>Set <code>vanish="right"</code> to flip the direction: text grows from left to right.</p>
       <DocsPreview>
         <motion-perspective class="demo-large" depth="0.7" vanish="right">RECEDING</motion-perspective>
       </DocsPreview>
@@ -119,7 +119,7 @@ el.text = 'UPDATED'   // animation restarts`}
       <h2>Properties</h2>
       <PropsTable nameLabel="Attribute" rows={[
         { name: 'text', type: 'string', default: '—', description: 'Text to render with the perspective effect. Falls back to the child text when unset' },
-        { name: 'depth', type: 'number', default: '0.65', description: 'Effect intensity — how small the vanishing end gets (0–1)' },
+        { name: 'depth', type: 'number', default: '0.65', description: 'Effect intensity: how small the vanishing end gets (0–1)' },
         { name: 'vanish', type: '"left" | "right"', default: '"left"', description: 'Which end of the text is the vanishing point' },
         { name: 'animate', type: 'boolean', default: 'false', description: 'Continuously rotate the perspective back and forth' },
         { name: 'speed', type: 'number', default: '1.5', description: 'Rotation cycles per second (only applies when animate is set)' },

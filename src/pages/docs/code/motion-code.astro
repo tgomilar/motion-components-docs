@@ -59,7 +59,7 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Copy button</h2>
-      <p>Add <code>copy</code> to show a copy icon button in the chrome bar — the same icon as <code>motion-code-inline</code>. Add <code>copy-label</code> to show a "Copy" text label next to the icon.</p>
+      <p>Add <code>copy</code> to show a copy icon button in the chrome bar. It's the same icon used in <code>motion-code-inline</code>. Add <code>copy-label</code> to show a "Copy" text label next to the icon.</p>
       <DocsPreview>
         <div class="demo-window">
           <CodeWindow
@@ -81,7 +81,7 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Typing animation</h2>
-      <p>Add <code>type</code> to animate code appearing character by character — syntax highlighting applies as it types. Loops automatically by default. Control speed with <code>type-speed</code> (chars/sec, default&nbsp;80) and the pause between loops with <code>type-loop-delay</code> (ms).</p>
+      <p>Add <code>type</code> to animate code appearing character by character. Syntax highlighting applies as it types. Loops automatically by default. Control speed with <code>type-speed</code> (chars/sec, default&nbsp;80) and the pause between loops with <code>type-loop-delay</code> (ms).</p>
       <DocsPreview>
         <div class="demo-window">
           <CodeWindow
@@ -108,7 +108,7 @@ animate(card, {
 </motion-code>`}
       />
 
-      <h2>On reveal — no-loop</h2>
+      <h2>On reveal: no-loop</h2>
       <p>Add <code>no-loop</code> to disable looping. The animation plays once when the element scrolls into the viewport instead of starting immediately.</p>
       <DocsPreview replayId="cw-reveal-demo">
         <div class="demo-window">
@@ -134,7 +134,7 @@ animate(card, {
       />
 
       <h2>Delayed typing</h2>
-      <p>Use <code>type-delay</code> (ms) to hold before typing starts — useful when the window animates into view.</p>
+      <p>Use <code>type-delay</code> (ms) to hold before typing starts. This is useful when the window animates into view.</p>
       <DocsPreview replayId="cw-delay-demo">
         <div class="demo-window">
           <CodeWindow
@@ -162,7 +162,7 @@ animate(".hero", {
       />
 
       <h2>Compact</h2>
-      <p>Add <code>compact</code> for tighter padding, smaller font, and a slimmer title bar — useful inside cards or sidebars.</p>
+      <p>Add <code>compact</code> for tighter padding, smaller font, and a slimmer title bar. Useful inside cards or sidebars.</p>
       <DocsPreview>
         <div class="demo-window">
           <CodeWindow
@@ -185,7 +185,7 @@ animate(".hero", {
       />
 
       <h2>Hide chrome</h2>
-      <p>Use <code>hide-chrome</code> to remove the title bar entirely — just the code body.</p>
+      <p>Use <code>hide-chrome</code> to remove the title bar entirely, leaving just the code body.</p>
       <DocsPreview>
         <div class="demo-window">
           <CodeWindow
@@ -250,7 +250,7 @@ animate(".hero", {
         { name: 'type',            type: 'boolean', default: 'false',      description: 'Animate code in character by character with a blinking cursor. Loops automatically.' },
         { name: 'type-speed',      type: 'number',  default: '80',         description: 'Typing speed in characters per second' },
         { name: 'type-delay',      type: 'number',  default: '0',          description: 'Delay in ms before typing starts' },
-        { name: 'no-loop',         type: 'boolean', default: 'false',      description: 'Disable looping — play once on viewport entry instead of repeating' },
+        { name: 'no-loop',         type: 'boolean', default: 'false',      description: 'Disable looping. Play once on viewport entry instead of repeating' },
         { name: 'type-loop-delay', type: 'number',  default: '1500',       description: 'Pause in ms between the end of one loop and the start of the next' },
       ]} />
 

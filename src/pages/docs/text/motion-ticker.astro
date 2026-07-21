@@ -10,14 +10,14 @@ import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
 
-<Layout title="motion-ticker — Motion Components" description="Continuously scrolls its children horizontally in a seamless loop. Accepts any content — text, tags, logos. Pauses on hover. Keyboard accessible." noMain>
+<Layout title="motion-ticker — Motion Components" description="Continuously scrolls its children horizontally in a seamless loop. Accepts any content: text, tags, logos. Pauses on hover. Keyboard accessible." noMain>
   <div class="layout">
     <DocsSidebar />
 
     <main>
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-ticker</motion-split></h1>
       <p class="lead">
-        Continuously scrolls its children horizontally in a seamless loop. Accepts any content — text, tags, logos. Pauses on hover by default. Keyboard accessible — tab to focus and press <kbd>Space</kbd> to pause.
+        Continuously scrolls its children horizontally in a seamless loop. Accepts any content: text, tags, logos. Pauses on hover by default. Keyboard accessible: tab to focus and press <kbd>Space</kbd> to pause.
       </p>
 
       <h2>Preview</h2>
@@ -41,7 +41,7 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Usage</h2>
-      <p class="usage-note">Place any inline content as children — the ticker duplicates it seamlessly.</p>
+      <p class="usage-note">Place any inline content as children. The ticker duplicates it seamlessly.</p>
       <CodeWindow
         filename="motion-ticker.html"
         copy
@@ -94,7 +94,7 @@ import 'motion-components'               // or the whole library`}
       <p>
         The ticker is focusable (<code>tabindex="0"</code>) and carries <code>role="region"</code> with a descriptive <code>aria-label</code>.
         Focusing pauses the scroll; blurring resumes it. While focused, <kbd>Space</kbd> or <kbd>Enter</kbd> toggles a persistent pause so keyboard-only
-        users can read the content at their own pace — satisfying WCAG 2.1 SC 2.2.2 (Pause, Stop, Hide).
+        users can read the content at their own pace. This satisfies WCAG 2.1 SC 2.2.2 (Pause, Stop, Hide).
         The duplicated set used for seamless looping carries <code>aria-hidden="true"</code> to avoid duplicate announcements.
       </p>
 

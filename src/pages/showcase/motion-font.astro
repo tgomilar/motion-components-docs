@@ -17,13 +17,13 @@ import Layout from "../../layouts/Layout.astro";
         <motion-font axis="wght" from="900" to="100" trigger="scroll" class="hero-word hero-word-inv">in</motion-font>
         <motion-font axis="wght" from="100" to="900" trigger="scroll" class="hero-word">Motion</motion-font>
       </h1>
-      <p class="hero-sub">Variable font axes animated with spring physics — weight, width, optical size.</p>
+      <p class="hero-sub">Variable font axes animated with spring physics: weight, width, optical size.</p>
       <div class="hero-scroll-cue">↓ scroll</div>
     </section>
 
     <!-- ── Weight spectrum ──────────────────────────────────────── -->
     <section class="spectrum">
-      <p class="section-label">Weight spectrum — scroll to reveal</p>
+      <p class="section-label">Weight spectrum: scroll to reveal</p>
       <div class="spectrum-stack">
         <motion-font axis="wght" from="100" to="100" trigger="scroll" class="spec-word spec-thin">Thin</motion-font>
         <motion-font axis="wght" from="100" to="300" trigger="scroll" class="spec-word spec-light">Light</motion-font>
@@ -36,7 +36,7 @@ import Layout from "../../layouts/Layout.astro";
 
     <!-- ── Hover word cloud ─────────────────────────────────────── -->
     <section class="word-cloud">
-      <p class="section-label">Hover any word — weight springs to bold</p>
+      <p class="section-label">Hover any word: weight springs to bold</p>
       <div class="cloud-grid">
         {[
           { text: "Interface", from: 200, to: 800, bounce: 0.1 },
@@ -67,7 +67,7 @@ import Layout from "../../layouts/Layout.astro";
 
     <!-- ── Optical size ──────────────────────────────────────────── -->
     <section class="optical">
-      <p class="section-label">Scroll — optical size tracks scroll</p>
+      <p class="section-label">Scroll: optical size tracks scroll</p>
       <div class="optical-row">
         <div class="optical-item">
           <motion-font axes="wght:200:800 opsz:8:32" trigger="scroll" class="optical-demo">Aa</motion-font>
@@ -83,7 +83,7 @@ import Layout from "../../layouts/Layout.astro";
 
     <!-- ── Spring bounce comparison ─────────────────────────────── -->
     <section class="bounce-section">
-      <p class="section-label">Hover each — different bounce values</p>
+      <p class="section-label">Hover each: different bounce values</p>
       <div class="bounce-row">
         <div class="bounce-item">
           <motion-font axis="wght" from="200" to="900" trigger="hover" bounce="0" duration="0.5" class="bounce-demo">No bounce</motion-font>
@@ -113,7 +113,7 @@ import Layout from "../../layouts/Layout.astro";
 
     <!-- ── Stagger reveal ────────────────────────────────────────── -->
     <section class="stagger-section">
-      <p class="section-label">Viewport entry — staggered weight reveal</p>
+      <p class="section-label">Viewport entry: staggered weight reveal</p>
       <div class="stagger-lines">
         <motion-font axis="wght" from="100" to="800" trigger="auto" delay="0"    duration="1.0" class="stagger-line">The quick</motion-font>
         <motion-font axis="wght" from="100" to="800" trigger="auto" delay="0.12" duration="1.0" class="stagger-line">brown fox</motion-font>

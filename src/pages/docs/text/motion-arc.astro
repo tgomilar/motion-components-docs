@@ -60,7 +60,7 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Narrow arc</h2>
-      <p>Reduce <code>arc</code> for a subtle curve — useful for short words or headline accents.</p>
+      <p>Reduce <code>arc</code> for a subtle curve. This works well for short words or headline accents.</p>
       <DocsPreview>
         <motion-arc class="demo-accent" text="GENTLE ARC" radius="200" arc="60" align="top"></motion-arc>
       </DocsPreview>
@@ -76,7 +76,7 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Upright characters</h2>
-      <p>Add <code>upright</code> to keep characters vertically oriented rather than tangent to the arc.</p>
+      <p>Add <code>upright</code> to keep characters vertically oriented instead of tangent to the arc. Tangent means angled to follow the curve at each point.</p>
       <DocsPreview>
         <motion-arc class="demo-accent" text="UPRIGHT · STAMP TEXT ·" radius="110" arc="200" align="top" upright></motion-arc>
       </DocsPreview>
@@ -93,7 +93,7 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Spinning arc</h2>
-      <p>Set <code>speed</code> to a non-zero value to rotate the arc continuously — like <code>motion-circle</code> but on a partial path.</p>
+      <p>Set <code>speed</code> to a non-zero value to rotate the arc continuously (like <code>motion-circle</code>, but on a partial path).</p>
       <DocsPreview>
         <motion-arc class="demo-accent" text="SPINNING · ARC · TEXT · " radius="90" arc="270" align="top" speed="10"></motion-arc>
       </DocsPreview>
@@ -143,7 +143,7 @@ import 'motion-components'               // or the whole library`}
 
       <h2>How it works</h2>
       <p>
-        Characters are distributed evenly across the arc span. Each character is placed using a transform chain — <code>rotate(angle) translateY(-radius)</code> — which positions it at the correct point on the circle. The starting angle is computed from <code>align</code>: <code>"top"</code> centers the arc at 270° (the topmost point), <code>"bottom"</code> at 90°.
+        Characters are distributed evenly across the arc span. Each character is placed using a transform chain: <code>rotate(angle) translateY(-radius)</code>. This positions it at the correct point on the circle. The starting angle is computed from <code>align</code>: <code>"top"</code> centers the arc at 270° (the topmost point), <code>"bottom"</code> at 90°.
       </p>
       <p>
         When <code>upright</code> is set, a counter-rotation is appended so characters remain axis-aligned. When <code>speed</code> is non-zero, the entire arc ring rotates continuously via Motion One's <code>animate</code> with <code>repeat: Infinity</code>.

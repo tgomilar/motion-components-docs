@@ -19,7 +19,7 @@ import "../../../styles/docs.css";
         Two-sided card that flips between a <code>front</code> and <code>back</code> slot with spring physics. Trigger on hover or click; choose the rotation axis.
       </p>
 
-      <h2>Preview — Hover, Y axis</h2>
+      <h2>Preview: Hover, Y axis</h2>
       <DocsPreview wide tall>
         <motion-flip-card class="flip-demo" trigger="hover" axis="y">
           <div slot="front" class="flip-face flip-front">Hover</div>
@@ -27,7 +27,7 @@ import "../../../styles/docs.css";
         </motion-flip-card>
       </DocsPreview>
 
-      <h2>Preview — Click, X axis</h2>
+      <h2>Preview: Click, X axis</h2>
       <DocsPreview wide tall>
         <motion-flip-card class="flip-demo" trigger="click" axis="x" duration="0.85" bounce="0.35">
           <div slot="front" class="flip-face flip-front">Click me</div>
@@ -55,7 +55,7 @@ import 'motion-components'               // or the whole library`}
 
       <h2>Sizing</h2>
       <p>
-        The host is <code>inline-block</code> by default. Give it an explicit width and height (or set <code>display: block</code>) — both faces fill the host.
+        The host is <code>inline-block</code> by default. Give it an explicit width and height (or set <code>display: block</code>). Both faces fill the host.
       </p>
       <CodeWindow
         filename="styles.css"
@@ -106,7 +106,7 @@ card.flip()`}
       <h2>Accessibility</h2>
       <p>
         When <code>trigger="click"</code> the host is given <code>role="button"</code>, <code>tabindex="0"</code>, and responds to <kbd>Space</kbd> / <kbd>Enter</kbd>.
-        Both faces stay in the DOM at all times — the back face is rotated 180° and hidden via <code>backface-visibility</code>, so screen readers can still find its content.
+        Both faces stay in the DOM at all times. The back face is rotated 180° and hidden via <code>backface-visibility</code>, so screen readers can still find its content.
       </p>
       <DocsPagination />
     </main>

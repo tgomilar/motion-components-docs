@@ -10,13 +10,13 @@ import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
 
-<Layout title="motion-parallax — Motion Components" description="Scroll-linked depth shift. Wrap any element to make it move slower or faster than the page scroll — no JavaScript required." noMain>
+<Layout title="motion-parallax — Motion Components" description="Scroll-linked depth shift. Wrap any element to make it move slower or faster than the page scroll. No JavaScript required." noMain>
   <div class="layout">
     <DocsSidebar />
 
     <main>
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-parallax</motion-split></h1>
-      <p class="lead">Scroll-linked depth shift. Wrap any element to make it move slower or faster than the page scroll — no JavaScript required.</p>
+      <p class="lead">Scroll-linked depth shift. Wrap any element to make it move slower or faster than the page scroll. No JavaScript required.</p>
 
       <a href="/showcase/parallax/" class="showcase-link">
         <span class="showcase-link-label">Live showcase</span>
@@ -91,7 +91,7 @@ import 'motion-components'               // or the whole library`}
         <strong>Reduced motion:</strong> when <code>prefers-reduced-motion: reduce</code> is set, all parallax movement is disabled.
       </p>
       <h2>JavaScript API</h2>
-      <p>Control the parallax effect programmatically with <code>play()</code>, <code>pause()</code>, <code>finish()</code>, and <code>cancel()</code>. Pause unbinds the scroll listener so the card freezes mid-drift, finish snaps to the end offset, cancel resets to the natural position. Scroll the box while running to drive the drift.</p>
+      <p>Control the parallax effect programmatically with <code>play()</code>, <code>pause()</code>, <code>finish()</code>, and <code>cancel()</code>. Pause unbinds the scroll listener so the card freezes mid-drift. Finish snaps to the end offset. Cancel resets to the natural position. Scroll the box while running to drive the drift.</p>
       <JsApiDemo mode="looper" target="api-parallax-demo">
         <div class="api-scroll" id="api-parallax-scroll">
           <div class="api-scroll-track">
