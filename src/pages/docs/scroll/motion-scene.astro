@@ -143,12 +143,15 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Without pinning</h2>
-      <p class="section-desc">Set the <code>pin</code> attribute to false (omit it) if you want scrubbed children but no sticky stage.</p>
+      <p class="section-desc">
+        <code>pin</code> defaults to <code>true</code> and, like any HTML boolean attribute, cannot be
+        switched off from markup: both omitting it and writing <code>pin="false"</code> leave it
+        <code>true</code>. Set the property to get scrubbed children without a sticky stage.
+      </p>
       <CodeWindow
         filename="motion-scene-no-pin.html"
         copy
-        code={`<!-- omit pin attribute to disable sticky -->
-<motion-scene height="200vh">
+        code={`<motion-scene id="scene" height="200vh">
   <div
     data-from='{"scale":"0.8","opacity":0}'
     data-to='{"scale":"1","opacity":1}'
@@ -157,7 +160,11 @@ import 'motion-components'               // or the whole library`}
   >
     Scales in over the full scroll
   </div>
-</motion-scene>`}
+</motion-scene>
+
+<script>
+  document.getElementById('scene').pin = false
+</script>`}
       />
 
       <h2>Properties</h2>
@@ -165,7 +172,7 @@ import 'motion-components'               // or the whole library`}
         nameLabel="Attribute"
         rows={[
           { name: "height", type: "string", default: "'200vh'", description: "Height of the scroll container: controls how much scroll the scene consumes." },
-          { name: "pin", type: "boolean", default: "true", description: "When present, the inner stage sticks to the viewport while scrolling. Omit to disable." },
+          { name: "pin", type: "boolean", default: "true", description: "The inner stage sticks to the viewport while scrolling. Cannot be switched off from markup; set <code>el.pin = false</code>" },
           { name: "container", type: "string", default: "''", description: "CSS selector for a custom scroll container. Defaults to document scroll when empty." },
         ]}
       />

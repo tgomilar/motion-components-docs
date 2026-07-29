@@ -67,8 +67,7 @@ import CodeWindow from "../components/CodeWindow.astro";
           One tag.<br />Works in <motion-words
             words="native HTML,React,Vue,Svelte,SolidJS,Alpine,Astro"
             colors="inherit, #61DAFB,#42B883,#FF3E00,#4F81C7,#77C1D2,#BC52EE"
-            interval="3600"
-            duration="0.8"></motion-words>.
+            interval="3600"></motion-words>.
         </h2>
         <p class="usage-sub">Drop a tag anywhere. No config, no wrappers, no boilerplate.</p>
         <ol class="steps">
@@ -169,7 +168,7 @@ import 'motion-components'
             <div class="card">
               <motion-code-inline>motion-reveal</motion-code-inline>
               <div class="stage stage--col">
-                <motion-reveal id="reveal-demo" duration="0.75" y="28" once="false">
+                <motion-reveal id="reveal-demo" duration="0.75" y="28">
                   <div class="reveal-block">Fades into view</div>
                 </motion-reveal>
                 <button class="replay-btn" id="replay-reveal">↺ Replay</button>
@@ -182,7 +181,7 @@ import 'motion-components'
               <motion-code-inline>motion-stagger</motion-code-inline>
               <div class="stage stage--col">
                 <div class="stagger-wrap">
-                  <motion-stagger id="stagger-demo" interval="0.1" duration="0.5" once="false">
+                  <motion-stagger id="stagger-demo" interval="0.1" duration="0.5">
                     <div class="stagger-row">Design</div>
                     <div class="stagger-row">Develop</div>
                     <div class="stagger-row">Delight</div>
@@ -238,7 +237,7 @@ import 'motion-components'
             <div class="card">
               <motion-code-inline>motion-split</motion-code-inline>
               <div class="stage">
-                <motion-split id="split-demo" by="words" interval="0.07" duration="0.6" y="18" once="false" class="split-text">Feel the motion</motion-split>
+                <motion-split id="split-demo" by="words" interval="0.07" duration="0.6" y="18" class="split-text">Feel the motion</motion-split>
               </div>
               <div class="replay-row">
                 <button class="replay-btn" id="replay-split">↺ Replay</button>
@@ -258,7 +257,7 @@ import 'motion-components'
               <motion-code-inline>motion-counter</motion-code-inline>
               <div class="stage">
                 <div class="counter-row">
-                  <motion-counter id="counter-demo" from="0" to="122" duration="1.8" suffix="k" class="counter-num" once="false"></motion-counter>
+                  <motion-counter id="counter-demo" from="0" to="122" duration="1.8" suffix="k" class="counter-num"></motion-counter>
                   <span class="counter-label">users</span>
                 </div>
               </div>
