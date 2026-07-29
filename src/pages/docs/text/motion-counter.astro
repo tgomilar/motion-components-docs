@@ -78,11 +78,19 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Repeat on re-entry</h2>
-      <p>Set <code>once="false"</code> to re-animate every time the element re-enters the viewport.</p>
+      <p>
+        <code>once</code> defaults to <code>true</code> and, like any HTML boolean attribute, cannot be
+        switched off from markup: <code>once="false"</code> still reads as <code>true</code>. Set the
+        property instead to re-animate every time the element re-enters the viewport.
+      </p>
       <CodeWindow
         filename="motion-counter.html"
         copy
-        code={`<motion-counter from="0" to="100" once="false"></motion-counter>`}
+        code={`<motion-counter id="hits" from="0" to="100"></motion-counter>
+
+<script>
+  document.getElementById('hits').once = false
+</script>`}
       />
 
       <h2>Methods</h2>

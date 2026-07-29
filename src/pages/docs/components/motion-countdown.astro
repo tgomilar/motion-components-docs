@@ -88,7 +88,7 @@ import 'motion-components'`}
       <PropsTable nameLabel="Attribute" rows={[
         { name: 'to', type: 'string', default: '—', description: 'Target date/time. Any value parseable by <code>new Date()</code>' },
         { name: 'format', type: 'string', default: '"days hours minutes seconds"', description: 'Space-separated list of units to display' },
-        { name: 'labels', type: 'boolean', default: 'false', description: 'Show unit labels below each digit group' },
+        { name: 'labels', type: 'boolean', default: 'true', description: 'Show unit labels below each digit group. Cannot be switched off from markup; set <code>el.labels = false</code>' },
         { name: 'roll', type: 'boolean', default: 'false', description: 'Use slot-machine roll instead of flip animation' },
       ]} />
 
