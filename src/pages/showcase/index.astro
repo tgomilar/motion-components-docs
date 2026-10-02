@@ -669,6 +669,45 @@ import CodeWindow from '../../components/CodeWindow.astro'
       </motion-image-compare>
     </section>
 
+    <!-- ── INSERT · DAY & NIGHT (motion-theme-toggle showcase) ─ -->
+    <section class="sc-theme">
+      <motion-reveal duration="0.7" y="14">
+        <p class="sc-chapter">
+          <span class="sc-chapter-num">INSERT</span>
+          <span class="sc-chapter-name">— Day &amp; night</span>
+        </p>
+      </motion-reveal>
+
+      <h2 class="sc-section-h">
+        <motion-headline by="words" interval="0.07" duration="1">Two editions, one page.</motion-headline>
+      </h2>
+
+      <motion-reveal duration="0.85" y="22">
+        <p class="sc-section-sub">
+          <motion-code-inline copy>motion-theme-toggle</motion-code-inline> prints the night edition with a circular wipe that grows from the switch.
+          The sun folds into a moon on a spring. Only the plate changes theme, and the rest of the page keeps its theme.
+        </p>
+      </motion-reveal>
+
+      <motion-reveal duration="0.9" y="28">
+        <article class="sc-theme-plate" id="sc-theme-plate">
+          <header class="sc-theme-mast">
+            <span class="sc-theme-edition">The Motion Gazette</span>
+            <motion-theme-toggle target="#sc-theme-plate" appearance="switch" light="Day" dark="Night" duration="0.7"></motion-theme-toggle>
+          </header>
+          <h3 class="sc-theme-headline">Springs settle the argument over easing curves</h3>
+          <div class="sc-theme-cols">
+            <p>
+              Interrupted animations no longer snap. Every transition starts from where the last one left off, carrying its velocity into the next.
+            </p>
+            <p>
+              The night edition uses the same motion on a dark page. When the reader makes no choice, the OS setting decides.
+            </p>
+          </div>
+        </article>
+      </motion-reveal>
+    </section>
+
     <!-- ── INSERT · CODE, ANIMATED (motion-code showcase) ─ -->
     <section class="sc-codeshow">
       <div class="sc-codeshow-bg" aria-hidden="true">
@@ -2338,6 +2377,68 @@ import 'motion-components/motion-headline'`}
     }
 
     /* ── motion-code showcase section ──────────── */
+    /* ── THEME ────────────────────────────────────── */
+    .sc-theme {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: clamp(4rem, 10vw, 8rem) clamp(1.25rem, 4vw, 3rem);
+      border-top: 1px solid var(--sc-rule);
+    }
+
+    .sc-theme-plate {
+      --plate-paper: #fbf8f1;
+      --plate-ink: #1c1917;
+      --plate-mute: #57534e;
+      --plate-rule: #d6d3d1;
+      display: grid;
+      gap: 1.5rem;
+      padding: clamp(1.5rem, 4vw, 3rem);
+      border-radius: 18px;
+      background: var(--plate-paper);
+      color: var(--plate-ink);
+      border: 1px solid var(--plate-rule);
+    }
+
+    .sc-theme-plate[data-theme='dark'] {
+      --plate-paper: #0c0a14;
+      --plate-ink: #f5f5f4;
+      --plate-mute: #a8a29e;
+      --plate-rule: #2e2a3a;
+    }
+
+    .sc-theme-mast {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding-bottom: 1rem;
+      border-bottom: 3px double var(--plate-rule);
+    }
+
+    .sc-theme-edition {
+      font-family: var(--sc-serif);
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+
+    .sc-theme-headline {
+      font-family: var(--sc-serif);
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      max-width: 22ch;
+    }
+
+    .sc-theme-cols {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.5rem 2.5rem;
+      color: var(--plate-mute);
+      line-height: 1.65;
+    }
+
     .sc-codeshow {
       max-width: 1280px;
       margin: 0 auto;

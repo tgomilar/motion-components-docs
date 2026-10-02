@@ -107,7 +107,11 @@ import 'motion-components'                       // or the whole library`}
       <CodeWindow filename="menu.html" copy code={`<motion-theme-toggle appearance="menu" system></motion-theme-toggle>`} />
 
       <h2>Control this site</h2>
-      <p>This one targets <code>&lt;html&gt;</code>, so it switches the whole docs site, with the wipe growing from the button.</p>
+      <p>
+        This one targets <code>&lt;html&gt;</code>, so it switches the whole docs site, with the wipe growing from the button. The theme menu in the
+        site header is a <code>&lt;motion-theme-toggle appearance="menu" system permanent&gt;</code> too. Toggles that share a target stay in sync,
+        so the header updates as well.
+      </p>
       <DocsPreview>
         <div class="demo-row site-row">
           <motion-theme-toggle id="site-toggle" legend="Site theme" duration="0.7"></motion-theme-toggle>
@@ -174,7 +178,7 @@ document.querySelector('motion-theme-icon').mode = 'dark'`}
           { name: "mode", type: "'light' | 'dark' | 'system'", default: "OS preference", description: "Selected mode. Reflects to the attribute. 'system' requires the system attribute" },
           { name: "appearance", type: "'icon' | 'toggle' | 'switch' | 'menu'", default: "'icon'", description: "Visual style of the control" },
           { name: "system", type: "boolean", default: "false", description: "Offers a third option that follows the OS preference. Ignored by switch" },
-          { name: "permanent", type: "boolean", default: "false", description: "Saves the choice to localStorage under motion-theme and restores it on load" },
+          { name: "permanent", type: "boolean", default: "false", description: "Saves the choice to localStorage and restores it on load. The key is motion-theme for <html>, and motion-theme:<target> for any other target" },
           { name: "legend", type: "string", default: "''", description: "Group label. Accessible name of the icon, switch and menu controls" },
           { name: "light", type: "string", default: "'Light'", description: "Label of the light option" },
           { name: "dark", type: "string", default: "'Dark'", description: "Label of the dark option" },
@@ -252,18 +256,6 @@ document.querySelector('motion-theme-icon').mode = 'dark'`}
 
 <script>
   import "motion-components";
-
-  const root = document.documentElement;
-  const navButton = document.getElementById("theme-toggle");
-  const siteToggle = document.getElementById("site-toggle") as any;
-
-  if (siteToggle) {
-    siteToggle.mode = root.dataset.theme === "dark" ? "dark" : root.dataset.theme === "light" ? "light" : siteToggle.mode;
-    siteToggle.addEventListener("colorschemechange", (e: CustomEvent) => {
-      localStorage.setItem("theme", e.detail.colorScheme);
-      navButton?.classList.toggle("is-dark", e.detail.colorScheme === "dark");
-    });
-  }
 
   document.querySelectorAll<HTMLElement>("[data-readout]").forEach((out) => {
     const toggle = document.getElementById(out.dataset.readout!)?.querySelector("motion-theme-toggle");
