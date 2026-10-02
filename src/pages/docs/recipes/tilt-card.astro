@@ -1,0 +1,197 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="Tilt Card — Recipes — Motion Components" description="A card that tilts in 3D following the cursor, with a spotlight overlay and hover lift. Three primitives composed for a premium card interaction." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1>Tilt Card</h1>
+      <p class="lead">A card that tilts in 3D following the cursor, with a spotlight overlay and hover lift. The kind of interaction you see on premium landing pages.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview wide>
+        <div class="tilt-demo">
+          <motion-tilt max="15" scale="1.02">
+            <motion-spotlight size="300" color="rgba(96,165,250,0.15)">
+              <div class="tilt-card">
+                <div class="card-icon">✦</div>
+                <h3>Analytics</h3>
+                <p>Real-time insights into your product usage, conversion funnels, and user behavior.</p>
+              </div>
+            </motion-spotlight>
+          </motion-tilt>
+        </div>
+      </DocsPreview>
+
+      <h2>Complete code</h2>
+      <CodeWindow
+        filename="tilt-card.html"
+        copy
+        code={`<motion-tilt max="15" scale="1.02">
+  <motion-spotlight size="300" color="rgba(96,165,250,0.15)">
+    <div class="card">
+      <div class="card-icon">✦</div>
+      <h3>Analytics</h3>
+      <p>Real-time insights into your product usage.</p>
+    </div>
+  </motion-spotlight>
+</motion-tilt>`}
+      />
+
+      <h2>How it works</h2>
+      <p class="section-lead">Two interaction primitives layered on a static card. The tilt handles 3D rotation, the spotlight adds a tracking light effect.</p>
+
+      <h3>3D tilt</h3>
+      <CodeWindow
+        filename="tilt.html"
+        copy
+        compact
+        code={`<motion-tilt max="15" scale="1.02">
+  <!-- rotates along X/Y based on cursor position -->
+</motion-tilt>`}
+      />
+      <p class="section-lead"><code>max</code> is the maximum rotation in degrees. At <code>15</code> the card tilts up to 15 degrees toward the cursor. The <code>scale</code> lifts it slightly on hover for a floating feel.</p>
+
+      <h3>Spotlight overlay</h3>
+      <CodeWindow
+        filename="spotlight.html"
+        copy
+        compact
+        code={`<motion-spotlight size="300" color="rgba(96,165,250,0.15)">
+  <!-- radial gradient tracks the cursor -->
+</motion-spotlight>`}
+      />
+      <p class="section-lead">The spotlight renders a radial gradient that follows the cursor with a lerped lag. It fades in on hover and out on leave. The <code>smoothing</code> attribute (default 0.18) controls how much the light lags behind the cursor.</p>
+
+      <h2>Tuning</h2>
+
+      <h3>Subtle</h3>
+      <CodeWindow
+        filename="subtle.html"
+        copy
+        compact
+        code={`<motion-tilt max="8" scale="1.01">
+  <motion-spotlight size="250" color="rgba(255,255,255,0.06)">
+    <div class="card">...</div>
+  </motion-spotlight>
+</motion-tilt>`}
+      />
+
+      <h3>Dramatic</h3>
+      <CodeWindow
+        filename="dramatic.html"
+        copy
+        compact
+        code={`<motion-tilt max="20" scale="1.04" gloss>
+  <motion-spotlight size="400" color="rgba(96,165,250,0.25)">
+    <div class="card">...</div>
+  </motion-spotlight>
+</motion-tilt>`}
+      />
+      <p class="section-lead">Add <code>gloss</code> to motion-tilt for a moving specular highlight across the card surface.</p>
+
+      <h2>Card styles</h2>
+      <p class="section-lead">The card itself is just CSS. The motion components wrap it without modifying its structure.</p>
+      <CodeWindow
+        filename="card.css"
+        copy
+        compact
+        code={`.card {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 16px;
+  padding: 2rem;
+  width: 320px;
+  min-height: 200px;
+  transform-style: preserve-3d;
+}`}
+      />
+
+      <h2>Accessibility</h2>
+      <p class="section-lead">Both components respect <code>prefers-reduced-motion</code>. The tilt settles to a flat position and the spotlight stays hidden. The card remains fully readable without any motion.</p>
+
+      <DocsPagination />
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+
+  .lead {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  .section-lead {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-lead code {
+    font-family: var(--font-mono), monospace;
+    font-size: 0.82rem;
+    color: var(--color-accent);
+    background: var(--color-accent-dim);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+  }
+
+  .tilt-demo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+  }
+
+  .tilt-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 16px;
+    padding: 2rem;
+    width: 300px;
+    min-height: 200px;
+    transform-style: preserve-3d;
+    position: relative;
+  }
+
+  .card-icon {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .tilt-card h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .tilt-card p {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+</style>

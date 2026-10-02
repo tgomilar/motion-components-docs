@@ -1,0 +1,213 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="Scroll Progress — Recipes — Motion Components" description="A fixed progress bar that tracks scroll position with spring physics, combined with parallax sections and reveal entrances." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1>Scroll Progress</h1>
+      <p class="lead">A fixed progress bar that tracks scroll position with spring physics, combined with parallax sections and reveal entrances.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview wide>
+        <div class="scroll-demo">
+          <motion-progress position="top" color="var(--color-accent)" thickness="3" />
+          <div class="scroll-content">
+            <motion-reveal y="24" duration="0.6">
+              <div class="scroll-section">
+                <h3>First section</h3>
+                <p>This content fades in when it enters the viewport.</p>
+              </div>
+            </motion-reveal>
+            <motion-parallax speed="0.3">
+              <div class="scroll-section parallax">
+                <h3>Parallax section</h3>
+                <p>This content moves at a different speed than the scroll.</p>
+              </div>
+            </motion-parallax>
+            <motion-reveal y="24" duration="0.6">
+              <div class="scroll-section">
+                <h3>Third section</h3>
+                <p>Another reveal entrance after the parallax.</p>
+              </div>
+            </motion-reveal>
+          </div>
+        </div>
+      </DocsPreview>
+
+      <h2>Complete code</h2>
+      <CodeWindow
+        filename="scroll-progress.html"
+        copy
+        code={`<!-- Fixed progress bar at the top -->
+<motion-progress position="top" color="#60a5fa" thickness="3" />
+
+<!-- Page content with scroll effects -->
+<section>
+  <motion-reveal y="24" duration="0.6">
+    <h2>Features</h2>
+    <p>Content that fades in on scroll.</p>
+  </motion-reveal>
+</section>
+
+<section>
+  <motion-parallax speed="0.3">
+    <img src="hero.jpg" alt="..." />
+  </motion-parallax>
+</section>
+
+<section>
+  <motion-reveal y="24" duration="0.6">
+    <h2>Pricing</h2>
+    <p>More content that reveals on scroll.</p>
+  </motion-reveal>
+</section>`}
+      />
+
+      <h2>How it works</h2>
+
+      <h3>Progress bar</h3>
+      <CodeWindow
+        filename="progress.html"
+        copy
+        compact
+        code={`<motion-progress position="top" color="#60a5fa" thickness="3" />`}
+      />
+      <p class="section-lead">The progress bar is a fixed element that fills as you scroll. It uses a spring-eased <code>scaleX</code> transform, so the fill feels physical rather than linear. <code>position</code> places it at <code>"top"</code> or <code>"bottom"</code>.</p>
+
+      <h3>Parallax</h3>
+      <CodeWindow
+        filename="parallax.html"
+        copy
+        compact
+        code={`<motion-parallax speed="0.3">
+  <img src="hero.jpg" alt="..." />
+</motion-parallax>`}
+      />
+      <p class="section-lead"><code>speed</code> controls how fast the content moves relative to the scroll. At <code>0.3</code> it moves at 30% of the scroll speed, creating a depth effect. Use <code>axis="x"</code> for horizontal parallax.</p>
+
+      <h3>Reveal entrances</h3>
+      <CodeWindow
+        filename="reveal.html"
+        copy
+        compact
+        code={`<motion-reveal y="24" duration="0.6">
+  <div>Content that fades in.</div>
+</motion-reveal>`}
+      />
+      <p class="section-lead">Reveals fire when the element enters the viewport via IntersectionObserver. They work at any scroll position, not just the initial load.</p>
+
+      <h2>Tuning</h2>
+
+      <h3>Heavier parallax</h3>
+      <CodeWindow
+        filename="heavy.html"
+        copy
+        compact
+        code={`<motion-parallax speed="0.6">
+  <img src="hero.jpg" alt="..." />
+</motion-parallax>`}
+      />
+      <p class="section-lead">Higher speed values create a more pronounced depth effect. At <code>0.6</code> the content noticeably lags behind the scroll.</p>
+
+      <h3>Custom progress color</h3>
+      <CodeWindow
+        filename="color.html"
+        copy
+        compact
+        code={`<motion-progress
+  position="top"
+  color="linear-gradient(90deg, #60a5fa, #a78bfa)"
+  thickness="3"
+/>`}
+      />
+      <p class="section-lead">The <code>color</code> attribute accepts any CSS color value, including gradients.</p>
+
+      <h2>Accessibility</h2>
+      <p class="section-lead">The progress bar is decorative and hidden from screen readers via <code>aria-hidden</code>. Parallax and reveal components respect <code>prefers-reduced-motion</code>: parallax becomes static and reveals fire instantly.</p>
+
+      <DocsPagination />
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+
+  .lead {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  .section-lead {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-lead code {
+    font-family: var(--font-mono), monospace;
+    font-size: 0.82rem;
+    color: var(--color-accent);
+    background: var(--color-accent-dim);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+  }
+
+  .scroll-demo {
+    width: 100%;
+    padding: 0;
+  }
+
+  .scroll-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 2rem;
+  }
+
+  .scroll-section {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 2rem;
+  }
+
+  .scroll-section h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  .scroll-section p {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .scroll-section.parallax {
+    background: var(--color-surface-2, var(--color-surface));
+  }
+</style>

@@ -1,0 +1,227 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="Staggered Grid — Recipes — Motion Components" description="A grid of cards that fade in sequentially when they enter the viewport. motion-stagger handles the timing, motion-reveal handles the entrance." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1>Staggered Grid</h1>
+      <p class="lead">A grid of cards that fade in sequentially when they enter the viewport. The stagger handles timing, the reveal handles the entrance.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview wide>
+        <div class="grid-demo">
+          <motion-stagger interval="0.08" y="24" from="first">
+            <motion-reveal y="0" duration="0.5">
+              <div class="grid-card">
+                <div class="card-num">01</div>
+                <h3>Design</h3>
+                <p>Pixel-perfect interfaces that scale across devices.</p>
+              </div>
+            </motion-reveal>
+            <motion-reveal y="0" duration="0.5">
+              <div class="grid-card">
+                <div class="card-num">02</div>
+                <h3>Develop</h3>
+                <p>Clean, maintainable code with modern tooling.</p>
+              </div>
+            </motion-reveal>
+            <motion-reveal y="0" duration="0.5">
+              <div class="grid-card">
+                <div class="card-num">03</div>
+                <h3>Deploy</h3>
+                <p>Ship to production with confidence and speed.</p>
+              </div>
+            </motion-reveal>
+            <motion-reveal y="0" duration="0.5">
+              <div class="grid-card">
+                <div class="card-num">04</div>
+                <h3>Measure</h3>
+                <p>Understand what works with real user data.</p>
+              </div>
+            </motion-reveal>
+          </motion-stagger>
+        </div>
+      </DocsPreview>
+
+      <h2>Complete code</h2>
+      <CodeWindow
+        filename="staggered-grid.html"
+        copy
+        code={`<motion-stagger interval="0.08" y="24" from="first">
+  <motion-reveal y="0" duration="0.5">
+    <div class="card">
+      <h3>Design</h3>
+      <p>Pixel-perfect interfaces that scale.</p>
+    </div>
+  </motion-reveal>
+
+  <motion-reveal y="0" duration="0.5">
+    <div class="card">
+      <h3>Develop</h3>
+      <p>Clean, maintainable code.</p>
+    </div>
+  </motion-reveal>
+
+  <motion-reveal y="0" duration="0.5">
+    <div class="card">
+      <h3>Deploy</h3>
+      <p>Ship with confidence.</p>
+    </div>
+  </motion-reveal>
+</motion-stagger>`}
+      />
+
+      <h2>How it works</h2>
+      <p class="section-lead">Two components with one responsibility each: stagger controls when each child appears, reveal controls how it appears.</p>
+
+      <h3>Stagger timing</h3>
+      <CodeWindow
+        filename="stagger.html"
+        copy
+        compact
+        code={`<motion-stagger interval="0.08" y="24" from="first">
+  <!-- each child enters 80ms after the previous -->
+</motion-stagger>`}
+      />
+      <p class="section-lead"><code>interval</code> is the delay between each child starting its entrance. <code>from</code> controls where the cascade starts: <code>"first"</code> (default), <code>"last"</code>, or <code>"center"</code>.</p>
+
+      <h3>Reveal entrance</h3>
+      <CodeWindow
+        filename="reveal.html"
+        copy
+        compact
+        code={`<motion-reveal y="0" duration="0.5">
+  <!-- fades in when it enters the viewport -->
+</motion-reveal>`}
+      />
+      <p class="section-lead">Setting <code>y="0"</code> means no vertical slide, just a fade. Use <code>y="24"</code> for a lift effect. The stagger wraps the reveal, so each child fades in sequence.</p>
+
+      <h2>Variations</h2>
+
+      <h3>With slide-up</h3>
+      <CodeWindow
+        filename="slide.html"
+        copy
+        compact
+        code={`<motion-stagger interval="0.1" y="20" from="center">
+  <motion-reveal y="20" duration="0.6">
+    <div class="card">...</div>
+  </motion-reveal>
+</motion-stagger>`}
+      />
+      <p class="section-lead">Use <code>from="center"</code> to fan outward from the middle. Works well for feature grids.</p>
+
+      <h3>With viewport trigger</h3>
+      <p class="section-lead">By default, the stagger fires when the first child enters the viewport. Add <code>once</code> to prevent re-triggering on scroll back.</p>
+      <CodeWindow
+        filename="once.html"
+        copy
+        compact
+        code={`<motion-stagger interval="0.08" y="24" once>
+  <motion-reveal y="0">...</motion-reveal>
+  <motion-reveal y="0">...</motion-reveal>
+</motion-stagger>`}
+      />
+
+      <h2>Accessibility</h2>
+      <p class="section-lead">Both components respect <code>prefers-reduced-motion</code>. Users get the final state immediately: all cards visible, no stagger, no fade animation.</p>
+
+      <DocsPagination />
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+
+  .lead {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  .section-lead {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-lead code {
+    font-family: var(--font-mono), monospace;
+    font-size: 0.82rem;
+    color: var(--color-accent);
+    background: var(--color-accent-dim);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+  }
+
+  .grid-demo {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+    width: 100%;
+  }
+
+  .grid-demo > motion-stagger {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    width: 100%;
+    max-width: 800px;
+  }
+
+  .grid-card {
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .card-num {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--color-accent);
+    margin-bottom: 0.75rem;
+  }
+
+  .grid-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.4rem;
+  }
+
+  .grid-card p {
+    color: var(--color-muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .grid-demo > motion-stagger {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+</style>

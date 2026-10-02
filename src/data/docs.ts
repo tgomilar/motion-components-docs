@@ -1,4 +1,4 @@
-export const SECTION_ORDER = ['reveal', 'respond', 'text', 'scroll', 'components', 'code'] as const
+export const SECTION_ORDER = ['reveal', 'respond', 'text', 'scroll', 'components', 'code', 'recipes'] as const
 
 export type DocsSection = (typeof SECTION_ORDER)[number]
 
@@ -9,4 +9,5 @@ export const SECTION_LABELS: Record<DocsSection, string> = {
   scroll: 'Scroll',
   components: 'Components',
   code: 'Code',
+  recipes: 'Recipes',
 }

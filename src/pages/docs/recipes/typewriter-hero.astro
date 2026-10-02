@@ -1,0 +1,160 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="Typewriter Hero — Recipes — Motion Components" description="A hero section with a character-by-character typewriter headline and a fading subcopy. The typewriter adds presence, the reveal adds depth." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1>Typewriter Hero</h1>
+      <p class="lead">A hero section with a character-by-character typewriter headline and a fading subcopy. The typewriter adds presence, the reveal adds depth.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview wide>
+        <div class="hero-demo">
+          <motion-typewriter speed="40" delay="0.3" cursor>
+            <h1 class="hero-headline">Build interactions that ship.</h1>
+          </motion-typewriter>
+          <motion-reveal y="16" duration="0.6" delay="0.2">
+            <p class="hero-sub">Physics-based web components for any framework. No easing curves to tune.</p>
+          </motion-reveal>
+        </div>
+      </DocsPreview>
+
+      <h2>Complete code</h2>
+      <CodeWindow
+        filename="typewriter-hero.html"
+        copy
+        code={`<section class="hero">
+  <motion-typewriter speed="40" delay="0.3" cursor>
+    <h1>Build interactions that ship.</h1>
+  </motion-typewriter>
+
+  <motion-reveal y="16" duration="0.6">
+    <p>Physics-based web components for any framework.
+       No easing curves to tune.</p>
+  </motion-reveal>
+</section>`}
+      />
+
+      <h2>How it works</h2>
+
+      <h3>Typewriter headline</h3>
+      <CodeWindow
+        filename="typewriter.html"
+        copy
+        compact
+        code={`<motion-typewriter speed="40" delay="0.3" cursor>
+  <h1>Build interactions that ship.</h1>
+</motion-typewriter>`}
+      />
+      <p class="section-lead">The typewriter reveals the headline one character at a time. <code>speed</code> is milliseconds per character. <code>delay</code> adds a pause before typing starts. The <code>cursor</code> attribute adds a blinking caret.</p>
+
+      <h3>Reveal subcopy</h3>
+      <CodeWindow
+        filename="reveal.html"
+        copy
+        compact
+        code={`<motion-reveal y="16" duration="0.6">
+  <p>Physics-based web components.</p>
+</motion-reveal>`}
+      />
+      <p class="section-lead">The subcopy fades in with a slight lift. Without an explicit <code>delay</code>, it starts immediately when the element enters the viewport. The different durations create a natural choreography: the typewriter takes longer, the reveal resolves faster.</p>
+
+      <h2>Variations</h2>
+
+      <h3>Looping</h3>
+      <CodeWindow
+        filename="loop.html"
+        copy
+        compact
+        code={`<motion-typewriter speed="40" delay="2000" loop cursor>
+  <h1>Build. Ship. Iterate.</h1>
+</motion-typewriter>`}
+      />
+      <p class="section-lead">Add <code>loop</code> to cycle through: type, pause, erase, retype. The <code>delay</code> is the pause between cycles in milliseconds.</p>
+
+      <h3>Word-by-word</h3>
+      <p class="section-lead">For a calmer, more editorial feel, use <code>motion-headline</code> instead. It reveals word by word with a mask slide rather than character by character.</p>
+      <CodeWindow
+        filename="headline.html"
+        copy
+        compact
+        code={`<motion-headline by="words" interval="0.06" duration="1">
+  <h1>The future of motion</h1>
+</motion-headline>`}
+      />
+
+      <h2>Accessibility</h2>
+      <p class="section-lead">The typewriter respects <code>prefers-reduced-motion</code>: the full text appears instantly with no character-by-character animation. The blinking cursor is also suppressed. The underlying <code>&lt;h1&gt;</code> stays semantically intact throughout.</p>
+
+      <DocsPagination />
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+
+  .lead {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  .section-lead {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-lead code {
+    font-family: var(--font-mono), monospace;
+    font-size: 0.82rem;
+    color: var(--color-accent);
+    background: var(--color-accent-dim);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+  }
+
+  .hero-demo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem 3rem;
+    width: 100%;
+  }
+
+  .hero-headline {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin: 0 0 1rem;
+  }
+
+  .hero-sub {
+    color: var(--color-muted);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin: 0;
+  }
+</style>
