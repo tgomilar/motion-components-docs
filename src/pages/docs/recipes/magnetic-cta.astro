@@ -1,0 +1,180 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="Magnetic CTA — Recipes — Motion Components" description="A call-to-action button that attracts the cursor with magnetic pull, lifts on hover, and presses on click. Three primitives composed into one premium interaction." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1>Magnetic CTA</h1>
+      <p class="lead">A call-to-action button that attracts the cursor, lifts on hover, and presses on click. Three primitives composed into one premium interaction.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview>
+        <div class="magnetic-demo">
+          <motion-magnetic strength="0.4">
+            <motion-hover scale="1.06" y="-3">
+              <motion-press scale="0.96">
+                <button class="cta-btn">Get started</button>
+              </motion-press>
+            </motion-hover>
+          </motion-magnetic>
+        </div>
+      </DocsPreview>
+
+      <h2>Complete code</h2>
+      <CodeWindow
+        filename="magnetic-cta.html"
+        copy
+        code={`<motion-magnetic strength="0.4">
+  <motion-hover scale="1.06" y="-3">
+    <motion-press scale="0.96">
+      <button>Get started</button>
+    </motion-press>
+  </motion-hover>
+</motion-magnetic>`}
+      />
+
+      <h2>How it works</h2>
+      <p class="section-lead">Each component handles one layer of the interaction. They compose without conflicting because each animates its own transform.</p>
+
+      <h3>Magnetic pull</h3>
+      <CodeWindow
+        filename="magnetic.html"
+        copy
+        compact
+        code={`<motion-magnetic strength="0.4">
+  <!-- content drifts toward the cursor -->
+</motion-magnetic>`}
+      />
+      <p class="section-lead"><code>strength</code> controls how far the content follows the cursor. At <code>0.4</code> the button shifts 40% of the cursor offset. Lower values feel subtle; higher values feel playful.</p>
+
+      <h3>Hover lift</h3>
+      <CodeWindow
+        filename="hover.html"
+        copy
+        compact
+        code={`<motion-hover scale="1.06" y="-3">
+  <!-- springs up on mouse enter -->
+</motion-hover>`}
+      />
+      <p class="section-lead">The hover lift gives visual confirmation that the element is interactive. The spring makes the transition feel physical rather than mechanical.</p>
+
+      <h3>Press feedback</h3>
+      <CodeWindow
+        filename="press.html"
+        copy
+        compact
+        code={`<motion-press scale="0.96">
+  <!-- compresses on pointerdown -->
+</motion-press>`}
+      />
+      <p class="section-lead">The press scale provides tactile feedback. The button compresses when clicked and springs back on release.</p>
+
+      <h2>Tuning</h2>
+      <p class="section-lead">Adjust each layer independently. The magnetic strength, hover scale, and press depth are all separate knobs.</p>
+
+      <h3>Subtle version</h3>
+      <CodeWindow
+        filename="subtle.html"
+        copy
+        compact
+        code={`<motion-magnetic strength="0.2">
+  <motion-hover scale="1.03" y="-1">
+    <motion-press scale="0.98">
+      <button>Subscribe</button>
+    </motion-press>
+  </motion-hover>
+</motion-magnetic>`}
+      />
+
+      <h3>Playful version</h3>
+      <CodeWindow
+        filename="playful.html"
+        copy
+        compact
+        code={`<motion-magnetic strength="0.6">
+  <motion-hover scale="1.08" y="-4" rotate="-1">
+    <motion-press scale="0.94">
+      <button>Let's go</button>
+    </motion-press>
+  </motion-hover>
+</motion-magnetic>`}
+      />
+
+      <h2>Accessibility</h2>
+      <p class="section-lead">All three components respect <code>prefers-reduced-motion</code>. Users who request reduced motion get the button at rest with no magnetic pull, hover transform, or press feedback.</p>
+
+      <DocsPagination />
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 1rem;
+  }
+
+  .lead {
+    color: var(--color-muted);
+    font-size: 1.05rem;
+    margin-bottom: 2rem;
+    line-height: 1.7;
+  }
+
+  .section-lead {
+    color: var(--color-muted);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1.5rem;
+  }
+
+  .section-lead code {
+    font-family: var(--font-mono), monospace;
+    font-size: 0.82rem;
+    color: var(--color-accent);
+    background: var(--color-accent-dim);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+  }
+
+  .magnetic-demo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3rem 0;
+  }
+
+  .cta-btn {
+    background: var(--color-accent);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    font-family: var(--font-sans);
+    box-shadow: 0 4px 16px rgba(96, 165, 250, 0.3);
+    transition: box-shadow 0.2s;
+  }
+
+  .cta-btn:hover {
+    box-shadow: 0 6px 24px rgba(96, 165, 250, 0.4);
+  }
+</style>
