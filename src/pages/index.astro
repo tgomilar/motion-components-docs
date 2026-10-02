@@ -305,6 +305,37 @@ import 'motion-components'
     </div>
   </section>
 
+  <!-- ── New: theme toggle ─────────────────── -->
+  <section class="theme-section">
+    <div class="inner">
+      <div class="section-head">
+        <p class="section-eyebrow">New in 0.7</p>
+        <h2>Light, dark, and system.</h2>
+        <p class="section-sub">
+          <code>&lt;motion-theme-toggle&gt;</code> switches themes with a spring sun-to-moon morph and a circular wipe from the control.
+        </p>
+      </div>
+      <div class="theme-showcase">
+        <div class="theme-demo" id="home-theme-demo">
+          <div class="theme-demo-head">
+            <span class="theme-demo-title">Inbox</span>
+            <motion-theme-toggle target="#home-theme-demo" appearance="toggle" system></motion-theme-toggle>
+          </div>
+          <div class="theme-demo-row"><span class="theme-demo-dot"></span>Release notes are ready for review</div>
+          <div class="theme-demo-row"><span class="theme-demo-dot"></span>Design sync moved to Thursday</div>
+          <div class="theme-demo-row"><span class="theme-demo-dot"></span>3 new comments on the roadmap</div>
+        </div>
+        <ul class="theme-points">
+          <li><strong>Four looks:</strong> icon, segmented toggle, switch and drop-down menu.</li>
+          <li><strong>Remembers the choice</strong> and follows the OS setting when set to system.</li>
+          <li><strong>Drop-in compatible</strong> with Chrome Labs' <code>dark-mode-toggle</code> attributes and events.</li>
+          <li><strong>Try the header:</strong> the theme menu on this site is the same component.</li>
+          <li><a href="/docs/components/motion-theme-toggle/" class="view-all-link">Read the docs →</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
   <!-- ── Features ──────────────────────────── -->
   <section class="features-section">
     <div class="inner">
@@ -472,7 +503,8 @@ import 'motion-components'
             <div class="flip-eyebrow flip-eyebrow--inv">Category</div>
             <span class="flip-cat-big">Components</span>
             <p class="flip-blurb">
-              Dialogs, galleries, sliders, image comparison, countdowns, progress rings, flip-cards, and spotlights: interactive widgets that animate themselves.
+              Dialogs, galleries, sliders, image comparison, countdowns, progress rings, flip-cards, spotlights, and theme toggles: interactive widgets that animate
+              themselves.
             </p>
             <span class="flip-link">Explore →</span>
           </a>
@@ -1215,6 +1247,107 @@ import 'motion-components'
       border: 1px solid var(--color-border);
       border-radius: 99px;
       padding: 0.2rem 0.65rem;
+    }
+
+    /* ── Theme toggle ─────────────────────── */
+    .theme-section {
+      padding-bottom: 6rem;
+    }
+
+    .theme-section .section-sub code {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      color: var(--color-text);
+    }
+
+    .theme-showcase {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      gap: 3rem;
+      align-items: center;
+    }
+
+    @media (max-width: 800px) {
+      .theme-showcase {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+    }
+
+    .theme-demo {
+      --demo-bg: #ffffff;
+      --demo-fg: #18181b;
+      --demo-muted: #71717a;
+      --demo-line: #e4e4e7;
+      display: grid;
+      gap: 0.25rem;
+      padding: 1.25rem;
+      border-radius: 16px;
+      background: var(--demo-bg);
+      color: var(--demo-fg);
+      border: 1px solid var(--demo-line);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+    }
+
+    .theme-demo[data-theme="dark"] {
+      --demo-bg: #111114;
+      --demo-fg: #f4f4f5;
+      --demo-muted: #a1a1aa;
+      --demo-line: #27272a;
+    }
+
+    .theme-demo-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.25rem;
+      border-bottom: 1px solid var(--demo-line);
+    }
+
+    .theme-demo-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+    }
+
+    .theme-demo-row {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.6rem 0;
+      color: var(--demo-muted);
+      font-size: 0.92rem;
+    }
+
+    .theme-demo-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--color-accent);
+      flex: none;
+    }
+
+    .theme-points {
+      list-style: none;
+      display: grid;
+      gap: 0.9rem;
+      color: var(--color-muted);
+      line-height: 1.55;
+    }
+
+    .theme-points strong {
+      color: var(--color-text);
+    }
+
+    .theme-points code {
+      font-family: var(--font-mono);
+      font-size: 0.88em;
+    }
+
+    .theme-points .view-all-link {
+      margin-top: 0.25rem;
     }
 
     /* ── Features ─────────────────────────── */

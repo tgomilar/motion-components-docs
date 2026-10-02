@@ -102,8 +102,23 @@ const jsonLd =
 
     <!-- Runs synchronously before first paint — no flash -->
     <script is:inline>
-      const saved = localStorage.getItem("theme");
-      if (saved) document.documentElement.setAttribute("data-theme", saved);
+      (() => {
+        const root = document.documentElement;
+        let mode = null;
+        try {
+          mode = localStorage.getItem("motion-theme");
+          const legacy = localStorage.getItem("theme");
+          if (!mode && (legacy === "light" || legacy === "dark")) {
+            mode = legacy;
+            localStorage.setItem("motion-theme", legacy);
+          }
+          localStorage.removeItem("theme");
+        } catch {}
+        if (mode === "light" || mode === "dark") {
+          root.dataset.theme = mode;
+          root.style.colorScheme = mode;
+        }
+      })();
     </script>
 
     <style>

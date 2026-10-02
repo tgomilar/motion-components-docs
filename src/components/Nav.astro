@@ -18,21 +18,14 @@ const { pathname } = Astro.url;
       <a href="/blog/" class:list={["link", { active: pathname.startsWith("/blog") }]}>Blog</a>
       <a href="/about/" class:list={["link", { active: pathname === "/about" || pathname === "/about/" }]}>About</a>
       <a href="https://github.com/tgomilar/motion-components" class="link" target="_blank" rel="noopener">GitHub</a>
-      <button id="theme-toggle" aria-label="Toggle theme">
-        <!-- Sun icon — shown in dark mode -->
-        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
-        </svg>
-        <!-- Moon icon — shown in light mode -->
-        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-      </button>
+      <motion-theme-toggle id="theme-toggle" appearance="menu" system permanent legend="Theme"></motion-theme-toggle>
     </div>
   </nav>
 </header>
 
 <script>
+  import "motion-components";
+
   const header = document.querySelector("header");
   if (header) {
     window.addEventListener(
@@ -42,31 +35,6 @@ const { pathname } = Astro.url;
       },
       { passive: true },
     );
-  }
-
-  const root = document.documentElement;
-  const btn = document.getElementById("theme-toggle");
-
-  if (btn) {
-    function getEffectiveTheme() {
-      const saved = root.getAttribute("data-theme");
-      if (saved) return saved;
-      return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-    }
-
-    function updateIcon() {
-      btn!.classList.toggle("is-dark", getEffectiveTheme() === "dark");
-    }
-
-    updateIcon();
-
-    btn.addEventListener("click", () => {
-      const next = getEffectiveTheme() === "dark" ? "light" : "dark";
-      root.setAttribute("data-theme", next);
-      localStorage.setItem("theme", next);
-      root.style.transition = "background 0.2s, color 0.2s";
-      updateIcon();
-    });
   }
 
   /* ── Hamburger ── */
@@ -195,30 +163,31 @@ const { pathname } = Astro.url;
   }
 
   #theme-toggle {
-    all: unset;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    min-width: 32px;
+    min-height: 32px;
+    color: var(--color-muted);
+    font-size: 0.875rem;
+    --theme-toggle-surface: transparent;
+    --theme-toggle-border: var(--color-border);
+    --theme-toggle-accent: var(--color-accent-dim);
+    --theme-toggle-menu-bg: var(--color-surface);
+    --theme-icon-size: 16px;
+  }
+
+  #theme-toggle::part(button) {
     width: 32px;
     height: 32px;
     border-radius: 6px;
-    border: 1px solid var(--color-border);
-    cursor: pointer;
-    color: var(--color-muted);
-    transition: color 0.15s, background 0.15s, border-color 0.15s;
   }
 
-  #theme-toggle:hover {
+  #theme-toggle::part(button):hover {
     color: var(--color-text);
     background: var(--color-surface-2);
-    border-color: var(--color-accent);
   }
 
-  /* Show sun in dark mode, moon in light mode */
-  #theme-toggle .icon-sun { display: none; }
-  #theme-toggle .icon-moon { display: block; }
-  #theme-toggle.is-dark .icon-sun { display: block; }
-  #theme-toggle.is-dark .icon-moon { display: none; }
+  #theme-toggle::part(menu) {
+    color: var(--color-text);
+  }
 
   /* ── Hamburger ── */
   .hamburger {
@@ -286,19 +255,13 @@ const { pathname } = Astro.url;
     }
 
     #theme-toggle {
-      margin-top: 0.5rem;
-      width: 100%;
-      justify-content: flex-start;
-      gap: 0.5rem;
-      padding: 0.65rem 0.75rem;
-      height: auto;
-      border: none;
+      margin: 0.5rem 0.75rem 0;
+      align-self: flex-start;
     }
 
-    #theme-toggle::after {
-      content: "Toggle theme";
-      font-size: 0.85rem;
-      font-family: var(--font-sans);
+    #theme-toggle::part(menu) {
+      inset-inline-start: 0;
+      inset-inline-end: auto;
     }
 
     .logo {
