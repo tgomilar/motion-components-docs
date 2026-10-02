@@ -1,0 +1,369 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout
+  title="motion-theme-toggle — Motion Components"
+  description="Light and dark mode toggle with an optional system option, a spring sun-to-moon morph and a circular view-transition wipe. API-compatible with Chrome Labs' dark-mode-toggle."
+  noMain
+>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-theme-toggle</motion-split></h1>
+      <p class="lead">
+        Light and dark mode control with an optional <strong>system</strong> option. The icon morphs from sun to moon on a spring, and the new theme
+        is revealed with a circular wipe that grows from the control. API-compatible with Chrome Labs'
+        <a href="https://github.com/GoogleChromeLabs/dark-mode-toggle" target="_blank" rel="noopener">dark-mode-toggle</a>.
+      </p>
+
+      <h2>Preview</h2>
+      <p>Each demo below themes its own card through <code>target</code>, so the rest of the site is left alone.</p>
+      <DocsPreview>
+        <div class="scope" id="scope-preview">
+          <div class="scope-head">
+            <span class="scope-title">Weekly digest</span>
+            <motion-theme-toggle target="#scope-preview"></motion-theme-toggle>
+          </div>
+          <p class="scope-body">Three new components shipped, two bugs squashed, and the docs got a fresh coat of paint.</p>
+          <div class="scope-actions">
+            <span class="scope-chip">Components</span>
+            <span class="scope-chip">Release</span>
+          </div>
+        </div>
+      </DocsPreview>
+
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-theme-toggle'   // just this one
+import 'motion-components'                       // or the whole library`}
+      />
+
+      <h2>Usage</h2>
+      <CodeWindow
+        filename="index.html"
+        copy
+        code={`<motion-theme-toggle permanent></motion-theme-toggle>
+
+<style>
+  :root[data-theme='light'] { --bg: #fff;    --fg: #111; }
+  :root[data-theme='dark']  { --bg: #0b0b0f; --fg: #eee; }
+  body { background: var(--bg); color: var(--fg); }
+</style>`}
+      />
+
+      <h2>Appearances</h2>
+
+      <h3>Icon with system</h3>
+      <p>Add <code>system</code> to cycle light → dark → system. System follows the OS setting live.</p>
+      <DocsPreview>
+        <div class="scope scope--row" id="scope-system">
+          <motion-theme-toggle target="#scope-system" system></motion-theme-toggle>
+          <span class="scope-body" data-readout="scope-system"></span>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="system.html" copy code={`<motion-theme-toggle system></motion-theme-toggle>`} />
+
+      <h3>Toggle</h3>
+      <p>A segmented radio group, like the <code>toggle</code> appearance in Google Labs. The selection pill springs between options.</p>
+      <DocsPreview>
+        <div class="scope scope--row" id="scope-toggle">
+          <motion-theme-toggle target="#scope-toggle" appearance="toggle" legend="Theme" system></motion-theme-toggle>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="toggle.html" copy code={`<motion-theme-toggle appearance="toggle" legend="Theme" system></motion-theme-toggle>`} />
+
+      <h3>Switch</h3>
+      <p>A two-state switch with light and dark labels on either side. <code>remember</code> adds a checkbox bound to <code>permanent</code>.</p>
+      <DocsPreview>
+        <div class="scope scope--row" id="scope-switch">
+          <motion-theme-toggle target="#scope-switch" appearance="switch" legend="Dark mode" remember="Remember"></motion-theme-toggle>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="switch.html"
+        copy
+        code={`<motion-theme-toggle appearance="switch" legend="Dark mode" remember="Remember"></motion-theme-toggle>`}
+      />
+
+      <h3>Menu</h3>
+      <p>A drop-down menu button. Opens with <kbd>Enter</kbd>, <kbd>Space</kbd> or <kbd>↓</kbd>, and closes with <kbd>Esc</kbd> or an outside click.</p>
+      <DocsPreview>
+        <div class="scope scope--row scope--menu" id="scope-menu">
+          <span class="scope-title">Appearance</span>
+          <motion-theme-toggle target="#scope-menu" appearance="menu" system></motion-theme-toggle>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="menu.html" copy code={`<motion-theme-toggle appearance="menu" system></motion-theme-toggle>`} />
+
+      <h2>Control this site</h2>
+      <p>This one targets <code>&lt;html&gt;</code>, so it switches the whole docs site, with the wipe growing from the button.</p>
+      <DocsPreview>
+        <div class="demo-row site-row">
+          <motion-theme-toggle id="site-toggle" legend="Site theme" duration="0.7"></motion-theme-toggle>
+          <span class="site-hint">Click to switch the docs theme</span>
+        </div>
+      </DocsPreview>
+
+      <h2>motion-theme-icon</h2>
+      <p>The morphing glyph is its own primitive, <code>&lt;motion-theme-icon&gt;</code>, so you can use it as a theme indicator anywhere.</p>
+      <DocsPreview>
+        <div class="demo-row icon-row">
+          <motion-theme-icon id="solo-icon" mode="light" style="--theme-icon-size: 3rem"></motion-theme-icon>
+          <div class="icon-buttons">
+            <button class="demo-btn demo-btn--accent" data-icon-mode="light">Light</button>
+            <button class="demo-btn demo-btn--accent" data-icon-mode="dark">Dark</button>
+            <button class="demo-btn demo-btn--accent" data-icon-mode="system">System</button>
+          </div>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="icon.ts"
+        copy
+        code={`import 'motion-components/motion-theme-icon'
+
+document.querySelector('motion-theme-icon').mode = 'dark'`}
+      />
+
+      <h2>Preventing a flash on load</h2>
+      <p>
+        Components register after the page has painted. To apply the saved theme before the first paint, put this inline script in
+        <code>&lt;head&gt;</code>. It uses the same rules as the component: the saved choice first, then the OS setting.
+      </p>
+      <CodeWindow
+        filename="head.html"
+        copy
+        code={`<script>
+  (() => {
+    let mode = null
+    try { mode = localStorage.getItem('motion-theme') } catch {}
+    const os = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+    const scheme = mode === 'light' || mode === 'dark' ? mode : os
+    document.documentElement.dataset.theme = scheme
+    document.documentElement.style.colorScheme = scheme
+  })()
+</script>`}
+      />
+
+      <h2>Stylesheets per scheme</h2>
+      <p>
+        As in Google Labs, stylesheets linked with a <code>prefers-color-scheme</code> media query are switched on and off to match the chosen theme,
+        so existing pages work unchanged:
+      </p>
+      <CodeWindow
+        filename="index.html"
+        copy
+        code={`<link rel="stylesheet" href="light.css" media="(prefers-color-scheme: light)">
+<link rel="stylesheet" href="dark.css"  media="(prefers-color-scheme: dark)">`}
+      />
+
+      <h2>Properties</h2>
+      <PropsTable
+        nameLabel="Attribute"
+        rows={[
+          { name: "mode", type: "'light' | 'dark' | 'system'", default: "OS preference", description: "Selected mode. Reflects to the attribute. 'system' requires the system attribute" },
+          { name: "appearance", type: "'icon' | 'toggle' | 'switch' | 'menu'", default: "'icon'", description: "Visual style of the control" },
+          { name: "system", type: "boolean", default: "false", description: "Offers a third option that follows the OS preference. Ignored by switch" },
+          { name: "permanent", type: "boolean", default: "false", description: "Saves the choice to localStorage under motion-theme and restores it on load" },
+          { name: "legend", type: "string", default: "''", description: "Group label. Accessible name of the icon, switch and menu controls" },
+          { name: "light", type: "string", default: "'Light'", description: "Label of the light option" },
+          { name: "dark", type: "string", default: "'Dark'", description: "Label of the dark option" },
+          { name: "system-label", type: "string", default: "'System'", description: "Label of the system option" },
+          { name: "remember", type: "string", default: "''", description: "When set, shows a checkbox with this label that toggles permanent" },
+          { name: "target", type: "string", default: "'html'", description: "CSS selector of the element that receives data-theme and color-scheme" },
+          { name: "transition", type: "'wipe' | 'none'", default: "'wipe'", description: "Page transition when the theme changes" },
+          { name: "duration", type: "number", default: "0.5", description: "Spring duration of the icon morph and wipe, in seconds" },
+          { name: "bounce", type: "number", default: "0.25", description: "Spring bounciness of the icon morph and controls" },
+        ]}
+      />
+
+      <h3>motion-theme-icon</h3>
+      <PropsTable
+        nameLabel="Attribute"
+        rows={[
+          { name: "mode", type: "'light' | 'dark' | 'system'", default: "'light'", description: "Glyph to show: sun, moon or half disc" },
+          { name: "duration", type: "number", default: "0.5", description: "Spring duration of the morph, in seconds" },
+          { name: "bounce", type: "number", default: "0.25", description: "Spring bounciness of the morph" },
+        ]}
+      />
+
+      <h2>Events</h2>
+      <div class="methods-table">
+        <table>
+          <thead><tr><th>Event</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr>
+              <td><code>colorschemechange</code></td>
+              <td>Fired when the mode or the applied scheme changes, including on first load. <code>detail: &#123; colorScheme, mode &#125;</code>.</td>
+            </tr>
+            <tr>
+              <td><code>permanentcolorschemechange</code></td>
+              <td>Fired when <code>permanent</code> changes. <code>detail: &#123; permanent &#125;</code>.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`document.addEventListener('colorschemechange', (e) => {
+  console.log(e.detail.colorScheme, e.detail.mode)
+})`}
+      />
+
+      <h2>CSS custom properties</h2>
+      <PropsTable
+        nameLabel="Property"
+        rows={[
+          { name: "--theme-toggle-surface", type: "color", default: "currentColor 6%", description: "Background of the track, segmented group and menu trigger" },
+          { name: "--theme-toggle-border", type: "color", default: "currentColor 16%", description: "Border color of the controls" },
+          { name: "--theme-toggle-accent", type: "color", default: "currentColor 14%", description: "Selected segment, switch thumb and active menu item" },
+          { name: "--theme-toggle-menu-bg", type: "color", default: "Canvas", description: "Drop-down menu background" },
+          { name: "--theme-toggle-radius", type: "length", default: "999px", description: "Corner radius of the controls" },
+          { name: "--theme-icon-size", type: "length", default: "1.25em", description: "Icon size (1.5em on a standalone motion-theme-icon)" },
+        ]}
+      />
+
+      <h2>Accessibility</h2>
+      <p>
+        <code>icon</code> and <code>switch</code> are buttons with <code>role="switch"</code> and <code>aria-checked</code>. With <code>system</code>,
+        the icon becomes a plain button whose label announces the current mode. <code>toggle</code> is a native radio group inside a
+        <code>&lt;fieldset&gt;</code>. <code>menu</code> follows the WAI-ARIA menu button pattern: <code>aria-haspopup</code>,
+        <code>aria-expanded</code> and <code>menuitemradio</code> items, with <kbd>↑</kbd> <kbd>↓</kbd> <kbd>Home</kbd> <kbd>End</kbd> to move,
+        <kbd>Enter</kbd> or <kbd>Space</kbd> to choose and <kbd>Esc</kbd> to close. With <code>prefers-reduced-motion</code>, the theme and icon
+        change instantly with no morph and no wipe.
+      </p>
+
+      <DocsPagination />
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+
+  const root = document.documentElement;
+  const navButton = document.getElementById("theme-toggle");
+  const siteToggle = document.getElementById("site-toggle") as any;
+
+  if (siteToggle) {
+    siteToggle.mode = root.dataset.theme === "dark" ? "dark" : root.dataset.theme === "light" ? "light" : siteToggle.mode;
+    siteToggle.addEventListener("colorschemechange", (e: CustomEvent) => {
+      localStorage.setItem("theme", e.detail.colorScheme);
+      navButton?.classList.toggle("is-dark", e.detail.colorScheme === "dark");
+    });
+  }
+
+  document.querySelectorAll<HTMLElement>("[data-readout]").forEach((out) => {
+    const toggle = document.getElementById(out.dataset.readout!)?.querySelector("motion-theme-toggle");
+    toggle?.addEventListener("colorschemechange", (e: Event) => {
+      const { mode, colorScheme } = (e as CustomEvent).detail;
+      out.textContent = mode === "system" ? `system → ${colorScheme}` : mode;
+    });
+  });
+
+  const icon = document.getElementById("solo-icon") as any;
+  document.querySelectorAll<HTMLButtonElement>("[data-icon-mode]").forEach((btn) => {
+    btn.addEventListener("click", () => (icon.mode = btn.dataset.iconMode));
+  });
+</script>
+
+<style>
+  .scope {
+    --scope-bg: #ffffff;
+    --scope-fg: #18181b;
+    --scope-muted: #52525b;
+    --scope-chip: #f4f4f5;
+    display: grid;
+    gap: 0.75rem;
+    width: min(100%, 26rem);
+    padding: 1.25rem 1.5rem;
+    border-radius: 16px;
+    background: var(--scope-bg);
+    color: var(--scope-fg);
+    border: 1px solid color-mix(in srgb, var(--scope-fg) 12%, transparent);
+  }
+
+  .scope[data-theme="dark"] {
+    --scope-bg: #111114;
+    --scope-fg: #f4f4f5;
+    --scope-muted: #a1a1aa;
+    --scope-chip: #27272a;
+  }
+
+  .scope--row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    width: auto;
+  }
+
+  .scope--menu {
+    justify-content: space-between;
+    min-width: 16rem;
+  }
+
+  .scope-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .scope-title {
+    font-weight: 700;
+  }
+
+  .scope-body {
+    margin: 0;
+    color: var(--scope-muted);
+    font-size: 0.9rem;
+    line-height: 1.6;
+  }
+
+  .scope-actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .scope-chip {
+    padding: 0.2rem 0.65rem;
+    border-radius: 999px;
+    background: var(--scope-chip);
+    font-size: 0.8rem;
+  }
+
+  .site-row {
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .site-hint {
+    color: var(--color-muted);
+    font-size: 0.9rem;
+  }
+
+  .icon-row {
+    justify-content: center;
+    padding: 1rem;
+    color: var(--color-text);
+  }
+
+  .icon-buttons {
+    display: flex;
+    gap: 0.5rem;
+  }
+</style>
