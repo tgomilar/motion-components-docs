@@ -61,9 +61,9 @@ const jsonLd = JSON.stringify({
   <meta name="ai-content-declaration" content="human-authored" />
   <article class="post-wrap">
     <header class="post-header">
-      <a class="back-link" href="/blog/">← All articles</a>
+      <a class="back-link" href="/blog/" data-pagefind-ignore>← All articles</a>
       <h1>{post.data.title}</h1>
-      <div class="post-meta">
+      <div class="post-meta" data-pagefind-ignore="all">
         <time datetime={post.data.pubDate.toISOString()}>{formatDate(post.data.pubDate)}</time>
         <span aria-hidden="true">·</span>
         <span>{readingTime} min read</span>
@@ -86,8 +86,8 @@ const jsonLd = JSON.stringify({
       <Content />
     </div>
 
-    <footer class="post-footer">
-      <a class="back-link" href="/blog/">← All articles</a>
+    <footer class="post-footer" data-pagefind-ignore="all">
+      <a class="back-link" href="/blog/" data-pagefind-ignore>← All articles</a>
     </footer>
   </article>
 

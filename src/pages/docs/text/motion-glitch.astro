@@ -10,14 +10,14 @@ import JsApiDemo from '../../../components/JsApiDemo.astro'
 import '../../../styles/docs.css'
 ---
 
-<Layout title="motion-glitch — Motion Components" description="RGB channel split effect triggered on hover, auto, or loop. Powered by Motion One." noMain>
+<Layout title="motion-glitch — Motion Components" description="RGB channel split effect triggered on hover, mount, or loop. Powered by Motion One." noMain>
   <div class="layout">
     <DocsSidebar />
 
     <main>
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-glitch</motion-split></h1>
       <p class="lead"
-        >RGB channel split effect triggered on hover, auto, or loop. Powered by Motion One.</p
+        >RGB channel split effect triggered on hover, mount, or loop. Powered by Motion One.</p
       >
 
       <h2>Preview</h2>
@@ -44,7 +44,7 @@ import 'motion-components'               // or the whole library`}
       <h2>Hover</h2>
       <p class="section-desc">Use <code>trigger="hover"</code> to fire the glitch on mouseenter.</p>
       <DocsPreview>
-        <motion-glitch trigger="hover" interval="1800" intensity="5" class="demo-text"
+        <motion-glitch trigger="hover" intensity="5" class="demo-text"
           >ERROR_404</motion-glitch
         >
       </DocsPreview>
@@ -52,7 +52,7 @@ import 'motion-components'               // or the whole library`}
       <CodeWindow
         filename="motion-glitch-hover.html"
         copy
-        code={`<motion-glitch trigger="hover" interval="1800">
+        code={`<motion-glitch trigger="hover">
   ERROR_404
 </motion-glitch>`}
       />
@@ -105,13 +105,13 @@ import 'motion-components'               // or the whole library`}
             type: 'string',
             default: "'loop'",
             description:
-              "<code>'loop'</code> — repeat on interval &nbsp;|&nbsp; <code>'hover'</code> — on mouseenter &nbsp;|&nbsp; <code>'auto'</code> — once on mount",
+              "<code>'loop'</code>: repeat on interval &nbsp;|&nbsp; <code>'hover'</code>: on mouseenter &nbsp;|&nbsp; <code>'mount'</code>: once on mount",
           },
           {
             name: 'interval',
             type: 'number',
-            default: '2000',
-            description: 'Milliseconds between each glitch when <code>trigger="loop"</code>',
+            default: '2',
+            description: 'Seconds between each glitch when <code>trigger="loop"</code>',
           },
         ]}
       />

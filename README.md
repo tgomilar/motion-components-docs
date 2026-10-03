@@ -113,7 +113,7 @@ npm install motion-components
 | [`motion-progress`](https://www.motion-components.dev/docs/components/motion-progress/)                         | Spring-eased scroll progress bar            |
 | [`motion-image-compare`](https://www.motion-components.dev/docs/components/motion-image-compare/)               | Before/after slider, drag or keyboard       |
 | [`motion-flip-card`](https://www.motion-components.dev/docs/components/motion-flip-card/)                       | Two-sided flip card (hover or click)        |
-| [`motion-theme-toggle`](https://www.motion-components.dev/docs/components/motion-theme-toggle/)                 | Light/dark/system toggle with circular wipe |
+| [`motion-theme-toggle`](https://www.motion-components.dev/docs/components/motion-theme-toggle/)                 | Light/dark/system toggle, optional wipe     |
 | [`motion-theme-icon`](https://www.motion-components.dev/docs/components/motion-theme-toggle/#motion-theme-icon) | Spring sun, moon and system glyph           |
 
 ### Code — syntax-highlighted display

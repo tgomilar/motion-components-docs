@@ -19,7 +19,7 @@ import "../../../styles/docs.css";
       <h2>Preview</h2>
       <DocsPreview wide>
         <div class="scroll-demo">
-          <motion-progress position="top" color="var(--color-accent)" thickness="3" />
+          <motion-progress position="top" thickness="3" style="--progress-color: var(--color-accent)" />
           <div class="scroll-content">
             <motion-reveal y="24" duration="0.6">
               <div class="scroll-section">
@@ -27,7 +27,7 @@ import "../../../styles/docs.css";
                 <p>This content fades in when it enters the viewport.</p>
               </div>
             </motion-reveal>
-            <motion-parallax speed="0.3">
+            <motion-parallax depth="0.3">
               <div class="scroll-section parallax">
                 <h3>Parallax section</h3>
                 <p>This content moves at a different speed than the scroll.</p>
@@ -48,7 +48,7 @@ import "../../../styles/docs.css";
         filename="scroll-progress.html"
         copy
         code={`<!-- Fixed progress bar at the top -->
-<motion-progress position="top" color="#60a5fa" thickness="3" />
+<motion-progress position="top" thickness="3" style="--progress-color: #60a5fa" />
 
 <!-- Page content with scroll effects -->
 <section>
@@ -59,7 +59,7 @@ import "../../../styles/docs.css";
 </section>
 
 <section>
-  <motion-parallax speed="0.3">
+  <motion-parallax depth="0.3">
     <img src="hero.jpg" alt="..." />
   </motion-parallax>
 </section>
@@ -79,7 +79,7 @@ import "../../../styles/docs.css";
         filename="progress.html"
         copy
         compact
-        code={`<motion-progress position="top" color="#60a5fa" thickness="3" />`}
+        code={`<motion-progress position="top" thickness="3" style="--progress-color: #60a5fa" />`}
       />
       <p class="section-lead">The progress bar is a fixed element that fills as you scroll. It uses a spring-eased <code>scaleX</code> transform, so the fill feels physical rather than linear. <code>position</code> places it at <code>"top"</code> or <code>"bottom"</code>.</p>
 
@@ -88,11 +88,11 @@ import "../../../styles/docs.css";
         filename="parallax.html"
         copy
         compact
-        code={`<motion-parallax speed="0.3">
+        code={`<motion-parallax depth="0.3">
   <img src="hero.jpg" alt="..." />
 </motion-parallax>`}
       />
-      <p class="section-lead"><code>speed</code> controls how fast the content moves relative to the scroll. At <code>0.3</code> it moves at 30% of the scroll speed, creating a depth effect. Use <code>axis="x"</code> for horizontal parallax.</p>
+      <p class="section-lead"><code>depth</code> controls how far the content drifts relative to the scroll. At <code>0.3</code> it moves at 30% of the scroll speed, which reads as depth. Use <code>axis="x"</code> for horizontal parallax.</p>
 
       <h3>Reveal entrances</h3>
       <CodeWindow
@@ -112,7 +112,7 @@ import "../../../styles/docs.css";
         filename="heavy.html"
         copy
         compact
-        code={`<motion-parallax speed="0.6">
+        code={`<motion-parallax depth="0.6">
   <img src="hero.jpg" alt="..." />
 </motion-parallax>`}
       />
@@ -125,8 +125,7 @@ import "../../../styles/docs.css";
         compact
         code={`<motion-progress
   position="top"
-  color="linear-gradient(90deg, #60a5fa, #a78bfa)"
-  thickness="3"
+  thickness="3" style="--progress-color: linear-gradient(90deg, #60a5fa, #a78bfa)"
 />`}
       />
       <p class="section-lead">The <code>color</code> attribute accepts any CSS color value, including gradients.</p>

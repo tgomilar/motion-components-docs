@@ -20,7 +20,7 @@ import "../../../styles/docs.css";
 
       <h2>Preview</h2>
       <DocsPreview replayId="scramble-demo">
-        <motion-scramble id="scramble-demo" speed="40" iterations="2" class="demo-text"> Hello, world. </motion-scramble>
+        <motion-scramble id="scramble-demo" interval="0.04" iterations="2" class="demo-text"> Hello, world. </motion-scramble>
       </DocsPreview>
 
       <h2>Import</h2>
@@ -35,18 +35,18 @@ import 'motion-components'               // or the whole library`}
       <CodeWindow
         filename="motion-scramble.html"
         copy
-        code={`<motion-scramble hover>
+        code={`<motion-scramble trigger="hover">
   Hover to scramble
 </motion-scramble>`}
       />
 
       <h2>Properties</h2>
       <PropsTable nameLabel="Attribute" rows={[
-        { name: 'speed', type: 'number', default: '40', description: 'Milliseconds between scramble frames' },
-        { name: 'delay', type: 'number', default: '0', description: 'Delay before starting (ms)' },
+        { name: 'interval', type: 'number', default: '0.04', description: 'Time between scramble frames, in seconds' },
+        { name: 'delay', type: 'number', default: '0', description: 'Delay before starting, in seconds' },
         { name: 'iterations', type: 'number', default: '2', description: 'Scramble frames per character before revealing' },
-        { name: 'hover', type: 'boolean', default: 'false', description: 'Trigger on mouseenter instead of scroll' },
-        { name: 'once', type: 'boolean', default: 'true', description: 'Animate only on first intersection' },
+        { name: 'trigger', type: 'string', default: "'view'", description: "What starts the scramble: <code>'view'</code> on viewport entry or <code>'hover'</code> on mouseenter" },
+        { name: 'once', type: 'boolean', default: 'true', description: 'Animate only on first intersection. Set <code>once="false"</code> to animate on every entry' },
       ]} />
       <h2>JavaScript API</h2>
       <p class="section-desc">Trigger the scramble programmatically with <code>play()</code> and <code>cancel()</code>.</p>

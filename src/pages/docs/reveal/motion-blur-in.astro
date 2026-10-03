@@ -20,7 +20,7 @@ import "../../../styles/docs.css";
 
       <h2>Preview</h2>
       <DocsPreview replayId="blur-in-demo">
-        <motion-blur-in id="blur-in-demo" blur="12" y="8" duration="0.7">
+        <motion-blur-in id="blur-in-demo" intensity="12" y="8" duration="0.7">
           <div class="demo-card">Scroll to reveal</div>
         </motion-blur-in>
       </DocsPreview>
@@ -37,7 +37,7 @@ import 'motion-components'               // or the whole library`}
       <CodeWindow
         filename="motion-blur-in.html"
         copy
-        code={`<motion-blur-in blur="12" y="8" duration="0.7">
+        code={`<motion-blur-in intensity="12" y="8" duration="0.7">
   <h1>Headline</h1>
 </motion-blur-in>`}
       />
@@ -47,10 +47,10 @@ import 'motion-components'               // or the whole library`}
         nameLabel="Attribute"
         rows={[
           { name: "duration", type: "number", default: "0.7", description: "Spring duration of the reveal animation, in seconds" },
-          { name: "blur", type: "number", default: "10", description: "Initial blur in pixels; animates to 0 on reveal" },
+          { name: "intensity", type: "number", default: "10", description: "Initial blur in pixels; animates to 0 on reveal" },
           { name: "y", type: "number", default: "12", description: "Initial vertical offset in pixels; animates to 0 on reveal" },
           { name: "threshold", type: "number", default: "0.1", description: "IntersectionObserver threshold (0–1) at which the reveal triggers" },
-          { name: "once", type: "boolean", default: "true", description: "Animate only the first time the element enters view" },
+          { name: "once", type: "boolean", default: "true", description: "Animate only the first time the element enters view. Set it to <code>\"false\"</code> to replay on every entry" },
         ]}
       />
 

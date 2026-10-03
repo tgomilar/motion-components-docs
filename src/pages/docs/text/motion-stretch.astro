@@ -67,18 +67,18 @@ el.text = 'UPDATED'   // animation restarts`}
       />
 
       <h2>Spring tuning</h2>
-      <p>Adjust <code>stiffness</code> and <code>damping</code> to change the character of the snap. High stiffness + low damping is bouncy; low stiffness + high damping is slow and smooth.</p>
+      <p>Adjust <code>duration</code> and <code>bounce</code> to change the character of the snap. A short duration with a high bounce is springy. A longer duration with <code>bounce="0"</code> is slow and smooth.</p>
       <DocsPreview>
         <div style="display:flex; flex-direction:column; gap:1.5rem; align-items:flex-start">
-          <motion-stretch class="demo-large" spread="20" stiffness="400" damping="10">BOUNCY</motion-stretch>
-          <motion-stretch class="demo-large" spread="20" stiffness="120" damping="28">SMOOTH</motion-stretch>
+          <motion-stretch class="demo-large" spread="20" duration="0.41" bounce="0.75">BOUNCY</motion-stretch>
+          <motion-stretch class="demo-large" spread="20" duration="0.75" bounce="0">SMOOTH</motion-stretch>
         </div>
       </DocsPreview>
       <CodeWindow
         filename="motion-stretch.html"
         copy
-        code={`<motion-stretch spread="20" stiffness="400" damping="10">BOUNCY</motion-stretch>
-<motion-stretch spread="20" stiffness="120" damping="28">SMOOTH</motion-stretch>`}
+        code={`<motion-stretch spread="20" duration="0.41" bounce="0.75">BOUNCY</motion-stretch>
+<motion-stretch spread="20" duration="0.75" bounce="0">SMOOTH</motion-stretch>`}
       />
 
       <h2>How it works</h2>
@@ -101,8 +101,8 @@ el.text = 'UPDATED'   // animation restarts`}
       <PropsTable nameLabel="Attribute" rows={[
         { name: 'text', type: 'string', default: '—', description: 'Text to render. Falls back to the child text when unset' },
         { name: 'spread', type: 'number', default: '12', description: 'Max displacement of the outermost character on each side (px)' },
-        { name: 'stiffness', type: 'number', default: '320', description: 'Spring stiffness: higher is snappier' },
-        { name: 'damping', type: 'number', default: '16', description: 'Spring damping: lower is bouncier' },
+        { name: 'duration', type: 'number', default: '0.45', description: 'Spring duration of the spread and release, in seconds' },
+        { name: 'bounce', type: 'number', default: '0.55', description: 'Spring bounciness: <code>0</code> settles without overshoot, higher is more elastic' },
       ]} />
       <DocsPagination />
     </main>

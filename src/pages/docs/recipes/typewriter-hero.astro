@@ -19,7 +19,7 @@ import "../../../styles/docs.css";
       <h2>Preview</h2>
       <DocsPreview wide>
         <div class="hero-demo">
-          <motion-typewriter speed="40" delay="0.3" cursor>
+          <motion-typewriter interval="0.04" delay="0.3" cursor>
             <h1 class="hero-headline">Build interactions that ship.</h1>
           </motion-typewriter>
           <motion-reveal y="16" duration="0.6" delay="0.2">
@@ -33,7 +33,7 @@ import "../../../styles/docs.css";
         filename="typewriter-hero.html"
         copy
         code={`<section class="hero">
-  <motion-typewriter speed="40" delay="0.3" cursor>
+  <motion-typewriter interval="0.04" delay="0.3" cursor>
     <h1>Build interactions that ship.</h1>
   </motion-typewriter>
 
@@ -51,11 +51,11 @@ import "../../../styles/docs.css";
         filename="typewriter.html"
         copy
         compact
-        code={`<motion-typewriter speed="40" delay="0.3" cursor>
+        code={`<motion-typewriter interval="0.04" delay="0.3" cursor>
   <h1>Build interactions that ship.</h1>
 </motion-typewriter>`}
       />
-      <p class="section-lead">The typewriter reveals the headline one character at a time. <code>speed</code> is milliseconds per character. <code>delay</code> adds a pause before typing starts. The <code>cursor</code> attribute adds a blinking caret.</p>
+      <p class="section-lead">The typewriter reveals the headline one character at a time. <code>interval</code> is the time between characters in seconds. <code>delay</code> adds a pause, in seconds, before typing starts. The <code>cursor</code> attribute adds a blinking caret.</p>
 
       <h3>Reveal subcopy</h3>
       <CodeWindow
@@ -75,7 +75,7 @@ import "../../../styles/docs.css";
         filename="loop.html"
         copy
         compact
-        code={`<motion-typewriter speed="40" delay="2000" loop cursor>
+        code={`<motion-typewriter interval="0.04" delay="2" loop cursor>
   <h1>Build. Ship. Iterate.</h1>
 </motion-typewriter>`}
       />

@@ -20,7 +20,7 @@ import "../../../styles/docs.css";
 
       <h2>Preview</h2>
       <DocsPreview>
-        <motion-liquid class="demo-large" intensity="12" speed="1.5">LIQUID</motion-liquid>
+        <motion-liquid class="demo-large" intensity="12" duration="6">LIQUID</motion-liquid>
       </DocsPreview>
 
       <h2>Import</h2>
@@ -37,7 +37,7 @@ import 'motion-components'               // or the whole library`}
       <CodeWindow
         filename="motion-liquid.html"
         copy
-        code={`<motion-liquid intensity="12" speed="2">LIQUID</motion-liquid>`}
+        code={`<motion-liquid intensity="12" duration="4.5">LIQUID</motion-liquid>`}
       />
 
       <h3>Dynamic content</h3>
@@ -56,8 +56,8 @@ el.text = 'UPDATED'   // animation restarts`}
       <p><motion-code-inline>intensity</motion-code-inline> sets the maximum displacement in pixels. Higher values create more dramatic distortion.</p>
       <DocsPreview>
         <div style="display:flex; flex-direction:column; gap:1.5rem; align-items:flex-start">
-          <motion-liquid class="demo-large" intensity="5" speed="1.5">SUBTLE</motion-liquid>
-          <motion-liquid class="demo-large" intensity="24" speed="1.5">INTENSE</motion-liquid>
+          <motion-liquid class="demo-large" intensity="5" duration="6">SUBTLE</motion-liquid>
+          <motion-liquid class="demo-large" intensity="24" duration="6">INTENSE</motion-liquid>
         </div>
       </DocsPreview>
       <CodeWindow
@@ -67,30 +67,30 @@ el.text = 'UPDATED'   // animation restarts`}
 <motion-liquid intensity="24">INTENSE</motion-liquid>`}
       />
 
-      <h2>Speed</h2>
-      <p><motion-code-inline>speed</motion-code-inline> controls how fast the fluid motion evolves. Slow speeds feel like a gentle shimmer; higher speeds feel chaotic.</p>
+      <h2>Duration</h2>
+      <p><motion-code-inline>duration</motion-code-inline> sets the seconds per distortion cycle. Long cycles feel like a gentle shimmer. Short cycles feel chaotic. Set it to <motion-code-inline>0</motion-code-inline> to hold the text still.</p>
       <DocsPreview>
         <div style="display:flex; flex-direction:column; gap:1.5rem; align-items:flex-start">
-          <motion-liquid class="demo-large" intensity="14" speed="0.5">SLOW</motion-liquid>
-          <motion-liquid class="demo-large" intensity="14" speed="4">FAST</motion-liquid>
+          <motion-liquid class="demo-large" intensity="14" duration="18">SLOW</motion-liquid>
+          <motion-liquid class="demo-large" intensity="14" duration="2.25">FAST</motion-liquid>
         </div>
       </DocsPreview>
       <CodeWindow
         filename="motion-liquid.html"
         copy
-        code={`<motion-liquid intensity="14" speed="0.5">SLOW</motion-liquid>
-<motion-liquid intensity="14" speed="4">FAST</motion-liquid>`}
+        code={`<motion-liquid intensity="14" duration="18">SLOW</motion-liquid>
+<motion-liquid intensity="14" duration="2.25">FAST</motion-liquid>`}
       />
 
       <h2>Pause on hover</h2>
       <p>Add <motion-code-inline>pause-on-hover</motion-code-inline> to freeze the fluid motion when the cursor enters.</p>
       <DocsPreview>
-        <motion-liquid class="demo-large" intensity="14" speed="1.5" pause-on-hover>HOVER ME</motion-liquid>
+        <motion-liquid class="demo-large" intensity="14" duration="6" pause-on-hover>HOVER ME</motion-liquid>
       </DocsPreview>
       <CodeWindow
         filename="motion-liquid.html"
         copy
-        code={`<motion-liquid intensity="14" speed="1.5" pause-on-hover>
+        code={`<motion-liquid intensity="14" duration="6" pause-on-hover>
   HOVER ME
 </motion-liquid>`}
       />
@@ -104,14 +104,14 @@ el.text = 'UPDATED'   // animation restarts`}
       <PropsTable nameLabel="Attribute" rows={[
         { name: 'text', type: 'string', default: '—', description: 'Text to render with the liquid effect. Falls back to the child text when unset' },
         { name: 'intensity', type: 'number', default: '10', description: 'Maximum displacement in px' },
-        { name: 'speed', type: 'number', default: '2', description: 'How fast the fluid motion evolves' },
+        { name: 'duration', type: 'number', default: '4.5', description: 'Seconds per distortion cycle. Lower is faster, <code>0</code> holds the text still' },
         { name: 'pause-on-hover', type: 'boolean', default: 'false', description: 'Freeze motion on mouseenter, resume on mouseleave' },
       ]} />
 
       <h2>JavaScript API</h2>
       <p class="section-desc">Control the liquid programmatically with <code>play()</code>, <code>pause()</code>, <code>finish()</code>, and <code>cancel()</code>.</p>
       <JsApiDemo target="api-liquid-demo" wide>
-        <motion-liquid id="api-liquid-demo" text="JS API · demo · " speed="30">
+        <motion-liquid id="api-liquid-demo" text="JS API · demo · " duration="3">
         </motion-liquid>
       </JsApiDemo>
 

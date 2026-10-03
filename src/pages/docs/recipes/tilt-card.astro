@@ -20,7 +20,7 @@ import "../../../styles/docs.css";
       <DocsPreview wide>
         <div class="tilt-demo">
           <motion-tilt max="15" scale="1.02">
-            <motion-spotlight size="300" color="rgba(96,165,250,0.15)">
+            <motion-spotlight size="300" style="--spotlight-color: rgba(96,165,250,0.15)">
               <div class="tilt-card">
                 <div class="card-icon">✦</div>
                 <h3>Analytics</h3>
@@ -36,7 +36,7 @@ import "../../../styles/docs.css";
         filename="tilt-card.html"
         copy
         code={`<motion-tilt max="15" scale="1.02">
-  <motion-spotlight size="300" color="rgba(96,165,250,0.15)">
+  <motion-spotlight size="300" style="--spotlight-color: rgba(96,165,250,0.15)">
     <div class="card">
       <div class="card-icon">✦</div>
       <h3>Analytics</h3>
@@ -65,11 +65,11 @@ import "../../../styles/docs.css";
         filename="spotlight.html"
         copy
         compact
-        code={`<motion-spotlight size="300" color="rgba(96,165,250,0.15)">
+        code={`<motion-spotlight size="300" style="--spotlight-color: rgba(96,165,250,0.15)">
   <!-- radial gradient tracks the cursor -->
 </motion-spotlight>`}
       />
-      <p class="section-lead">The spotlight renders a radial gradient that follows the cursor with a lerped lag. It fades in on hover and out on leave. The <code>smoothing</code> attribute (default 0.18) controls how much the light lags behind the cursor.</p>
+      <p class="section-lead">The spotlight renders a radial gradient that follows the cursor on a spring. It fades in on hover and out on leave. The <code>duration</code> attribute (default 0.35) controls how much the light lags behind the cursor.</p>
 
       <h2>Tuning</h2>
 
@@ -79,7 +79,7 @@ import "../../../styles/docs.css";
         copy
         compact
         code={`<motion-tilt max="8" scale="1.01">
-  <motion-spotlight size="250" color="rgba(255,255,255,0.06)">
+  <motion-spotlight size="250" style="--spotlight-color: rgba(255,255,255,0.06)">
     <div class="card">...</div>
   </motion-spotlight>
 </motion-tilt>`}
@@ -91,7 +91,7 @@ import "../../../styles/docs.css";
         copy
         compact
         code={`<motion-tilt max="20" scale="1.04" gloss>
-  <motion-spotlight size="400" color="rgba(96,165,250,0.25)">
+  <motion-spotlight size="400" style="--spotlight-color: rgba(96,165,250,0.25)">
     <div class="card">...</div>
   </motion-spotlight>
 </motion-tilt>`}

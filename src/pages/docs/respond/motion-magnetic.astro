@@ -46,7 +46,8 @@ import 'motion-components'               // or the whole library`}
         nameLabel="Attribute"
         rows={[
           { name: "strength", type: "number", default: "0.4", description: "Fraction of cursor offset to apply (0 = none, 1 = full)" },
-          { name: "duration", type: "number", default: "0.5", description: "Spring duration hint in seconds" },
+          { name: "duration", type: "number", default: "0.5", description: "Spring duration of the pull and release, in seconds" },
+          { name: "bounce", type: "number", default: "0.4", description: "Spring bounciness of the pull and release (0 = no overshoot)" },
           { name: "disabled", type: "boolean", default: "false", description: "Ignore pointer input and settle to the rest state" },
         ]}
       />

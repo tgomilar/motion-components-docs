@@ -27,9 +27,9 @@ const next = idx >= 0 && idx < linear.length - 1 ? linear[idx + 1] : null
 ---
 
 {(prev || next) && (
-  <nav class="docs-pagination" aria-label="Docs pagination">
+  <nav class="docs-pagination" aria-label="Docs pagination" data-pagefind-ignore="all">
     {prev ? (
-      <motion-spotlight class="pg-spot" size="320" color="rgba(96,165,250,0.22)">
+      <motion-spotlight class="pg-spot" size="320" style="--spotlight-color: rgba(96,165,250,0.22)">
         <a href={prev.href} class="pg pg-prev" rel="prev">
           <span class="pg-direction">← Previous</span>
           <span class="pg-section">{SECTION_LABELS[prev.section as keyof typeof SECTION_LABELS]}</span>
@@ -39,7 +39,7 @@ const next = idx >= 0 && idx < linear.length - 1 ? linear[idx + 1] : null
     ) : <span class="pg pg-empty" aria-hidden="true" />}
 
     {next ? (
-      <motion-spotlight class="pg-spot" size="320" color="rgba(96,165,250,0.22)">
+      <motion-spotlight class="pg-spot" size="320" style="--spotlight-color: rgba(96,165,250,0.22)">
         <a href={next.href} class="pg pg-next" rel="next">
           <span class="pg-direction">Next →</span>
           <span class="pg-section">{SECTION_LABELS[next.section as keyof typeof SECTION_LABELS]}</span>

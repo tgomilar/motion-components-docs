@@ -81,14 +81,14 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Typing animation</h2>
-      <p>Add <code>type</code> to animate code appearing character by character. Syntax highlighting applies as it types. Loops automatically by default. Control speed with <code>type-speed</code> (chars/sec, default&nbsp;80) and the pause between loops with <code>type-loop-delay</code> (ms).</p>
+      <p>Add <code>typing</code> to animate code appearing character by character. Syntax highlighting applies as it types. It loops by default. Control the speed with <code>typing-speed</code> (characters per second, default&nbsp;80) and the pause between loops with <code>typing-hold</code> (seconds).</p>
       <DocsPreview>
         <div class="demo-window">
           <CodeWindow
             filename="motion.ts"
-            type
-            typeSpeed={65}
-            typeLoopDelay={1200}
+            typing
+            typingSpeed={65}
+            typingHold={1.2}
             code={`const card = document.querySelector(".card")
 
 animate(card, {
@@ -101,23 +101,23 @@ animate(card, {
       <CodeWindow
         filename="motion-code.html"
         copy
-        code={`<motion-code filename="app.ts" type type-speed="65">
+        code={`<motion-code filename="app.ts" typing typing-speed="65">
   <script type="text/plain">
     animate(".card", { opacity: [0, 1] })
   <\/script>
 </motion-code>`}
       />
 
-      <h2>On reveal: no-loop</h2>
-      <p>Add <code>no-loop</code> to disable looping. The animation plays once when the element scrolls into the viewport instead of starting immediately.</p>
+      <h2>On reveal: type once</h2>
+      <p>Set <code>typing-loop="false"</code> to type once. The animation then plays when the element scrolls into view instead of starting immediately.</p>
       <DocsPreview replayId="cw-reveal-demo">
         <div class="demo-window">
           <CodeWindow
             id="cw-reveal-demo"
             filename="app.ts"
-            type
-            typeSpeed={60}
-            no-loop
+            typing
+            typingSpeed={60}
+            typingLoop={false}
             code={`animate(".hero", {
   opacity: [0, 1],
   y: [20, 0],
@@ -128,22 +128,22 @@ animate(card, {
       <CodeWindow
         filename="motion-code.html"
         copy
-        code={`<motion-code filename="app.ts" type no-loop>
+        code={`<motion-code filename="app.ts" typing typing-loop="false">
   ...
 </motion-code>`}
       />
 
       <h2>Delayed typing</h2>
-      <p>Use <code>type-delay</code> (ms) to hold before typing starts. This is useful when the window animates into view.</p>
+      <p>Use <code>typing-delay</code> (seconds) to wait before typing starts. This is useful when the window animates into view.</p>
       <DocsPreview replayId="cw-delay-demo">
         <div class="demo-window">
           <CodeWindow
             id="cw-delay-demo"
             filename="app.py"
-            type
-            no-loop
-            typeSpeed={55}
-            typeDelay={500}
+            typing
+            typingLoop={false}
+            typingSpeed={55}
+            typingDelay={0.5}
             code={`from motion import animate
 
 animate(".hero", {
@@ -156,7 +156,7 @@ animate(".hero", {
       <CodeWindow
         filename="motion-code.html"
         copy
-        code={`<motion-code filename="app.py" type type-speed="55" type-delay="500">
+        code={`<motion-code filename="app.py" typing typing-speed="55" typing-delay="0.5">
   ...
 </motion-code>`}
       />
@@ -230,12 +230,12 @@ animate(".hero", {
         copy
         code={`/* VS Code Dark+ */
 :root {
-  --cw-keyword: #569cd6;
-  --cw-string:  #ce9178;
-  --cw-tag:     #4ec9b0;
-  --cw-attr:    #9cdcfe;
-  --cw-num:     #b5cea8;
-  --cw-comment: #6a9955;
+  --code-keyword: #569cd6;
+  --code-string:  #ce9178;
+  --code-tag:     #4ec9b0;
+  --code-attr:    #9cdcfe;
+  --code-num:     #b5cea8;
+  --code-comment: #6a9955;
 }`}
       />
 
@@ -247,42 +247,42 @@ animate(".hero", {
         { name: 'copy-label',      type: 'boolean', default: 'false',      description: 'Show a "Copy" text label next to the copy icon' },
         { name: 'hide-chrome',     type: 'boolean', default: 'false',      description: 'Remove the title bar entirely' },
         { name: 'compact',         type: 'boolean', default: 'false',      description: 'Reduce padding, font size, border radius, and title bar height' },
-        { name: 'type',            type: 'boolean', default: 'false',      description: 'Animate code in character by character with a blinking cursor. Loops automatically.' },
-        { name: 'type-speed',      type: 'number',  default: '80',         description: 'Typing speed in characters per second' },
-        { name: 'type-delay',      type: 'number',  default: '0',          description: 'Delay in ms before typing starts' },
-        { name: 'no-loop',         type: 'boolean', default: 'false',      description: 'Disable looping. Play once on viewport entry instead of repeating' },
-        { name: 'type-loop-delay', type: 'number',  default: '1500',       description: 'Pause in ms between the end of one loop and the start of the next' },
+        { name: 'typing',          type: 'boolean', default: 'false',      description: 'Animate code in character by character with a blinking cursor. Loops automatically.' },
+        { name: 'typing-speed',    type: 'number',  default: '80',         description: 'Typing speed in characters per second' },
+        { name: 'typing-delay',    type: 'number',  default: '0',          description: 'Seconds to wait before typing starts, on every pass' },
+        { name: 'typing-loop',     type: 'boolean', default: 'true',       description: 'Repeat the typing. Set <code>typing-loop="false"</code> to type once when the block scrolls into view' },
+        { name: 'typing-hold',     type: 'number',  default: '1.5',        description: 'Seconds to hold the finished code before typing it again' },
       ]} />
 
       <h2>CSS variables</h2>
       <PropsTable nameLabel="Variable" rows={[
-        { name: '--cw-keyword', type: 'color', default: '#7c3aed',          description: 'Keywords, booleans, null' },
-        { name: '--cw-string',  type: 'color', default: '#16a34a',          description: 'String literals' },
-        { name: '--cw-tag',     type: 'color', default: '#0369a1',          description: 'HTML tags, CSS selectors' },
-        { name: '--cw-attr',    type: 'color', default: '#be123c',          description: 'Attributes, CSS properties, JSON keys, decorators' },
-        { name: '--cw-num',     type: 'color', default: '#b45309',          description: 'Numbers and units' },
-        { name: '--cw-comment', type: 'color', default: 'var(--color-muted)', description: 'Comments' },
+        { name: '--code-keyword', type: 'color', default: '#7c3aed',          description: 'Keywords, booleans, null' },
+        { name: '--code-string',  type: 'color', default: '#16a34a',          description: 'String literals' },
+        { name: '--code-tag',     type: 'color', default: '#0369a1',          description: 'HTML tags, CSS selectors' },
+        { name: '--code-attr',    type: 'color', default: '#be123c',          description: 'Attributes, CSS properties, JSON keys, decorators' },
+        { name: '--code-num',     type: 'color', default: '#b45309',          description: 'Numbers and units' },
+        { name: '--code-comment', type: 'color', default: 'var(--color-muted)', description: 'Comments' },
       ]} />
 
       <h2>Methods</h2>
       <PropsTable nameLabel="Method" rows={[
-        { name: 'setCode(raw)',  type: 'void', default: '—', description: 'Set code programmatically. Triggers typing if type is enabled.' },
+        { name: 'setCode(raw)',  type: 'void', default: '—', description: 'Set code programmatically. Triggers typing if typing is enabled.' },
         { name: 'replay()',      type: 'void', default: '—', description: 'Restart the typing animation from the beginning.' },
       ]} />
       <h2>JavaScript API</h2>
       <p>
         Every playback verb drives the typing animation: <code>play()</code>, <code>pause()</code>, <code>finish()</code> (snap to the fully-typed
         code), and <code>cancel()</code> (clear the window). <code>replay()</code> is shorthand for <code>cancel()</code> + <code>play()</code>.
-        This instance uses <code>no-loop</code>, so a completed run settles into the <code>finished</code> state.
+        This instance uses <code>typing-loop="false"</code>, so a completed run settles into the <code>finished</code> state.
       </p>
       <JsApiDemo mode="looper" target="api-code-demo">
         <div class="demo-window">
           <CodeWindow
             id="api-code-demo"
             filename="motion.ts"
-            type
-            no-loop
-            typeSpeed={60}
+            typing
+            typingLoop={false}
+            typingSpeed={60}
             code={`const card = document.querySelector(".card")
 
 animate(card, {

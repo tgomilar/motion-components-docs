@@ -43,13 +43,12 @@ import 'motion-components'               // or the whole library`}
         filename="motion-progress.html"
         copy
         code={`<!-- Document scroll progress, top of viewport -->
-<motion-progress color="#60a5fa" thickness="3"></motion-progress>
+<motion-progress thickness="3" style="--progress-color: #60a5fa"></motion-progress>
 
 <!-- Per-element progress, bottom of viewport -->
 <motion-progress
   target="#article"
-  position="bottom"
-  color="currentColor"
+  position="bottom" style="--progress-color: currentColor"
 ></motion-progress>`}
       />
 
@@ -61,12 +60,16 @@ import 'motion-components'               // or the whole library`}
 
       <h2>Properties</h2>
       <PropsTable nameLabel="Attribute" rows={[
-        { name: 'position', type: '"top" | "bottom"', default: '"top"', description: 'Edge of the viewport the bar pins to' },
-        { name: 'color', type: 'string', default: 'var(--color-accent, #2563eb)', description: 'Bar color (any valid CSS color)' },
+        { name: 'position', type: 'string', default: "'top'", description: "Edge of the viewport the bar pins to: <code>'top'</code> or <code>'bottom'</code>" },
         { name: 'thickness', type: 'number', default: '3', description: 'Bar thickness in pixels' },
-        { name: 'target', type: 'string', default: '—', description: 'CSS selector of the scroll target. Defaults to the document' },
+        { name: 'target', type: 'string', default: "''", description: 'CSS selector of the scroll target. Defaults to the document' },
         { name: 'bounce', type: 'number', default: '0.15', description: 'Spring bounciness applied to the scaleX response' },
         { name: 'duration', type: 'number', default: '0.4', description: 'Spring duration of the scaleX response, in seconds' },
+      ]} />
+
+      <h2>CSS custom properties</h2>
+      <PropsTable nameLabel="Property" rows={[
+        { name: '--progress-color', type: 'color', default: 'var(--color-accent, #2563eb)', description: 'Bar color' },
       ]} />
 
       <h2>JavaScript API</h2>
@@ -75,7 +78,7 @@ import 'motion-components'               // or the whole library`}
         The instance below pins an amber bar to the <strong>bottom edge of the viewport</strong> (the top bar is this page's own progress).
       </p>
       <JsApiDemo mode="looper" target="api-progress-demo">
-        <motion-progress id="api-progress-demo" position="bottom" color="#f59e0b" thickness="4"></motion-progress>
+        <motion-progress id="api-progress-demo" position="bottom" thickness="4" style="--progress-color: #f59e0b"></motion-progress>
         <p class="api-demo-hint">Look at the bottom of the viewport. Scroll while playing to see the bar track, then try the transport controls.</p>
       </JsApiDemo>
 

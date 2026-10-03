@@ -86,26 +86,26 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Tuning the blur</h2>
-      <p>Compare <code>blur</code> and <code>y</code> values side by side. Scroll to this row to see them all reveal.</p>
+      <p>Compare <code>intensity</code> and <code>y</code> values side by side. Scroll to this row to see them all reveal.</p>
       <DocsPreview replayId="blur-tuning-demo">
         <div id="blur-tuning-demo" class="blur-compare">
           <div class="blur-compare-item">
-            <motion-blur id="blur-subtle" blur="3" y="6">
+            <motion-blur id="blur-subtle" intensity="3" y="6">
               <div class="compare-swatch">Aa</div>
             </motion-blur>
-            <code>blur=3</code>
+            <code>intensity=3</code>
           </div>
           <div class="blur-compare-item">
             <motion-blur id="blur-default">
               <div class="compare-swatch">Aa</div>
             </motion-blur>
-            <code>blur=10</code>
+            <code>intensity=10</code>
           </div>
           <div class="blur-compare-item">
-            <motion-blur id="blur-dreamy" blur="24" y="20">
+            <motion-blur id="blur-dreamy" intensity="24" y="20">
               <div class="compare-swatch">Aa</div>
             </motion-blur>
-            <code>blur=24</code>
+            <code>intensity=24</code>
           </div>
         </div>
       </DocsPreview>
@@ -113,34 +113,34 @@ import 'motion-components'               // or the whole library`}
         filename="motion-blur-tuning.html"
         copy
         code={`<!-- Subtle -->
-<motion-blur blur="3" y="6">...</motion-blur>
+<motion-blur intensity="3" y="6">...</motion-blur>
 
 <!-- Default -->
 <motion-blur>...</motion-blur>
 
 <!-- Dreamy -->
-<motion-blur blur="24" y="20">...</motion-blur>`}
+<motion-blur intensity="24" y="20">...</motion-blur>`}
       />
 
       <h2>Wrapping content blocks</h2>
-      <p>Works around any block content. Stagger the effect naturally by giving each card a slightly higher <code>blur</code> value.</p>
+      <p>Works around any block content. Stagger the effect naturally by giving each card a slightly higher <code>intensity</code> value.</p>
       <DocsPreview replayId="blur-cards-demo">
         <div class="demo-cards" id="blur-cards-demo">
-          <motion-blur data-replay-group="blur-cards-demo" blur="10" y="16">
+          <motion-blur data-replay-group="blur-cards-demo" intensity="10" y="16">
             <div class="demo-feature-card">
               <div class="demo-feature-icon">◆</div>
               <div class="demo-feature-name">Scroll-driven</div>
               <div class="demo-feature-desc">Animation tied directly to scroll position.</div>
             </div>
           </motion-blur>
-          <motion-blur data-replay-group="blur-cards-demo" blur="14" y="20">
+          <motion-blur data-replay-group="blur-cards-demo" intensity="14" y="20">
             <div class="demo-feature-card">
               <div class="demo-feature-icon">◈</div>
               <div class="demo-feature-name">Zero layout shift</div>
               <div class="demo-feature-desc">Animates opacity and filter only.</div>
             </div>
           </motion-blur>
-          <motion-blur data-replay-group="blur-cards-demo" blur="18" y="24">
+          <motion-blur data-replay-group="blur-cards-demo" intensity="18" y="24">
             <div class="demo-feature-card">
               <div class="demo-feature-icon">◉</div>
               <div class="demo-feature-name">Accessible</div>
@@ -152,13 +152,13 @@ import 'motion-components'               // or the whole library`}
       <CodeWindow
         filename="motion-blur-cards.html"
         copy
-        code={`<motion-blur blur="10" y="16">
+        code={`<motion-blur intensity="10" y="16">
   <div class="card">Scroll-driven</div>
 </motion-blur>
-<motion-blur blur="14" y="20">
+<motion-blur intensity="14" y="20">
   <div class="card">Zero layout shift</div>
 </motion-blur>
-<motion-blur blur="18" y="24">
+<motion-blur intensity="18" y="24">
   <div class="card">Accessible</div>
 </motion-blur>`}
       />
@@ -171,10 +171,10 @@ import 'motion-components'               // or the whole library`}
             name: "direction",
             type: "string",
             default: "'in'",
-            description: "<code>'in'</code> — reveals on entry &nbsp;|&nbsp; <code>'out'</code> — blurs on exit &nbsp;|&nbsp; <code>'both'</code> — in and out",
+            description: "<code>'in'</code> reveals on entry &nbsp;|&nbsp; <code>'out'</code> blurs on exit &nbsp;|&nbsp; <code>'both'</code> blurs in and out",
           },
           {
-            name: "blur",
+            name: "intensity",
             type: "number",
             default: "10",
             description: "Blur radius in px at the start (<code>in</code>) or end (<code>out</code>) of the scroll range",
@@ -185,7 +185,7 @@ import 'motion-components'               // or the whole library`}
             type: "boolean",
             default: "true",
             description:
-              'For <code>direction="in"</code>: latch at fully-visible state and stop scroll tracking. Has no effect on <code>out</code> or <code>both</code>.',
+              'For <code>direction="in"</code>: latch at fully-visible state and stop scroll tracking. Has no effect on <code>out</code> or <code>both</code>. Set it to <code>"false"</code> to keep tracking scroll.',
           },
         ]}
       />
@@ -199,7 +199,7 @@ import 'motion-components'               // or the whole library`}
       <h2>JavaScript API</h2>
       <p>Control the scroll-driven blur programmatically with <code>play()</code>, <code>pause()</code>, <code>finish()</code>, and <code>cancel()</code>. Pause unbinds the scroll listener. Play rebinds it.</p>
       <JsApiDemo mode="looper" target="api-blur-demo">
-        <motion-blur id="api-blur-demo" direction="in" blur="10"><div class="demo-announce"><span class="demo-badge">Scroll-driven</span><p class="demo-announce-title">Blur API</p><p class="demo-announce-sub">Control with JavaScript</p></div></motion-blur>
+        <motion-blur id="api-blur-demo" direction="in" intensity="10"><div class="demo-announce"><span class="demo-badge">Scroll-driven</span><p class="demo-announce-title">Blur API</p><p class="demo-announce-sub">Control with JavaScript</p></div></motion-blur>
       </JsApiDemo>
 
       <h2>Accessibility</h2>

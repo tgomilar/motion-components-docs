@@ -37,7 +37,7 @@ import "../../../styles/docs.css";
       </DocsPreview>
 
       <h2>No backdrop</h2>
-      <p>Set <code>backdrop="false"</code> to remove the dimmed overlay. The dialog floats without any overlay.</p>
+      <p>Add <code>no-backdrop</code> to remove the dimmed overlay. The dialog floats without any overlay.</p>
       <DocsPreview>
         <div class="demo-trigger-area">
           <button class="demo-btn" id="open-no-backdrop-btn">Open without backdrop</button>
@@ -139,15 +139,15 @@ dialog.addEventListener('motion-close', () => {
       <PropsTable
         nameLabel="Property"
         rows={[
-          { name: "--dialog-bg", type: "color", default: "var(--color-surface)", description: "Panel background color" },
-          { name: "--dialog-color", type: "color", default: "var(--color-text)", description: "Panel text color" },
-          { name: "--dialog-radius", type: "length", default: "16px", description: "Panel border radius" },
-          { name: "--dialog-padding", type: "length", default: "2rem", description: "Panel inner padding" },
+          { name: "--dialog-bg", type: "color", default: "Canvas", description: "Panel background" },
+          { name: "--dialog-color", type: "color", default: "CanvasText", description: "Panel text color" },
+          { name: "--dialog-radius", type: "length", default: "16px", description: "Panel corner radius" },
+          { name: "--dialog-padding", type: "length", default: "2rem", description: "Panel padding" },
           { name: "--dialog-max-width", type: "length", default: "min(560px, 100vw - 2rem)", description: "Maximum panel width" },
           { name: "--dialog-max-height", type: "length", default: "calc(100dvh - 4rem)", description: "Maximum panel height" },
           { name: "--dialog-shadow", type: "shadow", default: "0 8px 32px …", description: "Panel box shadow" },
-          { name: "--dialog-backdrop-color", type: "color", default: "rgba(0,0,0,0.48)", description: "Backdrop overlay color" },
-          { name: "--dialog-backdrop-blur", type: "filter", default: "blur(6px)", description: "Backdrop CSS backdrop-filter" },
+          { name: "--dialog-backdrop-color", type: "color", default: "rgba(0, 0, 0, 0.48)", description: "Backdrop overlay color" },
+          { name: "--dialog-backdrop-blur", type: "filter", default: "blur(6px)", description: "Backdrop <code>backdrop-filter</code>" },
         ]}
       />
       <CodeWindow

@@ -10,15 +10,15 @@ import CodeWindow from "../components/CodeWindow.astro";
   <section class="hero">
     <div class="inner">
       <a href="/docs/" class="hero-circle" aria-label="Framework-agnostic motion components">
-        <motion-circle text="INTERRUPT ME · I DARE YOU · " radius="120" speed="14" pause-on-hover>
+        <motion-circle text="INTERRUPT ME · I DARE YOU · " radius="120" duration="14" pause-on-hover>
           <span class="hero-circle-icon">✦</span>
         </motion-circle>
       </a>
       <div class="hero-badge">Declarative motion · Spring physics · Interruptible</div>
       <h1>
-        <motion-stretch text="Animate" spread="20" stiffness="400" damping="10">Animate</motion-stretch>
+        <motion-stretch text="Animate" spread="20" duration="0.41" bounce="0.75">Animate</motion-stretch>
         <span class="accent">
-          <motion-stretch text="with HTML tags" spread="20" stiffness="400" damping="10">with HTML tags</motion-stretch>
+          <motion-stretch text="with HTML tags" spread="20" duration="0.41" bounce="0.75">with HTML tags</motion-stretch>
         </span>
       </h1>
       <p class="hero-sub">
@@ -47,7 +47,7 @@ import CodeWindow from "../components/CodeWindow.astro";
       loop
       amplitude="22"
       wave-length="420"
-      speed="0.1"
+      wave-duration="10"
       loop-gap="0"
       loop-speed="70"></motion-curve>
 
@@ -67,7 +67,7 @@ import CodeWindow from "../components/CodeWindow.astro";
           One tag.<br />Works in <motion-words
             words="native HTML,React,Vue,Svelte,SolidJS,Alpine,Astro"
             colors="inherit, #61DAFB,#42B883,#FF3E00,#4F81C7,#77C1D2,#BC52EE"
-            interval="3600"></motion-words>.
+            interval="3.6"></motion-words>.
         </h2>
         <p class="usage-sub">Drop a tag anywhere. No config, no wrappers, no boilerplate.</p>
         <ol class="steps">
@@ -248,7 +248,7 @@ import 'motion-components'
             <div class="card">
               <motion-code-inline>motion-typewriter</motion-code-inline>
               <div class="stage">
-                <motion-typewriter id="tw-demo" speed="55" loop cursor class="typewriter-text"> Motion that feels alive. </motion-typewriter>
+                <motion-typewriter id="tw-demo" interval="0.055" loop cursor class="typewriter-text"> Motion that feels alive. </motion-typewriter>
               </div>
             </div>
           </a>
@@ -270,7 +270,7 @@ import 'motion-components'
             <div class="card">
               <motion-code-inline>motion-scramble</motion-code-inline>
               <div class="stage">
-                <motion-scramble id="scramble-demo" speed="35" iterations="3" hover class="scramble-text"> Hello, world. </motion-scramble>
+                <motion-scramble id="scramble-demo" interval="0.035" iterations="3" trigger="hover" class="scramble-text"> Hello, world. </motion-scramble>
               </div>
               <p class="card-hint">Hover to scramble</p>
             </div>
@@ -281,7 +281,7 @@ import 'motion-components'
               <div class="stage">
                 <p class="words-demo-text">
                   We
-                  <motion-words words="design,build,ship" colors="#3b82f6,#8b5cf6,#10b981" interval="1600"></motion-words>
+                  <motion-words words="design,build,ship" colors="#3b82f6,#8b5cf6,#10b981" interval="1.6"></motion-words>
                   fast.
                 </p>
               </div>
@@ -292,7 +292,7 @@ import 'motion-components'
             <div class="card">
               <motion-code-inline>motion-swap</motion-code-inline>
               <div class="stage">
-                <motion-swap id="swap-demo" stagger-duration="0.04" class="swap-text">Smooth swaps</motion-swap>
+                <motion-swap id="swap-demo" interval="0.04" class="swap-text">Smooth swaps</motion-swap>
               </div>
               <p class="card-hint">Swaps on a loop</p>
             </div>
@@ -312,7 +312,7 @@ import 'motion-components'
         <p class="section-eyebrow">New in 0.7</p>
         <h2>Light, dark, and system.</h2>
         <p class="section-sub">
-          <code>&lt;motion-theme-toggle&gt;</code> switches themes with a spring sun-to-moon morph and a circular wipe from the control.
+          <code>&lt;motion-theme-toggle&gt;</code> switches themes with a spring sun-to-moon morph, and an optional circular wipe from the control.
         </p>
       </div>
       <div class="theme-showcase">
@@ -537,7 +537,7 @@ import 'motion-components'
         <div class="cta-inner">
           <h2 class="cta-heading">
             Start shipping motion
-            <motion-liquid text="today" intensity="12" speed="1.5">today</motion-liquid>.
+            <motion-liquid text="today" intensity="12" duration="6">today</motion-liquid>.
           </h2>
           <p class="cta-sub">Drop a tag in your HTML and you're done.</p>
           <div class="cta-actions">

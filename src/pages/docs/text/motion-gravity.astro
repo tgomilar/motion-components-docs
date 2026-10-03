@@ -66,19 +66,19 @@ el.text = 'UPDATED'   // animation restarts`}
 <motion-gravity height="120">LONG DROP</motion-gravity>`}
       />
 
-      <h2>Stagger</h2>
-      <p><code>stagger</code> is the delay in seconds between each character landing. Tighten it for snappy cascades; spread it out for a slow reveal.</p>
+      <h2>Interval</h2>
+      <p><code>interval</code> is the delay in seconds between each character landing. Use a small value for a fast cascade and a larger one for a slow reveal.</p>
       <DocsPreview replayId="gravity-stagger">
         <div id="gravity-stagger" style="display:flex; flex-direction:column; gap:2rem; align-items:flex-start">
-          <motion-gravity class="demo-large" stagger="0.02">FAST CASCADE</motion-gravity>
-          <motion-gravity class="demo-large" stagger="0.15">SLOW REVEAL</motion-gravity>
+          <motion-gravity class="demo-large" interval="0.02">FAST CASCADE</motion-gravity>
+          <motion-gravity class="demo-large" interval="0.15">SLOW REVEAL</motion-gravity>
         </div>
       </DocsPreview>
       <CodeWindow
         filename="motion-gravity.html"
         copy
-        code={`<motion-gravity stagger="0.02">FAST CASCADE</motion-gravity>
-<motion-gravity stagger="0.15">SLOW REVEAL</motion-gravity>`}
+        code={`<motion-gravity interval="0.02">FAST CASCADE</motion-gravity>
+<motion-gravity interval="0.15">SLOW REVEAL</motion-gravity>`}
       />
 
       <h2>Delay</h2>
@@ -100,9 +100,7 @@ el.text = 'UPDATED'   // animation restarts`}
       <p>
         Each character is wrapped in an inline-block <code>span</code>. On first render (and whenever <code>text</code> changes), all characters are set to <code
           >opacity: 0</code
-        > and <code>translateY(-height)</code>. Motion One then animates them back to their natural position using a spring (<code
-          >stiffness: 380, damping: 22</code
-        >), staggered by the <code>stagger</code> interval, with an optional leading <code>delay</code>.
+        > and <code>translateY(-height)</code>. Motion then springs them back to their natural position, tuned with <code>duration</code> and <code>bounce</code>. Each character starts <code>interval</code> seconds after the previous one, after an optional <code>delay</code>.
       </p>
 
       <h2>Properties</h2>
@@ -111,8 +109,9 @@ el.text = 'UPDATED'   // animation restarts`}
         rows={[
           { name: "text", type: "string", default: "—", description: "Text to animate in. Falls back to the child text when unset" },
           { name: "height", type: "number", default: "60", description: "Fall distance in px" },
-          { name: "stagger", type: "number", default: "0.05", description: "Seconds between each character landing" },
-          { name: "duration", type: "number", default: "0.6", description: "Spring duration hint per character" },
+          { name: "interval", type: "number", default: "0.05", description: "Seconds between each character landing" },
+          { name: "duration", type: "number", default: "0.6", description: "Spring duration of each character's fall, in seconds" },
+          { name: "bounce", type: "number", default: "0.45", description: "Spring bounciness of the landing (0 = no overshoot)" },
           { name: "delay", type: "number", default: "0", description: "Seconds to wait before the first character falls" },
         ]}
       />
@@ -125,7 +124,7 @@ el.text = 'UPDATED'   // animation restarts`}
       </JsApiDemo>
 
       <h2>Accessibility</h2>
-      <p>When <code>prefers-reduced-motion</code> is set, characters render immediately in their final position with no animation.</p>
+      <p>Screen readers read the whole text once from a visually hidden copy. The animated letters are hidden from them. When <code>prefers-reduced-motion</code> is set, characters render immediately in their final position with no animation.</p>
       <DocsPagination />
     </main>
     <DocsTOC />
