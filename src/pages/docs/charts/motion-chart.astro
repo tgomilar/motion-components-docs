@@ -14,7 +14,7 @@ const CDN = "https://cdn.jsdelivr.net/npm/motion-components@1/dist";
 const quickStart = `<!doctype html>
 <html>
   <head>
-    <script type="module" src="${CDN}/motion-chart.js"></script>
+    <script type="module" src="${CDN}/motion-chart.js/+esm"></script>
   </head>
   <body>
     <motion-chart
@@ -55,7 +55,7 @@ const frameworkTabs = [
     label: "HTML / Astro / Svelte",
     desc: "Write the data into attributes, or wrap a table.",
     filename: "index.html",
-    code: `<script type="module" src="${CDN}/motion-chart.js"></script>
+    code: `<script type="module" src="${CDN}/motion-chart.js/+esm"></script>
 
 <motion-chart values="12, 19, 8, 24" labels="Mon, Tue, Wed, Thu"></motion-chart>`,
   },

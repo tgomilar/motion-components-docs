@@ -712,7 +712,7 @@ import 'motion-components'
       }
       if (iconPreviewName) iconPreviewName.textContent = `${name} · ${animation} · ${lookOf(tile)}`;
       const styleAttr = style ? `\n  style="${style}"` : "";
-      const script = `<script type="module" src="https://cdn.jsdelivr.net/npm/motion-components@1/dist/motion-icon.js"><\/script>\n\n`;
+      const script = `<script type="module" src="https://cdn.jsdelivr.net/npm/motion-components@1/dist/motion-icon.js/+esm"><\/script>\n\n`;
       iconCode?.setCode(
         svg
           ? `${script}<motion-icon\n  animation="${animation}"${styleAttr}\n>\n  ${svg.replace("><path", ">\n    <path").replace("</svg>", "\n  </svg>")}\n</motion-icon>`

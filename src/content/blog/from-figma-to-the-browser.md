@@ -54,7 +54,7 @@ npm install motion-components
 No build step is required. The library also ships as an ES module on a CDN:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/motion-components/dist/index.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/motion-components@1/+esm"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/motion-components/dist/preload.css" />
 ```
 

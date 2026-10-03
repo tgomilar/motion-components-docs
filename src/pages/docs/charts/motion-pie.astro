@@ -14,7 +14,7 @@ const CDN = "https://cdn.jsdelivr.net/npm/motion-components@1/dist";
 const quickStart = `<!doctype html>
 <html>
   <head>
-    <script type="module" src="${CDN}/motion-pie.js"></script>
+    <script type="module" src="${CDN}/motion-pie.js/+esm"></script>
   </head>
   <body>
     <motion-pie
@@ -31,7 +31,7 @@ const frameworkTabs = [
     label: "HTML / Astro / Svelte",
     desc: "Write the data into attributes, or wrap a table.",
     filename: "index.html",
-    code: `<script type="module" src="${CDN}/motion-pie.js"></script>
+    code: `<script type="module" src="${CDN}/motion-pie.js/+esm"></script>
 
 <motion-pie values="42, 28, 18, 12" labels="Direct, Search, Social, Email"></motion-pie>`,
   },

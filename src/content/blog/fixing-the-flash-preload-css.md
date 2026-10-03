@@ -80,7 +80,7 @@ Via CDN:
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/motion-components/dist/preload.css" />
-<script type="module" src="https://cdn.jsdelivr.net/npm/motion-components/dist/index.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/motion-components@1/+esm"></script>
 ```
 
 Bundlers can import the same rules as a string and inline them, which saves a round trip. This site does that in its own layout:

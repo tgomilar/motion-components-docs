@@ -32,7 +32,7 @@ const librarySnippet = libraries
 const quickStart = `<!doctype html>
 <html>
   <head>
-    <script type="module" src="${CDN}/motion-components@1/dist/index.js"></script>
+    <script type="module" src="${CDN}/motion-components@1/+esm"></script>
   </head>
   <body>
     <motion-icon src="${lucide("heart")}"></motion-icon>
@@ -46,7 +46,7 @@ const frameworkTabs = [
     label: "HTML / Astro / Svelte",
     desc: "Load the library once, then use the tag anywhere.",
     filename: "index.html",
-    code: `<script type="module" src="${CDN}/motion-components@1/dist/motion-icon.js"></script>
+    code: `<script type="module" src="${CDN}/motion-components@1/dist/motion-icon.js/+esm"></script>
 
 <motion-icon src="${lucide("heart")}"></motion-icon>`,
   },
