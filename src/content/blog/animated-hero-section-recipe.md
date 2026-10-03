@@ -37,7 +37,7 @@ Here's the finished markup. Everything else in this article is explanation:
 One import, npm or CDN:
 
 ```html
-<script type="module" src="https://cdn.jsdelivr.net/npm/motion-components/dist/index.js"></script>
+<script type="module" src="https://cdn.jsdelivr.net/npm/motion-components@1/+esm"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/motion-components/dist/preload.css" />
 ```
 

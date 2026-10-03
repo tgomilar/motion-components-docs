@@ -27,7 +27,7 @@ const allIcons = icons.map((i) => `<motion-state-icon name="${i.name}" toggle la
 const quickStart = `<!doctype html>
 <html>
   <head>
-    <script type="module" src="${CDN}/motion-state-icon.js"></script>
+    <script type="module" src="${CDN}/motion-state-icon.js/+esm"></script>
   </head>
   <body>
     <motion-state-icon name="heart" toggle label="Like"></motion-state-icon>
@@ -124,7 +124,7 @@ const frameworkTabs = [
     label: "HTML / Astro / Svelte",
     desc: "Set the <code>active</code> attribute, or the <code>active</code> property from a script.",
     filename: "index.html",
-    code: `<script type="module" src="${CDN}/motion-state-icon.js"></script>
+    code: `<script type="module" src="${CDN}/motion-state-icon.js/+esm"></script>
 
 <motion-state-icon name="heart" toggle label="Like"></motion-state-icon>`,
   },

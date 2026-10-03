@@ -20,7 +20,7 @@ This is a complete page. Save it as `index.html` and open it in a browser. You d
 <!doctype html>
 <html>
   <head>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/motion-components@1/dist/motion-icon.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/motion-components@1/dist/motion-icon.js/+esm"></script>
   </head>
   <body>
     <motion-icon src="https://cdn.jsdelivr.net/npm/lucide-static@1/icons/heart.svg"></motion-icon>

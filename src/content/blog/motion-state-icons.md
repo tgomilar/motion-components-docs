@@ -28,7 +28,7 @@ Save this as `index.html` and open it in a browser:
 <!doctype html>
 <html>
   <head>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/motion-components@1/dist/motion-state-icon.js"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/motion-components@1/dist/motion-state-icon.js/+esm"></script>
   </head>
   <body>
     <motion-state-icon name="heart" toggle label="Like"></motion-state-icon>
