@@ -1,0 +1,220 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+
+const CDN = "https://cdn.jsdelivr.net/npm/motion-components@1/dist";
+
+const quickStart = `<!doctype html>
+<html>
+  <head>
+    <script type="module" src="${CDN}/motion-sparkline.js"></script>
+  </head>
+  <body>
+    <p>Signups this week <motion-sparkline values="3, 5, 4, 8, 7, 11"></motion-sparkline></p>
+  </body>
+</html>`;
+
+const tileCode = `<div class="stat">
+  <span class="stat-label">Revenue</span>
+  <motion-counter to="48.2" decimals="1" duration="1.4" prefix="€" suffix="K"></motion-counter>
+  <motion-sparkline values="31, 35, 33, 38, 41, 39, 45, 48" area></motion-sparkline>
+</div>`;
+---
+
+<Layout
+  title="motion-sparkline — Motion Components"
+  description="A small trend line for sentences, table cells and stat tiles. It draws itself in when it scrolls into view and springs to new values."
+  noMain
+>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-sparkline</motion-split></h1>
+      <p class="lead">
+        A small trend line that fits inside a sentence, a table cell or a stat tile. It draws itself in when it scrolls into view, and springs to new
+        values when the data changes. It takes the text color, so it matches the text around it.
+      </p>
+
+      <h2>Preview</h2>
+      <DocsPreview>
+        <div class="demo">
+          <p class="sentence">Signups this week <motion-sparkline values="3, 5, 4, 8, 7, 11"></motion-sparkline> are up 38%.</p>
+          <p class="sentence down">Response time <motion-sparkline values="420, 380, 400, 310, 290, 240" style="--sparkline-accent: #16a34a"></motion-sparkline> fell to 240 ms.</p>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={`<p>Signups this week <motion-sparkline values="3, 5, 4, 8, 7, 11"></motion-sparkline> are up 38%.</p>`} />
+
+      <h2>Quick start</h2>
+      <p>Save this as <code>index.html</code> and open it in a browser. No install, no build step.</p>
+      <CodeWindow filename="index.html" copy code={quickStart} />
+      <p>In a project with a bundler, install the package and import the component once:</p>
+      <CodeWindow filename="terminal" copy code={`npm install motion-components`} />
+      <CodeWindow filename="app.js" copy code={`import 'motion-components/motion-sparkline'`} />
+
+      <h2>In a table</h2>
+      <p>Put a sparkline in a table cell to show the trend next to the latest value.</p>
+      <DocsPreview>
+        <table class="stocks">
+          <thead><tr><th>Product</th><th>Sales</th><th>Last 8 weeks</th></tr></thead>
+          <tbody>
+            <tr><td>Starter</td><td>1,240</td><td><motion-sparkline values="8, 9, 9, 11, 10, 12, 13, 12"></motion-sparkline></td></tr>
+            <tr><td>Pro</td><td>860</td><td><motion-sparkline values="5, 7, 6, 8, 9, 11, 10, 14"></motion-sparkline></td></tr>
+            <tr><td>Team</td><td>310</td><td><motion-sparkline values="9, 8, 8, 7, 6, 6, 5, 4"></motion-sparkline></td></tr>
+          </tbody>
+        </table>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={`<td>
+  <motion-sparkline values="5, 7, 6, 8, 9, 11, 10, 14"></motion-sparkline>
+</td>`} />
+
+      <h2>Stat tile</h2>
+      <p>Combine it with <a href="/docs/text/motion-counter/"><code>motion-counter</code></a> for a number that counts up above its trend. <code>area</code> adds a light wash under the line.</p>
+      <DocsPreview>
+        <div class="stat">
+          <span class="stat-label">Revenue</span>
+          <motion-counter to="48.2" decimals="1" duration="1.4" prefix="€" suffix="K"></motion-counter>
+          <motion-sparkline values="31, 35, 33, 38, 41, 39, 45, 48" area></motion-sparkline>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={tileCode} />
+      <CodeWindow filename="styles.css" copy code={`.stat {
+  display: grid;
+  gap: 0.25rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.stat motion-sparkline {
+  --sparkline-width: 100%;
+  --sparkline-height: 2.5rem;
+}`} />
+
+      <h2>Live data</h2>
+      <p>Change <code>values</code> and the line springs to the new shape.</p>
+      <DocsPreview>
+        <div class="demo">
+          <p class="sentence">Active users <motion-sparkline id="live-spark" values="12, 14, 13, 15, 17, 16, 18, 20" style="--sparkline-width: 9em"></motion-sparkline></p>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={`<motion-sparkline id="users" values="12, 14, 13, 15, 17, 16, 18, 20"></motion-sparkline>
+
+<script type="module">
+  const spark = document.querySelector('#users')
+
+  setInterval(() => {
+    const values = spark.values.split(',').map(Number)
+    const next = Math.max(0, values.at(-1) + Math.round(Math.random() * 6 - 3))
+    spark.values = [...values.slice(1), next].join(', ')
+  }, 1500)
+</script>`} />
+
+      <h2>Properties</h2>
+      <PropsTable
+        nameLabel="Attribute"
+        rows={[
+          { name: "values", type: "string", default: "''", description: "Comma-separated numbers. At least two" },
+          { name: "area", type: "boolean", default: "false", description: "Fills the area under the line with a light wash" },
+          { name: "label", type: "string", default: "''", description: "Accessible name. Without it, the name describes the trend" },
+          { name: "trigger", type: "string", default: "'view'", description: "When the draw-in runs: <code>'view'</code> or <code>'mount'</code>" },
+          { name: "duration", type: "number", default: "1", description: "Spring duration in seconds" },
+          { name: "bounce", type: "number", default: "0.2", description: "Spring bounciness when the values change" },
+        ]}
+      />
+
+      <h2>CSS custom properties</h2>
+      <PropsTable
+        nameLabel="Property"
+        rows={[
+          { name: "--sparkline-width", type: "length", default: "6em", description: "Width" },
+          { name: "--sparkline-height", type: "length", default: "1.5em", description: "Height" },
+          { name: "--sparkline-color", type: "color", default: "currentColor", description: "Line color" },
+          { name: "--sparkline-accent", type: "color", default: "line color", description: "Color of the dot on the last value" },
+        ]}
+      />
+
+      <h2>JavaScript API</h2>
+      <p><code>replay()</code> draws the line in again. It also has <code>play()</code>, <code>pause()</code>, <code>finish()</code>, <code>cancel()</code> and <code>playState</code>. See the <a href="/docs/js-api/">JavaScript API</a>.</p>
+
+      <h2>Accessibility</h2>
+      <p>
+        The sparkline has <code>role="img"</code> and a name that describes the trend, for example "from 3 to 11, low 3, high 11". Set
+        <code>label</code> to give it your own name. With <code>prefers-reduced-motion</code>, the line shows at once and changes without animation.
+      </p>
+
+      <DocsPagination />
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+
+  const spark = document.getElementById("live-spark") as (HTMLElement & { values: string }) | null;
+  if (spark) {
+    setInterval(() => {
+      const values = spark.values.split(",").map(Number);
+      const next = Math.max(0, values[values.length - 1] + Math.round(Math.random() * 6 - 3));
+      spark.values = [...values.slice(1), next].join(", ");
+    }, 1500);
+  }
+</script>
+
+<style>
+  .demo {
+    display: grid;
+    gap: 0.75rem;
+    color: var(--color-text);
+  }
+
+  .sentence {
+    margin: 0;
+    font-size: 1.1rem;
+  }
+
+  .stocks {
+    border-collapse: collapse;
+    color: var(--color-text);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stocks th,
+  .stocks td {
+    padding: 0.5rem 1.25rem;
+    text-align: left;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .stat {
+    display: grid;
+    gap: 0.25rem;
+    width: 16rem;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .stat-label {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--color-muted);
+  }
+
+  .stat motion-sparkline {
+    --sparkline-width: 100%;
+    --sparkline-height: 2.5rem;
+    color: var(--color-accent);
+  }
+</style>

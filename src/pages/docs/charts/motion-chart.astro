@@ -1,0 +1,344 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import FwTabs from "../../../components/FwTabs.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+
+const CDN = "https://cdn.jsdelivr.net/npm/motion-components@1/dist";
+
+const quickStart = `<!doctype html>
+<html>
+  <head>
+    <script type="module" src="${CDN}/motion-chart.js"></script>
+  </head>
+  <body>
+    <motion-chart
+      values="12, 19, 8, 24, 16"
+      labels="Mon, Tue, Wed, Thu, Fri"
+      label="Orders per day"
+    ></motion-chart>
+  </body>
+</html>`;
+
+const tableCode = `<motion-chart type="line" label="Visitors and signups">
+  <table>
+    <tr><th>Month</th><th>Visitors</th><th>Signups</th></tr>
+    <tr><td>Jan</td><td>1200</td><td>310</td></tr>
+    <tr><td>Feb</td><td>1850</td><td>420</td></tr>
+    <tr><td>Mar</td><td>1600</td><td>530</td></tr>
+    <tr><td>Apr</td><td>2400</td><td>610</td></tr>
+    <tr><td>May</td><td>2900</td><td>780</td></tr>
+    <tr><td>Jun</td><td>3300</td><td>900</td></tr>
+  </table>
+</motion-chart>`;
+
+const liveCode = `<motion-chart id="live" type="line" values="40, 42, 45, 43, 48, 52, 50, 55"></motion-chart>
+
+<script type="module">
+  const chart = document.querySelector('#live')
+
+  setInterval(() => {
+    const values = chart.values.split(',').map(Number)
+    const next = values.at(-1) + Math.round(Math.random() * 10 - 4)
+    chart.values = [...values.slice(1), next].join(', ')
+  }, 1500)
+</script>`;
+
+const frameworkTabs = [
+  {
+    id: "vanilla",
+    label: "HTML / Astro / Svelte",
+    desc: "Write the data into attributes, or wrap a table.",
+    filename: "index.html",
+    code: `<script type="module" src="${CDN}/motion-chart.js"></script>
+
+<motion-chart values="12, 19, 8, 24" labels="Mon, Tue, Wed, Thu"></motion-chart>`,
+  },
+  {
+    id: "react",
+    label: "React",
+    desc: "React 19 sets <code>data</code> as a property, so pass the object from state. The chart springs to every new value.",
+    filename: "SalesChart.jsx",
+    code: `import 'motion-components/motion-chart'
+
+export function SalesChart({ months, sales }) {
+  const data = { labels: months, series: [{ name: 'Sales', values: sales }] }
+
+  return <motion-chart type="line" format="compact" data={data}></motion-chart>
+}`,
+  },
+  {
+    id: "vue",
+    label: "Vue 3",
+    desc: "Tell Vue that <code>motion-*</code> tags are custom elements (see <a href=\"/docs/#frameworks\">Getting started</a>), then bind <code>:data</code>.",
+    filename: "SalesChart.vue",
+    code: `<script setup>
+import 'motion-components/motion-chart'
+
+const props = defineProps(['months', 'sales'])
+</script>
+
+<template>
+  <motion-chart
+    type="line"
+    format="compact"
+    :data="{ labels: props.months, series: [{ name: 'Sales', values: props.sales }] }"
+  ></motion-chart>
+</template>`,
+  },
+];
+---
+
+<Layout
+  title="motion-chart — Motion Components"
+  description="Bar and line charts written in HTML. Pass numbers in an attribute or wrap a table. Bars grow, lines draw in, and every change in the data springs into place."
+  noMain
+>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-chart</motion-split></h1>
+      <p class="lead">
+        Bar and line charts written in HTML. Put the numbers in an attribute or wrap a table. Bars grow and lines draw in when the chart scrolls into
+        view. When the data changes, every bar and point springs to its new value.
+      </p>
+
+      <h2>Preview</h2>
+      <p>Hover a bar, or press <strong>New data</strong> several times quickly. The bars turn around from wherever they are.</p>
+      <DocsPreview>
+        <div class="demo">
+          <motion-chart id="preview-chart" values="12, 19, 8, 24, 16, 21, 14" labels="Mon, Tue, Wed, Thu, Fri, Sat, Sun" label="Orders per day"></motion-chart>
+          <button class="demo-action" id="new-data" type="button">New data</button>
+        </div>
+      </DocsPreview>
+      <CodeWindow id="preview-code" filename="index.html" copy code={`<motion-chart
+  values="12, 19, 8, 24, 16, 21, 14"
+  labels="Mon, Tue, Wed, Thu, Fri, Sat, Sun"
+  label="Orders per day"
+></motion-chart>
+
+<button id="new-data">New data</button>`} />
+      <p>Set <code>values</code> from JavaScript to change the data. The chart springs to the new numbers:</p>
+      <CodeWindow filename="app.js" copy code={`const chart = document.querySelector('motion-chart')
+
+document.querySelector('#new-data').addEventListener('click', () => {
+  const values = Array.from({ length: 7 }, () => 4 + Math.round(Math.random() * 24))
+  chart.values = values.join(', ')
+})`} />
+
+      <h2>Quick start</h2>
+      <p>Save this as <code>index.html</code> and open it in a browser. No install, no build step.</p>
+      <CodeWindow filename="index.html" copy code={quickStart} />
+      <p>In a project with a bundler, install the package and import the component once:</p>
+      <CodeWindow filename="terminal" copy code={`npm install motion-components`} />
+      <CodeWindow filename="app.js" copy code={`import 'motion-components/motion-chart'`} />
+
+      <h2>Give the chart its data</h2>
+      <p>There are three ways. Pick the one that fits where your data comes from.</p>
+
+      <h3>1. Numbers in attributes</h3>
+      <p>Separate the numbers with commas. For several series, separate the series with <code>;</code> and name them in <code>series</code>.</p>
+      <DocsPreview>
+        <div class="demo">
+          <motion-chart values="42, 55, 61, 48; 30, 38, 52, 60" labels="Q1, Q2, Q3, Q4" series="2025, 2026" label="Revenue by quarter" format="currency:EUR"></motion-chart>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={`<motion-chart
+  values="42, 55, 61, 48; 30, 38, 52, 60"
+  labels="Q1, Q2, Q3, Q4"
+  series="2025, 2026"
+  format="currency:EUR"
+></motion-chart>`} />
+
+      <h3>2. A table</h3>
+      <p>
+        Wrap a normal <code>&lt;table&gt;</code>. The first column holds the labels, and every other column is one series. The header row names the
+        series. Screen readers still read the table, and the chart updates when a cell changes.
+      </p>
+      <DocsPreview>
+        <div class="demo">
+          <motion-chart type="line" label="Visitors and signups">
+            <table>
+              <tr><th>Month</th><th>Visitors</th><th>Signups</th></tr>
+              <tr><td>Jan</td><td>1200</td><td>310</td></tr>
+              <tr><td>Feb</td><td>1850</td><td>420</td></tr>
+              <tr><td>Mar</td><td>1600</td><td>530</td></tr>
+              <tr><td>Apr</td><td>2400</td><td>610</td></tr>
+              <tr><td>May</td><td>2900</td><td>780</td></tr>
+              <tr><td>Jun</td><td>3300</td><td>900</td></tr>
+            </table>
+          </motion-chart>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={tableCode} />
+
+      <h3>3. From JavaScript</h3>
+      <p>Set the <code>data</code> property. Every time you set it, the chart springs to the new values.</p>
+      <CodeWindow filename="app.js" copy code={`const chart = document.querySelector('motion-chart')
+
+chart.data = {
+  labels: ['Jan', 'Feb', 'Mar'],
+  series: [
+    { name: 'Visitors', values: [1200, 1850, 1600] },
+    { name: 'Signups', values: [310, 420, 530] },
+  ],
+}`} />
+
+      <p class="note">For parts of a whole, use <a href="/docs/charts/motion-pie/"><code>motion-pie</code></a>, which draws pie and donut charts.</p>
+
+      <h2>Live data</h2>
+      <p>Change <code>values</code>, <code>data</code> or a table cell, and the chart moves to the new numbers. This line gets a new value every 1.5 seconds.</p>
+      <DocsPreview>
+        <div class="demo">
+          <motion-chart id="live" type="line" values="40, 42, 45, 43, 48, 52, 50, 55" label="Live value"></motion-chart>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={liveCode} />
+
+      <h2>Number format</h2>
+      <p><code>format</code> formats the axis, the tooltip and the screen reader text in the reader's language.</p>
+      <div class="methods-table">
+        <table>
+          <thead><tr><th><code>format</code></th><th>12900 shows as</th></tr></thead>
+          <tbody>
+            <tr><td>(empty)</td><td>12,900</td></tr>
+            <tr><td><code>compact</code></td><td>12.9K</td></tr>
+            <tr><td><code>currency:EUR</code></td><td>€12,900</td></tr>
+            <tr><td><code>percent</code></td><td>12,900%</td></tr>
+            <tr><td><code>unit:kilometer</code></td><td>12,900 km</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p><code>percent</code> adds a percent sign. It does not multiply by 100, so write <code>12</code> for 12%.</p>
+
+      <h2>Frameworks</h2>
+      <FwTabs tabs={frameworkTabs} group="frameworks" />
+
+      <h2>Colors and size</h2>
+      <p>
+        The eight series colors are chosen to stay apart for color-blind readers, in light and dark mode. Override them with <code>--chart-1</code> to
+        <code>--chart-8</code>. Text and gridlines follow the text color.
+      </p>
+      <DocsPreview>
+        <div class="demo">
+          <motion-chart values="8, 14, 11, 19" labels="North, East, South, West" style="--chart-1: #16a34a; --chart-height: 12rem"></motion-chart>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={`<motion-chart
+  values="8, 14, 11, 19"
+  labels="North, East, South, West"
+  style="--chart-1: #16a34a; --chart-height: 12rem"
+></motion-chart>`} />
+
+      <h2>Properties</h2>
+      <PropsTable
+        nameLabel="Attribute"
+        rows={[
+          { name: "type", type: "string", default: "'bar'", description: "<code>'bar'</code> or <code>'line'</code>" },
+          { name: "values", type: "string", default: "''", description: "Comma-separated numbers. Separate several series with <code>;</code>" },
+          { name: "labels", type: "string", default: "''", description: "Comma-separated labels for <code>values</code>" },
+          { name: "series", type: "string", default: "''", description: "Comma-separated series names for <code>values</code>" },
+          { name: "data", type: "object", default: "null", description: "Property only: <code>{ labels, series: [{ name, values }] }</code>. Takes precedence over a table and <code>values</code>" },
+          { name: "format", type: "string", default: "''", description: "<code>'compact'</code>, <code>'percent'</code>, <code>'currency:EUR'</code> or <code>'unit:kilometer'</code>" },
+          { name: "min", type: "number", default: "auto", description: "Lowest value on the axis. Defaults to the lower of 0 and the smallest value" },
+          { name: "max", type: "number", default: "auto", description: "Highest value on the axis. Defaults to the largest value, rounded up" },
+          { name: "label", type: "string", default: "''", description: "Accessible name of the chart" },
+          { name: "trigger", type: "string", default: "'view'", description: "When the entrance runs: <code>'view'</code> or <code>'mount'</code>" },
+          { name: "duration", type: "number", default: "0.8", description: "Spring duration in seconds" },
+          { name: "bounce", type: "number", default: "0.25", description: "Spring bounciness (0 = no overshoot)" },
+          { name: "interval", type: "number", default: "0.04", description: "Seconds between one bar group and the next on entrance" },
+          { name: "tooltip", type: "boolean", default: "true", description: "Set <code>tooltip=\"false\"</code> to hide the tooltip" },
+          { name: "legend", type: "boolean", default: "true", description: "Shown for two or more series. Set <code>legend=\"false\"</code> to hide it" },
+        ]}
+      />
+
+      <h2>CSS custom properties</h2>
+      <PropsTable
+        nameLabel="Property"
+        rows={[
+          { name: "--chart-height", type: "length", default: "16rem", description: "Height of the chart, including the legend" },
+          { name: "--chart-1 … --chart-8", type: "color", default: "blue, orange, aqua, yellow, magenta, green, violet, red", description: "Series colors, in order" },
+          { name: "--chart-surface", type: "color", default: "Canvas", description: "Background behind the chart. Used for the tooltip and the ring around points" },
+        ]}
+      />
+
+      <h2>JavaScript API</h2>
+      <p>
+        <code>replay()</code> runs the entrance again. Like every animated component, it also has <code>play()</code>, <code>pause()</code>,
+        <code>finish()</code>, <code>cancel()</code>, <code>playState</code> and the <code>motion-start</code> and <code>motion-finish</code> events. See
+        the <a href="/docs/js-api/">JavaScript API</a>.
+      </p>
+
+      <h2>Accessibility</h2>
+      <p>
+        Screen readers get the data as a table: your own table when you wrap one, or a generated one for <code>values</code> and <code>data</code>. Give
+        the chart a <code>label</code>. Press <kbd>Tab</kbd> to focus the chart, then <kbd>←</kbd> and <kbd>→</kbd> to move between points,
+        <kbd>Home</kbd> and <kbd>End</kbd> for the first and last, and <kbd>Esc</kbd> to close the tooltip. Each point is announced with its values.
+        With <code>prefers-reduced-motion</code>, the chart shows its final state and changes values at once.
+      </p>
+
+      <DocsPagination />
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+
+  type Chart = HTMLElement & { values: string };
+
+  const preview = document.getElementById("preview-chart") as Chart | null;
+  const previewCode = document.getElementById("preview-code") as (HTMLElement & { setCode(code: string): void }) | null;
+  document.getElementById("new-data")?.addEventListener("click", () => {
+    if (!preview) return;
+    preview.values = Array.from({ length: 7 }, () => 4 + Math.round(Math.random() * 24)).join(", ");
+    previewCode?.setCode(`<motion-chart
+  values="${preview.values}"
+  labels="Mon, Tue, Wed, Thu, Fri, Sat, Sun"
+  label="Orders per day"
+></motion-chart>
+
+<button id="new-data">New data</button>`);
+  });
+
+  const live = document.getElementById("live") as Chart | null;
+  if (live) {
+    setInterval(() => {
+      const values = live.values.split(",").map(Number);
+      const next = values[values.length - 1] + Math.round(Math.random() * 10 - 4);
+      live.values = [...values.slice(1), next].join(", ");
+    }, 1500);
+  }
+</script>
+
+<style>
+  .demo {
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
+    width: 100%;
+    color: var(--color-text);
+  }
+
+  .demo motion-chart {
+    width: 100%;
+  }
+
+  .demo-action {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+</style>

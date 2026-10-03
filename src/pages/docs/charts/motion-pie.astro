@@ -1,0 +1,294 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import FwTabs from "../../../components/FwTabs.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+
+const CDN = "https://cdn.jsdelivr.net/npm/motion-components@1/dist";
+
+const quickStart = `<!doctype html>
+<html>
+  <head>
+    <script type="module" src="${CDN}/motion-pie.js"></script>
+  </head>
+  <body>
+    <motion-pie
+      values="42, 28, 18, 12"
+      labels="Direct, Search, Social, Email"
+      label="Traffic sources"
+    ></motion-pie>
+  </body>
+</html>`;
+
+const frameworkTabs = [
+  {
+    id: "vanilla",
+    label: "HTML / Astro / Svelte",
+    desc: "Write the data into attributes, or wrap a table.",
+    filename: "index.html",
+    code: `<script type="module" src="${CDN}/motion-pie.js"></script>
+
+<motion-pie values="42, 28, 18, 12" labels="Direct, Search, Social, Email"></motion-pie>`,
+  },
+  {
+    id: "react",
+    label: "React",
+    desc: "React 19 sets <code>data</code> as a property, so pass the object from state. The slices spring to every new value.",
+    filename: "BudgetChart.jsx",
+    code: `import 'motion-components/motion-pie'
+
+export function BudgetChart({ categories, amounts }) {
+  return (
+    <motion-pie
+      donut
+      format="currency:EUR"
+      data={{ labels: categories, values: amounts }}
+    ></motion-pie>
+  )
+}`,
+  },
+  {
+    id: "vue",
+    label: "Vue 3",
+    desc: "Tell Vue that <code>motion-*</code> tags are custom elements (see <a href=\"/docs/#frameworks\">Getting started</a>), then bind <code>:data</code>.",
+    filename: "BudgetChart.vue",
+    code: `<script setup>
+import 'motion-components/motion-pie'
+
+const props = defineProps(['categories', 'amounts'])
+</script>
+
+<template>
+  <motion-pie
+    donut
+    format="currency:EUR"
+    :data="{ labels: props.categories, values: props.amounts }"
+  ></motion-pie>
+</template>`,
+  },
+];
+---
+
+<Layout
+  title="motion-pie — Motion Components"
+  description="Pie and donut charts written in HTML. The pie sweeps in, slices spring to new sizes when the data changes, and the hovered slice springs outward."
+  noMain
+>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-pie</motion-split></h1>
+      <p class="lead">
+        Pie and donut charts for parts of a whole. The pie sweeps in when it scrolls into view, the slices spring to new sizes when the data
+        changes, and the hovered slice springs outward. The legend shows each share.
+      </p>
+
+      <h2>Preview</h2>
+      <p>Hover a slice, or press <strong>New data</strong>.</p>
+      <DocsPreview>
+        <div class="demo">
+          <div class="pies">
+            <motion-pie id="pie" values="42, 28, 18, 12" labels="Direct, Search, Social, Email" label="Traffic sources"></motion-pie>
+            <motion-pie id="donut" donut values="1450, 620, 380, 240" labels="Rent, Food, Transport, Fun" label="Monthly budget" format="currency:EUR"></motion-pie>
+          </div>
+          <button class="demo-action" id="new-data" type="button">New data</button>
+        </div>
+      </DocsPreview>
+      <CodeWindow id="pie-code" filename="index.html" copy code={`<motion-pie
+  values="42, 28, 18, 12"
+  labels="Direct, Search, Social, Email"
+  label="Traffic sources"
+></motion-pie>
+
+<motion-pie
+  donut
+  values="1450, 620, 380, 240"
+  labels="Rent, Food, Transport, Fun"
+  label="Monthly budget"
+  format="currency:EUR"
+></motion-pie>
+
+<button id="new-data">New data</button>`} />
+      <p>Set <code>values</code> from JavaScript to change the data. The slices spring to their new sizes:</p>
+      <CodeWindow filename="app.js" copy code={`const pie = document.querySelector('motion-pie')
+
+document.querySelector('#new-data').addEventListener('click', () => {
+  const values = Array.from({ length: 4 }, () => 5 + Math.round(Math.random() * 40))
+  pie.values = values.join(', ')
+})`} />
+
+      <h2>Quick start</h2>
+      <p>Save this as <code>index.html</code> and open it in a browser. No install, no build step.</p>
+      <CodeWindow filename="index.html" copy code={quickStart} />
+      <p>In a project with a bundler, install the package and import the component once:</p>
+      <CodeWindow filename="terminal" copy code={`npm install motion-components`} />
+      <CodeWindow filename="app.js" copy code={`import 'motion-components/motion-pie'`} />
+
+      <h2>When to use a pie</h2>
+      <p>
+        A pie shows how a whole splits into a few parts. Use it for six slices or fewer. When there are more, the extra slices are combined into one
+        slice called "Other". To compare values that are close together, use a <a href="/docs/charts/motion-chart/">bar chart</a>: lengths are easier
+        to compare than angles.
+      </p>
+
+      <h2>Donut</h2>
+      <p>
+        Add <code>donut</code> to cut out the center. The center shows the total, with <code>total-label</code> as its caption. When you hover a slice, the
+        center shows that slice instead of a tooltip.
+      </p>
+      <CodeWindow filename="index.html" copy code={`<motion-pie
+  donut
+  values="1450, 620, 380, 240"
+  labels="Rent, Food, Transport, Fun"
+  total-label="Per month"
+  format="currency:EUR"
+></motion-pie>`} />
+
+      <h2>Give the chart its data</h2>
+      <h3>1. Numbers in attributes</h3>
+      <p>One number per slice in <code>values</code>, and one name per slice in <code>labels</code>.</p>
+      <CodeWindow filename="index.html" copy code={`<motion-pie values="42, 28, 18, 12" labels="Direct, Search, Social, Email"></motion-pie>`} />
+
+      <h3>2. A table</h3>
+      <p>Wrap a <code>&lt;table&gt;</code> with the labels in the first column and the values in the second. Screen readers still read the table, and the pie updates when a cell changes.</p>
+      <CodeWindow filename="index.html" copy code={`<motion-pie label="Traffic sources">
+  <table>
+    <tr><th>Source</th><th>Visits</th></tr>
+    <tr><td>Direct</td><td>4200</td></tr>
+    <tr><td>Search</td><td>2800</td></tr>
+    <tr><td>Social</td><td>1800</td></tr>
+    <tr><td>Email</td><td>1200</td></tr>
+  </table>
+</motion-pie>`} />
+
+      <h3>3. From JavaScript</h3>
+      <CodeWindow filename="app.js" copy code={`document.querySelector('motion-pie').data = {
+  labels: ['Direct', 'Search', 'Social', 'Email'],
+  values: [4200, 2800, 1800, 1200],
+}`} />
+
+      <h2>Frameworks</h2>
+      <FwTabs tabs={frameworkTabs} group="frameworks" />
+
+      <h2>Colors and size</h2>
+      <p>
+        Slices use the same color-blind-safe palette as <code>motion-chart</code>, in light and dark mode. Override it with <code>--chart-1</code> to
+        <code>--chart-6</code>.
+      </p>
+      <CodeWindow filename="index.html" copy code={`<motion-pie
+  values="60, 40"
+  labels="Done, Open"
+  style="--chart-1: #16a34a; --chart-2: #d4d4d8; --chart-height: 12rem"
+></motion-pie>`} />
+
+      <h2>Properties</h2>
+      <PropsTable
+        nameLabel="Attribute"
+        rows={[
+          { name: "values", type: "string", default: "''", description: "Comma-separated numbers, one per slice" },
+          { name: "labels", type: "string", default: "''", description: "Comma-separated slice labels" },
+          { name: "data", type: "object", default: "null", description: "Property only: <code>{ labels, values }</code>. Takes precedence over a table and <code>values</code>" },
+          { name: "donut", type: "boolean", default: "false", description: "Cuts out the center and shows the total there" },
+          { name: "total-label", type: "string", default: "'Total'", description: "Caption under the total in a donut" },
+          { name: "format", type: "string", default: "''", description: "<code>'compact'</code>, <code>'percent'</code>, <code>'currency:EUR'</code> or <code>'unit:kilometer'</code>" },
+          { name: "label", type: "string", default: "''", description: "Accessible name of the chart" },
+          { name: "trigger", type: "string", default: "'view'", description: "When the sweep-in runs: <code>'view'</code> or <code>'mount'</code>" },
+          { name: "duration", type: "number", default: "0.8", description: "Spring duration in seconds" },
+          { name: "bounce", type: "number", default: "0.25", description: "Spring bounciness when the values change" },
+          { name: "tooltip", type: "boolean", default: "true", description: "Set <code>tooltip=\"false\"</code> to hide the tooltip. A donut uses its center instead" },
+          { name: "legend", type: "boolean", default: "true", description: "Set <code>legend=\"false\"</code> to hide the legend" },
+        ]}
+      />
+
+      <h2>CSS custom properties</h2>
+      <PropsTable
+        nameLabel="Property"
+        rows={[
+          { name: "--chart-height", type: "length", default: "16rem", description: "Height of the chart, including the legend" },
+          { name: "--chart-1 … --chart-6", type: "color", default: "blue, orange, aqua, yellow, magenta, green", description: "Slice colors, in order" },
+          { name: "--chart-surface", type: "color", default: "Canvas", description: "Background behind the chart. Used for the gap between slices and the tooltip" },
+        ]}
+      />
+
+      <h2>JavaScript API</h2>
+      <p>
+        <code>replay()</code> sweeps the pie in again. It also has <code>play()</code>, <code>pause()</code>, <code>finish()</code>, <code>cancel()</code>,
+        <code>playState</code> and the <code>motion-start</code> and <code>motion-finish</code> events. See the <a href="/docs/js-api/">JavaScript API</a>.
+      </p>
+
+      <h2>Accessibility</h2>
+      <p>
+        Screen readers get the data as a table with each value and share. Give the chart a <code>label</code>. Press <kbd>Tab</kbd> to focus it, then the
+        arrow keys to move between slices, <kbd>Home</kbd> and <kbd>End</kbd> for the first and last, and <kbd>Esc</kbd> to clear. Each slice is announced
+        with its value and share. With <code>prefers-reduced-motion</code>, the pie shows at once and changes without animation.
+      </p>
+
+      <DocsPagination />
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+
+  type Pie = HTMLElement & { values: string };
+  const pie = document.getElementById("pie") as Pie | null;
+  const donut = document.getElementById("donut") as Pie | null;
+  const code = document.getElementById("pie-code") as (HTMLElement & { setCode(code: string): void }) | null;
+
+  document.getElementById("new-data")?.addEventListener("click", () => {
+    if (!pie || !donut) return;
+    pie.values = Array.from({ length: 4 }, () => 5 + Math.round(Math.random() * 40)).join(", ");
+    donut.values = Array.from({ length: 4 }, () => 150 + Math.round(Math.random() * 1400)).join(", ");
+    code?.setCode(`<motion-pie
+  values="${pie.values}"
+  labels="Direct, Search, Social, Email"
+  label="Traffic sources"
+></motion-pie>
+
+<motion-pie
+  donut
+  values="${donut.values}"
+  labels="Rent, Food, Transport, Fun"
+  label="Monthly budget"
+  format="currency:EUR"
+></motion-pie>
+
+<button id="new-data">New data</button>`);
+  });
+</script>
+
+<style>
+  .demo {
+    display: grid;
+    gap: 1rem;
+    justify-items: start;
+    width: 100%;
+    color: var(--color-text);
+  }
+
+  .pies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+    gap: 2rem;
+    width: 100%;
+  }
+
+  .demo-action {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+</style>

@@ -94,6 +94,13 @@ npm install motion-components
 | [`motion-text-mask`](https://www.motion-components.dev/docs/text/motion-text-mask/)     | Standalone mask-clip reveal primitive            |
 | [`motion-font`](https://www.motion-components.dev/docs/text/motion-font/)               | Variable font axis animation (weight/width/opsz) |
 
+### Icons — animated icons
+
+| Component | Does |
+| --- | --- |
+| [`motion-icon`](https://www.motion-components.dev/docs/icons/motion-icon/) | Animates any SVG icon: draw-in, pop, bounce, rotate, wiggle, pulse |
+| [`motion-state-icon`](https://www.motion-components.dev/docs/icons/motion-state-icon/) | Icons that morph between two states: menu, play, copy, heart and more |
+
 ### Scroll — scroll-driven animation
 
 | Component                                                                           | Does                                     |
@@ -115,6 +122,14 @@ npm install motion-components
 | [`motion-flip-card`](https://www.motion-components.dev/docs/components/motion-flip-card/)                       | Two-sided flip card (hover or click)        |
 | [`motion-theme-toggle`](https://www.motion-components.dev/docs/components/motion-theme-toggle/)                 | Light/dark/system toggle, optional wipe     |
 | [`motion-theme-icon`](https://www.motion-components.dev/docs/components/motion-theme-toggle/#motion-theme-icon) | Spring sun, moon and system glyph           |
+
+### Charts — data that springs
+
+| Component | Does |
+| --- | --- |
+| [`motion-chart`](https://www.motion-components.dev/docs/charts/motion-chart/) | Bar and line charts from attributes or a table; data changes spring into place |
+| [`motion-pie`](https://www.motion-components.dev/docs/charts/motion-pie/) | Pie and donut charts; slices sweep in and spring to new sizes |
+| [`motion-sparkline`](https://www.motion-components.dev/docs/charts/motion-sparkline/) | Small inline trend line for text, tables and stat tiles |
 
 ### Code — syntax-highlighted display
 

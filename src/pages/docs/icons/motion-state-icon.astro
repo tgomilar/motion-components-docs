@@ -1,0 +1,480 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import FwTabs from "../../../components/FwTabs.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+
+const CDN = "https://cdn.jsdelivr.net/npm/motion-components@1/dist";
+
+const icons = [
+  { name: "menu", label: "Menu", off: "menu", on: "close" },
+  { name: "play", label: "Play", off: "play", on: "pause" },
+  { name: "copy", label: "Copy", off: "copy", on: "check" },
+  { name: "plus", label: "Expand", off: "plus", on: "minus" },
+  { name: "chevron", label: "Expand", off: "chevron down", on: "chevron up" },
+  { name: "heart", label: "Like", off: "empty heart", on: "filled heart" },
+  { name: "loading", label: "Saving", off: "spinner", on: "check" },
+  { name: "eye", label: "Show password", off: "eye", on: "eye-off" },
+];
+
+const allIcons = icons.map((i) => `<motion-state-icon name="${i.name}" toggle label="${i.label}"></motion-state-icon>`).join("\n");
+
+const quickStart = `<!doctype html>
+<html>
+  <head>
+    <script type="module" src="${CDN}/motion-state-icon.js"></script>
+  </head>
+  <body>
+    <motion-state-icon name="heart" toggle label="Like"></motion-state-icon>
+  </body>
+</html>`;
+
+const recipes = {
+  menu: `<button id="menu-button" aria-label="Menu" aria-expanded="false">
+  <motion-state-icon name="menu"></motion-state-icon>
+</button>
+
+<script type="module">
+  const button = document.querySelector('#menu-button')
+
+  button.addEventListener('click', () => {
+    const open = button.getAttribute('aria-expanded') !== 'true'
+    button.setAttribute('aria-expanded', open)
+    button.querySelector('motion-state-icon').active = open
+  })
+</script>`,
+  copy: `<button id="copy-button">
+  <motion-state-icon name="copy"></motion-state-icon>
+  Copy
+</button>
+
+<script type="module">
+  const button = document.querySelector('#copy-button')
+  const icon = button.querySelector('motion-state-icon')
+
+  button.addEventListener('click', async () => {
+    await navigator.clipboard.writeText('Text to copy')
+    icon.active = true
+    setTimeout(() => (icon.active = false), 1500)
+  })
+</script>`,
+  save: `<button id="save-button">
+  <motion-state-icon name="loading" active></motion-state-icon>
+  Save
+</button>
+
+<script type="module">
+  const button = document.querySelector('#save-button')
+  const icon = button.querySelector('motion-state-icon')
+
+  button.addEventListener('click', async () => {
+    icon.active = false   // spinner
+    await new Promise((resolve) => setTimeout(resolve, 1500))   // replace with your save
+    icon.active = true    // check
+  })
+</script>`,
+  password: `<input id="password" type="password" value="secret" />
+<button id="password-button" aria-label="Show password">
+  <motion-state-icon name="eye"></motion-state-icon>
+</button>
+
+<script type="module">
+  const input = document.querySelector('#password')
+  const button = document.querySelector('#password-button')
+
+  button.addEventListener('click', () => {
+    const visible = input.type === 'password'
+    input.type = visible ? 'text' : 'password'
+    button.setAttribute('aria-label', visible ? 'Hide password' : 'Show password')
+    button.querySelector('motion-state-icon').active = visible
+  })
+</script>`,
+  details: `<details id="faq">
+  <summary>
+    What is motion-components?
+    <motion-state-icon name="chevron"></motion-state-icon>
+  </summary>
+  Web components with spring-based motion.
+</details>
+
+<script type="module">
+  const details = document.querySelector('#faq')
+
+  details.addEventListener('toggle', () => {
+    details.querySelector('motion-state-icon').active = details.open
+  })
+</script>`,
+  like: `<motion-state-icon id="like" name="heart" toggle label="Like"></motion-state-icon>
+
+<script type="module">
+  document.querySelector('#like').addEventListener('motion-change', (event) => {
+    console.log(event.detail.active ? 'liked' : 'unliked')
+  })
+</script>`,
+};
+
+const frameworkTabs = [
+  {
+    id: "vanilla",
+    label: "HTML / Astro / Svelte",
+    desc: "Set the <code>active</code> attribute, or the <code>active</code> property from a script.",
+    filename: "index.html",
+    code: `<script type="module" src="${CDN}/motion-state-icon.js"></script>
+
+<motion-state-icon name="heart" toggle label="Like"></motion-state-icon>`,
+  },
+  {
+    id: "react",
+    label: "React",
+    desc: "React 19 sets <code>active</code> as a property, so pass a boolean from state.",
+    filename: "LikeButton.jsx",
+    code: `import { useState } from 'react'
+import 'motion-components/motion-state-icon'
+
+export function LikeButton() {
+  const [liked, setLiked] = useState(false)
+
+  return (
+    <button aria-pressed={liked} onClick={() => setLiked(!liked)}>
+      <motion-state-icon name="heart" active={liked}></motion-state-icon>
+      Like
+    </button>
+  )
+}`,
+  },
+  {
+    id: "vue",
+    label: "Vue 3",
+    desc: "Tell Vue that <code>motion-*</code> tags are custom elements (see <a href=\"/docs/#frameworks\">Getting started</a>), then bind <code>:active</code>.",
+    filename: "LikeButton.vue",
+    code: `<script setup>
+import { ref } from 'vue'
+import 'motion-components/motion-state-icon'
+
+const liked = ref(false)
+</script>
+
+<template>
+  <button :aria-pressed="liked" @click="liked = !liked">
+    <motion-state-icon name="heart" :active="liked"></motion-state-icon>
+    Like
+  </button>
+</template>`,
+  },
+];
+---
+
+<Layout
+  title="motion-state-icon — Motion Components"
+  description="Icons that morph between two states on a spring: menu and close, play and pause, copy and check, plus and minus, chevron, heart, loading and done, eye and eye-off."
+  noMain
+>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-state-icon</motion-split></h1>
+      <p class="lead">
+        Icons that morph between two states on a spring, and can be interrupted midway. Set <code>name</code> to pick the icon and <code>active</code> for
+        the second state. They are drawn on a 24&nbsp;px grid with 2&nbsp;px round strokes, so they sit next to Lucide, Tabler and Heroicons icons.
+      </p>
+
+      <h2>Preview</h2>
+      <p>Click an icon to switch its state.</p>
+      <DocsPreview>
+        <div class="grid">
+          {icons.map((i) => (
+            <div class="cell">
+              <motion-state-icon name={i.name} toggle label={i.label}></motion-state-icon>
+              <span>{i.name}</span>
+            </div>
+          ))}
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={allIcons} />
+
+      <h2>Quick start</h2>
+      <p>Save this as <code>index.html</code> and open it in a browser. No install, no build step.</p>
+      <CodeWindow filename="index.html" copy code={quickStart} />
+      <p>In a project with a bundler, install the package and import the component once:</p>
+      <CodeWindow filename="terminal" copy code={`npm install motion-components`} />
+      <CodeWindow filename="app.js" copy code={`import 'motion-components/motion-state-icon'`} />
+
+      <h2>Icons</h2>
+      <p>Without <code>active</code>, the icon shows its first state. With <code>active</code>, it shows the second.</p>
+      <div class="methods-table">
+        <table>
+          <thead><tr><th><code>name</code></th><th>Default</th><th><code>active</code></th></tr></thead>
+          <tbody>
+            {icons.map((i) => (
+              <tr><td><code>{i.name}</code></td><td>{i.off}</td><td>{i.on}</td></tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Two ways to switch</h2>
+      <h3>1. The icon is the button</h3>
+      <p>
+        Add <code>toggle</code> and <code>label</code>. The icon switches itself on click, <kbd>Space</kbd> or <kbd>Enter</kbd>, and fires
+        <code>motion-change</code>.
+      </p>
+      <DocsPreview>
+        <div class="grid">
+          <div class="cell"><motion-state-icon id="like" name="heart" toggle label="Like"></motion-state-icon><span id="like-state">not liked</span></div>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={recipes.like} />
+
+      <h3>2. Your button controls the icon</h3>
+      <p>
+        Leave out <code>toggle</code> and set <code>active</code> from your own code. Use this when the icon sits inside a button or link that already
+        handles the click and has the accessible name. All the recipes below work this way.
+      </p>
+
+      <h2>Recipes</h2>
+      <p>Each snippet is complete. Paste it into a page that loads the library.</p>
+
+      <h3>Menu button</h3>
+      <DocsPreview>
+        <div class="grid">
+          <button class="demo-action icon-only" id="menu-button" type="button" aria-label="Menu" aria-expanded="false"><motion-state-icon name="menu"></motion-state-icon></button>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={recipes.menu} />
+
+      <h3>Copy button</h3>
+      <DocsPreview>
+        <div class="grid">
+          <button class="demo-action" id="copy-button" type="button"><motion-state-icon name="copy"></motion-state-icon>Copy</button>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={recipes.copy} />
+
+      <h3>Save button</h3>
+      <DocsPreview>
+        <div class="grid">
+          <button class="demo-action" id="save-button" type="button"><motion-state-icon name="loading" active></motion-state-icon>Save</button>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={recipes.save} />
+
+      <h3>Show password</h3>
+      <DocsPreview>
+        <div class="grid">
+          <div class="password">
+            <input id="password" type="password" value="secret" aria-label="Password" />
+            <button class="demo-action icon-only" id="password-button" type="button" aria-label="Show password"><motion-state-icon name="eye"></motion-state-icon></button>
+          </div>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={recipes.password} />
+
+      <h3>Accordion</h3>
+      <DocsPreview>
+        <details id="faq" class="faq">
+          <summary>What is motion-components?<motion-state-icon name="chevron"></motion-state-icon></summary>
+          <p>Web components with spring-based motion.</p>
+        </details>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={recipes.details} />
+
+      <h2>Frameworks</h2>
+      <FwTabs tabs={frameworkTabs} group="frameworks" />
+
+      <h2>Colors</h2>
+      <p>
+        Lines use <code>--icon-color</code>, which defaults to the text color. <code>--icon-accent</code> colors the filled heart and the copy and loading
+        checks. By default the heart is red and the checks are green.
+      </p>
+      <DocsPreview>
+        <div class="grid">
+          <div class="cell"><motion-state-icon name="heart" toggle label="Like" active></motion-state-icon><span>default</span></div>
+          <div class="cell"><motion-state-icon name="heart" toggle label="Like" active style="--icon-accent: #f59e0b"></motion-state-icon><span>--icon-accent</span></div>
+          <div class="cell"><motion-state-icon name="copy" toggle label="Copy" active style="--icon-color: #6366f1; --icon-accent: #6366f1"></motion-state-icon><span>both</span></div>
+          <div class="cell"><motion-state-icon name="eye" toggle label="Show" style="--icon-color: #0ea5e9; --icon-size: 2rem"></motion-state-icon><span>--icon-color</span></div>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={`<motion-state-icon name="heart" active style="--icon-accent: #f59e0b"></motion-state-icon>
+<motion-state-icon name="copy" active style="--icon-color: #6366f1; --icon-accent: #6366f1"></motion-state-icon>
+<motion-state-icon name="eye" style="--icon-color: #0ea5e9; --icon-size: 2rem"></motion-state-icon>`} />
+
+      <h2>Properties</h2>
+      <PropsTable
+        nameLabel="Attribute"
+        rows={[
+          { name: "name", type: "string", default: "'menu'", description: "<code>'menu'</code>, <code>'play'</code>, <code>'copy'</code>, <code>'plus'</code>, <code>'chevron'</code>, <code>'heart'</code>, <code>'loading'</code> or <code>'eye'</code>" },
+          { name: "active", type: "boolean", default: "false", description: "The second state: close, pause, check, minus, up, filled, done or eye-off" },
+          { name: "toggle", type: "boolean", default: "false", description: "Makes the icon a button that switches <code>active</code> on click, Space or Enter" },
+          { name: "label", type: "string", default: "''", description: "Accessible name. Without it, and without <code>toggle</code>, the icon is decorative" },
+          { name: "duration", type: "number", default: "0.45", description: "Spring duration of the morph, in seconds" },
+          { name: "bounce", type: "number", default: "0.3", description: "Spring bounciness of the morph" },
+        ]}
+      />
+
+      <h2>CSS custom properties</h2>
+      <PropsTable
+        nameLabel="Property"
+        rows={[
+          { name: "--icon-color", type: "color", default: "currentColor", description: "Line color" },
+          { name: "--icon-accent", type: "color", default: "red heart, green checks", description: "Accent for the filled heart and the copy and loading checks" },
+          { name: "--icon-size", type: "length", default: "1.5em", description: "Width and height of the icon" },
+        ]}
+      />
+
+      <h2>Events</h2>
+      <div class="methods-table">
+        <table>
+          <thead><tr><th>Event</th><th>Detail</th><th>Description</th></tr></thead>
+          <tbody>
+            <tr><td><code>motion-change</code></td><td><code>{"{ active }"}</code></td><td>Fired when <code>toggle</code> is set and the user switches the state.</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Accessibility</h2>
+      <p>
+        With <code>toggle</code>, the icon is a button with <code>aria-pressed</code>, reachable with <kbd>Tab</kbd> and switched with <kbd>Space</kbd> or
+        <kbd>Enter</kbd>. Give it a <code>label</code>. Inside your own button, put the name on the button (its text or <code>aria-label</code>) and
+        leave the icon without <code>label</code>. With <code>prefers-reduced-motion</code>, the icon switches state at once and the loading spinner
+        stands still.
+      </p>
+
+      <DocsPagination />
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+
+  type StateIcon = HTMLElement & { active: boolean };
+  const $ = <T extends Element = HTMLElement>(selector: string) => document.querySelector<T>(selector);
+  const iconIn = (el: Element | null) => el?.querySelector<StateIcon>("motion-state-icon");
+
+  $("#like")?.addEventListener("motion-change", (event) => {
+    const state = $("#like-state");
+    if (state) state.textContent = (event as CustomEvent<{ active: boolean }>).detail.active ? "liked" : "not liked";
+  });
+
+  const menu = $("#menu-button");
+  menu?.addEventListener("click", () => {
+    const open = menu.getAttribute("aria-expanded") !== "true";
+    menu.setAttribute("aria-expanded", String(open));
+    iconIn(menu)!.active = open;
+  });
+
+  const copy = $("#copy-button");
+  copy?.addEventListener("click", async () => {
+    await navigator.clipboard?.writeText("Text to copy").catch(() => {});
+    iconIn(copy)!.active = true;
+    setTimeout(() => (iconIn(copy)!.active = false), 1500);
+  });
+
+  const save = $("#save-button");
+  save?.addEventListener("click", () => {
+    iconIn(save)!.active = false;
+    setTimeout(() => (iconIn(save)!.active = true), 1500);
+  });
+
+  const input = $<HTMLInputElement>("#password");
+  const reveal = $("#password-button");
+  reveal?.addEventListener("click", () => {
+    if (!input) return;
+    const visible = input.type === "password";
+    input.type = visible ? "text" : "password";
+    reveal.setAttribute("aria-label", visible ? "Hide password" : "Show password");
+    iconIn(reveal)!.active = visible;
+  });
+
+  const faq = $<HTMLDetailsElement>("#faq");
+  faq?.addEventListener("toggle", () => (iconIn(faq)!.active = faq.open));
+</script>
+
+<style>
+  .grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.75rem 2.25rem;
+    color: var(--color-text);
+  }
+
+  .cell {
+    display: grid;
+    justify-items: center;
+    gap: 0.5rem;
+    --icon-size: 2rem;
+  }
+
+  .cell span {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-muted);
+  }
+
+  .demo-action {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    --icon-size: 1.15rem;
+  }
+
+  .demo-action.icon-only {
+    padding: 0.6rem;
+  }
+
+  .password {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .password input {
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+  }
+
+  .faq {
+    max-width: 28rem;
+    margin: 0 auto;
+    color: var(--color-text);
+  }
+
+  .faq summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  .faq summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq p {
+    margin: 0.75rem 0 0;
+    color: var(--color-muted);
+  }
+</style>
