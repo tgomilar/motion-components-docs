@@ -10,7 +10,7 @@ import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
 
-<Layout title="motion-swap — Motion Components" description="Splits text into individual characters and swaps them vertically on hover or reveal trigger." noMain>
+<Layout title="motion-swap — Motion Components" description="Splits text into individual characters and swaps them vertically on hover or when scrolled into view." noMain>
   <div class="layout">
     <DocsSidebar />
 
@@ -40,17 +40,18 @@ import 'motion-components'               // or the whole library`}
 
       <h2>Properties</h2>
       <PropsTable nameLabel="Attribute" rows={[
-        { name: 'trigger', type: '"hover" | "reveal"', default: '"hover"', description: 'Animation trigger: hover swaps in/out on mouseenter/mouseleave; reveal plays once on viewport entry' },
-        { name: 'reverse', type: 'boolean', default: 'true', description: 'When true, letters swap bottom-to-top. When false, top-to-bottom.' },
-        { name: 'stagger-duration', type: 'number', default: '0.03', description: 'Delay in seconds between each character\'s animation start' },
-        { name: 'transition', type: 'object', default: '{ type: "spring", duration: 0.7 }', description: 'Motion animation options for each character pair' },
-        { name: 'once', type: 'boolean', default: 'true', description: 'Animate only on first intersection (reveal mode)' },
+        { name: 'trigger', type: 'string', default: "'hover'", description: "Animation trigger: <code>'hover'</code> swaps in and out on mouseenter and mouseleave. <code>'view'</code> plays once on viewport entry" },
+        { name: 'reverse', type: 'boolean', default: 'true', description: 'Letters swap bottom-to-top. Set <code>reverse="false"</code> to swap top-to-bottom.' },
+        { name: 'interval', type: 'number', default: '0.03', description: 'Delay in seconds between each character\'s animation start' },
+        { name: 'duration', type: 'number', default: '0.7', description: 'Spring duration of each character swap, in seconds' },
+        { name: 'bounce', type: 'number', default: '0.3', description: 'Spring bounciness: <code>0</code> settles without overshoot, higher is more elastic' },
+        { name: 'once', type: 'boolean', default: 'true', description: 'Animate only on first intersection (<code>trigger="view"</code>). Set <code>once="false"</code> to animate on every entry' },
         { name: 'delay', type: 'number', default: '0', description: 'Delay in seconds before animation starts' },
       ]} />
       <h2>JavaScript API</h2>
-      <p class="section-desc">Control the swap reveal mode programmatically with <code>play()</code> and <code>cancel()</code>.</p>
+      <p class="section-desc">Control the swap view mode programmatically with <code>play()</code> and <code>cancel()</code>.</p>
       <JsApiDemo target="api-swap-demo" mode="one-shot" wide>
-        <motion-swap id="api-swap-demo" trigger="reveal">JavaScript API</motion-swap>
+        <motion-swap id="api-swap-demo" trigger="view">JavaScript API</motion-swap>
       </JsApiDemo>
 
       <h2>Accessibility</h2>

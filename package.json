@@ -36,17 +36,18 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro build",
+    "build": "astro build && pagefind --site dist --glob \"{index.html,about/**/*.html,docs/**/*.html,blog/**/*.html,showcase/**/*.html}\"",
     "preview": "astro preview",
     "check": "astro check"
   },
   "dependencies": {
     "astro": "^6.4.2",
-    "motion-components": "^0.7.1"
+    "motion-components": "^1.0.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "@astrojs/sitemap": "^3.7.3",
+    "pagefind": "^1.5.2",
     "typescript": "^5.9.3"
   }
 }

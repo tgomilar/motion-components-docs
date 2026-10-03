@@ -20,7 +20,7 @@ import "../../../styles/docs.css";
 
       <h2>Preview</h2>
       <DocsPreview>
-        <motion-circle class="demo-accent" text="MOTION COMPONENTS · SPIN IT · " radius="90" speed="8"></motion-circle>
+        <motion-circle class="demo-accent" text="MOTION COMPONENTS · SPIN IT · " radius="90" duration="8"></motion-circle>
       </DocsPreview>
 
       <h2>Import</h2>
@@ -38,14 +38,14 @@ import 'motion-components'               // or the whole library`}
         code={`<motion-circle
   text="MOTION COMPONENTS · SPIN IT · "
   radius="90"
-  speed="8"
+  duration="8"
 ></motion-circle>`}
       />
 
       <h2>Counterclockwise</h2>
       <p>Set <code>direction="ccw"</code> to reverse the spin direction.</p>
       <DocsPreview>
-        <motion-circle class="demo-accent" text="COUNTERCLOCKWISE · REVERSE · " radius="90" speed="10" direction="ccw"></motion-circle>
+        <motion-circle class="demo-accent" text="COUNTERCLOCKWISE · REVERSE · " radius="90" duration="10" direction="ccw"></motion-circle>
       </DocsPreview>
       <CodeWindow
         filename="motion-circle.html"
@@ -53,7 +53,7 @@ import 'motion-components'               // or the whole library`}
         code={`<motion-circle
   text="COUNTERCLOCKWISE · REVERSE · "
   radius="90"
-  speed="10"
+  duration="10"
   direction="ccw"
 ></motion-circle>`}
       />
@@ -61,7 +61,7 @@ import 'motion-components'               // or the whole library`}
       <h2>Upright characters</h2>
       <p>Add <code>upright</code> to keep each character vertically oriented instead of radiating outward from the center.</p>
       <DocsPreview>
-        <motion-circle class="demo-accent" text="UPRIGHT · READABLE · TEXT · " radius="90" speed="9" upright></motion-circle>
+        <motion-circle class="demo-accent" text="UPRIGHT · READABLE · TEXT · " radius="90" duration="9" upright></motion-circle>
       </DocsPreview>
       <CodeWindow
         filename="motion-circle.html"
@@ -69,7 +69,7 @@ import 'motion-components'               // or the whole library`}
         code={`<motion-circle
   text="UPRIGHT · READABLE · TEXT · "
   radius="90"
-  speed="9"
+  duration="9"
   upright
 ></motion-circle>`}
       />
@@ -77,14 +77,14 @@ import 'motion-components'               // or the whole library`}
       <h2>With slotted content</h2>
       <p>Place any element inside <code>motion-circle</code> to anchor it at the center. The slot content stays still. Only the text ring rotates.</p>
       <DocsPreview>
-        <motion-circle class="demo-accent" text="MOTION COMPONENTS · SPIN IT · " radius="90" speed="8">
+        <motion-circle class="demo-accent" text="MOTION COMPONENTS · SPIN IT · " radius="90" duration="8">
           <div class="demo-avatar"><span class="y">&lt;</span>mc<span class="y">&gt;</span></div>
         </motion-circle>
       </DocsPreview>
       <CodeWindow
         filename="motion-circle.html"
         copy
-        code={`<motion-circle text="AVAILABLE FOR WORK · HIRE ME · " radius="80" speed="10">
+        code={`<motion-circle text="AVAILABLE FOR WORK · HIRE ME · " radius="80" duration="10">
   <img src="avatar.jpg" width="80" height="80" alt="Avatar" />
 </motion-circle>`}
       />
@@ -92,7 +92,7 @@ import 'motion-components'               // or the whole library`}
       <h2>Pause on hover</h2>
       <p>Add <code>pause-on-hover</code> to freeze the rotation when the cursor enters and resume it on leave.</p>
       <DocsPreview>
-        <motion-circle class="demo-accent" text="HOVER TO PAUSE · SPIN IT · " radius="90" speed="8" pause-on-hover></motion-circle>
+        <motion-circle class="demo-accent" text="HOVER TO PAUSE · SPIN IT · " radius="90" duration="8" pause-on-hover></motion-circle>
       </DocsPreview>
       <CodeWindow
         filename="motion-circle.html"
@@ -100,7 +100,7 @@ import 'motion-components'               // or the whole library`}
         code={`<motion-circle
   text="HOVER TO PAUSE · SPIN IT · "
   radius="90"
-  speed="8"
+  duration="8"
   pause-on-hover
 ></motion-circle>`}
       />
@@ -122,8 +122,8 @@ import 'motion-components'               // or the whole library`}
       <PropsTable nameLabel="Attribute" rows={[
         { name: 'text', type: 'string', default: '—', description: 'Text to arrange around the circle' },
         { name: 'radius', type: 'number', default: '80', description: 'Circle radius in px' },
-        { name: 'speed', type: 'number', default: '8', description: 'Seconds per full rotation' },
-        { name: 'direction', type: '"cw" | "ccw"', default: '"cw"', description: 'Clockwise or counterclockwise spin' },
+        { name: 'duration', type: 'number', default: '8', description: 'Seconds per full rotation. Lower is faster' },
+        { name: 'direction', type: 'string', default: "'cw'", description: "Spin direction: <code>'cw'</code> (clockwise) or <code>'ccw'</code> (counterclockwise)" },
         { name: 'upright', type: 'boolean', default: 'false', description: 'Keep characters vertically oriented' },
         { name: 'pause-on-hover', type: 'boolean', default: 'false', description: 'Pause the rotation on mouseenter, resume on mouseleave' },
       ]} />
@@ -131,7 +131,7 @@ import 'motion-components'               // or the whole library`}
       <h2>JavaScript API</h2>
       <p class="section-desc">Control the circle programmatically with <code>play()</code>, <code>pause()</code>, <code>finish()</code>, and <code>cancel()</code>.</p>
       <JsApiDemo target="api-circle-demo" wide>
-        <motion-circle id="api-circle-demo" text="JS API · demo ·" speed="14">
+        <motion-circle id="api-circle-demo" text="JS API · demo ·" duration="14">
         </motion-circle>
       </JsApiDemo>
 

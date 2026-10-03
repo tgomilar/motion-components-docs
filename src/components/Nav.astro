@@ -1,13 +1,16 @@
 ---
+import Search from "./Search.astro";
+
 const { pathname } = Astro.url;
 ---
 
-<header>
+<header data-pagefind-ignore="all">
   <nav>
     <a href="/" class="logo"
       ><span class="logo-bracket">&lt;</span><span class="logo-motion">motion</span><span class="logo-dash">-</span><span class="logo-comp">components</span
       ><span class="logo-bracket">&gt;</span></a
     >
+    <Search />
     <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
       <span class="hamburger-line"></span>
       <span class="hamburger-line"></span>

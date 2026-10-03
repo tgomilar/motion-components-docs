@@ -1,13 +1,13 @@
 ---
 title: "motion-components 0.7: A Theme Toggle With a Circular Wipe"
-description: Version 0.7 adds motion-theme-toggle, a light, dark and system theme control with a spring icon morph and a circular page wipe. It also upgrades Motion to version 13.
+description: Version 0.7 adds motion-theme-toggle, a light, dark and system theme control with a spring icon morph and an optional circular page wipe. It also upgrades Motion to version 13.
 pubDate: 2026-10-02T00:00:00.000Z
 author: Tanja Gomilar
 tags:
   - release
   - components
 ---
-Version 0.7 of [motion-components](https://github.com/tgomilar/motion-components) adds two new elements: `<motion-theme-toggle>` and `<motion-theme-icon>`. The toggle switches a page between a light theme, a dark theme and the system theme. The new theme appears with a circular wipe that grows from the control. This release also upgrades the animation library underneath, Motion, from version 11 to version 13.
+Version 0.7 of [motion-components](https://github.com/tgomilar/motion-components) adds two new elements: `<motion-theme-toggle>` and `<motion-theme-icon>`. The toggle switches a page between a light theme, a dark theme and the system theme. The icon morphs from sun to moon, and an optional circular wipe can reveal the new theme. This release also upgrades the animation library underneath, Motion, from version 11 to version 13.
 
 You can see the toggle now: the theme menu in the header of this site is a `<motion-theme-toggle>`.
 
@@ -42,7 +42,13 @@ The `appearance` attribute chooses how the control looks.
 
 Add the `system` attribute to offer a third option. When the user chooses "System", the page follows the OS setting, and it changes when the OS setting changes.
 
-## How the wipe works
+## The optional page wipe
+
+By default, the theme changes at once. A wipe animates the whole page, and on most sites that is too much for a control people use often. Add the `wipe` attribute when you want the theme change to stand out, for example on a landing page:
+
+```html
+<motion-theme-toggle wipe></motion-theme-toggle>
+```
 
 The wipe uses the View Transitions API. The browser takes a picture of the page before the change. Then the toggle changes the theme, and the browser takes a second picture. The toggle shows the new picture inside a circle and makes the circle grow.
 
@@ -72,7 +78,8 @@ The attributes and events follow `dark-mode-toggle` from Google Chrome Labs. If 
 | A third "System" option | No | Yes |
 | A drop-down menu appearance | No | Yes |
 | A custom target element instead of `<html>` | No | Yes, with `target` |
-| Animated icon and circular wipe | No | Yes |
+| Animated icon | No | Yes |
+| Optional circular wipe | No | Yes, with `wipe` |
 
 With `permanent`, the toggle saves the choice in localStorage and restores it on the next visit. A toggle that themes `<html>` saves under the key `motion-theme`. A toggle with a different `target` saves under its own key, so a themed card does not change the theme of the whole page.
 
@@ -112,7 +119,7 @@ The library now depends on Motion 13 instead of Motion 11. The attributes and ev
 
 ## What comes next
 
-Version 0.8 will make the attribute names more consistent across all 40 components. For example, every time value will use seconds. The release notes will list every renamed attribute.
+A later version will make the attribute names more consistent across all 40 components. For example, every time value will use seconds. The release notes will list every renamed attribute.
 
 Read the [motion-theme-toggle documentation](/docs/components/motion-theme-toggle/) for every attribute, event and CSS custom property.
 

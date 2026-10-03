@@ -88,17 +88,17 @@ import 'motion-components'`}
       <PropsTable nameLabel="Attribute" rows={[
         { name: 'to', type: 'string', default: '—', description: 'Target date/time. Any value parseable by <code>new Date()</code>' },
         { name: 'format', type: 'string', default: '"days hours minutes seconds"', description: 'Space-separated list of units to display' },
-        { name: 'labels', type: 'boolean', default: 'true', description: 'Show unit labels below each digit group. Cannot be switched off from markup; set <code>el.labels = false</code>' },
+        { name: 'labels', type: 'boolean', default: 'true', description: 'Show unit labels below each digit group. Set it to <code>"false"</code> to hide them' },
         { name: 'roll', type: 'boolean', default: 'false', description: 'Use slot-machine roll instead of flip animation' },
       ]} />
 
       <h2>CSS variables</h2>
       <PropsTable nameLabel="Variable" rows={[
+        { name: '--countdown-size', type: 'length', default: '3.5rem', description: 'Font size of the digits' },
         { name: '--countdown-color', type: 'color', default: 'currentColor', description: 'Digit color' },
-        { name: '--countdown-label-color', type: 'color', default: 'currentColor', description: 'Label color' },
-        { name: '--countdown-size', type: 'length', default: '3.5rem', description: 'Digit font size' },
-        { name: '--countdown-label-size', type: 'length', default: '0.65rem', description: 'Label font size' },
-        { name: '--countdown-gap', type: 'length', default: '0.75rem', description: 'Gap between digit groups' },
+        { name: '--countdown-gap', type: 'length', default: '0.75rem', description: 'Space between units' },
+        { name: '--countdown-label-size', type: 'length', default: '0.65rem', description: 'Font size of the unit labels' },
+        { name: '--countdown-label-color', type: 'color', default: 'currentColor', description: 'Unit label color' },
       ]} />
 
       <h2>JavaScript API</h2>

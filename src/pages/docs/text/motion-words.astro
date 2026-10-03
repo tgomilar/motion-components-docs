@@ -24,7 +24,7 @@ import "../../../styles/docs.css";
       <DocsPreview>
         <p class="demo-heading">
           We help you
-          <motion-words words="design,build,ship" colors="#3b82f6,#8b5cf6,#10b981" interval="2000"></motion-words>
+          <motion-words words="design,build,ship" colors="#3b82f6,#8b5cf6,#10b981" interval="2"></motion-words>
           faster.
         </p>
       </DocsPreview>
@@ -46,7 +46,7 @@ import 'motion-components'               // or the whole library`}
   <motion-words
     words="design,build,ship"
     colors="#3b82f6,#8b5cf6,#10b981"
-    interval="2000"
+    interval="2"
   ></motion-words>
   faster.
 </h1>`}
@@ -67,7 +67,7 @@ import 'motion-components'               // or the whole library`}
       <PropsTable nameLabel="Attribute" rows={[
         { name: 'words', type: 'string', default: '—', description: 'Comma-separated list of words to cycle through' },
         { name: 'colors', type: 'string', default: "''", description: 'Comma-separated colors, one per word. Any valid CSS color value.' },
-        { name: 'interval', type: 'number', default: '2000', description: 'Time in ms between word changes' },
+        { name: 'interval', type: 'number', default: '2', description: 'Time each word stays visible, in seconds' },
       ]} />
 
       <h2>JavaScript API</h2>

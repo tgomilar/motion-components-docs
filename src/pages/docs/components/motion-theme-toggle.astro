@@ -20,8 +20,8 @@ import "../../../styles/docs.css";
     <main>
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-theme-toggle</motion-split></h1>
       <p class="lead">
-        Light and dark mode control with an optional <strong>system</strong> option. The icon morphs from sun to moon on a spring, and the new theme
-        is revealed with a circular wipe that grows from the control. API-compatible with Chrome Labs'
+        Light and dark mode control with an optional <strong>system</strong> option. The icon morphs from sun to moon on a spring. Add
+        <code>wipe</code> to reveal the new theme with a circular wipe that grows from the control. API-compatible with Chrome Labs'
         <a href="https://github.com/GoogleChromeLabs/dark-mode-toggle" target="_blank" rel="noopener">dark-mode-toggle</a>.
       </p>
 
@@ -62,19 +62,17 @@ import 'motion-components'                       // or the whole library`}
 </style>`}
       />
 
-      <h2>Appearances</h2>
-
-      <h3>Icon with system</h3>
+      <h2>Icon with system</h2>
       <p>Add <code>system</code> to cycle light → dark → system. System follows the OS setting live.</p>
       <DocsPreview>
         <div class="scope scope--row" id="scope-system">
-          <motion-theme-toggle target="#scope-system" system></motion-theme-toggle>
-          <span class="scope-body" data-readout="scope-system"></span>
+          <motion-theme-toggle class="framed" target="#scope-system" system></motion-theme-toggle>
+          <span class="scope-readout" data-readout="scope-system">system</span>
         </div>
       </DocsPreview>
       <CodeWindow filename="system.html" copy code={`<motion-theme-toggle system></motion-theme-toggle>`} />
 
-      <h3>Toggle</h3>
+      <h2>Toggle</h2>
       <p>A segmented radio group, like the <code>toggle</code> appearance in Google Labs. The selection pill springs between options.</p>
       <DocsPreview>
         <div class="scope scope--row" id="scope-toggle">
@@ -82,8 +80,15 @@ import 'motion-components'                       // or the whole library`}
         </div>
       </DocsPreview>
       <CodeWindow filename="toggle.html" copy code={`<motion-theme-toggle appearance="toggle" legend="Theme" system></motion-theme-toggle>`} />
+      <p>Add <code>icon-only</code> to hide the labels. They stay available to screen readers, and each option shows its label as a tooltip.</p>
+      <DocsPreview>
+        <div class="scope scope--row" id="scope-toggle-icons">
+          <motion-theme-toggle target="#scope-toggle-icons" appearance="toggle" icon-only system></motion-theme-toggle>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="toggle-icons.html" copy code={`<motion-theme-toggle appearance="toggle" icon-only system></motion-theme-toggle>`} />
 
-      <h3>Switch</h3>
+      <h2>Switch</h2>
       <p>A two-state switch with light and dark labels on either side. <code>remember</code> adds a checkbox bound to <code>permanent</code>.</p>
       <DocsPreview>
         <div class="scope scope--row" id="scope-switch">
@@ -96,7 +101,7 @@ import 'motion-components'                       // or the whole library`}
         code={`<motion-theme-toggle appearance="switch" legend="Dark mode" remember="Remember"></motion-theme-toggle>`}
       />
 
-      <h3>Menu</h3>
+      <h2>Menu</h2>
       <p>A drop-down menu button. Opens with <kbd>Enter</kbd>, <kbd>Space</kbd> or <kbd>↓</kbd>, and closes with <kbd>Esc</kbd> or an outside click.</p>
       <DocsPreview>
         <div class="scope scope--row scope--menu" id="scope-menu">
@@ -106,18 +111,23 @@ import 'motion-components'                       // or the whole library`}
       </DocsPreview>
       <CodeWindow filename="menu.html" copy code={`<motion-theme-toggle appearance="menu" system></motion-theme-toggle>`} />
 
-      <h2>Control this site</h2>
+      <h2>Page wipe</h2>
       <p>
-        This one targets <code>&lt;html&gt;</code>, so it switches the whole docs site, with the wipe growing from the button. The theme menu in the
-        site header is a <code>&lt;motion-theme-toggle appearance="menu" system permanent&gt;</code> too. Toggles that share a target stay in sync,
-        so the header updates as well.
+        By default the theme changes at once. Add <code>wipe</code> to reveal the new theme with a circular view transition that grows from the
+        control. Use it where the theme change is the moment you want people to notice. For a site header, the default is usually calmer.
+      </p>
+      <p>
+        This demo targets <code>&lt;html&gt;</code>, so it switches the whole docs site. The theme menu in the site header is a
+        <code>&lt;motion-theme-toggle appearance="menu" system permanent&gt;</code> without <code>wipe</code>. Toggles that share a target stay in
+        sync, so the header updates as well.
       </p>
       <DocsPreview>
         <div class="demo-row site-row">
-          <motion-theme-toggle id="site-toggle" legend="Site theme" duration="0.7"></motion-theme-toggle>
-          <span class="site-hint">Click to switch the docs theme</span>
+          <motion-theme-toggle class="framed" id="site-toggle" legend="Site theme" wipe duration="0.7"></motion-theme-toggle>
+          <span class="site-hint">Click to switch the docs theme with a wipe</span>
         </div>
       </DocsPreview>
+      <CodeWindow filename="wipe.html" copy code={`<motion-theme-toggle wipe></motion-theme-toggle>`} />
 
       <h2>motion-theme-icon</h2>
       <p>The morphing glyph is its own primitive, <code>&lt;motion-theme-icon&gt;</code>, so you can use it as a theme indicator anywhere.</p>
@@ -161,7 +171,7 @@ document.querySelector('motion-theme-icon').mode = 'dark'`}
 
       <h2>Stylesheets per scheme</h2>
       <p>
-        As in Google Labs, stylesheets linked with a <code>prefers-color-scheme</code> media query are switched on and off to match the chosen theme,
+        Stylesheets linked with a <code>prefers-color-scheme</code> media query are switched on and off to match the chosen theme,
         so existing pages work unchanged:
       </p>
       <CodeWindow
@@ -175,27 +185,28 @@ document.querySelector('motion-theme-icon').mode = 'dark'`}
       <PropsTable
         nameLabel="Attribute"
         rows={[
-          { name: "mode", type: "'light' | 'dark' | 'system'", default: "OS preference", description: "Selected mode. Reflects to the attribute. 'system' requires the system attribute" },
-          { name: "appearance", type: "'icon' | 'toggle' | 'switch' | 'menu'", default: "'icon'", description: "Visual style of the control" },
-          { name: "system", type: "boolean", default: "false", description: "Offers a third option that follows the OS preference. Ignored by switch" },
-          { name: "permanent", type: "boolean", default: "false", description: "Saves the choice to localStorage and restores it on load. The key is motion-theme for <html>, and motion-theme:<target> for any other target" },
+          { name: "mode", type: "string", default: "OS", description: "<code>'light'</code>, <code>'dark'</code> or <code>'system'</code>: the selected mode. Reflects to the attribute. <code>'system'</code> needs the <code>system</code> attribute" },
+          { name: "appearance", type: "string", default: "'icon'", description: "<code>'icon'</code>, <code>'toggle'</code>, <code>'switch'</code> or <code>'menu'</code>: the visual style of the control" },
+          { name: "system", type: "boolean", default: "false", description: "Offers a third option that follows the OS preference. Ignored by <code>switch</code>" },
+          { name: "permanent", type: "boolean", default: "false", description: "Saves the choice to localStorage and restores it on load. The key is <code>motion-theme</code> for <code>&lt;html&gt;</code>, and <code>motion-theme:&lt;target&gt;</code> for any other target" },
+          { name: "wipe", type: "boolean", default: "false", description: "Reveals the new theme with a circular view-transition wipe from the control" },
+          { name: "icon-only", type: "boolean", default: "false", description: "Shows icons only in the <code>toggle</code> appearance. Labels stay available to screen readers and as tooltips" },
           { name: "legend", type: "string", default: "''", description: "Group label. Accessible name of the icon, switch and menu controls" },
           { name: "light", type: "string", default: "'Light'", description: "Label of the light option" },
           { name: "dark", type: "string", default: "'Dark'", description: "Label of the dark option" },
           { name: "system-label", type: "string", default: "'System'", description: "Label of the system option" },
-          { name: "remember", type: "string", default: "''", description: "When set, shows a checkbox with this label that toggles permanent" },
-          { name: "target", type: "string", default: "'html'", description: "CSS selector of the element that receives data-theme and color-scheme" },
-          { name: "transition", type: "'wipe' | 'none'", default: "'wipe'", description: "Page transition when the theme changes" },
+          { name: "remember", type: "string", default: "''", description: "When set, shows a checkbox with this label that toggles <code>permanent</code>" },
+          { name: "target", type: "string", default: "'html'", description: "CSS selector of the element that receives <code>data-theme</code> and <code>color-scheme</code>" },
           { name: "duration", type: "number", default: "0.5", description: "Spring duration of the icon morph and wipe, in seconds" },
           { name: "bounce", type: "number", default: "0.25", description: "Spring bounciness of the icon morph and controls" },
         ]}
       />
 
-      <h3>motion-theme-icon</h3>
+      <h2>Icon properties</h2>
       <PropsTable
         nameLabel="Attribute"
         rows={[
-          { name: "mode", type: "'light' | 'dark' | 'system'", default: "'light'", description: "Glyph to show: sun, moon or half disc" },
+          { name: "mode", type: "string", default: "'light'", description: "<code>'light'</code> (sun), <code>'dark'</code> (moon) or <code>'system'</code> (half disc): the glyph to show" },
           { name: "duration", type: "number", default: "0.5", description: "Spring duration of the morph, in seconds" },
           { name: "bounce", type: "number", default: "0.25", description: "Spring bounciness of the morph" },
         ]}
@@ -204,15 +215,17 @@ document.querySelector('motion-theme-icon').mode = 'dark'`}
       <h2>Events</h2>
       <div class="methods-table">
         <table>
-          <thead><tr><th>Event</th><th>Description</th></tr></thead>
+          <thead><tr><th>Event</th><th>Detail</th><th>Description</th></tr></thead>
           <tbody>
             <tr>
               <td><code>colorschemechange</code></td>
-              <td>Fired when the mode or the applied scheme changes, including on first load. <code>detail: &#123; colorScheme, mode &#125;</code>.</td>
+              <td class="nowrap"><code>colorScheme</code>, <code>mode</code></td>
+              <td>Fired when the mode or the applied scheme changes, including on first load.</td>
             </tr>
             <tr>
               <td><code>permanentcolorschemechange</code></td>
-              <td>Fired when <code>permanent</code> changes. <code>detail: &#123; permanent &#125;</code>.</td>
+              <td class="nowrap"><code>permanent</code></td>
+              <td>Fired when <code>permanent</code> changes.</td>
             </tr>
           </tbody>
         </table>
@@ -258,11 +271,15 @@ document.querySelector('motion-theme-icon').mode = 'dark'`}
   import "motion-components";
 
   document.querySelectorAll<HTMLElement>("[data-readout]").forEach((out) => {
-    const toggle = document.getElementById(out.dataset.readout!)?.querySelector("motion-theme-toggle");
-    toggle?.addEventListener("colorschemechange", (e: Event) => {
-      const { mode, colorScheme } = (e as CustomEvent).detail;
-      out.textContent = mode === "system" ? `system → ${colorScheme}` : mode;
-    });
+    const scope = document.getElementById(out.dataset.readout!);
+    const toggle = scope?.querySelector<any>("motion-theme-toggle");
+    if (!scope || !toggle) return;
+    const show = () => {
+      const scheme = scope.dataset.theme ?? "light";
+      out.textContent = toggle.mode === "system" ? `system → ${scheme}` : toggle.mode;
+    };
+    toggle.addEventListener("colorschemechange", show);
+    customElements.whenDefined("motion-theme-toggle").then(() => toggle.updateComplete).then(show);
   });
 
   const icon = document.getElementById("solo-icon") as any;
@@ -306,6 +323,23 @@ document.querySelector('motion-theme-icon').mode = 'dark'`}
   .scope--menu {
     justify-content: space-between;
     min-width: 16rem;
+    margin-bottom: 8.5rem;
+  }
+
+  .framed::part(button) {
+    border: 1px solid color-mix(in srgb, currentColor 22%, transparent);
+    background: color-mix(in srgb, currentColor 5%, transparent);
+  }
+
+  .scope-readout {
+    min-width: 7.5rem;
+    color: var(--scope-muted);
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+  }
+
+  .nowrap {
+    white-space: nowrap;
   }
 
   .scope-head {

@@ -10,19 +10,19 @@ import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
 
-<Layout title="motion-typewriter — Motion Components" description="Types out its text content character by character when it scrolls into view. Supports looping, a blinking cursor, and configurable speed." noMain>
+<Layout title="motion-typewriter — Motion Components" description="Types out its text content character by character when it scrolls into view. Supports looping, a blinking cursor, and configurable timing." noMain>
   <div class="layout">
     <DocsSidebar />
 
     <main>
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-typewriter</motion-split></h1>
       <p class="lead">
-        Types out its text content character by character when it scrolls into view. Supports looping, a blinking cursor, and configurable speed.
+        Types out its text content character by character when it scrolls into view. Supports looping, a blinking cursor, and configurable timing.
       </p>
 
       <h2>Preview</h2>
       <DocsPreview replayId="tw-demo">
-        <motion-typewriter id="tw-demo" speed="55" loop cursor class="demo-text"> Motion that feels alive. </motion-typewriter>
+        <motion-typewriter id="tw-demo" interval="0.055" loop cursor class="demo-text"> Motion that feels alive. </motion-typewriter>
       </DocsPreview>
 
       <h2>Import</h2>
@@ -37,18 +37,18 @@ import 'motion-components'               // or the whole library`}
       <CodeWindow
         filename="motion-typewriter.html"
         copy
-        code={`<motion-typewriter speed="50" loop>
+        code={`<motion-typewriter interval="0.05" loop>
   Hello, world.
 </motion-typewriter>`}
       />
 
       <h2>Properties</h2>
       <PropsTable nameLabel="Attribute" rows={[
-        { name: 'speed', type: 'number', default: '50', description: 'Milliseconds per character' },
-        { name: 'delay', type: 'number', default: '0', description: 'Delay before typing starts (ms)' },
-        { name: 'pause', type: 'number', default: '1800', description: 'Pause at end before erasing (ms, loop only)' },
+        { name: 'interval', type: 'number', default: '0.05', description: 'Time between characters while typing, in seconds' },
+        { name: 'delay', type: 'number', default: '0', description: 'Delay before typing starts after viewport entry, in seconds' },
+        { name: 'hold', type: 'number', default: '1.8', description: 'Time to hold the finished line before erasing, in seconds (loop only)' },
         { name: 'loop', type: 'boolean', default: 'false', description: 'Erase and retype continuously' },
-        { name: 'cursor', type: 'boolean', default: 'true', description: 'Show blinking cursor' },
+        { name: 'cursor', type: 'boolean', default: 'true', description: 'Show a blinking cursor. Set <code>cursor="false"</code> to hide it' },
       ]} />
       <h2>JavaScript API</h2>
       <p class="section-desc">Control the typewriter programmatically with <code>play()</code>, <code>pause()</code>, <code>finish()</code>, and <code>cancel()</code>.</p>

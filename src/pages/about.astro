@@ -10,7 +10,7 @@ import CodeWindow from '../components/CodeWindow.astro'
     <header class="about-hero">
       <p class="eyebrow">About</p>
       <h1>
-        The motion layer<br /> your <motion-liquid text="UI" intensity="12" speed="1.5"
+        The motion layer<br /> your <motion-liquid text="UI" intensity="12" duration="6"
         ></motion-liquid> is missing
       </h1>
 
@@ -48,7 +48,7 @@ import CodeWindow from '../components/CodeWindow.astro'
       free.
     </p>
 
-    <p class="tagline">The simplicity of HTML. <span><motion-curve amplitude="8" wave-length="220" speed="0.2">
+    <p class="tagline">The simplicity of HTML. <span><motion-curve amplitude="8" wave-length="220" wave-duration="5">
   The power of Motion
 </motion-curve></span>.</p>
 
@@ -205,9 +205,9 @@ export function App() {
         filename="theme.css"
         copy
         code={`:root {
-  --cw-keyword: #c084fc;
-  --cw-string:  #86efac;
-  --cw-tag:     #67e8f9;
+  --code-keyword: #c084fc;
+  --code-string:  #86efac;
+  --code-tag:     #67e8f9;
 }`}
       />
 

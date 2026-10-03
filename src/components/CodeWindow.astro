@@ -7,11 +7,11 @@ interface Props {
   "copy-label"?: boolean;
   compact?: boolean;
   "hide-chrome"?: boolean;
-  type?: boolean;
-  typeSpeed?: number;
-  typeDelay?: number;
-  "no-loop"?: boolean;
-  typeLoopDelay?: number;
+  typing?: boolean;
+  typingSpeed?: number;
+  typingDelay?: number;
+  typingLoop?: boolean;
+  typingHold?: number;
   code: string;
 }
 
@@ -23,11 +23,11 @@ const {
   "copy-label": copyLabel = false,
   compact = false,
   "hide-chrome": hideChrome = false,
-  type = false,
-  typeSpeed,
-  typeDelay,
-  "no-loop": noLoop = false,
-  typeLoopDelay,
+  typing = false,
+  typingSpeed,
+  typingDelay,
+  typingLoop = true,
+  typingHold,
   code,
 } = Astro.props;
 
@@ -42,11 +42,11 @@ const elId = customId ?? `cw-${Math.random().toString(36).slice(2, 9)}`;
   copy-label={copyLabel || undefined}
   compact={compact || undefined}
   hide-chrome={hideChrome || undefined}
-  type={type || undefined}
-  type-speed={typeSpeed}
-  type-delay={typeDelay}
-  no-loop={noLoop || undefined}
-  type-loop-delay={typeLoopDelay}
+  typing={typing || undefined}
+  typing-speed={typingSpeed}
+  typing-delay={typingDelay}
+  typing-loop={typingLoop ? undefined : "false"}
+  typing-hold={typingHold}
 ></motion-code>
 
 <script define:vars={{ elId, code }}>

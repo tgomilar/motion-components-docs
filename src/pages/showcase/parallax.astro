@@ -5,23 +5,23 @@ import Layout from '../../layouts/Layout.astro'
 <Layout title="Parallax — motion-parallax Showcase" noMain>
   <div class="showcase">
     <section class="hero">
-      <motion-parallax speed="0.03" class="hero-grid"></motion-parallax>
+      <motion-parallax depth="0.03" class="hero-grid"></motion-parallax>
 
-      <motion-parallax speed="0.06" class="hero-blur"></motion-parallax>
+      <motion-parallax depth="0.06" class="hero-blur"></motion-parallax>
 
-      <motion-parallax speed="0.08" class="hero-ghost">PARALLAX</motion-parallax>
+      <motion-parallax depth="0.08" class="hero-ghost">PARALLAX</motion-parallax>
 
-      <motion-parallax speed="0.10" class="hero-word hero-word--a">Every</motion-parallax>
+      <motion-parallax depth="0.10" class="hero-word hero-word--a">Every</motion-parallax>
 
-      <motion-parallax speed="2.55" class="hero-word hero-word--b">Layer</motion-parallax>
+      <motion-parallax depth="2.55" class="hero-word hero-word--b">Layer</motion-parallax>
 
-      <motion-parallax speed="3" class="hero-word hero-word--c">Moves</motion-parallax>
+      <motion-parallax depth="3" class="hero-word hero-word--c">Moves</motion-parallax>
 
-      <motion-parallax speed="1.6" class="hero-tag">
+      <motion-parallax depth="1.6" class="hero-tag">
         <span class="hero-dot"></span> motion-parallax
       </motion-parallax>
 
-      <motion-parallax speed="2.0" class="hero-cue">↓ scroll</motion-parallax>
+      <motion-parallax depth="2.0" class="hero-cue">↓ scroll</motion-parallax>
     </section>
 
     <section class="spectrum">
@@ -32,7 +32,7 @@ import Layout from '../../layouts/Layout.astro'
 
       <div class="spectrum-demos">
         <div class="spec spec-slow">
-          <motion-parallax speed="0.0" class="spec-block">
+          <motion-parallax depth="0.0" class="spec-block">
             <div class="spec-inner spec-inner--still">
               <span class="spec-label">speed="0"</span>
               <span class="spec-desc">Fixed: scrolls with the page</span>
@@ -41,7 +41,7 @@ import Layout from '../../layouts/Layout.astro'
         </div>
 
         <div class="spec spec-mid">
-          <motion-parallax speed="0.5" class="spec-block">
+          <motion-parallax depth="0.5" class="spec-block">
             <div class="spec-inner spec-inner--mid">
               <span class="spec-label">speed="0.5"</span>
               <span class="spec-desc">Moderate: gentle drift</span>
@@ -50,7 +50,7 @@ import Layout from '../../layouts/Layout.astro'
         </div>
 
         <div class="spec spec-fast">
-          <motion-parallax speed="1.5" class="spec-block">
+          <motion-parallax depth="1.5" class="spec-block">
             <div class="spec-inner spec-inner--fast">
               <span class="spec-label">speed="1.5"</span>
               <span class="spec-desc">Fast: races past slower layers</span>
@@ -67,7 +67,7 @@ import Layout from '../../layouts/Layout.astro'
       </div>
 
       <div class="layers-stage">
-        <motion-parallax speed="0.08" class="plane plane-back">
+        <motion-parallax depth="0.08" class="plane plane-back">
           <div class="plane-body">
             <span class="plane-num">01</span>
             <h3 class="plane-title">Deep<br />Background</h3>
@@ -75,7 +75,7 @@ import Layout from '../../layouts/Layout.astro'
           </div>
         </motion-parallax>
 
-        <motion-parallax speed="0.5" class="plane plane-mid">
+        <motion-parallax depth="0.5" class="plane plane-mid">
           <div class="plane-body">
             <span class="plane-num">02</span>
             <h3 class="plane-title">Middle<br />Ground</h3>
@@ -83,7 +83,7 @@ import Layout from '../../layouts/Layout.astro'
           </div>
         </motion-parallax>
 
-        <motion-parallax speed="1.5" class="plane plane-front">
+        <motion-parallax depth="1.5" class="plane plane-front">
           <div class="plane-body">
             <span class="plane-num">03</span>
             <h3 class="plane-title">Near<br />Foreground</h3>
@@ -100,13 +100,13 @@ import Layout from '../../layouts/Layout.astro'
       </div>
 
       <div class="drift-stage">
-        <motion-parallax axis="x" speed="0.1" class="drift-lane drift-lane--a">
+        <motion-parallax axis="x" depth="0.1" class="drift-lane drift-lane--a">
           <span>BACKGROUND</span>
         </motion-parallax>
-        <motion-parallax axis="x" speed="0.6" class="drift-lane drift-lane--b">
+        <motion-parallax axis="x" depth="0.6" class="drift-lane drift-lane--b">
           <span>MIDGROUND</span>
         </motion-parallax>
-        <motion-parallax axis="x" speed="1.8" class="drift-lane drift-lane--c">
+        <motion-parallax axis="x" depth="1.8" class="drift-lane drift-lane--c">
           <span>FOREGROUND</span>
         </motion-parallax>
       </div>
@@ -115,7 +115,7 @@ import Layout from '../../layouts/Layout.astro'
     </section>
 
     <section class="outro">
-      <motion-parallax speed="0.3" class="outro-text">
+      <motion-parallax depth="0.3" class="outro-text">
         <p>Parallax is the space between layers.<br />Scroll reveals what was always there.</p>
       </motion-parallax>
       <div class="outro-nav">

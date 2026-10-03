@@ -66,6 +66,8 @@ import 'motion-components'               // or the whole library`}
         rows={[
           { name: "max", type: "number", default: "15", description: "Maximum tilt angle in degrees" },
           { name: "scale", type: "number", default: "1.04", description: "Scale factor applied on hover" },
+          { name: "duration", type: "number", default: "0.5", description: "Spring duration of the tilt and settle, in seconds" },
+          { name: "bounce", type: "number", default: "0.2", description: "Spring bounciness of the tilt and settle (0 = no overshoot)" },
           { name: "gloss", type: "boolean", default: "false", description: "Show specular gloss highlight tracking the cursor" },
           { name: "disabled", type: "boolean", default: "false", description: "Ignore pointer input and settle to the rest state" },
         ]}

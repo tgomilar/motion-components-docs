@@ -10,7 +10,7 @@ import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
 
-<Layout title="motion-font — Motion Components" description="Animates one or more variable font axes using Motion One spring physics. Three trigger modes: auto, hover, and scroll. Requires a variable font." noMain>
+<Layout title="motion-font — Motion Components" description="Animates one or more variable font axes using Motion One spring physics. Three trigger modes: view, hover, and scroll. Requires a variable font." noMain>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,100..900&display=swap" rel="stylesheet" />
@@ -22,7 +22,7 @@ import "../../../styles/docs.css";
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-font</motion-split></h1>
       <p class="lead">
         Animates one or more variable font axes (weight, optical size, width, or any custom axis) using Motion One spring physics.
-        Three trigger modes: <code>auto</code> (viewport entry), <code>hover</code> (mouse/focus), and <code>scroll</code> (axis tracks scroll position).
+        Three trigger modes: <code>view</code> (viewport entry), <code>hover</code> (mouse/focus), and <code>scroll</code> (axis tracks scroll position).
         Requires a variable font with the targeted axes.
       </p>
 
@@ -47,17 +47,17 @@ import "../../../styles/docs.css";
 </motion-font>`}
       />
 
-      <h2>Auto: viewport reveal</h2>
-      <p class="section-desc">Animates the axis once when the element scrolls into view. Ideal for hero headings that gain weight on entrance.</p>
+      <h2>View: viewport reveal</h2>
+      <p class="section-desc">Animates the axis once when the element scrolls into view. Ideal for hero headings that gain weight on entrance. Set <code>once="false"</code> to replay it every time the element enters the viewport.</p>
       <DocsPreview replayId="vf-auto-demo">
-        <motion-font id="vf-auto-demo" axis="wght" from="100" to="900" duration="1.2" trigger="auto" class="vf-demo">
+        <motion-font id="vf-auto-demo" axis="wght" from="100" to="900" duration="1.2" trigger="view" class="vf-demo">
           Weight reveal
         </motion-font>
       </DocsPreview>
       <CodeWindow
         filename="motion-font-auto.html"
         copy
-        code={`<motion-font axis="wght" from="100" to="900" duration="1.2" trigger="auto">
+        code={`<motion-font axis="wght" from="100" to="900" duration="1.2" trigger="view">
   Weight reveal
 </motion-font>`}
       />
@@ -118,13 +118,13 @@ import "../../../styles/docs.css";
       <p class="section-desc">Delay the animation start in seconds. This is useful for staggering multiple reveals.</p>
       <DocsPreview replayId="vf-delay-2">
         <div class="vf-delay-stack">
-          <motion-font axis="wght" from="100" to="900" trigger="auto" delay="0" duration="0.8" class="vf-demo vf-small">
+          <motion-font axis="wght" from="100" to="900" trigger="view" delay="0" duration="0.8" class="vf-demo vf-small">
             First line
           </motion-font>
-          <motion-font id="vf-delay-2" axis="wght" from="100" to="900" trigger="auto" delay="0.15" duration="0.8" class="vf-demo vf-small">
+          <motion-font id="vf-delay-2" axis="wght" from="100" to="900" trigger="view" delay="0.15" duration="0.8" class="vf-demo vf-small">
             Second line
           </motion-font>
-          <motion-font axis="wght" from="100" to="900" trigger="auto" delay="0.3" duration="0.8" class="vf-demo vf-small">
+          <motion-font axis="wght" from="100" to="900" trigger="view" delay="0.3" duration="0.8" class="vf-demo vf-small">
             Third line
           </motion-font>
         </div>
@@ -132,9 +132,9 @@ import "../../../styles/docs.css";
       <CodeWindow
         filename="motion-font-delay.html"
         copy
-        code={`<motion-font axis="wght" from="100" to="900" trigger="auto" delay="0">First line</motion-font>
-<motion-font axis="wght" from="100" to="900" trigger="auto" delay="0.15">Second line</motion-font>
-<motion-font axis="wght" from="100" to="900" trigger="auto" delay="0.3">Third line</motion-font>`}
+        code={`<motion-font axis="wght" from="100" to="900" trigger="view" delay="0">First line</motion-font>
+<motion-font axis="wght" from="100" to="900" trigger="view" delay="0.15">Second line</motion-font>
+<motion-font axis="wght" from="100" to="900" trigger="view" delay="0.3">Third line</motion-font>`}
       />
 
       <h2>Properties</h2>
@@ -146,13 +146,13 @@ import "../../../styles/docs.css";
         { name: 'duration', type: 'number',  default: '0.6',    description: 'Spring duration hint in seconds.' },
         { name: 'bounce',   type: 'number',  default: '0',      description: 'Spring bounciness 0–1. 0 = no overshoot, 1 = very bouncy.' },
         { name: 'delay',    type: 'number',  default: '0',      description: 'Delay before animation starts in seconds.' },
-        { name: 'trigger',  type: 'string',  default: "'auto'", description: "<code>'auto'</code> — viewport entry &nbsp;|&nbsp; <code>'hover'</code> — mouseenter / focusin &nbsp;|&nbsp; <code>'scroll'</code> — axis tracks scroll position" },
-        { name: 'once',     type: 'boolean', default: 'true',   description: "For <code>trigger='auto'</code>: animate only on the first intersection." },
+        { name: 'trigger',  type: 'string',  default: "'view'", description: "<code>'view'</code>: on viewport entry &nbsp;|&nbsp; <code>'hover'</code>: on mouseenter / focusin &nbsp;|&nbsp; <code>'scroll'</code>: axis tracks scroll position" },
+        { name: 'once',     type: 'boolean', default: 'true',   description: "For <code>trigger='view'</code>: animate only on the first intersection. Set it to <code>\"false\"</code> to animate on every entry." },
       ]} />
 
       <h2>Methods</h2>
       <PropsTable nameLabel="Method" rows={[
-        { name: 'replay()', type: 'void', default: '—', description: 'Reset axis to <code>from</code> and re-run the entrance animation. Only has effect for <code>trigger="auto"</code>.' },
+        { name: 'replay()', type: 'void', default: '—', description: 'Reset axis to <code>from</code> and re-run the entrance animation. Only has effect for <code>trigger="view"</code>.' },
       ]} />
 
       <p class="note">

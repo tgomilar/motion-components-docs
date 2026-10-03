@@ -93,9 +93,9 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Spinning arc</h2>
-      <p>Set <code>speed</code> to a non-zero value to rotate the arc continuously (like <code>motion-circle</code>, but on a partial path).</p>
+      <p>Set <code>duration</code> to a non-zero value to rotate the arc continuously (like <code>motion-circle</code>, but on a partial path). It is the number of seconds per full rotation.</p>
       <DocsPreview>
-        <motion-arc class="demo-accent" text="SPINNING · ARC · TEXT · " radius="90" arc="270" align="top" speed="10"></motion-arc>
+        <motion-arc class="demo-accent" text="SPINNING · ARC · TEXT · " radius="90" arc="270" align="top" duration="10"></motion-arc>
       </DocsPreview>
       <CodeWindow
         filename="motion-arc.html"
@@ -105,21 +105,21 @@ import 'motion-components'               // or the whole library`}
   radius="90"
   arc="270"
   align="top"
-  speed="10"
+  duration="10"
 ></motion-arc>`}
       />
 
       <h2>With slotted content</h2>
       <p>Place any element inside <code>motion-arc</code> to anchor it at the center of the arc.</p>
       <DocsPreview>
-        <motion-arc class="demo-accent" text="AVAILABLE FOR WORK · HIRE ME ·" radius="110" arc="200" align="top" speed="12">
+        <motion-arc class="demo-accent" text="AVAILABLE FOR WORK · HIRE ME ·" radius="110" arc="200" align="top" duration="12">
           <div class="demo-avatar"><span class="y">&lt;</span>mc<span class="y">&gt;</span></div>
         </motion-arc>
       </DocsPreview>
       <CodeWindow
         filename="motion-arc.html"
         copy
-        code={`<motion-arc text="AVAILABLE FOR WORK · HIRE ME ·" radius="110" arc="200" speed="12">
+        code={`<motion-arc text="AVAILABLE FOR WORK · HIRE ME ·" radius="110" arc="200" duration="12">
   <img src="avatar.jpg" width="80" height="80" alt="Avatar" />
 </motion-arc>`}
       />
@@ -127,7 +127,7 @@ import 'motion-components'               // or the whole library`}
       <h2>Pause on hover</h2>
       <p>Add <code>pause-on-hover</code> to freeze rotation on mouseenter and resume on mouseleave.</p>
       <DocsPreview>
-        <motion-arc class="demo-accent" text="HOVER TO PAUSE · ARC SPIN ·" radius="90" arc="270" align="top" speed="10" pause-on-hover></motion-arc>
+        <motion-arc class="demo-accent" text="HOVER TO PAUSE · ARC SPIN ·" radius="90" arc="270" align="top" duration="10" pause-on-hover></motion-arc>
       </DocsPreview>
       <CodeWindow
         filename="motion-arc.html"
@@ -136,7 +136,7 @@ import 'motion-components'               // or the whole library`}
   text="HOVER TO PAUSE · ARC SPIN ·"
   radius="90"
   arc="270"
-  speed="10"
+  duration="10"
   pause-on-hover
 ></motion-arc>`}
       />
@@ -146,7 +146,7 @@ import 'motion-components'               // or the whole library`}
         Characters are distributed evenly across the arc span. Each character is placed using a transform chain: <code>rotate(angle) translateY(-radius)</code>. This positions it at the correct point on the circle. The starting angle is computed from <code>align</code>: <code>"top"</code> centers the arc at 270° (the topmost point), <code>"bottom"</code> at 90°.
       </p>
       <p>
-        When <code>upright</code> is set, a counter-rotation is appended so characters remain axis-aligned. When <code>speed</code> is non-zero, the entire arc ring rotates continuously via Motion One's <code>animate</code> with <code>repeat: Infinity</code>.
+        When <code>upright</code> is set, a counter-rotation is appended so characters remain axis-aligned. When <code>duration</code> is non-zero, the entire arc ring rotates continuously via Motion One's <code>animate</code> with <code>repeat: Infinity</code>.
       </p>
 
       <h2>Properties</h2>
@@ -154,9 +154,9 @@ import 'motion-components'               // or the whole library`}
         { name: 'text', type: 'string', default: '—', description: 'Text to arrange along the arc' },
         { name: 'radius', type: 'number', default: '100', description: 'Arc radius in px' },
         { name: 'arc', type: 'number', default: '180', description: 'Arc span in degrees (180 = semicircle, 360 = full circle)' },
-        { name: 'align', type: '"top" | "bottom"', default: '"top"', description: 'Whether the arc curves over the top or along the bottom' },
-        { name: 'speed', type: 'number', default: '0', description: 'Seconds per full rotation (0 = static)' },
-        { name: 'direction', type: '"cw" | "ccw"', default: '"cw"', description: 'Clockwise or counterclockwise spin (only applies when speed > 0)' },
+        { name: 'align', type: 'string', default: "'top'", description: "Where the arc opens: <code>'top'</code> curves over the top, <code>'bottom'</code> along the bottom" },
+        { name: 'duration', type: 'number', default: '0', description: 'Seconds per full rotation (0 = static)' },
+        { name: 'direction', type: 'string', default: "'cw'", description: "Spin direction: <code>'cw'</code> or <code>'ccw'</code> (only applies when duration &gt; 0)" },
         { name: 'upright', type: 'boolean', default: 'false', description: 'Keep characters vertically oriented' },
         { name: 'pause-on-hover', type: 'boolean', default: 'false', description: 'Pause rotation on mouseenter, resume on mouseleave' },
       ]} />
@@ -164,7 +164,7 @@ import 'motion-components'               // or the whole library`}
       <h2>JavaScript API</h2>
       <p class="section-desc">Control the arc programmatically with <code>play()</code>, <code>pause()</code>, <code>finish()</code>, and <code>cancel()</code>.</p>
       <JsApiDemo target="api-arc-demo" wide>
-        <motion-arc id="api-arc-demo" text="play · pause · finish · cancel" radius="90" arc="270" speed="12">
+        <motion-arc id="api-arc-demo" text="play · pause · finish · cancel" radius="90" arc="270" duration="12">
         </motion-arc>
       </JsApiDemo>
 

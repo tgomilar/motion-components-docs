@@ -496,7 +496,7 @@ const jsonLd =
       )
     }
     <Nav />
-    {showProgress && <motion-progress color="var(--color-accent)" thickness="3" />}
+    {showProgress && <motion-progress thickness="3" style="--progress-color: var(--color-accent)" />}
     {
       noMain ? (
         <slot />

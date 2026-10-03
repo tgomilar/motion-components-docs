@@ -23,7 +23,7 @@ import "../../../styles/docs.css";
       <h2>Preview</h2>
       <DocsPreview>
         <p class="demo-heading">
-          <motion-curve amplitude="28" wave-length="260" speed="0.4">Make it wave.</motion-curve>
+          <motion-curve amplitude="28" wave-length="260" wave-duration="2.5">Make it wave.</motion-curve>
         </p>
       </DocsPreview>
 
@@ -41,7 +41,7 @@ import 'motion-components'               // or the whole library`}
       <CodeWindow
         filename="motion-curve.html"
         copy
-        code={`<motion-curve amplitude="28" wave-length="260" speed="0.4">
+        code={`<motion-curve amplitude="28" wave-length="260" wave-duration="2.5">
   Make it wave.
 </motion-curve>`}
       />
@@ -63,7 +63,7 @@ el.text = 'UPDATED'   // animation restarts`}
         Add <code>loop</code> to scroll the text continuously like a ticker, with the wave applied as it travels. The text is duplicated for a seamless loop.
       </p>
       <DocsPreview wide tall>
-        <motion-curve text="Make it wave · Physics-based · Zero CSS · " loop amplitude="22" wave-length="320" speed="0.3" loop-speed="70"></motion-curve>
+        <motion-curve text="Make it wave · Physics-based · Zero CSS · " loop amplitude="22" wave-length="320" wave-duration="3.33" loop-speed="70"></motion-curve>
       </DocsPreview>
       <CodeWindow
         filename="motion-curve.html"
@@ -73,7 +73,7 @@ el.text = 'UPDATED'   // animation restarts`}
   loop
   amplitude="22"
   wave-length="320"
-  speed="0.3"
+  wave-duration="3.33"
   loop-speed="70"
 ></motion-curve>`}
       />
@@ -81,7 +81,7 @@ el.text = 'UPDATED'   // animation restarts`}
       <h2>Loop gap</h2>
       <p>By default a <code>48px</code> gap separates each repetition. Set <code>loop-gap="0"</code> for continuous text with no visible break.</p>
       <DocsPreview wide tall>
-        <motion-curve text="Spring physics · No CSS · Framework-free · " loop amplitude="22" wave-length="320" speed="0.3" loop-speed="70" loop-gap="0"
+        <motion-curve text="Spring physics · No CSS · Framework-free · " loop amplitude="22" wave-length="320" wave-duration="3.33" loop-speed="70" loop-gap="0"
         ></motion-curve>
       </DocsPreview>
       <CodeWindow
@@ -97,7 +97,7 @@ el.text = 'UPDATED'   // animation restarts`}
       <h2>Pause on hover</h2>
       <p>Add <code>pause-on-hover</code> to freeze the wave (and scroll in loop mode) when the cursor enters, resuming on leave.</p>
       <DocsPreview wide tall>
-        <motion-curve text="Make it wave · Hover to pause · Zero CSS · " loop amplitude="22" wave-length="320" speed="0.3" loop-speed="70" pause-on-hover></motion-curve>
+        <motion-curve text="Make it wave · Hover to pause · Zero CSS · " loop amplitude="22" wave-length="320" wave-duration="3.33" loop-speed="70" pause-on-hover></motion-curve>
       </DocsPreview>
       <CodeWindow
         filename="motion-curve.html"
@@ -127,7 +127,7 @@ el.text = 'UPDATED'   // animation restarts`}
           { name: "text", type: "string", default: "—", description: "The sentence to animate. Falls back to the child text when unset" },
           { name: "amplitude", type: "number", default: "24", description: "Peak vertical offset in px" },
           { name: "wave-length", type: "number", default: "280", description: "Horizontal distance of one full wave cycle in px" },
-          { name: "speed", type: "number", default: "0.4", description: "Wave cycles per second" },
+          { name: "wave-duration", type: "number", default: "2.5", description: "Seconds for one full wave cycle. Lower is faster, <code>0</code> holds the wave still" },
           { name: "loop", type: "boolean", default: "false", description: "Scroll the text in a seamless continuous loop" },
           { name: "loop-speed", type: "number", default: "80", description: "Horizontal scroll speed in px/s (loop mode only)" },
           {
@@ -144,7 +144,7 @@ el.text = 'UPDATED'   // animation restarts`}
       <h2>JavaScript API</h2>
       <p class="section-desc">Control the curve programmatically with <code>play()</code>, <code>pause()</code>, <code>finish()</code>, and <code>cancel()</code>.</p>
       <JsApiDemo target="api-curve-demo" wide>
-        <motion-curve id="api-curve-demo" text="JavaScript API · playback controls " speed="0.4">
+        <motion-curve id="api-curve-demo" text="JavaScript API · playback controls " wave-duration="2.5">
         </motion-curve>
       </JsApiDemo>
 

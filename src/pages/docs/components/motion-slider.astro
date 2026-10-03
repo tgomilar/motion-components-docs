@@ -123,7 +123,7 @@ import 'motion-components'               // or the whole library`}
 
   const slider = document.querySelector('.demo-slider');
   if (slider) {
-    slider.addEventListener('slidechange', (e: Event) => {
+    slider.addEventListener('motion-change', (e: Event) => {
       const { index } = (e as CustomEvent<{ index: number }>).detail;
       const slide = slider.querySelectorAll('.slide')[index];
       if (slide) replaySlide(slide);
