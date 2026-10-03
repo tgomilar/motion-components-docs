@@ -7,7 +7,7 @@ tags:
   - release
   - components
 ---
-Version 0.7 of [motion-components](https://github.com/tgomilar/motion-components) adds two new elements: `<motion-theme-toggle>` and `<motion-theme-icon>`. The toggle switches a page between a light theme, a dark theme and the system theme. The new theme appears with a circular wipe that grows from the control. This release also upgrades the animation library underneath, Motion\*, from version 11 to version 13.
+Version 0.7 of [motion-components](https://github.com/tgomilar/motion-components) adds two new elements: `<motion-theme-toggle>` and `<motion-theme-icon>`. The toggle switches a page between a light theme, a dark theme and the system theme. The new theme appears with a circular wipe that grows from the control. This release also upgrades the animation library underneath, Motion, from version 11 to version 13.
 
 You can see the toggle now: the theme menu in the header of this site is a `<motion-theme-toggle>`.
 
@@ -22,7 +22,7 @@ npm install motion-components@latest
 <motion-theme-toggle permanent></motion-theme-toggle>
 ```
 
-The toggle sets two things on the `<html>` element: a `data-theme` attribute and the `color-scheme` CSS\* property. Your own CSS reads the attribute:
+The toggle sets two things on the `<html>` element: a `data-theme` attribute and the `color-scheme` CSS property. Your own CSS reads the attribute:
 
 ```css
 :root[data-theme='light'] { --bg: #fff;    --fg: #111; }
@@ -40,13 +40,13 @@ The `appearance` attribute chooses how the control looks.
 | `switch` | A switch with "Light" and "Dark" labels on each side | Forms and preference panels |
 | `menu` | A button that opens a drop-down list | A header that also offers "System" |
 
-Add the `system` attribute to offer a third option. When the user chooses "System", the page follows the OS\* setting, and it changes when the OS setting changes.
+Add the `system` attribute to offer a third option. When the user chooses "System", the page follows the OS setting, and it changes when the OS setting changes.
 
 ## How the wipe works
 
-The wipe uses the View Transitions API\*. The browser takes a picture of the page before the change. Then the toggle changes the theme, and the browser takes a second picture. The toggle shows the new picture inside a circle and makes the circle grow.
+The wipe uses the View Transitions API. The browser takes a picture of the page before the change. Then the toggle changes the theme, and the browser takes a second picture. The toggle shows the new picture inside a circle and makes the circle grow.
 
-The circle starts at the center of the control. It grows until it covers the farthest corner of the window. Motion drives the circle with its `animateView` function and a spring\* with no bounce, so the edge does not overshoot.
+The circle starts at the center of the control. It grows until it covers the farthest corner of the window. Motion drives the circle with its `animateView` function and a spring with no bounce, so the edge does not overshoot.
 
 If the user clicks again during a wipe, the toggle stops the running wipe and starts a new one. Two wipes never run at the same time. Browsers without the View Transitions API change the theme at once, with no error.
 
@@ -62,7 +62,7 @@ When `mode` changes, the sun rays shrink and turn, and a circle slides in to cut
 
 ## Compatible with dark-mode-toggle
 
-The attributes and events follow `dark-mode-toggle` from Google Chrome Labs\*. If your page already uses that element, most of your markup works without changes.
+The attributes and events follow `dark-mode-toggle` from Google Chrome Labs. If your page already uses that element, most of your markup works without changes.
 
 | Feature | dark-mode-toggle | motion-theme-toggle |
 |---|---|---|
@@ -74,11 +74,11 @@ The attributes and events follow `dark-mode-toggle` from Google Chrome Labs\*. I
 | A custom target element instead of `<html>` | No | Yes, with `target` |
 | Animated icon and circular wipe | No | Yes |
 
-With `permanent`, the toggle saves the choice in localStorage\* and restores it on the next visit. A toggle that themes `<html>` saves under the key `motion-theme`. A toggle with a different `target` saves under its own key, so a themed card does not change the theme of the whole page.
+With `permanent`, the toggle saves the choice in localStorage and restores it on the next visit. A toggle that themes `<html>` saves under the key `motion-theme`. A toggle with a different `target` saves under its own key, so a themed card does not change the theme of the whole page.
 
 ## Prevent a flash of the wrong theme
 
-Web components\* start after the browser paints the page for the first time. For a short moment, the page can show the wrong theme. To prevent this, put this small script in the `<head>` of your page. It follows the same rules as the toggle: first the saved choice, then the OS setting.
+Web components start after the browser paints the page for the first time. For a short moment, the page can show the wrong theme. To prevent this, put this small script in the `<head>` of your page. It follows the same rules as the toggle: first the saved choice, then the OS setting.
 
 ```html
 <script>
@@ -104,11 +104,11 @@ Every appearance works with the keyboard and with screen readers.
 | `toggle` | A group of radio buttons with a label | Arrow keys |
 | `menu` | A menu button with a list of options | Arrow keys, Home, End, Enter, Escape |
 
-If the user turns on the reduced motion setting\* of the OS, the theme and the icon change at once. There is no morph and no wipe.
+If the user turns on the reduced motion setting of the OS, the theme and the icon change at once. There is no morph and no wipe.
 
 ## Motion 13
 
-The library now depends on Motion 13 instead of Motion 11. The attributes and events of the existing components did not change. If your own code also imports `motion`, update it to version 13. Then your bundler\* includes one copy of Motion instead of two.
+The library now depends on Motion 13 instead of Motion 11. The attributes and events of the existing components did not change. If your own code also imports `motion`, update it to version 13. Then your bundler includes one copy of Motion instead of two.
 
 ## What comes next
 
@@ -116,26 +116,3 @@ Version 0.8 will make the attribute names more consistent across all 40 componen
 
 Read the [motion-theme-toggle documentation](/docs/components/motion-theme-toggle/) for every attribute, event and CSS custom property.
 
-## Glossary
-
-Every term marked with an asterisk (\*) in this post is explained here.
-
-**Bundler**: A build tool that collects the JavaScript files of a website into a small number of files for the browser. Examples are Vite and webpack.
-
-**CSS**: Cascading Style Sheets. The language that describes how a web page looks: colors, sizes, spacing and layout.
-
-**Google Chrome Labs**: A group at Google that publishes small open source experiments and tools for the web. `dark-mode-toggle` is one of their projects.
-
-**localStorage**: Storage inside the browser where a website can keep small pieces of text. The data stays after the user closes the browser.
-
-**Motion**: The JavaScript animation library that motion-components uses for every animation.
-
-**OS**: Operating system. The main software of a computer or phone, for example macOS, Windows, iOS or Android. It has a setting for light or dark appearance.
-
-**Reduced motion setting**: A setting in the OS for people who feel unwell or are distracted by movement on screen. Websites can read it and show less animation.
-
-**Spring**: A way to animate that simulates a physical spring instead of following a fixed curve. A spring keeps its speed when the animation changes direction, so movement stays smooth.
-
-**View Transitions API**: A browser feature that takes a picture of the page before and after a change and lets a script animate between the two pictures.
-
-**Web component**: A custom element for web pages, such as `<motion-theme-toggle>`. It works in every framework, and also on pages that use no framework.
