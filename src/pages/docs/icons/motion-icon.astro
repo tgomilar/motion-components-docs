@@ -1,0 +1,426 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import FwTabs from "../../../components/FwTabs.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+
+const CDN = "https://cdn.jsdelivr.net/npm";
+const lucide = (name: string) => `${CDN}/lucide-static@1/icons/${name}.svg`;
+
+const libraries = [
+  { id: "lucide", name: "Lucide", site: "https://lucide.dev/icons", license: "ISC", path: "lucide-static@1/icons/{name}.svg", example: "heart", draw: true },
+  { id: "tabler", name: "Tabler", site: "https://tabler.io/icons", license: "MIT", path: "@tabler/icons@3/icons/outline/{name}.svg", example: "heart", draw: true },
+  { id: "heroicons", name: "Heroicons", site: "https://heroicons.com", license: "MIT", path: "heroicons@2/24/outline/{name}.svg", example: "heart", draw: true },
+  { id: "iconoir", name: "Iconoir", site: "https://iconoir.com", license: "MIT", path: "iconoir@7/icons/regular/{name}.svg", example: "heart", draw: true },
+  { id: "feather", name: "Feather", site: "https://feathericons.com", license: "MIT", path: "feather-icons@4/dist/icons/{name}.svg", example: "heart", draw: true },
+  { id: "phosphor", name: "Phosphor", site: "https://phosphoricons.com", license: "MIT", path: "@phosphor-icons/core@2/assets/regular/{name}.svg", example: "heart", draw: false },
+  { id: "bootstrap", name: "Bootstrap Icons", site: "https://icons.getbootstrap.com", license: "MIT", path: "bootstrap-icons@1/icons/{name}.svg", example: "heart", draw: false },
+  { id: "material", name: "Material Symbols", site: "https://fonts.google.com/icons", license: "Apache-2.0", path: "@material-symbols/svg-400@0/outlined/{name}.svg", example: "favorite", draw: false },
+  { id: "fontawesome", name: "Font Awesome Free", site: "https://fontawesome.com/search?ic=free", license: "CC BY 4.0", path: "@fortawesome/fontawesome-free@7/svgs/regular/{name}.svg", example: "heart", draw: false },
+  { id: "simple", name: "Simple Icons (brands)", site: "https://simpleicons.org", license: "CC0", path: "simple-icons@15/icons/{name}.svg", example: "github", draw: false },
+].map((lib) => ({ ...lib, url: `${CDN}/${lib.path.replace("{name}", lib.example)}` }));
+
+const librarySnippet = libraries
+  .map((lib) => `<!-- ${lib.name} -->\n<motion-icon${lib.draw ? "" : ' animation="pop"'} src="${lib.url}"></motion-icon>`)
+  .join("\n\n");
+
+const quickStart = `<!doctype html>
+<html>
+  <head>
+    <script type="module" src="${CDN}/motion-components@1/dist/index.js"></script>
+  </head>
+  <body>
+    <motion-icon src="${lucide("heart")}"></motion-icon>
+    <motion-icon src="${lucide("bell")}" animation="wiggle"></motion-icon>
+  </body>
+</html>`;
+
+const frameworkTabs = [
+  {
+    id: "vanilla",
+    label: "HTML / Astro / Svelte",
+    desc: "Load the library once, then use the tag anywhere.",
+    filename: "index.html",
+    code: `<script type="module" src="${CDN}/motion-components@1/dist/motion-icon.js"></script>
+
+<motion-icon src="${lucide("heart")}"></motion-icon>`,
+  },
+  {
+    id: "react",
+    label: "React",
+    desc: "React 19 passes attributes to custom elements. Use <code>src</code>, or put any icon component that renders an <code>&lt;svg&gt;</code> inside, such as <code>lucide-react</code>.",
+    filename: "LikeButton.jsx",
+    code: `import 'motion-components/motion-icon'
+import { Heart } from 'lucide-react'
+
+export function LikeButton() {
+  return (
+    <button>
+      <motion-icon animation="pop">
+        <Heart />
+      </motion-icon>
+      Like
+    </button>
+  )
+}`,
+  },
+  {
+    id: "vue",
+    label: "Vue 3",
+    desc: "Tell Vue that <code>motion-*</code> tags are custom elements (see <a href=\"/docs/#frameworks\">Getting started</a>), then use <code>src</code> or an icon component such as <code>lucide-vue-next</code>.",
+    filename: "LikeButton.vue",
+    code: `<script setup>
+import 'motion-components/motion-icon'
+import { Heart } from 'lucide-vue-next'
+</script>
+
+<template>
+  <button>
+    <motion-icon animation="pop">
+      <Heart />
+    </motion-icon>
+    Like
+  </button>
+</template>`,
+  },
+];
+
+const bundlerTabs = [
+  {
+    id: "lucide",
+    label: "Lucide",
+    desc: "<code>npm install lucide-static</code>. Every icon is a named export, and only the ones you import end up in your bundle.",
+    filename: "app.js",
+    code: `import 'motion-components/motion-icon'
+import { Heart } from 'lucide-static'
+
+document.querySelector('#like-icon').icon = Heart`,
+  },
+  {
+    id: "raw",
+    label: "Any SVG file (Vite)",
+    desc: "Vite's <code>?raw</code> suffix imports an SVG file as a string. This works for any icon package that ships SVG files.",
+    filename: "app.js",
+    code: `import 'motion-components/motion-icon'
+import heart from '@tabler/icons/outline/heart.svg?raw'
+
+document.querySelector('#like-icon').icon = heart`,
+  },
+];
+---
+
+<Layout
+  title="motion-icon — Motion Components"
+  description="Animate any SVG icon from Lucide, Tabler, Heroicons, Phosphor, Material Symbols, Font Awesome and more: draw the strokes in, or pop, bounce, rotate, wiggle and pulse it on a spring."
+  noMain
+>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-icon</motion-split></h1>
+      <p class="lead">
+        Animate any SVG icon. Point <code>src</code> at an icon from Lucide, Tabler, Heroicons, Material Symbols, Font Awesome or your own folder,
+        and choose how it moves. Stroke icons can be drawn in line by line. Any icon can pop, bounce, rotate, wiggle or pulse on a spring.
+      </p>
+
+      <h2>Preview</h2>
+      <p>Hover an icon to draw it in.</p>
+      <DocsPreview>
+        <div class="row">
+          <div class="cell"><motion-icon src={lucide("heart")} style="--icon-color: #e11d48"></motion-icon><span>heart</span></div>
+          <div class="cell"><motion-icon src={lucide("bell")} style="--icon-color: #f59e0b"></motion-icon><span>bell</span></div>
+          <div class="cell"><motion-icon src={lucide("rocket")} style="--icon-color: #6366f1"></motion-icon><span>rocket</span></div>
+          <div class="cell"><motion-icon src={lucide("mail")} style="--icon-color: #0ea5e9"></motion-icon><span>mail</span></div>
+          <div class="cell"><motion-icon src={lucide("circle-check")} style="--icon-color: #16a34a"></motion-icon><span>circle-check</span></div>
+          <div class="cell"><motion-icon src={lucide("sparkles")} style="--icon-color: #d946ef"></motion-icon><span>sparkles</span></div>
+        </div>
+      </DocsPreview>
+
+      <h2>Quick start</h2>
+      <p>Save this as <code>index.html</code> and open it in a browser. No install, no build step.</p>
+      <CodeWindow filename="index.html" copy code={quickStart} />
+      <p>In a project with a bundler, install the package and import the component once:</p>
+      <CodeWindow filename="terminal" copy code={`npm install motion-components`} />
+      <CodeWindow filename="app.js" copy code={`import 'motion-components/motion-icon'`} />
+
+      <h2>Add an icon</h2>
+      <p>There are three ways to give <code>motion-icon</code> its icon. Pick the one that fits your project.</p>
+
+      <h3>1. From a URL</h3>
+      <p>
+        Set <code>src</code> to the URL of an SVG file. Use a CDN, or download the SVG files you need into your own <code>/icons</code> folder.
+        Each URL is loaded once and shared by every icon that uses it.
+      </p>
+      <CodeWindow filename="index.html" copy code={`<!-- from a CDN -->
+<motion-icon src="${lucide("heart")}"></motion-icon>
+
+<!-- from your own folder -->
+<motion-icon src="/icons/heart.svg"></motion-icon>`} />
+
+      <h3>2. Inline SVG</h3>
+      <p>Paste the icon's <code>&lt;svg&gt;</code> inside the element. Most icon websites have a "Copy SVG" button.</p>
+      <DocsPreview>
+        <div class="row">
+          <div class="cell"><motion-icon><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></motion-icon><span>check</span></div>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={`<motion-icon>
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20 6 9 17l-5-5" />
+  </svg>
+</motion-icon>`} />
+
+      <h3>3. From an npm package</h3>
+      <p>
+        With a bundler, import the icon as a string and set the <code>icon</code> property. The icon is part of your bundle, so nothing is loaded
+        at runtime.
+      </p>
+      <CodeWindow filename="index.html" copy code={`<motion-icon id="like-icon"></motion-icon>`} />
+      <FwTabs tabs={bundlerTabs} group="icon-bundler" />
+
+      <h2>Icon libraries</h2>
+      <p>
+        Every library below publishes its icons as SVG files on the <a href="https://www.jsdelivr.com" target="_blank" rel="noopener">jsDelivr</a> CDN.
+        Find an icon on the library's website, copy its line below and replace the name at the end of the URL. Hover the hearts to compare them.
+      </p>
+      <DocsPreview>
+        <div class="row">
+          {libraries.map((lib) => (
+            <div class="cell">
+              <motion-icon src={lib.url} animation={lib.draw ? "draw" : "pop"}></motion-icon>
+              <span>{lib.name.replace(" (brands)", "")}</span>
+            </div>
+          ))}
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={librarySnippet} />
+      <div class="methods-table">
+        <table>
+          <thead><tr><th>Library</th><th>URL</th><th><code>draw</code></th><th>License</th></tr></thead>
+          <tbody>
+            {libraries.map((lib) => (
+              <tr>
+                <td><a href={lib.site} target="_blank" rel="noopener">{lib.name}</a></td>
+                <td><code>{lib.path}</code></td>
+                <td>{lib.draw ? "Yes" : "Pops instead"}</td>
+                <td>{lib.license}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+      <p>
+        <code>draw</code> traces the icon's strokes, so it needs an outline (stroke) icon. Filled icons pop instead. Font Awesome Free icons are
+        CC BY 4.0, which asks you to credit Font Awesome.
+      </p>
+
+      <h2>Frameworks</h2>
+      <p>The same element works in every framework. In React and Vue you can also wrap the library's own icon component.</p>
+      <FwTabs tabs={frameworkTabs} group="frameworks" />
+
+      <h2>Inside a button</h2>
+      <p>Inside a <code>&lt;button&gt;</code> or <code>&lt;a&gt;</code>, the icon animates when the whole button is hovered or clicked, not only the icon.</p>
+      <DocsPreview>
+        <div class="row">
+          <button class="demo-btn"><motion-icon src={lucide("send")} animation="bounce"></motion-icon>Send</button>
+          <button class="demo-btn"><motion-icon src={lucide("refresh-cw")} animation="rotate" trigger="click" duration="0.9"></motion-icon>Refresh</button>
+          <a class="demo-btn" href="#inside-a-button"><motion-icon src={lucide("arrow-right")} animation="bounce"></motion-icon>Next</a>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={`<button>
+  <motion-icon src="${lucide("send")}" animation="bounce"></motion-icon>
+  Send
+</button>
+
+<button>
+  <motion-icon src="${lucide("refresh-cw")}" animation="rotate" trigger="click"></motion-icon>
+  Refresh
+</button>`} />
+
+      <h2>Animations</h2>
+      <p>Hover each icon. <code>draw</code> needs a stroke icon; the others work with any icon.</p>
+      <DocsPreview>
+        <div class="row">
+          <div class="cell"><motion-icon src={lucide("heart")} animation="draw"></motion-icon><span>draw</span></div>
+          <div class="cell"><motion-icon src={lucide("thumbs-up")} animation="pop"></motion-icon><span>pop</span></div>
+          <div class="cell"><motion-icon src={lucide("arrow-right")} animation="bounce"></motion-icon><span>bounce</span></div>
+          <div class="cell"><motion-icon src={lucide("settings")} animation="rotate" duration="0.9"></motion-icon><span>rotate</span></div>
+          <div class="cell"><motion-icon src={lucide("bell")} animation="wiggle"></motion-icon><span>wiggle</span></div>
+          <div class="cell"><motion-icon src={lucide("heart")} animation="pulse"></motion-icon><span>pulse</span></div>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={`<motion-icon src="${lucide("heart")}" animation="draw"></motion-icon>
+<motion-icon src="${lucide("thumbs-up")}" animation="pop"></motion-icon>
+<motion-icon src="${lucide("arrow-right")}" animation="bounce"></motion-icon>
+<motion-icon src="${lucide("settings")}" animation="rotate" duration="0.9"></motion-icon>
+<motion-icon src="${lucide("bell")}" animation="wiggle"></motion-icon>
+<motion-icon src="${lucide("heart")}" animation="pulse"></motion-icon>`} />
+
+      <h2>Triggers</h2>
+      <p><code>trigger</code> decides when the animation runs: <code>hover</code> (default), <code>click</code>, <code>view</code> (when it scrolls into view), <code>mount</code> or <code>loop</code>.</p>
+      <DocsPreview>
+        <div class="row">
+          <div class="cell"><motion-icon src={lucide("rocket")} trigger="view" once="false"></motion-icon><span>view</span></div>
+          <div class="cell"><motion-icon src={lucide("mail")} trigger="click" animation="pop"></motion-icon><span>click</span></div>
+          <div class="cell"><motion-icon src={lucide("bell")} trigger="loop" animation="wiggle" interval="1"></motion-icon><span>loop</span></div>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={`<motion-icon src="${lucide("rocket")}" trigger="view"></motion-icon>
+<motion-icon src="${lucide("mail")}" trigger="click" animation="pop"></motion-icon>
+<motion-icon src="${lucide("bell")}" trigger="loop" animation="wiggle" interval="1"></motion-icon>`} />
+
+      <h2>Color and size</h2>
+      <p>The icon uses <code>currentColor</code>, so it follows the text color. Set <code>--icon-color</code> to color it and <code>--icon-size</code> to size it.</p>
+      <DocsPreview>
+        <div class="row">
+          <div class="cell"><motion-icon src={lucide("heart")} trigger="loop" animation="pulse" interval="0.4" style="--icon-color: #e11d48; --icon-size: 3rem"></motion-icon><span>#e11d48</span></div>
+          <div class="cell"><motion-icon src={lucide("sparkles")} trigger="loop" interval="1.5" style="--icon-color: #d946ef; --icon-size: 3rem"></motion-icon><span>#d946ef</span></div>
+          <div class="cell"><motion-icon src={lucide("circle-check")} trigger="loop" interval="1.5" style="--icon-color: #16a34a; --icon-size: 3rem"></motion-icon><span>#16a34a</span></div>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={`<motion-icon
+  src="${lucide("heart")}"
+  style="--icon-color: #e11d48; --icon-size: 3rem"
+></motion-icon>`} />
+
+      <h2>Fill and background</h2>
+      <p>
+        <code>--icon-fill</code> colors the inside of an outline icon. With <code>draw</code>, the fill fades in as the lines finish. For an icon on a
+        colored background, style the element itself and make the icon white.
+      </p>
+      <DocsPreview>
+        <div class="row">
+          <div class="cell"><motion-icon src={lucide("star")} animation="pop" style="--icon-color: #f59e0b; --icon-fill: #f59e0b33; --icon-size: 3rem"></motion-icon><span>tinted fill</span></div>
+          <div class="cell"><motion-icon src={lucide("heart")} trigger="loop" interval="1.5" style="--icon-color: #e11d48; --icon-fill: #e11d48; --icon-size: 3rem"></motion-icon><span>solid fill</span></div>
+          <div class="cell"><motion-icon src={lucide("rocket")} animation="bounce" style="--icon-color: #fff; background: #6366f1; padding: 0.6rem; border-radius: 14px; --icon-size: 3rem"></motion-icon><span>background</span></div>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={`<!-- tinted fill: the color plus 33 for 20% opacity -->
+<motion-icon
+  src="${lucide("star")}"
+  animation="pop"
+  style="--icon-color: #f59e0b; --icon-fill: #f59e0b33"
+></motion-icon>
+
+<!-- solid fill -->
+<motion-icon
+  src="${lucide("heart")}"
+  style="--icon-color: #e11d48; --icon-fill: #e11d48"
+></motion-icon>
+
+<!-- colored background -->
+<motion-icon
+  src="${lucide("rocket")}"
+  animation="bounce"
+  style="--icon-color: #fff; background: #6366f1; padding: 0.6rem; border-radius: 14px"
+></motion-icon>`} />
+
+      <h2>Properties</h2>
+      <PropsTable
+        nameLabel="Attribute"
+        rows={[
+          { name: "src", type: "string", default: "''", description: "URL of an SVG file. Each URL is loaded once and cached" },
+          { name: "icon", type: "string", default: "''", description: "SVG markup to render. Takes precedence over <code>src</code>. When both are empty, the child <code>&lt;svg&gt;</code> is used" },
+          { name: "animation", type: "string", default: "'draw'", description: "<code>'draw'</code>, <code>'pop'</code>, <code>'bounce'</code>, <code>'rotate'</code>, <code>'wiggle'</code> or <code>'pulse'</code>. <code>draw</code> needs a stroke icon and falls back to <code>pop</code>" },
+          { name: "trigger", type: "string", default: "'hover'", description: "<code>'hover'</code>, <code>'click'</code>, <code>'view'</code>, <code>'mount'</code> or <code>'loop'</code>. Inside a button or link, <code>hover</code> and <code>click</code> follow the button or link" },
+          { name: "duration", type: "number", default: "0.6", description: "Duration of one run, in seconds" },
+          { name: "bounce", type: "number", default: "0.4", description: "Spring bounciness for <code>pop</code>, <code>bounce</code> and <code>rotate</code>" },
+          { name: "delay", type: "number", default: "0", description: "Seconds to wait before the animation starts" },
+          { name: "interval", type: "number", default: "1.2", description: "Seconds between runs with <code>trigger=\"loop\"</code>" },
+          { name: "once", type: "boolean", default: "true", description: "With <code>trigger=\"view\"</code>, animate only the first time. Set <code>once=\"false\"</code> to replay on every entry" },
+          { name: "label", type: "string", default: "''", description: "Accessible name. Without it the icon is decorative" },
+        ]}
+      />
+
+      <h2>CSS custom properties</h2>
+      <PropsTable
+        nameLabel="Property"
+        rows={[
+          { name: "--icon-color", type: "color", default: "currentColor", description: "Icon color" },
+          { name: "--icon-fill", type: "color", default: "none", description: "Fills the inside of an outline icon" },
+          { name: "--icon-size", type: "length", default: "1.5em", description: "Width and height of the icon" },
+        ]}
+      />
+
+      <h2>Events</h2>
+      <PropsTable
+        nameLabel="Event"
+        rows={[
+          { name: "motion-start", type: "Event", default: "", description: "An animation run starts" },
+          { name: "motion-finish", type: "Event", default: "", description: "An animation run finishes" },
+          { name: "error", type: "Event", default: "", description: "The <code>src</code> URL could not be loaded" },
+        ]}
+      />
+
+      <h2>JavaScript API</h2>
+      <p><code>replay()</code> restarts the animation. Like every animated component, it also has <code>play()</code>, <code>pause()</code>, <code>finish()</code>, <code>cancel()</code> and <code>playState</code>. See the <a href="/docs/js-api/">JavaScript API</a>.</p>
+
+      <h2>Security</h2>
+      <p>
+        Icons from <code>src</code> and <code>icon</code> are cleaned before they render. Only drawing elements such as <code>&lt;path&gt;</code> and
+        <code>&lt;circle&gt;</code> are kept. Scripts, styles, images, links, event handlers and references to other files are removed.
+        A <code>src</code> on another domain must allow cross-origin requests; jsDelivr and most CDNs do.
+      </p>
+
+      <h2>Accessibility</h2>
+      <p>
+        Icons are decorative by default and hidden from screen readers. Add <code>label</code> when the icon carries meaning on its own; it then gets
+        <code>role="img"</code> and that name. Inside a button with text, leave <code>label</code> empty. With <code>prefers-reduced-motion</code>,
+        the icon shows its final state with no animation.
+      </p>
+      <p class="note">Demo icons are loaded from the icon libraries listed above, under their own licenses.</p>
+
+      <DocsPagination />
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 1.75rem 2.25rem;
+    color: var(--color-text);
+  }
+
+  .cell {
+    display: grid;
+    justify-items: center;
+    gap: 0.5rem;
+    --icon-size: 2rem;
+  }
+
+  .cell span {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-muted);
+  }
+
+  .demo-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-surface, transparent);
+    color: var(--color-text);
+    font: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    --icon-size: 1.15rem;
+  }
+</style>

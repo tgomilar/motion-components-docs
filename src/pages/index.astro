@@ -1,6 +1,32 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import CodeWindow from "../components/CodeWindow.astro";
+
+const ICON_COLS = 8;
+const HEART_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>`;
+
+const iconStyle = (color?: string, look?: string) => {
+  if (look === "solid") return `--icon-color: #fff; background: ${color}; padding: 0.6rem; border-radius: 14px`;
+  if (look === "fill") return `--icon-color: ${color}; --icon-fill: ${color}33`;
+  return color ? `--icon-color: ${color}` : "";
+};
+
+const iconWall = [
+  ["heart", "pulse", "#e11d48", "fill"], ["bell", "wiggle"], ["rocket", "bounce", "#6366f1", "solid"], ["sun", "rotate", "#f59e0b", "fill"], ["sparkles", "pop", "#d946ef", "solid"], ["mail", "draw"], ["music", "bounce", "#8b5cf6", "solid"], ["zap", "wiggle", "#eab308", "fill"],
+  ["camera", "pop"], ["cloud", "bounce", "#0ea5e9", "fill"], ["moon", "rotate"], ["star", "pop", "#f59e0b", "fill"], ["gift", "wiggle", "#ec4899", "solid"], ["coffee", "draw"], ["globe", "rotate", "#0ea5e9", "solid"], ["flame", "pulse", "#f97316", "fill"],
+  ["compass", "rotate"], ["leaf", "wiggle", "#16a34a", "fill"], ["anchor", "bounce"], ["feather", "draw"], ["umbrella", "pop", "#6366f1", "fill"], ["key", "wiggle"], ["smile", "pop", "#eab308", "fill"], ["thumbs-up", "bounce"],
+  ["bookmark", "draw"], ["send", "bounce", "#2563eb", "solid"], ["trash-2", "wiggle", "#ef4444"], ["settings", "rotate"], ["search", "pop"], ["house", "draw"], ["lock", "wiggle"], ["map-pin", "bounce", "#e11d48", "fill"],
+  ["calendar", "draw"], ["clock", "rotate"], ["download", "bounce", "#16a34a", "solid"], ["message-circle", "pop"], ["shopping-cart", "bounce"], ["trophy", "pop", "#ca8a04", "fill"], ["flower-2", "rotate", "#ec4899", "solid"], ["palette", "wiggle", "#8b5cf6"],
+].map(([name, animation, color, look], i) => ({
+  name,
+  animation,
+  look: look ?? "outline",
+  style: iconStyle(color, look),
+  tileStyle: look === "solid" ? `--icon-color: #fff; --tile-bg: ${color}; background: ${color}` : iconStyle(color, look),
+  inline: i === 0,
+  src: i === 0 ? "" : `https://cdn.jsdelivr.net/npm/lucide-static@1/icons/${name}.svg`,
+  delay: ((i % ICON_COLS) + Math.floor(i / ICON_COLS)) * 0.06,
+}));
 ---
 
 <Layout
@@ -11,7 +37,7 @@ import CodeWindow from "../components/CodeWindow.astro";
     <div class="inner">
       <a href="/docs/" class="hero-circle" aria-label="Framework-agnostic motion components">
         <motion-circle text="INTERRUPT ME · I DARE YOU · " radius="120" duration="14" pause-on-hover>
-          <span class="hero-circle-icon">✦</span>
+          <motion-icon class="hero-circle-icon" src="https://cdn.jsdelivr.net/npm/lucide-static@1/icons/sparkle.svg" trigger="mount" duration="1" data-hover-animation="rotate"></motion-icon>
         </motion-circle>
       </a>
       <div class="hero-badge">Declarative motion · Spring physics · Interruptible</div>
@@ -336,6 +362,56 @@ import 'motion-components'
     </div>
   </section>
 
+  <!-- ── Icons ─────────────────────────────── -->
+  <section class="icons-section">
+    <div class="inner">
+      <div class="section-head">
+        <p class="section-eyebrow">Icons</p>
+        <h2>Icons that move.</h2>
+        <p class="section-sub">
+          <motion-code-inline>&lt;motion-icon&gt;</motion-code-inline> draws in, pops or wiggles any SVG icon from Lucide, Tabler, Heroicons, Material
+          Symbols, Font Awesome and more. <motion-code-inline>&lt;motion-state-icon&gt;</motion-code-inline> morphs between two states on a spring.
+        </p>
+      </div>
+      <div class="icons-showcase">
+        <div class="icon-wall" id="icon-wall" style={`--cols: ${ICON_COLS}`}>
+          {iconWall.map((icon, i) => (
+            <button
+              class={`icon-tile icon-tile--${icon.look}`}
+              type="button"
+              aria-label={icon.name}
+              aria-pressed={i === 0 ? "true" : "false"}
+              data-name={icon.name}
+              data-src={icon.src}
+              data-animation={icon.animation}
+              data-style={icon.style}
+              data-svg={icon.inline ? HEART_SVG : undefined}
+              style={icon.tileStyle || undefined}
+            >
+              {icon.inline ? (
+                <motion-icon trigger="view" delay={icon.delay} duration="0.8" set:html={HEART_SVG}></motion-icon>
+              ) : (
+                <motion-icon src={icon.src} trigger="view" delay={icon.delay} duration="0.8"></motion-icon>
+              )}
+            </button>
+          ))}
+        </div>
+        <div class="icon-inspector">
+          <div class="icon-preview">
+            <motion-icon id="icon-preview" icon={HEART_SVG} animation={iconWall[0].animation} trigger="loop" interval="0.9" style={iconWall[0].style}></motion-icon>
+            <span id="icon-preview-name">{iconWall[0].name} · {iconWall[0].animation} · {iconWall[0].look}</span>
+          </div>
+          <motion-code id="icon-code" filename="index.html" copy copy-label compact></motion-code>
+        </div>
+      </div>
+      <p class="icons-hint">Hover the icons. Click one to preview it and copy its code.</p>
+      <div class="icons-links">
+        <a href="/docs/icons/motion-icon/" class="view-all-link">motion-icon docs →</a>
+        <a href="/docs/icons/motion-state-icon/" class="view-all-link">motion-state-icon docs →</a>
+      </div>
+    </div>
+  </section>
+
   <!-- ── Features ──────────────────────────── -->
   <section class="features-section">
     <div class="inner">
@@ -472,7 +548,7 @@ import 'motion-components'
       <div class="section-head">
         <p class="section-eyebrow">Pick a goal. Find the tag.</p>
         <h2>Still want more?</h2>
-        <p class="section-sub">Three more areas to explore. Hover to reveal what's inside.</p>
+        <p class="section-sub">Four more areas to explore. Hover to reveal what's inside.</p>
       </div>
     </div>
     <div class="inner">
@@ -513,6 +589,24 @@ import 'motion-components'
         <motion-flip-card trigger="hover" axis="y" duration="0.85" bounce="0.25" class="flip">
           <div slot="front" class="flip-face flip-face--ask">
             <div class="flip-eyebrow">I want to…</div>
+            <p class="flip-q">Show data as a <em>chart that moves</em>.</p>
+            <motion-sparkline id="flip-spark" class="flip-spark" values="12, 15, 13, 18, 17, 21, 19, 24, 23, 28" area></motion-sparkline>
+            <div class="flip-meta">Hover for the answer →</div>
+          </div>
+          <a slot="back" class="flip-face flip-face--ans" href="/docs/charts/motion-chart/">
+            <div class="flip-eyebrow flip-eyebrow--inv">Category</div>
+            <span class="flip-cat-big">Charts</span>
+            <p class="flip-blurb">
+              Bar, line, pie and donut charts from an attribute or a table, plus inline sparklines. Bars grow, pies sweep in, and every change in the data
+              springs into place.
+            </p>
+            <span class="flip-link">Explore →</span>
+          </a>
+        </motion-flip-card>
+
+        <motion-flip-card trigger="hover" axis="y" duration="0.85" bounce="0.25" class="flip">
+          <div slot="front" class="flip-face flip-face--ask">
+            <div class="flip-eyebrow">I want to…</div>
             <p class="flip-q">Display code with <em>syntax highlighting</em>.</p>
             <div class="flip-meta">Hover for the answer →</div>
           </div>
@@ -542,10 +636,10 @@ import 'motion-components'
           <p class="cta-sub">Drop a tag in your HTML and you're done.</p>
           <div class="cta-actions">
             <motion-hover>
-              <a href="/docs/" class="btn-primary">Read the docs</a>
+              <a href="/docs/" class="btn-primary"><motion-icon src="https://cdn.jsdelivr.net/npm/lucide-static@1/icons/book-open.svg"></motion-icon>Read the docs</a>
             </motion-hover>
             <motion-hover>
-              <a href="https://github.com/tgomilar/motion-components" class="btn-ghost" target="_blank" rel="noopener">Star on GitHub</a>
+              <a href="https://github.com/tgomilar/motion-components" class="btn-ghost" target="_blank" rel="noopener"><motion-icon class="btn-star" src="https://cdn.jsdelivr.net/npm/lucide-static@1/icons/star.svg" animation="rotate"></motion-icon>Star on GitHub</a>
             </motion-hover>
           </div>
         </div>
@@ -580,6 +674,70 @@ import 'motion-components'
         swapDemo.dispatchEvent(new MouseEvent(on ? "mouseenter" : "mouseleave"));
       }, 1400);
     }
+    document.querySelectorAll<HTMLElement & { trigger: string; animation: string }>("motion-icon[data-hover-animation]").forEach((icon) => {
+      icon.addEventListener(
+        "motion-finish",
+        () => {
+          icon.animation = icon.dataset.hoverAnimation ?? "draw";
+          icon.trigger = "hover";
+        },
+        { once: true },
+      );
+    });
+
+    const flipSpark = document.getElementById("flip-spark") as (HTMLElement & { values: string }) | null;
+    if (flipSpark && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      setInterval(() => {
+        const values = flipSpark.values.split(",").map(Number);
+        const next = Math.max(4, values[values.length - 1] + Math.round(Math.random() * 10 - 5));
+        flipSpark.values = [...values.slice(1), next].join(", ");
+      }, 1600);
+    }
+
+    type IconEl = HTMLElement & { src: string; icon: string; trigger: string; animation: string; delay: number; replay(): void };
+    const iconCode = document.getElementById("icon-code") as (HTMLElement & { setCode(code: string): void }) | null;
+    const iconPreview = document.getElementById("icon-preview") as IconEl | null;
+    const iconPreviewName = document.getElementById("icon-preview-name");
+    const tiles = [...document.querySelectorAll<HTMLButtonElement>("#icon-wall .icon-tile")];
+    const lookOf = (tile: HTMLElement) => [...tile.classList].find((c) => c.startsWith("icon-tile--"))?.slice(11);
+
+    const showIcon = (tile: HTMLButtonElement) => {
+      const { name, src = "", animation = "draw", style = "", svg = "" } = tile.dataset;
+      tiles.forEach((t) => t.setAttribute("aria-pressed", String(t === tile)));
+      if (iconPreview) {
+        iconPreview.icon = svg;
+        iconPreview.src = src;
+        iconPreview.animation = animation;
+        iconPreview.setAttribute("style", style);
+      }
+      if (iconPreviewName) iconPreviewName.textContent = `${name} · ${animation} · ${lookOf(tile)}`;
+      const styleAttr = style ? `\n  style="${style}"` : "";
+      const script = `<script type="module" src="https://cdn.jsdelivr.net/npm/motion-components@1/dist/motion-icon.js"><\/script>\n\n`;
+      iconCode?.setCode(
+        svg
+          ? `${script}<motion-icon\n  animation="${animation}"${styleAttr}\n>\n  ${svg.replace("><path", ">\n    <path").replace("</svg>", "\n  </svg>")}\n</motion-icon>`
+          : `${script}<motion-icon\n  src="${src}"\n  animation="${animation}"${styleAttr}\n></motion-icon>`,
+      );
+    };
+
+    customElements.whenDefined("motion-code").then(() => tiles[0] && showIcon(tiles[0]));
+
+    tiles.forEach((tile) => {
+      const icon = tile.querySelector<IconEl>("motion-icon")!;
+      icon.addEventListener(
+        "motion-finish",
+        () => {
+          icon.delay = 0;
+          icon.animation = tile.dataset.animation ?? "draw";
+          icon.trigger = "hover";
+        },
+        { once: true },
+      );
+      tile.addEventListener("click", () => {
+        showIcon(tile);
+        icon.replay();
+      });
+    });
   </script>
 
   <style>
@@ -643,8 +801,9 @@ import 'motion-components'
     }
 
     .hero-circle-icon {
-      font-size: 2.25rem;
-      color: var(--color-yellow);
+      --icon-size: 2.5rem;
+      --icon-color: var(--color-yellow);
+      --icon-fill: var(--color-yellow);
     }
 
     .hero-badge {
@@ -707,8 +866,20 @@ import 'motion-components'
       }
     }
 
+    .btn-primary,
+    .btn-ghost {
+      --icon-size: 1.15em;
+      gap: 0.55rem;
+      align-items: center;
+    }
+
+    .btn-star {
+      --icon-color: var(--color-yellow);
+      --icon-fill: var(--color-yellow);
+    }
+
     .btn-primary {
-      display: inline-block;
+      display: inline-flex;
       background: var(--color-accent);
       color: #fff;
       padding: 0.8rem 1.75rem;
@@ -719,7 +890,7 @@ import 'motion-components'
     }
 
     .btn-ghost {
-      display: inline-block;
+      display: inline-flex;
       background: transparent;
       border: 1px solid var(--color-yellow);
       padding: 0.8rem 1.75rem;
@@ -1350,6 +1521,122 @@ import 'motion-components'
       margin-top: 0.25rem;
     }
 
+    /* ── Icons ────────────────────────────── */
+    .icons-section .section-sub code {
+      font-family: var(--font-mono);
+      font-size: 0.9em;
+      color: var(--color-text);
+    }
+
+    .icons-showcase {
+      display: grid;
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      gap: 3rem;
+      align-items: center;
+    }
+
+    @media (max-width: 860px) {
+      .icons-showcase {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .icon-wall {
+      display: grid;
+      grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+      gap: 0.5rem;
+    }
+
+    @media (max-width: 640px) {
+      .icon-wall {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+    }
+
+    .icon-tile {
+      all: unset;
+      box-sizing: border-box;
+      display: grid;
+      place-items: center;
+      aspect-ratio: 1;
+      padding: 22%;
+      border-radius: 14px;
+      color: var(--color-muted);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    .icon-tile motion-icon {
+      --icon-size: 100%;
+      width: 100%;
+      height: 100%;
+    }
+
+    .icon-tile:hover,
+    .icon-tile:focus-visible {
+      border-color: var(--icon-color, var(--color-accent));
+    }
+
+    .icon-tile[aria-pressed="true"] {
+      border-color: var(--icon-color, var(--color-accent));
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--icon-color, var(--color-accent)) 20%, transparent);
+    }
+
+    .icon-tile--solid,
+    .icon-tile--solid:hover,
+    .icon-tile--solid:focus-visible {
+      border-color: transparent;
+    }
+
+    .icon-tile--solid[aria-pressed="true"] {
+      box-shadow: 0 0 0 3px var(--color-bg, #fff), 0 0 0 5px var(--tile-bg);
+    }
+
+    .icon-inspector {
+      display: grid;
+      gap: 1rem;
+      min-width: 0;
+    }
+
+    .icon-preview {
+      display: grid;
+      justify-items: center;
+      gap: 1rem;
+      padding: 2.25rem 1rem 1.5rem;
+      border-radius: 20px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      color: var(--color-text);
+    }
+
+    .icon-preview motion-icon {
+      --icon-size: 5rem;
+    }
+
+    .icon-preview span {
+      font-family: var(--font-mono);
+      font-size: 0.8rem;
+      color: var(--color-muted);
+    }
+
+    .icons-hint {
+      margin-top: 1.5rem;
+      font-size: 0.85rem;
+      color: var(--color-muted);
+    }
+
+    .icons-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 2rem;
+    }
+
+    .icons-links .view-all-link {
+      margin-top: 0.75rem;
+    }
+
     /* ── Features ─────────────────────────── */
     .features-section {
       padding-bottom: 8rem;
@@ -1373,7 +1660,7 @@ import 'motion-components'
 
     .flips-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
       gap: 1.5rem;
     }
 
@@ -1467,6 +1754,12 @@ import 'motion-components'
       padding: 0.35rem 0.6rem;
       border-radius: 8px;
       align-self: flex-start;
+    }
+
+    .flip-spark {
+      --sparkline-width: 100%;
+      --sparkline-height: 3rem;
+      color: var(--color-accent);
     }
 
     .flip-cat-big {
