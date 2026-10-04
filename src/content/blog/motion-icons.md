@@ -31,15 +31,42 @@ This is a complete page. Save it as `index.html` and open it in a browser. You d
 
 Hover the heart and its outline draws in, line by line. Hover the bell and it wiggles.
 
-## Three ways to add an icon
+## Four ways to add an icon
 
 | Way | Use it when | Example |
 |---|---|---|
-| `src` | You want one line of HTML. The icon comes from a CDN or from your own folder. | `<motion-icon src="/icons/heart.svg">` |
+| `src` with a CDN URL | You want one line of HTML and no files to manage. | `<motion-icon src="https://cdn.jsdelivr.net/…/heart.svg">` |
+| `src` with your own folder | You keep your icons as files in your site, or you drew your own. | `<motion-icon src="icons/heart.svg">` |
 | Inline SVG | You copied the SVG from an icon website. | `<motion-icon><svg>…</svg></motion-icon>` |
 | `icon` | You use a bundler and want the icon inside your bundle. | `el.icon = Heart` |
 
 The `src` attribute loads each URL once. If ten icons use the same URL, the browser downloads it one time. If the URL fails, the element fires an `error` event.
+
+### Icons from your own folder
+
+`src` also takes a path to a file in your site. Put the SVG files in a folder, for example `icons/`:
+
+```text
+my-site/
+├── index.html
+└── icons/
+    ├── heart.svg
+    └── logo.svg
+```
+
+```html
+<motion-icon src="icons/heart.svg"></motion-icon>
+<motion-icon src="icons/logo.svg" animation="draw"></motion-icon>
+```
+
+This works for icons from any set and for icons you drew yourself. A stroke icon can use `draw`, like every other icon.
+
+Two details:
+
+1. A path without a leading slash, such as `icons/heart.svg`, is relative to the page. For pages in subfolders, write `/icons/heart.svg`, so the path always starts at the root of your site.
+2. Open the page through a web server, for example `npx serve` in the site folder. Browsers do not load files from a `file://` address, so a page opened by double-clicking it shows no icon.
+
+### Inline SVG
 
 Inline SVG works well when you want the icon in your HTML with no extra request:
 
@@ -50,6 +77,8 @@ Inline SVG works well when you want the icon in your HTML with no extra request:
   </svg>
 </motion-icon>
 ```
+
+### From an npm package
 
 With a bundler such as Vite, import the icon as a string. `lucide-static` exports every icon by name, so only the icons you import end up in your bundle:
 

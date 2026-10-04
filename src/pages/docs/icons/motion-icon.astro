@@ -150,20 +150,40 @@ document.querySelector('#like-icon').icon = heart`,
       <CodeWindow filename="app.js" copy code={`import 'motion-components/motion-icon'`} />
 
       <h2>Add an icon</h2>
-      <p>There are three ways to give <code>motion-icon</code> its icon. Pick the one that fits your project.</p>
+      <p>There are four ways to give <code>motion-icon</code> its icon. Pick the one that fits your project.</p>
 
-      <h3>1. From a URL</h3>
+      <h3>1. From a CDN</h3>
+      <p>Set <code>src</code> to the URL of an SVG file. Each URL is loaded once and shared by every icon that uses it.</p>
+      <CodeWindow filename="index.html" copy code={`<motion-icon src="${lucide("heart")}"></motion-icon>`} />
+
+      <h3>2. From your own folder</h3>
       <p>
-        Set <code>src</code> to the URL of an SVG file. Use a CDN, or download the SVG files you need into your own <code>/icons</code> folder.
-        Each URL is loaded once and shared by every icon that uses it.
+        Put the SVG files in a folder of your site and point <code>src</code> at them. This works for any icon: one from an icon set, or one you drew
+        yourself. These two icons load from this site's own <code>/icons</code> folder:
       </p>
-      <CodeWindow filename="index.html" copy code={`<!-- from a CDN -->
-<motion-icon src="${lucide("heart")}"></motion-icon>
+      <DocsPreview>
+        <div class="row">
+          <div class="cell"><motion-icon src="/icons/heart.svg" style="--icon-color: #e11d48"></motion-icon><span>/icons/heart.svg</span></div>
+          <div class="cell"><motion-icon src="/icons/brackets.svg" animation="draw" style="--icon-color: #6366f1"></motion-icon><span>/icons/brackets.svg</span></div>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="my-site" code={`my-site/
+├── index.html
+└── icons/
+    ├── heart.svg
+    └── brackets.svg`} />
+      <CodeWindow filename="index.html" copy code={`<motion-icon src="icons/heart.svg"></motion-icon>
+<motion-icon src="icons/brackets.svg"></motion-icon>`} />
+      <p>
+        A path without a leading slash, such as <code>icons/heart.svg</code>, is relative to the page. For pages in subfolders, start the path with a
+        slash, such as <code>/icons/heart.svg</code>, so it always points to the folder at the root of your site.
+      </p>
+      <p class="note">
+        Open the page through a web server, not by double-clicking the file. Browsers do not load files from a <code>file://</code> address, so the
+        icon stays empty and fires <code>error</code>. Any local server works, for example <code>npx serve</code> in the site folder.
+      </p>
 
-<!-- from your own folder -->
-<motion-icon src="/icons/heart.svg"></motion-icon>`} />
-
-      <h3>2. Inline SVG</h3>
+      <h3>3. Inline SVG</h3>
       <p>Paste the icon's <code>&lt;svg&gt;</code> inside the element. Most icon websites have a "Copy SVG" button.</p>
       <DocsPreview>
         <div class="row">
@@ -176,7 +196,7 @@ document.querySelector('#like-icon').icon = heart`,
   </svg>
 </motion-icon>`} />
 
-      <h3>3. From an npm package</h3>
+      <h3>4. From an npm package</h3>
       <p>
         With a bundler, import the icon as a string and set the <code>icon</code> property. The icon is part of your bundle, so nothing is loaded
         at runtime.
