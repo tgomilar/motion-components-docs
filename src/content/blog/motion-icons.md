@@ -61,10 +61,7 @@ my-site/
 
 This works for icons from any set and for icons you drew yourself. A stroke icon can use `draw`, like every other icon.
 
-Two details:
-
-1. A path without a leading slash, such as `icons/heart.svg`, is relative to the page. For pages in subfolders, write `/icons/heart.svg`, so the path always starts at the root of your site.
-2. Open the page through a web server, for example `npx serve` in the site folder. Browsers do not load files from a `file://` address, so a page opened by double-clicking it shows no icon.
+A path without a leading slash, such as `icons/heart.svg`, is relative to the page. For pages in subfolders, write `/icons/heart.svg`, so the path always starts at the root of your site.
 
 ### Inline SVG
 
