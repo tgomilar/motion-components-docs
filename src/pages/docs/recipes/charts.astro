@@ -161,6 +161,53 @@ document.querySelector('#month').addEventListener('change', (event) => {
 }`,
   },
   {
+    id: "color-palettes",
+    title: "Color palettes",
+    intro: "The colors are CSS custom properties, <code>--chart-1</code> to <code>--chart-8</code>. Set them on a wrapper, and every chart inside takes them. These buttons switch palettes for a bar chart and a donut at once.",
+    html: `<div id="themed" class="themed-charts">
+  <div class="palettes" role="group" aria-label="Color palette">
+    <button aria-pressed="true" data-palette="default">Default</button>
+    <button aria-pressed="false" data-palette="ocean">Ocean</button>
+    <button aria-pressed="false" data-palette="sunset">Sunset</button>
+    <button aria-pressed="false" data-palette="mono">Mono</button>
+  </div>
+  <motion-chart label="Sales by channel" labels="Q1, Q2, Q3, Q4" series="Web, Store, Partners" values="42, 55, 61, 70; 30, 38, 35, 41; 12, 18, 25, 31"></motion-chart>
+  <motion-pie donut label="Sales by channel" labels="Web, Store, Partners" values="228, 144, 86"></motion-pie>
+</div>`,
+    js: `const charts = document.querySelector('#themed')
+const palettes = {
+  default: [],
+  ocean: ['#0369a1', '#0ea5e9', '#14b8a6'],
+  sunset: ['#c2410c', '#f59e0b', '#be185d'],
+  mono: ['#18181b', '#71717a', '#c4c4cc'],
+}
+
+document.querySelectorAll('[data-palette]').forEach((button) => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('[data-palette]').forEach((b) => b.setAttribute('aria-pressed', b === button))
+    const colors = palettes[button.dataset.palette]
+    for (let i = 1; i <= 3; i++) {
+      if (colors[i - 1]) charts.style.setProperty(\`--chart-\${i}\`, colors[i - 1])
+      else charts.style.removeProperty(\`--chart-\${i}\`)
+    }
+  })
+})`,
+    css: `.themed-charts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.palettes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  grid-column: 1 / -1;
+}`,
+    note: "Without JavaScript, set the palette in CSS: <code>.my-charts { --chart-1: #0369a1; --chart-2: #0ea5e9; }</code>. The default palette is chosen so the colors stay apart for readers with color blindness. When you pick your own, make the colors differ in lightness too, as the Mono palette does.",
+  },
+  {
     id: "live-line",
     title: "Live line chart",
     intro: "A new point every 1.5 seconds. The oldest point drops off, and the whole line springs into its new shape.",
@@ -181,7 +228,7 @@ setInterval(() => {
 
 <Layout
   title="Chart Recipes — Recipes — Motion Components"
-  description="Copy-paste chart recipes: a stat tile, a period switcher, a chart from a form, data from JSON, a budget donut and a live line chart."
+  description="Copy-paste chart recipes: a stat tile, a period switcher, a chart from a form, data from JSON, a budget donut, color palettes and a live line chart."
   noMain
 >
   <div class="layout">
