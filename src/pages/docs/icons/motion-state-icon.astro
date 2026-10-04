@@ -177,7 +177,7 @@ const liked = ref(false)
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-state-icon</motion-split></h1>
       <p class="lead">
         Icons that morph between two states on a spring, and can be interrupted midway. Set <code>name</code> to pick the icon and <code>active</code> for
@@ -222,7 +222,7 @@ const liked = ref(false)
       <h3>1. The icon is the button</h3>
       <p>
         Add <code>toggle</code> and <code>label</code>. The icon switches itself on click, <kbd>Space</kbd> or <kbd>Enter</kbd>, and fires
-        <code>motion-change</code>.
+        <code>motion-change</code>. <code>label</code> is required here: it is the button's name for screen readers, and leaving it out logs a warning.
       </p>
       <DocsPreview compact>
         <div class="grid">
@@ -313,7 +313,7 @@ const liked = ref(false)
           { name: "name", type: "string", default: "'menu'", description: "<code>'menu'</code>, <code>'play'</code>, <code>'copy'</code>, <code>'plus'</code>, <code>'chevron'</code>, <code>'heart'</code>, <code>'loading'</code> or <code>'eye'</code>" },
           { name: "active", type: "boolean", default: "false", description: "The second state: close, pause, check, minus, up, filled, done or eye-off" },
           { name: "toggle", type: "boolean", default: "false", description: "Makes the icon a button that switches <code>active</code> on click, Space or Enter" },
-          { name: "label", type: "string", default: "''", description: "Accessible name. Without it, and without <code>toggle</code>, the icon is decorative" },
+          { name: "label", type: "string", default: "''", description: "Accessible name. Required with <code>toggle</code>: without it the icon name is read out and a warning is logged. Without <code>label</code> and <code>toggle</code>, the icon is decorative" },
           { name: "duration", type: "number", default: "0.45", description: "Spring duration of the morph, in seconds" },
           { name: "bounce", type: "number", default: "0.3", description: "Spring bounciness of the morph" },
         ]}
@@ -354,7 +354,8 @@ const liked = ref(false)
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-split";
+  import "motion-components/motion-state-icon";
 
   type StateIcon = HTMLElement & { active: boolean };
   const $ = <T extends Element = HTMLElement>(selector: string) => document.querySelector<T>(selector);

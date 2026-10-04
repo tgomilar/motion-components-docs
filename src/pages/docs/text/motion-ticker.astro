@@ -14,7 +14,7 @@ import "../../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-ticker</motion-split></h1>
       <p class="lead">
         Continuously scrolls its children horizontally in a seamless loop. Accepts any content: text, tags, logos. Pauses on hover by default. Keyboard accessible: tab to focus and press <kbd>Space</kbd> to pause.
@@ -95,7 +95,7 @@ import 'motion-components'               // or the whole library`}
         The ticker is focusable (<code>tabindex="0"</code>) and carries <code>role="region"</code> with a descriptive <code>aria-label</code>.
         Focusing pauses the scroll; blurring resumes it. While focused, <kbd>Space</kbd> or <kbd>Enter</kbd> toggles a persistent pause so keyboard-only
         users can read the content at their own pace. This satisfies WCAG 2.1 SC 2.2.2 (Pause, Stop, Hide).
-        The duplicated set used for seamless looping carries <code>aria-hidden="true"</code> to avoid duplicate announcements.
+        Every copy used for seamless looping carries <code>aria-hidden="true"</code> and <code>inert</code>, so items are announced once and <kbd>Tab</kbd> reaches only the originals.
       </p>
 
       <h2>Properties</h2>
@@ -113,7 +113,7 @@ import 'motion-components'               // or the whole library`}
         ]}
       />
       <h2>Reduced motion</h2>
-      <p>Respects <code>prefers-reduced-motion</code>: when enabled, the ticker does not scroll and content is static. Keyboard controls remain active.</p>
+      <p>Respects <code>prefers-reduced-motion</code>: when enabled, the ticker does not scroll and content is static. It is not focusable and has no keyboard controls, since there is nothing to pause.</p>
       <DocsPagination />
     </main>
       <DocsTOC />
@@ -121,7 +121,8 @@ import 'motion-components'               // or the whole library`}
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-split";
+  import "motion-components/motion-ticker";
 </script>
 
 <style>

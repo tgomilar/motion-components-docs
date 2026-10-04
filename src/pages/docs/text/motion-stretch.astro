@@ -13,7 +13,7 @@ import "../../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-stretch</motion-split></h1>
       <p class="lead">Spring-physics letter spacing on hover. Characters elastically spread apart when the cursor enters and snap back when it leaves.</p>
 
@@ -70,20 +70,20 @@ el.text = 'UPDATED'   // animation restarts`}
       <p>Adjust <code>duration</code> and <code>bounce</code> to change the character of the snap. A short duration with a high bounce is springy. A longer duration with <motion-code-inline copy>bounce="0"</motion-code-inline> is slow and smooth.</p>
       <DocsPreview>
         <div style="display:flex; flex-direction:column; gap:1.5rem; align-items:flex-start">
-          <motion-stretch class="demo-large" spread="20" duration="0.41" bounce="0.75">BOUNCY</motion-stretch>
+          <motion-stretch class="demo-large" spread="20" duration="1.11" bounce="0.75">BOUNCY</motion-stretch>
           <motion-stretch class="demo-large" spread="20" duration="0.75" bounce="0">SMOOTH</motion-stretch>
         </div>
       </DocsPreview>
       <CodeWindow
         filename="motion-stretch.html"
         copy
-        code={`<motion-stretch spread="20" duration="0.41" bounce="0.75">BOUNCY</motion-stretch>
+        code={`<motion-stretch spread="20" duration="1.11" bounce="0.75">BOUNCY</motion-stretch>
 <motion-stretch spread="20" duration="0.75" bounce="0">SMOOTH</motion-stretch>`}
       />
 
       <h2>How it works</h2>
       <p>
-        Each character is wrapped in an inline-block <code>span</code>. On <code>mouseenter</code>, Motion One animates each character's <code>x</code> transform using a spring. Characters at the edges travel furthest (<code>±spread</code>), and characters near the center barely move. On <code>mouseleave</code>, a new spring animation returns all characters to <code>x: 0</code>.
+        Each character is wrapped in an inline-block <code>span</code>. On <code>mouseenter</code>, Motion animates each character's <code>x</code> transform using a spring. Characters at the edges travel furthest (<code>±spread</code>), and characters near the center barely move. On <code>mouseleave</code>, a new spring animation returns all characters to <code>x: 0</code>.
       </p>
       <p>
         Any in-progress animation is cancelled before starting the next, so fast hover transitions always feel responsive rather than lagging.
@@ -111,7 +111,8 @@ el.text = 'UPDATED'   // animation restarts`}
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-split";
+  import "motion-components/motion-stretch";
 </script>
 
 <style>

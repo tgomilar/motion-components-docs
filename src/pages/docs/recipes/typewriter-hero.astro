@@ -12,16 +12,16 @@ import "../../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1>Typewriter Hero</h1>
       <p class="lead">A hero section with a character-by-character typewriter headline and a fading subcopy. The typewriter adds presence, the reveal adds depth.</p>
 
       <h2>Preview</h2>
       <DocsPreview wide>
         <div class="hero-demo">
-          <motion-typewriter interval="0.04" delay="0.3" cursor>
-            <h1 class="hero-headline">Build interactions that ship.</h1>
-          </motion-typewriter>
+          <p class="hero-headline">
+            <motion-typewriter interval="0.04" delay="0.3" cursor>Build interactions that ship.</motion-typewriter>
+          </p>
           <motion-reveal y="16" duration="0.6" delay="0.2">
             <p class="hero-sub">Physics-based web components for any framework. No easing curves to tune.</p>
           </motion-reveal>
@@ -33,9 +33,9 @@ import "../../../styles/docs.css";
         filename="typewriter-hero.html"
         copy
         code={`<section class="hero">
-  <motion-typewriter interval="0.04" delay="0.3" cursor>
-    <h1>Build interactions that ship.</h1>
-  </motion-typewriter>
+  <h1>
+    <motion-typewriter interval="0.04" delay="0.3" cursor>Build interactions that ship.</motion-typewriter>
+  </h1>
 
   <motion-reveal y="16" duration="0.6">
     <p>Physics-based web components for any framework.
@@ -51,9 +51,9 @@ import "../../../styles/docs.css";
         filename="typewriter.html"
         copy
         compact
-        code={`<motion-typewriter interval="0.04" delay="0.3" cursor>
-  <h1>Build interactions that ship.</h1>
-</motion-typewriter>`}
+        code={`<h1>
+  <motion-typewriter interval="0.04" delay="0.3" cursor>Build interactions that ship.</motion-typewriter>
+</h1>`}
       />
       <p class="section-lead">The typewriter reveals the headline one character at a time. <code>interval</code> is the time between characters in seconds. <code>delay</code> adds a pause, in seconds, before typing starts. The <code>cursor</code> attribute adds a blinking caret.</p>
 
@@ -75,9 +75,9 @@ import "../../../styles/docs.css";
         filename="loop.html"
         copy
         compact
-        code={`<motion-typewriter interval="0.04" delay="2" loop cursor>
-  <h1>Build. Ship. Iterate.</h1>
-</motion-typewriter>`}
+        code={`<h1>
+  <motion-typewriter interval="0.04" delay="2" loop cursor>Build. Ship. Iterate.</motion-typewriter>
+</h1>`}
       />
       <p class="section-lead">Add <code>loop</code> to cycle through: type, pause, erase, retype. The <code>delay</code> is the pause between cycles in milliseconds.</p>
 
@@ -87,13 +87,13 @@ import "../../../styles/docs.css";
         filename="headline.html"
         copy
         compact
-        code={`<motion-headline by="words" interval="0.06" duration="1">
-  <h1>The future of motion</h1>
-</motion-headline>`}
+        code={`<h1>
+  <motion-headline by="words" interval="0.06" duration="1">The future of motion</motion-headline>
+</h1>`}
       />
 
       <h2>Accessibility</h2>
-      <p class="section-lead">The typewriter respects <code>prefers-reduced-motion</code>: the full text appears instantly with no character-by-character animation. The blinking cursor is also suppressed. The underlying <code>&lt;h1&gt;</code> stays semantically intact throughout.</p>
+      <p class="section-lead">The typewriter respects <code>prefers-reduced-motion</code>: the full text appears instantly with no character-by-character animation, and the caret does not blink. Screen readers always read the full text, even while it types. Put the typewriter inside the <code>&lt;h1&gt;</code>, not around it: it replaces its own content, so a heading inside it would be lost.</p>
 
       <DocsPagination />
     </main>
@@ -102,7 +102,8 @@ import "../../../styles/docs.css";
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-reveal";
+  import "motion-components/motion-typewriter";
 </script>
 
 <style>

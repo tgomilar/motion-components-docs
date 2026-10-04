@@ -14,7 +14,7 @@ import "../../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-blur-in</motion-split></h1>
       <p class="lead">Viewport-triggered blur reveal. Starts blurred and translated, snaps to focus once the element enters the viewport.</p>
 
@@ -70,7 +70,8 @@ import 'motion-components'               // or the whole library`}
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-blur-in";
+  import "motion-components/motion-split";
 </script>
 
 <style>

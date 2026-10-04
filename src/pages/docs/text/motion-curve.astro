@@ -14,7 +14,7 @@ import "../../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-curve</motion-split></h1>
       <p class="lead">
         Animates each character of a sentence along a continuous sine-wave curve. Letters rotate to follow the tangent (the wave's direction at each point), giving the text a natural, fluid motion.
@@ -157,7 +157,8 @@ el.text = 'UPDATED'   // animation restarts`}
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-curve";
+  import "motion-components/motion-split";
 </script>
 
 <style>

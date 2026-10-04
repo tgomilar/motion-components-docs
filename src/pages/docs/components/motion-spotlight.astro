@@ -13,7 +13,7 @@ import "../../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-spotlight</motion-split></h1>
       <p class="lead">
         Mouse-tracked radial gradient overlay. The spotlight fades in on hover or focus and springs toward the cursor: soft, weighted, never locked 1:1 to the pointer.
@@ -73,7 +73,7 @@ import 'motion-components'               // or the whole library`}
       <h2>Accessibility</h2>
       <p>
         The spotlight is purely decorative. It is marked <code>aria-hidden</code>. The host listens for <code>:focus-within</code> as well as hover, so keyboard
-        users get the effect when focusing slotted interactive content. Under <code>prefers-reduced-motion</code> the fade transition is removed.
+        users get the effect when focusing slotted interactive content, centered when the pointer is not over it. Under <code>prefers-reduced-motion</code> the glow does not show.
       </p>
       <DocsPagination />
     </main>
@@ -82,7 +82,7 @@ import 'motion-components'               // or the whole library`}
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-split";
 </script>
 
 <style>

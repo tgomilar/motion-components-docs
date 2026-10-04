@@ -47,12 +47,8 @@ const elId = customId ?? `cw-${Math.random().toString(36).slice(2, 9)}`;
   typing-delay={typingDelay}
   typing-loop={typingLoop ? undefined : "false"}
   typing-hold={typingHold}
-></motion-code>
+><pre><code>{code}</code></pre></motion-code>
 
-<script define:vars={{ elId, code }}>
-  customElements.whenDefined("motion-code").then(() => {
-    const el = document.getElementById(elId);
-    if (!el) return;
-    el.setCode(code);
-  });
+<script>
+  import "motion-components/motion-code";
 </script>

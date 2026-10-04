@@ -14,7 +14,7 @@ import "../../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-code</motion-split></h1>
       <p class="lead">
         A syntax-highlighted code block with a macOS-style chrome, built-in tokenizer for multiple languages, typing animation, and compact mode.
@@ -299,7 +299,7 @@ animate(card, {
       </JsApiDemo>
 
       <h2>Accessibility</h2>
-      <p>Respects <code>prefers-reduced-motion</code>: when enabled, the cursor blink animation is disabled. The typing animation remains functional.</p>
+      <p>Respects <code>prefers-reduced-motion</code>: when enabled, the full code shows at once with no typing, and the cursor does not blink.</p>
       <DocsPagination />
     </main>
       <DocsTOC />
@@ -307,7 +307,7 @@ animate(card, {
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-split";
 </script>
 
 <style>

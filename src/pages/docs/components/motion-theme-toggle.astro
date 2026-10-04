@@ -17,7 +17,7 @@ import "../../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-theme-toggle</motion-split></h1>
       <p class="lead">
         Light and dark mode control with an optional <strong>system</strong> option. The icon morphs from sun to moon on a spring. Add
@@ -268,7 +268,8 @@ document.querySelector('motion-theme-icon').mode = 'dark'`}
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-split";
+  import "motion-components/motion-theme-icon";
 
   document.querySelectorAll<HTMLElement>("[data-readout]").forEach((out) => {
     const scope = document.getElementById(out.dataset.readout!);

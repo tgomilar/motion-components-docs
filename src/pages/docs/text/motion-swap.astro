@@ -14,7 +14,7 @@ import "../../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-swap</motion-split></h1>
       <p class="lead">Splits text into individual characters and swaps them vertically on hover or scroll reveal. Each character has an original and duplicate that trade places with a spring animation.</p>
 
@@ -40,7 +40,7 @@ import 'motion-components'               // or the whole library`}
 
       <h2>Properties</h2>
       <PropsTable nameLabel="Attribute" rows={[
-        { name: 'trigger', type: 'string', default: "'hover'", description: "Animation trigger: <code>'hover'</code> swaps in and out on mouseenter and mouseleave. <code>'view'</code> plays once on viewport entry" },
+        { name: 'trigger', type: 'string', default: "'hover'", description: "Animation trigger: <code>'hover'</code> swaps in and out on mouseenter and mouseleave. <code>'view'</code> plays on viewport entry" },
         { name: 'reverse', type: 'boolean', default: 'true', description: 'Letters swap bottom-to-top. Set <motion-code-inline copy>reverse="false"</motion-code-inline> to swap top-to-bottom.' },
         { name: 'interval', type: 'number', default: '0.03', description: 'Delay in seconds between each character\'s animation start' },
         { name: 'duration', type: 'number', default: '0.7', description: 'Spring duration of each character swap, in seconds' },
@@ -63,7 +63,8 @@ import 'motion-components'               // or the whole library`}
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-split";
+  import "motion-components/motion-swap";
 </script>
 
 <style>

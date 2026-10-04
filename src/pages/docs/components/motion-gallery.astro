@@ -13,7 +13,7 @@ import "../../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-gallery</motion-split></h1>
       <p class="lead">CSS grid gallery with spring hover lift and FLIP-based lightbox expand. Click any item. It springs to full screen and back. Navigate with arrows or keyboard.</p>
 
@@ -92,7 +92,8 @@ import 'motion-components'               // or the whole library`}
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-gallery";
+  import "motion-components/motion-split";
 </script>
 
 <style>

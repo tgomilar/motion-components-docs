@@ -11,7 +11,7 @@ import "../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">JavaScript API</motion-split></h1>
       <p class="lead">Every animating component exposes a Web-Animations-style playback surface: <code>play()</code>, <code>pause()</code>, <code>finish()</code>, <code>cancel()</code>, a <code>playState</code> getter, and a <code>finished</code> promise. It also exposes package-level helpers to control everything at once.</p>
 
@@ -80,9 +80,31 @@ pauseAll(document.querySelector('#hero'))   // or scope to a subtree`}
           { name: "pause()", type: "() => void", default: "—", description: "Freeze in place; resumable with play()" },
           { name: "finish()", type: "() => void", default: "—", description: "Jump to the end state immediately" },
           { name: "cancel()", type: "() => void", default: "—", description: "Hard terminate and reset to the initial state" },
+          { name: "replay()", type: "() => void", default: "—", description: "Reset and run again from the start. On components with a one-shot animation, such as the reveals, text effects, charts, icons and <code>motion-code</code>" },
           { name: "playState", type: "PlaybackState", default: "'idle'", description: "'idle' | 'running' | 'paused' | 'finished'" },
           { name: "finished", type: "Promise<void>", default: "—", description: "Fresh per run; resolves on finish or cancel, never rejects" },
         ]}
+      />
+
+      <h2 id="events">Events</h2>
+      <p>
+        Every controllable component fires these events. They bubble and are composed, so one listener on a parent or on
+        <code>document</code> hears every component inside it, including components inside another shadow root.
+      </p>
+      <PropsTable
+        nameLabel="Event"
+        rows={[
+          { name: "motion-start", type: "CustomEvent", default: "—", description: "A run starts, from a trigger or from <code>play()</code>" },
+          { name: "motion-finish", type: "CustomEvent", default: "—", description: "A run reaches its end, or <code>finish()</code> jumps there" },
+          { name: "motion-cancel", type: "CustomEvent", default: "—", description: "<code>cancel()</code> stops a run and resets it" },
+        ]}
+      />
+      <CodeWindow
+        filename="app.js"
+        copy
+        code={`document.addEventListener('motion-finish', (event) => {
+  console.log(event.target.localName, 'finished')
+})`}
       />
 
       <h2>Package exports</h2>
@@ -101,13 +123,17 @@ pauseAll(document.querySelector('#hero'))   // or scope to a subtree`}
       <p>For <code>motion-parallax</code>, <code>motion-scene</code>, <code>motion-progress</code>, and <code>motion-blur</code>, the verbs adapt because these components track scroll position instead of a timeline. <code>pause()</code> unbinds the scroll listener and freezes the effect at its current progress. <code>play()</code> rebinds. <code>finish()</code> applies the end-of-scroll state. <code>cancel()</code> unbinds and resets styles. While bound, <code>playState</code> is <code>'running'</code>.</p>
 
       <h2>Accessibility</h2>
-      <p>The API always respects <code>prefers-reduced-motion</code>. A programmatic <code>play()</code> applies the final state instantly, still resolves <code>finished</code>, and still fires <code>motion-start</code> and <code>motion-finish</code>. So calling code never needs a reduced-motion branch.</p>
+      <p>The API always respects <code>prefers-reduced-motion</code>. A programmatic <code>play()</code> applies the final state instantly, still resolves <code>finished</code>, and still fires <code>motion-start</code> and <code>motion-finish</code>. So calling code never needs a reduced-motion branch. Two components keep running instead, because their job is ongoing: <code>motion-words</code> keeps changing words and <code>motion-countdown</code> keeps counting, both without animation, and the playback methods control them as usual.</p>
     </main>
   </div>
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-circle";
+  import "motion-components/motion-reveal";
+  import "motion-components/motion-split";
+  import "motion-components/motion-ticker";
+  import "motion-components/motion-typewriter";
 </script>
 
 <style>

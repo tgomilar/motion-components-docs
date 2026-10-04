@@ -174,11 +174,11 @@ useHead({ style: [{ children: preloadCSS }] })
 ];
 ---
 
-<Layout title="Docs — Motion Components" description="Explore the full Motion Components API. Animate, reveal, respond, and compose with spring-based web components. Framework-agnostic and drop-in." noMain>
+<Layout title="Docs: Spring Animation Web Components — Motion Components" description="Explore the full Motion Components API. Animate, reveal, respond, and compose with spring-based web components. Framework-agnostic and drop-in." noMain>
   <div class="layout">
     <DocsSidebar backHref="/" backLabel="← Home" />
 
-    <main>
+    <main id="main">
       <h1>Documentation</h1>
       <p class="lead">Motion Components is a library of physics-based web components. Compose primitives to build natural, interruptible interactions.</p>
 
@@ -248,7 +248,7 @@ console.log(el.to)`}
 </script>`}
       />
       <p class="section-lead">
-        The full bundle (<motion-code-inline copy>import 'motion-components'</motion-code-inline>) is convenient and brotli-compresses to ~20&nbsp;KB for all components. Per-component
+        The full bundle (<motion-code-inline copy>import 'motion-components'</motion-code-inline>) is convenient and brotli-compresses to ~40&nbsp;KB for all components, Lit and Motion included. Per-component
         imports drop straight to the cost of just the tags you use.
       </p>
 
@@ -306,7 +306,7 @@ document.head.appendChild(style)`}
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-code-inline";
 </script>
 
 <style>

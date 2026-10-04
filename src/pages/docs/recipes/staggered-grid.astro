@@ -12,7 +12,7 @@ import "../../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1>Staggered Grid</h1>
       <p class="lead">A grid of cards that fade in sequentially when they enter the viewport. The stagger handles timing, the reveal handles the entrance.</p>
 
@@ -142,7 +142,9 @@ import "../../../styles/docs.css";
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-code-inline";
+  import "motion-components/motion-reveal";
+  import "motion-components/motion-stagger";
 </script>
 
 <style>

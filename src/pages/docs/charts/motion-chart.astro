@@ -102,7 +102,7 @@ const props = defineProps(['months', 'sales'])
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-chart</motion-split></h1>
       <p class="lead">
         Bar and line charts written in HTML. Put the numbers in an attribute or wrap a table. Bars grow and lines draw in when the chart scrolls into
@@ -145,7 +145,7 @@ document.querySelector('#new-data').addEventListener('click', () => {
       <CodeWindow filename="terminal" copy code={`npm install motion-components`} />
       <CodeWindow filename="app.js" copy code={`import 'motion-components/motion-chart'`} />
 
-      <h2>Give the chart its data</h2>
+      <h2 id="give-the-chart-its-data">Give the chart its data</h2>
       <p>There are three ways. Pick the one that fits where your data comes from.</p>
 
       <h3>1. Numbers in attributes</h3>
@@ -183,6 +183,13 @@ document.querySelector('#new-data').addEventListener('click', () => {
         </div>
       </DocsPreview>
       <CodeWindow filename="index.html" copy code={tableCode} />
+      <p>How a cell becomes a number:</p>
+      <ul>
+        <li>The first number in the cell is used, so units and notes around it are ignored: <code>€12k</code> reads as 12, <code>3 – 5%</code> as 3.</li>
+        <li>Commas group thousands and a dot marks decimals: <code>1,234.5</code> reads as 1234.5.</li>
+        <li>A cell without a number, such as <code>—</code>, counts as 0.</li>
+        <li>For other formats, such as <code>1.234,5</code>, put the number in <code>data-value</code>: <code>&lt;td data-value="1234.5"&gt;1.234,5&lt;/td&gt;</code>. It overrides the cell text.</li>
+      </ul>
 
       <h3>3. From JavaScript</h3>
       <p>Set the <code>data</code> property. Every time you set it, the chart springs to the new values.</p>
@@ -298,7 +305,8 @@ chart.data = {
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-chart";
+  import "motion-components/motion-split";
 
   type Chart = HTMLElement & { values: string };
 

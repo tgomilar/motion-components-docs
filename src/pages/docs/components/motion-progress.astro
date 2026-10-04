@@ -10,14 +10,14 @@ import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
 
-<Layout title="motion-progress — Motion Components" description="Fixed scroll-progress bar driven by Motion One. Spring-eased scaleX so the bar settles past its target instead of hard-snapping." noMain>
+<Layout title="motion-progress — Motion Components" description="Fixed scroll-progress bar driven by Motion. Spring-eased scaleX so the bar settles past its target instead of hard-snapping." noMain>
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-progress</motion-split></h1>
       <p class="lead">
-        Fixed scroll-progress bar driven by Motion One's <code>scroll()</code>. Spring-eased <code>scaleX</code>, so the bar settles past its target instead of hard-snapping.
+        Fixed scroll-progress bar driven by Motion's <code>scroll()</code>. Spring-eased <code>scaleX</code>, so the bar settles past its target instead of hard-snapping.
       </p>
 
       <h2>Preview</h2>
@@ -84,7 +84,7 @@ import 'motion-components'               // or the whole library`}
 
       <h2>Accessibility</h2>
       <p>
-        The bar is rendered with <code>role="progressbar"</code>. It does not steal focus or pointer events. Spring overshoot is deliberately small;
+        The bar is decorative and rendered with <code>aria-hidden="true"</code>, so screen readers skip it. It does not steal focus or pointer events. Spring overshoot is deliberately small;
         if you need a perfectly linear bar, set <motion-code-inline copy>bounce="0"</motion-code-inline>.
       </p>
       <DocsPagination />
@@ -94,7 +94,7 @@ import 'motion-components'               // or the whole library`}
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-split";
 </script>
 
 <style>
