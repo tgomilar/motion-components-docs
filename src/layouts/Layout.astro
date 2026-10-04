@@ -1,5 +1,6 @@
 ---
 import { preloadCSS } from "motion-components/preload";
+import { COMPONENT_TOPICS } from "../data/seo";
 import Footer from "../components/Footer.astro";
 import Nav from "../components/Nav.astro";
 
@@ -10,18 +11,18 @@ interface Props {
   ogImageAlt?: string;
   ogType?: string;
   noMain?: boolean;
-  keywords?: string;
+  noindex?: boolean;
   author?: string;
 }
 
 const {
   title,
   description = "A framework-agnostic web components library focused on high-quality motion and transitions",
-  ogImage = "/og-template.png",
+  ogImage,
   ogImageAlt = "Motion Components — Motion-first web components library",
   ogType,
   noMain = false,
-  keywords,
+  noindex = false,
   author,
 } = Astro.props;
 const { pathname } = Astro.url;
@@ -29,7 +30,20 @@ const showBg = !pathname.startsWith("/docs") && !pathname.startsWith("/showcase"
 const showProgress = pathname.startsWith("/docs") || pathname.startsWith("/blog");
 const resolvedOgType = ogType ?? (pathname.startsWith("/docs/") || pathname.startsWith("/blog/") ? "article" : "website");
 
-const ogImageUrl = new URL(ogImage, Astro.url.origin).href;
+const SUFFIX = " — Motion Components";
+const tag = pathname.match(/^\/docs\/[a-z]+\/(motion-[a-z-]+)\/$/)?.[1];
+const fullTitle = tag && COMPONENT_TOPICS[tag] ? `${tag}: ${COMPONENT_TOPICS[tag]}${SUFFIX}` : title;
+const pageTitle = fullTitle.length > 65 && fullTitle.endsWith(SUFFIX) ? fullTitle.slice(0, -SUFFIX.length) : fullTitle;
+const snippet = description.length > 160 ? `${description.slice(0, 157).replace(/[\s,;:.]+\S*$/, "")}…` : description;
+
+const markdown =
+  /^\/docs\/[a-z]+\/motion-[a-z-]+\/$/.test(pathname) || /^\/docs\/(js-api|migration|recipes\/[a-z-]+)?\/?$/.test(pathname)
+    ? pathname.replace(/\/$/, ".md")
+    : null;
+
+const hasShareImage = /^\/docs\/[a-z]+\/motion-[a-z-]+\/$/.test(pathname) || /^\/blog\/[^/]+\/$/.test(pathname);
+const pageImage = hasShareImage ? `/og${pathname.replace(/\/$/, ".png")}` : "/og-template.png";
+const ogImageUrl = new URL(ogImage ?? pageImage, Astro.url.origin).href;
 
 const breadcrumbSegments = pathname.split("/").filter(Boolean);
 const breadcrumbItems = [
@@ -40,25 +54,47 @@ const breadcrumbItems = [
   })),
 ];
 
+const website = { "@type": "WebSite", "@id": `${Astro.url.origin}/#website`, name: "Motion Components", url: `${Astro.url.origin}/` };
+const library = {
+  "@type": "SoftwareSourceCode",
+  "@id": `${Astro.url.origin}/#library`,
+  name: "motion-components",
+  description: "Framework-agnostic web components for spring-based motion: reveals, hover and press responses, text effects, animated icons, scroll scenes, charts and widgets.",
+  url: `${Astro.url.origin}/`,
+  codeRepository: "https://github.com/tgomilar/motion-components",
+  programmingLanguage: ["TypeScript", "HTML"],
+  runtimePlatform: "Web browser",
+  license: "https://opensource.org/licenses/MIT",
+  author: { "@type": "Person", name: "Tanja Gomilar", url: "https://github.com/tgomilar" },
+};
+
 const jsonLd =
   pathname === "/"
-    ? JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        name: "Motion Components",
-        url: Astro.url.origin,
-        description,
-      })
+    ? JSON.stringify({ "@context": "https://schema.org", "@graph": [{ ...website, description }, library] })
     : pathname.startsWith("/docs/")
       ? JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: breadcrumbItems.map((item, i) => ({
-            "@type": "ListItem",
-            position: i + 1,
-            name: item.name,
-            item: item.url,
-          })),
+          "@graph": [
+            {
+              "@type": "TechArticle",
+              headline: pageTitle.replace(SUFFIX, ""),
+              description,
+              url: Astro.url.href,
+              inLanguage: "en",
+              image: ogImageUrl,
+              isPartOf: { "@id": `${Astro.url.origin}/#website` },
+              about: { "@id": `${Astro.url.origin}/#library` },
+            },
+            {
+              "@type": "BreadcrumbList",
+              itemListElement: breadcrumbItems.map((item, i) => ({
+                "@type": "ListItem",
+                position: i + 1,
+                name: item.name,
+                item: item.url,
+              })),
+            },
+          ],
         })
       : null;
 ---
@@ -68,20 +104,21 @@ const jsonLd =
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content={description} />
+    <meta name="description" content={snippet} />
     {author && <meta name="author" content={author} />}
-    <meta name="robots" content="index, follow" />
-    {keywords && <meta name="keywords" content={keywords} />}
-    <title>{title}</title>
-    <link rel="canonical" href={Astro.url.href} />
+    <meta name="robots" content={noindex ? "noindex, follow" : "index, follow"} />
+    <title>{pageTitle}</title>
+    {!noindex && <link rel="canonical" href={Astro.url.href} />}
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link rel="alternate" type="application/rss+xml" title="Motion Components Blog" href="/rss.xml" />
+    {markdown && <link rel="alternate" type="text/markdown" href={markdown} />}
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <meta name="theme-color" content="#2563eb" />
     <meta property="og:type" content={resolvedOgType} />
     <meta property="og:locale" content="en_US" />
     <meta property="og:site_name" content="Motion Components" />
-    <meta property="og:title" content={title} />
+    <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={Astro.url.href} />
     <meta property="og:image" content={ogImageUrl} />
@@ -89,14 +126,30 @@ const jsonLd =
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content={ogImageAlt} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
+    <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImageUrl} />
     <meta name="twitter:image:alt" content={ogImageAlt} />
     {jsonLd && <script is:inline type="application/ld+json" set:html={jsonLd} />}
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet" />
+    <link rel="preload" href="/fonts/jetbrains-mono-latin-500.woff2" as="font" type="font/woff2" crossorigin />
+    <style is:inline>
+      @font-face {
+        font-family: "JetBrains Mono";
+        font-style: normal;
+        font-weight: 500;
+        font-display: swap;
+        src: url("/fonts/jetbrains-mono-latin-500.woff2") format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+      @font-face {
+        font-family: "JetBrains Mono";
+        font-style: normal;
+        font-weight: 700;
+        font-display: swap;
+        src: url("/fonts/jetbrains-mono-latin-700.woff2") format("woff2");
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+      }
+    </style>
     <meta name="google-site-verification" content="8oCrUMilW9lL38eQjv8_OuGkx1qpLnu4hVR_9dW2sZ0" />
     <style is:inline set:html={preloadCSS}></style>
 
@@ -184,6 +237,26 @@ const jsonLd =
         --color-accent: #60a5fa;
         --color-accent-dim: #60a5fa18;
         --color-yellow: #facc15;
+      }
+
+      .skip-link {
+        position: fixed;
+        top: 0.75rem;
+        left: 0.75rem;
+        z-index: 1000;
+        padding: 0.6rem 1rem;
+        border-radius: 10px;
+        background: var(--color-accent);
+        color: var(--color-bg);
+        font-weight: 600;
+        text-decoration: none;
+        transform: translateY(-200%);
+      }
+
+      .skip-link:focus-visible {
+        transform: none;
+        outline: 2px solid var(--color-text);
+        outline-offset: 2px;
       }
 
       html {
@@ -391,6 +464,13 @@ const jsonLd =
         }
       }
 
+      @media (prefers-reduced-motion: reduce) {
+        .blob,
+        .orb {
+          animation: none;
+        }
+      }
+
       @keyframes drift-1 {
         0% {
           transform: translate(0, 0) rotate(0deg);
@@ -482,6 +562,7 @@ const jsonLd =
     </style>
   </head>
   <body>
+    <a class="skip-link" href="#main">Skip to content</a>
     {
       showBg && (
         <div class="bg" aria-hidden="true">
@@ -496,16 +577,19 @@ const jsonLd =
       )
     }
     <Nav />
-    {showProgress && <motion-progress thickness="3" style="--progress-color: var(--color-accent)" />}
+    {showProgress && <motion-progress thickness="3" style="--progress-color: var(--color-yellow)" />}
     {
       noMain ? (
         <slot />
       ) : (
-        <main>
+        <main id="main">
           <slot />
         </main>
       )
     }
     <Footer />
+    <script>
+      import "motion-components/motion-progress";
+    </script>
   </body>
 </html>

@@ -12,9 +12,9 @@ Here's the finished markup. Everything else in this article is explanation:
 
 ```html
 <section class="hero">
-  <motion-headline by="words" interval="0.06" duration="1">
-    <h1>Ship motion your users can feel</h1>
-  </motion-headline>
+  <h1>
+    <motion-headline by="words" interval="0.06" duration="1">Ship motion your users can feel</motion-headline>
+  </h1>
 
   <motion-reveal y="24" duration="0.6">
     <p>Physics-based web components for any framework.
@@ -46,9 +46,9 @@ The stylesheet stops the headline and buttons from flashing fully visible before
 ## The headline: `motion-headline`
 
 ```html
-<motion-headline by="words" interval="0.06" duration="1">
-  <h1>Ship motion your users can feel</h1>
-</motion-headline>
+<h1>
+  <motion-headline by="words" interval="0.06" duration="1">Ship motion your users can feel</motion-headline>
+</h1>
 ```
 
 `motion-headline` wraps each word in an overflow-hidden mask and springs it up into view. It is the reveal style you've seen on every high-end agency site, without the agency. Three attributes carry the whole effect:
@@ -57,7 +57,7 @@ The stylesheet stops the headline and buttons from flashing fully visible before
 - **`interval="0.06"`**: seconds between each word starting. This knob controls perceived speed more than `duration` does. At `0.03` the headline pours in; at `0.12` it becomes deliberate.
 - **`duration="1"`**: the spring duration hint for each word's individual rise.
 
-The `<h1>` stays a real `<h1>`. The component masks and animates it without changing document semantics, and screen readers get the full text through `aria-label` rather than a soup of `<span>` fragments.
+Put `motion-headline` inside the `<h1>`, not around it. The component replaces its own content with the animated pieces, so a heading inside it would be lost. This way the `<h1>` stays a real `<h1>`, and screen readers get the full text from a visually hidden copy rather than a soup of `<span>` fragments.
 
 If the slide-up mask is too subtle for your brand, `variant="flip"` swaps it for a 3D card-flip per word. Use it sparingly.
 

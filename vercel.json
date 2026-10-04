@@ -1,0 +1,165 @@
+{
+  "trailingSlash": true,
+  "redirects": [
+    {
+      "source": "/docs/interaction/motion-countdown",
+      "destination": "/docs/components/motion-countdown/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/interaction/motion-countdown/",
+      "destination": "/docs/components/motion-countdown/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/interaction/motion-dialog",
+      "destination": "/docs/components/motion-dialog/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/interaction/motion-dialog/",
+      "destination": "/docs/components/motion-dialog/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/interaction/motion-flip-card",
+      "destination": "/docs/components/motion-flip-card/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/interaction/motion-flip-card/",
+      "destination": "/docs/components/motion-flip-card/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/interaction/motion-gallery",
+      "destination": "/docs/components/motion-gallery/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/interaction/motion-gallery/",
+      "destination": "/docs/components/motion-gallery/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/interaction/motion-image-compare",
+      "destination": "/docs/components/motion-image-compare/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/interaction/motion-image-compare/",
+      "destination": "/docs/components/motion-image-compare/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/interaction/motion-progress",
+      "destination": "/docs/components/motion-progress/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/interaction/motion-progress/",
+      "destination": "/docs/components/motion-progress/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/interaction/motion-slider",
+      "destination": "/docs/components/motion-slider/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/interaction/motion-slider/",
+      "destination": "/docs/components/motion-slider/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/interaction/motion-spotlight",
+      "destination": "/docs/components/motion-spotlight/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/interaction/motion-spotlight/",
+      "destination": "/docs/components/motion-spotlight/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/primitives/motion-blur",
+      "destination": "/docs/reveal/motion-blur/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/primitives/motion-blur/",
+      "destination": "/docs/reveal/motion-blur/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/primitives/motion-blur-in",
+      "destination": "/docs/reveal/motion-blur-in/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/primitives/motion-blur-in/",
+      "destination": "/docs/reveal/motion-blur-in/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/primitives/motion-reveal",
+      "destination": "/docs/reveal/motion-reveal/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/primitives/motion-reveal/",
+      "destination": "/docs/reveal/motion-reveal/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/primitives/motion-stagger",
+      "destination": "/docs/reveal/motion-stagger/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/primitives/motion-stagger/",
+      "destination": "/docs/reveal/motion-stagger/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/primitives/motion-hover",
+      "destination": "/docs/respond/motion-hover/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/primitives/motion-hover/",
+      "destination": "/docs/respond/motion-hover/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/primitives/motion-magnetic",
+      "destination": "/docs/respond/motion-magnetic/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/primitives/motion-magnetic/",
+      "destination": "/docs/respond/motion-magnetic/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/primitives/motion-press",
+      "destination": "/docs/respond/motion-press/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/primitives/motion-press/",
+      "destination": "/docs/respond/motion-press/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/primitives/motion-tilt",
+      "destination": "/docs/respond/motion-tilt/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/primitives/motion-tilt/",
+      "destination": "/docs/respond/motion-tilt/",
+      "permanent": true
+    }
+  ]
+}

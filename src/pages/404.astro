@@ -2,10 +2,11 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="404 — Page not found" noMain>
-  <main class="error-page">
+<Layout title="404 — Page not found" description="This page doesn't exist or has moved. Browse the motion-components docs or go back to the homepage." noMain noindex>
+  <main id="main" class="error-page">
     <div class="error-inner">
 
+      <h1 class="visually-hidden">Page not found</h1>
       <p class="error-code-label">ERROR</p>
 
       <motion-glitch trigger="loop" interval="1.4" intensity="10" class="error-404">
@@ -30,10 +31,19 @@ import Layout from "../layouts/Layout.astro";
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-glitch";
 </script>
 
 <style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
   .error-page {
     min-height: 100vh;
     display: flex;

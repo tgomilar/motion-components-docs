@@ -33,6 +33,7 @@ const jsonLd = JSON.stringify({
     url: "https://www.motion-components.dev"
   },
   url: Astro.url.href,
+  image: new URL(`/og/blog/${post.id}.png`, Astro.url.origin).href,
   mainEntityOfPage: {
     "@type": "WebPage",
     "@id": Astro.url.href
@@ -47,7 +48,7 @@ const jsonLd = JSON.stringify({
 });
 ---
 
-<Layout title={`${post.data.title} — Motion Components`} description={post.data.description} ogType="article" keywords={post.data.tags.join(", ")} author={post.data.author}>
+<Layout title={`${post.data.title} — Motion Components`} description={post.data.description} ogType="article" author={post.data.author}>
   <script is:inline type="application/ld+json" set:html={jsonLd} />
   <meta property="article:published_time" content={post.data.pubDate.toISOString()} />
   <meta property="article:modified_time" content={post.data.pubDate.toISOString()} />

@@ -2,9 +2,10 @@
 import Layout from '../../layouts/Layout.astro'
 ---
 
-<Layout title="Parallax — motion-parallax Showcase" noMain>
+<Layout title="Parallax — motion-parallax Showcase" description="A scroll-driven parallax showcase built with motion-parallax: layers moving at different speeds, depth planes and sideways drift, all from HTML attributes." noMain>
   <div class="showcase">
     <section class="hero">
+      <h1 class="visually-hidden">Every layer moves: a motion-parallax showcase</h1>
       <motion-parallax depth="0.03" class="hero-grid"></motion-parallax>
 
       <motion-parallax depth="0.06" class="hero-blur"></motion-parallax>
@@ -127,10 +128,19 @@ import Layout from '../../layouts/Layout.astro'
 </Layout>
 
 <script>
-  import 'motion-components'
+  import "motion-components/motion-parallax";
 </script>
 
 <style>
+  .visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+
   .showcase {
     color: var(--color-text);
     min-height: 100vh;
