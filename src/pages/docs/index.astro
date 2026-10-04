@@ -248,7 +248,7 @@ console.log(el.to)`}
 </script>`}
       />
       <p class="section-lead">
-        The full bundle (<code>import 'motion-components'</code>) is convenient and brotli-compresses to ~20&nbsp;KB for all components. Per-component
+        The full bundle (<motion-code-inline copy>import 'motion-components'</motion-code-inline>) is convenient and brotli-compresses to ~20&nbsp;KB for all components. Per-component
         imports drop straight to the cost of just the tags you use.
       </p>
 
@@ -261,7 +261,7 @@ console.log(el.to)`}
       <h2 id="flash">Flash prevention</h2>
       <p class="section-lead">
         Web components are undefined when the HTML first renders. The browser treats <code>&lt;motion-flip-card&gt;</code> as a plain <code>HTMLElement</code>.
-        Its Light DOM children (<code>slot="back"</code> content, dialog panels, etc.) display as unstyled visible DOM before the JavaScript bundle
+        Its Light DOM children (<motion-code-inline copy>slot="back"</motion-code-inline> content, dialog panels, etc.) display as unstyled visible DOM before the JavaScript bundle
         arrives and calls <code>customElements.define()</code>. Slot-based components are especially sensitive because they carry visible Light DOM.
       </p>
 

@@ -109,7 +109,7 @@ animate(card, {
       />
 
       <h2>On reveal: type once</h2>
-      <p>Set <code>typing-loop="false"</code> to type once. The animation then plays when the element scrolls into view instead of starting immediately.</p>
+      <p>Set <motion-code-inline copy>typing-loop="false"</motion-code-inline> to type once. The animation then plays when the element scrolls into view instead of starting immediately.</p>
       <DocsPreview replayId="cw-reveal-demo">
         <div class="demo-window">
           <CodeWindow
@@ -250,7 +250,7 @@ animate(".hero", {
         { name: 'typing',          type: 'boolean', default: 'false',      description: 'Animate code in character by character with a blinking cursor. Loops automatically.' },
         { name: 'typing-speed',    type: 'number',  default: '80',         description: 'Typing speed in characters per second' },
         { name: 'typing-delay',    type: 'number',  default: '0',          description: 'Seconds to wait before typing starts, on every pass' },
-        { name: 'typing-loop',     type: 'boolean', default: 'true',       description: 'Repeat the typing. Set <code>typing-loop="false"</code> to type once when the block scrolls into view' },
+        { name: 'typing-loop',     type: 'boolean', default: 'true',       description: 'Repeat the typing. Set <motion-code-inline copy>typing-loop="false"</motion-code-inline> to type once when the block scrolls into view' },
         { name: 'typing-hold',     type: 'number',  default: '1.5',        description: 'Seconds to hold the finished code before typing it again' },
       ]} />
 
@@ -278,7 +278,7 @@ animate(".hero", {
       <p>
         Every playback verb drives the typing animation: <code>play()</code>, <code>pause()</code>, <code>finish()</code> (snap to the fully-typed
         code), and <code>cancel()</code> (clear the window). <code>replay()</code> is shorthand for <code>cancel()</code> + <code>play()</code>.
-        This instance uses <code>typing-loop="false"</code>, so a completed run settles into the <code>finished</code> state.
+        This instance uses <motion-code-inline copy>typing-loop="false"</motion-code-inline>, so a completed run settles into the <code>finished</code> state.
       </p>
       <JsApiDemo mode="looper" target="api-code-demo">
         <div class="demo-window">

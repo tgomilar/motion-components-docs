@@ -41,11 +41,11 @@ import 'motion-components'               // or the whole library`}
       <h2>Properties</h2>
       <PropsTable nameLabel="Attribute" rows={[
         { name: 'trigger', type: 'string', default: "'hover'", description: "Animation trigger: <code>'hover'</code> swaps in and out on mouseenter and mouseleave. <code>'view'</code> plays once on viewport entry" },
-        { name: 'reverse', type: 'boolean', default: 'true', description: 'Letters swap bottom-to-top. Set <code>reverse="false"</code> to swap top-to-bottom.' },
+        { name: 'reverse', type: 'boolean', default: 'true', description: 'Letters swap bottom-to-top. Set <motion-code-inline copy>reverse="false"</motion-code-inline> to swap top-to-bottom.' },
         { name: 'interval', type: 'number', default: '0.03', description: 'Delay in seconds between each character\'s animation start' },
         { name: 'duration', type: 'number', default: '0.7', description: 'Spring duration of each character swap, in seconds' },
         { name: 'bounce', type: 'number', default: '0.3', description: 'Spring bounciness: <code>0</code> settles without overshoot, higher is more elastic' },
-        { name: 'once', type: 'boolean', default: 'true', description: 'Animate only on first intersection (<code>trigger="view"</code>). Set <code>once="false"</code> to animate on every entry' },
+        { name: 'once', type: 'boolean', default: 'true', description: 'Animate only on first intersection (<motion-code-inline copy>trigger="view"</motion-code-inline>). Set <motion-code-inline copy>once="false"</motion-code-inline> to animate on every entry' },
         { name: 'delay', type: 'number', default: '0', description: 'Delay in seconds before animation starts' },
       ]} />
       <h2>JavaScript API</h2>

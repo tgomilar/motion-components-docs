@@ -133,7 +133,8 @@ p {
   margin-bottom: 1rem;
 }
 
-code {
+code,
+motion-code-inline:not(:defined) {
   font-family: var(--font-mono);
   font-size: 0.82rem;
   color: var(--color-accent);
@@ -283,7 +284,8 @@ motion-code {
   border-bottom: none;
 }
 
-.methods-table code {
+.methods-table code,
+motion-code-inline:not(:defined) {
   font-family: var(--font-mono);
   font-size: 0.82rem;
   color: var(--color-accent);

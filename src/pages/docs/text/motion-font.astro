@@ -48,7 +48,7 @@ import "../../../styles/docs.css";
       />
 
       <h2>View: viewport reveal</h2>
-      <p class="section-desc">Animates the axis once when the element scrolls into view. Ideal for hero headings that gain weight on entrance. Set <code>once="false"</code> to replay it every time the element enters the viewport.</p>
+      <p class="section-desc">Animates the axis once when the element scrolls into view. Ideal for hero headings that gain weight on entrance. Set <motion-code-inline copy>once="false"</motion-code-inline> to replay it every time the element enters the viewport.</p>
       <DocsPreview replayId="vf-auto-demo">
         <motion-font id="vf-auto-demo" axis="wght" from="100" to="900" duration="1.2" trigger="view" class="vf-demo">
           Weight reveal
@@ -147,12 +147,12 @@ import "../../../styles/docs.css";
         { name: 'bounce',   type: 'number',  default: '0',      description: 'Spring bounciness 0–1. 0 = no overshoot, 1 = very bouncy.' },
         { name: 'delay',    type: 'number',  default: '0',      description: 'Delay before animation starts in seconds.' },
         { name: 'trigger',  type: 'string',  default: "'view'", description: "<code>'view'</code>: on viewport entry &nbsp;|&nbsp; <code>'hover'</code>: on mouseenter / focusin &nbsp;|&nbsp; <code>'scroll'</code>: axis tracks scroll position" },
-        { name: 'once',     type: 'boolean', default: 'true',   description: "For <code>trigger='view'</code>: animate only on the first intersection. Set it to <code>\"false\"</code> to animate on every entry." },
+        { name: 'once',     type: 'boolean', default: 'true',   description: "For <motion-code-inline copy>trigger='view'</motion-code-inline>: animate only on the first intersection. Set it to <code>\"false\"</code> to animate on every entry." },
       ]} />
 
       <h2>Methods</h2>
       <PropsTable nameLabel="Method" rows={[
-        { name: 'replay()', type: 'void', default: '—', description: 'Reset axis to <code>from</code> and re-run the entrance animation. Only has effect for <code>trigger="view"</code>.' },
+        { name: 'replay()', type: 'void', default: '—', description: 'Reset axis to <code>from</code> and re-run the entrance animation. Only has effect for <motion-code-inline copy>trigger="view"</motion-code-inline>.' },
       ]} />
 
       <p class="note">

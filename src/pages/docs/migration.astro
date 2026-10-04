@@ -14,27 +14,27 @@ const renames = [
   { tag: "motion-code", from: "type-speed", to: "typing-speed", how: "Same number, characters per second." },
   { tag: "motion-code", from: "type-delay", to: "typing-delay", how: "Divide by 1000. Now in seconds." },
   { tag: "motion-code", from: "type-loop-delay", to: "typing-hold", how: "Divide by 1000. Now in seconds." },
-  { tag: "motion-code", from: "no-loop", to: "typing-loop=\"false\"", how: "Looping is on by default. Set <code>typing-loop=\"false\"</code> to type once." },
-  { tag: "motion-curve", from: "speed", to: "wave-duration", how: "Use <code>1 / speed</code>. Seconds per wave cycle, so <code>speed=\"0.4\"</code> becomes <code>wave-duration=\"2.5\"</code>." },
+  { tag: "motion-code", from: "no-loop", to: "typing-loop=\"false\"", how: "Looping is on by default. Set <motion-code-inline copy>typing-loop=\"false\"</motion-code-inline> to type once." },
+  { tag: "motion-curve", from: "speed", to: "wave-duration", how: "Use <code>1 / speed</code>. Seconds per wave cycle, so <code>speed=\"0.4\"</code> becomes <motion-code-inline copy>wave-duration=\"2.5\"</motion-code-inline>." },
   { tag: "motion-font", from: "trigger=\"auto\"", to: "trigger=\"view\"", how: "Same behavior: animates when it scrolls into view." },
   { tag: "motion-glitch", from: "interval", to: "interval", how: "Divide by 1000. Now in seconds, so <code>2000</code> becomes <code>2</code>." },
   { tag: "motion-glitch", from: "trigger=\"auto\"", to: "trigger=\"mount\"", how: "Same behavior: glitches once on load." },
   { tag: "motion-gravity", from: "stagger", to: "interval", how: "Same number, seconds between characters." },
   { tag: "motion-gravity", from: "fixed spring", to: "duration, bounce", how: "<code>duration</code> now takes effect. <code>bounce</code> (default <code>0.45</code>) tunes the landing." },
-  { tag: "motion-liquid", from: "speed", to: "duration", how: "Use <code>9 / speed</code>. Seconds per distortion cycle, so <code>speed=\"2\"</code> becomes <code>duration=\"4.5\"</code>." },
+  { tag: "motion-liquid", from: "speed", to: "duration", how: "Use <code>9 / speed</code>. Seconds per distortion cycle, so <code>speed=\"2\"</code> becomes <motion-code-inline copy>duration=\"4.5\"</motion-code-inline>." },
   { tag: "motion-parallax", from: "speed", to: "depth", how: "Same number." },
   { tag: "motion-perspective", from: "animate", to: "oscillate", how: "Boolean, same meaning." },
-  { tag: "motion-perspective", from: "speed", to: "duration", how: "Use <code>1 / speed</code>. Seconds per cycle, so <code>speed=\"1.5\"</code> becomes <code>duration=\"0.667\"</code>." },
-  { tag: "motion-progress", from: "color", to: "--progress-color", how: "Now a CSS custom property: <code>style=\"--progress-color: #60a5fa\"</code>." },
+  { tag: "motion-perspective", from: "speed", to: "duration", how: "Use <code>1 / speed</code>. Seconds per cycle, so <code>speed=\"1.5\"</code> becomes <motion-code-inline copy>duration=\"0.667\"</motion-code-inline>." },
+  { tag: "motion-progress", from: "color", to: "--progress-color", how: "Now a CSS custom property: <motion-code-inline copy>style=\"--progress-color: #60a5fa\"</motion-code-inline>." },
   { tag: "motion-scramble", from: "speed", to: "interval", how: "Divide by 1000. Seconds between glyph swaps." },
   { tag: "motion-scramble", from: "delay", to: "delay", how: "Divide by 1000. Now in seconds." },
   { tag: "motion-scramble", from: "hover", to: "trigger=\"hover\"", how: "<code>trigger</code> is <code>'view'</code> (default) or <code>'hover'</code>." },
   { tag: "motion-slider", from: "slidechange event", to: "motion-change event", how: "Same <code>detail: &#123; index &#125;</code>. Now also composed." },
-  { tag: "motion-spotlight", from: "color", to: "--spotlight-color", how: "Now a CSS custom property: <code>style=\"--spotlight-color: rgba(96,165,250,0.25)\"</code>." },
+  { tag: "motion-spotlight", from: "color", to: "--spotlight-color", how: "Now a CSS custom property: <motion-code-inline copy>style=\"--spotlight-color: rgba(96,165,250,0.25)\"</motion-code-inline>." },
   { tag: "motion-spotlight", from: "smoothing, fade-duration", to: "duration, bounce", how: "The follow is now a spring. <code>duration</code> sets both the follow and the fade." },
   { tag: "motion-stretch", from: "stiffness, damping", to: "duration, bounce", how: "The defaults (<code>0.45</code>, <code>0.55</code>) match the old <code>320</code> and <code>16</code>." },
   { tag: "motion-swap", from: "stagger-duration", to: "interval", how: "Same number, seconds between characters." },
-  { tag: "motion-swap", from: "transition (property)", to: "duration, bounce", how: "The old default <code>&#123; type: 'spring', duration: 0.7 &#125;</code> is <code>duration=\"0.7\" bounce=\"0.3\"</code>." },
+  { tag: "motion-swap", from: "transition (property)", to: "duration, bounce", how: "The old default <code>&#123; type: 'spring', duration: 0.7 &#125;</code> is <motion-code-inline copy>duration=\"0.7\" bounce=\"0.3\"</motion-code-inline>." },
   { tag: "motion-swap", from: "trigger=\"reveal\"", to: "trigger=\"view\"", how: "Same behavior: swaps once when scrolled into view." },
   { tag: "motion-theme-toggle", from: "transition=\"wipe\"", to: "wipe", how: "The page wipe is now off by default. Add the boolean <code>wipe</code> to turn it on. <code>transition=\"none\"</code> can be removed." },
   { tag: "motion-typewriter", from: "speed", to: "interval", how: "Divide by 1000. Seconds between characters." },
@@ -67,7 +67,7 @@ const renames = [
             <tr><td><code>interval</code></td><td>Seconds between steps: characters, words or bursts.</td></tr>
             <tr><td><code>speed</code></td><td>Only a rate per second: pixels per second (<code>motion-ticker</code>, <code>loop-speed</code>) or characters per second (<code>typing-speed</code>).</td></tr>
             <tr><td>Springs</td><td>Every spring is tuned with <code>duration</code> and <code>bounce</code>.</td></tr>
-            <tr><td>Boolean attributes</td><td>Every boolean accepts <code>"false"</code>. Flags that are on by default, like <code>once</code>, <code>pin</code> or <code>labels</code>, can now be turned off in HTML: <code>once="false"</code>.</td></tr>
+            <tr><td>Boolean attributes</td><td>Every boolean accepts <code>"false"</code>. Flags that are on by default, like <code>once</code>, <code>pin</code> or <code>labels</code>, can now be turned off in HTML: <motion-code-inline copy>once="false"</motion-code-inline>.</td></tr>
             <tr><td>Triggers</td><td><code>'view'</code> means when it scrolls into view and <code>'mount'</code> means once on load. <code>'hover'</code>, <code>'click'</code>, <code>'loop'</code> and <code>'scroll'</code> keep their meaning.</td></tr>
             <tr><td>Events</td><td>Events start with <code>motion-</code>. The theme toggle keeps <code>colorschemechange</code> and <code>permanentcolorschemechange</code> for compatibility with <code>dark-mode-toggle</code>.</td></tr>
             <tr><td>CSS custom properties</td><td>Named after the component: <code>--dialog-*</code>, <code>--countdown-*</code>, <code>--code-*</code>, <code>--progress-color</code>, <code>--spotlight-color</code>.</td></tr>
@@ -111,7 +111,7 @@ const renames = [
         <li><code>motion-theme-toggle</code> has <code>icon-only</code> for the <code>toggle</code> appearance.</li>
         <li>Registering a component twice no longer throws. Two bundles can include the same component.</li>
         <li>Importing the library during server-side rendering no longer throws, so it works in Next.js, Astro and similar frameworks.</li>
-        <li><code>once="false"</code> replays the animation every time the element scrolls into view.</li>
+        <li><motion-code-inline copy>once="false"</motion-code-inline> replays the animation every time the element scrolls into view.</li>
         <li>Text components escape their text. Markup inside the text is shown as text and never runs as HTML.</li>
         <li>Screen readers read the whole text once in <code>motion-arc</code>, <code>motion-circle</code>, <code>motion-curve</code>, <code>motion-gravity</code> and <code>motion-perspective</code>, instead of letter by letter.</li>
         <li>With reduced motion, <code>motion-split</code> and <code>motion-headline</code> show their text at once.</li>
