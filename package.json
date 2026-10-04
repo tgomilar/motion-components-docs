@@ -39,6 +39,7 @@
     "build": "astro build && pagefind --site dist --glob \"{index.html,about/**/*.html,docs/**/*.html,blog/**/*.html,showcase/**/*.html}\"",
     "preview": "astro preview",
     "check": "astro check",
+    "check:site": "node scripts/check-site.mjs",
     "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {

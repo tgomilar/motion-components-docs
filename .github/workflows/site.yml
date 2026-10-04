@@ -1,0 +1,27 @@
+name: Site
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+
+      # Type-checks the Astro pages and scripts.
+      - run: npm run check
+
+      # Builds the static site, including the search index, Markdown files and share images.
+      - run: npm run build
+
+      # Fails on components a page never loads, broken internal links, future-dated posts,
+      # missing SEO basics, and properties tables that drift from the component code.
+      - run: npm run check:site
