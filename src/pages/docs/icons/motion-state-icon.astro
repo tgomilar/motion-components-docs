@@ -186,7 +186,7 @@ const liked = ref(false)
 
       <h2>Preview</h2>
       <p>Click an icon to switch its state.</p>
-      <DocsPreview>
+      <DocsPreview compact>
         <div class="grid">
           {icons.map((i) => (
             <div class="cell">
@@ -224,7 +224,7 @@ const liked = ref(false)
         Add <code>toggle</code> and <code>label</code>. The icon switches itself on click, <kbd>Space</kbd> or <kbd>Enter</kbd>, and fires
         <code>motion-change</code>.
       </p>
-      <DocsPreview>
+      <DocsPreview compact>
         <div class="grid">
           <div class="cell"><motion-state-icon id="like" name="heart" toggle label="Like"></motion-state-icon><span id="like-state">not liked</span></div>
         </div>
@@ -241,7 +241,7 @@ const liked = ref(false)
       <p>Each snippet is complete. Paste it into a page that loads the library.</p>
 
       <h3>Menu button</h3>
-      <DocsPreview>
+      <DocsPreview compact>
         <div class="grid">
           <button class="demo-action icon-only" id="menu-button" type="button" aria-label="Menu" aria-expanded="false"><motion-state-icon name="menu"></motion-state-icon></button>
         </div>
@@ -249,7 +249,7 @@ const liked = ref(false)
       <CodeWindow filename="index.html" copy code={recipes.menu} />
 
       <h3>Copy button</h3>
-      <DocsPreview>
+      <DocsPreview compact>
         <div class="grid">
           <button class="demo-action" id="copy-button" type="button"><motion-state-icon name="copy"></motion-state-icon>Copy</button>
         </div>
@@ -257,7 +257,7 @@ const liked = ref(false)
       <CodeWindow filename="index.html" copy code={recipes.copy} />
 
       <h3>Save button</h3>
-      <DocsPreview>
+      <DocsPreview compact>
         <div class="grid">
           <button class="demo-action" id="save-button" type="button"><motion-state-icon name="loading" active></motion-state-icon>Save</button>
         </div>
@@ -265,7 +265,7 @@ const liked = ref(false)
       <CodeWindow filename="index.html" copy code={recipes.save} />
 
       <h3>Show password</h3>
-      <DocsPreview>
+      <DocsPreview compact>
         <div class="grid">
           <div class="password">
             <input id="password" type="password" value="secret" aria-label="Password" />
@@ -276,7 +276,7 @@ const liked = ref(false)
       <CodeWindow filename="index.html" copy code={recipes.password} />
 
       <h3>Accordion</h3>
-      <DocsPreview>
+      <DocsPreview compact>
         <details id="faq" class="faq">
           <summary>What is motion-components?<motion-state-icon name="chevron"></motion-state-icon></summary>
           <p>Web components with spring-based motion.</p>
@@ -292,7 +292,7 @@ const liked = ref(false)
         Lines use <code>--icon-color</code>, which defaults to the text color. <code>--icon-accent</code> colors the filled heart and the copy and loading
         checks. By default the heart is red and the checks are green.
       </p>
-      <DocsPreview>
+      <DocsPreview compact>
         <div class="grid">
           <div class="cell"><motion-state-icon name="heart" toggle label="Like" active></motion-state-icon><span>default</span></div>
           <div class="cell"><motion-state-icon name="heart" toggle label="Like" active style="--icon-accent: #f59e0b"></motion-state-icon><span>--icon-accent</span></div>

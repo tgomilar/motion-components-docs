@@ -7,11 +7,12 @@ interface Props {
   tall?: boolean;
   noPad?: boolean;
   dark?: boolean;
+  compact?: boolean;
 }
-const { replayId, wide, tall, noPad, dark } = Astro.props;
+const { replayId, wide, tall, noPad, dark, compact } = Astro.props;
 ---
 
-<DemoCard {wide} {tall} {noPad} {dark} showBar={!!replayId}>
+<DemoCard {wide} {tall} {noPad} {dark} {compact} showBar={!!replayId}>
   <slot />
   {replayId && (
     <button slot="bar" class="replay-btn" data-replay={replayId}>

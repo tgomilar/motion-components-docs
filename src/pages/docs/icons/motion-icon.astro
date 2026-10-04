@@ -131,7 +131,7 @@ document.querySelector('#like-icon').icon = heart`,
 
       <h2>Preview</h2>
       <p>Hover an icon to draw it in.</p>
-      <DocsPreview>
+      <DocsPreview compact>
         <div class="row">
           <div class="cell"><motion-icon src={lucide("heart")} style="--icon-color: #e11d48"></motion-icon><span>heart</span></div>
           <div class="cell"><motion-icon src={lucide("bell")} style="--icon-color: #f59e0b"></motion-icon><span>bell</span></div>
@@ -161,7 +161,7 @@ document.querySelector('#like-icon').icon = heart`,
         Put the SVG files in a folder of your site and point <code>src</code> at them. This works for any icon: one from an icon set, or one you drew
         yourself. These two icons load from this site's own <code>/icons</code> folder:
       </p>
-      <DocsPreview>
+      <DocsPreview compact>
         <div class="row">
           <div class="cell"><motion-icon src="/icons/heart.svg" style="--icon-color: #e11d48"></motion-icon><span>/icons/heart.svg</span></div>
           <div class="cell"><motion-icon src="/icons/brackets.svg" animation="draw" style="--icon-color: #6366f1"></motion-icon><span>/icons/brackets.svg</span></div>
@@ -181,7 +181,7 @@ document.querySelector('#like-icon').icon = heart`,
 
       <h3>3. Inline SVG</h3>
       <p>Paste the icon's <code>&lt;svg&gt;</code> inside the element. Most icon websites have a "Copy SVG" button.</p>
-      <DocsPreview>
+      <DocsPreview compact>
         <div class="row">
           <div class="cell"><motion-icon><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5" /></svg></motion-icon><span>check</span></div>
         </div>
@@ -205,7 +205,7 @@ document.querySelector('#like-icon').icon = heart`,
         Every library below publishes its icons as SVG files on the <a href="https://www.jsdelivr.com" target="_blank" rel="noopener">jsDelivr</a> CDN.
         Find an icon on the library's website, copy its line below and replace the name at the end of the URL. Hover the hearts to compare them.
       </p>
-      <DocsPreview>
+      <DocsPreview compact>
         <div class="row">
           {libraries.map((lib) => (
             <div class="cell">
@@ -242,7 +242,7 @@ document.querySelector('#like-icon').icon = heart`,
 
       <h2>Inside a button</h2>
       <p>Inside a <code>&lt;button&gt;</code> or <code>&lt;a&gt;</code>, the icon animates when the whole button is hovered or clicked, not only the icon.</p>
-      <DocsPreview>
+      <DocsPreview compact>
         <div class="row">
           <button class="demo-btn"><motion-icon src={lucide("send")} animation="bounce"></motion-icon>Send</button>
           <button class="demo-btn"><motion-icon src={lucide("refresh-cw")} animation="rotate" trigger="click" duration="0.9"></motion-icon>Refresh</button>
@@ -261,7 +261,7 @@ document.querySelector('#like-icon').icon = heart`,
 
       <h2>Animations</h2>
       <p>Hover each icon. <code>draw</code> needs a stroke icon; the others work with any icon.</p>
-      <DocsPreview>
+      <DocsPreview compact>
         <div class="row">
           <div class="cell"><motion-icon src={lucide("heart")} animation="draw"></motion-icon><span>draw</span></div>
           <div class="cell"><motion-icon src={lucide("thumbs-up")} animation="pop"></motion-icon><span>pop</span></div>
@@ -280,7 +280,7 @@ document.querySelector('#like-icon').icon = heart`,
 
       <h2>Triggers</h2>
       <p><code>trigger</code> decides when the animation runs: <code>hover</code> (default), <code>click</code>, <code>view</code> (when it scrolls into view), <code>mount</code> or <code>loop</code>.</p>
-      <DocsPreview>
+      <DocsPreview compact>
         <div class="row">
           <div class="cell"><motion-icon src={lucide("rocket")} trigger="view" once="false"></motion-icon><span>view</span></div>
           <div class="cell"><motion-icon src={lucide("mail")} trigger="click" animation="pop"></motion-icon><span>click</span></div>
@@ -293,7 +293,7 @@ document.querySelector('#like-icon').icon = heart`,
 
       <h2>Color and size</h2>
       <p>The icon uses <code>currentColor</code>, so it follows the text color. Set <code>--icon-color</code> to color it and <code>--icon-size</code> to size it.</p>
-      <DocsPreview>
+      <DocsPreview compact>
         <div class="row">
           <div class="cell"><motion-icon src={lucide("heart")} trigger="loop" animation="pulse" interval="0.4" style="--icon-color: #e11d48; --icon-size: 3rem"></motion-icon><span>#e11d48</span></div>
           <div class="cell"><motion-icon src={lucide("sparkles")} trigger="loop" interval="1.5" style="--icon-color: #d946ef; --icon-size: 3rem"></motion-icon><span>#d946ef</span></div>
@@ -310,7 +310,7 @@ document.querySelector('#like-icon').icon = heart`,
         <code>--icon-fill</code> colors the inside of an outline icon. With <code>draw</code>, the fill fades in as the lines finish. For an icon on a
         colored background, style the element itself and make the icon white.
       </p>
-      <DocsPreview>
+      <DocsPreview compact>
         <div class="row">
           <div class="cell"><motion-icon src={lucide("star")} animation="pop" style="--icon-color: #f59e0b; --icon-fill: #f59e0b33; --icon-size: 3rem"></motion-icon><span>tinted fill</span></div>
           <div class="cell"><motion-icon src={lucide("heart")} trigger="loop" interval="1.5" style="--icon-color: #e11d48; --icon-fill: #e11d48; --icon-size: 3rem"></motion-icon><span>solid fill</span></div>
