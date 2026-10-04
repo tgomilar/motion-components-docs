@@ -35,7 +35,7 @@ const tileCode = `<div class="stat">
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-sparkline</motion-split></h1>
       <p class="lead">
         A small trend line that fits inside a sentence, a table cell or a stat tile. It draws itself in when it scrolls into view, and springs to new
@@ -162,7 +162,9 @@ const tileCode = `<div class="stat">
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-counter";
+  import "motion-components/motion-sparkline";
+  import "motion-components/motion-split";
 
   const spark = document.getElementById("live-spark") as (HTMLElement & { values: string }) | null;
   if (spark) {

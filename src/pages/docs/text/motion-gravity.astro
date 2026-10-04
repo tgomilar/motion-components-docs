@@ -14,7 +14,7 @@ import "../../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-gravity</motion-split></h1>
       <p class="lead">
         Characters fall in from above with staggered spring-physics timing. Each one bounces to a rest at the baseline. An entrance animation built for hero
@@ -132,7 +132,8 @@ el.text = 'UPDATED'   // animation restarts`}
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-gravity";
+  import "motion-components/motion-split";
 
   ["gravity-height", "gravity-stagger", "gravity-delay"].forEach((id) => {
     const el = document.getElementById(id);

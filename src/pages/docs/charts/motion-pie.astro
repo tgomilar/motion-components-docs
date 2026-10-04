@@ -82,7 +82,7 @@ const props = defineProps(['categories', 'amounts'])
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-pie</motion-split></h1>
       <p class="lead">
         Pie and donut charts for parts of a whole. The pie sweeps in when it scrolls into view, the slices spring to new sizes when the data
@@ -158,7 +158,7 @@ document.querySelector('#new-data').addEventListener('click', () => {
       <CodeWindow filename="index.html" copy code={`<motion-pie values="42, 28, 18, 12" labels="Direct, Search, Social, Email"></motion-pie>`} />
 
       <h3>2. A table</h3>
-      <p>Wrap a <code>&lt;table&gt;</code> with the labels in the first column and the values in the second. Screen readers still read the table, and the pie updates when a cell changes.</p>
+      <p>Wrap a <code>&lt;table&gt;</code> with the labels in the first column and the values in the second. Screen readers still read the table, and the pie updates when a cell changes. Each value is the first number in its cell, and a cell's <code>data-value</code> overrides its text; see <a href="/docs/charts/motion-chart/#give-the-chart-its-data">how cells are read</a>.</p>
       <CodeWindow filename="index.html" copy code={`<motion-pie label="Traffic sources">
   <table>
     <tr><th>Source</th><th>Visits</th></tr>
@@ -240,7 +240,8 @@ document.querySelector('#new-data').addEventListener('click', () => {
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-pie";
+  import "motion-components/motion-split";
 
   type Pie = HTMLElement & { values: string };
   const pie = document.getElementById("pie") as Pie | null;

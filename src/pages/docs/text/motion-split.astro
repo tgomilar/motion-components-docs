@@ -10,13 +10,13 @@ import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
 
-<Layout title="motion-split — Motion Components" description="Splits text into words, characters, or detected lines and staggers them in on viewport entry. Fully accessible: screen readers receive the original text via aria-label." noMain>
+<Layout title="motion-split — Motion Components" description="Splits text into words, characters, or detected lines and staggers them in on viewport entry. Fully accessible: screen readers receive the original text from a visually hidden copy." noMain>
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-split</motion-split></h1>
-      <p class="lead">Splits text into words, characters, or detected lines and staggers them in on viewport entry. Fully accessible: screen readers receive the original text via <code>aria-label</code>.</p>
+      <p class="lead">Splits text into words, characters, or detected lines and staggers them in on viewport entry. Fully accessible: screen readers receive the original text from a visually hidden copy.</p>
 
       <h2>Preview</h2>
       <DocsPreview replayId="split-demo">
@@ -88,7 +88,7 @@ import 'motion-components'               // or the whole library`}
 
       <h2>Accessibility</h2>
       <p>
-        The component sets <code>aria-label</code> on the host with the original unsplit text and <code>aria-hidden="true"</code> on all child spans.
+        The component keeps the original unsplit text in a visually hidden span and sets <code>aria-hidden="true"</code> on the split spans.
         Screen readers announce the full phrase, not individual letters or words.
         Respects <code>prefers-reduced-motion</code>: when enabled, content appears immediately at its final state.
       </p>
@@ -99,7 +99,7 @@ import 'motion-components'               // or the whole library`}
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-split";
 </script>
 
 <style>

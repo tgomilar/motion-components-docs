@@ -10,14 +10,14 @@ import JsApiDemo from '../../../components/JsApiDemo.astro'
 import '../../../styles/docs.css'
 ---
 
-<Layout title="motion-glitch — Motion Components" description="RGB channel split effect triggered on hover, mount, or loop. Powered by Motion One." noMain>
+<Layout title="motion-glitch — Motion Components" description="RGB channel split effect triggered on hover, mount, or loop. Powered by Motion." noMain>
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-glitch</motion-split></h1>
       <p class="lead"
-        >RGB channel split effect triggered on hover, mount, or loop. Powered by Motion One.</p
+        >RGB channel split effect triggered on hover, mount, or loop. Powered by Motion.</p
       >
 
       <h2>Preview</h2>
@@ -139,7 +139,8 @@ import 'motion-components'               // or the whole library`}
 </Layout>
 
 <script>
-  import 'motion-components'
+  import "motion-components/motion-glitch";
+  import "motion-components/motion-split";
 </script>
 
 <style>

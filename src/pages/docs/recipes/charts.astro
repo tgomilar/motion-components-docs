@@ -235,7 +235,7 @@ setInterval(() => {
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1>Chart Recipes</h1>
       <p class="lead">
         Everyday data patterns built with <a href="/docs/charts/motion-chart/"><code>motion-chart</code></a>,
@@ -253,5 +253,8 @@ setInterval(() => {
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-chart";
+  import "motion-components/motion-counter";
+  import "motion-components/motion-pie";
+  import "motion-components/motion-sparkline";
 </script>

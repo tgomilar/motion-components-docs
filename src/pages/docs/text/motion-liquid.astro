@@ -14,7 +14,7 @@ import "../../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-liquid</motion-split></h1>
       <p class="lead">Applies an animated SVG displacement filter to text, giving it a living, fluid quality. It feels like ink in water or hot air shimmer. No WebGL required.</p>
 
@@ -124,7 +124,8 @@ el.text = 'UPDATED'   // animation restarts`}
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-liquid";
+  import "motion-components/motion-split";
 </script>
 
 <style>

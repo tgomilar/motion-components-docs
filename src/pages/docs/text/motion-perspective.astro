@@ -14,7 +14,7 @@ import "../../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-perspective</motion-split></h1>
       <p class="lead">Scales characters progressively to simulate a vanishing-point perspective: text that recedes into the distance. Static by default, with an optional animated rotation mode.</p>
 
@@ -142,7 +142,8 @@ el.text = 'UPDATED'   // animation restarts`}
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-perspective";
+  import "motion-components/motion-split";
 </script>
 
 <style>

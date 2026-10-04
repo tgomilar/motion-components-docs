@@ -13,7 +13,7 @@ import "../../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-image-compare</motion-split></h1>
       <p class="lead">
         Before/after slider with a draggable, spring-damped handle. Drop two images into the <code>before</code> and <code>after</code> slots.
@@ -84,8 +84,8 @@ import 'motion-components'               // or the whole library`}
 
       <h2>Accessibility</h2>
       <p>
-        The handle is a focusable <code>role="slider"</code> with <code>aria-valuemin/max/now</code>.
-        Use <kbd>←</kbd> / <kbd>→</kbd> (or <kbd>↑</kbd> / <kbd>↓</kbd> in vertical mode) to nudge the split by 2%, hold <kbd>Shift</kbd> for 10% jumps.
+        The handle is a focusable <code>role="slider"</code> labelled "Image comparison", with <code>aria-valuemin/max/now</code>.
+        Use <kbd>←</kbd> / <kbd>→</kbd> (or <kbd>↑</kbd> / <kbd>↓</kbd> in vertical mode) to nudge the split by 2%, hold <kbd>Shift</kbd> for 10% jumps. <kbd>Home</kbd> and <kbd>End</kbd> move it to 0% and 100%.
         Slotted images are kept as the source of truth; remember to write meaningful <code>alt</code> text.
       </p>
       <DocsPagination />
@@ -95,7 +95,8 @@ import 'motion-components'               // or the whole library`}
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-image-compare";
+  import "motion-components/motion-split";
 </script>
 
 <style>

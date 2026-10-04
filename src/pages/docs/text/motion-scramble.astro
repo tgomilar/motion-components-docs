@@ -14,7 +14,7 @@ import "../../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-scramble</motion-split></h1>
       <p class="lead">Scrambles text with random characters then progressively reveals the real text from left to right. Trigger on scroll or on hover.</p>
 
@@ -63,7 +63,8 @@ import 'motion-components'               // or the whole library`}
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-scramble";
+  import "motion-components/motion-split";
 </script>
 
 <style>

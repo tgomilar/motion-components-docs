@@ -12,7 +12,7 @@ import "../../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1>Scroll Progress</h1>
       <p class="lead">A fixed progress bar that tracks scroll position with spring physics, combined with parallax sections and reveal entrances.</p>
 
@@ -140,7 +140,9 @@ import "../../../styles/docs.css";
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-code-inline";
+  import "motion-components/motion-parallax";
+  import "motion-components/motion-reveal";
 </script>
 
 <style>

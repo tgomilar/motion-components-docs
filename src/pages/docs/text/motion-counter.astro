@@ -14,7 +14,7 @@ import "../../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-counter</motion-split></h1>
       <p class="lead">Animates a number from one value to another using spring physics when it enters the viewport. Great for stats, scores, and dashboards.</p>
 
@@ -26,7 +26,7 @@ import "../../../styles/docs.css";
             <span class="stat-label">Active users</span>
           </div>
           <div class="stat">
-            <span class="stat-prefix">$</span><motion-counter class="stat-num" from="0" to="2.4" duration="2" decimals="1"></motion-counter><span class="stat-suffix">M</span>
+            <motion-counter class="stat-num" from="0" to="2.4" duration="2" decimals="1" prefix="$" suffix="M"></motion-counter>
             <span class="stat-label">Revenue</span>
           </div>
           <div class="stat">
@@ -79,18 +79,13 @@ import 'motion-components'               // or the whole library`}
 
       <h2>Repeat on re-entry</h2>
       <p>
-        <code>once</code> defaults to <code>true</code> and, like any HTML boolean attribute, cannot be
-        switched off from markup: <motion-code-inline copy>once="false"</motion-code-inline> still reads as <code>true</code>. Set the
-        property instead to re-animate every time the element re-enters the viewport.
+        <code>once</code> defaults to <code>true</code>. Set <motion-code-inline copy>once="false"</motion-code-inline> to count again every
+        time the element re-enters the viewport. From JavaScript, set the <code>once</code> property to <code>false</code>.
       </p>
       <CodeWindow
         filename="motion-counter.html"
         copy
-        code={`<motion-counter id="hits" from="0" to="100"></motion-counter>
-
-<script>
-  document.getElementById('hits').once = false
-</script>`}
+        code={`<motion-counter from="0" to="100" once="false"></motion-counter>`}
       />
 
       <h2>Methods</h2>
@@ -137,7 +132,8 @@ counter.replay()`}
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-counter";
+  import "motion-components/motion-split";
 
   // Replay button replays all counters in the stats grid
   document.querySelector('[data-replay="counter-stats"]')?.addEventListener('click', () => {
@@ -149,7 +145,9 @@ counter.replay()`}
   /* ── Stats preview ── */
   .stats-grid {
     display: flex;
-    gap: 3rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem 3rem;
     align-items: flex-start;
   }
 
@@ -161,7 +159,8 @@ counter.replay()`}
   }
 
   .stat-num {
-    font-size: 3rem;
+    font-size: clamp(2.25rem, 10vw, 3rem);
+    white-space: nowrap;
     font-weight: 800;
     letter-spacing: -0.04em;
     color: var(--color-text);
@@ -173,32 +172,9 @@ counter.replay()`}
     color: var(--color-accent);
   }
 
-  .stat-prefix,
-  .stat-suffix {
-    font-size: 3rem;
-    font-weight: 800;
-    letter-spacing: -0.04em;
-    color: var(--color-text);
-    line-height: 1;
-  }
-
   .stat > div {
     display: flex;
     align-items: baseline;
-  }
-
-  .stat:nth-child(2) {
-    flex-direction: row;
-    align-items: baseline;
-    gap: 0;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .stat:nth-child(2) .stat-label {
-    flex-basis: 100%;
-    text-align: center;
-    margin-top: 0.35rem;
   }
 
   .stat-label {

@@ -13,7 +13,7 @@ import "../../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-flip-card</motion-split></h1>
       <p class="lead">
         Two-sided card that flips between a <code>front</code> and <code>back</code> slot with spring physics. Trigger on hover or click; choose the rotation axis.
@@ -115,7 +115,8 @@ card.flip()`}
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-flip-card";
+  import "motion-components/motion-split";
 </script>
 
 <style>

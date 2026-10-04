@@ -122,7 +122,7 @@ document.querySelector('#like-icon').icon = heart`,
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-icon</motion-split></h1>
       <p class="lead">
         Animate any SVG icon. Point <code>src</code> at an icon from Lucide, Tabler, Heroicons, Material Symbols, Font Awesome or your own folder,
@@ -280,6 +280,25 @@ document.querySelector('#like-icon').icon = heart`,
 <motion-icon src="${lucide("bell")}" animation="wiggle"></motion-icon>
 <motion-icon src="${lucide("heart")}" animation="pulse"></motion-icon>`} />
 
+      <h3>Draw and move together</h3>
+      <p>
+        Put <code>draw</code> in front of another animation to run both: the outline draws in, the fill fades in, and the icon moves at the same
+        time. On a filled icon, only the motion runs.
+      </p>
+      <DocsPreview compact>
+        <div class="row">
+          <div class="cell"><motion-icon src={lucide("zap")} animation="draw wiggle" style="--icon-color: #eab308; --icon-fill: #eab3084d"></motion-icon><span>draw wiggle</span></div>
+          <div class="cell"><motion-icon src={lucide("heart")} animation="draw pulse" style="--icon-color: #e11d48; --icon-fill: #e11d484d"></motion-icon><span>draw pulse</span></div>
+          <div class="cell"><motion-icon src={lucide("sun")} animation="draw rotate" duration="0.9" style="--icon-color: #f59e0b; --icon-fill: #f59e0b4d"></motion-icon><span>draw rotate</span></div>
+          <div class="cell"><motion-icon src={lucide("star")} animation="draw pop" style="--icon-color: #f59e0b; --icon-fill: #f59e0b4d"></motion-icon><span>draw pop</span></div>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={`<motion-icon
+  src="${lucide("zap")}"
+  animation="draw wiggle"
+  style="--icon-color: #eab308; --icon-fill: #eab3084d"
+></motion-icon>`} />
+
       <h2>Triggers</h2>
       <p><code>trigger</code> decides when the animation runs: <code>hover</code> (default), <code>click</code>, <code>view</code> (when it scrolls into view), <code>mount</code> or <code>loop</code>.</p>
       <DocsPreview compact>
@@ -314,7 +333,7 @@ document.querySelector('#like-icon').icon = heart`,
       </p>
       <DocsPreview compact>
         <div class="row">
-          <div class="cell"><motion-icon src={lucide("star")} animation="pop" style="--icon-color: #f59e0b; --icon-fill: #f59e0b33; --icon-size: 3rem"></motion-icon><span>tinted fill</span></div>
+          <div class="cell"><motion-icon src={lucide("star")} animation="pop" style="--icon-color: #f59e0b; --icon-fill: #f59e0b4d; --icon-size: 3rem"></motion-icon><span>tinted fill</span></div>
           <div class="cell"><motion-icon src={lucide("heart")} trigger="loop" interval="1.5" style="--icon-color: #e11d48; --icon-fill: #e11d48; --icon-size: 3rem"></motion-icon><span>solid fill</span></div>
           <div class="cell"><motion-icon src={lucide("rocket")} animation="bounce" style="--icon-color: #fff; background: #6366f1; padding: 0.6rem; border-radius: 14px; --icon-size: 3rem"></motion-icon><span>background</span></div>
         </div>
@@ -323,7 +342,7 @@ document.querySelector('#like-icon').icon = heart`,
 <motion-icon
   src="${lucide("star")}"
   animation="pop"
-  style="--icon-color: #f59e0b; --icon-fill: #f59e0b33"
+  style="--icon-color: #f59e0b; --icon-fill: #f59e0b4d"
 ></motion-icon>
 
 <!-- solid fill -->
@@ -345,7 +364,7 @@ document.querySelector('#like-icon').icon = heart`,
         rows={[
           { name: "src", type: "string", default: "''", description: "URL of an SVG file. Each URL is loaded once and cached" },
           { name: "icon", type: "string", default: "''", description: "SVG markup to render. Takes precedence over <code>src</code>. When both are empty, the child <code>&lt;svg&gt;</code> is used" },
-          { name: "animation", type: "string", default: "'draw'", description: "<code>'draw'</code>, <code>'pop'</code>, <code>'bounce'</code>, <code>'rotate'</code>, <code>'wiggle'</code> or <code>'pulse'</code>. <code>draw</code> needs a stroke icon and falls back to <code>pop</code>" },
+          { name: "animation", type: "string", default: "'draw'", description: "<code>'draw'</code>, <code>'pop'</code>, <code>'bounce'</code>, <code>'rotate'</code>, <code>'wiggle'</code> or <code>'pulse'</code>, or <code>draw</code> plus one of the others, such as <code>'draw wiggle'</code>, to run both. <code>draw</code> needs a stroke icon and falls back to <code>pop</code>" },
           { name: "trigger", type: "string", default: "'hover'", description: "<code>'hover'</code>, <code>'click'</code>, <code>'view'</code>, <code>'mount'</code> or <code>'loop'</code>. Inside a button or link, <code>hover</code> and <code>click</code> follow the button or link" },
           { name: "duration", type: "number", default: "0.6", description: "Duration of one run, in seconds" },
           { name: "bounce", type: "number", default: "0.4", description: "Spring bounciness for <code>pop</code>, <code>bounce</code> and <code>rotate</code>" },
@@ -372,6 +391,7 @@ document.querySelector('#like-icon').icon = heart`,
         rows={[
           { name: "motion-start", type: "Event", default: "", description: "An animation run starts" },
           { name: "motion-finish", type: "Event", default: "", description: "An animation run finishes" },
+          { name: "motion-cancel", type: "Event", default: "", description: "A run is stopped with <code>cancel()</code>" },
           { name: "error", type: "Event", default: "", description: "The <code>src</code> URL could not be loaded" },
         ]}
       />
@@ -401,7 +421,8 @@ document.querySelector('#like-icon').icon = heart`,
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-icon";
+  import "motion-components/motion-split";
 </script>
 
 <style>

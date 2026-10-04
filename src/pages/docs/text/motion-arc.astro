@@ -14,7 +14,7 @@ import "../../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-arc</motion-split></h1>
       <p class="lead">Distributes text characters along a partial arc. Perfect for badge lettering, stamps, logotype banners, and curved typographic layouts.</p>
 
@@ -146,7 +146,7 @@ import 'motion-components'               // or the whole library`}
         Characters are distributed evenly across the arc span. Each character is placed using a transform chain: <code>rotate(angle) translateY(-radius)</code>. This positions it at the correct point on the circle. The starting angle is computed from <code>align</code>: <code>"top"</code> centers the arc at 270° (the topmost point), <code>"bottom"</code> at 90°.
       </p>
       <p>
-        When <code>upright</code> is set, a counter-rotation is appended so characters remain axis-aligned. When <code>duration</code> is non-zero, the entire arc ring rotates continuously via Motion One's <code>animate</code> with <code>repeat: Infinity</code>.
+        When <code>upright</code> is set, a counter-rotation is appended so characters remain axis-aligned. When <code>duration</code> is non-zero, the entire arc ring rotates continuously via Motion's <code>animate</code> with <code>repeat: Infinity</code>.
       </p>
 
       <h2>Properties</h2>
@@ -177,7 +177,8 @@ import 'motion-components'               // or the whole library`}
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-arc";
+  import "motion-components/motion-split";
 </script>
 
 <style>

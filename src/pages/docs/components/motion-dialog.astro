@@ -13,7 +13,7 @@ import "../../../styles/docs.css";
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-dialog</motion-split></h1>
       <p class="lead">
         Modal dialog with spring-physics animation. Slides up on open, springs back down on close. Built on the native <code>&lt;dialog&gt;</code> element for top-layer
@@ -199,7 +199,7 @@ dialog.addEventListener('motion-close', () => {
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-split";
 
   function wire(openId: string, closeId: string, dialogId: string) {
     const openBtn = document.getElementById(openId);

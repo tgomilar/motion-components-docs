@@ -32,7 +32,7 @@ const renames = [
   { tag: "motion-slider", from: "slidechange event", to: "motion-change event", how: "Same <code>detail: &#123; index &#125;</code>. Now also composed." },
   { tag: "motion-spotlight", from: "color", to: "--spotlight-color", how: "Now a CSS custom property: <motion-code-inline copy>style=\"--spotlight-color: rgba(96,165,250,0.25)\"</motion-code-inline>." },
   { tag: "motion-spotlight", from: "smoothing, fade-duration", to: "duration, bounce", how: "The follow is now a spring. <code>duration</code> sets both the follow and the fade." },
-  { tag: "motion-stretch", from: "stiffness, damping", to: "duration, bounce", how: "The defaults (<code>0.45</code>, <code>0.55</code>) match the old <code>320</code> and <code>16</code>." },
+  { tag: "motion-stretch", from: "stiffness, damping", to: "duration, bounce", how: "<code>bounce</code> is <code>1 - damping / (2 × √stiffness)</code>, and <code>duration</code> is how long the old spring took to settle. The old defaults <code>320</code> and <code>16</code> are <code>duration=\"0.77\" bounce=\"0.55\"</code>; the new defaults (<code>0.45</code>, <code>0.55</code>) bounce the same but settle faster. <code>stiffness=\"400\" damping=\"10\"</code> is <code>duration=\"1.11\" bounce=\"0.75\"</code>." },
   { tag: "motion-swap", from: "stagger-duration", to: "interval", how: "Same number, seconds between characters." },
   { tag: "motion-swap", from: "transition (property)", to: "duration, bounce", how: "The old default <code>&#123; type: 'spring', duration: 0.7 &#125;</code> is <motion-code-inline copy>duration=\"0.7\" bounce=\"0.3\"</motion-code-inline>." },
   { tag: "motion-swap", from: "trigger=\"reveal\"", to: "trigger=\"view\"", how: "Same behavior: swaps once when scrolled into view." },
@@ -48,7 +48,7 @@ const renames = [
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">Migrating to 1.0</motion-split></h1>
       <p class="lead">
         Version 1.0 makes the attributes consistent across all 40 components. Most changes are renames. A few change the unit, so the number changes too.
@@ -130,7 +130,8 @@ const renames = [
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-code-inline";
+  import "motion-components/motion-split";
 </script>
 
 <style>

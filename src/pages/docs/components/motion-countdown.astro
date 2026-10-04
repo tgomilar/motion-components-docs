@@ -16,7 +16,7 @@ const target = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString()
   <div class="layout">
     <DocsSidebar />
 
-    <main>
+    <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-countdown</motion-split></h1>
       <p class="lead">Animated countdown timer with per-digit transitions. Choose between a smooth flip or a slot-machine roll for each digit.</p>
 
@@ -116,7 +116,8 @@ import 'motion-components'`}
 </Layout>
 
 <script>
-  import "motion-components";
+  import "motion-components/motion-countdown";
+  import "motion-components/motion-split";
 
   document
     .getElementById("api-countdown-demo")
