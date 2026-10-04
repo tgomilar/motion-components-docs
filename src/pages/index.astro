@@ -5,46 +5,52 @@ import CodeWindow from "../components/CodeWindow.astro";
 const ICON_COLS = 8;
 const HEART_SVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5"/></svg>`;
 
-const iconStyle = (color?: string, look?: string) => {
-  if (look === "solid") return `--icon-color: #fff; background: ${color}; padding: 0.6rem; border-radius: 14px`;
-  if (look === "fill") return `--icon-color: ${color}; --icon-fill: ${color}33`;
+const iconFiles = import.meta.glob<string>("../assets/home-icons/*.svg", { query: "?raw", import: "default", eager: true });
+
+const MOBILE_ICONS = new Set(["heart", "bell", "rocket", "sun", "mail", "cake", "star", "gift", "puzzle-piece", "shield-check"]);
+
+const iconStyle = (color?: string, look?: string, bg?: string) => {
+  if (look === "solid") return `--icon-color: ${color}; background: ${bg}; padding: 0.6rem; border-radius: 14px`;
+  if (look === "tinted") return `--icon-color: ${color}; --icon-fill: ${color}4d`;
   return color ? `--icon-color: ${color}` : "";
 };
 
 const iconWall = [
-  ["heart", "pulse", "#e11d48", "fill"], ["bell", "wiggle"], ["rocket", "bounce", "#6366f1", "solid"], ["sun", "rotate", "#f59e0b", "fill"], ["sparkles", "pop", "#d946ef", "solid"], ["mail", "draw"], ["music", "bounce", "#8b5cf6", "solid"], ["zap", "wiggle", "#eab308", "fill"],
-  ["camera", "pop"], ["cloud", "bounce", "#0ea5e9", "fill"], ["moon", "rotate"], ["star", "pop", "#f59e0b", "fill"], ["gift", "wiggle", "#ec4899", "solid"], ["coffee", "draw"], ["globe", "rotate", "#0ea5e9", "solid"], ["flame", "pulse", "#f97316", "fill"],
-  ["compass", "rotate"], ["leaf", "wiggle", "#16a34a", "fill"], ["anchor", "bounce"], ["feather", "draw"], ["umbrella", "pop", "#6366f1", "fill"], ["key", "wiggle"], ["smile", "pop", "#eab308", "fill"], ["thumbs-up", "bounce"],
-  ["bookmark", "draw"], ["send", "bounce", "#2563eb", "solid"], ["trash-2", "wiggle", "#ef4444"], ["settings", "rotate"], ["search", "pop"], ["house", "draw"], ["lock", "wiggle"], ["map-pin", "bounce", "#e11d48", "fill"],
-  ["calendar", "draw"], ["clock", "rotate"], ["download", "bounce", "#16a34a", "solid"], ["message-circle", "pop"], ["shopping-cart", "bounce"], ["trophy", "pop", "#ca8a04", "fill"], ["flower-2", "rotate", "#ec4899", "solid"], ["palette", "wiggle", "#8b5cf6"],
-].map(([name, animation, color, look], i) => ({
+  ["heart", "pulse", "#e11d48", "tinted"], ["bell", "wiggle"], ["rocket", "bounce", "#ffffff", "solid", "#2563eb"], ["sun", "rotate", "#f59e0b", "tinted"], ["sparkles", "pop", "#facc15", "solid", "#1e40af"], ["academic-cap", "bounce", "#f59e0b", "filled"], ["mail", "draw"], ["music", "bounce", "#ffffff", "solid", "#3b82f6"],
+  ["zap", "wiggle", "#eab308", "tinted"], ["camera", "pop"], ["cake", "bounce", "#ec4899", "filled"], ["cloud", "bounce", "#0ea5e9", "tinted"], ["moon", "rotate"], ["star", "pop", "#f59e0b", "tinted"], ["gift", "wiggle", "#1e40af", "solid", "#facc15"], ["coffee", "draw"],
+  ["globe", "rotate", "#facc15", "solid", "#2563eb"], ["flame", "pulse", "#f97316", "tinted"], ["compass", "rotate"], ["puzzle-piece", "rotate", "#8b5cf6", "filled"], ["leaf", "wiggle", "#16a34a", "tinted"], ["anchor", "bounce"], ["light-bulb", "pulse", "#eab308", "filled"], ["feather", "draw"],
+  ["umbrella", "pop", "#6366f1", "tinted"], ["key", "wiggle"], ["smile", "pop", "#eab308", "tinted"], ["thumbs-up", "bounce"], ["bug-ant", "wiggle", "#16a34a", "filled"], ["bookmark", "draw"], ["send", "bounce", "#ffffff", "solid", "#1d4ed8"], ["trash-2", "wiggle", "#ef4444"],
+  ["settings", "rotate"], ["shield-check", "pop", "#10b981", "filled"], ["search", "pop"], ["house", "draw"], ["lock", "wiggle"], ["map-pin", "bounce", "#e11d48", "tinted"], ["beaker", "wiggle", "#06b6d4", "filled"], ["calendar", "draw"],
+  ["clock", "rotate"], ["download", "bounce", "#facc15", "solid", "#1e40af"], ["message-circle", "pop"], ["shopping-cart", "bounce"], ["trophy", "pop", "#ca8a04", "tinted"], ["chart-pie", "rotate", "#2563eb", "filled"], ["flower-2", "rotate", "#2563eb", "solid", "#facc15"], ["palette", "wiggle", "#8b5cf6"],
+].map(([name, animation, color, look, bg], i) => ({
   name,
-  animation,
+  animation: animation === "draw" || look === "filled" ? animation : `draw ${animation}`,
   look: look ?? "outline",
-  style: iconStyle(color, look),
-  tileStyle: look === "solid" ? `--icon-color: #fff; --tile-bg: ${color}; background: ${color}` : iconStyle(color, look),
+  style: iconStyle(color, look, bg),
+  tileStyle: look === "solid" ? `--icon-color: ${color}; --tile-bg: ${bg}; background: ${bg}` : iconStyle(color, look),
   inline: i === 0,
-  src: i === 0 ? "" : `https://cdn.jsdelivr.net/npm/lucide-static@1/icons/${name}.svg`,
+  src: i === 0 ? "" : look === "filled" ? `https://cdn.jsdelivr.net/npm/heroicons@2/24/solid/${name}.svg` : `https://cdn.jsdelivr.net/npm/lucide-static@1/icons/${name}.svg`,
+  svg: i === 0 ? HEART_SVG : iconFiles[`../assets/home-icons/${look === "filled" ? "heroicons" : "lucide"}-${name}.svg`],
   delay: ((i % ICON_COLS) + Math.floor(i / ICON_COLS)) * 0.06,
 }));
 ---
 
 <Layout
   title="Motion Components — Motion-first web components"
-  description="Drop physics-based motion into any framework without rewriting your markup. Spring physics, interruptible animations, framework-agnostic web components powered by Motion One.">
+  description="Drop physics-based motion into any framework without rewriting your markup. Spring physics, interruptible animations, framework-agnostic web components built on Motion.">
   <!-- ── Hero ─────────────────────────────── -->
   <section class="hero">
     <div class="inner">
       <a href="/docs/" class="hero-circle" aria-label="Framework-agnostic motion components">
         <motion-circle text="INTERRUPT ME · I DARE YOU · " radius="120" duration="14" pause-on-hover>
-          <motion-icon class="hero-circle-icon" src="https://cdn.jsdelivr.net/npm/lucide-static@1/icons/sparkle.svg" trigger="mount" duration="1" data-hover-animation="rotate"></motion-icon>
+          <motion-icon class="hero-circle-icon" set:html={iconFiles["../assets/home-icons/lucide-sparkle.svg"]} trigger="mount" duration="1" data-hover-animation="rotate"></motion-icon>
         </motion-circle>
       </a>
       <div class="hero-badge">Declarative motion · Spring physics · Interruptible</div>
       <h1>
-        <motion-stretch text="Animate" spread="20" duration="0.41" bounce="0.75">Animate</motion-stretch>
+        <motion-stretch text="Animate" spread="20" duration="1.11" bounce="0.75">Animate</motion-stretch>
         <span class="accent">
-          <motion-stretch text="with HTML tags" spread="20" duration="0.41" bounce="0.75">with HTML tags</motion-stretch>
+          <motion-stretch text="with HTML tags" spread="20" duration="1.11" bounce="0.75">with HTML tags</motion-stretch>
         </span>
       </h1>
       <p class="hero-sub">
@@ -93,7 +99,7 @@ const iconWall = [
           One tag.<br />Works in <motion-words
             words="native HTML,React,Vue,Svelte,SolidJS,Alpine,Astro"
             colors="inherit, #61DAFB,#42B883,#FF3E00,#4F81C7,#77C1D2,#BC52EE"
-            interval="3.6"></motion-words>.
+            interval="3.6">native HTML</motion-words>.
         </h2>
         <p class="usage-sub">Drop a tag anywhere. No config, no wrappers, no boilerplate.</p>
         <ol class="steps">
@@ -102,7 +108,10 @@ const iconWall = [
               <span class="step-num">1</span>
               <div>
                 <strong>Install</strong>
-                <p>Run <motion-code-inline copy-visible>npm install motion-components</motion-code-inline></p>
+                <p>
+                  Run <motion-code-inline copy-visible>npm install motion-components</motion-code-inline>, or load it from a CDN with one
+                  script tag, as in the example.
+                </p>
               </div>
             </li>
             <li>
@@ -131,6 +140,9 @@ const iconWall = [
         copy
         code={`// 1. install
 npm install motion-components
+
+// or, with no build step, one tag in your HTML
+<script type="module" src="https://cdn.jsdelivr.net/npm/motion-components@1/+esm"></script>
 
 // 2. import once — works in any framework
 import 'motion-components'
@@ -253,7 +265,7 @@ import 'motion-components'
       <div class="section-head">
         <p class="section-eyebrow">Text Effects</p>
         <h2>Words in motion.</h2>
-        <p class="section-sub">Components for animated text: split, typewriter, counter, scramble, and ticker.</p>
+        <p class="section-sub">Components for animated text: split, typewriter, counter, rotating words, and swaps.</p>
       </div>
     </div>
     <div class="inner inner--wide">
@@ -283,7 +295,7 @@ import 'motion-components'
               <motion-code-inline>motion-counter</motion-code-inline>
               <div class="stage">
                 <div class="counter-row">
-                  <motion-counter id="counter-demo" from="0" to="122" duration="1.8" suffix="k" class="counter-num"></motion-counter>
+                  <motion-counter id="counter-demo" from="0" to="122" duration="1.8" suffix="k" class="counter-num">122k</motion-counter>
                   <span class="counter-label">users</span>
                 </div>
               </div>
@@ -335,28 +347,38 @@ import 'motion-components'
   <section class="theme-section">
     <div class="inner">
       <div class="section-head">
-        <p class="section-eyebrow">New in 0.7</p>
+        <p class="section-eyebrow">Theming</p>
         <h2>Light, dark, and system.</h2>
         <p class="section-sub">
           <code>&lt;motion-theme-toggle&gt;</code> switches themes with a spring sun-to-moon morph, and an optional circular wipe from the control.
         </p>
       </div>
       <div class="theme-showcase">
-        <div class="theme-demo" id="home-theme-demo">
-          <div class="theme-demo-head">
-            <span class="theme-demo-title">Inbox</span>
-            <motion-theme-toggle target="#home-theme-demo" appearance="toggle" system></motion-theme-toggle>
-          </div>
-          <div class="theme-demo-row"><span class="theme-demo-dot"></span>Release notes are ready for review</div>
-          <div class="theme-demo-row"><span class="theme-demo-dot"></span>Design sync moved to Thursday</div>
-          <div class="theme-demo-row"><span class="theme-demo-dot"></span>3 new comments on the roadmap</div>
-        </div>
+        <motion-reveal y="32" duration="0.8">
+          <motion-tilt max="4" scale="1" class="theme-tilt">
+            <motion-spotlight size="360" class="theme-spot">
+              <div class="theme-demo" id="home-theme-demo">
+                <div class="theme-demo-head">
+                  <span class="theme-demo-title"><motion-theme-icon id="home-theme-icon" mode="system"></motion-theme-icon>Inbox</span>
+                  <motion-theme-toggle target="#home-theme-demo" appearance="toggle" system></motion-theme-toggle>
+                </div>
+                <motion-stagger id="home-theme-rows" interval="0.08" y="10">
+                  <div class="theme-demo-row"><span class="theme-demo-dot"></span>Release notes are ready for review</div>
+                  <div class="theme-demo-row"><span class="theme-demo-dot"></span>Design sync moved to Thursday</div>
+                  <div class="theme-demo-row"><span class="theme-demo-dot"></span>3 new comments on the roadmap</div>
+                </motion-stagger>
+              </div>
+            </motion-spotlight>
+          </motion-tilt>
+        </motion-reveal>
         <ul class="theme-points">
-          <li><strong>Four looks:</strong> icon, segmented toggle, switch and drop-down menu.</li>
-          <li><strong>Remembers the choice</strong> and follows the OS setting when set to system.</li>
-          <li><strong>Drop-in compatible</strong> with Chrome Labs' <code>dark-mode-toggle</code> attributes and events.</li>
-          <li><strong>Try the header:</strong> the theme menu on this site is the same component.</li>
-          <li><a href="/docs/components/motion-theme-toggle/" class="view-all-link">Read the docs →</a></li>
+          <motion-stagger interval="0.1" y="16">
+            <li><motion-icon trigger="view" set:html={iconFiles["../assets/home-icons/lucide-palette.svg"]}></motion-icon><span><strong>Four looks:</strong> icon, segmented toggle, switch and drop-down menu.</span></li>
+            <li><motion-icon trigger="view" set:html={iconFiles["../assets/home-icons/lucide-history.svg"]}></motion-icon><span><strong>Remembers the choice</strong> and follows the OS setting when set to system.</span></li>
+            <li><motion-icon trigger="view" set:html={iconFiles["../assets/home-icons/lucide-puzzle.svg"]}></motion-icon><span><strong>Drop-in compatible</strong> with Chrome Labs' <code>dark-mode-toggle</code> attributes and events.</span></li>
+            <li><motion-icon trigger="view" set:html={iconFiles["../assets/home-icons/lucide-mouse-pointer-click.svg"]}></motion-icon><span><strong>Try the header:</strong> the theme menu on this site is the same component.</span></li>
+            <li class="theme-points-link"><a href="/docs/components/motion-theme-toggle/" class="view-all-link">Read the docs →</a></li>
+          </motion-stagger>
         </ul>
       </div>
     </div>
@@ -366,7 +388,7 @@ import 'motion-components'
   <section class="icons-section">
     <div class="inner">
       <div class="section-head">
-        <p class="section-eyebrow">Icons</p>
+        <p class="section-eyebrow">Animated icons</p>
         <h2>Icons that move.</h2>
         <p class="section-sub">
           <motion-code-inline>&lt;motion-icon&gt;</motion-code-inline> draws in, pops or wiggles any SVG icon from Lucide, Tabler, Heroicons, Material
@@ -377,7 +399,7 @@ import 'motion-components'
         <div class="icon-wall" id="icon-wall" style={`--cols: ${ICON_COLS}`}>
           {iconWall.map((icon, i) => (
             <button
-              class={`icon-tile icon-tile--${icon.look}`}
+              class={`icon-tile icon-tile--${icon.look}${MOBILE_ICONS.has(icon.name) ? "" : " icon-tile--extra"}`}
               type="button"
               aria-label={icon.name}
               aria-pressed={i === 0 ? "true" : "false"}
@@ -388,11 +410,7 @@ import 'motion-components'
               data-svg={icon.inline ? HEART_SVG : undefined}
               style={icon.tileStyle || undefined}
             >
-              {icon.inline ? (
-                <motion-icon trigger="view" delay={icon.delay} duration="0.8" set:html={HEART_SVG}></motion-icon>
-              ) : (
-                <motion-icon src={icon.src} trigger="view" delay={icon.delay} duration="0.8"></motion-icon>
-              )}
+              <motion-icon trigger="view" animation={icon.animation} delay={icon.delay} duration="0.8" set:html={icon.svg}></motion-icon>
             </button>
           ))}
         </div>
@@ -438,7 +456,7 @@ import 'motion-components'
                 >
               </div>
               <h3>Spring physics</h3>
-              <p>Every animation uses spring dynamics: naturally interruptible, with no jarring cuts or fixed durations.</p>
+              <p>Every animation uses spring dynamics: naturally interruptible, with no jarring cuts.</p>
             </div>
           </motion-hover>
           <motion-hover scale="1.02" y="-4">
@@ -534,7 +552,7 @@ import 'motion-components'
                 >
               </div>
               <h3>Accessible by default</h3>
-              <p>Respects <motion-code-inline>prefers-reduced-motion</motion-code-inline>. Animations skip cleanly: no flashes, no layout shift.</p>
+              <p>Respects the reduced motion setting. Animations skip cleanly: no flashes, no layout shift.</p>
             </div>
           </motion-hover>
         </motion-stagger>
@@ -627,7 +645,7 @@ import 'motion-components'
   <!-- ── CTA ──────────────────────────────── -->
   <section class="cta-section">
     <div class="inner">
-      <motion-reveal duration="0.7" y="24">
+      <motion-reveal duration="0.9" y="56" threshold="0.8">
         <div class="cta-inner">
           <h2 class="cta-heading">
             Start shipping motion
@@ -636,10 +654,10 @@ import 'motion-components'
           <p class="cta-sub">Drop a tag in your HTML and you're done.</p>
           <div class="cta-actions">
             <motion-hover>
-              <a href="/docs/" class="btn-primary"><motion-icon src="https://cdn.jsdelivr.net/npm/lucide-static@1/icons/book-open.svg"></motion-icon>Read the docs</a>
+              <a href="/docs/" class="btn-primary"><motion-icon set:html={iconFiles["../assets/home-icons/lucide-book-open.svg"]} animation="draw bounce" style="--icon-fill: color-mix(in srgb, currentColor 35%, transparent)"></motion-icon>Read the docs</a>
             </motion-hover>
             <motion-hover>
-              <a href="https://github.com/tgomilar/motion-components" class="btn-ghost" target="_blank" rel="noopener"><motion-icon class="btn-star" src="https://cdn.jsdelivr.net/npm/lucide-static@1/icons/star.svg" animation="rotate"></motion-icon>Star on GitHub</a>
+              <a href="https://github.com/tgomilar/motion-components" class="btn-ghost" target="_blank" rel="noopener"><motion-icon class="btn-star" set:html={iconFiles["../assets/home-icons/lucide-star.svg"]} animation="draw rotate"></motion-icon>Star on GitHub</a>
             </motion-hover>
           </div>
         </div>
@@ -648,7 +666,28 @@ import 'motion-components'
   </section>
 
   <script>
-    import "motion-components";
+    import "motion-components/motion-circle";
+    import "motion-components/motion-code-inline";
+    import "motion-components/motion-counter";
+    import "motion-components/motion-curve";
+    import "motion-components/motion-flip-card";
+    import "motion-components/motion-hover";
+    import "motion-components/motion-icon";
+    import "motion-components/motion-liquid";
+    import "motion-components/motion-magnetic";
+    import "motion-components/motion-press";
+    import "motion-components/motion-reveal";
+    import "motion-components/motion-scramble";
+    import "motion-components/motion-sparkline";
+    import "motion-components/motion-split";
+    import "motion-components/motion-theme-icon";
+    import "motion-components/motion-spotlight";
+    import "motion-components/motion-stagger";
+    import "motion-components/motion-stretch";
+    import "motion-components/motion-swap";
+    import "motion-components/motion-tilt";
+    import "motion-components/motion-typewriter";
+    import "motion-components/motion-words";
 
     document.getElementById("replay-reveal")?.addEventListener("click", () => {
       (document.getElementById("reveal-demo") as any)?.replay();
@@ -705,8 +744,8 @@ import 'motion-components'
       const { name, src = "", animation = "draw", style = "", svg = "" } = tile.dataset;
       tiles.forEach((t) => t.setAttribute("aria-pressed", String(t === tile)));
       if (iconPreview) {
-        iconPreview.icon = svg;
-        iconPreview.src = src;
+        iconPreview.icon = tile.querySelector("motion-icon svg")?.outerHTML ?? svg;
+        iconPreview.src = "";
         iconPreview.animation = animation;
         iconPreview.setAttribute("style", style);
       }
@@ -721,6 +760,22 @@ import 'motion-components'
     };
 
     customElements.whenDefined("motion-code").then(() => tiles[0] && showIcon(tiles[0]));
+
+    type ModeEl = HTMLElement & { mode: string };
+    const demoToggle = document.querySelector<ModeEl>("#home-theme-demo motion-theme-toggle");
+    const demoIcon = document.getElementById("home-theme-icon") as ModeEl | null;
+    const demoRows = document.getElementById("home-theme-rows") as (HTMLElement & { replay(): void }) | null;
+    let demoMode = "";
+    customElements.whenDefined("motion-theme-toggle").then(() => {
+      demoMode = demoToggle?.mode ?? "";
+      if (demoIcon && demoMode) demoIcon.mode = demoMode;
+    });
+    demoToggle?.addEventListener("colorschemechange", (event) => {
+      const { mode } = (event as CustomEvent<{ mode: string }>).detail;
+      if (demoIcon) demoIcon.mode = mode;
+      if (demoMode && mode !== demoMode) demoRows?.replay();
+      demoMode = mode;
+    });
 
     tiles.forEach((tile) => {
       const icon = tile.querySelector<IconEl>("motion-icon")!;
@@ -861,8 +916,14 @@ import 'motion-components'
         flex-direction: column;
         align-items: stretch;
       }
-      .actions a {
-        text-align: center;
+      .actions a,
+      .cta-actions a {
+        display: flex;
+        justify-content: center;
+      }
+      .cta-actions {
+        flex-direction: column;
+        align-items: stretch;
       }
     }
 
@@ -875,7 +936,7 @@ import 'motion-components'
 
     .btn-star {
       --icon-color: var(--color-yellow);
-      --icon-fill: var(--color-yellow);
+      --icon-fill: color-mix(in srgb, var(--color-yellow) 35%, transparent);
     }
 
     .btn-primary {
@@ -899,6 +960,11 @@ import 'motion-components'
       font-weight: 600;
       font-size: 0.95rem;
       text-decoration: none;
+    }
+
+    .usage-text,
+    .steps li > div {
+      min-width: 0;
     }
 
     .install-label {
@@ -1219,6 +1285,32 @@ import 'motion-components'
       gap: 1.25rem;
     }
 
+    @media (max-width: 640px) {
+      .demo-grid,
+      .text-grid {
+        grid-template-columns: none;
+        grid-auto-flow: column;
+        grid-auto-columns: 80%;
+        gap: 0.75rem;
+        margin-inline: -1rem;
+        padding: 0.25rem 1rem 1rem;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: 1rem;
+        scrollbar-width: none;
+      }
+
+      .demo-grid::-webkit-scrollbar,
+      .text-grid::-webkit-scrollbar {
+        display: none;
+      }
+
+      .demo-grid .card-link,
+      .text-grid .card-link {
+        scroll-snap-align: start;
+      }
+    }
+
     .split-text {
       font-size: 1.3rem;
       font-weight: 800;
@@ -1478,9 +1570,27 @@ import 'motion-components'
       border-bottom: 1px solid var(--demo-line);
     }
 
+    .theme-tilt,
+    .theme-spot {
+      display: block;
+      border-radius: 16px;
+    }
+
+    .theme-spot {
+      --spotlight-color: color-mix(in srgb, var(--color-accent) 16%, transparent);
+    }
+
     .theme-demo-title {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
       font-weight: 700;
       font-size: 1.05rem;
+    }
+
+    .theme-demo-title motion-theme-icon {
+      --theme-icon-size: 1.25rem;
+      color: var(--color-accent);
     }
 
     .theme-demo-row {
@@ -1508,6 +1618,24 @@ import 'motion-components'
       line-height: 1.55;
     }
 
+    .theme-points li {
+      display: grid;
+      grid-template-columns: 1.25rem 1fr;
+      gap: 0.75rem;
+      align-items: start;
+    }
+
+    .theme-points motion-icon {
+      --icon-size: 1.25rem;
+      --icon-color: var(--color-accent);
+      margin-top: 0.15rem;
+    }
+
+    .theme-points .theme-points-link {
+      display: block;
+      padding-left: 2rem;
+    }
+
     .theme-points strong {
       color: var(--color-text);
     }
@@ -1532,7 +1660,7 @@ import 'motion-components'
       display: grid;
       grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
       gap: 3rem;
-      align-items: center;
+      align-items: start;
     }
 
     @media (max-width: 860px) {
@@ -1550,6 +1678,9 @@ import 'motion-components'
     @media (max-width: 640px) {
       .icon-wall {
         grid-template-columns: repeat(5, minmax(0, 1fr));
+      }
+      .icon-tile.icon-tile--extra {
+        display: none;
       }
     }
 
@@ -1843,6 +1974,26 @@ import 'motion-components'
       color: var(--color-muted);
       font-size: 0.88rem;
       line-height: 1.65;
+    }
+
+    @media (max-width: 640px) {
+      .features-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
+      }
+      .feature {
+        padding: 1rem;
+      }
+      .feature-icon {
+        margin-bottom: 0.75rem;
+      }
+      .feature h3 {
+        font-size: 0.9rem;
+      }
+      .feature p {
+        font-size: 0.8rem;
+        line-height: 1.55;
+      }
     }
 
     /* ── CTA ──────────────────────────────── */
