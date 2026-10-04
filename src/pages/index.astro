@@ -265,7 +265,7 @@ import 'motion-components'
       <div class="section-head">
         <p class="section-eyebrow">Text Effects</p>
         <h2>Words in motion.</h2>
-        <p class="section-sub">Components for animated text: split, typewriter, counter, rotating words, and swaps.</p>
+        <p class="section-sub">Components for animated text: split, typewriter, counter, rotating words, swaps, and marks that draw onto words.</p>
       </div>
     </div>
     <div class="inner inner--wide">
@@ -333,6 +333,20 @@ import 'motion-components'
                 <motion-swap id="swap-demo" interval="0.04" class="swap-text">Smooth swaps</motion-swap>
               </div>
               <p class="card-hint">Swaps on a loop</p>
+            </div>
+          </a>
+          <a href="/docs/text/motion-marker/" class="card-link">
+            <div class="card">
+              <motion-code-inline>motion-marker</motion-code-inline>
+              <div class="stage">
+                <p class="marks-text">
+                  <motion-ring>Draw attention</motion-ring><br />
+                  to <motion-marker delay="0.4">what matters</motion-marker>,<br />
+                  <motion-underline shape="wave" delay="0.8" class="marks-wave">not</motion-underline>
+                  <motion-strike delay="1.2">everything</motion-strike>.
+                </p>
+              </div>
+              <p class="card-hint">Marker, underline, strike and ring</p>
             </div>
           </a>
         </motion-stagger>
@@ -673,6 +687,10 @@ import 'motion-components'
     import "motion-components/motion-flip-card";
     import "motion-components/motion-hover";
     import "motion-components/motion-icon";
+    import "motion-components/motion-underline";
+    import "motion-components/motion-strike";
+    import "motion-components/motion-ring";
+    import "motion-components/motion-marker";
     import "motion-components/motion-liquid";
     import "motion-components/motion-magnetic";
     import "motion-components/motion-press";
@@ -1325,6 +1343,20 @@ import 'motion-components'
       font-weight: 700;
       letter-spacing: -0.02em;
       color: var(--color-text);
+    }
+
+    .marks-text {
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+      line-height: 2;
+      white-space: nowrap;
+      color: var(--color-text);
+      text-align: center;
+    }
+
+    .marks-wave {
+      --mc-mark-color: var(--color-accent);
     }
 
     .swap-text {

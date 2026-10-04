@@ -1,0 +1,93 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-strike — Motion Components" description="A line that draws itself through a phrase, left to right, when it scrolls into view. For old prices, removed steps and replaced words." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main id="main">
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-strike</motion-split></h1>
+      <p class="lead">A line that draws itself through a phrase, from left to right, when it scrolls into view. Use it for an old price, a removed step or a word you replace.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview replayId="strike-demo">
+        <p class="sentence"><del><motion-strike id="strike-demo">€49</motion-strike></del> <ins class="price">€29</ins> per month</p>
+      </DocsPreview>
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-strike'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <h2>Usage</h2>
+      <p>Wrap the component in <code>&lt;del&gt;</code> when the strike means removed, so screen readers know.</p>
+      <CodeWindow filename="index.html" copy code={`<del><motion-strike>€49</motion-strike></del> <ins>€29</ins> per month`} />
+
+      <h2>Then mark the replacement</h2>
+      <p>Draw the strike first, then another mark with <code>delay</code>.</p>
+      <DocsPreview replayId="strike-then">
+        <p class="sentence" id="strike-then">From a <motion-strike>manual checklist</motion-strike> to <motion-marker delay="0.6">fully automated</motion-marker>.</p>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={`From a <motion-strike>manual checklist</motion-strike>
+to <motion-marker delay="0.6">fully automated</motion-marker>.`} />
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'trigger', type: 'string', default: "'view'", description: "What draws the mark: <code>'view'</code> when it scrolls into view, <code>'hover'</code> on pointer enter (it undraws on leave), or <code>'mount'</code> when it connects" },
+        { name: 'duration', type: 'number', default: '0.6', description: 'Spring duration of the drawing, in seconds' },
+        { name: 'delay', type: 'number', default: '0', description: 'Seconds to wait before drawing. Use it to draw several marks in one sentence one after another' },
+        { name: 'bounce', type: 'number', default: '0', description: 'Spring bounciness. <code>0</code> keeps the stroke from overshooting the text' },
+        { name: 'once', type: 'boolean', default: 'true', description: 'With <code>trigger="view"</code>, draw only the first time. Set <motion-code-inline copy>once="false"</motion-code-inline> to undraw when it leaves and draw again on every entry' },
+        { name: 'threshold', type: 'number', default: '0.6', description: 'Share of the element, from 0 to 1, that must be visible before it draws' },
+      ]} />
+
+      <h2>CSS custom properties</h2>
+      <PropsTable nameLabel="Property" rows={[
+        { name: '--mc-mark-color', type: 'color', default: 'currentColor', description: 'Color of the line' },
+        { name: '--mc-mark-thickness', type: 'length', default: '2px', description: 'Thickness of the line' },
+      ]} />
+
+      <h2>JavaScript API</h2>
+      <p>The mark has the shared playback API: <code>play()</code> draws it, <code>cancel()</code> removes it, <code>finish()</code> shows it fully drawn and <code>replay()</code> draws it again from the start. It fires <code>motion-start</code>, <code>motion-finish</code> and <code>motion-cancel</code>. See the <a href="/docs/js-api/">JavaScript API</a>.</p>
+
+      <h2>Accessibility</h2>
+      <p>The mark is decoration: the text stays real, selectable and read by screen readers exactly as written. The line alone does not tell screen readers the text is removed; wrap it in <code>&lt;del&gt;</code> when it is. Respects <code>prefers-reduced-motion</code>: the mark appears fully drawn at once, with no animation.</p>
+      <DocsPagination />
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components/motion-marker";
+  import "motion-components/motion-split";
+  import "motion-components/motion-strike";
+</script>
+
+<style>
+  .sentence {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.5;
+    color: var(--color-text);
+    text-align: center;
+  }
+  del,
+  ins {
+    text-decoration: none;
+  }
+  .price {
+    color: var(--color-accent);
+  }
+</style>
