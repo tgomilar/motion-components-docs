@@ -126,10 +126,16 @@ const props = defineProps(['months', 'sales'])
 <button id="new-data">New data</button>`} />
       <p>Set <code>values</code> from JavaScript to change the data. The chart springs to the new numbers:</p>
       <CodeWindow filename="app.js" copy code={`const chart = document.querySelector('motion-chart')
+const datasets = [
+  '12, 19, 8, 24, 16, 21, 14',
+  '20, 9, 17, 10, 27, 25, 14',
+  '8, 24, 15, 19, 11, 28, 22',
+]
+let step = 0
 
 document.querySelector('#new-data').addEventListener('click', () => {
-  const values = Array.from({ length: 7 }, () => 4 + Math.round(Math.random() * 24))
-  chart.values = values.join(', ')
+  step = (step + 1) % datasets.length
+  chart.values = datasets[step]
 })`} />
 
       <h2>Quick start</h2>
@@ -298,9 +304,12 @@ chart.data = {
 
   const preview = document.getElementById("preview-chart") as Chart | null;
   const previewCode = document.getElementById("preview-code") as (HTMLElement & { setCode(code: string): void }) | null;
+  const datasets = ["12, 19, 8, 24, 16, 21, 14", "20, 9, 17, 10, 27, 25, 14", "8, 24, 15, 19, 11, 28, 22"];
+  let step = 0;
   document.getElementById("new-data")?.addEventListener("click", () => {
     if (!preview) return;
-    preview.values = Array.from({ length: 7 }, () => 4 + Math.round(Math.random() * 24)).join(", ");
+    step = (step + 1) % datasets.length;
+    preview.values = datasets[step];
     previewCode?.setCode(`<motion-chart
   values="${preview.values}"
   labels="Mon, Tue, Wed, Thu, Fri, Sat, Sun"
