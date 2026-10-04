@@ -13,9 +13,8 @@ const readingTime = (body: string) => Math.max(1, Math.round(body.split(/\s+/).l
 ---
 
 <Layout
-  title="Blog — Motion Components"
-  description="Articles and guides on building animation with motion-components: springs, web components, and design-to-code workflows."
-  keywords="motion-components blog, web animation guides, spring animation tutorials, web components animation">
+  title="Blog: Web Animation Guides — Motion Components"
+  description="Articles and guides on building animation with motion-components: springs, web components, and design-to-code workflows.">
   <div class="blog-wrap">
     <header class="blog-hero">
       <p class="eyebrow">Blog</p>
@@ -25,6 +24,7 @@ const readingTime = (body: string) => Math.max(1, Math.round(body.split(/\s+/).l
         accessible animation, every article uses
         <motion-code-inline copy-visible>motion-components</motion-code-inline>.
       </p>
+      <a class="rss" href="/rss.xml">Subscribe with RSS</a>
     </header>
 
     <motion-stagger interval="0.09" class="post-list">
@@ -55,7 +55,9 @@ const readingTime = (body: string) => Math.max(1, Math.round(body.split(/\s+/).l
   </div>
 
   <script>
-    import "motion-components";
+    import "motion-components/motion-code-inline";
+    import "motion-components/motion-hover";
+    import "motion-components/motion-stagger";
   </script>
 
   <style>
@@ -80,6 +82,19 @@ const readingTime = (body: string) => Math.max(1, Math.round(body.split(/\s+/).l
       letter-spacing: -0.04em;
       line-height: 1.05;
       margin-bottom: 1.25rem;
+    }
+
+    .rss {
+      display: inline-block;
+      margin-top: 1rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--color-accent);
+      text-decoration: none;
+    }
+
+    .rss:hover {
+      text-decoration: underline;
     }
 
     .lead {

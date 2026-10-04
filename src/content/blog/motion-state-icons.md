@@ -1,7 +1,7 @@
 ---
 title: "State Icons: Menu to Close, Play to Pause, on a Spring"
 description: motion-state-icon morphs an icon between two states with spring physics. Eight icons, two ways to switch them, and complete recipes for menu, copy, save, password and accordion buttons.
-pubDate: 2026-10-05T00:00:00.000Z
+pubDate: 2026-10-04T10:00:00.000Z
 author: Tanja Gomilar
 tags:
   - components

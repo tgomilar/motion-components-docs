@@ -38,7 +38,8 @@
     "dev": "astro dev",
     "build": "astro build && pagefind --site dist --glob \"{index.html,about/**/*.html,docs/**/*.html,blog/**/*.html,showcase/**/*.html}\"",
     "preview": "astro preview",
-    "check": "astro check"
+    "check": "astro check",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "astro": "^6.4.2",
@@ -47,7 +48,9 @@
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
     "@astrojs/sitemap": "^3.7.3",
+    "@resvg/resvg-js": "^2.6.2",
     "pagefind": "^1.5.2",
+    "satori": "^0.35.0",
     "typescript": "^5.9.3"
   }
 }

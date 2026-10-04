@@ -6,7 +6,7 @@ import CodeWindow from '../../components/CodeWindow.astro'
 <Layout
   title="Showcase — Motion Components"
   description="An editorial showcase of motion-components in real composition. Physics-based motion, framework-agnostic, drop-in.">
-  <main class="sc">
+  <main id="main" class="sc">
     <!-- ── COVER PLATE ─────────────────────────────────── -->
     <motion-spotlight
       class="sc-hero-spot"
@@ -104,7 +104,7 @@ import CodeWindow from '../../components/CodeWindow.astro'
             <span class="sc-meta-dot">·</span>
             <span class="sc-meta-tag">Spring physics</span>
             <span class="sc-meta-dot">·</span>
-            <span class="sc-meta-tag">~20 KB brotlied</span>
+            <span class="sc-meta-tag">~40 KB brotlied</span>
             <span class="sc-meta-dot">·</span>
             <span class="sc-meta-tag">Tree-shakeable</span>
           </div>
@@ -217,7 +217,7 @@ import CodeWindow from '../../components/CodeWindow.astro'
           <div class="sc-aside-block">
             <span class="sc-aside-label">Built on</span>
             <span class="sc-aside-name">
-              <motion-typewriter interval="0.05" loop cursor>Motion One</motion-typewriter>
+              <motion-typewriter interval="0.05" loop cursor>Motion</motion-typewriter>
             </span>
             <span class="sc-aside-name sc-aside-name--small">+ Lit</span>
             <span class="sc-aside-foot">native custom elements</span>
@@ -407,7 +407,7 @@ import CodeWindow from '../../components/CodeWindow.astro'
         <motion-reveal duration="0.85" y="22">
           <p class="sc-section-sub">
             Six specimens. Every one auto-animates on its own clock, with staggered intervals so the
-            page never feels metronomic. Spring physics through Motion One; no CSS keyframes; no
+            page never feels metronomic. Spring physics through Motion; no CSS keyframes; no
             setInterval that you write.
           </p>
         </motion-reveal>
@@ -795,7 +795,7 @@ import CodeWindow from '../../components/CodeWindow.astro'
             filename="terminal"
             compact
             copy
-            code={`# the whole library — ~20 KB brotlied, every component
+            code={`# the whole library — ~40 KB brotlied with Lit and Motion, every component
 npm install motion-components
 
 # or just one tag — bundler skips the rest
@@ -911,7 +911,7 @@ import 'motion-components/motion-headline'`}
               filename="app.js"
               copy
               compact
-              code={`// the whole library — ~20 KB brotlied
+              code={`// the whole library — ~40 KB brotlied with Lit and Motion
 import 'motion-components'
 
 // or just one tag — bundler skips the rest
@@ -944,7 +944,7 @@ import 'motion-components/motion-headline'`}
           <p class="sc-colophon-eyebrow">Colophon</p>
           <p class="sc-colophon-text">
             <em>Motion Specimen</em> N°01 was set entirely in the components it documents. Plates were
-            pressed by Lit and animated by Motion One. The specimen was first issued in May, 2026, with
+            pressed by Lit and animated by Motion. The specimen was first issued in May, 2026, with
             no print run, no edition cap, and no proprietary build. Compositions are reproduced as-is.
           </p>
           <p class="sc-colophon-text sc-colophon-text--small">
@@ -966,7 +966,29 @@ import 'motion-components/motion-headline'`}
   </main>
 
   <script>
-    import 'motion-components'
+    import "motion-components/motion-arc";
+    import "motion-components/motion-circle";
+    import "motion-components/motion-code-inline";
+    import "motion-components/motion-countdown";
+    import "motion-components/motion-counter";
+    import "motion-components/motion-curve";
+    import "motion-components/motion-flip-card";
+    import "motion-components/motion-glitch";
+    import "motion-components/motion-headline";
+    import "motion-components/motion-image-compare";
+    import "motion-components/motion-liquid";
+    import "motion-components/motion-magnetic";
+    import "motion-components/motion-parallax";
+    import "motion-components/motion-press";
+    import "motion-components/motion-reveal";
+    import "motion-components/motion-scramble";
+    import "motion-components/motion-split";
+    import "motion-components/motion-spotlight";
+    import "motion-components/motion-stagger";
+    import "motion-components/motion-ticker";
+    import "motion-components/motion-tilt";
+    import "motion-components/motion-typewriter";
+    import "motion-components/motion-words";
 
     type Replayable = HTMLElement & { replay?: () => void }
 
