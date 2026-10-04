@@ -94,7 +94,7 @@ const bundlerTabs = [
   {
     id: "lucide",
     label: "Lucide",
-    desc: "<code>npm install lucide-static</code>. Every icon is a named export, and only the ones you import end up in your bundle.",
+    desc: "<motion-code-inline copy>npm install lucide-static</motion-code-inline>. Every icon is a named export, and only the ones you import end up in your bundle.",
     filename: "app.js",
     code: `import 'motion-components/motion-icon'
 import { Heart } from 'lucide-static'
@@ -175,8 +175,8 @@ document.querySelector('#like-icon').icon = heart`,
       <CodeWindow filename="index.html" copy code={`<motion-icon src="icons/heart.svg"></motion-icon>
 <motion-icon src="icons/brackets.svg"></motion-icon>`} />
       <p>
-        A path without a leading slash, such as <code>icons/heart.svg</code>, is relative to the page. For pages in subfolders, start the path with a
-        slash, such as <code>/icons/heart.svg</code>, so it always points to the folder at the root of your site.
+        A path without a leading slash, such as <motion-code-inline copy>icons/heart.svg</motion-code-inline>, is relative to the page. For pages in subfolders, start the path with a
+        slash, such as <motion-code-inline copy>/icons/heart.svg</motion-code-inline>, so it always points to the folder at the root of your site.
       </p>
 
       <h3>3. Inline SVG</h3>
@@ -223,7 +223,7 @@ document.querySelector('#like-icon').icon = heart`,
             {libraries.map((lib) => (
               <tr>
                 <td><a href={lib.site} target="_blank" rel="noopener">{lib.name}</a></td>
-                <td><code>{lib.path}</code></td>
+                <td><motion-code-inline copy>{lib.path}</motion-code-inline></td>
                 <td>{lib.draw ? "Yes" : "Pops instead"}</td>
                 <td>{lib.license}</td>
               </tr>
@@ -348,8 +348,8 @@ document.querySelector('#like-icon').icon = heart`,
           { name: "duration", type: "number", default: "0.6", description: "Duration of one run, in seconds" },
           { name: "bounce", type: "number", default: "0.4", description: "Spring bounciness for <code>pop</code>, <code>bounce</code> and <code>rotate</code>" },
           { name: "delay", type: "number", default: "0", description: "Seconds to wait before the animation starts" },
-          { name: "interval", type: "number", default: "1.2", description: "Seconds between runs with <code>trigger=\"loop\"</code>" },
-          { name: "once", type: "boolean", default: "true", description: "With <code>trigger=\"view\"</code>, animate only the first time. Set <code>once=\"false\"</code> to replay on every entry" },
+          { name: "interval", type: "number", default: "1.2", description: "Seconds between runs with <motion-code-inline copy>trigger=\"loop\"</motion-code-inline>" },
+          { name: "once", type: "boolean", default: "true", description: "With <motion-code-inline copy>trigger=\"view\"</motion-code-inline>, animate only the first time. Set <motion-code-inline copy>once=\"false\"</motion-code-inline> to replay on every entry" },
           { name: "label", type: "string", default: "''", description: "Accessible name. Without it the icon is decorative" },
         ]}
       />

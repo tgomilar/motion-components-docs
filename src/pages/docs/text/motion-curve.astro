@@ -79,7 +79,7 @@ el.text = 'UPDATED'   // animation restarts`}
       />
 
       <h2>Loop gap</h2>
-      <p>By default a <code>48px</code> gap separates each repetition. Set <code>loop-gap="0"</code> for continuous text with no visible break.</p>
+      <p>By default a <code>48px</code> gap separates each repetition. Set <motion-code-inline copy>loop-gap="0"</motion-code-inline> for continuous text with no visible break.</p>
       <DocsPreview wide tall>
         <motion-curve text="Spring physics · No CSS · Framework-free · " loop amplitude="22" wave-length="320" wave-duration="3.33" loop-speed="70" loop-gap="0"
         ></motion-curve>
@@ -116,7 +116,7 @@ el.text = 'UPDATED'   // animation restarts`}
         <code>translateY</code> + <code>rotate</code>. The phase advances each frame, making the wave travel through the text.
       </p>
       <p>
-        The rotation is derived from the curve's tangent: <code>angle = atan(A · k · cos(kx − phase))</code>, so letters lean naturally into the curve rather
+        The rotation is derived from the curve's tangent: <motion-code-inline copy>angle = atan(A · k · cos(kx − phase))</motion-code-inline>, so letters lean naturally into the curve rather
         than staying upright.
       </p>
 
