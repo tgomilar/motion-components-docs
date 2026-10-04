@@ -1,0 +1,93 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import PropsTable from "../../../components/PropsTable.astro";
+import "../../../styles/docs.css";
+---
+
+<Layout title="motion-ring — Motion Components" description="An ellipse or box that draws itself around a word when it scrolls into view. Keeps its text on one line." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main id="main">
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-ring</motion-split></h1>
+      <p class="lead">An ellipse or a box that draws itself around a word or a short phrase when it scrolls into view, like a pen circling something important. It keeps its text on one line.</p>
+
+      <h2>Preview</h2>
+      <DocsPreview replayId="ring-demo">
+        <p class="sentence">Every change is <motion-ring id="ring-demo">reversible</motion-ring>.</p>
+      </DocsPreview>
+      <h2>Import</h2>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import 'motion-components/motion-ring'   // just this one
+import 'motion-components'               // or the whole library`}
+      />
+
+      <h2>Usage</h2>
+      <CodeWindow filename="index.html" copy code={`<p>Every change is <motion-ring>reversible</motion-ring>.</p>`} />
+
+      <h2>Box</h2>
+      <p>Set <code>shape="box"</code> for a rectangle with slightly rounded corners.</p>
+      <DocsPreview replayId="ring-box">
+        <p class="sentence">Fully <motion-ring id="ring-box" shape="box">tested</motion-ring>.</p>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={`<motion-ring shape="box">tested</motion-ring>`} />
+
+      <h2>Padding and bounce</h2>
+      <p><code>padding</code> sets the gap between the text and the stroke. A little <code>bounce</code> makes the ring playful.</p>
+      <DocsPreview replayId="ring-bounce">
+        <p class="sentence">Twice <motion-ring id="ring-bounce" padding="12" bounce="0.3" style="--mc-mark-thickness: 3px">as fast</motion-ring>.</p>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={`<motion-ring padding="12" bounce="0.3" style="--mc-mark-thickness: 3px">as fast</motion-ring>`} />
+
+      <h2>Properties</h2>
+      <PropsTable nameLabel="Attribute" rows={[
+        { name: 'trigger', type: 'string', default: "'view'", description: "What draws the mark: <code>'view'</code> when it scrolls into view, <code>'hover'</code> on pointer enter (it undraws on leave), or <code>'mount'</code> when it connects" },
+        { name: 'duration', type: 'number', default: '0.6', description: 'Spring duration of the drawing, in seconds' },
+        { name: 'delay', type: 'number', default: '0', description: 'Seconds to wait before drawing. Use it to draw several marks in one sentence one after another' },
+        { name: 'bounce', type: 'number', default: '0', description: 'Spring bounciness. <code>0</code> keeps the stroke from overshooting the text' },
+        { name: 'once', type: 'boolean', default: 'true', description: 'With <code>trigger="view"</code>, draw only the first time. Set <motion-code-inline copy>once="false"</motion-code-inline> to undraw when it leaves and draw again on every entry' },
+        { name: 'threshold', type: 'number', default: '0.6', description: 'Share of the element, from 0 to 1, that must be visible before it draws' },
+        { name: 'shape', type: 'string', default: "'ellipse'", description: "<code>'ellipse'</code>, or <code>'box'</code> for a rectangle with slightly rounded corners" },
+        { name: 'padding', type: 'number', default: '6', description: 'Gap in pixels between the text and the stroke' },
+      ]} />
+
+      <h2>CSS custom properties</h2>
+      <PropsTable nameLabel="Property" rows={[
+        { name: '--mc-mark-color', type: 'color', default: 'var(--color-accent, #2563eb)', description: 'Color of the stroke' },
+        { name: '--mc-mark-thickness', type: 'length', default: '2px', description: 'Thickness of the stroke' },
+      ]} />
+
+      <h2>JavaScript API</h2>
+      <p>The mark has the shared playback API: <code>play()</code> draws it, <code>cancel()</code> removes it, <code>finish()</code> shows it fully drawn and <code>replay()</code> draws it again from the start. It fires <code>motion-start</code>, <code>motion-finish</code> and <code>motion-cancel</code>. See the <a href="/docs/js-api/">JavaScript API</a>.</p>
+
+      <h2>Accessibility</h2>
+      <p>The mark is decoration: the text stays real, selectable and read by screen readers exactly as written. The drawing is hidden from screen readers. Respects <code>prefers-reduced-motion</code>: the mark appears fully drawn at once, with no animation.</p>
+      <DocsPagination />
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components/motion-ring";
+  import "motion-components/motion-split";
+</script>
+
+<style>
+  .sentence {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.5;
+    color: var(--color-text);
+    text-align: center;
+  }
+
+</style>
