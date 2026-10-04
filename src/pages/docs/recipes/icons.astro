@@ -1,0 +1,262 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsPreview from "../../../components/DocsPreview.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import "../../../styles/docs.css";
+
+const icon = (name: string) => `https://cdn.jsdelivr.net/npm/lucide-static@1/icons/${name}.svg`;
+
+interface Recipe {
+  id: string;
+  title: string;
+  intro: string;
+  html: string;
+  js?: string;
+  css?: string;
+  note?: string;
+}
+
+const recipes: Recipe[] = [
+  {
+    id: "send-button",
+    title: "Button with an animated icon",
+    intro: "Put a <code>motion-icon</code> inside a button. It animates when the pointer enters any part of the button, not only the icon.",
+    html: `<button>
+  <motion-icon src="${icon("send")}" animation="bounce"></motion-icon>
+  Send
+</button>`,
+  },
+  {
+    id: "notification-bell",
+    title: "Notification bell",
+    intro: "The bell wiggles when a notification arrives. Call <code>replay()</code> from your code, and update the badge and the button name for screen readers.",
+    html: `<button id="notifications" aria-label="Notifications">
+  <motion-icon src="${icon("bell")}" animation="wiggle"></motion-icon>
+  <span id="notification-count" class="badge" hidden>0</span>
+</button>
+
+<button id="simulate">Simulate a notification</button>`,
+    js: `const button = document.querySelector('#notifications')
+const bell = button.querySelector('motion-icon')
+const badge = document.querySelector('#notification-count')
+let count = 0
+
+function notify() {
+  count += 1
+  badge.textContent = count
+  badge.hidden = false
+  button.setAttribute('aria-label', \`Notifications, \${count} new\`)
+  bell.replay()
+}
+
+document.querySelector('#simulate').addEventListener('click', notify)`,
+    css: `.badge {
+  min-width: 1.1rem;
+  padding: 0 0.3rem;
+  border-radius: 999px;
+  background: #e11d48;
+  color: #fff;
+  font-size: 0.7rem;
+  font-weight: 700;
+}`,
+  },
+  {
+    id: "like-button",
+    title: "Like button with a count",
+    intro: "The heart fills on a spring and the count goes up or down. The button keeps <code>aria-pressed</code> in sync, so screen readers know the state.",
+    html: `<button id="like" aria-pressed="false" aria-label="Like">
+  <motion-state-icon name="heart"></motion-state-icon>
+  <span id="like-count">128</span>
+</button>`,
+    js: `const button = document.querySelector('#like')
+const heart = button.querySelector('motion-state-icon')
+const count = document.querySelector('#like-count')
+
+button.addEventListener('click', () => {
+  const liked = button.getAttribute('aria-pressed') !== 'true'
+  button.setAttribute('aria-pressed', liked)
+  heart.active = liked
+  count.textContent = Number(count.textContent) + (liked ? 1 : -1)
+})`,
+  },
+  {
+    id: "download-button",
+    title: "Download button: arrow, spinner, check",
+    intro: "Two components work together. <code>motion-icon</code> shows the arrow and bounces on hover. On click, <code>motion-state-icon</code> takes over with a spinner that turns into a check.",
+    html: `<button id="download">
+  <motion-icon src="${icon("download")}" animation="bounce"></motion-icon>
+  <motion-state-icon name="loading" hidden></motion-state-icon>
+  Download
+</button>`,
+    js: `const button = document.querySelector('#download')
+const arrow = button.querySelector('motion-icon')
+const status = button.querySelector('motion-state-icon')
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
+
+button.addEventListener('click', async () => {
+  button.disabled = true
+  arrow.hidden = true
+  status.hidden = false
+  status.active = false   // spinner
+  await wait(1500)        // replace with your download
+  status.active = true    // check
+  await wait(1500)
+  status.hidden = true
+  arrow.hidden = false
+  button.disabled = false
+})`,
+    css: `motion-icon[hidden],
+motion-state-icon[hidden] {
+  display: none;
+}`,
+    note: "The <code>[hidden]</code> rule is needed because a component's own <code>display</code> style is stronger than the browser's default for <code>hidden</code>.",
+  },
+  {
+    id: "icon-navigation",
+    title: "Navigation with icons",
+    intro: "Each link has an icon with its own animation. Inside a link, the icon animates when the pointer enters the whole link.",
+    html: `<nav class="icon-nav">
+  <a href="#home"><motion-icon src="${icon("house")}"></motion-icon>Home</a>
+  <a href="#inbox"><motion-icon src="${icon("inbox")}" animation="bounce"></motion-icon>Inbox</a>
+  <a href="#calendar"><motion-icon src="${icon("calendar")}"></motion-icon>Calendar</a>
+  <a href="#settings"><motion-icon src="${icon("settings")}" animation="rotate"></motion-icon>Settings</a>
+</nav>`,
+    css: `.icon-nav {
+  display: grid;
+  gap: 0.25rem;
+  width: 12rem;
+}
+
+.icon-nav a {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.icon-nav a:hover {
+  background: rgb(0 0 0 / 0.05);
+}`,
+  },
+  {
+    id: "feature-list",
+    title: "Feature list that draws in on scroll",
+    intro: "Each icon draws itself in when the list scrolls into view. A growing <code>delay</code> makes them follow each other.",
+    html: `<ul class="feature-list">
+  <li>
+    <motion-icon src="${icon("zap")}" trigger="view"></motion-icon>
+    <span><strong>Light</strong> Each icon file loads once and is shared.</span>
+  </li>
+  <li>
+    <motion-icon src="${icon("shield-check")}" trigger="view" delay="0.15"></motion-icon>
+    <span><strong>Accessible</strong> Reduced motion is respected.</span>
+  </li>
+  <li>
+    <motion-icon src="${icon("sparkles")}" trigger="view" delay="0.3"></motion-icon>
+    <span><strong>Simple</strong> One tag per icon.</span>
+  </li>
+</ul>`,
+    css: `.feature-list {
+  display: grid;
+  gap: 0.9rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  --icon-size: 1.4rem;
+}
+
+.feature-list li {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}`,
+  },
+];
+
+const indent = (text: string) => text.split("\n").map((line) => (line ? `  ${line}` : line)).join("\n");
+const snippet = (r: Recipe) =>
+  [r.html, r.js && `<script type="module">\n${indent(r.js)}\n</script>`, r.css && `<style>\n${indent(r.css)}\n</style>`].filter(Boolean).join("\n\n");
+---
+
+<Layout
+  title="Icon Recipes — Recipes — Motion Components"
+  description="Copy-paste recipes for animated icons: buttons, a notification bell, a like button, a download button, icon navigation and a feature list."
+  noMain
+>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1>Icon Recipes</h1>
+      <p class="lead">
+        Everyday interface patterns built with <a href="/docs/icons/motion-icon/"><code>motion-icon</code></a> and
+        <a href="/docs/icons/motion-state-icon/"><code>motion-state-icon</code></a>. Each snippet is complete: copy it into a page that loads the library.
+      </p>
+      <CodeWindow filename="index.html" copy code={`<script type="module" src="https://cdn.jsdelivr.net/npm/motion-components@1/+esm"></script>`} />
+
+      {recipes.map((r) => (
+        <>
+          <h2 id={r.id}>{r.title}</h2>
+          <p set:html={r.intro} />
+          <DocsPreview compact>
+            <div class="recipe-demo" set:html={r.html} />
+          </DocsPreview>
+          <CodeWindow filename="index.html" copy code={snippet(r)} />
+          {r.note && <p class="note" set:html={r.note} />}
+        </>
+      ))}
+
+      <h2 id="more">More recipes</h2>
+      <p>
+        The <a href="/docs/icons/motion-state-icon/#recipes">motion-state-icon page</a> has five more: a menu button, a copy button, a save button with
+        a spinner, a show password button and an accordion.
+      </p>
+
+      <DocsPagination />
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<Fragment set:html={`<style>${recipes.map((r) => r.css ?? "").join("\n")}</style>`} />
+{recipes.filter((r) => r.js).map((r) => <script type="module" is:inline set:html={`{\n${r.js}\n}`} />)}
+
+<script>
+  import "motion-components";
+</script>
+
+<style>
+  .recipe-demo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: var(--color-text);
+  }
+
+  .recipe-demo :global(button) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    --icon-size: 1.15rem;
+  }
+
+  .recipe-demo :global(button:disabled) {
+    cursor: progress;
+  }
+</style>
