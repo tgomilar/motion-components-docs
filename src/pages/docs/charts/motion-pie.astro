@@ -117,10 +117,12 @@ const props = defineProps(['categories', 'amounts'])
 <button id="new-data">New data</button>`} />
       <p>Set <code>values</code> from JavaScript to change the data. The slices spring to their new sizes:</p>
       <CodeWindow filename="app.js" copy code={`const pie = document.querySelector('motion-pie')
+const datasets = ['42, 28, 18, 12', '25, 40, 20, 15', '30, 15, 35, 20']
+let step = 0
 
 document.querySelector('#new-data').addEventListener('click', () => {
-  const values = Array.from({ length: 4 }, () => 5 + Math.round(Math.random() * 40))
-  pie.values = values.join(', ')
+  step = (step + 1) % datasets.length
+  pie.values = datasets[step]
 })`} />
 
       <h2>Quick start</h2>
@@ -245,10 +247,14 @@ document.querySelector('#new-data').addEventListener('click', () => {
   const donut = document.getElementById("donut") as Pie | null;
   const code = document.getElementById("pie-code") as (HTMLElement & { setCode(code: string): void }) | null;
 
+  const pieData = ["42, 28, 18, 12", "25, 40, 20, 15", "30, 15, 35, 20"];
+  const donutData = ["1450, 620, 380, 240", "1450, 540, 310, 420", "1450, 700, 260, 180"];
+  let step = 0;
   document.getElementById("new-data")?.addEventListener("click", () => {
     if (!pie || !donut) return;
-    pie.values = Array.from({ length: 4 }, () => 5 + Math.round(Math.random() * 40)).join(", ");
-    donut.values = Array.from({ length: 4 }, () => 150 + Math.round(Math.random() * 1400)).join(", ");
+    step = (step + 1) % pieData.length;
+    pie.values = pieData[step];
+    donut.values = donutData[step];
     code?.setCode(`<motion-pie
   values="${pie.values}"
   labels="Direct, Search, Social, Email"

@@ -41,7 +41,7 @@ const recipes: Recipe[] = [
   {
     id: "period-switcher",
     title: "Week, month and year switcher",
-    intro: "Buttons swap the data, and the bars spring to the new values. Click quickly between periods: the bars turn around from wherever they are.",
+    intro: "Buttons swap the data and the color, and the bars spring to the new values while the axis follows. Click quickly between periods: the bars turn around from wherever they are.",
     html: `<div class="period-chart">
   <div class="periods" role="group" aria-label="Period">
     <button aria-pressed="true" data-period="week">Week</button>
@@ -52,15 +52,16 @@ const recipes: Recipe[] = [
 </div>`,
     js: `const chart = document.querySelector('#visits')
 const periods = {
-  week: { labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], values: [320, 410, 380, 460, 520, 290, 250] },
-  month: { labels: ['W1', 'W2', 'W3', 'W4'], values: [2400, 2900, 2650, 3100] },
-  year: { labels: ['Q1', 'Q2', 'Q3', 'Q4'], values: [9800, 11200, 10400, 12900] },
+  week: { color: '#2a78d6', labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], values: [320, 410, 380, 460, 520, 290, 250] },
+  month: { color: '#1baf7a', labels: ['W1', 'W2', 'W3', 'W4'], values: [2400, 2900, 2650, 3100] },
+  year: { color: '#8b5cf6', labels: ['Q1', 'Q2', 'Q3', 'Q4'], values: [9800, 11200, 10400, 12900] },
 }
 
 document.querySelectorAll('[data-period]').forEach((button) => {
   button.addEventListener('click', () => {
     document.querySelectorAll('[data-period]').forEach((b) => b.setAttribute('aria-pressed', b === button))
-    const { labels, values } = periods[button.dataset.period]
+    const { color, labels, values } = periods[button.dataset.period]
+    chart.style.setProperty('--chart-1', color)
     chart.data = { labels, series: [{ name: 'Visits', values }] }
   })
 })`,
