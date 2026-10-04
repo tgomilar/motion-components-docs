@@ -4,13 +4,14 @@ interface Props {
   tall?: boolean;
   noPad?: boolean;
   dark?: boolean;
+  compact?: boolean;
   showBar?: boolean;
 }
-const { wide, tall, noPad, dark, showBar = false } = Astro.props;
+const { wide, tall, noPad, dark, compact, showBar = false } = Astro.props;
 ---
 
 <div class="demo-wrap">
-  <div class:list={["demo-stage", { wide, tall, "no-pad": noPad, dark }]}>
+  <div class:list={["demo-stage", { wide, tall, "no-pad": noPad, dark, compact }]}>
     <slot name="default" />
   </div>
   {showBar && (
@@ -40,6 +41,11 @@ const { wide, tall, noPad, dark, showBar = false } = Astro.props;
 
   .demo-stage.wide {
     padding: 2rem;
+  }
+
+  .demo-stage.compact {
+    padding: 1.5rem;
+    min-height: 0;
   }
 
   .demo-stage.tall {
