@@ -1,0 +1,70 @@
+---
+import DocsPreview from "./DocsPreview.astro";
+import CodeWindow from "./CodeWindow.astro";
+import { recipeSnippet, type Recipe } from "../data/recipes";
+
+interface Props {
+  recipes: Recipe[];
+}
+
+const { recipes } = Astro.props;
+---
+
+{recipes.map((r) => (
+  <>
+    <h2 id={r.id}>{r.title}</h2>
+    <p set:html={r.intro} />
+    <DocsPreview compact>
+      <div class="recipe-demo" set:html={r.html} />
+    </DocsPreview>
+    <CodeWindow filename="index.html" copy code={recipeSnippet(r)} />
+    {r.note && <p class="note" set:html={r.note} />}
+  </>
+))}
+
+<Fragment set:html={`<style>${recipes.map((r) => r.css ?? "").join("\n")}</style>`} />
+{recipes.filter((r) => r.js).map((r) => <script type="module" is:inline set:html={`{\n${r.js}\n}`} />)}
+
+<style>
+  .recipe-demo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    width: 100%;
+    color: var(--color-text);
+  }
+
+  .recipe-demo :global(button),
+  .recipe-demo :global(select),
+  .recipe-demo :global(input) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.55rem 1rem;
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    background: var(--color-surface);
+    color: var(--color-text);
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    --icon-size: 1.15rem;
+  }
+
+  .recipe-demo :global(input) {
+    width: 5.5rem;
+    font-weight: 400;
+    cursor: text;
+  }
+
+  .recipe-demo :global(button[aria-pressed="true"]) {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+  }
+
+  .recipe-demo :global(button:disabled) {
+    cursor: progress;
+  }
+</style>
