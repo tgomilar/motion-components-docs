@@ -178,10 +178,6 @@ document.querySelector('#like-icon').icon = heart`,
         A path without a leading slash, such as <code>icons/heart.svg</code>, is relative to the page. For pages in subfolders, start the path with a
         slash, such as <code>/icons/heart.svg</code>, so it always points to the folder at the root of your site.
       </p>
-      <p class="note">
-        Open the page through a web server, not by double-clicking the file. Browsers do not load files from a <code>file://</code> address, so the
-        icon stays empty and fires <code>error</code>. Any local server works, for example <code>npx serve</code> in the site folder.
-      </p>
 
       <h3>3. Inline SVG</h3>
       <p>Paste the icon's <code>&lt;svg&gt;</code> inside the element. Most icon websites have a "Copy SVG" button.</p>
