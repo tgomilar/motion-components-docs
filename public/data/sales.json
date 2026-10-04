@@ -1,0 +1,7 @@
+{
+  "labels": ["Jan", "Feb", "Mar", "Apr", "May", "Jun"],
+  "series": [
+    { "name": "Online", "values": [420, 510, 480, 620, 700, 760] },
+    { "name": "In store", "values": [380, 360, 410, 390, 430, 470] }
+  ]
+}

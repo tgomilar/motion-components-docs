@@ -1,23 +1,14 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
-import DocsPreview from "../../../components/DocsPreview.astro";
 import DocsSidebar from "../../../components/DocsSidebar.astro";
 import DocsTOC from "../../../components/DocsTOC.astro";
 import DocsPagination from "../../../components/DocsPagination.astro";
 import CodeWindow from "../../../components/CodeWindow.astro";
+import RecipeList from "../../../components/RecipeList.astro";
+import type { Recipe } from "../../../data/recipes";
 import "../../../styles/docs.css";
 
 const icon = (name: string) => `https://cdn.jsdelivr.net/npm/lucide-static@1/icons/${name}.svg`;
-
-interface Recipe {
-  id: string;
-  title: string;
-  intro: string;
-  html: string;
-  js?: string;
-  css?: string;
-  note?: string;
-}
 
 const recipes: Recipe[] = [
   {
@@ -179,9 +170,6 @@ motion-state-icon[hidden] {
   },
 ];
 
-const indent = (text: string) => text.split("\n").map((line) => (line ? `  ${line}` : line)).join("\n");
-const snippet = (r: Recipe) =>
-  [r.html, r.js && `<script type="module">\n${indent(r.js)}\n</script>`, r.css && `<style>\n${indent(r.css)}\n</style>`].filter(Boolean).join("\n\n");
 ---
 
 <Layout
@@ -200,17 +188,7 @@ const snippet = (r: Recipe) =>
       </p>
       <CodeWindow filename="index.html" copy code={`<script type="module" src="https://cdn.jsdelivr.net/npm/motion-components@1/+esm"></script>`} />
 
-      {recipes.map((r) => (
-        <>
-          <h2 id={r.id}>{r.title}</h2>
-          <p set:html={r.intro} />
-          <DocsPreview compact>
-            <div class="recipe-demo" set:html={r.html} />
-          </DocsPreview>
-          <CodeWindow filename="index.html" copy code={snippet(r)} />
-          {r.note && <p class="note" set:html={r.note} />}
-        </>
-      ))}
+      <RecipeList recipes={recipes} />
 
       <h2 id="more">More recipes</h2>
       <p>
@@ -224,39 +202,6 @@ const snippet = (r: Recipe) =>
   </div>
 </Layout>
 
-<Fragment set:html={`<style>${recipes.map((r) => r.css ?? "").join("\n")}</style>`} />
-{recipes.filter((r) => r.js).map((r) => <script type="module" is:inline set:html={`{\n${r.js}\n}`} />)}
-
 <script>
   import "motion-components";
 </script>
-
-<style>
-  .recipe-demo {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    color: var(--color-text);
-  }
-
-  .recipe-demo :global(button) {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.55rem 1rem;
-    border: 1px solid var(--color-border);
-    border-radius: 8px;
-    background: var(--color-surface);
-    color: var(--color-text);
-    font: inherit;
-    font-weight: 600;
-    cursor: pointer;
-    --icon-size: 1.15rem;
-  }
-
-  .recipe-demo :global(button:disabled) {
-    cursor: progress;
-  }
-</style>

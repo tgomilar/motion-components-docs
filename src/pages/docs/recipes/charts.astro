@@ -1,0 +1,209 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import DocsSidebar from "../../../components/DocsSidebar.astro";
+import DocsTOC from "../../../components/DocsTOC.astro";
+import DocsPagination from "../../../components/DocsPagination.astro";
+import CodeWindow from "../../../components/CodeWindow.astro";
+import RecipeList from "../../../components/RecipeList.astro";
+import type { Recipe } from "../../../data/recipes";
+import "../../../styles/docs.css";
+
+const recipes: Recipe[] = [
+  {
+    id: "stat-tile",
+    title: "Stat tile",
+    intro: "A number that counts up above its trend. <code>motion-counter</code> animates the value, <code>motion-sparkline</code> draws the trend.",
+    html: `<div class="stat">
+  <span class="stat-label">Revenue this month</span>
+  <motion-counter to="48.2" decimals="1" prefix="€" suffix="K"></motion-counter>
+  <motion-sparkline values="31, 35, 33, 38, 41, 39, 45, 48" area></motion-sparkline>
+</div>`,
+    css: `.stat {
+  display: grid;
+  gap: 0.25rem;
+  width: 16rem;
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  opacity: 0.7;
+}
+
+.stat motion-sparkline {
+  --sparkline-width: 100%;
+  --sparkline-height: 2.5rem;
+  color: #2a78d6;
+}`,
+  },
+  {
+    id: "period-switcher",
+    title: "Week, month and year switcher",
+    intro: "Buttons swap the data, and the bars spring to the new values. Click quickly between periods: the bars turn around from wherever they are.",
+    html: `<div class="period-chart">
+  <div class="periods" role="group" aria-label="Period">
+    <button aria-pressed="true" data-period="week">Week</button>
+    <button aria-pressed="false" data-period="month">Month</button>
+    <button aria-pressed="false" data-period="year">Year</button>
+  </div>
+  <motion-chart id="visits" label="Visits" labels="Mon, Tue, Wed, Thu, Fri, Sat, Sun" values="320, 410, 380, 460, 520, 290, 250"></motion-chart>
+</div>`,
+    js: `const chart = document.querySelector('#visits')
+const periods = {
+  week: { labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'], values: [320, 410, 380, 460, 520, 290, 250] },
+  month: { labels: ['W1', 'W2', 'W3', 'W4'], values: [2400, 2900, 2650, 3100] },
+  year: { labels: ['Q1', 'Q2', 'Q3', 'Q4'], values: [9800, 11200, 10400, 12900] },
+}
+
+document.querySelectorAll('[data-period]').forEach((button) => {
+  button.addEventListener('click', () => {
+    document.querySelectorAll('[data-period]').forEach((b) => b.setAttribute('aria-pressed', b === button))
+    const { labels, values } = periods[button.dataset.period]
+    chart.data = { labels, series: [{ name: 'Visits', values }] }
+  })
+})`,
+    css: `.period-chart {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+}
+
+.periods {
+  display: flex;
+  gap: 0.5rem;
+}`,
+  },
+  {
+    id: "chart-from-a-form",
+    title: "Chart from a form",
+    intro: "Type a number and the matching bar springs to it. The inputs are the data, so the chart never needs a separate update call.",
+    html: `<div class="form-chart">
+  <div class="inputs">
+    <label>North <input type="number" value="8" data-region></label>
+    <label>East <input type="number" value="14" data-region></label>
+    <label>South <input type="number" value="11" data-region></label>
+    <label>West <input type="number" value="19" data-region></label>
+  </div>
+  <motion-chart id="regions" label="Sales by region" labels="North, East, South, West" values="8, 14, 11, 19"></motion-chart>
+</div>`,
+    js: `const chart = document.querySelector('#regions')
+const inputs = [...document.querySelectorAll('[data-region]')]
+
+for (const input of inputs) {
+  input.addEventListener('input', () => {
+    chart.values = inputs.map((i) => Number(i.value) || 0).join(', ')
+  })
+}`,
+    css: `.form-chart {
+  display: grid;
+  gap: 1rem;
+  width: 100%;
+}
+
+.inputs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.inputs label {
+  display: grid;
+  gap: 0.25rem;
+  font-size: 0.85rem;
+}`,
+  },
+  {
+    id: "load-from-json",
+    title: "Load data from a JSON file",
+    intro: "Fetch the data and set <code>data</code>. The chart waits with empty axes, then animates in once the data arrives. This demo loads <code>/data/sales.json</code> from this site.",
+    html: `<motion-chart id="sales" type="line" label="Sales" format="currency:EUR"></motion-chart>`,
+    js: `const chart = document.querySelector('#sales')
+const response = await fetch('/data/sales.json')
+chart.data = await response.json()`,
+    css: `#sales {
+  width: 100%;
+}`,
+    note: "<code>sales.json</code> has the same shape as <code>data</code>: <code>{ \"labels\": [...], \"series\": [{ \"name\": \"Online\", \"values\": [...] }] }</code>.",
+  },
+  {
+    id: "budget-by-month",
+    title: "Budget donut by month",
+    intro: "A select changes the month, and the slices spring to their new sizes. The center shows the total, or the slice you hover.",
+    html: `<div class="budget">
+  <select id="month" aria-label="Month">
+    <option value="jan">January</option>
+    <option value="feb">February</option>
+    <option value="mar">March</option>
+  </select>
+  <motion-pie id="budget" donut label="Monthly budget" format="currency:EUR" labels="Rent, Food, Transport, Fun" values="1450, 620, 380, 240"></motion-pie>
+</div>`,
+    js: `const pie = document.querySelector('#budget')
+const months = {
+  jan: [1450, 620, 380, 240],
+  feb: [1450, 540, 310, 420],
+  mar: [1450, 700, 260, 180],
+}
+
+document.querySelector('#month').addEventListener('change', (event) => {
+  pie.values = months[event.target.value].join(', ')
+})`,
+    css: `.budget {
+  display: grid;
+  justify-items: start;
+  gap: 1rem;
+  width: 100%;
+}
+
+#budget {
+  width: 100%;
+}`,
+  },
+  {
+    id: "live-line",
+    title: "Live line chart",
+    intro: "A new point every 1.5 seconds. The oldest point drops off, and the whole line springs into its new shape.",
+    html: `<motion-chart id="live-cpu" type="line" label="CPU load" format="percent" min="0" max="100" values="42, 48, 45, 51, 49, 55, 53, 58"></motion-chart>`,
+    js: `const chart = document.querySelector('#live-cpu')
+
+setInterval(() => {
+  const values = chart.values.split(',').map(Number)
+  const next = Math.min(100, Math.max(0, values.at(-1) + Math.round(Math.random() * 14 - 7)))
+  chart.values = [...values.slice(1), next].join(', ')
+}, 1500)`,
+    css: `#live-cpu {
+  width: 100%;
+}`,
+  },
+];
+---
+
+<Layout
+  title="Chart Recipes — Recipes — Motion Components"
+  description="Copy-paste chart recipes: a stat tile, a period switcher, a chart from a form, data from JSON, a budget donut and a live line chart."
+  noMain
+>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main>
+      <h1>Chart Recipes</h1>
+      <p class="lead">
+        Everyday data patterns built with <a href="/docs/charts/motion-chart/"><code>motion-chart</code></a>,
+        <a href="/docs/charts/motion-pie/"><code>motion-pie</code></a> and <a href="/docs/charts/motion-sparkline/"><code>motion-sparkline</code></a>. Each
+        snippet is complete: copy it into a page that loads the library.
+      </p>
+      <CodeWindow filename="index.html" copy code={`<script type="module" src="https://cdn.jsdelivr.net/npm/motion-components@1/+esm"></script>`} />
+
+      <RecipeList recipes={recipes} />
+
+      <DocsPagination />
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components";
+</script>
