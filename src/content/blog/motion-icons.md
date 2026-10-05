@@ -1,7 +1,7 @@
 ---
 title: "motion-components 1.1: Animate Any SVG Icon With One HTML Tag"
 description: motion-icon draws in, pops, bounces, rotates, wiggles or pulses any SVG icon from Lucide, Tabler, Heroicons, Material Symbols, Font Awesome and more. motion-state-icon morphs between two states on a spring.
-pubDate: 2026-10-04T00:00:00.000Z
+pubDate: 2026-10-03T00:00:00.000Z
 author: Tanja Gomilar
 tags:
   - release
