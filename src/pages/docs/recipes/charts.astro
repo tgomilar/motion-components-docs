@@ -33,8 +33,8 @@ const recipes: Recipe[] = [
 }
 
 .stat motion-sparkline {
-  --sparkline-width: 100%;
-  --sparkline-height: 2.5rem;
+  --mc-sparkline-width: 100%;
+  --mc-sparkline-height: 2.5rem;
   color: #2a78d6;
 }`,
   },
@@ -61,7 +61,7 @@ document.querySelectorAll('[data-period]').forEach((button) => {
   button.addEventListener('click', () => {
     document.querySelectorAll('[data-period]').forEach((b) => b.setAttribute('aria-pressed', b === button))
     const { color, labels, values } = periods[button.dataset.period]
-    chart.style.setProperty('--chart-1', color)
+    chart.style.setProperty('--mc-chart-1', color)
     chart.data = { labels, series: [{ name: 'Visits', values }] }
   })
 })`,
@@ -164,7 +164,7 @@ document.querySelector('#month').addEventListener('change', (event) => {
   {
     id: "color-palettes",
     title: "Color palettes",
-    intro: "The colors are CSS custom properties, <code>--chart-1</code> to <code>--chart-8</code>. Set them on a wrapper, and every chart inside takes them. These buttons switch palettes for a bar chart and a donut at once.",
+    intro: "The colors are CSS custom properties, <code>--mc-chart-1</code> to <code>--mc-chart-8</code>. Set them on a wrapper, and every chart inside takes them. These buttons switch palettes for a bar chart and a donut at once.",
     html: `<div id="themed" class="themed-charts">
   <div class="palettes" role="group" aria-label="Color palette">
     <button aria-pressed="true" data-palette="default">Default</button>
@@ -188,8 +188,8 @@ document.querySelectorAll('[data-palette]').forEach((button) => {
     document.querySelectorAll('[data-palette]').forEach((b) => b.setAttribute('aria-pressed', b === button))
     const colors = palettes[button.dataset.palette]
     for (let i = 1; i <= 3; i++) {
-      if (colors[i - 1]) charts.style.setProperty(\`--chart-\${i}\`, colors[i - 1])
-      else charts.style.removeProperty(\`--chart-\${i}\`)
+      if (colors[i - 1]) charts.style.setProperty(\`--mc-chart-\${i}\`, colors[i - 1])
+      else charts.style.removeProperty(\`--mc-chart-\${i}\`)
     }
   })
 })`,
@@ -206,7 +206,7 @@ document.querySelectorAll('[data-palette]').forEach((button) => {
   gap: 0.5rem;
   grid-column: 1 / -1;
 }`,
-    note: "Without JavaScript, set the palette in CSS: <code>.my-charts { --chart-1: #0369a1; --chart-2: #0ea5e9; }</code>. The default palette is chosen so the colors stay apart for readers with color blindness. When you pick your own, make the colors differ in lightness too, as the Mono palette does.",
+    note: "Without JavaScript, set the palette in CSS: <code>.my-charts { --mc-chart-1: #0369a1; --mc-chart-2: #0ea5e9; }</code>. The default palette is chosen so the colors stay apart for readers with color blindness. When you pick your own, make the colors differ in lightness too, as the Mono palette does.",
   },
   {
     id: "live-line",

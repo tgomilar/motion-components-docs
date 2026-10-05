@@ -197,23 +197,23 @@
     gap: 0.5rem;
     height: 32px;
     padding: 0 0.5rem 0 0.65rem;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--mc-color-border);
     border-radius: 8px;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     font-size: 0.85rem;
     cursor: pointer;
-    background: var(--color-surface);
+    background: var(--mc-color-surface);
     min-width: 11rem;
     box-sizing: border-box;
   }
 
   .search-trigger:hover {
-    color: var(--color-text);
-    border-color: color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
+    color: var(--mc-color-text);
+    border-color: color-mix(in srgb, var(--mc-color-accent) 45%, var(--mc-color-border));
   }
 
   .search-trigger:focus-visible {
-    outline: 2px solid var(--color-accent);
+    outline: 2px solid var(--mc-color-accent);
     outline-offset: 2px;
   }
 
@@ -226,10 +226,10 @@
     font-family: var(--font-mono);
     font-size: 0.7rem;
     padding: 0.1rem 0.35rem;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--mc-color-border);
     border-radius: 5px;
-    color: var(--color-muted);
-    background: var(--color-surface-2);
+    color: var(--mc-color-muted);
+    background: var(--mc-color-surface-2);
   }
 
   @media (max-width: 640px) {
@@ -247,13 +247,13 @@
   }
 
   .search-dialog {
-    --dialog-padding: 0;
-    --dialog-radius: 14px;
-    --dialog-max-width: min(640px, calc(100vw - 2rem));
-    --dialog-bg: var(--color-surface);
-    --dialog-color: var(--color-text);
-    --dialog-backdrop-color: rgba(10, 10, 20, 0.35);
-    --dialog-backdrop-blur: blur(3px);
+    --mc-dialog-padding: 0;
+    --mc-dialog-radius: 14px;
+    --mc-dialog-max-width: min(640px, calc(100vw - 2rem));
+    --mc-dialog-bg: var(--mc-color-surface);
+    --mc-dialog-color: var(--mc-color-text);
+    --mc-dialog-backdrop-color: rgba(10, 10, 20, 0.35);
+    --mc-dialog-backdrop-blur: blur(3px);
   }
 
   .search-panel {
@@ -267,19 +267,19 @@
     align-items: center;
     gap: 0.75rem;
     padding: 0.9rem 1rem;
-    border-bottom: 1px solid var(--color-border);
-    color: var(--color-muted);
+    border-bottom: 1px solid var(--mc-color-border);
+    color: var(--mc-color-muted);
   }
 
   .search-field input {
     all: unset;
     flex: 1;
     font-size: 1rem;
-    color: var(--color-text);
+    color: var(--mc-color-text);
   }
 
   .search-field input::placeholder {
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
   }
 
   .search-field input::-webkit-search-cancel-button {
@@ -304,19 +304,19 @@
     gap: 0.2rem;
     padding: 0.6rem 0.75rem;
     border-radius: 8px;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     text-decoration: none;
   }
 
   .search-results :global(.search-hit--sub) {
     margin-left: 1.25rem;
     padding-left: 0.85rem;
-    border-left: 2px solid var(--color-border);
+    border-left: 2px solid var(--mc-color-border);
     border-radius: 0 8px 8px 0;
   }
 
   .search-results :global(.search-hit[aria-selected="true"]) {
-    background: var(--color-accent-dim);
+    background: var(--mc-color-accent-dim);
   }
 
   .search-results :global(.search-hit-head) {
@@ -332,7 +332,7 @@
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: var(--color-accent);
+    color: var(--mc-color-accent);
   }
 
   .search-results :global(.search-hit-title) {
@@ -345,7 +345,7 @@
 
   .search-results :global(.search-hit-excerpt) {
     font-size: 0.82rem;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     line-height: 1.45;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -355,7 +355,7 @@
 
   .search-results :global(mark) {
     background: none;
-    color: var(--color-accent);
+    color: var(--mc-color-accent);
     font-weight: 600;
   }
 
@@ -363,8 +363,8 @@
     margin: 0;
     padding: 0.6rem 1rem;
     font-size: 0.78rem;
-    color: var(--color-muted);
-    border-top: 1px solid var(--color-border);
+    color: var(--mc-color-muted);
+    border-top: 1px solid var(--mc-color-border);
     max-width: none;
   }
 

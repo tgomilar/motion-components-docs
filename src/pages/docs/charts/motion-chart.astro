@@ -237,18 +237,18 @@ chart.data = {
 
       <h2>Colors and size</h2>
       <p>
-        The eight series colors are chosen to stay apart for color-blind readers, in light and dark mode. Override them with <code>--chart-1</code> to
-        <code>--chart-8</code>. Text and gridlines follow the text color.
+        The eight series colors are chosen to stay apart for color-blind readers, in light and dark mode. Override them with <code>--mc-chart-1</code> to
+        <code>--mc-chart-8</code>. Text and gridlines follow the text color.
       </p>
       <DocsPreview>
         <div class="demo">
-          <motion-chart values="8, 14, 11, 19" labels="North, East, South, West" style="--chart-1: #16a34a; --chart-height: 12rem"></motion-chart>
+          <motion-chart values="8, 14, 11, 19" labels="North, East, South, West" style="--mc-chart-1: #16a34a; --mc-chart-height: 12rem"></motion-chart>
         </div>
       </DocsPreview>
       <CodeWindow filename="index.html" copy code={`<motion-chart
   values="8, 14, 11, 19"
   labels="North, East, South, West"
-  style="--chart-1: #16a34a; --chart-height: 12rem"
+  style="--mc-chart-1: #16a34a; --mc-chart-height: 12rem"
 ></motion-chart>`} />
 
       <h2>Properties</h2>
@@ -277,9 +277,9 @@ chart.data = {
       <PropsTable
         nameLabel="Property"
         rows={[
-          { name: "--chart-height", type: "length", default: "16rem", description: "Height of the chart, including the legend" },
-          { name: "--chart-1 … --chart-8", type: "color", default: "blue, orange, aqua, yellow, magenta, green, violet, red", description: "Series colors, in order" },
-          { name: "--chart-surface", type: "color", default: "Canvas", description: "Background behind the chart. Used for the tooltip and the ring around points" },
+          { name: "--mc-chart-height", type: "length", default: "16rem", description: "Height of the chart, including the legend" },
+          { name: "--mc-chart-1 … --mc-chart-8", type: "color", default: "blue, orange, aqua, yellow, magenta, green, violet, red", description: "Series colors, in order" },
+          { name: "--mc-chart-surface", type: "color", default: "Canvas", description: "Background behind the chart. Used for the tooltip and the ring around points" },
         ]}
       />
 
@@ -343,7 +343,7 @@ chart.data = {
     gap: 1rem;
     justify-items: start;
     width: 100%;
-    color: var(--color-text);
+    color: var(--mc-color-text);
   }
 
   .demo motion-chart {
@@ -352,10 +352,10 @@ chart.data = {
 
   .demo-action {
     padding: 0.5rem 1rem;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--mc-color-border);
     border-radius: 8px;
-    background: var(--color-surface);
-    color: var(--color-text);
+    background: var(--mc-color-surface);
+    color: var(--mc-color-text);
     font: inherit;
     font-weight: 600;
     cursor: pointer;

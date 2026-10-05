@@ -39,44 +39,44 @@ The result is the small hitch you have felt on a thousand websites. The element 
   <svg viewBox="0 0 640 290" role="img" aria-label="Two position over time graphs. Both show a card rising from resting toward lifted when the pointer leaves mid animation. The CSS transition restarts from a standstill, so its curve has a sharp corner. The spring keeps its velocity, so its curve continues up briefly and arcs back down in one smooth motion." style="width: 100%; height: auto; display: block; font-family: var(--font-mono);">
     <defs>
       <marker id="interrupt-arrow" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="7" markerHeight="7" orient="auto">
-        <path d="M0,0 L8,4 L0,8 Z" fill="var(--color-muted)" />
+        <path d="M0,0 L8,4 L0,8 Z" fill="var(--mc-color-muted)" />
       </marker>
     </defs>
     <!-- divider -->
-    <line x1="330" y1="24" x2="330" y2="266" stroke="var(--color-border)" stroke-dasharray="4 4" />
+    <line x1="330" y1="24" x2="330" y2="266" stroke="var(--mc-color-border)" stroke-dasharray="4 4" />
     <!-- left panel: CSS transition -->
     <g>
-      <text x="30" y="30" font-size="13" fill="var(--color-muted)">CSS transition</text>
-      <line x1="30" y1="90" x2="290" y2="90" stroke="var(--color-border)" stroke-dasharray="3 4" />
-      <text x="30" y="82" font-size="10" fill="var(--color-muted)">lifted</text>
-      <line x1="30" y1="215" x2="290" y2="215" stroke="var(--color-border)" stroke-dasharray="3 4" />
-      <text x="30" y="230" font-size="10" fill="var(--color-muted)">resting</text>
-      <line x1="145" y1="60" x2="145" y2="235" stroke="var(--color-muted)" stroke-dasharray="3 4" />
-      <text x="145" y="52" font-size="10" fill="var(--color-muted)" text-anchor="middle">pointer leaves</text>
-      <path d="M 40 215 C 85 215, 120 180, 145 130 L 162 130 C 195 132, 200 215, 250 215" fill="none" stroke="var(--color-accent)" stroke-width="2" />
-      <circle cx="40" cy="215" r="3.5" fill="var(--color-accent)" />
-      <circle cx="145" cy="130" r="3.5" fill="var(--color-accent)" />
-      <text x="153" y="118" font-size="10" fill="var(--color-muted)">stops dead</text>
-      <text x="290" y="232" font-size="11" fill="var(--color-muted)" text-anchor="end">time</text>
-      <line x1="30" y1="240" x2="284" y2="240" stroke="var(--color-muted)" stroke-width="1" marker-end="url(#interrupt-arrow)" />
-      <text x="160" y="272" font-size="12" fill="var(--color-muted)" text-anchor="middle">the restart throws away velocity</text>
+      <text x="30" y="30" font-size="13" fill="var(--mc-color-muted)">CSS transition</text>
+      <line x1="30" y1="90" x2="290" y2="90" stroke="var(--mc-color-border)" stroke-dasharray="3 4" />
+      <text x="30" y="82" font-size="10" fill="var(--mc-color-muted)">lifted</text>
+      <line x1="30" y1="215" x2="290" y2="215" stroke="var(--mc-color-border)" stroke-dasharray="3 4" />
+      <text x="30" y="230" font-size="10" fill="var(--mc-color-muted)">resting</text>
+      <line x1="145" y1="60" x2="145" y2="235" stroke="var(--mc-color-muted)" stroke-dasharray="3 4" />
+      <text x="145" y="52" font-size="10" fill="var(--mc-color-muted)" text-anchor="middle">pointer leaves</text>
+      <path d="M 40 215 C 85 215, 120 180, 145 130 L 162 130 C 195 132, 200 215, 250 215" fill="none" stroke="var(--mc-color-accent)" stroke-width="2" />
+      <circle cx="40" cy="215" r="3.5" fill="var(--mc-color-accent)" />
+      <circle cx="145" cy="130" r="3.5" fill="var(--mc-color-accent)" />
+      <text x="153" y="118" font-size="10" fill="var(--mc-color-muted)">stops dead</text>
+      <text x="290" y="232" font-size="11" fill="var(--mc-color-muted)" text-anchor="end">time</text>
+      <line x1="30" y1="240" x2="284" y2="240" stroke="var(--mc-color-muted)" stroke-width="1" marker-end="url(#interrupt-arrow)" />
+      <text x="160" y="272" font-size="12" fill="var(--mc-color-muted)" text-anchor="middle">the restart throws away velocity</text>
     </g>
     <!-- right panel: Spring -->
     <g>
-      <text x="360" y="30" font-size="13" fill="var(--color-muted)">Spring</text>
-      <line x1="360" y1="90" x2="620" y2="90" stroke="var(--color-border)" stroke-dasharray="3 4" />
-      <text x="360" y="82" font-size="10" fill="var(--color-muted)">lifted</text>
-      <line x1="360" y1="215" x2="620" y2="215" stroke="var(--color-border)" stroke-dasharray="3 4" />
-      <text x="360" y="230" font-size="10" fill="var(--color-muted)">resting</text>
-      <line x1="475" y1="60" x2="475" y2="235" stroke="var(--color-muted)" stroke-dasharray="3 4" />
-      <text x="475" y="52" font-size="10" fill="var(--color-muted)" text-anchor="middle">pointer leaves</text>
-      <path d="M 370 215 C 415 215, 450 180, 475 130 C 490 100, 512 92, 532 140 C 545 175, 558 212, 580 215" fill="none" stroke="var(--color-accent)" stroke-width="2" />
-      <circle cx="370" cy="215" r="3.5" fill="var(--color-accent)" />
-      <circle cx="475" cy="130" r="3.5" fill="var(--color-accent)" />
-      <text x="468" y="112" font-size="10" fill="var(--color-muted)" text-anchor="end">keeps moving</text>
-      <text x="620" y="232" font-size="11" fill="var(--color-muted)" text-anchor="end">time</text>
-      <line x1="360" y1="240" x2="614" y2="240" stroke="var(--color-muted)" stroke-width="1" marker-end="url(#interrupt-arrow)" />
-      <text x="490" y="272" font-size="12" fill="var(--color-muted)" text-anchor="middle">the momentum carries through</text>
+      <text x="360" y="30" font-size="13" fill="var(--mc-color-muted)">Spring</text>
+      <line x1="360" y1="90" x2="620" y2="90" stroke="var(--mc-color-border)" stroke-dasharray="3 4" />
+      <text x="360" y="82" font-size="10" fill="var(--mc-color-muted)">lifted</text>
+      <line x1="360" y1="215" x2="620" y2="215" stroke="var(--mc-color-border)" stroke-dasharray="3 4" />
+      <text x="360" y="230" font-size="10" fill="var(--mc-color-muted)">resting</text>
+      <line x1="475" y1="60" x2="475" y2="235" stroke="var(--mc-color-muted)" stroke-dasharray="3 4" />
+      <text x="475" y="52" font-size="10" fill="var(--mc-color-muted)" text-anchor="middle">pointer leaves</text>
+      <path d="M 370 215 C 415 215, 450 180, 475 130 C 490 100, 512 92, 532 140 C 545 175, 558 212, 580 215" fill="none" stroke="var(--mc-color-accent)" stroke-width="2" />
+      <circle cx="370" cy="215" r="3.5" fill="var(--mc-color-accent)" />
+      <circle cx="475" cy="130" r="3.5" fill="var(--mc-color-accent)" />
+      <text x="468" y="112" font-size="10" fill="var(--mc-color-muted)" text-anchor="end">keeps moving</text>
+      <text x="620" y="232" font-size="11" fill="var(--mc-color-muted)" text-anchor="end">time</text>
+      <line x1="360" y1="240" x2="614" y2="240" stroke="var(--mc-color-muted)" stroke-width="1" marker-end="url(#interrupt-arrow)" />
+      <text x="490" y="272" font-size="12" fill="var(--mc-color-muted)" text-anchor="middle">the momentum carries through</text>
     </g>
   </svg>
 </figure>
@@ -107,13 +107,13 @@ Two cards, same visual goal. Hover back and forth between them as fast as you ca
     font-size: 0.75rem;
     margin-top: 0.75rem;
     height: 1.2em;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
   }
   .compare-status.restarting { color: #e5484d; }
   .compare-status.continuing { color: #30a46c; }
   .compare-card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    background: var(--mc-color-surface);
+    border: 1px solid var(--mc-color-border);
     border-radius: 12px;
     padding: 2rem;
     text-align: center;
@@ -200,8 +200,8 @@ The animation is slow and the travel is large on purpose. That makes the interru
 ```html
 <style>
   .compare-card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    background: var(--mc-color-surface);
+    border: 1px solid var(--mc-color-border);
     border-radius: 12px;
     padding: 2rem;
     text-align: center;
@@ -254,53 +254,53 @@ That is the entire difference.
   <svg viewBox="0 0 640 368" role="img" aria-label="Diagram comparing the two models. A CSS transition maps time to progress with a fixed curve from 0% to 100%. A spring runs frame by frame, each frame holding position and velocity. When the target changes, the simulation continues." style="width: 100%; height: auto; display: block; font-family: var(--font-mono);">
     <defs>
       <marker id="spring-sim-arrow" viewBox="0 0 8 8" refX="6" refY="4" markerWidth="7" markerHeight="7" orient="auto">
-        <path d="M0,0 L8,4 L0,8 Z" fill="var(--color-muted)" />
+        <path d="M0,0 L8,4 L0,8 Z" fill="var(--mc-color-muted)" />
       </marker>
     </defs>
     <!-- divider -->
-    <line x1="330" y1="24" x2="330" y2="344" stroke="var(--color-border)" stroke-dasharray="4 4" />
+    <line x1="330" y1="24" x2="330" y2="344" stroke="var(--mc-color-border)" stroke-dasharray="4 4" />
     <!-- left panel: CSS transition -->
-    <text x="30" y="30" font-size="13" fill="var(--color-muted)">CSS transition</text>
-    <path d="M 30 244 C 126 244, 78 124, 270 124" fill="none" stroke="var(--color-accent)" stroke-width="2" />
-    <circle cx="30" cy="244" r="3.5" fill="var(--color-accent)" />
-    <circle cx="270" cy="124" r="3.5" fill="var(--color-accent)" />
-    <text x="270" y="256" font-size="11" fill="var(--color-muted)" text-anchor="end">time</text>
-    <line x1="30" y1="264" x2="264" y2="264" stroke="var(--color-muted)" stroke-width="1" marker-end="url(#spring-sim-arrow)" />
-    <g stroke="var(--color-muted)" stroke-width="1">
+    <text x="30" y="30" font-size="13" fill="var(--mc-color-muted)">CSS transition</text>
+    <path d="M 30 244 C 126 244, 78 124, 270 124" fill="none" stroke="var(--mc-color-accent)" stroke-width="2" />
+    <circle cx="30" cy="244" r="3.5" fill="var(--mc-color-accent)" />
+    <circle cx="270" cy="124" r="3.5" fill="var(--mc-color-accent)" />
+    <text x="270" y="256" font-size="11" fill="var(--mc-color-muted)" text-anchor="end">time</text>
+    <line x1="30" y1="264" x2="264" y2="264" stroke="var(--mc-color-muted)" stroke-width="1" marker-end="url(#spring-sim-arrow)" />
+    <g stroke="var(--mc-color-muted)" stroke-width="1">
       <line x1="30" y1="264" x2="30" y2="269" />
       <line x1="90" y1="264" x2="90" y2="269" />
       <line x1="150" y1="264" x2="150" y2="269" />
       <line x1="210" y1="264" x2="210" y2="269" />
       <line x1="270" y1="264" x2="270" y2="269" />
     </g>
-    <g font-size="11" fill="var(--color-muted)" text-anchor="middle">
+    <g font-size="11" fill="var(--mc-color-muted)" text-anchor="middle">
       <text x="30" y="286">0%</text>
       <text x="90" y="286">25%</text>
       <text x="150" y="286">50%</text>
       <text x="210" y="286">75%</text>
       <text x="270" y="286">100%</text>
     </g>
-    <text x="150" y="320" font-size="12" fill="var(--color-muted)" text-anchor="middle">progress follows a predefined curve</text>
+    <text x="150" y="320" font-size="12" fill="var(--mc-color-muted)" text-anchor="middle">progress follows a predefined curve</text>
     <!-- right panel: Spring -->
-    <text x="390" y="30" font-size="13" fill="var(--color-muted)">Spring</text>
+    <text x="390" y="30" font-size="13" fill="var(--mc-color-muted)">Spring</text>
     <g text-anchor="middle">
-      <rect x="390" y="50" width="200" height="46" rx="8" fill="var(--color-surface)" stroke="var(--color-border)" />
-      <text x="490" y="69" font-size="12" fill="var(--color-text)">frame 1</text>
-      <text x="490" y="85" font-size="11" fill="var(--color-muted)">position · velocity</text>
-      <line x1="490" y1="100" x2="490" y2="114" stroke="var(--color-muted)" marker-end="url(#spring-sim-arrow)" />
-      <rect x="390" y="120" width="200" height="46" rx="8" fill="var(--color-surface)" stroke="var(--color-border)" />
-      <text x="490" y="139" font-size="12" fill="var(--color-text)">frame 2</text>
-      <text x="490" y="155" font-size="11" fill="var(--color-muted)">position · velocity</text>
-      <line x1="490" y1="170" x2="490" y2="184" stroke="var(--color-muted)" marker-end="url(#spring-sim-arrow)" />
-      <rect x="390" y="190" width="200" height="46" rx="8" fill="var(--color-surface)" stroke="var(--color-border)" />
-      <text x="490" y="209" font-size="12" fill="var(--color-text)">frame 3</text>
-      <text x="490" y="225" font-size="11" fill="var(--color-muted)">position · velocity</text>
-      <line x1="490" y1="240" x2="490" y2="254" stroke="var(--color-muted)" marker-end="url(#spring-sim-arrow)" />
-      <rect x="390" y="260" width="200" height="32" rx="8" fill="var(--color-accent-dim)" stroke="var(--color-accent)" />
-      <text x="490" y="280" font-size="12" fill="var(--color-accent)">target changes</text>
-      <line x1="490" y1="296" x2="490" y2="310" stroke="var(--color-muted)" marker-end="url(#spring-sim-arrow)" />
-      <rect x="390" y="316" width="200" height="32" rx="8" fill="var(--color-surface)" stroke="var(--color-border)" />
-      <text x="490" y="336" font-size="12" fill="var(--color-text)">simulation continues</text>
+      <rect x="390" y="50" width="200" height="46" rx="8" fill="var(--mc-color-surface)" stroke="var(--mc-color-border)" />
+      <text x="490" y="69" font-size="12" fill="var(--mc-color-text)">frame 1</text>
+      <text x="490" y="85" font-size="11" fill="var(--mc-color-muted)">position · velocity</text>
+      <line x1="490" y1="100" x2="490" y2="114" stroke="var(--mc-color-muted)" marker-end="url(#spring-sim-arrow)" />
+      <rect x="390" y="120" width="200" height="46" rx="8" fill="var(--mc-color-surface)" stroke="var(--mc-color-border)" />
+      <text x="490" y="139" font-size="12" fill="var(--mc-color-text)">frame 2</text>
+      <text x="490" y="155" font-size="11" fill="var(--mc-color-muted)">position · velocity</text>
+      <line x1="490" y1="170" x2="490" y2="184" stroke="var(--mc-color-muted)" marker-end="url(#spring-sim-arrow)" />
+      <rect x="390" y="190" width="200" height="46" rx="8" fill="var(--mc-color-surface)" stroke="var(--mc-color-border)" />
+      <text x="490" y="209" font-size="12" fill="var(--mc-color-text)">frame 3</text>
+      <text x="490" y="225" font-size="11" fill="var(--mc-color-muted)">position · velocity</text>
+      <line x1="490" y1="240" x2="490" y2="254" stroke="var(--mc-color-muted)" marker-end="url(#spring-sim-arrow)" />
+      <rect x="390" y="260" width="200" height="32" rx="8" fill="var(--mc-color-accent-dim)" stroke="var(--mc-color-accent)" />
+      <text x="490" y="280" font-size="12" fill="var(--mc-color-accent)">target changes</text>
+      <line x1="490" y1="296" x2="490" y2="310" stroke="var(--mc-color-muted)" marker-end="url(#spring-sim-arrow)" />
+      <rect x="390" y="316" width="200" height="32" rx="8" fill="var(--mc-color-surface)" stroke="var(--mc-color-border)" />
+      <text x="490" y="336" font-size="12" fill="var(--mc-color-text)">simulation continues</text>
     </g>
   </svg>
 </figure>
@@ -364,8 +364,8 @@ Click any square to replay its animation. All four scale up with the same durati
     width: 80px;
     height: 80px;
     margin: 0 auto;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    background: var(--mc-color-surface);
+    border: 1px solid var(--mc-color-border);
     border-radius: 12px;
     cursor: pointer;
   }

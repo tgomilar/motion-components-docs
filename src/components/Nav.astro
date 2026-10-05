@@ -81,8 +81,8 @@ const { pathname } = Astro.url;
     position: sticky;
     top: 0;
     z-index: 50;
-    background: var(--color-bg);
-    border-bottom: 1px solid var(--color-border);
+    background: var(--mc-color-bg);
+    border-bottom: 1px solid var(--mc-color-border);
     transition:
       background 0.3s,
       border-color 0.3s,
@@ -90,10 +90,10 @@ const { pathname } = Astro.url;
   }
 
   header.scrolled {
-    background: color-mix(in srgb, var(--color-bg) 65%, transparent);
+    background: color-mix(in srgb, var(--mc-color-bg) 65%, transparent);
     backdrop-filter: blur(20px) saturate(1.8);
     -webkit-backdrop-filter: blur(20px) saturate(1.8);
-    border-bottom-color: color-mix(in srgb, var(--color-border) 50%, transparent);
+    border-bottom-color: color-mix(in srgb, var(--mc-color-border) 50%, transparent);
     box-shadow:
       inset 0 -1px 0 rgba(255, 255, 255, 0.04),
       0 4px 12px rgba(0, 0, 0, 0.04);
@@ -119,7 +119,7 @@ const { pathname } = Astro.url;
   }
 
   .logo-bracket {
-    color: var(--color-yellow);
+    color: var(--mc-color-yellow);
   }
   .logo-bracket:first-child {
     margin-right: 0.15em;
@@ -128,13 +128,13 @@ const { pathname } = Astro.url;
     margin-left: 0.15em;
   }
   .logo-motion {
-    color: var(--color-accent);
+    color: var(--mc-color-accent);
   }
   .logo-dash {
-    color: var(--color-yellow);
+    color: var(--mc-color-yellow);
   }
   .logo-comp {
-    color: var(--color-accent);
+    color: var(--mc-color-accent);
   }
 
   .links {
@@ -145,7 +145,7 @@ const { pathname } = Astro.url;
 
   .link {
     font-size: 0.9rem;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     text-decoration: none;
     padding: 0.35rem 0.75rem;
     border-radius: 6px;
@@ -155,26 +155,26 @@ const { pathname } = Astro.url;
   }
 
   .link:hover {
-    color: var(--color-text);
-    background: var(--color-surface-2);
+    color: var(--mc-color-text);
+    background: var(--mc-color-surface-2);
     text-decoration: none;
   }
 
   .link.active {
-    color: var(--color-text);
+    color: var(--mc-color-text);
     font-weight: 500;
   }
 
   #theme-toggle {
     min-width: 32px;
     min-height: 32px;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     font-size: 0.875rem;
-    --theme-toggle-surface: transparent;
-    --theme-toggle-border: var(--color-border);
-    --theme-toggle-accent: var(--color-accent-dim);
-    --theme-toggle-menu-bg: var(--color-surface);
-    --theme-icon-size: 16px;
+    --mc-theme-toggle-surface: transparent;
+    --mc-theme-toggle-border: var(--mc-color-border);
+    --mc-theme-toggle-accent: var(--mc-color-accent-dim);
+    --mc-theme-toggle-menu-bg: var(--mc-color-surface);
+    --mc-theme-icon-size: 16px;
   }
 
   #theme-toggle::part(button) {
@@ -184,12 +184,12 @@ const { pathname } = Astro.url;
   }
 
   #theme-toggle::part(button):hover {
-    color: var(--color-text);
-    background: var(--color-surface-2);
+    color: var(--mc-color-text);
+    background: var(--mc-color-surface-2);
   }
 
   #theme-toggle::part(menu) {
-    color: var(--color-text);
+    color: var(--mc-color-text);
   }
 
   /* ── Hamburger ── */
@@ -211,7 +211,7 @@ const { pathname } = Astro.url;
     display: block;
     width: 20px;
     height: 2px;
-    background: var(--color-text);
+    background: var(--mc-color-text);
     border-radius: 2px;
     transition: transform 0.2s, opacity 0.2s;
   }
@@ -236,8 +236,8 @@ const { pathname } = Astro.url;
          instead; `dvh` stays viewport-relative regardless. */
       height: calc(100dvh - 56px);
       width: 260px;
-      background: var(--color-surface);
-      border-left: 1px solid var(--color-border);
+      background: var(--mc-color-surface);
+      border-left: 1px solid var(--mc-color-border);
       flex-direction: column;
       align-items: stretch;
       gap: 0;

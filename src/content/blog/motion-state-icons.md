@@ -194,12 +194,12 @@ The native `<details>` element fires a `toggle` event when it opens or closes. T
 
 | Property | What it changes | Default |
 |---|---|---|
-| `--icon-color` | The color of the lines | The text color |
-| `--icon-accent` | The filled heart and the checks in `copy` and `loading` | Red for the heart, green for the checks |
-| `--icon-size` | The width and height | `1.5em` |
+| `--mc-icon-color` | The color of the lines | The text color |
+| `--mc-icon-accent` | The filled heart and the checks in `copy` and `loading` | Red for the heart, green for the checks |
+| `--mc-icon-size` | The width and height | `1.5em` |
 
 ```html
-<motion-state-icon name="heart" active style="--icon-accent: #f59e0b"></motion-state-icon>
+<motion-state-icon name="heart" active style="--mc-icon-accent: #f59e0b"></motion-state-icon>
 ```
 
 Two attributes change how the morph feels:

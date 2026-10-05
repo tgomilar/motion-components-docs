@@ -19,7 +19,7 @@ import "../../../styles/docs.css";
       <h2>Preview</h2>
       <DocsPreview wide>
         <div class="scroll-demo">
-          <motion-progress position="top" thickness="3" style="--progress-color: var(--color-accent)" />
+          <motion-progress position="top" thickness="3" style="--mc-progress-color: var(--mc-color-accent)" />
           <div class="scroll-content">
             <motion-reveal y="24" duration="0.6">
               <div class="scroll-section">
@@ -48,7 +48,7 @@ import "../../../styles/docs.css";
         filename="scroll-progress.html"
         copy
         code={`<!-- Fixed progress bar at the top -->
-<motion-progress position="top" thickness="3" style="--progress-color: #60a5fa" />
+<motion-progress position="top" thickness="3" style="--mc-progress-color: #60a5fa" />
 
 <!-- Page content with scroll effects -->
 <section>
@@ -79,7 +79,7 @@ import "../../../styles/docs.css";
         filename="progress.html"
         copy
         compact
-        code={`<motion-progress position="top" thickness="3" style="--progress-color: #60a5fa" />`}
+        code={`<motion-progress position="top" thickness="3" style="--mc-progress-color: #60a5fa" />`}
       />
       <p class="section-lead">The progress bar is a fixed element that fills as you scroll. It uses a spring-eased <code>scaleX</code> transform, so the fill feels physical rather than linear. <code>position</code> places it at <code>"top"</code> or <code>"bottom"</code>.</p>
 
@@ -125,7 +125,7 @@ import "../../../styles/docs.css";
         compact
         code={`<motion-progress
   position="top"
-  thickness="3" style="--progress-color: linear-gradient(90deg, #60a5fa, #a78bfa)"
+  thickness="3" style="--mc-progress-color: linear-gradient(90deg, #60a5fa, #a78bfa)"
 />`}
       />
       <p class="section-lead">The <code>color</code> attribute accepts any CSS color value, including gradients.</p>
@@ -154,14 +154,14 @@ import "../../../styles/docs.css";
   }
 
   .lead {
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     font-size: 1.05rem;
     margin-bottom: 2rem;
     line-height: 1.7;
   }
 
   .section-lead {
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     font-size: 0.95rem;
     line-height: 1.7;
     margin-bottom: 1.5rem;
@@ -170,8 +170,8 @@ import "../../../styles/docs.css";
   .section-lead code {
     font-family: var(--font-mono), monospace;
     font-size: 0.82rem;
-    color: var(--color-accent);
-    background: var(--color-accent-dim);
+    color: var(--mc-color-accent);
+    background: var(--mc-color-accent-dim);
     padding: 0.15rem 0.4rem;
     border-radius: 4px;
   }
@@ -189,8 +189,8 @@ import "../../../styles/docs.css";
   }
 
   .scroll-section {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    background: var(--mc-color-surface);
+    border: 1px solid var(--mc-color-border);
     border-radius: 12px;
     padding: 2rem;
   }
@@ -202,13 +202,13 @@ import "../../../styles/docs.css";
   }
 
   .scroll-section p {
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     font-size: 0.9rem;
     line-height: 1.5;
     margin: 0;
   }
 
   .scroll-section.parallax {
-    background: var(--color-surface-2, var(--color-surface));
+    background: var(--mc-color-surface-2, var(--mc-color-surface));
   }
 </style>

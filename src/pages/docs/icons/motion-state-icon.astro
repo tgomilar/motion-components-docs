@@ -291,20 +291,20 @@ const liked = ref(false)
 
       <h2>Colors</h2>
       <p>
-        Lines use <code>--icon-color</code>, which defaults to the text color. <code>--icon-accent</code> colors the filled heart and the copy and loading
+        Lines use <code>--mc-icon-color</code>, which defaults to the text color. <code>--mc-icon-accent</code> colors the filled heart and the copy and loading
         checks. By default the heart is red and the checks are green.
       </p>
       <DocsPreview compact>
         <div class="grid">
           <div class="cell"><motion-state-icon name="heart" toggle label="Like" active></motion-state-icon><span>default</span></div>
-          <div class="cell"><motion-state-icon name="heart" toggle label="Like" active style="--icon-accent: #f59e0b"></motion-state-icon><span>--icon-accent</span></div>
-          <div class="cell"><motion-state-icon name="copy" toggle label="Copy" active style="--icon-color: #6366f1; --icon-accent: #6366f1"></motion-state-icon><span>both</span></div>
-          <div class="cell"><motion-state-icon name="eye" toggle label="Show" style="--icon-color: #0ea5e9; --icon-size: 2rem"></motion-state-icon><span>--icon-color</span></div>
+          <div class="cell"><motion-state-icon name="heart" toggle label="Like" active style="--mc-icon-accent: #f59e0b"></motion-state-icon><span>--mc-icon-accent</span></div>
+          <div class="cell"><motion-state-icon name="copy" toggle label="Copy" active style="--mc-icon-color: #6366f1; --mc-icon-accent: #6366f1"></motion-state-icon><span>both</span></div>
+          <div class="cell"><motion-state-icon name="eye" toggle label="Show" style="--mc-icon-color: #0ea5e9; --mc-icon-size: 2rem"></motion-state-icon><span>--mc-icon-color</span></div>
         </div>
       </DocsPreview>
-      <CodeWindow filename="index.html" copy code={`<motion-state-icon name="heart" active style="--icon-accent: #f59e0b"></motion-state-icon>
-<motion-state-icon name="copy" active style="--icon-color: #6366f1; --icon-accent: #6366f1"></motion-state-icon>
-<motion-state-icon name="eye" style="--icon-color: #0ea5e9; --icon-size: 2rem"></motion-state-icon>`} />
+      <CodeWindow filename="index.html" copy code={`<motion-state-icon name="heart" active style="--mc-icon-accent: #f59e0b"></motion-state-icon>
+<motion-state-icon name="copy" active style="--mc-icon-color: #6366f1; --mc-icon-accent: #6366f1"></motion-state-icon>
+<motion-state-icon name="eye" style="--mc-icon-color: #0ea5e9; --mc-icon-size: 2rem"></motion-state-icon>`} />
 
       <h2>Properties</h2>
       <PropsTable
@@ -323,9 +323,9 @@ const liked = ref(false)
       <PropsTable
         nameLabel="Property"
         rows={[
-          { name: "--icon-color", type: "color", default: "currentColor", description: "Line color" },
-          { name: "--icon-accent", type: "color", default: "red heart, green checks", description: "Accent for the filled heart and the copy and loading checks" },
-          { name: "--icon-size", type: "length", default: "1.5em", description: "Width and height of the icon" },
+          { name: "--mc-icon-color", type: "color", default: "currentColor", description: "Line color" },
+          { name: "--mc-icon-accent", type: "color", default: "red heart, green checks", description: "Accent for the filled heart and the copy and loading checks" },
+          { name: "--mc-icon-size", type: "length", default: "1.5em", description: "Width and height of the icon" },
         ]}
       />
 
@@ -407,20 +407,20 @@ const liked = ref(false)
     justify-content: center;
     align-items: center;
     gap: 1.75rem 2.25rem;
-    color: var(--color-text);
+    color: var(--mc-color-text);
   }
 
   .cell {
     display: grid;
     justify-items: center;
     gap: 0.5rem;
-    --icon-size: 2rem;
+    --mc-icon-size: 2rem;
   }
 
   .cell span {
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
   }
 
   .demo-action {
@@ -428,14 +428,14 @@ const liked = ref(false)
     align-items: center;
     gap: 0.5rem;
     padding: 0.6rem 1.1rem;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--mc-color-border);
     border-radius: 8px;
-    background: var(--color-surface);
-    color: var(--color-text);
+    background: var(--mc-color-surface);
+    color: var(--mc-color-text);
     font: inherit;
     font-weight: 600;
     cursor: pointer;
-    --icon-size: 1.15rem;
+    --mc-icon-size: 1.15rem;
   }
 
   .demo-action.icon-only {
@@ -449,17 +449,17 @@ const liked = ref(false)
 
   .password input {
     padding: 0.6rem 0.8rem;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--mc-color-border);
     border-radius: 8px;
-    background: var(--color-surface);
-    color: var(--color-text);
+    background: var(--mc-color-surface);
+    color: var(--mc-color-text);
     font: inherit;
   }
 
   .faq {
     max-width: 28rem;
     margin: 0 auto;
-    color: var(--color-text);
+    color: var(--mc-color-text);
   }
 
   .faq summary {
@@ -478,6 +478,6 @@ const liked = ref(false)
 
   .faq p {
     margin: 0.75rem 0 0;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
   }
 </style>

@@ -46,7 +46,7 @@ const tileCode = `<div class="stat">
       <DocsPreview>
         <div class="demo">
           <p class="sentence">Signups this week <motion-sparkline values="3, 5, 4, 8, 7, 11"></motion-sparkline> are up 38%.</p>
-          <p class="sentence down">Response time <motion-sparkline values="420, 380, 400, 310, 290, 240" style="--sparkline-accent: #16a34a"></motion-sparkline> fell to 240 ms.</p>
+          <p class="sentence down">Response time <motion-sparkline values="420, 380, 400, 310, 290, 240" style="--mc-sparkline-accent: #16a34a"></motion-sparkline> fell to 240 ms.</p>
         </div>
       </DocsPreview>
       <CodeWindow filename="index.html" copy code={`<p>Signups this week <motion-sparkline values="3, 5, 4, 8, 7, 11"></motion-sparkline> are up 38%.</p>`} />
@@ -97,15 +97,15 @@ const tileCode = `<div class="stat">
 }
 
 .stat motion-sparkline {
-  --sparkline-width: 100%;
-  --sparkline-height: 2.5rem;
+  --mc-sparkline-width: 100%;
+  --mc-sparkline-height: 2.5rem;
 }`} />
 
       <h2>Live data</h2>
       <p>Change <code>values</code> and the line springs to the new shape.</p>
       <DocsPreview>
         <div class="demo">
-          <p class="sentence">Active users <motion-sparkline id="live-spark" values="12, 14, 13, 15, 17, 16, 18, 20" style="--sparkline-width: 9em"></motion-sparkline></p>
+          <p class="sentence">Active users <motion-sparkline id="live-spark" values="12, 14, 13, 15, 17, 16, 18, 20" style="--mc-sparkline-width: 9em"></motion-sparkline></p>
         </div>
       </DocsPreview>
       <CodeWindow filename="index.html" copy code={`<motion-sparkline id="users" values="12, 14, 13, 15, 17, 16, 18, 20"></motion-sparkline>
@@ -139,10 +139,10 @@ const tileCode = `<div class="stat">
       <PropsTable
         nameLabel="Property"
         rows={[
-          { name: "--sparkline-width", type: "length", default: "6em", description: "Width" },
-          { name: "--sparkline-height", type: "length", default: "1.5em", description: "Height" },
-          { name: "--sparkline-color", type: "color", default: "currentColor", description: "Line color" },
-          { name: "--sparkline-accent", type: "color", default: "line color", description: "Color of the dot on the last value" },
+          { name: "--mc-sparkline-width", type: "length", default: "6em", description: "Width" },
+          { name: "--mc-sparkline-height", type: "length", default: "1.5em", description: "Height" },
+          { name: "--mc-sparkline-color", type: "color", default: "currentColor", description: "Line color" },
+          { name: "--mc-sparkline-accent", type: "color", default: "line color", description: "Color of the dot on the last value" },
         ]}
       />
 
@@ -180,7 +180,7 @@ const tileCode = `<div class="stat">
   .demo {
     display: grid;
     gap: 0.75rem;
-    color: var(--color-text);
+    color: var(--mc-color-text);
   }
 
   .sentence {
@@ -190,7 +190,7 @@ const tileCode = `<div class="stat">
 
   .stocks {
     border-collapse: collapse;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     font-variant-numeric: tabular-nums;
   }
 
@@ -198,7 +198,7 @@ const tileCode = `<div class="stat">
   .stocks td {
     padding: 0.5rem 1.25rem;
     text-align: left;
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--mc-color-border);
   }
 
   .stat {
@@ -207,18 +207,18 @@ const tileCode = `<div class="stat">
     width: 16rem;
     font-size: 2rem;
     font-weight: 700;
-    color: var(--color-text);
+    color: var(--mc-color-text);
   }
 
   .stat-label {
     font-size: 0.85rem;
     font-weight: 500;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
   }
 
   .stat motion-sparkline {
-    --sparkline-width: 100%;
-    --sparkline-height: 2.5rem;
-    color: var(--color-accent);
+    --mc-sparkline-width: 100%;
+    --mc-sparkline-height: 2.5rem;
+    color: var(--mc-color-accent);
   }
 </style>

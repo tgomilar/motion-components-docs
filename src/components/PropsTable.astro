@@ -54,7 +54,7 @@ const kebabToCamel = (s: string) => s.replace(/-([a-z0-9])/g, (_, c) => c.toUppe
 
 <style>
   .props-table {
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--mc-color-border);
     border-radius: 12px;
     overflow-x: auto;
     overflow-y: hidden;
@@ -66,34 +66,34 @@ const kebabToCamel = (s: string) => s.replace(/-([a-z0-9])/g, (_, c) => c.toUppe
     width: 100%;
     border-collapse: collapse;
     font-size: 0.9rem;
-    background: var(--color-surface);
+    background: var(--mc-color-surface);
   }
 
   .props-table :global(th) {
     text-align: left;
     padding: 0.65rem 1rem;
-    background: var(--color-surface-2);
-    color: var(--color-muted);
+    background: var(--mc-color-surface-2);
+    color: var(--mc-color-muted);
     font-weight: 600;
     font-size: 0.78rem;
     text-transform: uppercase;
     letter-spacing: 0.06em;
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--mc-color-border);
   }
 
   .props-table :global(td) {
     padding: 0.65rem 1rem;
-    border-bottom: 1px solid var(--color-border);
-    color: var(--color-text);
+    border-bottom: 1px solid var(--mc-color-border);
+    color: var(--mc-color-text);
     transition: background 0.15s;
   }
 
   .props-table :global(tr:nth-child(even) td) {
-    background: color-mix(in srgb, var(--color-surface-2) 45%, transparent);
+    background: color-mix(in srgb, var(--mc-color-surface-2) 45%, transparent);
   }
 
   .props-table :global(tbody tr:hover td) {
-    background: var(--color-accent-dim);
+    background: var(--mc-color-accent-dim);
   }
 
   .props-table :global(tr:last-child td) {
@@ -105,15 +105,15 @@ const kebabToCamel = (s: string) => s.replace(/-([a-z0-9])/g, (_, c) => c.toUppe
   .props-table:has(th:nth-child(5)) :global(td:nth-child(4)) {
     font-family: var(--font-mono);
     font-size: 0.82rem;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     white-space: nowrap;
   }
 
   .props-table :global(code) {
     font-family: var(--font-mono);
     font-size: 0.82rem;
-    color: var(--color-accent);
-    background: var(--color-accent-dim);
+    color: var(--mc-color-accent);
+    background: var(--mc-color-accent-dim);
     padding: 0.15rem 0.4rem;
     border-radius: 4px;
   }

@@ -10,7 +10,7 @@ import CodeWindow from '../../components/CodeWindow.astro'
     <!-- ── COVER PLATE ─────────────────────────────────── -->
     <motion-spotlight
       class="sc-hero-spot"
-      size="900" style="--spotlight-color: rgba(192,38,211,0.22)">
+      size="900" style="--mc-spotlight-color: rgba(192,38,211,0.22)">
       <section class="sc-hero">
         <!-- thin parallax line, no orbs -->
         <div class="sc-hero-bg" aria-hidden="true">
@@ -417,7 +417,7 @@ import CodeWindow from '../../components/CodeWindow.astro'
         <div class="sc-words-grid">
           <motion-tilt max="6" scale="1.02">
             <motion-spotlight
-              class="sc-word-card sc-word-card--feature" style="--spotlight-color: rgba(192,38,211,0.35)">
+              class="sc-word-card sc-word-card--feature" style="--mc-spotlight-color: rgba(192,38,211,0.35)">
               <span class="sc-word-tag">specimen no. 1 · motion-typewriter</span>
               <div class="sc-word-stage">
                 <motion-typewriter interval="0.055" loop cursor class="sc-word-text"
@@ -429,7 +429,7 @@ import CodeWindow from '../../components/CodeWindow.astro'
           </motion-tilt>
 
           <motion-tilt max="6" scale="1.02">
-            <motion-spotlight class="sc-word-card" style="--spotlight-color: rgba(8,145,178,0.32)">
+            <motion-spotlight class="sc-word-card" style="--mc-spotlight-color: rgba(8,145,178,0.32)">
               <span class="sc-word-tag">specimen no. 2 · motion-scramble</span>
               <div class="sc-word-stage">
                 <motion-scramble id="sc-loop-scramble" class="sc-word-text"
@@ -441,7 +441,7 @@ import CodeWindow from '../../components/CodeWindow.astro'
           </motion-tilt>
 
           <motion-tilt max="6" scale="1.02">
-            <motion-spotlight class="sc-word-card" style="--spotlight-color: rgba(101,163,13,0.30)">
+            <motion-spotlight class="sc-word-card" style="--mc-spotlight-color: rgba(101,163,13,0.30)">
               <span class="sc-word-tag">specimen no. 3 · motion-glitch</span>
               <div class="sc-word-stage">
                 <motion-glitch class="sc-word-text" trigger="loop">SYSTEM ONLINE</motion-glitch>
@@ -452,7 +452,7 @@ import CodeWindow from '../../components/CodeWindow.astro'
 
           <motion-tilt max="6" scale="1.02">
             <motion-spotlight
-              class="sc-word-card sc-word-card--feature" style="--spotlight-color: rgba(168,85,247,0.32)">
+              class="sc-word-card sc-word-card--feature" style="--mc-spotlight-color: rgba(168,85,247,0.32)">
               <span class="sc-word-tag">specimen no. 4 · motion-words</span>
               <div class="sc-word-stage">
                 <motion-words
@@ -466,7 +466,7 @@ import CodeWindow from '../../components/CodeWindow.astro'
           </motion-tilt>
 
           <motion-tilt max="6" scale="1.02">
-            <motion-spotlight class="sc-word-card" style="--spotlight-color: rgba(244,114,182,0.30)">
+            <motion-spotlight class="sc-word-card" style="--mc-spotlight-color: rgba(244,114,182,0.30)">
               <span class="sc-word-tag">specimen no. 5 · motion-counter</span>
               <div class="sc-word-stage">
                 <motion-counter
@@ -481,7 +481,7 @@ import CodeWindow from '../../components/CodeWindow.astro'
           </motion-tilt>
 
           <motion-tilt max="6" scale="1.02">
-            <motion-spotlight class="sc-word-card" style="--spotlight-color: rgba(56,189,248,0.30)">
+            <motion-spotlight class="sc-word-card" style="--mc-spotlight-color: rgba(56,189,248,0.30)">
               <span class="sc-word-tag">specimen no. 6 · motion-headline</span>
               <div class="sc-word-stage">
                 <motion-headline
@@ -610,7 +610,7 @@ import CodeWindow from '../../components/CodeWindow.astro'
               },
             ].map((card) => (
               <motion-tilt max="10" scale="1.02">
-                <motion-spotlight class="sc-touch-card" size="500" style="--spotlight-color: rgba(192,38,211,0.28)">
+                <motion-spotlight class="sc-touch-card" size="500" style="--mc-spotlight-color: rgba(192,38,211,0.28)">
                   <div class="sc-touch-head">
                     <div class="sc-touch-num">{card.num}</div>
                     <div class="sc-touch-kicker">{card.kicker}</div>
@@ -774,7 +774,7 @@ import CodeWindow from '../../components/CodeWindow.astro'
             copy
             code={`<motion-tilt max="10" scale="1.02">
   <motion-spotlight
-    size="500" style="--spotlight-color: rgba(192,38,211,0.30)">
+    size="500" style="--mc-spotlight-color: rgba(192,38,211,0.30)">
     <article class="card">
       <h3>Composition over config.</h3>
       <p>Wrap a tag inside a tag.</p>
@@ -864,7 +864,7 @@ import 'motion-components/motion-headline'`}
     <section class="sc-cta">
       <motion-spotlight
         size="700"
-        class="sc-cta-spot" style="--spotlight-color: rgba(8,145,178,0.30)">
+        class="sc-cta-spot" style="--mc-spotlight-color: rgba(8,145,178,0.30)">
         <div class="sc-cta-inner">
           <p class="sc-chapter sc-chapter--centered">
             <span class="sc-chapter-num">PLATE 06 / 06</span>
@@ -1020,22 +1020,22 @@ import 'motion-components/motion-headline'`}
     /* ── neon palette · light (default) ─────────── */
     .sc {
       /* paper-white with hint of cool · vivid magenta · cyan · lime */
-      --color-bg: #f8f7fc;
-      --color-surface: #ffffff;
-      --color-surface-2: #efedf8;
-      --color-border: #d8d4ea;
-      --color-text: #18162a;
-      --color-muted: #645f80;
-      --color-accent: #c026d3;
-      --color-accent-dim: rgba(192, 38, 211, 0.1);
-      --color-yellow: #0891b2;
+      --mc-color-bg: #f8f7fc;
+      --mc-color-surface: #ffffff;
+      --mc-color-surface-2: #efedf8;
+      --mc-color-border: #d8d4ea;
+      --mc-color-text: #18162a;
+      --mc-color-muted: #645f80;
+      --mc-color-accent: #c026d3;
+      --mc-color-accent-dim: rgba(192, 38, 211, 0.1);
+      --mc-color-yellow: #0891b2;
 
-      --sc-paper: var(--color-bg);
-      --sc-ink: var(--color-text);
-      --sc-rule: var(--color-border);
-      --sc-mute: var(--color-muted);
-      --sc-accent: var(--color-accent);
-      --sc-yellow: var(--color-yellow);
+      --sc-paper: var(--mc-color-bg);
+      --sc-ink: var(--mc-color-text);
+      --sc-rule: var(--mc-color-border);
+      --sc-mute: var(--mc-color-muted);
+      --sc-accent: var(--mc-color-accent);
+      --sc-yellow: var(--mc-color-yellow);
       --sc-deep: #86198f;
       --sc-rose: #65a30d;
       --sc-glow-magenta: rgba(192, 38, 211, 0.3);
@@ -1046,15 +1046,15 @@ import 'motion-components/motion-headline'`}
 
     /* ── neon palette · dark (toggle or system) ── */
     [data-theme='dark'] .sc {
-      --color-bg: #07070d;
-      --color-surface: #0e0e18;
-      --color-surface-2: #16162a;
-      --color-border: #2a2a44;
-      --color-text: #f0eefc;
-      --color-muted: #8a8ab0;
-      --color-accent: #d946ef;
-      --color-accent-dim: rgba(217, 70, 239, 0.16);
-      --color-yellow: #22d3ee;
+      --mc-color-bg: #07070d;
+      --mc-color-surface: #0e0e18;
+      --mc-color-surface-2: #16162a;
+      --mc-color-border: #2a2a44;
+      --mc-color-text: #f0eefc;
+      --mc-color-muted: #8a8ab0;
+      --mc-color-accent: #d946ef;
+      --mc-color-accent-dim: rgba(217, 70, 239, 0.16);
+      --mc-color-yellow: #22d3ee;
       --sc-deep: #f0abfc;
       --sc-rose: #a3e635;
       --sc-glow-magenta: rgba(217, 70, 239, 0.55);
@@ -1064,15 +1064,15 @@ import 'motion-components/motion-headline'`}
 
     @media (prefers-color-scheme: dark) {
       :root:not([data-theme='light']) .sc {
-        --color-bg: #07070d;
-        --color-surface: #0e0e18;
-        --color-surface-2: #16162a;
-        --color-border: #2a2a44;
-        --color-text: #f0eefc;
-        --color-muted: #8a8ab0;
-        --color-accent: #d946ef;
-        --color-accent-dim: rgba(217, 70, 239, 0.16);
-        --color-yellow: #22d3ee;
+        --mc-color-bg: #07070d;
+        --mc-color-surface: #0e0e18;
+        --mc-color-surface-2: #16162a;
+        --mc-color-border: #2a2a44;
+        --mc-color-text: #f0eefc;
+        --mc-color-muted: #8a8ab0;
+        --mc-color-accent: #d946ef;
+        --mc-color-accent-dim: rgba(217, 70, 239, 0.16);
+        --mc-color-yellow: #22d3ee;
         --sc-deep: #f0abfc;
         --sc-rose: #a3e635;
         --sc-glow-magenta: rgba(217, 70, 239, 0.55);
@@ -1085,8 +1085,8 @@ import 'motion-components/motion-headline'`}
       position: relative;
       z-index: 1;
       overflow-x: clip;
-      background: var(--color-bg);
-      color: var(--color-text);
+      background: var(--mc-color-bg);
+      color: var(--mc-color-text);
       min-height: 100vh;
     }
 
@@ -1696,7 +1696,7 @@ import 'motion-components/motion-headline'`}
       display: flex;
       flex-direction: column;
       gap: 0.25rem;
-      background: var(--color-surface);
+      background: var(--mc-color-surface);
     }
 
     .sc-aside-label {
@@ -1754,7 +1754,7 @@ import 'motion-components/motion-headline'`}
       padding: 1.25rem 1.35rem 1.1rem;
       border-radius: 14px;
       border: 1px solid var(--sc-rule);
-      background: var(--color-surface);
+      background: var(--mc-color-surface);
       display: flex;
       flex-direction: column;
       gap: 0.45rem;
@@ -2026,7 +2026,7 @@ import 'motion-components/motion-headline'`}
       border-radius: 16px;
       padding: 1.4rem;
       min-height: 180px;
-      background: var(--color-surface);
+      background: var(--mc-color-surface);
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.04),
         0 0 0 1px rgba(217, 70, 239, 0.04),
@@ -2082,7 +2082,7 @@ import 'motion-components/motion-headline'`}
     .sc-marquee {
       border-top: 1px solid var(--sc-rule);
       border-bottom: 1px solid var(--sc-rule);
-      background: var(--color-surface);
+      background: var(--mc-color-surface);
       padding: clamp(2.5rem, 6vw, 4rem) 0;
       overflow: hidden;
     }
@@ -2132,7 +2132,7 @@ import 'motion-components/motion-headline'`}
       padding: 1.6rem 1.5rem 1.75rem;
       border: 1px solid var(--sc-rule);
       border-radius: 18px;
-      background: var(--color-surface);
+      background: var(--mc-color-surface);
       min-height: 240px;
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.04),
@@ -2287,7 +2287,7 @@ import 'motion-components/motion-headline'`}
       background:
         radial-gradient(ellipse at 50% 0%, rgba(217, 70, 239, 0.18) 0%, transparent 60%),
         radial-gradient(ellipse at 50% 100%, rgba(34, 211, 238, 0.12) 0%, transparent 60%),
-        var(--color-surface);
+        var(--mc-color-surface);
       border: 1px solid var(--sc-rule);
       border-radius: 24px;
       box-shadow:
@@ -2519,7 +2519,7 @@ import 'motion-components/motion-headline'`}
       padding: 1.25rem;
       border: 1px solid var(--sc-rule);
       border-radius: 14px;
-      background: var(--color-surface);
+      background: var(--mc-color-surface);
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.04),
         0 12px 36px rgba(0, 0, 0, 0.05);
@@ -2583,7 +2583,7 @@ import 'motion-components/motion-headline'`}
       padding: 1.5rem 1.5rem 1.75rem;
       border: 1px solid var(--sc-rule);
       border-radius: 14px;
-      background: var(--color-surface);
+      background: var(--mc-color-surface);
     }
 
     .sc-codeshow-prose {
@@ -2726,7 +2726,7 @@ import 'motion-components/motion-headline'`}
       padding: 1.4rem 1.5rem;
       border: 1px solid var(--sc-rule);
       border-radius: 14px;
-      background: var(--color-surface);
+      background: var(--mc-color-surface);
     }
 
     .sc-countdown-stage {
@@ -2736,11 +2736,11 @@ import 'motion-components/motion-headline'`}
     }
 
     .sc-cover-countdown motion-countdown {
-      --countdown-color: var(--sc-ink);
-      --countdown-label-color: var(--sc-mute);
-      --countdown-size: clamp(1.5rem, 2.8vw, 2rem);
-      --countdown-label-size: 0.6rem;
-      --countdown-gap: 0.7rem;
+      --mc-countdown-color: var(--sc-ink);
+      --mc-countdown-label-color: var(--sc-mute);
+      --mc-countdown-size: clamp(1.5rem, 2.8vw, 2rem);
+      --mc-countdown-label-size: 0.6rem;
+      --mc-countdown-gap: 0.7rem;
     }
 
     .sc-countdown-cap {
@@ -2801,7 +2801,7 @@ import 'motion-components/motion-headline'`}
     /* ── closing colophon strip ────────────────── */
     .sc-colophon {
       border-top: 1px solid var(--sc-rule);
-      background: var(--color-surface);
+      background: var(--mc-color-surface);
       padding: clamp(3rem, 7vw, 5rem) clamp(1.25rem, 4vw, 3rem);
       position: relative;
       z-index: 1;

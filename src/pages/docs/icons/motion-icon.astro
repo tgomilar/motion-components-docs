@@ -133,12 +133,12 @@ document.querySelector('#like-icon').icon = heart`,
       <p>Hover an icon to draw it in.</p>
       <DocsPreview compact>
         <div class="row">
-          <div class="cell"><motion-icon src={lucide("heart")} style="--icon-color: #e11d48"></motion-icon><span>heart</span></div>
-          <div class="cell"><motion-icon src={lucide("bell")} style="--icon-color: #f59e0b"></motion-icon><span>bell</span></div>
-          <div class="cell"><motion-icon src={lucide("rocket")} style="--icon-color: #6366f1"></motion-icon><span>rocket</span></div>
-          <div class="cell"><motion-icon src={lucide("mail")} style="--icon-color: #0ea5e9"></motion-icon><span>mail</span></div>
-          <div class="cell"><motion-icon src={lucide("circle-check")} style="--icon-color: #16a34a"></motion-icon><span>circle-check</span></div>
-          <div class="cell"><motion-icon src={lucide("sparkles")} style="--icon-color: #d946ef"></motion-icon><span>sparkles</span></div>
+          <div class="cell"><motion-icon src={lucide("heart")} style="--mc-icon-color: #e11d48"></motion-icon><span>heart</span></div>
+          <div class="cell"><motion-icon src={lucide("bell")} style="--mc-icon-color: #f59e0b"></motion-icon><span>bell</span></div>
+          <div class="cell"><motion-icon src={lucide("rocket")} style="--mc-icon-color: #6366f1"></motion-icon><span>rocket</span></div>
+          <div class="cell"><motion-icon src={lucide("mail")} style="--mc-icon-color: #0ea5e9"></motion-icon><span>mail</span></div>
+          <div class="cell"><motion-icon src={lucide("circle-check")} style="--mc-icon-color: #16a34a"></motion-icon><span>circle-check</span></div>
+          <div class="cell"><motion-icon src={lucide("sparkles")} style="--mc-icon-color: #d946ef"></motion-icon><span>sparkles</span></div>
         </div>
       </DocsPreview>
 
@@ -163,8 +163,8 @@ document.querySelector('#like-icon').icon = heart`,
       </p>
       <DocsPreview compact>
         <div class="row">
-          <div class="cell"><motion-icon src="/icons/heart.svg" style="--icon-color: #e11d48"></motion-icon><span>/icons/heart.svg</span></div>
-          <div class="cell"><motion-icon src="/icons/brackets.svg" animation="draw" style="--icon-color: #6366f1"></motion-icon><span>/icons/brackets.svg</span></div>
+          <div class="cell"><motion-icon src="/icons/heart.svg" style="--mc-icon-color: #e11d48"></motion-icon><span>/icons/heart.svg</span></div>
+          <div class="cell"><motion-icon src="/icons/brackets.svg" animation="draw" style="--mc-icon-color: #6366f1"></motion-icon><span>/icons/brackets.svg</span></div>
         </div>
       </DocsPreview>
       <CodeWindow filename="my-site" code={`my-site/
@@ -287,16 +287,16 @@ document.querySelector('#like-icon').icon = heart`,
       </p>
       <DocsPreview compact>
         <div class="row">
-          <div class="cell"><motion-icon src={lucide("zap")} animation="draw wiggle" style="--icon-color: #eab308; --icon-fill: #eab3084d"></motion-icon><span>draw wiggle</span></div>
-          <div class="cell"><motion-icon src={lucide("heart")} animation="draw pulse" style="--icon-color: #e11d48; --icon-fill: #e11d484d"></motion-icon><span>draw pulse</span></div>
-          <div class="cell"><motion-icon src={lucide("sun")} animation="draw rotate" duration="0.9" style="--icon-color: #f59e0b; --icon-fill: #f59e0b4d"></motion-icon><span>draw rotate</span></div>
-          <div class="cell"><motion-icon src={lucide("star")} animation="draw pop" style="--icon-color: #f59e0b; --icon-fill: #f59e0b4d"></motion-icon><span>draw pop</span></div>
+          <div class="cell"><motion-icon src={lucide("zap")} animation="draw wiggle" style="--mc-icon-color: #eab308; --mc-icon-fill: #eab3084d"></motion-icon><span>draw wiggle</span></div>
+          <div class="cell"><motion-icon src={lucide("heart")} animation="draw pulse" style="--mc-icon-color: #e11d48; --mc-icon-fill: #e11d484d"></motion-icon><span>draw pulse</span></div>
+          <div class="cell"><motion-icon src={lucide("sun")} animation="draw rotate" duration="0.9" style="--mc-icon-color: #f59e0b; --mc-icon-fill: #f59e0b4d"></motion-icon><span>draw rotate</span></div>
+          <div class="cell"><motion-icon src={lucide("star")} animation="draw pop" style="--mc-icon-color: #f59e0b; --mc-icon-fill: #f59e0b4d"></motion-icon><span>draw pop</span></div>
         </div>
       </DocsPreview>
       <CodeWindow filename="index.html" copy code={`<motion-icon
   src="${lucide("zap")}"
   animation="draw wiggle"
-  style="--icon-color: #eab308; --icon-fill: #eab3084d"
+  style="--mc-icon-color: #eab308; --mc-icon-fill: #eab3084d"
 ></motion-icon>`} />
 
       <h2>Triggers</h2>
@@ -313,49 +313,49 @@ document.querySelector('#like-icon').icon = heart`,
 <motion-icon src="${lucide("bell")}" trigger="loop" animation="wiggle" interval="1"></motion-icon>`} />
 
       <h2>Color and size</h2>
-      <p>The icon uses <code>currentColor</code>, so it follows the text color. Set <code>--icon-color</code> to color it and <code>--icon-size</code> to size it.</p>
+      <p>The icon uses <code>currentColor</code>, so it follows the text color. Set <code>--mc-icon-color</code> to color it and <code>--mc-icon-size</code> to size it.</p>
       <DocsPreview compact>
         <div class="row">
-          <div class="cell"><motion-icon src={lucide("heart")} trigger="loop" animation="pulse" interval="0.4" style="--icon-color: #e11d48; --icon-size: 3rem"></motion-icon><span>#e11d48</span></div>
-          <div class="cell"><motion-icon src={lucide("sparkles")} trigger="loop" interval="1.5" style="--icon-color: #d946ef; --icon-size: 3rem"></motion-icon><span>#d946ef</span></div>
-          <div class="cell"><motion-icon src={lucide("circle-check")} trigger="loop" interval="1.5" style="--icon-color: #16a34a; --icon-size: 3rem"></motion-icon><span>#16a34a</span></div>
+          <div class="cell"><motion-icon src={lucide("heart")} trigger="loop" animation="pulse" interval="0.4" style="--mc-icon-color: #e11d48; --mc-icon-size: 3rem"></motion-icon><span>#e11d48</span></div>
+          <div class="cell"><motion-icon src={lucide("sparkles")} trigger="loop" interval="1.5" style="--mc-icon-color: #d946ef; --mc-icon-size: 3rem"></motion-icon><span>#d946ef</span></div>
+          <div class="cell"><motion-icon src={lucide("circle-check")} trigger="loop" interval="1.5" style="--mc-icon-color: #16a34a; --mc-icon-size: 3rem"></motion-icon><span>#16a34a</span></div>
         </div>
       </DocsPreview>
       <CodeWindow filename="index.html" copy code={`<motion-icon
   src="${lucide("heart")}"
-  style="--icon-color: #e11d48; --icon-size: 3rem"
+  style="--mc-icon-color: #e11d48; --mc-icon-size: 3rem"
 ></motion-icon>`} />
 
       <h2>Fill and background</h2>
       <p>
-        <code>--icon-fill</code> colors the inside of an outline icon. With <code>draw</code>, the fill fades in as the lines finish. For an icon on a
+        <code>--mc-icon-fill</code> colors the inside of an outline icon. With <code>draw</code>, the fill fades in as the lines finish. For an icon on a
         colored background, style the element itself and make the icon white.
       </p>
       <DocsPreview compact>
         <div class="row">
-          <div class="cell"><motion-icon src={lucide("star")} animation="pop" style="--icon-color: #f59e0b; --icon-fill: #f59e0b4d; --icon-size: 3rem"></motion-icon><span>tinted fill</span></div>
-          <div class="cell"><motion-icon src={lucide("heart")} trigger="loop" interval="1.5" style="--icon-color: #e11d48; --icon-fill: #e11d48; --icon-size: 3rem"></motion-icon><span>solid fill</span></div>
-          <div class="cell"><motion-icon src={lucide("rocket")} animation="bounce" style="--icon-color: #fff; background: #6366f1; padding: 0.6rem; border-radius: 14px; --icon-size: 3rem"></motion-icon><span>background</span></div>
+          <div class="cell"><motion-icon src={lucide("star")} animation="pop" style="--mc-icon-color: #f59e0b; --mc-icon-fill: #f59e0b4d; --mc-icon-size: 3rem"></motion-icon><span>tinted fill</span></div>
+          <div class="cell"><motion-icon src={lucide("heart")} trigger="loop" interval="1.5" style="--mc-icon-color: #e11d48; --mc-icon-fill: #e11d48; --mc-icon-size: 3rem"></motion-icon><span>solid fill</span></div>
+          <div class="cell"><motion-icon src={lucide("rocket")} animation="bounce" style="--mc-icon-color: #fff; background: #6366f1; padding: 0.6rem; border-radius: 14px; --mc-icon-size: 3rem"></motion-icon><span>background</span></div>
         </div>
       </DocsPreview>
       <CodeWindow filename="index.html" copy code={`<!-- tinted fill: the color plus 33 for 20% opacity -->
 <motion-icon
   src="${lucide("star")}"
   animation="pop"
-  style="--icon-color: #f59e0b; --icon-fill: #f59e0b4d"
+  style="--mc-icon-color: #f59e0b; --mc-icon-fill: #f59e0b4d"
 ></motion-icon>
 
 <!-- solid fill -->
 <motion-icon
   src="${lucide("heart")}"
-  style="--icon-color: #e11d48; --icon-fill: #e11d48"
+  style="--mc-icon-color: #e11d48; --mc-icon-fill: #e11d48"
 ></motion-icon>
 
 <!-- colored background -->
 <motion-icon
   src="${lucide("rocket")}"
   animation="bounce"
-  style="--icon-color: #fff; background: #6366f1; padding: 0.6rem; border-radius: 14px"
+  style="--mc-icon-color: #fff; background: #6366f1; padding: 0.6rem; border-radius: 14px"
 ></motion-icon>`} />
 
       <h2>Properties</h2>
@@ -379,9 +379,9 @@ document.querySelector('#like-icon').icon = heart`,
       <PropsTable
         nameLabel="Property"
         rows={[
-          { name: "--icon-color", type: "color", default: "currentColor", description: "Icon color" },
-          { name: "--icon-fill", type: "color", default: "none", description: "Fills the inside of an outline icon" },
-          { name: "--icon-size", type: "length", default: "1.5em", description: "Width and height of the icon" },
+          { name: "--mc-icon-color", type: "color", default: "currentColor", description: "Icon color" },
+          { name: "--mc-icon-fill", type: "color", default: "none", description: "Fills the inside of an outline icon" },
+          { name: "--mc-icon-size", type: "length", default: "1.5em", description: "Width and height of the icon" },
         ]}
       />
 
@@ -432,20 +432,20 @@ document.querySelector('#like-icon').icon = heart`,
     justify-content: center;
     align-items: center;
     gap: 1.75rem 2.25rem;
-    color: var(--color-text);
+    color: var(--mc-color-text);
   }
 
   .cell {
     display: grid;
     justify-items: center;
     gap: 0.5rem;
-    --icon-size: 2rem;
+    --mc-icon-size: 2rem;
   }
 
   .cell span {
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
   }
 
   .demo-btn {
@@ -453,13 +453,13 @@ document.querySelector('#like-icon').icon = heart`,
     align-items: center;
     gap: 0.5rem;
     padding: 0.6rem 1.1rem;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--mc-color-border);
     border-radius: 8px;
-    background: var(--color-surface, transparent);
-    color: var(--color-text);
+    background: var(--mc-color-surface, transparent);
+    color: var(--mc-color-text);
     font: inherit;
     text-decoration: none;
     cursor: pointer;
-    --icon-size: 1.15rem;
+    --mc-icon-size: 1.15rem;
   }
 </style>

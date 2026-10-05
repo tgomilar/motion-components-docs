@@ -104,7 +104,7 @@ const { tabs, group = "default" } = Astro.props;
 
 <style>
   .fw-tabs {
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--mc-color-border);
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 2rem;
@@ -113,8 +113,8 @@ const { tabs, group = "default" } = Astro.props;
   .fw-tab-list {
     display: flex;
     position: relative;
-    border-bottom: 1px solid var(--color-border);
-    background: var(--color-surface-2);
+    border-bottom: 1px solid var(--mc-color-border);
+    background: var(--mc-color-surface-2);
     overflow-x: auto;
     scrollbar-width: none;
   }
@@ -126,15 +126,15 @@ const { tabs, group = "default" } = Astro.props;
     padding: 0.6rem 1rem;
     font-size: 0.82rem;
     font-weight: 500;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     cursor: pointer;
     white-space: nowrap;
     transition: color 0.15s;
   }
 
-  .fw-tab:hover { color: var(--color-text); }
+  .fw-tab:hover { color: var(--mc-color-text); }
 
-  .fw-tab.active { color: var(--color-text); }
+  .fw-tab.active { color: var(--mc-color-text); }
 
   .fw-tab-indicator {
     position: absolute;
@@ -142,7 +142,7 @@ const { tabs, group = "default" } = Astro.props;
     left: 0;
     height: 2px;
     width: 0;
-    background: var(--color-accent);
+    background: var(--mc-color-accent);
     transform: translateX(0);
     transition: transform 0.24s cubic-bezier(0.4, 0, 0.2, 1), width 0.24s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
@@ -162,7 +162,7 @@ const { tabs, group = "default" } = Astro.props;
   .fw-panel {
     display: none;
     padding: 1rem 1.25rem;
-    background: var(--color-surface);
+    background: var(--mc-color-surface);
   }
 
   .fw-panel.active { display: block; }
@@ -170,7 +170,7 @@ const { tabs, group = "default" } = Astro.props;
   .fw-desc {
     font-size: 0.9rem;
     font-weight: 500;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     line-height: 1.65;
     margin: 0 0 0.75rem;
   }
@@ -178,8 +178,8 @@ const { tabs, group = "default" } = Astro.props;
   .fw-desc :global(code) {
     font-family: var(--font-mono), monospace;
     font-size: 0.82rem;
-    color: var(--color-accent);
-    background: var(--color-accent-dim);
+    color: var(--mc-color-accent);
+    background: var(--mc-color-accent-dim);
     padding: 0.15rem 0.4rem;
     border-radius: 4px;
   }

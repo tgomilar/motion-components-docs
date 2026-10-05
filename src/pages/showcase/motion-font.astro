@@ -143,8 +143,8 @@ import Layout from "../../layouts/Layout.astro";
 
   .showcase {
     font-family: 'Inter', var(--font-sans);
-    background: var(--color-bg);
-    color: var(--color-text);
+    background: var(--mc-color-bg);
+    color: var(--mc-color-text);
   }
 
   /* ── Shared ───────────────────────────────────────────── */
@@ -162,14 +162,14 @@ import Layout from "../../layouts/Layout.astro";
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     margin: 0 0 3rem;
   }
 
   /* ── Hero ─────────────────────────────────────────────── */
   .hero {
     min-height: 100vh;
-    background: var(--color-bg);
+    background: var(--mc-color-bg);
     position: relative;
     text-align: center;
     gap: 1.5rem;
@@ -180,7 +180,7 @@ import Layout from "../../layouts/Layout.astro";
     font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--color-accent);
+    color: var(--mc-color-accent);
     margin: 0;
   }
 
@@ -197,19 +197,19 @@ import Layout from "../../layouts/Layout.astro";
 
   .hero-word {
     display: inline-block;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     letter-spacing: -0.04em;
   }
 
   .hero-word-inv {
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     font-size: 0.5em;
     align-self: center;
   }
 
   .hero-sub {
     font-size: 1rem;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     max-width: 420px;
     margin: 0;
     line-height: 1.6;
@@ -220,13 +220,13 @@ import Layout from "../../layouts/Layout.astro";
     bottom: 2.5rem;
     font-size: 0.72rem;
     letter-spacing: 0.08em;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     text-transform: uppercase;
   }
 
   /* ── Weight spectrum ──────────────────────────────────── */
   .spectrum {
-    background: var(--color-surface);
+    background: var(--mc-color-surface);
   }
 
   .spectrum-stack {
@@ -240,14 +240,14 @@ import Layout from "../../layouts/Layout.astro";
   .spec-word {
     font-size: clamp(2.5rem, 6vw, 5rem);
     letter-spacing: -0.03em;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     line-height: 1.15;
     display: block;
   }
 
   /* ── Word cloud ───────────────────────────────────────── */
   .word-cloud {
-    background: var(--color-bg);
+    background: var(--mc-color-bg);
     min-height: 80vh;
   }
 
@@ -263,7 +263,7 @@ import Layout from "../../layouts/Layout.astro";
   .cloud-word {
     font-size: clamp(1.5rem, 3.5vw, 2.75rem);
     letter-spacing: -0.025em;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     cursor: default;
     user-select: none;
     line-height: 1.2;
@@ -271,7 +271,7 @@ import Layout from "../../layouts/Layout.astro";
 
   /* ── Optical size ─────────────────────────────────────── */
   .optical {
-    background: var(--color-surface);
+    background: var(--mc-color-surface);
     gap: 3rem;
   }
 
@@ -293,26 +293,26 @@ import Layout from "../../layouts/Layout.astro";
   .optical-demo {
     font-size: clamp(5rem, 12vw, 9rem);
     letter-spacing: -0.05em;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     line-height: 1;
   }
 
   .optical-caption {
     font-size: 0.72rem;
     font-family: var(--font-mono);
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     letter-spacing: 0.04em;
   }
 
   .optical-sep {
     font-size: 1rem;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     font-weight: 300;
   }
 
   /* ── Bounce section ───────────────────────────────────── */
   .bounce-section {
-    background: var(--color-bg);
+    background: var(--mc-color-bg);
     min-height: 70vh;
   }
 
@@ -334,7 +334,7 @@ import Layout from "../../layouts/Layout.astro";
   .bounce-demo {
     font-size: clamp(1.75rem, 4vw, 3rem);
     letter-spacing: -0.03em;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     cursor: default;
     user-select: none;
   }
@@ -342,13 +342,13 @@ import Layout from "../../layouts/Layout.astro";
   .bounce-tag {
     font-size: 0.68rem;
     font-family: var(--font-mono);
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     letter-spacing: 0.04em;
   }
 
   /* ── Statement ────────────────────────────────────────── */
   .statement {
-    background: var(--color-surface);
+    background: var(--mc-color-surface);
     padding: 8rem 3rem;
     text-align: center;
   }
@@ -357,14 +357,14 @@ import Layout from "../../layouts/Layout.astro";
     display: block;
     font-size: clamp(2rem, 5.5vw, 4.5rem);
     letter-spacing: -0.04em;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     line-height: 1.15;
     max-width: 800px;
   }
 
   /* ── Stagger ──────────────────────────────────────────── */
   .stagger-section {
-    background: var(--color-bg);
+    background: var(--mc-color-bg);
   }
 
   .stagger-lines {
@@ -380,13 +380,13 @@ import Layout from "../../layouts/Layout.astro";
     display: block;
     font-size: clamp(2.5rem, 7vw, 5.5rem);
     letter-spacing: -0.04em;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     line-height: 1.1;
   }
 
   /* ── Outro ────────────────────────────────────────────── */
   .outro {
-    background: var(--color-bg);
+    background: var(--mc-color-bg);
     min-height: 60vh;
     text-align: center;
     gap: 1rem;
@@ -397,13 +397,13 @@ import Layout from "../../layouts/Layout.astro";
     font-weight: 700;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--color-accent);
+    color: var(--mc-color-accent);
     margin: 0;
   }
 
   .outro-sub {
     font-size: 1.1rem;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     max-width: 380px;
     line-height: 1.6;
     margin: 0;
@@ -418,7 +418,7 @@ import Layout from "../../layouts/Layout.astro";
   .outro-link {
     font-size: 0.85rem;
     font-weight: 600;
-    color: var(--color-accent);
+    color: var(--mc-color-accent);
     text-decoration: none;
     letter-spacing: 0.02em;
     border-bottom: 1px solid transparent;
@@ -426,6 +426,6 @@ import Layout from "../../layouts/Layout.astro";
   }
 
   .outro-link:hover {
-    border-color: var(--color-accent);
+    border-color: var(--mc-color-accent);
   }
 </style>

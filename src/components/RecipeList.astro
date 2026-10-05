@@ -33,7 +33,7 @@ const { recipes } = Astro.props;
     justify-content: center;
     gap: 1rem;
     width: 100%;
-    color: var(--color-text);
+    color: var(--mc-color-text);
   }
 
   .recipe-demo :global(button),
@@ -43,14 +43,14 @@ const { recipes } = Astro.props;
     align-items: center;
     gap: 0.5rem;
     padding: 0.55rem 1rem;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--mc-color-border);
     border-radius: 8px;
-    background: var(--color-surface);
-    color: var(--color-text);
+    background: var(--mc-color-surface);
+    color: var(--mc-color-text);
     font: inherit;
     font-weight: 600;
     cursor: pointer;
-    --icon-size: 1.15rem;
+    --mc-icon-size: 1.15rem;
   }
 
   .recipe-demo :global(input) {
@@ -60,8 +60,8 @@ const { recipes } = Astro.props;
   }
 
   .recipe-demo :global(button[aria-pressed="true"]) {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
+    border-color: var(--mc-color-accent);
+    color: var(--mc-color-accent);
   }
 
   .recipe-demo :global(button:disabled) {

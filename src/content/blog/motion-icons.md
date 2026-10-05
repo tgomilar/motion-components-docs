@@ -68,7 +68,7 @@ A path without a leading slash, such as `icons/heart.svg`, is relative to the pa
 Inline SVG works well when you want the icon in your HTML with no extra request:
 
 ```html
-<motion-icon animation="pulse" style="--icon-color: #e11d48">
+<motion-icon animation="pulse" style="--mc-icon-color: #e11d48">
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
     <path d="M20 6 9 17l-5-5" />
   </svg>
@@ -160,24 +160,24 @@ Three CSS custom properties control how an icon looks:
 
 | Property | What it changes | Default |
 |---|---|---|
-| `--icon-color` | The color of the lines | The text color |
-| `--icon-fill` | The color inside an outline icon | No fill |
-| `--icon-size` | The width and height | `1.5em` |
+| `--mc-icon-color` | The color of the lines | The text color |
+| `--mc-icon-fill` | The color inside an outline icon | No fill |
+| `--mc-icon-size` | The width and height | `1.5em` |
 
-`--icon-fill` turns an outline icon into a filled one. Add `33` to the end of a hex color for a light tint at 20% opacity. With `draw`, the fill fades in as the lines finish.
+`--mc-icon-fill` turns an outline icon into a filled one. Add `33` to the end of a hex color for a light tint at 20% opacity. With `draw`, the fill fades in as the lines finish.
 
 ```html
 <!-- tinted fill -->
 <motion-icon
   src="https://cdn.jsdelivr.net/npm/lucide-static@1/icons/star.svg"
-  style="--icon-color: #f59e0b; --icon-fill: #f59e0b33"
+  style="--mc-icon-color: #f59e0b; --mc-icon-fill: #f59e0b33"
 ></motion-icon>
 
 <!-- white icon on a colored background -->
 <motion-icon
   src="https://cdn.jsdelivr.net/npm/lucide-static@1/icons/rocket.svg"
   animation="bounce"
-  style="--icon-color: #fff; background: #6366f1; padding: 0.6rem; border-radius: 14px"
+  style="--mc-icon-color: #fff; background: #6366f1; padding: 0.6rem; border-radius: 14px"
 ></motion-icon>
 ```
 

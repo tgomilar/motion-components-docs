@@ -73,9 +73,9 @@ import 'motion-components'               // or the whole library`}
 
       <h2>CSS variables</h2>
       <PropsTable nameLabel="Variable" rows={[
-        { name: '--color-accent', type: 'color', default: '#2563eb', description: 'Text colour and icon hover colour' },
-        { name: '--color-accent-dim', type: 'color', default: '#2563eb18', description: 'Background fill behind the code text' },
-        { name: '--color-muted', type: 'color', default: '#60608a', description: 'Copy icon default colour' },
+        { name: '--mc-color-accent', type: 'color', default: '#2563eb', description: 'Text colour and icon hover colour' },
+        { name: '--mc-color-accent-dim', type: 'color', default: '#2563eb18', description: 'Background fill behind the code text' },
+        { name: '--mc-color-muted', type: 'color', default: '#60608a', description: 'Copy icon default colour' },
       ]} />
 
       <h2>Theming</h2>
@@ -93,9 +93,9 @@ import 'motion-components'               // or the whole library`}
           compact
           code={`/* Dark theme example */
 .theme-block {
-  --color-accent: #60a5fa;
-  --color-accent-dim: #60a5fa20;
-  --color-muted: #94a3b8;
+  --mc-color-accent: #60a5fa;
+  --mc-color-accent-dim: #60a5fa20;
+  --mc-color-muted: #94a3b8;
 }`}
         />
       </div>
@@ -114,7 +114,7 @@ import 'motion-components'               // or the whole library`}
 <style>
   .demo-text {
     font-size: 1rem;
-    color: var(--color-text);
+    color: var(--mc-color-text);
   }
 
   .theme-grid {

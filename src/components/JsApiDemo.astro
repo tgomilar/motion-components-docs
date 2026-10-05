@@ -137,21 +137,21 @@ const { target, mode = "looper", wide, showLog = false } = Astro.props;
     font-weight: 600;
     padding: 0.4rem 0.9rem;
     border-radius: 8px;
-    border: 1px solid var(--color-border);
-    background: var(--color-surface-2);
-    color: var(--color-text);
+    border: 1px solid var(--mc-color-border);
+    background: var(--mc-color-surface-2);
+    color: var(--mc-color-text);
     cursor: pointer;
     transition: border-color 0.15s;
   }
 
   .transport button:hover {
-    border-color: var(--color-text);
+    border-color: var(--mc-color-text);
   }
 
   .state-chip {
     margin-left: auto;
     font-size: 0.8rem;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
   }
 
   .event-log {
@@ -160,8 +160,8 @@ const { target, mode = "looper", wide, showLog = false } = Astro.props;
     padding: 1rem 1.25rem;
     font-family: var(--font-mono);
     font-size: 0.78rem;
-    color: var(--color-muted);
-    background: var(--color-surface-2);
+    color: var(--mc-color-muted);
+    background: var(--mc-color-surface-2);
     border-radius: 8px;
   }
 </style>

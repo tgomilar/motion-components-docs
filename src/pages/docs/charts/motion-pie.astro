@@ -182,13 +182,13 @@ document.querySelector('#new-data').addEventListener('click', () => {
 
       <h2>Colors and size</h2>
       <p>
-        Slices use the same color-blind-safe palette as <code>motion-chart</code>, in light and dark mode. Override it with <code>--chart-1</code> to
-        <code>--chart-6</code>.
+        Slices use the same color-blind-safe palette as <code>motion-chart</code>, in light and dark mode. Override it with <code>--mc-chart-1</code> to
+        <code>--mc-chart-6</code>.
       </p>
       <CodeWindow filename="index.html" copy code={`<motion-pie
   values="60, 40"
   labels="Done, Open"
-  style="--chart-1: #16a34a; --chart-2: #d4d4d8; --chart-height: 12rem"
+  style="--mc-chart-1: #16a34a; --mc-chart-2: #d4d4d8; --mc-chart-height: 12rem"
 ></motion-pie>`} />
 
       <h2>Properties</h2>
@@ -214,9 +214,9 @@ document.querySelector('#new-data').addEventListener('click', () => {
       <PropsTable
         nameLabel="Property"
         rows={[
-          { name: "--chart-height", type: "length", default: "16rem", description: "Height of the chart, including the legend" },
-          { name: "--chart-1 … --chart-6", type: "color", default: "blue, orange, aqua, yellow, magenta, green", description: "Slice colors, in order" },
-          { name: "--chart-surface", type: "color", default: "Canvas", description: "Background behind the chart. Used for the gap between slices and the tooltip" },
+          { name: "--mc-chart-height", type: "length", default: "16rem", description: "Height of the chart, including the legend" },
+          { name: "--mc-chart-1 … --mc-chart-6", type: "color", default: "blue, orange, aqua, yellow, magenta, green", description: "Slice colors, in order" },
+          { name: "--mc-chart-surface", type: "color", default: "Canvas", description: "Background behind the chart. Used for the gap between slices and the tooltip" },
         ]}
       />
 
@@ -280,7 +280,7 @@ document.querySelector('#new-data').addEventListener('click', () => {
     gap: 1rem;
     justify-items: start;
     width: 100%;
-    color: var(--color-text);
+    color: var(--mc-color-text);
   }
 
   .pies {
@@ -292,10 +292,10 @@ document.querySelector('#new-data').addEventListener('click', () => {
 
   .demo-action {
     padding: 0.5rem 1rem;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--mc-color-border);
     border-radius: 8px;
-    background: var(--color-surface);
-    color: var(--color-text);
+    background: var(--mc-color-surface);
+    color: var(--mc-color-text);
     font: inherit;
     font-weight: 600;
     cursor: pointer;

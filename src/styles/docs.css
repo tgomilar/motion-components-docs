@@ -53,19 +53,19 @@ main {
   max-height: calc(100vh - 56px);
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: var(--color-border) transparent;
+  scrollbar-color: var(--mc-color-border) transparent;
 }
 
 .docs-toc::-webkit-scrollbar { width: 3px; }
 .docs-toc::-webkit-scrollbar-track { background: transparent; }
-.docs-toc::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 2px; }
+.docs-toc::-webkit-scrollbar-thumb { background: var(--mc-color-border); border-radius: 2px; }
 
 .toc-label {
   font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  color: var(--color-muted);
+  color: var(--mc-color-muted);
   margin: 0 0 0.65rem;
 }
 
@@ -73,7 +73,7 @@ main {
   list-style: none;
   margin: 0;
   padding: 0;
-  border-left: 1px solid var(--color-border);
+  border-left: 1px solid var(--mc-color-border);
 }
 
 .toc-item { margin: 0; }
@@ -84,20 +84,20 @@ main {
   margin-left: -1px;
   font-size: 0.82rem;
   line-height: 1.45;
-  color: var(--color-muted);
+  color: var(--mc-color-muted);
   text-decoration: none;
   border-left: 1px solid transparent;
   transition: color 0.15s, border-color 0.15s;
 }
 
 .toc-link:hover {
-  color: var(--color-text);
+  color: var(--mc-color-text);
   text-decoration: none;
 }
 
 .toc-link.active {
-  color: var(--color-accent);
-  border-left-color: var(--color-accent);
+  color: var(--mc-color-accent);
+  border-left-color: var(--mc-color-accent);
   font-weight: 600;
 }
 
@@ -118,7 +118,7 @@ h2 {
 }
 
 .lead {
-  color: var(--color-muted);
+  color: var(--mc-color-muted);
   font-size: 1.05rem;
   line-height: 1.65;
   max-width: 60ch;
@@ -126,7 +126,7 @@ h2 {
 }
 
 p {
-  color: var(--color-muted);
+  color: var(--mc-color-muted);
   font-size: 0.95rem;
   line-height: 1.75;
   max-width: 64ch;
@@ -137,8 +137,8 @@ code,
 motion-code-inline:not(:defined) {
   font-family: var(--font-mono);
   font-size: 0.82rem;
-  color: var(--color-accent);
-  background: var(--color-accent-dim);
+  color: var(--mc-color-accent);
+  background: var(--mc-color-accent-dim);
   padding: 0.15rem 0.4rem;
   border-radius: 4px;
 }
@@ -159,7 +159,7 @@ motion-code {
 }
 
 .demo-btn {
-  background: var(--color-accent);
+  background: var(--mc-color-accent);
   color: #fff;
   border: none;
   padding: 0.75rem 1.5rem;
@@ -171,17 +171,17 @@ motion-code {
 }
 
 .demo-btn--accent {
-  background: var(--color-surface);
-  color: var(--color-text);
-  border: 1px solid var(--color-border);
+  background: var(--mc-color-surface);
+  color: var(--mc-color-text);
+  border: 1px solid var(--mc-color-border);
 }
 
 .demo-icon {
   width: 64px;
   height: 64px;
   border-radius: 16px;
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background: var(--mc-color-surface);
+  border: 1px solid var(--mc-color-border);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -192,15 +192,15 @@ motion-code {
 /* ── Note callout ─────────────────────────────────── */
 .note {
   font-size: 0.85rem;
-  color: var(--color-muted);
-  border-left: 2px solid var(--color-border);
+  color: var(--mc-color-muted);
+  border-left: 2px solid var(--mc-color-border);
   padding-left: 0.85rem;
   margin-bottom: 1.5rem;
 }
 
 /* ── Section description ──────────────────────────── */
 .section-desc {
-  color: var(--color-muted);
+  color: var(--mc-color-muted);
   font-size: 0.9rem;
   margin-bottom: 0.75rem;
 }
@@ -212,43 +212,43 @@ motion-code {
   gap: 0.75rem;
   padding: 0.75rem 1rem;
   margin-bottom: 2rem;
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--mc-color-border);
   border-radius: 10px;
-  background: var(--color-surface);
+  background: var(--mc-color-surface);
   text-decoration: none;
   transition: border-color 0.15s, background 0.15s;
   flex-wrap: wrap;
 }
 
 .showcase-link:hover {
-  border-color: var(--color-accent);
-  background: var(--color-accent-dim);
+  border-color: var(--mc-color-accent);
+  background: var(--mc-color-accent-dim);
   text-decoration: none;
 }
 
 .showcase-link-label {
   font-size: 0.82rem;
   font-weight: 600;
-  color: var(--color-accent);
+  color: var(--mc-color-accent);
 }
 
 .showcase-link-arrow {
   font-size: 0.82rem;
-  color: var(--color-accent);
+  color: var(--mc-color-accent);
   opacity: 0.6;
 }
 
 .showcase-link-sub {
   font-size: 0.75rem;
   font-family: var(--font-mono);
-  color: var(--color-muted);
+  color: var(--mc-color-muted);
   margin-left: auto;
   letter-spacing: 0.04em;
 }
 
 /* ── Methods table ────────────────────────────────── */
 .methods-table {
-  border: 1px solid var(--color-border);
+  border: 1px solid var(--mc-color-border);
   border-radius: 12px;
   overflow-x: auto;
   overflow-y: hidden;
@@ -259,25 +259,25 @@ motion-code {
   width: 100%;
   border-collapse: collapse;
   font-size: 0.9rem;
-  background: var(--color-surface);
+  background: var(--mc-color-surface);
 }
 
 .methods-table th {
   text-align: left;
   padding: 0.65rem 1rem;
-  background: var(--color-surface-2);
-  color: var(--color-muted);
+  background: var(--mc-color-surface-2);
+  color: var(--mc-color-muted);
   font-weight: 600;
   font-size: 0.78rem;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  border-bottom: 1px solid var(--color-border);
+  border-bottom: 1px solid var(--mc-color-border);
 }
 
 .methods-table td {
   padding: 0.65rem 1rem;
-  border-bottom: 1px solid var(--color-border);
-  color: var(--color-text);
+  border-bottom: 1px solid var(--mc-color-border);
+  color: var(--mc-color-text);
   font-size: 0.9rem;
 }
 
@@ -288,8 +288,8 @@ motion-code {
 .methods-table code {
   font-family: var(--font-mono);
   font-size: 0.82rem;
-  color: var(--color-accent);
-  background: var(--color-accent-dim);
+  color: var(--mc-color-accent);
+  background: var(--mc-color-accent-dim);
   padding: 0.15rem 0.4rem;
   border-radius: 4px;
 }

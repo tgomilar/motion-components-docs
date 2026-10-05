@@ -105,19 +105,19 @@ const defaultCode = `<${component}\n${defaultAttrs}>\n  <!-- content -->\n</${co
 
 <style>
   .playground {
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--mc-color-border);
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 1.5rem;
   }
 
   .preview {
-    background: var(--color-surface);
+    background: var(--mc-color-surface);
     padding: 3rem;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--mc-color-border);
   }
 
   @media (max-width: 640px) {
@@ -127,7 +127,7 @@ const defaultCode = `<${component}\n${defaultAttrs}>\n  <!-- content -->\n</${co
   }
 
   .controls {
-    background: var(--color-surface-2);
+    background: var(--mc-color-surface-2);
   }
 
   .control {
@@ -135,14 +135,14 @@ const defaultCode = `<${component}\n${defaultAttrs}>\n  <!-- content -->\n</${co
     align-items: center;
     justify-content: space-between;
     padding: 0.6rem 1.25rem;
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--mc-color-border);
   }
 
   .ctrl-name {
     font-family: var(--font-mono);
     font-size: 0.8rem;
-    color: var(--color-accent);
-    background: var(--color-accent-dim);
+    color: var(--mc-color-accent);
+    background: var(--mc-color-accent-dim);
     padding: 0.1rem 0.4rem;
     border-radius: 4px;
   }
@@ -155,10 +155,10 @@ const defaultCode = `<${component}\n${defaultAttrs}>\n  <!-- content -->\n</${co
 
   input[type="number"] {
     width: 80px;
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    background: var(--mc-color-surface);
+    border: 1px solid var(--mc-color-border);
     border-radius: 6px;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     font-family: var(--font-mono);
     font-size: 0.85rem;
     padding: 0.3rem 0.5rem;
@@ -171,13 +171,13 @@ const defaultCode = `<${component}\n${defaultAttrs}>\n  <!-- content -->\n</${co
   input[type="number"]::-webkit-outer-spin-button { opacity: 1; }
 
   input[type="number"]:focus {
-    border-color: var(--color-accent);
+    border-color: var(--mc-color-accent);
   }
 
   .unit {
     font-family: var(--font-mono);
     font-size: 0.8rem;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     width: 1.5rem;
   }
 
@@ -193,7 +193,7 @@ const defaultCode = `<${component}\n${defaultAttrs}>\n  <!-- content -->\n</${co
   .track {
     width: 36px;
     height: 20px;
-    background: var(--color-border);
+    background: var(--mc-color-border);
     border-radius: 99px;
     position: relative;
     transition: background 0.2s;
@@ -211,43 +211,43 @@ const defaultCode = `<${component}\n${defaultAttrs}>\n  <!-- content -->\n</${co
     transition: transform 0.2s;
   }
 
-  .toggle input:checked + .track { background: var(--color-accent); }
+  .toggle input:checked + .track { background: var(--mc-color-accent); }
   .toggle input:checked + .track::after { transform: translateX(16px); }
 
   .code-wrap {
     position: relative;
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid var(--mc-color-border);
   }
 
   .code-preview {
-    background: var(--color-surface);
+    background: var(--mc-color-surface);
     padding: 1rem 1.25rem;
     font-family: var(--font-mono);
     font-size: 0.82rem;
     line-height: 1.7;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     margin: 0;
     overflow-x: auto;
   }
 
-  .code-preview code { color: var(--color-text); }
+  .code-preview code { color: var(--mc-color-text); }
 
   .copy-btn {
     position: absolute;
     top: 0.6rem;
     right: 0.75rem;
-    background: var(--color-surface-2);
-    border: 1px solid var(--color-border);
+    background: var(--mc-color-surface-2);
+    border: 1px solid var(--mc-color-border);
     border-radius: 6px;
     padding: 0.2rem 0.6rem;
     font-size: 0.75rem;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     cursor: pointer;
     transition: color 0.15s, border-color 0.15s;
   }
 
   .copy-btn:hover {
-    color: var(--color-accent);
-    border-color: var(--color-accent);
+    color: var(--mc-color-accent);
+    border-color: var(--mc-color-accent);
   }
 </style>

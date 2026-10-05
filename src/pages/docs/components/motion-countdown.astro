@@ -76,11 +76,11 @@ import 'motion-components'`}
         filename="styles.css"
         copy
         code={`motion-countdown {
-  --countdown-color: #60a5fa;
-  --countdown-label-color: #8888a8;
-  --countdown-size: 4rem;
-  --countdown-label-size: 0.65rem;
-  --countdown-gap: 1rem;
+  --mc-countdown-color: #60a5fa;
+  --mc-countdown-label-color: #8888a8;
+  --mc-countdown-size: 4rem;
+  --mc-countdown-label-size: 0.65rem;
+  --mc-countdown-gap: 1rem;
 }`}
       />
 
@@ -94,11 +94,11 @@ import 'motion-components'`}
 
       <h2>CSS variables</h2>
       <PropsTable nameLabel="Variable" rows={[
-        { name: '--countdown-size', type: 'length', default: '3.5rem', description: 'Font size of the digits' },
-        { name: '--countdown-color', type: 'color', default: 'currentColor', description: 'Digit color' },
-        { name: '--countdown-gap', type: 'length', default: '0.75rem', description: 'Space between units' },
-        { name: '--countdown-label-size', type: 'length', default: '0.65rem', description: 'Font size of the unit labels' },
-        { name: '--countdown-label-color', type: 'color', default: 'currentColor', description: 'Unit label color' },
+        { name: '--mc-countdown-size', type: 'length', default: '3.5rem', description: 'Font size of the digits' },
+        { name: '--mc-countdown-color', type: 'color', default: 'currentColor', description: 'Digit color' },
+        { name: '--mc-countdown-gap', type: 'length', default: '0.75rem', description: 'Space between units' },
+        { name: '--mc-countdown-label-size', type: 'length', default: '0.65rem', description: 'Font size of the unit labels' },
+        { name: '--mc-countdown-label-color', type: 'color', default: 'currentColor', description: 'Unit label color' },
       ]} />
 
       <h2>JavaScript API</h2>
@@ -133,9 +133,9 @@ import 'motion-components'`}
   }
 
   motion-countdown {
-    --countdown-color: var(--color-text);
-    --countdown-label-color: var(--color-muted);
-    --countdown-size: 2.75rem;
-    --countdown-gap: 0.75rem;
+    --mc-countdown-color: var(--mc-color-text);
+    --mc-countdown-label-color: var(--mc-color-muted);
+    --mc-countdown-size: 2.75rem;
+    --mc-countdown-gap: 0.75rem;
   }
 </style>
