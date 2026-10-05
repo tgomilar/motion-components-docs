@@ -33,6 +33,7 @@ export function llmsIndex() {
 - [Usage](${SITE}/docs.md): install, framework setup, preload CSS and per-component imports
 - [JavaScript API](${SITE}/docs/js-api.md): playback methods, events and pauseAll/resumeAll/cancelAll
 - [Migrating to 1.0](${SITE}/docs/migration.md): renamed attributes and units
+- [Using with AI](${SITE}/docs/ai.md): llms.txt, Markdown pages, a rules file for coding agents and editor completions
 
 ${groups.join("\n\n")}
 
