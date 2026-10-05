@@ -7,6 +7,7 @@ import DocsPagination from "../../../components/DocsPagination.astro";
 import CodeWindow from "../../../components/CodeWindow.astro";
 import FwTabs from "../../../components/FwTabs.astro";
 import PropsTable from "../../../components/PropsTable.astro";
+import DocsTable from "../../../components/DocsTable.astro";
 import "../../../styles/docs.css";
 
 const CDN = "https://cdn.jsdelivr.net/npm";
@@ -116,7 +117,7 @@ document.querySelector('#like-icon').icon = heart`,
 
 <Layout
   title="motion-icon — Motion Components"
-  description="Animate any SVG icon from Lucide, Tabler, Heroicons, Phosphor, Material Symbols, Font Awesome and more: draw the strokes in, or pop, bounce, rotate, wiggle and pulse it on a spring."
+  description="Animate any SVG icon on a spring: draw its strokes in, or pop, bounce, rotate, wiggle or pulse it on hover, click, scroll or load. Lucide, Heroicons and more."
   noMain
 >
   <div class="layout">
@@ -125,8 +126,10 @@ document.querySelector('#like-icon').icon = heart`,
     <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-icon</motion-split></h1>
       <p class="lead">
-        Animate any SVG icon. Point <code>src</code> at an icon from Lucide, Tabler, Heroicons, Material Symbols, Font Awesome or your own folder,
-        and choose how it moves. Stroke icons can be drawn in line by line. Any icon can pop, bounce, rotate, wiggle or pulse on a spring.
+        Animate any SVG icon on a spring. Load it with <code>src</code> from Lucide, Tabler, Heroicons, Material Symbols, Font Awesome or your own folder,
+        or put an <code>&lt;svg&gt;</code> inside. Stroke icons draw their lines in, and every icon can pop, bounce, rotate, wiggle or pulse.
+        Combine both with <code>animation="draw wiggle"</code>. It plays on hover, click, scroll or page load, or in a loop, and inside a button
+        or link it reacts to the whole button.
       </p>
 
       <h2>Preview</h2>
@@ -216,21 +219,21 @@ document.querySelector('#like-icon').icon = heart`,
         </div>
       </DocsPreview>
       <CodeWindow filename="index.html" copy code={librarySnippet} />
-      <div class="methods-table">
-        <table>
-          <thead><tr><th>Library</th><th>URL</th><th><code>draw</code></th><th>License</th></tr></thead>
-          <tbody>
-            {libraries.map((lib) => (
-              <tr>
-                <td><a href={lib.site} target="_blank" rel="noopener">{lib.name}</a></td>
-                <td><motion-code-inline copy>{lib.path}</motion-code-inline></td>
-                <td>{lib.draw ? "Yes" : "Pops instead"}</td>
-                <td>{lib.license}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <DocsTable
+        columns={[
+          { label: "Library" },
+          { label: "URL" },
+          { label: "draw", code: true },
+          { label: "License" },
+        ]}
+        rows={libraries.map((lib) => [
+          { html: `<a href="${lib.site}" target="_blank" rel="noopener">${lib.name}</a>` },
+          { code: lib.path },
+          lib.draw ? "Yes" : "Pops instead",
+          lib.license,
+        ])}
+        copy
+      />
       <p>
         <code>draw</code> traces the icon's strokes, so it needs an outline (stroke) icon. Filled icons pop instead. Font Awesome Free icons are
         CC BY 4.0, which asks you to credit Font Awesome.

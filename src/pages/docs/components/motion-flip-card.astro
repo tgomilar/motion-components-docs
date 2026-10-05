@@ -6,6 +6,7 @@ import DocsTOC from "../../../components/DocsTOC.astro";
 import DocsPagination from "../../../components/DocsPagination.astro";
 import CodeWindow from "../../../components/CodeWindow.astro";
 import PropsTable from "../../../components/PropsTable.astro";
+import DocsTable from "../../../components/DocsTable.astro";
 import "../../../styles/docs.css";
 ---
 
@@ -94,14 +95,11 @@ card.flip()`}
       ]} />
 
       <h2>Methods</h2>
-      <div class="methods-table">
-        <table>
-          <thead><tr><th>Method</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td><code>flip()</code></td><td>Toggles the card between front and back.</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <DocsTable
+        columns={[{ label: "Method" }, { label: "Description" }]}
+        rows={[[{ code: "flip()" }, "Toggles the card between front and back."]]}
+        copy
+      />
 
       <h2>Accessibility</h2>
       <p>

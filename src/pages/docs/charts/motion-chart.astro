@@ -7,6 +7,7 @@ import DocsPagination from "../../../components/DocsPagination.astro";
 import CodeWindow from "../../../components/CodeWindow.astro";
 import FwTabs from "../../../components/FwTabs.astro";
 import PropsTable from "../../../components/PropsTable.astro";
+import DocsTable from "../../../components/DocsTable.astro";
 import "../../../styles/docs.css";
 
 const CDN = "https://cdn.jsdelivr.net/npm/motion-components@1/dist";
@@ -216,18 +217,16 @@ chart.data = {
 
       <h2>Number format</h2>
       <p><code>format</code> formats the axis, the tooltip and the screen reader text in the reader's language.</p>
-      <div class="methods-table">
-        <table>
-          <thead><tr><th><code>format</code></th><th>12900 shows as</th></tr></thead>
-          <tbody>
-            <tr><td>(empty)</td><td>12,900</td></tr>
-            <tr><td><code>compact</code></td><td>12.9K</td></tr>
-            <tr><td><code>currency:EUR</code></td><td>€12,900</td></tr>
-            <tr><td><code>percent</code></td><td>12,900%</td></tr>
-            <tr><td><code>unit:kilometer</code></td><td>12,900 km</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <DocsTable
+        columns={[{ label: "format", code: true }, { label: "12900 shows as" }]}
+        rows={[
+          ["(empty)", "12,900"],
+          [{ code: "compact" }, "12.9K"],
+          [{ code: "currency:EUR" }, "€12,900"],
+          [{ code: "percent" }, "12,900%"],
+          [{ code: "unit:kilometer" }, "12,900 km"],
+        ]}
+      />
       <p><code>percent</code> adds a percent sign. It does not multiply by 100, so write <code>12</code> for 12%.</p>
 
       <p class="note">More patterns, such as a period switcher, a chart from a form and data from a JSON file, are on the <a href="/docs/recipes/charts/">Chart Recipes</a> page.</p>

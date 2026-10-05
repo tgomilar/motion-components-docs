@@ -40,7 +40,8 @@
     "preview": "astro preview",
     "check": "astro check",
     "check:site": "node scripts/check-site.mjs",
-    "indexnow": "node scripts/indexnow.mjs"
+    "indexnow": "node scripts/indexnow.mjs",
+    "test": "node --test src/lib/*.test.mjs"
   },
   "dependencies": {
     "astro": "^6.4.2",
