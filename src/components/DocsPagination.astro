@@ -29,7 +29,7 @@ const next = idx >= 0 && idx < linear.length - 1 ? linear[idx + 1] : null
 {(prev || next) && (
   <nav class="docs-pagination" aria-label="Docs pagination" data-pagefind-ignore="all">
     {prev ? (
-      <motion-spotlight class="pg-spot" size="320" style="--spotlight-color: rgba(96,165,250,0.22)">
+      <motion-spotlight class="pg-spot" size="320" style="--mc-spotlight-color: rgba(96,165,250,0.22)">
         <a href={prev.href} class="pg pg-prev" rel="prev">
           <span class="pg-direction">← Previous</span>
           <span class="pg-section">{SECTION_LABELS[prev.section as keyof typeof SECTION_LABELS]}</span>
@@ -39,7 +39,7 @@ const next = idx >= 0 && idx < linear.length - 1 ? linear[idx + 1] : null
     ) : <span class="pg pg-empty" aria-hidden="true" />}
 
     {next ? (
-      <motion-spotlight class="pg-spot" size="320" style="--spotlight-color: rgba(96,165,250,0.22)">
+      <motion-spotlight class="pg-spot" size="320" style="--mc-spotlight-color: rgba(96,165,250,0.22)">
         <a href={next.href} class="pg pg-next" rel="next">
           <span class="pg-direction">Next →</span>
           <span class="pg-section">{SECTION_LABELS[next.section as keyof typeof SECTION_LABELS]}</span>
@@ -54,7 +54,7 @@ const next = idx >= 0 && idx < linear.length - 1 ? linear[idx + 1] : null
   .docs-pagination {
     margin: 4rem 0 1rem;
     padding-top: 2rem;
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid var(--mc-color-border);
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 1rem;
@@ -74,23 +74,23 @@ const next = idx >= 0 && idx < linear.length - 1 ? linear[idx + 1] : null
     flex-direction: column;
     gap: 0.35rem;
     padding: 1rem 1.25rem;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--mc-color-border);
     border-radius: 12px;
-    background: var(--color-surface);
-    color: var(--color-text);
+    background: var(--mc-color-surface);
+    color: var(--mc-color-text);
     text-decoration: none;
     transition: border-color 0.18s, transform 0.18s;
     min-height: 80px;
   }
 
   .pg-spot:hover .pg {
-    border-color: color-mix(in srgb, var(--color-accent) 50%, var(--color-border));
+    border-color: color-mix(in srgb, var(--mc-color-accent) 50%, var(--mc-color-border));
     transform: translateY(-2px);
     text-decoration: none;
   }
 
   .pg-empty {
-    border: 1px dashed var(--color-border);
+    border: 1px dashed var(--mc-color-border);
     background: transparent;
     pointer-events: none;
     opacity: 0;
@@ -104,7 +104,7 @@ const next = idx >= 0 && idx < linear.length - 1 ? linear[idx + 1] : null
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--color-accent);
+    color: var(--mc-color-accent);
   }
 
   .pg-section {
@@ -112,14 +112,14 @@ const next = idx >= 0 && idx < linear.length - 1 ? linear[idx + 1] : null
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.08em;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
   }
 
   .pg-name {
     font-family: var(--font-mono);
     font-size: 0.95rem;
     font-weight: 700;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     letter-spacing: -0.01em;
   }
 

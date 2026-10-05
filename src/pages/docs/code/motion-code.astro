@@ -230,12 +230,12 @@ animate(".hero", {
         copy
         code={`/* VS Code Dark+ */
 :root {
-  --code-keyword: #569cd6;
-  --code-string:  #ce9178;
-  --code-tag:     #4ec9b0;
-  --code-attr:    #9cdcfe;
-  --code-num:     #b5cea8;
-  --code-comment: #6a9955;
+  --mc-code-keyword: #569cd6;
+  --mc-code-string:  #ce9178;
+  --mc-code-tag:     #4ec9b0;
+  --mc-code-attr:    #9cdcfe;
+  --mc-code-num:     #b5cea8;
+  --mc-code-comment: #6a9955;
 }`}
       />
 
@@ -256,17 +256,17 @@ animate(".hero", {
 
       <h2>CSS variables</h2>
       <PropsTable nameLabel="Variable" rows={[
-        { name: '--code-keyword', type: 'color', default: '#7c3aed',          description: 'Keywords, booleans, null' },
-        { name: '--code-string',  type: 'color', default: '#16a34a',          description: 'String literals' },
-        { name: '--code-tag',     type: 'color', default: '#0369a1',          description: 'HTML tags, CSS selectors' },
-        { name: '--code-attr',    type: 'color', default: '#be123c',          description: 'Attributes, CSS properties, JSON keys, decorators' },
-        { name: '--code-num',     type: 'color', default: '#b45309',          description: 'Numbers and units' },
-        { name: '--code-comment', type: 'color', default: 'var(--color-muted)', description: 'Comments' },
-        { name: '--color-surface', type: 'color', default: '#ffffff', description: 'Background of the code area' },
-        { name: '--color-surface-2', type: 'color', default: '#f0f0f8', description: 'Background of the window and its title bar' },
-        { name: '--color-border', type: 'color', default: '#dddde8', description: 'Window border, title bar divider and copy button border' },
-        { name: '--color-muted', type: 'color', default: '#60608a', description: 'File name, copy button and typing cursor' },
-        { name: '--color-accent', type: 'color', default: '#2563eb', description: 'Copy button on hover' },
+        { name: '--mc-code-keyword', type: 'color', default: '#7c3aed',          description: 'Keywords, booleans, null' },
+        { name: '--mc-code-string',  type: 'color', default: '#16a34a',          description: 'String literals' },
+        { name: '--mc-code-tag',     type: 'color', default: '#0369a1',          description: 'HTML tags, CSS selectors' },
+        { name: '--mc-code-attr',    type: 'color', default: '#be123c',          description: 'Attributes, CSS properties, JSON keys, decorators' },
+        { name: '--mc-code-num',     type: 'color', default: '#b45309',          description: 'Numbers and units' },
+        { name: '--mc-code-comment', type: 'color', default: 'var(--mc-color-muted)', description: 'Comments' },
+        { name: '--mc-color-surface', type: 'color', default: '#ffffff', description: 'Background of the code area' },
+        { name: '--mc-color-surface-2', type: 'color', default: '#f0f0f8', description: 'Background of the window and its title bar' },
+        { name: '--mc-color-border', type: 'color', default: '#dddde8', description: 'Window border, title bar divider and copy button border' },
+        { name: '--mc-color-muted', type: 'color', default: '#60608a', description: 'File name, copy button and typing cursor' },
+        { name: '--mc-color-accent', type: 'color', default: '#2563eb', description: 'Copy button on hover' },
       ]} />
 
       <h2>Methods</h2>
@@ -326,9 +326,9 @@ animate(card, {
   .lang-pill {
     font-size: 0.75rem;
     font-family: var(--font-mono);
-    color: var(--color-muted);
-    background: var(--color-surface-2);
-    border: 1px solid var(--color-border);
+    color: var(--mc-color-muted);
+    background: var(--mc-color-surface-2);
+    border: 1px solid var(--mc-color-border);
     padding: 0.2rem 0.6rem;
     border-radius: 20px;
   }

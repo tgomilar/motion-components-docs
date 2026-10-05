@@ -22,13 +22,13 @@ import "../../../styles/docs.css";
       <h2>Preview</h2>
       <DocsPreview wide>
         <div class="spot-grid">
-          <motion-spotlight size="320" style="--spotlight-color: rgba(96,165,250,0.35)">
+          <motion-spotlight size="320" style="--mc-spotlight-color: rgba(96,165,250,0.35)">
             <div class="spot-card">Hover me</div>
           </motion-spotlight>
-          <motion-spotlight size="320" duration="0.8" style="--spotlight-color: rgba(244,114,182,0.32)">
+          <motion-spotlight size="320" duration="0.8" style="--mc-spotlight-color: rgba(244,114,182,0.32)">
             <div class="spot-card">Smoother lag</div>
           </motion-spotlight>
-          <motion-spotlight size="320" duration="0.15" style="--spotlight-color: rgba(250,204,21,0.32)">
+          <motion-spotlight size="320" duration="0.15" style="--mc-spotlight-color: rgba(250,204,21,0.32)">
             <div class="spot-card">Snappier</div>
           </motion-spotlight>
         </div>
@@ -47,7 +47,7 @@ import 'motion-components'               // or the whole library`}
       <CodeWindow
         filename="motion-spotlight.html"
         copy
-        code={`<motion-spotlight size="500" style="--spotlight-color: rgba(96,165,250,0.25)">
+        code={`<motion-spotlight size="500" style="--mc-spotlight-color: rgba(96,165,250,0.25)">
   <div class="card">…</div>
 </motion-spotlight>`}
       />
@@ -67,7 +67,7 @@ import 'motion-components'               // or the whole library`}
 
       <h2>CSS custom properties</h2>
       <PropsTable nameLabel="Property" rows={[
-        { name: '--spotlight-color', type: 'color', default: 'rgba(255,255,255,0.18)', description: 'Center color of the radial gradient' },
+        { name: '--mc-spotlight-color', type: 'color', default: 'rgba(255,255,255,0.18)', description: 'Center color of the radial gradient' },
       ]} />
 
       <h2>Accessibility</h2>
@@ -95,13 +95,13 @@ import 'motion-components'               // or the whole library`}
   }
 
   .spot-card {
-    border: 1px solid var(--color-border);
-    background: var(--color-surface);
+    border: 1px solid var(--mc-color-border);
+    background: var(--mc-color-surface);
     border-radius: 14px;
     padding: 2.5rem 1rem;
     text-align: center;
     font-weight: 600;
-    color: var(--color-text);
+    color: var(--mc-color-text);
   }
 
   motion-spotlight {

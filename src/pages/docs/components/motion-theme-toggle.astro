@@ -133,7 +133,7 @@ import 'motion-components'                       // or the whole library`}
       <p>The morphing glyph is its own primitive, <code>&lt;motion-theme-icon&gt;</code>, so you can use it as a theme indicator anywhere.</p>
       <DocsPreview>
         <div class="demo-row icon-row">
-          <motion-theme-icon id="solo-icon" mode="light" style="--theme-icon-size: 3rem"></motion-theme-icon>
+          <motion-theme-icon id="solo-icon" mode="light" style="--mc-theme-icon-size: 3rem"></motion-theme-icon>
           <div class="icon-buttons">
             <button class="demo-btn demo-btn--accent" data-icon-mode="light">Light</button>
             <button class="demo-btn demo-btn--accent" data-icon-mode="dark">Dark</button>
@@ -242,12 +242,12 @@ document.querySelector('motion-theme-icon').mode = 'dark'`}
       <PropsTable
         nameLabel="Property"
         rows={[
-          { name: "--theme-toggle-surface", type: "color", default: "currentColor 6%", description: "Background of the track, segmented group and menu trigger" },
-          { name: "--theme-toggle-border", type: "color", default: "currentColor 16%", description: "Border color of the controls" },
-          { name: "--theme-toggle-accent", type: "color", default: "currentColor 14%", description: "Selected segment, switch thumb and active menu item" },
-          { name: "--theme-toggle-menu-bg", type: "color", default: "Canvas", description: "Drop-down menu background" },
-          { name: "--theme-toggle-radius", type: "length", default: "999px", description: "Corner radius of the controls" },
-          { name: "--theme-icon-size", type: "length", default: "1.25em", description: "Icon size (1.5em on a standalone motion-theme-icon)" },
+          { name: "--mc-theme-toggle-surface", type: "color", default: "currentColor 6%", description: "Background of the track, segmented group and menu trigger" },
+          { name: "--mc-theme-toggle-border", type: "color", default: "currentColor 16%", description: "Border color of the controls" },
+          { name: "--mc-theme-toggle-accent", type: "color", default: "currentColor 14%", description: "Selected segment, switch thumb and active menu item" },
+          { name: "--mc-theme-toggle-menu-bg", type: "color", default: "Canvas", description: "Drop-down menu background" },
+          { name: "--mc-theme-toggle-radius", type: "length", default: "999px", description: "Corner radius of the controls" },
+          { name: "--mc-theme-icon-size", type: "length", default: "1.25em", description: "Icon size (1.5em on a standalone motion-theme-icon)" },
         ]}
       />
 
@@ -379,14 +379,14 @@ document.querySelector('motion-theme-icon').mode = 'dark'`}
   }
 
   .site-hint {
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     font-size: 0.9rem;
   }
 
   .icon-row {
     justify-content: center;
     padding: 1rem;
-    color: var(--color-text);
+    color: var(--mc-color-text);
   }
 
   .icon-buttons {

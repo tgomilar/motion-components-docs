@@ -104,7 +104,7 @@ const activeSection = SECTION_ORDER.find(s => sections[s]?.some(item => item.hre
 <style>
   aside {
     padding: 2rem 1rem 0 0;
-    border-right: 1px solid var(--color-border);
+    border-right: 1px solid var(--mc-color-border);
     position: sticky;
     top: 56px;
     height: calc(100vh - 56px);
@@ -118,14 +118,14 @@ const activeSection = SECTION_ORDER.find(s => sections[s]?.some(item => item.hre
     align-items: center;
     gap: 0.3rem;
     font-size: 0.85rem;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     text-decoration: none;
     margin-bottom: 1.5rem;
     transition: color 0.15s;
     flex-shrink: 0;
   }
 
-  .back:hover { color: var(--color-text); }
+  .back:hover { color: var(--mc-color-text); }
 
   nav {
     display: flex;
@@ -134,13 +134,13 @@ const activeSection = SECTION_ORDER.find(s => sections[s]?.some(item => item.hre
     min-height: 0;
     overflow-y: auto;
     scrollbar-width: thin;
-    scrollbar-color: var(--color-border) transparent;
+    scrollbar-color: var(--mc-color-border) transparent;
     padding-bottom: 1rem;
   }
 
   nav::-webkit-scrollbar { width: 3px; }
   nav::-webkit-scrollbar-track { background: transparent; }
-  nav::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 2px; }
+  nav::-webkit-scrollbar-thumb { background: var(--mc-color-border); border-radius: 2px; }
 
   /* ── Section toggle ── */
   details {
@@ -164,7 +164,7 @@ const activeSection = SECTION_ORDER.find(s => sections[s]?.some(item => item.hre
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     flex: 1;
   }
 
@@ -172,14 +172,14 @@ const activeSection = SECTION_ORDER.find(s => sections[s]?.some(item => item.hre
     font-size: 0.6rem;
     font-weight: 600;
     font-family: var(--font-mono);
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     line-height: 1;
   }
 
   .chevron {
     width: 11px;
     height: 11px;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     opacity: 0.4;
     transition: transform 0.18s ease;
     flex-shrink: 0;
@@ -193,17 +193,17 @@ const activeSection = SECTION_ORDER.find(s => sections[s]?.some(item => item.hre
   .nav-item {
     display: block;
     font-size: 0.875rem;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     padding: 0.28rem 0 0.28rem 0.75rem;
     text-decoration: none;
     transition: color 0.12s;
     line-height: 1.4;
   }
 
-  .nav-item:hover { color: var(--color-text); }
+  .nav-item:hover { color: var(--mc-color-text); }
 
   .nav-item.active {
-    color: var(--color-text);
+    color: var(--mc-color-text);
     font-weight: 600;
   }
 
@@ -211,7 +211,7 @@ const activeSection = SECTION_ORDER.find(s => sections[s]?.some(item => item.hre
   .footer-nav {
     flex-shrink: 0;
     padding: 1rem 0 2.5rem;
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid var(--mc-color-border);
   }
 
   .footer-label {
@@ -219,14 +219,14 @@ const activeSection = SECTION_ORDER.find(s => sections[s]?.some(item => item.hre
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     margin: 0 0 0.4rem;
   }
 
   .footer-link {
     display: block;
     font-size: 0.875rem;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     padding: 0.28rem 0;
     text-decoration: none;
     transition: color 0.12s;
@@ -234,7 +234,7 @@ const activeSection = SECTION_ORDER.find(s => sections[s]?.some(item => item.hre
 
   .footer-link:hover,
   .footer-link.active {
-    color: var(--color-text);
+    color: var(--mc-color-text);
   }
 
   .footer-link.active {
@@ -251,13 +251,13 @@ const activeSection = SECTION_ORDER.find(s => sections[s]?.some(item => item.hre
     all: unset;
     display: none;
     cursor: pointer;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     padding: 0.25rem;
     border-radius: 6px;
     transition: color 0.15s;
   }
 
-  .sidebar-close:hover { color: var(--color-text); }
+  .sidebar-close:hover { color: var(--mc-color-text); }
 
   .sidebar-toggle {
     display: none;
@@ -267,13 +267,13 @@ const activeSection = SECTION_ORDER.find(s => sections[s]?.some(item => item.hre
     z-index: 40;
     align-items: center;
     gap: 0.4rem;
-    background: var(--color-yellow);
-    border: 1px solid var(--color-yellow);
+    background: var(--mc-color-yellow);
+    border: 1px solid var(--mc-color-yellow);
     border-radius: 10px;
     padding: 0.55rem 0.85rem;
     font-size: 0.82rem;
     font-weight: 600;
-    color: var(--color-bg);
+    color: var(--mc-color-bg);
     cursor: pointer;
     font-family: var(--font-sans);
     box-shadow: 0 2px 12px rgba(0,0,0,0.12);
@@ -308,8 +308,8 @@ const activeSection = SECTION_ORDER.find(s => sections[s]?.some(item => item.hre
       bottom: 0;
       z-index: 52;
       width: 280px;
-      background: var(--color-bg);
-      border-right: 1px solid var(--color-border);
+      background: var(--mc-color-bg);
+      border-right: 1px solid var(--mc-color-border);
       padding: 1.25rem 0.75rem 1rem;
       transform: translateX(-100%);
       transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);

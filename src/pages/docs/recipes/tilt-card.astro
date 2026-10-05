@@ -20,7 +20,7 @@ import "../../../styles/docs.css";
       <DocsPreview wide>
         <div class="tilt-demo">
           <motion-tilt max="15" scale="1.02">
-            <motion-spotlight size="300" style="--spotlight-color: rgba(96,165,250,0.15)">
+            <motion-spotlight size="300" style="--mc-spotlight-color: rgba(96,165,250,0.15)">
               <div class="tilt-card">
                 <div class="card-icon">✦</div>
                 <h3>Analytics</h3>
@@ -36,7 +36,7 @@ import "../../../styles/docs.css";
         filename="tilt-card.html"
         copy
         code={`<motion-tilt max="15" scale="1.02">
-  <motion-spotlight size="300" style="--spotlight-color: rgba(96,165,250,0.15)">
+  <motion-spotlight size="300" style="--mc-spotlight-color: rgba(96,165,250,0.15)">
     <div class="card">
       <div class="card-icon">✦</div>
       <h3>Analytics</h3>
@@ -65,7 +65,7 @@ import "../../../styles/docs.css";
         filename="spotlight.html"
         copy
         compact
-        code={`<motion-spotlight size="300" style="--spotlight-color: rgba(96,165,250,0.15)">
+        code={`<motion-spotlight size="300" style="--mc-spotlight-color: rgba(96,165,250,0.15)">
   <!-- radial gradient tracks the cursor -->
 </motion-spotlight>`}
       />
@@ -79,7 +79,7 @@ import "../../../styles/docs.css";
         copy
         compact
         code={`<motion-tilt max="8" scale="1.01">
-  <motion-spotlight size="250" style="--spotlight-color: rgba(255,255,255,0.06)">
+  <motion-spotlight size="250" style="--mc-spotlight-color: rgba(255,255,255,0.06)">
     <div class="card">...</div>
   </motion-spotlight>
 </motion-tilt>`}
@@ -91,7 +91,7 @@ import "../../../styles/docs.css";
         copy
         compact
         code={`<motion-tilt max="20" scale="1.04" gloss>
-  <motion-spotlight size="400" style="--spotlight-color: rgba(96,165,250,0.25)">
+  <motion-spotlight size="400" style="--mc-spotlight-color: rgba(96,165,250,0.25)">
     <div class="card">...</div>
   </motion-spotlight>
 </motion-tilt>`}
@@ -105,8 +105,8 @@ import "../../../styles/docs.css";
         copy
         compact
         code={`.card {
-  background: var(--color-surface);
-  border: 1px solid var(--color-border);
+  background: var(--mc-color-surface);
+  border: 1px solid var(--mc-color-border);
   border-radius: 16px;
   padding: 2rem;
   width: 320px;
@@ -137,14 +137,14 @@ import "../../../styles/docs.css";
   }
 
   .lead {
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     font-size: 1.05rem;
     margin-bottom: 2rem;
     line-height: 1.7;
   }
 
   .section-lead {
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     font-size: 0.95rem;
     line-height: 1.7;
     margin-bottom: 1.5rem;
@@ -153,8 +153,8 @@ import "../../../styles/docs.css";
   .section-lead code {
     font-family: var(--font-mono), monospace;
     font-size: 0.82rem;
-    color: var(--color-accent);
-    background: var(--color-accent-dim);
+    color: var(--mc-color-accent);
+    background: var(--mc-color-accent-dim);
     padding: 0.15rem 0.4rem;
     border-radius: 4px;
   }
@@ -167,8 +167,8 @@ import "../../../styles/docs.css";
   }
 
   .tilt-card {
-    background: var(--color-surface);
-    border: 1px solid var(--color-border);
+    background: var(--mc-color-surface);
+    border: 1px solid var(--mc-color-border);
     border-radius: 16px;
     padding: 2rem;
     width: 300px;
@@ -189,7 +189,7 @@ import "../../../styles/docs.css";
   }
 
   .tilt-card p {
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     font-size: 0.9rem;
     line-height: 1.6;
     margin: 0;

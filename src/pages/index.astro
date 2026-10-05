@@ -10,9 +10,9 @@ const iconFiles = import.meta.glob<string>("../assets/home-icons/*.svg", { query
 const MOBILE_ICONS = new Set(["heart", "bell", "rocket", "sun", "mail", "cake", "star", "gift", "puzzle-piece", "shield-check"]);
 
 const iconStyle = (color?: string, look?: string, bg?: string) => {
-  if (look === "solid") return `--icon-color: ${color}; background: ${bg}; padding: 0.6rem; border-radius: 14px`;
-  if (look === "tinted") return `--icon-color: ${color}; --icon-fill: ${color}4d`;
-  return color ? `--icon-color: ${color}` : "";
+  if (look === "solid") return `--mc-icon-color: ${color}; background: ${bg}; padding: 0.6rem; border-radius: 14px`;
+  if (look === "tinted") return `--mc-icon-color: ${color}; --mc-icon-fill: ${color}4d`;
+  return color ? `--mc-icon-color: ${color}` : "";
 };
 
 const iconWall = [
@@ -27,7 +27,7 @@ const iconWall = [
   animation: animation === "draw" || look === "filled" ? animation : `draw ${animation}`,
   look: look ?? "outline",
   style: iconStyle(color, look, bg),
-  tileStyle: look === "solid" ? `--icon-color: ${color}; --tile-bg: ${bg}; background: ${bg}` : iconStyle(color, look),
+  tileStyle: look === "solid" ? `--mc-icon-color: ${color}; --tile-bg: ${bg}; background: ${bg}` : iconStyle(color, look),
   inline: i === 0,
   src: i === 0 ? "" : look === "filled" ? `https://cdn.jsdelivr.net/npm/heroicons@2/24/solid/${name}.svg` : `https://cdn.jsdelivr.net/npm/lucide-static@1/icons/${name}.svg`,
   svg: i === 0 ? HEART_SVG : iconFiles[`../assets/home-icons/${look === "filled" ? "heroicons" : "lucide"}-${name}.svg`],
@@ -668,7 +668,7 @@ import 'motion-components'
           <p class="cta-sub">Drop a tag in your HTML and you're done.</p>
           <div class="cta-actions">
             <motion-hover>
-              <a href="/docs/" class="btn-primary"><motion-icon set:html={iconFiles["../assets/home-icons/lucide-book-open.svg"]} animation="draw bounce" style="--icon-fill: color-mix(in srgb, currentColor 35%, transparent)"></motion-icon>Read the docs</a>
+              <a href="/docs/" class="btn-primary"><motion-icon set:html={iconFiles["../assets/home-icons/lucide-book-open.svg"]} animation="draw bounce" style="--mc-icon-fill: color-mix(in srgb, currentColor 35%, transparent)"></motion-icon>Read the docs</a>
             </motion-hover>
             <motion-hover>
               <a href="https://github.com/tgomilar/motion-components" class="btn-ghost" target="_blank" rel="noopener"><motion-icon class="btn-star" set:html={iconFiles["../assets/home-icons/lucide-star.svg"]} animation="draw rotate"></motion-icon>Star on GitHub</a>
@@ -855,7 +855,7 @@ import 'motion-components'
       top: 3rem;
       right: 4rem;
       text-decoration: none;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
       font-size: 0.9rem;
       font-weight: 700;
       letter-spacing: 0.12em;
@@ -874,9 +874,9 @@ import 'motion-components'
     }
 
     .hero-circle-icon {
-      --icon-size: 2.5rem;
-      --icon-color: var(--color-yellow);
-      --icon-fill: var(--color-yellow);
+      --mc-icon-size: 2.5rem;
+      --mc-icon-color: var(--mc-color-yellow);
+      --mc-icon-fill: var(--mc-color-yellow);
     }
 
     .hero-badge {
@@ -885,8 +885,8 @@ import 'motion-components'
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: var(--color-accent);
-      background: var(--color-accent-dim);
+      color: var(--mc-color-accent);
+      background: var(--mc-color-accent-dim);
       padding: 0.3rem 0.85rem;
       border-radius: 99px;
       margin-bottom: 2rem;
@@ -905,20 +905,20 @@ import 'motion-components'
     }
 
     h1 .accent {
-      color: var(--color-accent);
+      color: var(--mc-color-accent);
       display: block;
     }
 
     .hero-sub {
       font-size: 1.15rem;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
       max-width: 480px;
       margin-bottom: 2.5rem;
       line-height: 1.75;
     }
 
     .motion {
-      color: var(--color-yellow);
+      color: var(--mc-color-yellow);
       font-weight: 600;
     }
 
@@ -947,19 +947,19 @@ import 'motion-components'
 
     .btn-primary,
     .btn-ghost {
-      --icon-size: 1.15em;
+      --mc-icon-size: 1.15em;
       gap: 0.55rem;
       align-items: center;
     }
 
     .btn-star {
-      --icon-color: var(--color-yellow);
-      --icon-fill: color-mix(in srgb, var(--color-yellow) 35%, transparent);
+      --mc-icon-color: var(--mc-color-yellow);
+      --mc-icon-fill: color-mix(in srgb, var(--mc-color-yellow) 35%, transparent);
     }
 
     .btn-primary {
       display: inline-flex;
-      background: var(--color-accent);
+      background: var(--mc-color-accent);
       color: #fff;
       padding: 0.8rem 1.75rem;
       border-radius: 10px;
@@ -971,10 +971,10 @@ import 'motion-components'
     .btn-ghost {
       display: inline-flex;
       background: transparent;
-      border: 1px solid var(--color-yellow);
+      border: 1px solid var(--mc-color-yellow);
       padding: 0.8rem 1.75rem;
       border-radius: 10px;
-      color: var(--color-text);
+      color: var(--mc-color-text);
       font-weight: 600;
       font-size: 0.95rem;
       text-decoration: none;
@@ -987,7 +987,7 @@ import 'motion-components'
 
     .install-label {
       font-size: 0.78rem;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
       font-weight: 500;
     }
 
@@ -1007,7 +1007,7 @@ import 'motion-components'
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.14em;
-      color: var(--color-accent);
+      color: var(--mc-color-accent);
       margin-bottom: 0.75rem;
     }
 
@@ -1020,7 +1020,7 @@ import 'motion-components'
 
     .section-sub {
       font-size: 1rem;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
     }
 
     /* ── Ticker ───────────────────────────── */
@@ -1037,9 +1037,9 @@ import 'motion-components'
 
     .ticker-track {
       position: relative;
-      border-top: 1px solid var(--color-border);
-      border-bottom: 1px solid var(--color-border);
-      background: var(--color-surface-2);
+      border-top: 1px solid var(--mc-color-border);
+      border-bottom: 1px solid var(--mc-color-border);
+      background: var(--mc-color-surface-2);
       overflow: hidden;
     }
 
@@ -1047,7 +1047,7 @@ import 'motion-components'
       content: "";
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse 60% 100% at 50% 50%, var(--color-surface-2) 0%, transparent 70%);
+      background: radial-gradient(ellipse 60% 100% at 50% 50%, var(--mc-color-surface-2) 0%, transparent 70%);
       pointer-events: none;
     }
 
@@ -1055,7 +1055,7 @@ import 'motion-components'
       content: "";
       position: absolute;
       inset: 0;
-      background: linear-gradient(to right, var(--color-surface-2) 0%, transparent 8%, transparent 92%, var(--color-surface-2) 100%);
+      background: linear-gradient(to right, var(--mc-color-surface-2) 0%, transparent 8%, transparent 92%, var(--mc-color-surface-2) 100%);
       pointer-events: none;
       z-index: 1;
     }
@@ -1068,26 +1068,26 @@ import 'motion-components'
       display: inline-flex;
       align-items: center;
       padding: 0.35rem 0.875rem;
-      border: 1px solid var(--color-border);
+      border: 1px solid var(--mc-color-border);
       border-radius: 99px;
       font-size: 0.82rem;
       font-weight: 500;
-      color: var(--color-text);
-      background: var(--color-surface-2);
+      color: var(--mc-color-text);
+      background: var(--mc-color-surface-2);
       white-space: nowrap;
     }
 
     .chip--yellow {
-      border-color: color-mix(in srgb, var(--color-yellow) 35%, var(--color-border));
-      background: color-mix(in srgb, var(--color-yellow) 10%, var(--color-surface-2));
-      color: var(--color-yellow);
+      border-color: color-mix(in srgb, var(--mc-color-yellow) 35%, var(--mc-color-border));
+      background: color-mix(in srgb, var(--mc-color-yellow) 10%, var(--mc-color-surface-2));
+      color: var(--mc-color-yellow);
       font-weight: 600;
     }
 
     /* ── Cards (shared) ───────────────────── */
     .card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
+      background: var(--mc-color-surface);
+      border: 1px solid var(--mc-color-border);
       border-radius: 16px;
       padding: 1.5rem;
       display: flex;
@@ -1157,8 +1157,8 @@ import 'motion-components'
       align-items: center;
       justify-content: center;
       min-height: 120px;
-      background: var(--color-bg);
-      border: 1px solid var(--color-border);
+      background: var(--mc-color-bg);
+      border: 1px solid var(--mc-color-border);
       border-radius: 10px;
       padding: 1.5rem;
       box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.05);
@@ -1186,7 +1186,7 @@ import 'motion-components'
     }
 
     .card-link:hover .card {
-      border-color: color-mix(in srgb, var(--color-accent) 45%, var(--color-border));
+      border-color: color-mix(in srgb, var(--mc-color-accent) 45%, var(--mc-color-border));
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.08),
         0 4px 16px rgba(0, 0, 0, 0.07),
@@ -1195,7 +1195,7 @@ import 'motion-components'
 
     .card-desc {
       font-size: 0.82rem;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
       line-height: 1.5;
     }
 
@@ -1203,8 +1203,8 @@ import 'motion-components'
       display: flex;
       align-items: center;
       gap: 0.6rem;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
+      background: var(--mc-color-surface);
+      border: 1px solid var(--mc-color-border);
       border-radius: 99px;
       padding: 0.55rem 1.1rem;
       font-size: 0.88rem;
@@ -1217,12 +1217,12 @@ import 'motion-components'
       width: 7px;
       height: 7px;
       border-radius: 50%;
-      background: var(--color-accent);
+      background: var(--mc-color-accent);
       flex-shrink: 0;
     }
 
     .press-btn {
-      background: var(--color-accent);
+      background: var(--mc-color-accent);
       color: #fff;
       border: none;
       padding: 0.7rem 1.4rem;
@@ -1233,13 +1233,13 @@ import 'motion-components'
     }
 
     .reveal-block {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
+      background: var(--mc-color-surface);
+      border: 1px solid var(--mc-color-border);
       border-radius: 8px;
       padding: 0.15rem 0.25rem;
       font-size: 0.82rem;
       font-weight: 500;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
       text-align: center;
       width: 100%;
     }
@@ -1252,22 +1252,22 @@ import 'motion-components'
     }
 
     .stagger-row {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
+      background: var(--mc-color-surface);
+      border: 1px solid var(--mc-color-border);
       border-radius: 7px;
       padding: 0.45rem 0.875rem;
       font-size: 0.82rem;
       font-weight: 500;
-      color: var(--color-text);
+      color: var(--mc-color-text);
     }
 
     .replay-btn {
       background: transparent;
-      border: 1px solid var(--color-border);
+      border: 1px solid var(--mc-color-border);
       border-radius: 6px;
       padding: 0.25rem 0.65rem;
       font-size: 0.75rem;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
       cursor: pointer;
       font-family: var(--font-sans);
       transition:
@@ -1277,13 +1277,13 @@ import 'motion-components'
     }
 
     .replay-btn:hover {
-      color: var(--color-accent);
-      border-color: var(--color-accent);
+      color: var(--mc-color-accent);
+      border-color: var(--mc-color-accent);
     }
 
     .tilt-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
+      background: var(--mc-color-surface);
+      border: 1px solid var(--mc-color-border);
       border-radius: 12px;
       padding: 1.5rem 2rem;
       cursor: default;
@@ -1293,7 +1293,7 @@ import 'motion-components'
     .tilt-label {
       font-weight: 700;
       font-size: 0.9rem;
-      color: var(--color-text);
+      color: var(--mc-color-text);
     }
 
     /* ── Text grid ────────────────────────── */
@@ -1333,7 +1333,7 @@ import 'motion-components'
       font-size: 1.3rem;
       font-weight: 800;
       letter-spacing: -0.02em;
-      color: var(--color-text);
+      color: var(--mc-color-text);
       text-align: center;
       line-height: 1.3;
     }
@@ -1342,7 +1342,7 @@ import 'motion-components'
       font-size: 1.3rem;
       font-weight: 700;
       letter-spacing: -0.02em;
-      color: var(--color-text);
+      color: var(--mc-color-text);
     }
 
     .marks-text {
@@ -1351,19 +1351,19 @@ import 'motion-components'
       letter-spacing: -0.01em;
       line-height: 2;
       white-space: nowrap;
-      color: var(--color-text);
+      color: var(--mc-color-text);
       text-align: center;
     }
 
     .marks-wave {
-      --mc-mark-color: var(--color-accent);
+      --mc-mark-color: var(--mc-color-accent);
     }
 
     .swap-text {
       font-size: 1.3rem;
       font-weight: 800;
       letter-spacing: -0.02em;
-      color: var(--color-text);
+      color: var(--mc-color-text);
       text-align: center;
       line-height: 1.3;
     }
@@ -1378,21 +1378,21 @@ import 'motion-components'
       font-size: 2.5rem;
       font-weight: 800;
       letter-spacing: -0.04em;
-      color: var(--color-accent);
+      color: var(--mc-color-accent);
       line-height: 1;
     }
 
     .counter-label {
       font-size: 0.9rem;
       font-weight: 600;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
     }
 
     .scramble-text {
       font-size: 1.3rem;
       font-weight: 700;
       letter-spacing: -0.02em;
-      color: var(--color-text);
+      color: var(--mc-color-text);
       font-family: var(--font-mono);
       cursor: default;
     }
@@ -1401,7 +1401,7 @@ import 'motion-components'
       font-size: 1.5rem;
       font-weight: 800;
       letter-spacing: -0.03em;
-      color: var(--color-text);
+      color: var(--mc-color-text);
       margin: 0;
       line-height: 1.2;
       display: flex;
@@ -1417,13 +1417,13 @@ import 'motion-components'
       margin-top: 2rem;
       font-size: 0.9rem;
       font-weight: 500;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
       text-decoration: none;
       transition: color 0.15s;
     }
 
     .view-all-link:hover {
-      color: var(--color-text);
+      color: var(--mc-color-text);
     }
 
     .replay-row {
@@ -1433,7 +1433,7 @@ import 'motion-components'
 
     .card-hint {
       font-size: 0.78rem;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
       text-align: center;
       margin: 0;
     }
@@ -1462,7 +1462,7 @@ import 'motion-components'
 
     .usage-sub {
       font-size: 0.95rem;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
       line-height: 1.7;
       margin-bottom: 2rem;
     }
@@ -1484,8 +1484,8 @@ import 'motion-components'
       width: 28px;
       height: 28px;
       border-radius: 50%;
-      background: var(--color-accent-dim);
-      color: var(--color-accent);
+      background: var(--mc-color-accent-dim);
+      color: var(--mc-color-accent);
       font-size: 0.78rem;
       font-weight: 700;
       display: flex;
@@ -1498,14 +1498,14 @@ import 'motion-components'
     .steps strong {
       font-size: 0.9rem;
       font-weight: 600;
-      color: var(--color-text);
+      color: var(--mc-color-text);
       display: block;
       margin-bottom: 0.3rem;
     }
 
     .steps p {
       font-size: 0.85rem;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
       line-height: 1.6;
       margin: 0;
     }
@@ -1530,16 +1530,16 @@ import 'motion-components'
 
     .compat-label {
       font-size: 0.78rem;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
       margin-right: 0.25rem;
     }
 
     .compat-chip {
       font-size: 0.75rem;
       font-weight: 600;
-      color: var(--color-muted);
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
+      color: var(--mc-color-muted);
+      background: var(--mc-color-surface);
+      border: 1px solid var(--mc-color-border);
       border-radius: 99px;
       padding: 0.2rem 0.65rem;
     }
@@ -1552,7 +1552,7 @@ import 'motion-components'
     .theme-section .section-sub code {
       font-family: var(--font-mono);
       font-size: 0.9em;
-      color: var(--color-text);
+      color: var(--mc-color-text);
     }
 
     .theme-showcase {
@@ -1609,7 +1609,7 @@ import 'motion-components'
     }
 
     .theme-spot {
-      --spotlight-color: color-mix(in srgb, var(--color-accent) 16%, transparent);
+      --mc-spotlight-color: color-mix(in srgb, var(--mc-color-accent) 16%, transparent);
     }
 
     .theme-demo-title {
@@ -1621,8 +1621,8 @@ import 'motion-components'
     }
 
     .theme-demo-title motion-theme-icon {
-      --theme-icon-size: 1.25rem;
-      color: var(--color-accent);
+      --mc-theme-icon-size: 1.25rem;
+      color: var(--mc-color-accent);
     }
 
     .theme-demo-row {
@@ -1638,7 +1638,7 @@ import 'motion-components'
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background: var(--color-accent);
+      background: var(--mc-color-accent);
       flex: none;
     }
 
@@ -1646,7 +1646,7 @@ import 'motion-components'
       list-style: none;
       display: grid;
       gap: 0.9rem;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
       line-height: 1.55;
     }
 
@@ -1658,8 +1658,8 @@ import 'motion-components'
     }
 
     .theme-points motion-icon {
-      --icon-size: 1.25rem;
-      --icon-color: var(--color-accent);
+      --mc-icon-size: 1.25rem;
+      --mc-icon-color: var(--mc-color-accent);
       margin-top: 0.15rem;
     }
 
@@ -1669,7 +1669,7 @@ import 'motion-components'
     }
 
     .theme-points strong {
-      color: var(--color-text);
+      color: var(--mc-color-text);
     }
 
     .theme-points code {
@@ -1685,7 +1685,7 @@ import 'motion-components'
     .icons-section .section-sub code {
       font-family: var(--font-mono);
       font-size: 0.9em;
-      color: var(--color-text);
+      color: var(--mc-color-text);
     }
 
     .icons-showcase {
@@ -1724,27 +1724,27 @@ import 'motion-components'
       aspect-ratio: 1;
       padding: 22%;
       border-radius: 14px;
-      color: var(--color-muted);
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
+      color: var(--mc-color-muted);
+      background: var(--mc-color-surface);
+      border: 1px solid var(--mc-color-border);
       cursor: pointer;
       transition: border-color 0.2s, box-shadow 0.2s;
     }
 
     .icon-tile motion-icon {
-      --icon-size: 100%;
+      --mc-icon-size: 100%;
       width: 100%;
       height: 100%;
     }
 
     .icon-tile:hover,
     .icon-tile:focus-visible {
-      border-color: var(--icon-color, var(--color-accent));
+      border-color: var(--mc-icon-color, var(--mc-color-accent));
     }
 
     .icon-tile[aria-pressed="true"] {
-      border-color: var(--icon-color, var(--color-accent));
-      box-shadow: 0 0 0 3px color-mix(in srgb, var(--icon-color, var(--color-accent)) 20%, transparent);
+      border-color: var(--mc-icon-color, var(--mc-color-accent));
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--mc-icon-color, var(--mc-color-accent)) 20%, transparent);
     }
 
     .icon-tile--solid,
@@ -1754,7 +1754,7 @@ import 'motion-components'
     }
 
     .icon-tile--solid[aria-pressed="true"] {
-      box-shadow: 0 0 0 3px var(--color-bg, #fff), 0 0 0 5px var(--tile-bg);
+      box-shadow: 0 0 0 3px var(--mc-color-bg, #fff), 0 0 0 5px var(--tile-bg);
     }
 
     .icon-inspector {
@@ -1769,25 +1769,25 @@ import 'motion-components'
       gap: 1rem;
       padding: 2.25rem 1rem 1.5rem;
       border-radius: 20px;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      color: var(--color-text);
+      background: var(--mc-color-surface);
+      border: 1px solid var(--mc-color-border);
+      color: var(--mc-color-text);
     }
 
     .icon-preview motion-icon {
-      --icon-size: 5rem;
+      --mc-icon-size: 5rem;
     }
 
     .icon-preview span {
       font-family: var(--font-mono);
       font-size: 0.8rem;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
     }
 
     .icons-hint {
       margin-top: 1.5rem;
       font-size: 0.85rem;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
     }
 
     .icons-links {
@@ -1855,9 +1855,9 @@ import 'motion-components'
     }
 
     .flip-face--ask {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      color: var(--color-text);
+      background: var(--mc-color-surface);
+      border: 1px solid var(--mc-color-border);
+      color: var(--mc-color-text);
       justify-content: space-between;
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.06),
@@ -1865,12 +1865,12 @@ import 'motion-components'
     }
 
     .flip-face--ans {
-      background: linear-gradient(150deg, var(--color-accent), color-mix(in srgb, var(--color-accent) 55%, #1e3a8a));
+      background: linear-gradient(150deg, var(--mc-color-accent), color-mix(in srgb, var(--mc-color-accent) 55%, #1e3a8a));
       color: white;
       justify-content: space-between;
       box-shadow:
         inset 0 1px 0 rgba(255, 255, 255, 0.18),
-        0 12px 32px color-mix(in srgb, var(--color-accent) 30%, transparent);
+        0 12px 32px color-mix(in srgb, var(--mc-color-accent) 30%, transparent);
     }
 
     .flip-eyebrow {
@@ -1878,7 +1878,7 @@ import 'motion-components'
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.14em;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
     }
 
     .flip-eyebrow--inv {
@@ -1890,13 +1890,13 @@ import 'motion-components'
       font-weight: 700;
       line-height: 1.32;
       letter-spacing: -0.01em;
-      color: var(--color-text);
+      color: var(--mc-color-text);
       margin: 0;
     }
 
     .flip-q em {
       font-style: normal;
-      color: var(--color-accent);
+      color: var(--mc-color-accent);
     }
 
     .flip-meta {
@@ -1904,7 +1904,7 @@ import 'motion-components'
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
     }
 
     .flip-tag-big {
@@ -1920,9 +1920,9 @@ import 'motion-components'
     }
 
     .flip-spark {
-      --sparkline-width: 100%;
-      --sparkline-height: 3rem;
-      color: var(--color-accent);
+      --mc-sparkline-width: 100%;
+      --mc-sparkline-height: 3rem;
+      color: var(--mc-color-accent);
     }
 
     .flip-cat-big {
@@ -1965,9 +1965,9 @@ import 'motion-components'
     }
 
     .feature {
-      background: var(--color-surface);
+      background: var(--mc-color-surface);
       padding: 1.75rem;
-      border: 1px solid var(--color-border);
+      border: 1px solid var(--mc-color-border);
       border-radius: 14px;
       cursor: default;
       height: 100%;
@@ -1987,8 +1987,8 @@ import 'motion-components'
       width: 36px;
       height: 36px;
       border-radius: 8px;
-      background: var(--color-accent-dim);
-      color: var(--color-accent);
+      background: var(--mc-color-accent-dim);
+      color: var(--mc-color-accent);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1999,11 +1999,11 @@ import 'motion-components'
       font-size: 1rem;
       font-weight: 600;
       margin-bottom: 0.5rem;
-      color: var(--color-text);
+      color: var(--mc-color-text);
     }
 
     .feature p {
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
       font-size: 0.88rem;
       line-height: 1.65;
     }
@@ -2053,12 +2053,12 @@ import 'motion-components'
     }
 
     .cta-heading motion-liquid {
-      color: var(--color-yellow);
+      color: var(--mc-color-yellow);
     }
 
     .cta-sub {
       font-size: 1rem;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
       margin-bottom: 2.5rem;
       line-height: 1.7;
     }

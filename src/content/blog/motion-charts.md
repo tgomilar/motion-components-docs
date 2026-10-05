@@ -116,10 +116,10 @@ Put it next to `motion-counter` and you have a stat tile: a number that counts u
 
 ## Colors
 
-The eight series colors are chosen to stay apart for readers with color blindness, in light mode and in dark mode. Each mode has its own set of colors, not an automatic inversion. Override them with `--chart-1` to `--chart-8`:
+The eight series colors are chosen to stay apart for readers with color blindness, in light mode and in dark mode. Each mode has its own set of colors, not an automatic inversion. Override them with `--mc-chart-1` to `--mc-chart-8`:
 
 ```html
-<motion-chart values="8, 14, 11" labels="A, B, C" style="--chart-1: #16a34a"></motion-chart>
+<motion-chart values="8, 14, 11" labels="A, B, C" style="--mc-chart-1: #16a34a"></motion-chart>
 ```
 
 Text, axes and gridlines use the text color, so the chart fits any theme.

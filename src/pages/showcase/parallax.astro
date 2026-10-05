@@ -142,7 +142,7 @@ import Layout from '../../layouts/Layout.astro'
   }
 
   .showcase {
-    color: var(--color-text);
+    color: var(--mc-color-text);
     min-height: 100vh;
     overflow-x: hidden;
   }
@@ -153,7 +153,7 @@ import Layout from '../../layouts/Layout.astro'
     font-weight: 600;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--color-yellow);
+    color: var(--mc-color-yellow);
     opacity: 0.7;
   }
   .spectrum-title {
@@ -161,7 +161,7 @@ import Layout from '../../layouts/Layout.astro'
     font-weight: 900;
     letter-spacing: -0.02em;
     line-height: 0.88;
-    color: var(--color-text);
+    color: var(--mc-color-text);
   }
 
   /* ════════════════════════════════════════════════════════
@@ -185,8 +185,8 @@ import Layout from '../../layouts/Layout.astro'
     align-self: stretch;
     justify-self: stretch;
     background-image:
-      linear-gradient(var(--color-border) 1px, transparent 1px),
-      linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+      linear-gradient(var(--mc-color-border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--mc-color-border) 1px, transparent 1px);
     background-size: 80px 80px;
     opacity: 0.04;
   }
@@ -197,7 +197,7 @@ import Layout from '../../layouts/Layout.astro'
     width: clamp(400px, 60vw, 800px);
     height: clamp(400px, 60vw, 800px);
     border-radius: 50%;
-    background: radial-gradient(circle, var(--color-yellow) 0%, transparent 70%);
+    background: radial-gradient(circle, var(--mc-color-yellow) 0%, transparent 70%);
     opacity: 0.06;
     filter: blur(60px);
   }
@@ -208,7 +208,7 @@ import Layout from '../../layouts/Layout.astro'
     font-size: clamp(70px, 12vw, 180px);
     font-weight: 900;
     letter-spacing: 0.06em;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     opacity: 0.25;
     white-space: nowrap;
   }
@@ -223,20 +223,20 @@ import Layout from '../../layouts/Layout.astro'
 
   .hero-word--a {
     align-self: center;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     margin-top: -6.5em;
     margin-left: -5em;
   }
 
   .hero-word--b {
     align-self: center;
-    color: var(--color-yellow);
+    color: var(--mc-color-yellow);
     margin-top: 0.4em;
   }
 
   .hero-word--c {
     align-self: center;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     opacity: 0.4;
     margin-top: 7.4em;
     margin-left: 5em;
@@ -249,7 +249,7 @@ import Layout from '../../layouts/Layout.astro'
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.12em;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     opacity: 0.35;
     display: flex;
     align-items: center;
@@ -261,7 +261,7 @@ import Layout from '../../layouts/Layout.astro'
     width: 5px;
     height: 5px;
     border-radius: 50%;
-    background: var(--color-yellow);
+    background: var(--mc-color-yellow);
   }
 
   .hero-cue {
@@ -271,7 +271,7 @@ import Layout from '../../layouts/Layout.astro'
     font-size: 0.65rem;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     opacity: 0.6;
   }
 
@@ -296,7 +296,7 @@ import Layout from '../../layouts/Layout.astro'
     flex-direction: column;
   }
   .spec + .spec {
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid var(--mc-color-border);
   }
 
   .spec-block {
@@ -313,16 +313,16 @@ import Layout from '../../layouts/Layout.astro'
     border: 1px solid transparent;
   }
   .spec-inner--still {
-    background: var(--color-surface);
-    border-color: var(--color-border);
+    background: var(--mc-color-surface);
+    border-color: var(--mc-color-border);
   }
   .spec-inner--mid {
-    background: var(--color-surface-2);
-    border-color: var(--color-border);
+    background: var(--mc-color-surface-2);
+    border-color: var(--mc-color-border);
   }
   .spec-inner--fast {
-    background: var(--color-surface);
-    border-color: var(--color-yellow);
+    background: var(--mc-color-surface);
+    border-color: var(--mc-color-yellow);
   }
 
   .spec-label {
@@ -330,12 +330,12 @@ import Layout from '../../layouts/Layout.astro'
     font-size: 1.2rem;
     font-weight: 700;
     letter-spacing: -0.02em;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     white-space: nowrap;
   }
   .spec-desc {
     font-size: 0.9rem;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     opacity: 0.55;
     line-height: 1.5;
   }
@@ -345,9 +345,9 @@ import Layout from '../../layouts/Layout.astro'
      ════════════════════════════════════════════════════════ */
   .layers {
     padding: 8rem 2rem 14rem;
-    background: var(--color-surface);
-    border-top: 1px solid var(--color-border);
-    border-bottom: 1px solid var(--color-border);
+    background: var(--mc-color-surface);
+    border-top: 1px solid var(--mc-color-border);
+    border-bottom: 1px solid var(--mc-color-border);
   }
   .layers-head {
     padding: 0 6vw 5rem;
@@ -377,20 +377,20 @@ import Layout from '../../layouts/Layout.astro'
   }
 
   .plane-back .plane-body {
-    background: var(--color-bg);
-    border-color: var(--color-border);
+    background: var(--mc-color-bg);
+    border-color: var(--mc-color-border);
     transform: scale(0.92);
     transform-origin: center top;
   }
   .plane-mid .plane-body {
-    background: var(--color-surface-2);
-    border-color: var(--color-border);
+    background: var(--mc-color-surface-2);
+    border-color: var(--mc-color-border);
     transform: scale(0.96);
     transform-origin: center top;
   }
   .plane-front .plane-body {
-    background: var(--color-surface);
-    border-color: var(--color-yellow);
+    background: var(--mc-color-surface);
+    border-color: var(--mc-color-yellow);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
   }
 
@@ -398,11 +398,11 @@ import Layout from '../../layouts/Layout.astro'
     font-size: 0.65rem;
     font-weight: 600;
     letter-spacing: 0.2em;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     opacity: 0.3;
   }
   .plane-front .plane-num {
-    color: var(--color-yellow);
+    color: var(--mc-color-yellow);
     opacity: 1;
   }
 
@@ -411,12 +411,12 @@ import Layout from '../../layouts/Layout.astro'
     font-weight: 800;
     letter-spacing: -0.03em;
     line-height: 0.9;
-    color: var(--color-text);
+    color: var(--mc-color-text);
   }
 
   .plane-text {
     font-size: 0.85rem;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     opacity: 0.55;
     line-height: 1.7;
     flex: 1;
@@ -442,12 +442,12 @@ import Layout from '../../layouts/Layout.astro'
 
   .drift-lane {
     display: block;
-    border-top: 1px solid var(--color-border);
+    border-top: 1px solid var(--mc-color-border);
     padding: 2rem 0;
     overflow: hidden;
   }
   .drift-lane:last-child {
-    border-bottom: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--mc-color-border);
   }
 
   .drift-lane span {
@@ -460,18 +460,18 @@ import Layout from '../../layouts/Layout.astro'
 
   .drift-lane--a span {
     font-size: clamp(18px, 3vw, 42px);
-    color: var(--color-text);
+    color: var(--mc-color-text);
     opacity: 0.12;
   }
   .drift-lane--b span {
     font-size: clamp(14px, 2.2vw, 30px);
-    color: var(--color-text);
+    color: var(--mc-color-text);
     opacity: 0.3;
     padding-left: 16vw;
   }
   .drift-lane--c span {
     font-size: clamp(11px, 1.5vw, 20px);
-    color: var(--color-yellow);
+    color: var(--mc-color-yellow);
     opacity: 0.7;
     padding-left: 26vw;
   }
@@ -480,14 +480,14 @@ import Layout from '../../layouts/Layout.astro'
     text-align: center;
     font-size: 0.75rem;
     letter-spacing: 0.08em;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     opacity: 0.4;
     margin-top: 3.5rem;
   }
   .drift-note code {
     font-family: var(--font-mono);
     font-size: inherit;
-    color: var(--color-yellow);
+    color: var(--mc-color-yellow);
   }
 
   /* ════════════════════════════════════════════════════════
@@ -495,8 +495,8 @@ import Layout from '../../layouts/Layout.astro'
      ════════════════════════════════════════════════════════ */
   .outro {
     padding: 14rem 2rem 8rem;
-    background: var(--color-surface);
-    border-top: 1px solid var(--color-border);
+    background: var(--mc-color-surface);
+    border-top: 1px solid var(--mc-color-border);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -507,7 +507,7 @@ import Layout from '../../layouts/Layout.astro'
   .outro-text p {
     font-size: clamp(1rem, 2vw, 1.4rem);
     font-weight: 500;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     opacity: 0.5;
     line-height: 1.8;
     max-width: 420px;
@@ -534,21 +534,21 @@ import Layout from '../../layouts/Layout.astro'
   }
 
   .btn-ghost {
-    color: var(--color-text);
+    color: var(--mc-color-text);
     opacity: 0.5;
-    border: 1px solid var(--color-border);
+    border: 1px solid var(--mc-color-border);
     background: transparent;
   }
   .btn-ghost:hover {
     opacity: 0.85;
-    color: var(--color-text);
-    background: var(--color-surface-2);
+    color: var(--mc-color-text);
+    background: var(--mc-color-surface-2);
     text-decoration: none;
   }
 
   .btn-solid {
-    color: var(--color-bg);
-    background: var(--color-yellow);
+    color: var(--mc-color-bg);
+    background: var(--mc-color-yellow);
     border: 1px solid transparent;
   }
   .btn-solid:hover {

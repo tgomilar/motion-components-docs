@@ -106,19 +106,19 @@ const jsonLd = JSON.stringify({
     .post-header {
       margin-bottom: 3rem;
       padding-bottom: 2rem;
-      border-bottom: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--mc-color-border);
     }
 
     .back-link {
       display: inline-block;
       font-size: 0.85rem;
       font-weight: 500;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
       margin-bottom: 1.5rem;
     }
 
     .back-link:hover {
-      color: var(--color-accent);
+      color: var(--mc-color-accent);
       text-decoration: none;
     }
 
@@ -136,7 +136,7 @@ const jsonLd = JSON.stringify({
       align-items: center;
       gap: 0.5rem;
       font-size: 0.85rem;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
     }
 
     .tags {
@@ -149,8 +149,8 @@ const jsonLd = JSON.stringify({
       font-family: var(--font-mono);
       font-size: 0.7rem;
       font-weight: 500;
-      color: var(--color-accent);
-      background: var(--color-accent-dim);
+      color: var(--mc-color-accent);
+      background: var(--mc-color-accent-dim);
       padding: 0.15rem 0.5rem;
       border-radius: 999px;
     }
@@ -159,14 +159,14 @@ const jsonLd = JSON.stringify({
     .prose {
       font-size: 0.97rem;
       line-height: 1.75;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
     }
 
     .prose :global(h2) {
       font-size: 1.4rem;
       font-weight: 800;
       letter-spacing: -0.03em;
-      color: var(--color-text);
+      color: var(--mc-color-text);
       margin: 2.75rem 0 0.75rem;
       line-height: 1.25;
     }
@@ -174,7 +174,7 @@ const jsonLd = JSON.stringify({
     .prose :global(h3) {
       font-size: 1.05rem;
       font-weight: 700;
-      color: var(--color-text);
+      color: var(--mc-color-text);
       margin: 2rem 0 0.5rem;
     }
 
@@ -183,7 +183,7 @@ const jsonLd = JSON.stringify({
     }
 
     .prose :global(strong) {
-      color: var(--color-text);
+      color: var(--mc-color-text);
     }
 
     .prose :global(ul),
@@ -198,8 +198,8 @@ const jsonLd = JSON.stringify({
     .prose :global(code:not(pre code)) {
       font-family: var(--font-mono);
       font-size: 0.85em;
-      color: var(--color-accent);
-      background: var(--color-accent-dim);
+      color: var(--mc-color-accent);
+      background: var(--mc-color-accent-dim);
       padding: 0.1em 0.4em;
       border-radius: 4px;
     }
@@ -213,7 +213,7 @@ const jsonLd = JSON.stringify({
       margin: 1.1rem 0 1.5rem;
       padding: 1.1rem 1.25rem;
       border-radius: 10px;
-      border: 1px solid var(--color-border);
+      border: 1px solid var(--mc-color-border);
       font-size: 0.84rem;
       line-height: 1.65;
       overflow-x: auto;
@@ -224,15 +224,15 @@ const jsonLd = JSON.stringify({
     }
 
     .prose :global(a) {
-      color: var(--color-accent);
+      color: var(--mc-color-accent);
       text-decoration: underline;
-      text-decoration-color: color-mix(in srgb, var(--color-accent) 30%, transparent);
+      text-decoration-color: color-mix(in srgb, var(--mc-color-accent) 30%, transparent);
       text-underline-offset: 0.2em;
       transition: text-decoration-color 0.15s;
     }
 
     .prose :global(a:hover) {
-      text-decoration-color: var(--color-accent);
+      text-decoration-color: var(--mc-color-accent);
     }
 
     .prose :global(a[target="_blank"])::after {
@@ -247,7 +247,7 @@ const jsonLd = JSON.stringify({
 
     /* Markdown tables, styled to match the docs' PropsTable component */
     .prose :global(.md-table) {
-      border: 1px solid var(--color-border);
+      border: 1px solid var(--mc-color-border);
       border-radius: 12px;
       overflow-x: auto;
       overflow-y: hidden;
@@ -259,35 +259,35 @@ const jsonLd = JSON.stringify({
       width: 100%;
       border-collapse: collapse;
       font-size: 0.9rem;
-      background: var(--color-surface);
+      background: var(--mc-color-surface);
     }
 
     .prose :global(.md-table th) {
       text-align: left;
       padding: 0.65rem 1rem;
-      background: var(--color-surface-2);
-      color: var(--color-muted);
+      background: var(--mc-color-surface-2);
+      color: var(--mc-color-muted);
       font-weight: 600;
       font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 0.06em;
-      border-bottom: 1px solid var(--color-border);
+      border-bottom: 1px solid var(--mc-color-border);
       white-space: nowrap;
     }
 
     .prose :global(.md-table td) {
       padding: 0.65rem 1rem;
-      border-bottom: 1px solid var(--color-border);
-      color: var(--color-text);
+      border-bottom: 1px solid var(--mc-color-border);
+      color: var(--mc-color-text);
       transition: background 0.15s;
     }
 
     .prose :global(.md-table tr:nth-child(even) td) {
-      background: color-mix(in srgb, var(--color-surface-2) 45%, transparent);
+      background: color-mix(in srgb, var(--mc-color-surface-2) 45%, transparent);
     }
 
     .prose :global(.md-table tbody tr:hover td) {
-      background: var(--color-accent-dim);
+      background: var(--mc-color-accent-dim);
     }
 
     .prose :global(.md-table tr:last-child td) {
@@ -313,13 +313,13 @@ const jsonLd = JSON.stringify({
       top: 0;
       width: 3px;
       height: 100%;
-      background: var(--color-accent);
+      background: var(--mc-color-accent);
       border-radius: 999px;
     }
 
     .prose :global(hr) {
       border: none;
-      border-top: 1px solid var(--color-border);
+      border-top: 1px solid var(--mc-color-border);
       margin: 2.5rem 0;
     }
 
@@ -331,7 +331,7 @@ const jsonLd = JSON.stringify({
     .post-footer {
       margin-top: 3.5rem;
       padding-top: 2rem;
-      border-top: 1px solid var(--color-border);
+      border-top: 1px solid var(--mc-color-border);
     }
 
     .post-footer .back-link {

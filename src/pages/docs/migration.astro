@@ -25,12 +25,12 @@ const renames = [
   { tag: "motion-parallax", from: "speed", to: "depth", how: "Same number." },
   { tag: "motion-perspective", from: "animate", to: "oscillate", how: "Boolean, same meaning." },
   { tag: "motion-perspective", from: "speed", to: "duration", how: "Use <code>1 / speed</code>. Seconds per cycle, so <code>speed=\"1.5\"</code> becomes <motion-code-inline copy>duration=\"0.667\"</motion-code-inline>." },
-  { tag: "motion-progress", from: "color", to: "--progress-color", how: "Now a CSS custom property: <motion-code-inline copy>style=\"--progress-color: #60a5fa\"</motion-code-inline>." },
+  { tag: "motion-progress", from: "color", to: "--mc-progress-color", how: "Now a CSS custom property: <motion-code-inline copy>style=\"--mc-progress-color: #60a5fa\"</motion-code-inline>." },
   { tag: "motion-scramble", from: "speed", to: "interval", how: "Divide by 1000. Seconds between glyph swaps." },
   { tag: "motion-scramble", from: "delay", to: "delay", how: "Divide by 1000. Now in seconds." },
   { tag: "motion-scramble", from: "hover", to: "trigger=\"hover\"", how: "<code>trigger</code> is <code>'view'</code> (default) or <code>'hover'</code>." },
   { tag: "motion-slider", from: "slidechange event", to: "motion-change event", how: "Same <code>detail: &#123; index &#125;</code>. Now also composed." },
-  { tag: "motion-spotlight", from: "color", to: "--spotlight-color", how: "Now a CSS custom property: <motion-code-inline copy>style=\"--spotlight-color: rgba(96,165,250,0.25)\"</motion-code-inline>." },
+  { tag: "motion-spotlight", from: "color", to: "--mc-spotlight-color", how: "Now a CSS custom property: <motion-code-inline copy>style=\"--mc-spotlight-color: rgba(96,165,250,0.25)\"</motion-code-inline>." },
   { tag: "motion-spotlight", from: "smoothing, fade-duration", to: "duration, bounce", how: "The follow is now a spring. <code>duration</code> sets both the follow and the fade." },
   { tag: "motion-stretch", from: "stiffness, damping", to: "duration, bounce", how: "<code>bounce</code> is <code>1 - damping / (2 × √stiffness)</code>, and <code>duration</code> is how long the old spring took to settle. Since 1.2.0 the defaults are <code>duration=\"0.77\" bounce=\"0.55\"</code>, the same spring as the old defaults <code>320</code> and <code>16</code>. <code>stiffness=\"400\" damping=\"10\"</code> is <code>duration=\"1.11\" bounce=\"0.75\"</code>." },
   { tag: "motion-swap", from: "stagger-duration", to: "interval", how: "Same number, seconds between characters." },
@@ -41,6 +41,20 @@ const renames = [
   { tag: "motion-typewriter", from: "delay", to: "delay", how: "Divide by 1000. Now in seconds." },
   { tag: "motion-typewriter", from: "pause", to: "hold", how: "Divide by 1000. Seconds to hold the line before erasing." },
   { tag: "motion-words", from: "interval", to: "interval", how: "Divide by 1000. Now in seconds, so <code>2000</code> becomes <code>2</code>." },
+];
+
+const cssRenames = [
+  { tags: "motion-chart, motion-pie", names: ["chart-height", "chart-surface", "chart-1", "chart-2", "chart-3", "chart-4", "chart-5", "chart-6", "chart-7", "chart-8"] },
+  { tags: "motion-sparkline", names: ["sparkline-width", "sparkline-height", "sparkline-color", "sparkline-accent"] },
+  { tags: "motion-code", names: ["code-keyword", "code-string", "code-tag", "code-attr", "code-num", "code-comment"] },
+  { tags: "motion-countdown", names: ["countdown-size", "countdown-color", "countdown-gap", "countdown-label-size", "countdown-label-color"] },
+  { tags: "motion-dialog", names: ["dialog-bg", "dialog-color", "dialog-radius", "dialog-padding", "dialog-max-width", "dialog-max-height", "dialog-shadow", "dialog-backdrop-color", "dialog-backdrop-blur"] },
+  { tags: "motion-icon, motion-state-icon", names: ["icon-size", "icon-color", "icon-fill", "icon-accent"] },
+  { tags: "motion-progress", names: ["progress-color"] },
+  { tags: "motion-spotlight", names: ["spotlight-color"] },
+  { tags: "motion-theme-icon, motion-theme-toggle", names: ["theme-icon-size", "theme-toggle-surface", "theme-toggle-border", "theme-toggle-accent", "theme-toggle-menu-bg", "theme-toggle-radius"] },
+  { tags: "motion-scene (set for its children)", names: ["progress"] },
+  { tags: "Theme colors, read by motion-code, motion-code-inline, motion-dialog, motion-image-compare, motion-progress, motion-ring and motion-slider", names: ["color-accent", "color-accent-dim", "color-border", "color-muted", "color-surface", "color-surface-2", "color-text"] },
 ];
 ---
 
@@ -54,6 +68,46 @@ const renames = [
         Version 1.0 makes the attributes consistent across all 40 components. Most changes are renames. A few change the unit, so the number changes too.
         The table below lists every change and how to convert it.
       </p>
+      <p>Upgrading from 1.0 or 1.1? Read the first section: since 1.2.0, every CSS custom property starts with <code>--mc-</code>.</p>
+
+      <h2>CSS custom properties start with --mc-</h2>
+      <p>
+        Since version 1.2.0, every CSS custom property starts with <code>--mc-</code>. The names without the prefix no longer work. Add
+        <code>mc-</code> after the two dashes and keep the rest of the name:
+      </p>
+      <CodeWindow
+        filename="theme.css"
+        copy
+        code={`motion-icon {
+  --mc-icon-color: #2563eb; /* was --icon-color */
+}
+
+motion-chart {
+  --mc-chart-1: #e11d48; /* was --chart-1 */
+}`}
+      />
+      <div class="methods-table">
+        <table>
+          <thead><tr><th>Component</th><th>Before</th><th>Now</th></tr></thead>
+          <tbody>
+            {
+              cssRenames.map((r) => (
+                <tr>
+                  <td>{r.tags}</td>
+                  <td>{r.names.map((n, i) => <>{i > 0 && ", "}<code>--{n}</code></>)}</td>
+                  <td>{r.names.map((n, i) => <>{i > 0 && ", "}<code>--mc-{n}</code></>)}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+      <p>This search lists the old names in your code. It also finds your own variables with the same names, so review each match:</p>
+      <CodeWindow
+        filename="terminal"
+        copy
+        code={`grep -rnE -- '--(color-|icon-|chart-|sparkline-|code-|countdown-|dialog-|progress|spotlight-|theme-)' src`}
+      />
 
       <h2>Install</h2>
       <CodeWindow filename="terminal" copy code={`npm install motion-components@^1.0.0`} />
@@ -70,7 +124,7 @@ const renames = [
             <tr><td>Boolean attributes</td><td>Every boolean accepts <code>"false"</code>. Flags that are on by default, like <code>once</code>, <code>pin</code> or <code>labels</code>, can now be turned off in HTML: <motion-code-inline copy>once="false"</motion-code-inline>.</td></tr>
             <tr><td>Triggers</td><td><code>'view'</code> means when it scrolls into view and <code>'mount'</code> means once on load. <code>'hover'</code>, <code>'click'</code>, <code>'loop'</code> and <code>'scroll'</code> keep their meaning.</td></tr>
             <tr><td>Events</td><td>Events start with <code>motion-</code>. The theme toggle keeps <code>colorschemechange</code> and <code>permanentcolorschemechange</code> for compatibility with <code>dark-mode-toggle</code>.</td></tr>
-            <tr><td>CSS custom properties</td><td>Named after the component: <code>--dialog-*</code>, <code>--countdown-*</code>, <code>--code-*</code>, <code>--progress-color</code>, <code>--spotlight-color</code>.</td></tr>
+            <tr><td>CSS custom properties</td><td>Start with <code>--mc-</code> and are named after the component: <code>--mc-dialog-*</code>, <code>--mc-countdown-*</code>, <code>--mc-code-*</code>, <code>--mc-progress-color</code>, <code>--mc-spotlight-color</code>.</td></tr>
           </tbody>
         </table>
       </div>
@@ -94,14 +148,14 @@ const renames = [
         </table>
       </div>
 
-      <h2>CSS custom properties</h2>
-      <p><code>motion-code</code> token colors move from <code>--cw-*</code> to <code>--code-*</code>. Replace the prefix and keep the rest of the name:</p>
+      <h2>Code token colors</h2>
+      <p><code>motion-code</code> token colors move from <code>--cw-*</code> to <code>--mc-code-*</code>. Replace the prefix and keep the rest of the name:</p>
       <CodeWindow
         filename="theme.css"
         copy
         code={`motion-code {
-  --code-keyword: #c678dd; /* was --cw-keyword */
-  --code-string: #98c379;  /* was --cw-string */
+  --mc-code-keyword: #c678dd; /* was --cw-keyword */
+  --mc-code-string: #98c379;  /* was --cw-string */
 }`}
       />
 
@@ -136,7 +190,7 @@ const renames = [
 
 <style>
   .migration-list {
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
     font-size: 0.95rem;
     line-height: 1.75;
     padding-left: 1.25rem;

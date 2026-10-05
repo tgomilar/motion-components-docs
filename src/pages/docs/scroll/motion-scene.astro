@@ -110,13 +110,13 @@ import 'motion-components'               // or the whole library`}
 
       <h2>CSS variable</h2>
       <p class="section-desc">
-        The scene exposes <code>--progress</code> (0–1) so you can drive your own CSS effects off scroll position.
+        The scene exposes <code>--mc-progress</code> (0–1) so you can drive your own CSS effects off scroll position.
       </p>
       <CodeWindow
         filename="scene-progress.css"
         copy
         code={`motion-scene {
-  --hue: calc(var(--progress) * 200);
+  --hue: calc(var(--mc-progress) * 200);
   background: hsl(var(--hue) 40% 8%);
 }`}
       />
@@ -226,7 +226,7 @@ import 'motion-components'               // or the whole library`}
     position: relative;
     border-radius: 12px;
     scrollbar-width: thin;
-    scrollbar-color: var(--color-border) transparent;
+    scrollbar-color: var(--mc-color-border) transparent;
   }
 
   .demo-scene {
@@ -245,26 +245,26 @@ import 'motion-components'               // or the whole library`}
     font-size: 1.1rem;
     font-weight: 900;
     letter-spacing: 0.12em;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     opacity: 0;
     pointer-events: none;
   }
 
   .demo-chip--b {
-    color: var(--color-accent);
+    color: var(--mc-color-accent);
   }
 
   .demo-chip--c {
-    color: var(--color-muted);
+    color: var(--mc-color-muted);
   }
 
   .api-scene-card {
-    background: var(--color-surface-2);
-    border: 1px solid var(--color-border);
+    background: var(--mc-color-surface-2);
+    border: 1px solid var(--mc-color-border);
     border-radius: 10px;
     padding: 2rem 3rem;
     font-weight: 600;
-    color: var(--color-text);
+    color: var(--mc-color-text);
     text-align: center;
     opacity: 0;
   }

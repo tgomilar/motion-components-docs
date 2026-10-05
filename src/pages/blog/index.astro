@@ -72,7 +72,7 @@ const readingTime = (body: string) => Math.max(1, Math.round(body.split(/\s+/).l
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.14em;
-      color: var(--color-accent);
+      color: var(--mc-color-accent);
       margin-bottom: 1rem;
     }
 
@@ -89,7 +89,7 @@ const readingTime = (body: string) => Math.max(1, Math.round(body.split(/\s+/).l
       margin-top: 1rem;
       font-size: 0.875rem;
       font-weight: 600;
-      color: var(--color-accent);
+      color: var(--mc-color-accent);
       text-decoration: none;
     }
 
@@ -99,7 +99,7 @@ const readingTime = (body: string) => Math.max(1, Math.round(body.split(/\s+/).l
 
     .lead {
       font-size: 1.05rem;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
       line-height: 1.75;
     }
 
@@ -113,16 +113,16 @@ const readingTime = (body: string) => Math.max(1, Math.round(body.split(/\s+/).l
     .post-card {
       display: block;
       padding: 1.5rem 1.75rem;
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
+      background: var(--mc-color-surface);
+      border: 1px solid var(--mc-color-border);
       border-radius: 12px;
-      color: var(--color-text);
+      color: var(--mc-color-text);
       text-decoration: none;
       transition: border-color 0.2s;
     }
 
     .post-card:hover {
-      border-color: var(--color-accent);
+      border-color: var(--mc-color-accent);
       text-decoration: none;
     }
 
@@ -131,7 +131,7 @@ const readingTime = (body: string) => Math.max(1, Math.round(body.split(/\s+/).l
       align-items: center;
       gap: 0.5rem;
       font-size: 0.8rem;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
       margin-bottom: 0.6rem;
     }
 
@@ -145,7 +145,7 @@ const readingTime = (body: string) => Math.max(1, Math.round(body.split(/\s+/).l
 
     .post-card p {
       font-size: 0.92rem;
-      color: var(--color-muted);
+      color: var(--mc-color-muted);
       line-height: 1.65;
       margin-bottom: 0.9rem;
     }
@@ -161,8 +161,8 @@ const readingTime = (body: string) => Math.max(1, Math.round(body.split(/\s+/).l
       font-family: var(--font-mono);
       font-size: 0.7rem;
       font-weight: 500;
-      color: var(--color-accent);
-      background: var(--color-accent-dim);
+      color: var(--mc-color-accent);
+      background: var(--mc-color-accent-dim);
       padding: 0.15rem 0.5rem;
       border-radius: 999px;
     }
@@ -170,7 +170,7 @@ const readingTime = (body: string) => Math.max(1, Math.round(body.split(/\s+/).l
     .read-more {
       font-size: 0.85rem;
       font-weight: 600;
-      color: var(--color-accent);
+      color: var(--mc-color-accent);
     }
 
     @media (max-width: 640px) {
