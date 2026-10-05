@@ -1,0 +1,184 @@
+---
+/**
+ * The one table used by documentation content.
+ *
+ * Cells come in four kinds, all plain data so pages stay declarative:
+ *   - a string            → text, with bare `<code>` upgraded to chips
+ *   - `{ code: 'x' }`     → a single copyable chip
+ *   - `{ codes: [...] }`  → several chips in one cell
+ *   - `{ html: '...' }`   → rich markup, also chip-upgraded
+ *
+ * Column heads may be given as `{ label: 'x', code: true }` to render the head
+ * itself as a chip, which is what "attribute vs property" tables need.
+ */
+import { inlineText, upgradeInlineCode } from "../lib/inline-code.mjs";
+
+interface Column {
+  label: string;
+  code?: boolean;
+  /** Render as monospaced, non-wrapping text. */
+  mono?: boolean;
+  /** Never wrap, even for long values. */
+  nowrap?: boolean;
+}
+
+type Cell =
+  | string
+  | { code: string; copy?: boolean }
+  | { codes: string[]; copy?: boolean }
+  | { html: string };
+
+type Row = Cell[];
+
+interface Props {
+  columns: Column[];
+  rows: Row[];
+  /** Adds the copy button to every chip that does not opt out. */
+  copy?: boolean;
+}
+
+const { columns, rows, copy = false } = Astro.props;
+
+const escape = (s: string) =>
+  s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+const cellText = (cell: Cell) => {
+  if (typeof cell === "string") return inlineText(cell);
+  if ("html" in cell) return upgradeInlineCode(cell.html);
+  return "";
+};
+
+const headText = (col: Column) => (col.code ? escape(col.label) : col.label);
+---
+
+<div class="docs-table">
+  <table>
+    <thead>
+      <tr>
+        {
+          columns.map((col) => (
+            <th class:list={[col.mono && "mono", col.nowrap && "nowrap"]}>
+              {col.code ? <motion-code-inline set:text={headText(col)} /> : col.label}
+            </th>
+          ))
+        }
+      </tr>
+    </thead>
+    <tbody>
+      {
+        rows.map((row) => (
+          <tr>
+            {
+              row.map((cell, i) => (
+                <td
+                  class:list={[
+                    columns[i]?.mono && "mono",
+                    columns[i]?.nowrap && "nowrap",
+                  ]}
+                >
+                  {typeof cell === "object" && "code" in cell && (
+                    <motion-code-inline copy={copy || cell.copy !== false} set:text={cell.code} />
+                  )}
+                  {typeof cell === "object" && "codes" in cell && (
+                    <span class="chips">
+                      {cell.codes.map((value) => (
+                        <motion-code-inline copy={copy || cell.copy !== false} set:text={value} />
+                      ))}
+                    </span>
+                  )}
+                  {typeof cell === "object" && "html" in cell && (
+                    <Fragment set:html={cellText(cell)} />
+                  )}
+                  {typeof cell === "string" && <Fragment set:html={cellText(cell)} />}
+                </td>
+              ))
+            }
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>
+
+<style>
+  .docs-table {
+    border: 1px solid var(--mc-color-border);
+    border-radius: 12px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    max-width: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .docs-table :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+    background: var(--mc-color-surface);
+  }
+
+  .docs-table :global(th) {
+    text-align: left;
+    padding: 0.65rem 1rem;
+    background: var(--mc-color-surface-2);
+    color: var(--mc-color-muted);
+    font-weight: 600;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid var(--mc-color-border);
+    white-space: nowrap;
+  }
+
+  .docs-table :global(td) {
+    padding: 0.65rem 1rem;
+    border-bottom: 1px solid var(--mc-color-border);
+    color: var(--mc-color-text);
+    transition: background 0.15s;
+    vertical-align: top;
+  }
+
+  .docs-table :global(tr:nth-child(even) td) {
+    background: color-mix(in srgb, var(--mc-color-surface-2) 45%, transparent);
+  }
+
+  .docs-table :global(tbody tr:hover td) {
+    background: var(--mc-color-accent-dim);
+  }
+
+  .docs-table :global(tr:last-child td) {
+    border-bottom: none;
+  }
+
+  .docs-table :global(td.mono),
+  .docs-table :global(th.mono) {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--mc-color-muted);
+  }
+
+  .docs-table :global(td.nowrap),
+  .docs-table :global(th.nowrap) {
+    white-space: nowrap;
+  }
+
+  .docs-table :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    color: var(--mc-color-accent);
+    background: var(--mc-color-accent-dim);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+  }
+
+  .chips {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    align-items: center;
+  }
+</style>
+
+<script>
+  import "motion-components/motion-code-inline";
+</script>

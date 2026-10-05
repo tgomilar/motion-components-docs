@@ -6,6 +6,7 @@ import DocsTOC from "../../../components/DocsTOC.astro";
 import DocsPagination from "../../../components/DocsPagination.astro";
 import CodeWindow from "../../../components/CodeWindow.astro";
 import PropsTable from "../../../components/PropsTable.astro";
+import DocsTable from "../../../components/DocsTable.astro";
 import "../../../styles/docs.css";
 ---
 
@@ -213,23 +214,18 @@ document.querySelector('motion-theme-icon').mode = 'dark'`}
       />
 
       <h2>Events</h2>
-      <div class="methods-table">
-        <table>
-          <thead><tr><th>Event</th><th>Detail</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr>
-              <td><code>colorschemechange</code></td>
-              <td class="nowrap"><code>colorScheme</code>, <code>mode</code></td>
-              <td>Fired when the mode or the applied scheme changes, including on first load.</td>
-            </tr>
-            <tr>
-              <td><code>permanentcolorschemechange</code></td>
-              <td class="nowrap"><code>permanent</code></td>
-              <td>Fired when <code>permanent</code> changes.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <DocsTable
+        columns={[
+          { label: "Event" },
+          { label: "Detail", nowrap: true },
+          { label: "Description" },
+        ]}
+        rows={[
+          [{ code: "colorschemechange" }, { codes: ["colorScheme", "mode"] }, "Fired when the mode or the applied scheme changes, including on first load."],
+          [{ code: "permanentcolorschemechange" }, { code: "permanent" }, { html: "Fired when <code>permanent</code> changes." }],
+        ]}
+        copy
+      />
       <CodeWindow
         filename="app.ts"
         copy

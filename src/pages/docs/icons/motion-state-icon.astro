@@ -7,6 +7,7 @@ import DocsPagination from "../../../components/DocsPagination.astro";
 import CodeWindow from "../../../components/CodeWindow.astro";
 import FwTabs from "../../../components/FwTabs.astro";
 import PropsTable from "../../../components/PropsTable.astro";
+import DocsTable from "../../../components/DocsTable.astro";
 import "../../../styles/docs.css";
 
 const CDN = "https://cdn.jsdelivr.net/npm/motion-components@1/dist";
@@ -207,16 +208,14 @@ const liked = ref(false)
 
       <h2>Icons</h2>
       <p>Without <code>active</code>, the icon shows its first state. With <code>active</code>, it shows the second.</p>
-      <div class="methods-table">
-        <table>
-          <thead><tr><th><code>name</code></th><th>Default</th><th><code>active</code></th></tr></thead>
-          <tbody>
-            {icons.map((i) => (
-              <tr><td><code>{i.name}</code></td><td>{i.off}</td><td>{i.on}</td></tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <DocsTable
+        columns={[
+          { label: "name", code: true },
+          { label: "Default" },
+          { label: "active", code: true },
+        ]}
+        rows={icons.map((i) => [{ code: i.name }, i.off, i.on])}
+      />
 
       <h2>Two ways to switch</h2>
       <h3>1. The icon is the button</h3>
@@ -330,14 +329,19 @@ const liked = ref(false)
       />
 
       <h2>Events</h2>
-      <div class="methods-table">
-        <table>
-          <thead><tr><th>Event</th><th>Detail</th><th>Description</th></tr></thead>
-          <tbody>
-            <tr><td><code>motion-change</code></td><td><code>&#123; active &#125;</code></td><td>Fired when <code>toggle</code> is set and the user switches the state.</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <DocsTable
+        columns={[
+          { label: "Event" },
+          { label: "Detail" },
+          { label: "Description" },
+        ]}
+        rows={[[
+          { code: "motion-change" },
+          { code: "{ active }" },
+          { html: "Fired when <code>toggle</code> is set and the user switches the state." },
+        ]]}
+        copy
+      />
 
       <h2>Accessibility</h2>
       <p>

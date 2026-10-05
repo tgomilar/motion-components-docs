@@ -6,6 +6,7 @@ import DocsTOC from "../../../components/DocsTOC.astro";
 import DocsPagination from "../../../components/DocsPagination.astro";
 import CodeWindow from "../../../components/CodeWindow.astro";
 import PropsTable from "../../../components/PropsTable.astro";
+import DocsTable from "../../../components/DocsTable.astro";
 import "../../../styles/docs.css";
 ---
 
@@ -85,17 +86,20 @@ import 'motion-components'               // or the whole library`}
         { name: 'arrows', type: 'boolean', default: 'true', description: 'Show prev/next arrow buttons. Set <motion-code-inline copy>arrows="false"</motion-code-inline> to hide.' },
       ]} />
 
+      <h2>CSS custom properties</h2>
+      <PropsTable
+        nameLabel="Property"
+        rows={[
+          { name: "--mc-color-accent", type: "color", default: "#2563eb", description: "Color of the keyboard focus ring on the arrows" },
+        ]}
+      />
+
       <h2>Methods</h2>
-      <div class="methods-table">
-        <table>
-          <thead>
-            <tr><th>Method</th><th>Description</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><code>goTo(index, velocity?)</code></td><td>Animate to a specific slide index. Optional initial velocity in px/s.</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <DocsTable
+        columns={[{ label: "Method" }, { label: "Description" }]}
+        rows={[[{ code: "goTo(index, velocity?)" }, "Animate to a specific slide index. Optional initial velocity in px/s."]]}
+        copy
+      />
 
       <h2>Keyboard</h2>
       <p>Focus the slider and use <code>ArrowLeft</code> / <code>ArrowRight</code> to navigate.</p>

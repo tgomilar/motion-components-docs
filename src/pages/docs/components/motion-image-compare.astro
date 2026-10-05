@@ -82,6 +82,14 @@ import 'motion-components'               // or the whole library`}
         { name: 'after',  type: 'element', default: '—', description: 'The right/bottom image (revealed by dragging)' },
       ]} />
 
+      <h2>CSS custom properties</h2>
+      <PropsTable
+        nameLabel="Property"
+        rows={[
+          { name: "--mc-color-accent", type: "color", default: "#2563eb", description: "Color of the keyboard focus ring on the knob" },
+        ]}
+      />
+
       <h2>Accessibility</h2>
       <p>
         The handle is a focusable <code>role="slider"</code> labelled "Image comparison", with <code>aria-valuemin/max/now</code>.
