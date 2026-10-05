@@ -15,7 +15,7 @@ import "../../../styles/docs.css";
 
     <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-marker</motion-split></h1>
-      <p class="lead">A highlighter stroke that sweeps behind a phrase when it scrolls into view, the way you would mark a printed page. It follows text that wraps across lines, and the text itself never changes.</p>
+      <p class="lead">A highlighter stroke that sweeps behind a phrase when it scrolls into view, the way you would mark a printed page. The straight stroke follows text that wraps across lines, and <code>shape="wave"</code> draws a wavy one. The text itself never changes.</p>
 
       <h2>Preview</h2>
       <DocsPreview replayId="marker-demo">
@@ -39,6 +39,13 @@ import 'motion-components'               // or the whole library`}
       </DocsPreview>
       <CodeWindow filename="index.html" copy code={`<motion-marker style="--mc-marker-color: rgb(96 165 250 / 0.35)">interruptible</motion-marker>`} />
 
+      <h2>Wave</h2>
+      <p>Set <code>shape="wave"</code> for a wavy stroke. It keeps its text on one line, so use it on a word or a short phrase.</p>
+      <DocsPreview replayId="marker-wave">
+        <p class="sentence">Motion that feels <motion-marker id="marker-wave" shape="wave">hand-drawn</motion-marker>.</p>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={`<motion-marker shape="wave">hand-drawn</motion-marker>`} />
+
       <h2>Text that wraps</h2>
       <p>On a phrase that wraps, every line gets its own stroke, and all of them draw together.</p>
       <DocsPreview replayId="marker-wrap">
@@ -57,14 +64,34 @@ import 'motion-components'               // or the whole library`}
   and <motion-ring delay="1.5">reversible</motion-ring>.
 </p>`} />
 
+      <h2>Loop</h2>
+      <p>
+        Add <code>loop</code> to draw, hold, undraw and draw again. <code>hold</code> sets how long the highlight stays on
+        the text, <code>gap</code> how long it stays away. Add <code>pause-on-hover</code> to freeze it while the reader
+        points at it.
+      </p>
+      <DocsPreview replayId="marker-loop">
+        <p class="sentence">Makes <motion-marker id="marker-loop" loop hold="2">the code</motion-marker> feel alive.</p>
+      </DocsPreview>
+      <CodeWindow
+        filename="index.html"
+        copy
+        code={`<motion-marker loop hold="2" pause-on-hover>the code</motion-marker>`}
+      />
+
       <h2>Properties</h2>
       <PropsTable nameLabel="Attribute" rows={[
         { name: 'trigger', type: 'string', default: "'view'", description: "What draws the mark: <code>'view'</code> when it scrolls into view, <code>'hover'</code> on pointer enter (it undraws on leave), or <code>'mount'</code> when it connects" },
         { name: 'duration', type: 'number', default: '0.6', description: 'Spring duration of the drawing, in seconds' },
         { name: 'delay', type: 'number', default: '0', description: 'Seconds to wait before drawing. Use it to draw several marks in one sentence one after another' },
         { name: 'bounce', type: 'number', default: '0', description: 'Spring bounciness. <code>0</code> keeps the stroke from overshooting the text' },
-        { name: 'once', type: 'boolean', default: 'true', description: 'With <code>trigger="view"</code>, draw only the first time. Set <motion-code-inline copy>once="false"</motion-code-inline> to undraw when it leaves and draw again on every entry' },
+        { name: 'loop', type: 'boolean', default: 'false', description: 'Draw, hold, undraw and draw again on repeat. With <motion-code-inline copy copy-visible>trigger="view"</motion-code-inline> the cycle runs while the mark is on screen' },
+        { name: 'hold', type: 'number', default: '1.6', description: 'With <motion-code-inline>loop</motion-code-inline>, seconds the mark stays drawn before it undraws' },
+        { name: 'gap', type: 'number', default: '0.5', description: 'With <motion-code-inline>loop</motion-code-inline>, seconds the mark stays undrawn before it draws again' },
+        { name: 'pause-on-hover', type: 'boolean', default: 'false', description: 'Pause the loop while the pointer is over the mark, resuming on leave' },
+        { name: 'once', type: 'boolean', default: 'true', description: 'With <motion-code-inline copy copy-visible>trigger="view"</motion-code-inline>, draw only the first time. Set <motion-code-inline copy>once="false"</motion-code-inline> to undraw when it leaves and draw again on every entry. Ignored with <motion-code-inline>loop</motion-code-inline>' },
         { name: 'threshold', type: 'number', default: '0.6', description: 'Share of the element, from 0 to 1, that must be visible before it draws' },
+        { name: 'shape', type: 'string', default: "'line'", description: "<code>'line'</code>, a straight stroke that follows wrapping text, or <code>'wave'</code>, a wavy stroke that keeps the text on one line" },
       ]} />
 
       <h2>CSS custom properties</h2>
@@ -76,7 +103,7 @@ import 'motion-components'               // or the whole library`}
       <p>The mark has the shared playback API: <code>play()</code> draws it, <code>cancel()</code> removes it, <code>finish()</code> shows it fully drawn and <code>replay()</code> draws it again from the start. It fires <code>motion-start</code>, <code>motion-finish</code> and <code>motion-cancel</code>. See the <a href="/docs/js-api/">JavaScript API</a>.</p>
 
       <h2>Accessibility</h2>
-      <p>The mark is decoration: the text stays real, selectable and read by screen readers exactly as written. If the highlight carries meaning, wrap the component in <code>&lt;mark&gt;</code>. Respects <code>prefers-reduced-motion</code>: the mark appears fully drawn at once, with no animation.</p>
+      <p>The mark is decoration: the text stays real, selectable and read by screen readers exactly as written. If the highlight carries meaning, wrap the component in <code>&lt;mark&gt;</code>. Respects <code>prefers-reduced-motion</code>: the mark appears fully drawn at once, with no animation, and <code>loop</code> never starts.</p>
       <DocsPagination />
     </main>
     <DocsTOC />

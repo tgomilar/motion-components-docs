@@ -137,6 +137,27 @@ import "../../../styles/docs.css";
 <motion-font axis="wght" from="100" to="900" trigger="view" delay="0.3">Third line</motion-font>`}
       />
 
+      <h2>Loop</h2>
+      <p>
+        Add <code>loop</code> to spring to <code>to</code>, hold, spring back to <code>from</code> and repeat, like a
+        headline that breathes. <code>hold</code> sets how long it stays at <code>to</code>, <code>gap</code> how long it
+        rests at <code>from</code>.
+      </p>
+      <DocsPreview replayId="vf-loop">
+        <motion-font id="vf-loop" class="vf-demo" axis="wght" from="200" to="800" loop hold="1.2" gap="0.4">
+          Breathe
+        </motion-font>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-font-loop.html"
+        copy
+        code={`<motion-font axis="wght" from="200" to="800" loop hold="1.2" gap="0.4">Breathe</motion-font>`}
+      />
+      <p>
+        With <code>trigger="view"</code> the cycle runs only while the text is on screen, and <code>once</code> is ignored.
+        Add <code>pause-on-hover</code> to freeze it while the pointer is over the text.
+      </p>
+
       <h2>Properties</h2>
       <PropsTable nameLabel="Attribute" rows={[
         { name: 'axis',     type: 'string',  default: "'wght'", description: "Font axis tag: <code>'wght'</code>, <code>'wdth'</code>, <code>'opsz'</code>, or any custom axis. Ignored when <code>axes</code> is set." },
@@ -147,7 +168,11 @@ import "../../../styles/docs.css";
         { name: 'bounce',   type: 'number',  default: '0',      description: 'Spring bounciness 0–1. 0 = no overshoot, 1 = very bouncy.' },
         { name: 'delay',    type: 'number',  default: '0',      description: 'Delay before animation starts in seconds.' },
         { name: 'trigger',  type: 'string',  default: "'view'", description: "<code>'view'</code>: on viewport entry &nbsp;|&nbsp; <code>'hover'</code>: on mouseenter / focusin &nbsp;|&nbsp; <code>'scroll'</code>: axis tracks scroll position" },
-        { name: 'once',     type: 'boolean', default: 'true',   description: "For <motion-code-inline copy>trigger='view'</motion-code-inline>: animate only on the first intersection. Set it to <code>\"false\"</code> to animate on every entry." },
+        { name: 'once',     type: 'boolean', default: 'true',   description: "For <motion-code-inline copy>trigger='view'</motion-code-inline>: animate only on the first intersection. Set it to <code>\"false\"</code> to animate on every entry. Ignored with <code>loop</code>." },
+        { name: 'loop',     type: 'boolean', default: 'false',   description: 'Spring to <code>to</code>, hold, spring back to <code>from</code> and repeat. With <motion-code-inline copy>trigger="view"</motion-code-inline> the cycle runs while the text is on screen' },
+        { name: 'hold',     type: 'number',  default: '1.6',    description: 'With <code>loop</code>, seconds the text stays at <code>to</code> before it springs back' },
+        { name: 'gap',      type: 'number',  default: '0.5',    description: 'With <code>loop</code>, seconds the text rests at <code>from</code> before it springs again' },
+        { name: 'pause-on-hover', type: 'boolean', default: 'false', description: 'Pause the loop while the pointer is over the text, resuming on leave' },
       ]} />
 
       <h2>Methods</h2>
@@ -165,7 +190,7 @@ import "../../../styles/docs.css";
       </JsApiDemo>
 
       <h2>Accessibility</h2>
-      <p>Respects <code>prefers-reduced-motion</code>: when enabled, axis animations are skipped and the font renders at its target value immediately.</p>
+      <p>Respects <code>prefers-reduced-motion</code>: when enabled, axis animations are skipped, the font renders at its target value immediately and <code>loop</code> never starts.</p>
       <DocsPagination />
     </main>
       <DocsTOC />

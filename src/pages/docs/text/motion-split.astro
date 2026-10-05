@@ -66,6 +66,28 @@ import 'motion-components'               // or the whole library`}
 </motion-split>`}
       />
 
+      <h2>Loop</h2>
+      <p>
+        Add <code>loop</code> to reveal the text, hold, hide it and reveal again. <code>hold</code> sets how long it stays
+        visible, <code>gap</code> how long it stays hidden.
+      </p>
+      <DocsPreview replayId="split-loop">
+        <motion-split id="split-loop" by="words" interval="0.06" duration="0.6" loop hold="1.4" gap="0.5"
+          >One line at a time</motion-split
+        >
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-split-loop.html"
+        copy
+        code={`<motion-split by="words" interval="0.06" duration="0.6" loop hold="1.4" gap="0.5">
+  One line at a time
+</motion-split>`}
+      />
+      <p>
+        The cycle runs only while the text is on screen, and <code>once</code> is ignored. Add
+        <code>pause-on-hover</code> to freeze it while the pointer is over the text.
+      </p>
+
       <h2>Properties</h2>
       <PropsTable
         nameLabel="Attribute"
@@ -74,7 +96,11 @@ import 'motion-components'               // or the whole library`}
           { name: "interval", type: "number", default: "0.05", description: "Delay between each unit in seconds" },
           { name: "duration", type: "number", default: "0.6", description: "Spring duration hint in seconds" },
           { name: "y", type: "number", default: "20", description: "Initial vertical offset in px" },
-          { name: "once", type: "boolean", default: "true", description: "Animate only on first intersection" },
+          { name: "once", type: "boolean", default: "true", description: "Animate only on first intersection. Ignored with <code>loop</code>" },
+          { name: "loop", type: "boolean", default: "false", description: "Reveal, hold, hide and reveal again on repeat. The cycle runs while the text is on screen" },
+          { name: "hold", type: "number", default: "1.6", description: "With <code>loop</code>, seconds the text stays visible before it hides" },
+          { name: "gap", type: "number", default: "0.5", description: "With <code>loop</code>, seconds the text stays hidden before it reveals again" },
+          { name: "pause-on-hover", type: "boolean", default: "false", description: "Pause the loop while the pointer is over the text, resuming on leave" },
         ]}
       />
 
@@ -90,7 +116,7 @@ import 'motion-components'               // or the whole library`}
       <p>
         The component keeps the original unsplit text in a visually hidden span and sets <code>aria-hidden="true"</code> on the split spans.
         Screen readers announce the full phrase, not individual letters or words.
-        Respects <code>prefers-reduced-motion</code>: when enabled, content appears immediately at its final state.
+        Respects <code>prefers-reduced-motion</code>: when enabled, content appears immediately at its final state and <code>loop</code> never starts.
       </p>
       <DocsPagination />
     </main>

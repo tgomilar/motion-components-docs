@@ -54,8 +54,8 @@ const iconWall = [
         </span>
       </h1>
       <p class="hero-sub">
-      Declarative by default. A JavaScript API when you need it.<br />
-      Physics-based motion for any framework. Built on <span class="motion">Motion</span>.
+      Declarative by default. A <motion-underline shape="wave" class="wave">JavaScript API</motion-underline> when you need it.<br />
+      Physics-based motion for any framework. Built on <motion-underline shape="wave" class="wave">Motion</motion-underline>.
       </p>
       <div class="actions">
         <motion-hover>
@@ -271,17 +271,6 @@ import 'motion-components'
     <div class="inner inner--wide">
       <div class="text-grid">
         <motion-stagger interval="0.1" duration="0.65" y="24">
-          <a href="/docs/text/motion-split/" class="card-link">
-            <div class="card">
-              <motion-code-inline>motion-split</motion-code-inline>
-              <div class="stage">
-                <motion-split id="split-demo" by="words" interval="0.07" duration="0.6" y="18" class="split-text">Feel the motion</motion-split>
-              </div>
-              <div class="replay-row">
-                <button class="replay-btn" id="replay-split">↺ Replay</button>
-              </div>
-            </div>
-          </a>
           <a href="/docs/text/motion-typewriter/" class="card-link">
             <div class="card">
               <motion-code-inline>motion-typewriter</motion-code-inline>
@@ -308,9 +297,9 @@ import 'motion-components'
             <div class="card">
               <motion-code-inline>motion-scramble</motion-code-inline>
               <div class="stage">
-                <motion-scramble id="scramble-demo" interval="0.035" iterations="3" trigger="hover" class="scramble-text"> Hello, world. </motion-scramble>
+                <motion-scramble id="scramble-demo" interval="0.035" delay="1" loop class="scramble-text"> Creativity! </motion-scramble>
               </div>
-              <p class="card-hint">Hover to scramble</p>
+              <p class="card-hint">Loop scramble</p>
             </div>
           </a>
           <a href="/docs/text/motion-words/" class="card-link">
@@ -341,9 +330,9 @@ import 'motion-components'
               <div class="stage">
                 <p class="marks-text">
                   <motion-ring>Draw attention</motion-ring><br />
-                  to <motion-marker delay="0.4">what matters</motion-marker>,<br />
+                  to <motion-marker loop pause-on-hover delay="0.7">what matters</motion-marker>,<br />
                   <motion-underline shape="wave" delay="0.8" class="marks-wave">not</motion-underline>
-                  <motion-strike delay="1.2">everything</motion-strike>.
+                  <motion-strike delay="1.2" class="marks-strike">everything</motion-strike>.
                 </p>
               </div>
               <p class="card-hint">Marker, underline, strike and ring</p>
@@ -659,7 +648,7 @@ import 'motion-components'
   <!-- ── CTA ──────────────────────────────── -->
   <section class="cta-section">
     <div class="inner">
-      <motion-reveal duration="0.9" y="56" threshold="0.8">
+      <motion-blur-in>
         <div class="cta-inner">
           <h2 class="cta-heading">
             Start shipping motion
@@ -675,7 +664,7 @@ import 'motion-components'
             </motion-hover>
           </div>
         </div>
-      </motion-reveal>
+      </motion-blur-in>
     </div>
   </section>
 
@@ -706,6 +695,7 @@ import 'motion-components'
     import "motion-components/motion-tilt";
     import "motion-components/motion-typewriter";
     import "motion-components/motion-words";
+    import "motion-components/motion-blur-in";
 
     document.getElementById("replay-reveal")?.addEventListener("click", () => {
       (document.getElementById("reveal-demo") as any)?.replay();
@@ -917,9 +907,8 @@ import 'motion-components'
       line-height: 1.75;
     }
 
-    .motion {
-      color: var(--mc-color-yellow);
-      font-weight: 600;
+    .wave {
+      --mc-mark-color: var(--mc-color-yellow);
     }
 
     .actions {
@@ -1357,6 +1346,20 @@ import 'motion-components'
 
     .marks-wave {
       --mc-mark-color: var(--mc-color-accent);
+    }
+
+    .marks-strike {
+      --mc-mark-color: #e11d48;
+    }
+
+    [data-theme="dark"] .marks-strike {
+      --mc-mark-color: #fb7185;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) .marks-strike {
+        --mc-mark-color: #fb7185;
+      }
     }
 
     .swap-text {
