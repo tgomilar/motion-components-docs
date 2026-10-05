@@ -1,7 +1,7 @@
 ---
-title: "Charts That Move: Bar, Line, Pie and Sparkline Charts in HTML"
+title: "Animated HTML Charts: Bar, Line, Pie and Sparkline With Springs"
 description: motion-chart, motion-pie and motion-sparkline draw charts from an HTML attribute or a table. Bars grow, lines draw in, pies sweep in, and every change in the data springs into place.
-pubDate: 2026-10-04T12:00:00.000Z
+pubDate: 2026-10-05T00:00:00.000Z
 author: Tanja Gomilar
 tags:
   - release
