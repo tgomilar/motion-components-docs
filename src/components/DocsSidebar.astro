@@ -60,7 +60,8 @@ const activeSection = SECTION_ORDER.find(s => sections[s]?.some(item => item.hre
   <div class="footer-nav">
     <p class="footer-label">Getting started</p>
     <a href="/docs/" class={`footer-link${current === '/docs/' ? ' active' : ''}`}>Usage</a>
-    <a href="/docs/#frameworks" class="footer-link">Frameworks</a>
+    <a href="/docs/#frameworks" class={`footer-link${current === '/docs/#frameworks' ? ' active' : ''}`}>Frameworks</a>
+    <a href="/docs/ai/" class={`footer-link${current === '/docs/ai/' ? ' active' : ''}`}>Using with AI</a>
     <a href="/docs/js-api/" class={`footer-link${current === '/docs/js-api/' ? ' active' : ''}`}>JavaScript API</a>
     <a href="/docs/migration/" class={`footer-link${current === '/docs/migration/' ? ' active' : ''}`}>Migrating to 1.0</a>
   </div>

@@ -37,7 +37,7 @@ const pageTitle = fullTitle.length > 65 && fullTitle.endsWith(SUFFIX) ? fullTitl
 const snippet = description.length > 160 ? `${description.slice(0, 157).replace(/[\s,;:.]+\S*$/, "")}…` : description;
 
 const markdown =
-  /^\/docs\/[a-z]+\/motion-[a-z-]+\/$/.test(pathname) || /^\/docs\/(js-api|migration|recipes\/[a-z-]+)?\/?$/.test(pathname)
+  /^\/docs\/[a-z]+\/motion-[a-z-]+\/$/.test(pathname) || /^\/docs\/(js-api|migration|ai|recipes\/[a-z-]+)?\/?$/.test(pathname)
     ? pathname.replace(/\/$/, ".md")
     : null;
 

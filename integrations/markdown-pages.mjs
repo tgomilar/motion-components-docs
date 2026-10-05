@@ -8,6 +8,7 @@ export function markdownPages(dist) {
     ["docs/index.html", "docs.md"],
     ["docs/js-api/index.html", "docs/js-api.md"],
     ["docs/migration/index.html", "docs/migration.md"],
+    ["docs/ai/index.html", "docs/ai.md"],
     ...recipes.map((name) => [`docs/recipes/${name}/index.html`, `docs/recipes/${name}.md`]),
   ].filter(([page]) => existsSync(dist + page));
 }

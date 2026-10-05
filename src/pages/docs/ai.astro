@@ -1,0 +1,104 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import DocsSidebar from "../../components/DocsSidebar.astro";
+import DocsTOC from "../../components/DocsTOC.astro";
+import CodeWindow from "../../components/CodeWindow.astro";
+import DocsTable from "../../components/DocsTable.astro";
+import "../../styles/docs.css";
+
+const SITE = "https://www.motion-components.dev";
+
+const rules = `## Animation
+
+Use motion-components (${SITE}) for motion.
+
+- Use a motion-components tag for entrances, hover and press feedback,
+  text effects, icons, scroll effects and charts. Do not write CSS
+  keyframes or animation code for these.
+- Wrap existing markup instead of rebuilding it:
+  \`<motion-reveal><div class="card">...</div></motion-reveal>\`
+- Combine effects by nesting tags, for example \`<motion-hover>\` cards
+  inside \`<motion-stagger>\`. Do not look for one option that does both.
+- Import one subpath per tag: \`import 'motion-components/motion-reveal'\`
+- Import \`motion-components/preload.css\` once, so content does not flash
+  before the tags load. Other setups:
+  ${SITE}/docs/#flash
+- Time is in seconds: \`duration="0.6"\`, \`delay="0.2"\`. Springs are tuned
+  with \`duration\` and \`bounce\`.
+- Boolean attributes are on when present. \`once="false"\` turns one off.
+- CSS custom properties start with \`--mc-\`, for example
+  \`--mc-progress-color\`.
+- The components handle \`prefers-reduced-motion\`. Do not add your own
+  check.
+- Before using an attribute, check its name in
+  ${SITE}/llms-full.txt
+  because names changed in past releases and names from memory can
+  be wrong.`;
+---
+
+<Layout title="Using with AI — Motion Components" description="Give AI assistants and coding agents the current motion-components docs: llms.txt, Markdown pages, a rules file for your project and editor completions." noMain>
+  <div class="layout">
+    <DocsSidebar />
+
+    <main id="main">
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">Using with AI</motion-split></h1>
+      <p class="lead">AI assistants write better motion-components code when they read the current docs instead of guessing from what they learned in training. This site publishes its docs in formats they can read, and the package includes data that editors use for completions.</p>
+
+      <h2 id="docs">Give your assistant the docs</h2>
+      <p>Three kinds of file cover every component. Pick the one that fits how your tool works.</p>
+      <DocsTable
+        columns={[{ label: "File", nowrap: true }, { label: "What it has" }]}
+        rows={[
+          [
+            { html: `<a href="/llms.txt">llms.txt</a>` },
+            "A list of every component, docs page and recipe, with a link and one line each. Use it when your tool can follow links, like a coding agent that can browse the web.",
+          ],
+          [
+            { html: `<a href="/llms-full.txt">llms-full.txt</a>` },
+            "Every component's attributes, events, slots and CSS custom properties in one file. Use it when you want to give a chat one link or one file.",
+          ],
+          [
+            { html: `<code>.md</code> pages` },
+            { html: `Any docs page as Markdown: add <code>.md</code> to the address, as in <a href="/docs/text/motion-marker.md">/docs/text/motion-marker.md</a>. Use it when you work on one component and want a short context.` },
+          ],
+        ]}
+      />
+      <p>Each docs page also links its Markdown version in its <code>&lt;head&gt;</code>, so tools that look for one find it. To start a chat, point the assistant at the file and then describe the effect:</p>
+      <CodeWindow
+        filename="prompt.txt"
+        copy
+        code={`Read ${SITE}/llms-full.txt first.
+Then use motion-components to fade in the feature cards on my
+landing page one after another as they scroll into view.`}
+      />
+
+      <h2 id="rules">Add rules to your project</h2>
+      <p>Coding agents read a rules file in your project before each task. Paste these rules into the file your tool reads, such as <code>AGENTS.md</code>, <code>CLAUDE.md</code>, a rule in <code>.cursor/rules/</code> or <code>.github/copilot-instructions.md</code>.</p>
+      <CodeWindow filename="AGENTS.md" copy code={rules} />
+
+      <h2 id="old-names">When the assistant uses old names</h2>
+      <p>Models trained on older versions may write attributes that no longer exist, such as <code>speed</code> on <code>motion-scramble</code>, times in milliseconds, or <code>--chart-1</code> instead of <code>--mc-chart-1</code>. Give the assistant <code>llms-full.txt</code>, or point it to the <a href="/docs/migration/">migration guide</a>, which lists every rename and how to convert it.</p>
+
+      <h2 id="editor">Editor completions</h2>
+      <p>The package includes data files that give VS Code completions and hover help for every tag and attribute in HTML files, and for every CSS custom property in CSS files. The hover help has the same guidance as these docs: when to use a component, when not to, and accessibility notes. It is a quick way to check what an assistant wrote. Add the files to <code>.vscode/settings.json</code>:</p>
+      <CodeWindow
+        filename=".vscode/settings.json"
+        copy
+        code={`{
+  "html.customData": [
+    "./node_modules/motion-components/dist/vscode.html-custom-data.json"
+  ],
+  "css.customData": [
+    "./node_modules/motion-components/dist/vscode.css-custom-data.json"
+  ]
+}`}
+      />
+      <p>JetBrains IDEs such as WebStorm need no setup: they read the package's <code>web-types.json</code> on their own. Other tools can read <code>node_modules/motion-components/dist/custom-elements.json</code>, a Custom Elements Manifest with the same information.</p>
+    </main>
+    <DocsTOC />
+  </div>
+</Layout>
+
+<script>
+  import "motion-components/motion-split";
+</script>
