@@ -15,7 +15,7 @@ import "../../../styles/docs.css";
 
     <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-underline</motion-split></h1>
-      <p class="lead">A line that draws itself under a phrase, from left to right, when it scrolls into view or on hover. Straight, dashed and dotted lines follow text that wraps across lines; <code>shape="wave"</code> draws a wavy line. It uses the text color unless you set another.</p>
+      <p class="lead">A line that draws itself under a phrase, from left to right, when it scrolls into view or on hover. Straight, dashed and dotted lines follow text that wraps across lines; <code>shape="wave"</code> and <code>shape="zigzag"</code> draw a wavy or a zigzag line. It uses the text color unless you set another.</p>
 
       <h2>Preview</h2>
       <DocsPreview replayId="underline-demo">
@@ -32,12 +32,13 @@ import 'motion-components'               // or the whole library`}
       <h2>Usage</h2>
       <CodeWindow filename="index.html" copy code={`<p>Interactions that <motion-underline>feel right</motion-underline>.</p>`} />
 
-      <h2>Wave</h2>
-      <p>Set <code>shape="wave"</code> for a wavy line. It keeps its text on one line, so use it on a word or a short phrase.</p>
+      <h2>Wave and zigzag</h2>
+      <p>Set <code>shape="wave"</code> for a wavy line, or <code>shape="zigzag"</code> for a zigzag. Both keep their text on one line, so use them on a word or a short phrase.</p>
       <DocsPreview replayId="underline-wave">
-        <p class="sentence">Springs, not <motion-underline id="underline-wave" shape="wave" style="--mc-mark-color: var(--mc-color-accent)">easing curves</motion-underline>.</p>
+        <p class="sentence" id="underline-wave">Springs, not <motion-underline shape="wave" style="--mc-mark-color: var(--mc-color-accent)">easing curves</motion-underline>, and <motion-underline shape="zigzag" delay="0.3" style="--mc-mark-color: var(--mc-color-accent)">no jank</motion-underline>.</p>
       </DocsPreview>
-      <CodeWindow filename="index.html" copy code={`<motion-underline shape="wave">easing curves</motion-underline>`} />
+      <CodeWindow filename="index.html" copy code={`<motion-underline shape="wave">easing curves</motion-underline>
+<motion-underline shape="zigzag">no jank</motion-underline>`} />
 
       <h2>Dashed and dotted</h2>
       <p>Set <code>shape="dashed"</code> or <code>shape="dotted"</code>. Both follow text that wraps, like the straight line.</p>
@@ -60,15 +61,33 @@ import 'motion-components'               // or the whole library`}
       </DocsPreview>
       <CodeWindow filename="index.html" copy code={`<a href="/guide/"><motion-underline trigger="hover">Read the guide</motion-underline></a>`} />
 
+      <h2>Loop</h2>
+      <p>
+        Add <code>loop</code> to draw, hold, undraw and draw again, like a hand that keeps underlining.
+        <code>hold</code> sets how long the line stays, <code>gap</code> how long it stays away.
+      </p>
+      <DocsPreview replayId="underline-loop">
+        <p class="sentence">Still <motion-underline id="underline-loop" loop hold="2">spring physics</motion-underline>.</p>
+      </DocsPreview>
+      <CodeWindow
+        filename="index.html"
+        copy
+        code={`<motion-underline loop hold="2">spring physics</motion-underline>`}
+      />
+
       <h2>Properties</h2>
       <PropsTable nameLabel="Attribute" rows={[
         { name: 'trigger', type: 'string', default: "'view'", description: "What draws the mark: <code>'view'</code> when it scrolls into view, <code>'hover'</code> on pointer enter (it undraws on leave), or <code>'mount'</code> when it connects" },
         { name: 'duration', type: 'number', default: '0.6', description: 'Spring duration of the drawing, in seconds' },
         { name: 'delay', type: 'number', default: '0', description: 'Seconds to wait before drawing. Use it to draw several marks in one sentence one after another' },
         { name: 'bounce', type: 'number', default: '0', description: 'Spring bounciness. <code>0</code> keeps the stroke from overshooting the text' },
-        { name: 'once', type: 'boolean', default: 'true', description: 'With <code>trigger="view"</code>, draw only the first time. Set <motion-code-inline copy>once="false"</motion-code-inline> to undraw when it leaves and draw again on every entry' },
+        { name: 'loop', type: 'boolean', default: 'false', description: 'Draw, hold, undraw and draw again on repeat. With <motion-code-inline copy copy-visible>trigger="view"</motion-code-inline> the cycle runs while the mark is on screen' },
+        { name: 'hold', type: 'number', default: '1.6', description: 'With <motion-code-inline>loop</motion-code-inline>, seconds the mark stays drawn before it undraws' },
+        { name: 'gap', type: 'number', default: '0.5', description: 'With <motion-code-inline>loop</motion-code-inline>, seconds the mark stays undrawn before it draws again' },
+        { name: 'pause-on-hover', type: 'boolean', default: 'false', description: 'Pause the loop while the pointer is over the mark, resuming on leave' },
+        { name: 'once', type: 'boolean', default: 'true', description: 'With <motion-code-inline copy copy-visible>trigger="view"</motion-code-inline>, draw only the first time. Set <motion-code-inline copy>once="false"</motion-code-inline> to undraw when it leaves and draw again on every entry. Ignored with <motion-code-inline>loop</motion-code-inline>' },
         { name: 'threshold', type: 'number', default: '0.6', description: 'Share of the element, from 0 to 1, that must be visible before it draws' },
-        { name: 'shape', type: 'string', default: "'line'", description: "<code>'line'</code>, <code>'dashed'</code> or <code>'dotted'</code>, which follow wrapping text, or <code>'wave'</code>, a wavy line that keeps the text on one line" },
+        { name: 'shape', type: 'string', default: "'line'", description: "<code>'line'</code>, <code>'dashed'</code> or <code>'dotted'</code>, which follow wrapping text, or <code>'wave'</code> and <code>'zigzag'</code>, which keep the text on one line" },
       ]} />
 
       <h2>CSS custom properties</h2>
@@ -81,7 +100,7 @@ import 'motion-components'               // or the whole library`}
       <p>The mark has the shared playback API: <code>play()</code> draws it, <code>cancel()</code> removes it, <code>finish()</code> shows it fully drawn and <code>replay()</code> draws it again from the start. It fires <code>motion-start</code>, <code>motion-finish</code> and <code>motion-cancel</code>. See the <a href="/docs/js-api/">JavaScript API</a>.</p>
 
       <h2>Accessibility</h2>
-      <p>The mark is decoration: the text stays real, selectable and read by screen readers exactly as written. With <code>trigger="hover"</code> the line follows the pointer only; give links their own focus style. Respects <code>prefers-reduced-motion</code>: the mark appears fully drawn at once, with no animation.</p>
+      <p>The mark is decoration: the text stays real, selectable and read by screen readers exactly as written. With <code>trigger="hover"</code> the line follows the pointer only; give links their own focus style. Respects <code>prefers-reduced-motion</code>: the mark appears fully drawn at once, with no animation, and <code>loop</code> never starts.</p>
       <DocsPagination />
     </main>
     <DocsTOC />

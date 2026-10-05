@@ -71,12 +71,42 @@ import 'motion-components'               // or the whole library`}
         The content appears to rise from behind an invisible floor.
       </p>
 
+      <h2>Loop</h2>
+      <p>
+        Add <code>loop</code> to rise the text into view, hold, drop it back behind the mask and rise again.
+        <code>hold</code> sets how long it stays visible, <code>gap</code> how long it stays hidden.
+      </p>
+      <DocsPreview replayId="text-mask-loop">
+        <p class="sentence">
+          Rises and falls with <motion-text-mask
+            id="text-mask-loop"
+            duration="0.8"
+            loop
+            hold="1.4"
+            gap="0.5">the mask</motion-text-mask
+          >.
+        </p>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-text-mask-loop.html"
+        copy
+        code={`<motion-text-mask loop hold="1.4" gap="0.5">the mask</motion-text-mask>`}
+      />
+      <p>
+        The cycle runs only while the text is on screen, and <code>once</code> is ignored. Add
+        <code>pause-on-hover</code> to freeze it while the pointer is over the text.
+      </p>
+
       <h2>Properties</h2>
       <PropsTable nameLabel="Attribute" rows={[
         { name: 'duration', type: 'number', default: '0.9', description: 'Spring duration hint in seconds' },
         { name: 'delay', type: 'number', default: '0', description: 'Initial delay in seconds before the reveal' },
         { name: 'threshold', type: 'number', default: '0.2', description: 'IntersectionObserver visibility threshold (0–1)' },
-        { name: 'once', type: 'boolean', default: 'true', description: 'Reveal only on first intersection' },
+        { name: 'once', type: 'boolean', default: 'true', description: 'Reveal only on first intersection. Ignored with <code>loop</code>' },
+        { name: 'loop', type: 'boolean', default: 'false', description: 'Reveal, hold, hide and reveal again on repeat. The cycle runs while the text is on screen' },
+        { name: 'hold', type: 'number', default: '1.6', description: 'With <code>loop</code>, seconds the text stays visible before it hides' },
+        { name: 'gap', type: 'number', default: '0.5', description: 'With <code>loop</code>, seconds the text stays hidden before it reveals again' },
+        { name: 'pause-on-hover', type: 'boolean', default: 'false', description: 'Pause the loop while the pointer is over the text, resuming on leave' },
       ]} />
       <h2>JavaScript API</h2>
       <p class="section-desc">Trigger the text mask programmatically with <code>play()</code> and <code>cancel()</code>.</p>
@@ -85,7 +115,7 @@ import 'motion-components'               // or the whole library`}
       </JsApiDemo>
 
       <h2>Accessibility</h2>
-      <p>Respects <code>prefers-reduced-motion</code>: when enabled, the mask reveal animates instantly and the text is fully visible.</p>
+      <p>Respects <code>prefers-reduced-motion</code>: when enabled, the mask reveal animates instantly, the text is fully visible and <code>loop</code> never starts.</p>
       <DocsPagination />
     </main>
       <DocsTOC />

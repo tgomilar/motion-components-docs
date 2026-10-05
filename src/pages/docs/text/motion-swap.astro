@@ -38,6 +38,24 @@ import 'motion-components'               // or the whole library`}
         code={`<motion-swap>Hover me</motion-swap>`}
       />
 
+      <h2>Loop</h2>
+      <p>
+        Add <code>loop</code> to swap the word in, hold, swap it back out and swap in again. <code>hold</code> sets how
+        long the swapped word stays, <code>gap</code> how long it stays swapped back.
+      </p>
+      <DocsPreview replayId="swap-loop">
+        <p class="sentence"><motion-swap id="swap-loop" trigger="view" loop hold="1.4" gap="0.5">swap me</motion-swap></p>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-swap-loop.html"
+        copy
+        code={`<motion-swap trigger="view" loop hold="1.4" gap="0.5">swap me</motion-swap>`}
+      />
+      <p>
+        The cycle runs only while the text is on screen, and <code>once</code> is ignored. Add
+        <code>pause-on-hover</code> to freeze it while the pointer is over the text.
+      </p>
+
       <h2>Properties</h2>
       <PropsTable nameLabel="Attribute" rows={[
         { name: 'trigger', type: 'string', default: "'hover'", description: "Animation trigger: <code>'hover'</code> swaps in and out on mouseenter and mouseleave. <code>'view'</code> plays on viewport entry" },
@@ -45,8 +63,12 @@ import 'motion-components'               // or the whole library`}
         { name: 'interval', type: 'number', default: '0.03', description: 'Delay in seconds between each character\'s animation start' },
         { name: 'duration', type: 'number', default: '0.7', description: 'Spring duration of each character swap, in seconds' },
         { name: 'bounce', type: 'number', default: '0.3', description: 'Spring bounciness: <code>0</code> settles without overshoot, higher is more elastic' },
-        { name: 'once', type: 'boolean', default: 'true', description: 'Animate only on first intersection (<motion-code-inline copy>trigger="view"</motion-code-inline>). Set <motion-code-inline copy>once="false"</motion-code-inline> to animate on every entry' },
+        { name: 'once', type: 'boolean', default: 'true', description: 'Animate only on first intersection (<motion-code-inline copy>trigger="view"</motion-code-inline>). Set <motion-code-inline copy>once="false"</motion-code-inline> to animate on every entry. Ignored with <code>loop</code>' },
         { name: 'delay', type: 'number', default: '0', description: 'Delay in seconds before animation starts' },
+        { name: 'loop', type: 'boolean', default: 'false', description: 'Swap in, hold, swap out and swap in again on repeat. With <motion-code-inline copy>trigger="view"</motion-code-inline> the cycle runs while the text is on screen' },
+        { name: 'hold', type: 'number', default: '1.6', description: 'With <code>loop</code>, seconds the swapped word stays before it swaps back' },
+        { name: 'gap', type: 'number', default: '0.5', description: 'With <code>loop</code>, seconds the word stays swapped back before it swaps in again' },
+        { name: 'pause-on-hover', type: 'boolean', default: 'false', description: 'Pause the loop while the pointer is over the text, resuming on leave' },
       ]} />
       <h2>JavaScript API</h2>
       <p class="section-desc">Control the swap view mode programmatically with <code>play()</code> and <code>cancel()</code>.</p>
@@ -55,7 +77,7 @@ import 'motion-components'               // or the whole library`}
       </JsApiDemo>
 
       <h2>Accessibility</h2>
-      <p>Respects <code>prefers-reduced-motion</code>: when enabled, the swap effect is skipped and the text appears at its default state.</p>
+      <p>Respects <code>prefers-reduced-motion</code>: when enabled, the swap effect is skipped, the text appears at its default state and <code>loop</code> never starts.</p>
       <DocsPagination />
     </main>
       <DocsTOC />

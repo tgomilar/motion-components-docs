@@ -6,6 +6,7 @@ import DocsTOC from "../../../components/DocsTOC.astro";
 import DocsPagination from "../../../components/DocsPagination.astro";
 import CodeWindow from "../../../components/CodeWindow.astro";
 import PropsTable from "../../../components/PropsTable.astro";
+import DocsTable from "../../../components/DocsTable.astro";
 import JsApiDemo from "../../../components/JsApiDemo.astro";
 import "../../../styles/docs.css";
 ---
@@ -88,17 +89,44 @@ import 'motion-components'               // or the whole library`}
         code={`<motion-counter from="0" to="100" once="false"></motion-counter>`}
       />
 
+      <h2>Loop</h2>
+      <p>
+        Add <code>loop</code> to count to <code>to</code>, hold, snap back to <code>from</code> and count again, like a
+        dashboard that keeps ticking. <code>hold</code> sets how long the final number stays, <code>gap</code> how long it
+        sits back at the start.
+      </p>
+      <DocsPreview replayId="counter-loop">
+        <p class="sentence">
+          Requests per second: <motion-counter
+            id="counter-loop"
+            from="120"
+            to="480"
+            duration="1.2"
+            loop
+            hold="1.2"
+            gap="0.4"
+          ></motion-counter>
+        </p>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-counter.html"
+        copy
+        code={`<motion-counter from="120" to="480" loop hold="1.2" gap="0.4"></motion-counter>`}
+      />
+      <p>
+        With <code>loop</code> the cycle runs only while the counter is on screen, and <code>once</code> is ignored. Add
+        <code>pause-on-hover</code> to freeze the cycle while the pointer is over it.
+      </p>
+
       <h2>Methods</h2>
-      <div class="methods-table">
-        <table>
-          <thead>
-            <tr><th>Method</th><th>Description</th></tr>
-          </thead>
-          <tbody>
-            <tr><td><code>replay()</code></td><td>Restart the animation from <code>from</code> immediately, regardless of viewport state.</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <DocsTable
+        columns={[{ label: "Method" }, { label: "Description" }]}
+        rows={[[
+          { code: "replay()" },
+          { html: "Restart the animation from <code>from</code> immediately, regardless of viewport state." },
+        ]]}
+        copy
+      />
       <CodeWindow
         filename="app.js"
         copy
@@ -114,7 +142,11 @@ counter.replay()`}
         { name: 'decimals', type: 'number', default: '0', description: 'Number of decimal places to display' },
         { name: 'prefix', type: 'string', default: "''", description: 'Static text prepended to the number' },
         { name: 'suffix', type: 'string', default: "''", description: 'Static text appended to the number' },
-        { name: 'once', type: 'boolean', default: 'true', description: 'Animate only on first intersection. Set to <code>false</code> to replay on every re-entry.' },
+        { name: 'once', type: 'boolean', default: 'true', description: 'Animate only on first intersection. Set to <code>false</code> to replay on every re-entry. Ignored with <code>loop</code>' },
+        { name: 'loop', type: 'boolean', default: 'false', description: 'Count to <code>to</code>, hold, snap back to <code>from</code> and count again on repeat. The cycle runs while the counter is on screen' },
+        { name: 'hold', type: 'number', default: '1.6', description: 'With <code>loop</code>, seconds the counter stays at <code>to</code> before snapping back' },
+        { name: 'gap', type: 'number', default: '0.5', description: 'With <code>loop</code>, seconds the counter stays at <code>from</code> before counting again' },
+        { name: 'pause-on-hover', type: 'boolean', default: 'false', description: 'Pause the loop while the pointer is over the counter, resuming on leave' },
       ]} />
 
       <h2>JavaScript API</h2>
@@ -124,7 +156,10 @@ counter.replay()`}
       </JsApiDemo>
 
       <h2>Accessibility</h2>
-      <p>When <code>prefers-reduced-motion</code> is set, the counter jumps instantly to its final value with no animation.</p>
+      <p>
+        When <code>prefers-reduced-motion</code> is set, the counter jumps instantly to its final value with no animation,
+        and <code>loop</code> never starts.
+      </p>
       <DocsPagination />
     </main>
       <DocsTOC />
@@ -183,9 +218,5 @@ counter.replay()`}
     color: var(--mc-color-muted);
     text-transform: uppercase;
     letter-spacing: 0.08em;
-  }
-
-  .methods-table td:last-child {
-    color: var(--mc-color-muted);
   }
 </style>

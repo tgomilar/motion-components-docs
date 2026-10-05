@@ -40,13 +40,39 @@ import 'motion-components'               // or the whole library`}
 </motion-scramble>`}
       />
 
+      <h2>Loop</h2>
+      <p>
+        Add <code>loop</code> to decode the text, hold, then scramble it again. <code>hold</code> sets how long the
+        resolved text stays readable, <code>gap</code> how long it rests before the next decode.
+      </p>
+      <DocsPreview replayId="scramble-loop">
+        <p class="sentence">
+          Status: <motion-scramble id="scramble-loop" interval="0.04" loop hold="1.6" gap="0.6"
+            >SYSTEM_ONLINE</motion-scramble
+          >
+        </p>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-scramble-loop.html"
+        copy
+        code={`<motion-scramble interval="0.04" loop hold="1.6" gap="0.6">SYSTEM_ONLINE</motion-scramble>`}
+      />
+      <p>
+        With <motion-code-inline copy>trigger="view"</motion-code-inline> the cycle runs only while the text is on screen,
+        and <code>once</code> is ignored. Add <code>pause-on-hover</code> to freeze it while the pointer is over the text.
+      </p>
+
       <h2>Properties</h2>
       <PropsTable nameLabel="Attribute" rows={[
         { name: 'interval', type: 'number', default: '0.04', description: 'Time between scramble frames, in seconds' },
         { name: 'delay', type: 'number', default: '0', description: 'Delay before starting, in seconds' },
         { name: 'iterations', type: 'number', default: '2', description: 'Scramble frames per character before revealing' },
         { name: 'trigger', type: 'string', default: "'view'", description: "What starts the scramble: <code>'view'</code> on viewport entry or <code>'hover'</code> on mouseenter" },
-        { name: 'once', type: 'boolean', default: 'true', description: 'Animate only on first intersection. Set <motion-code-inline copy>once="false"</motion-code-inline> to animate on every entry' },
+        { name: 'once', type: 'boolean', default: 'true', description: 'Animate only on first intersection. Set <motion-code-inline copy>once="false"</motion-code-inline> to animate on every entry. Ignored with <code>loop</code>' },
+        { name: 'loop', type: 'boolean', default: 'false', description: 'Decode, hold, then scramble again on repeat. With <motion-code-inline copy>trigger="view"</motion-code-inline> the cycle runs while the text is on screen' },
+        { name: 'hold', type: 'number', default: '1.6', description: 'With <code>loop</code>, seconds the resolved text stays readable before it scrambles again' },
+        { name: 'gap', type: 'number', default: '0.5', description: 'With <code>loop</code>, seconds between cycles, while the text is already resolved' },
+        { name: 'pause-on-hover', type: 'boolean', default: 'false', description: 'Pause the loop while the pointer is over the text, resuming on leave' },
       ]} />
       <h2>JavaScript API</h2>
       <p class="section-desc">Trigger the scramble programmatically with <code>play()</code> and <code>cancel()</code>.</p>
@@ -55,7 +81,7 @@ import 'motion-components'               // or the whole library`}
       </JsApiDemo>
 
       <h2>Accessibility</h2>
-      <p>Respects <code>prefers-reduced-motion</code>: when enabled, the scramble effect is skipped and the text appears at its final state immediately.</p>
+      <p>Respects <code>prefers-reduced-motion</code>: when enabled, the scramble effect is skipped, the text appears at its final state immediately and <code>loop</code> never starts.</p>
       <DocsPagination />
     </main>
       <DocsTOC />

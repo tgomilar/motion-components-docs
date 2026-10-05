@@ -82,15 +82,19 @@ el.text = 'UPDATED'   // animation restarts`}
 <motion-perspective depth="0.85" vanish="left">DEEP</motion-perspective>`}
       />
 
-      <h2>Animated rotation</h2>
-      <p>Add <code>oscillate</code> to continuously rotate the perspective illusion back and forth. <code>duration</code> sets the seconds per cycle. Lower is faster.</p>
+      <h2>loop</h2>
+      <p>
+        Add <code>loop</code> to continuously rotate the perspective illusion back and forth. <code>duration</code> sets
+        the seconds per cycle. Lower is faster. The old <code>oscillate</code> attribute still works as an alias for
+        <code>loop</code>.
+      </p>
       <DocsPreview>
-        <motion-perspective class="demo-large" depth="0.7" vanish="left" oscillate duration="1.667">ROTATING</motion-perspective>
+        <motion-perspective class="demo-large" depth="0.7" vanish="left" loop duration="1.667">ROTATING</motion-perspective>
       </DocsPreview>
       <CodeWindow
         filename="motion-perspective.html"
         copy
-        code={`<motion-perspective depth="0.7" oscillate duration="1.667">
+        code={`<motion-perspective depth="0.7" loop duration="1.667">
   ROTATING
 </motion-perspective>`}
       />
@@ -98,12 +102,12 @@ el.text = 'UPDATED'   // animation restarts`}
       <h2>Pause on hover</h2>
       <p>Add <code>pause-on-hover</code> to freeze the animation when the cursor enters.</p>
       <DocsPreview>
-        <motion-perspective class="demo-large" depth="0.7" oscillate duration="2" pause-on-hover>HOVER ME</motion-perspective>
+        <motion-perspective class="demo-large" depth="0.7" loop duration="2" pause-on-hover>HOVER ME</motion-perspective>
       </DocsPreview>
       <CodeWindow
         filename="motion-perspective.html"
         copy
-        code={`<motion-perspective depth="0.7" oscillate duration="2" pause-on-hover>
+        code={`<motion-perspective depth="0.7" loop duration="2" pause-on-hover>
   HOVER ME
 </motion-perspective>`}
       />
@@ -113,7 +117,7 @@ el.text = 'UPDATED'   // animation restarts`}
         Characters are laid out in a bottom-aligned flex row. Each character's <code>font-size</code> is scaled from <code>(1 - depth)em</code> at the vanishing end to <code>1em</code> at the foreground end. Because all characters share the same baseline, the result mimics text on a flat plane receding into the distance.
       </p>
       <p>
-        In oscillate mode, a <code>requestAnimationFrame</code> loop drives a cosine wave across the character positions, continuously cycling the perspective illusion through a full rotation.
+        In loop mode, a <code>requestAnimationFrame</code> cycle drives a cosine wave across the character positions, continuously cycling the perspective illusion through a full rotation.
       </p>
 
       <h2>Properties</h2>
@@ -121,20 +125,22 @@ el.text = 'UPDATED'   // animation restarts`}
         { name: 'text', type: 'string', default: '—', description: 'Text to render with the perspective effect. Falls back to the child text when unset' },
         { name: 'depth', type: 'number', default: '0.65', description: 'Effect intensity: how small the vanishing end gets (0–1)' },
         { name: 'vanish', type: 'string', default: "'left'", description: "Which end of the text is the vanishing point: <code>'left'</code> or <code>'right'</code>" },
-        { name: 'oscillate', type: 'boolean', default: 'false', description: 'Continuously rotate the perspective back and forth' },
-        { name: 'duration', type: 'number', default: '0.667', description: 'Seconds per oscillation cycle. Lower is faster (only applies when <code>oscillate</code> is set)' },
+        { name: 'loop', type: 'boolean', default: 'false', description: 'Continuously rotate the perspective back and forth. <code>oscillate</code> is kept as an alias' },
+        { name: 'duration', type: 'number', default: '0.667', description: 'Seconds per rotation cycle. Lower is faster (only applies when <code>loop</code> is set)' },
         { name: 'pause-on-hover', type: 'boolean', default: 'false', description: 'Freeze animation on mouseenter, resume on mouseleave' },
       ]} />
 
       <h2>JavaScript API</h2>
       <p class="section-desc">Control the perspective programmatically with <code>play()</code>, <code>pause()</code>, <code>finish()</code>, and <code>cancel()</code>.</p>
       <JsApiDemo target="api-perspective-demo" wide>
-        <motion-perspective id="api-perspective-demo" text="JS API" oscillate duration="2">
+        <motion-perspective id="api-perspective-demo" text="JS API" loop duration="2">
         </motion-perspective>
       </JsApiDemo>
 
       <h2>Accessibility</h2>
-      <p>When <code>prefers-reduced-motion</code> is set, oscillate mode falls back to the static perspective layout.</p>
+      <p>
+        When <code>prefers-reduced-motion</code> is set, <code>loop</code> falls back to the static perspective layout.
+      </p>
       <DocsPagination />
     </main>
       <DocsTOC />

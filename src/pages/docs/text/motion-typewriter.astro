@@ -48,8 +48,35 @@ import 'motion-components'               // or the whole library`}
         { name: 'delay', type: 'number', default: '0', description: 'Delay before typing starts after viewport entry, in seconds' },
         { name: 'hold', type: 'number', default: '1.8', description: 'Time to hold the finished line before erasing, in seconds (loop only)' },
         { name: 'loop', type: 'boolean', default: 'false', description: 'Erase and retype continuously' },
+        { name: 'gap', type: 'number', default: '0.5', description: 'With <code>loop</code>, seconds the line stays empty after erasing before typing starts again' },
+        { name: 'pause-on-hover', type: 'boolean', default: 'false', description: 'With <code>loop</code>, freeze the cycle while the pointer is over the text, resuming on leave' },
         { name: 'cursor', type: 'boolean', default: 'true', description: 'Show a blinking cursor. Set <motion-code-inline copy>cursor="false"</motion-code-inline> to hide it' },
       ]} />
+      <h2>Pause on hover</h2>
+      <p>
+        Add <code>pause-on-hover</code> to freeze the typing cycle while the pointer is over the text. <code>gap</code>
+        sets the empty pause between erasing and retyping.
+      </p>
+      <DocsPreview replayId="typewriter-loop">
+        <p class="sentence">
+          <motion-typewriter
+            id="typewriter-loop"
+            interval="0.06"
+            loop
+            hold="1.2"
+            gap="0.8"
+            pause-on-hover>Hover to hold the line</motion-typewriter
+          >
+        </p>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-typewriter-loop.html"
+        copy
+        code={`<motion-typewriter interval="0.06" loop hold="1.2" gap="0.8" pause-on-hover>
+  Hover to hold the line
+</motion-typewriter>`}
+      />
+
       <h2>JavaScript API</h2>
       <p class="section-desc">Control the typewriter programmatically with <code>play()</code>, <code>pause()</code>, <code>finish()</code>, and <code>cancel()</code>.</p>
       <JsApiDemo mode="looper" target="api-typewriter-demo" wide>
@@ -59,7 +86,7 @@ import 'motion-components'               // or the whole library`}
       </JsApiDemo>
 
       <h2>Accessibility</h2>
-      <p>Respects <code>prefers-reduced-motion</code>: when enabled, the typing animation is skipped and the full text appears immediately.</p>
+      <p>Respects <code>prefers-reduced-motion</code>: when enabled, the typing animation is skipped, the full text appears immediately and <code>loop</code> never starts.</p>
       <DocsPagination />
     </main>
       <DocsTOC />

@@ -24,7 +24,7 @@ import CodeWindow from '../components/CodeWindow.astro'
     <!-- ── Manifesto ────────────────────────── -->
     <section class="manifesto">
       <h2 class="manifesto-statement">
-        Motion is not only <motion-headline by="chars" interval="0.04" duration="0.9"
+        Motion is <motion-underline shape="zigzag">not only</motion-underline> <motion-headline by="chars" interval="0.04" duration="0.9"
           >decoration
         </motion-headline>.</h2
       >
@@ -48,9 +48,9 @@ import CodeWindow from '../components/CodeWindow.astro'
       free.
     </p>
 
-    <p class="tagline">The simplicity of HTML. <span><motion-curve amplitude="8" wave-length="220" wave-duration="5">
+    <p class="tagline">The simplicity of HTML. <span><motion-underline shape="zigzag">
   The power of Motion
-</motion-curve></span>.</p>
+</motion-underline></span>.</p>
 
     <!-- ── What are web components ─────────── -->
     <section>
@@ -297,7 +297,7 @@ customElements.define('my-hover', MyHover)`}
 
   <script>
     import "motion-components/motion-code-inline";
-    import "motion-components/motion-curve";
+    import "motion-components/motion-underline";
     import "motion-components/motion-headline";
     import "motion-components/motion-liquid";
   </script>
@@ -373,8 +373,9 @@ customElements.define('my-hover', MyHover)`}
       margin: 2rem 0 0;
     }
 
-    .tagline span {
-      color: var(--mc-color-yellow);
+    motion-underline {
+      --mc-mark-color: var(--mc-color-yellow);
+      --mc-mark-thickness: 3px;
     }
 
     .manifesto p:not(.manifesto-statement) {
