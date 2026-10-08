@@ -288,6 +288,10 @@ document.querySelector('#like-icon').icon = heart`,
         Put <code>draw</code> in front of another animation to run both: the outline draws in, the fill fades in, and the icon moves at the same
         time. On a filled icon, only the motion runs.
       </p>
+      <p>
+        <code>draw</code> combines with any one motion. Two motions don't combine: in <code>animation="pop wiggle"</code> only the first
+        motion, <code>pop</code>, runs.
+      </p>
       <DocsPreview compact>
         <div class="row">
           <div class="cell"><motion-icon src={lucide("zap")} animation="draw wiggle" style="--mc-icon-color: #eab308; --mc-icon-fill: #eab3084d"></motion-icon><span>draw wiggle</span></div>
