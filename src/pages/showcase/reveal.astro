@@ -1,0 +1,334 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ShowcaseFonts from "../../components/showcase/ShowcaseFonts.astro";
+import CategoryNav from "../../components/showcase/CategoryNav.astro";
+import ShowcaseCode from "../../components/showcase/ShowcaseCode.astro";
+import "../../styles/showcase.css";
+
+const signals = [
+  "This is new.",
+  "This belongs with that.",
+  "Read this first.",
+  "This came from where you clicked.",
+  "Nothing here changed.",
+];
+
+const snippets = {
+  statement: `<motion-blur direction="both" intensity="18" y="40" once="false">
+  <p>A page is read in time, not all at once.</p>
+</motion-blur>`,
+  heading: `<motion-blur-in intensity="24" y="28" duration="0.9" once="false">
+  <h2>Motion tells you where to look.</h2>
+</motion-blur-in>`,
+  rise: `<motion-reveal y="64" duration="0.8" once="false">
+  <p>
+    When everything appears at the same moment, the eye has to decide on its own
+    where to start. A small, short movement settles that question.
+  </p>
+</motion-reveal>`,
+  list: `<motion-stagger interval="0.12" y="28" duration="0.6" once="false">
+${signals.map((t) => `  <p>${t}</p>`).join("\n")}
+</motion-stagger>`,
+  quote: `<motion-blur direction="in" intensity="22" y="60" once="false">
+  <blockquote>Good motion is noticed once, then forgotten.</blockquote>
+</motion-blur>`,
+  drop: `<motion-reveal y="-48" duration="0.9" once="false">
+  <p>
+    The first time, a movement explains what happened.
+    After that it should get out of the way.
+  </p>
+</motion-reveal>`,
+  orders: ["first", "center", "last"]
+    .map(
+      (from) => `<motion-stagger interval="0.1" y="40" from="${from}" once="false" style="display: flex; gap: 1rem">
+  <span>one</span><span>two</span><span>three</span><span>four</span><span>five</span>
+</motion-stagger>`,
+    )
+    .join("\n\n"),
+  last: `<motion-blur direction="in" intensity="20" y="40" once="false">
+  <p>And when you move on, it lets go.</p>
+</motion-blur>`,
+};
+---
+
+<Layout
+  title="Reveal showcase — Motion Components"
+  description="A short essay where every paragraph enters differently: scroll-linked blur, blur-in, fade-and-rise and staggered lists, built from the four motion-components reveal tags."
+  noMain>
+  <ShowcaseFonts />
+
+  <main id="main" class="sc">
+    <header class="sc-cat-hero">
+      <h1 class="sc-cat-title" style="--len: 6">reveal</h1>
+      <p class="sc-cat-lede">
+        Four tags for how content arrives. This page is a short essay, and each part of it enters in its own way. The caption under
+        each part names the tag and the setting. Scroll back up and most of it plays again.
+      </p>
+    </header>
+
+    <article class="rv">
+      <section class="rv-spec rv-wide">
+        <motion-blur direction="both" intensity="18" y="40" once="false">
+          <p class="rv-statement">A page is read in time, not all at once.</p>
+        </motion-blur>
+        <p class="sc-meta">
+          <a href="/docs/reveal/motion-blur/"><code>&lt;motion-blur&gt;</code></a>
+          <span>direction="both": sharp only in the middle of the screen, blurred as it arrives and as it leaves</span>
+        </p>
+        <ShowcaseCode tags={["motion-blur"]} code={snippets.statement} />
+      </section>
+
+      <section class="rv-spec">
+        <motion-blur-in intensity="24" y="28" duration="0.9" once="false">
+          <h2 class="rv-heading">Motion tells you where to look.</h2>
+        </motion-blur-in>
+        <p class="sc-meta">
+          <a href="/docs/reveal/motion-blur-in/"><code>&lt;motion-blur-in&gt;</code></a>
+          <span>comes into focus over 0.9 seconds when it scrolls into view</span>
+        </p>
+        <ShowcaseCode tags={["motion-blur-in"]} code={snippets.heading} />
+      </section>
+
+      <section class="rv-spec rv-indent">
+        <motion-reveal y="64" duration="0.8" once="false">
+          <p class="rv-body">
+            When everything appears at the same moment, the eye has to decide on its own where to start. A small, short movement
+            settles that question. It points at the part that just changed and says: start here.
+          </p>
+        </motion-reveal>
+        <p class="sc-meta">
+          <a href="/docs/reveal/motion-reveal/"><code>&lt;motion-reveal&gt;</code></a>
+          <span>fades in and rises 64 pixels on a spring</span>
+        </p>
+        <ShowcaseCode tags={["motion-reveal"]} code={snippets.rise} />
+      </section>
+
+      <section class="rv-spec">
+        <h2 class="rv-subhead">What a single movement can say</h2>
+        <motion-stagger class="rv-list" interval="0.12" y="28" duration="0.6" once="false">
+          {signals.map((s) => <p class="rv-list-item">{s}</p>)}
+        </motion-stagger>
+        <p class="sc-meta">
+          <a href="/docs/reveal/motion-stagger/"><code>&lt;motion-stagger&gt;</code></a>
+          <span>each line follows the one before it by 0.12 seconds</span>
+        </p>
+        <ShowcaseCode tags={["motion-stagger"]} code={snippets.list} />
+      </section>
+
+      <section class="rv-spec rv-wide">
+        <motion-blur direction="in" intensity="22" y="60" once="false">
+          <blockquote class="rv-quote">Good motion is noticed once, then forgotten.</blockquote>
+        </motion-blur>
+        <p class="sc-meta">
+          <a href="/docs/reveal/motion-blur/"><code>&lt;motion-blur&gt;</code></a>
+          <span>direction="in": the blur follows your scroll, so it sharpens as you move down and blurs again as you move up</span>
+        </p>
+        <ShowcaseCode tags={["motion-blur"]} code={snippets.quote} />
+      </section>
+
+      <section class="rv-spec rv-indent">
+        <motion-reveal y="-48" duration="0.9" once="false">
+          <p class="rv-body">
+            The first time, a movement explains what happened. After that it should get out of the way. That is why these
+            entrances are short, why they use springs instead of fixed curves, and why they never move the text you are already
+            reading.
+          </p>
+        </motion-reveal>
+        <p class="sc-meta">
+          <a href="/docs/reveal/motion-reveal/"><code>&lt;motion-reveal&gt;</code></a>
+          <span>y="-48": drops in from above instead of rising</span>
+        </p>
+        <ShowcaseCode tags={["motion-reveal"]} code={snippets.drop} />
+      </section>
+
+      <section class="rv-spec">
+        <h2 class="rv-subhead">Three ways to order a list</h2>
+        <div class="rv-orders">
+          <div class="rv-order">
+            <motion-stagger class="rv-words" interval="0.1" y="40" from="first" once="false">
+              <span>one</span><span>two</span><span>three</span><span>four</span><span>five</span>
+            </motion-stagger>
+            <p class="sc-meta"><code>from="first"</code> <span>left to right</span></p>
+          </div>
+          <div class="rv-order">
+            <motion-stagger class="rv-words" interval="0.1" y="40" from="center" once="false">
+              <span>one</span><span>two</span><span>three</span><span>four</span><span>five</span>
+            </motion-stagger>
+            <p class="sc-meta"><code>from="center"</code> <span>outward from the middle</span></p>
+          </div>
+          <div class="rv-order">
+            <motion-stagger class="rv-words" interval="0.1" y="40" from="last" once="false">
+              <span>one</span><span>two</span><span>three</span><span>four</span><span>five</span>
+            </motion-stagger>
+            <p class="sc-meta"><code>from="last"</code> <span>right to left</span></p>
+          </div>
+        </div>
+        <p class="sc-meta">
+          <a href="/docs/reveal/motion-stagger/"><code>&lt;motion-stagger&gt;</code></a>
+          <span>the same five words with three values of <code>from</code></span>
+        </p>
+        <ShowcaseCode tags={["motion-stagger"]} code={snippets.orders} />
+      </section>
+
+      <section class="rv-spec rv-wide rv-last">
+        <motion-blur direction="in" intensity="20" y="40" once="false">
+          <p class="rv-statement rv-fade">And when you move on, it lets go.</p>
+        </motion-blur>
+        <p class="sc-meta">
+          <a href="/docs/reveal/motion-blur/"><code>&lt;motion-blur&gt;</code></a>
+          <span>direction="in": comes into focus as you reach the end, and blurs again if you scroll back up</span>
+        </p>
+        <ShowcaseCode tags={["motion-blur"]} code={snippets.last} />
+      </section>
+    </article>
+
+    <CategoryNav current="reveal" />
+  </main>
+
+  <script>
+    import "motion-components/motion-blur";
+    import "motion-components/motion-blur-in";
+    import "motion-components/motion-reveal";
+    import "motion-components/motion-stagger";
+  </script>
+
+  <style>
+    .rv {
+      padding: clamp(2rem, 8vh, 5rem) var(--gutter) clamp(4rem, 14vh, 9rem);
+    }
+
+    .rv-spec {
+      max-width: 46rem;
+      margin-bottom: clamp(6rem, 22vh, 14rem);
+    }
+
+    .rv-wide {
+      max-width: none;
+    }
+
+    .rv-indent {
+      margin-left: clamp(0rem, 18vw, 22rem);
+    }
+
+    .rv-last {
+      margin-bottom: clamp(3rem, 10vh, 6rem);
+    }
+
+    .rv-spec motion-blur,
+    .rv-spec motion-blur-in,
+    .rv-spec motion-reveal,
+    .rv-spec motion-stagger {
+      display: block;
+    }
+
+    .rv-statement {
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(2.75rem, 9vw, 9rem);
+      font-weight: 800;
+      font-variation-settings: "wdth" 60, "opsz" 96;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+      max-width: 14ch;
+    }
+
+    .rv-fade {
+      color: var(--mc-color-muted);
+      margin-left: auto;
+      text-align: right;
+    }
+
+    .rv-heading {
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(2.25rem, 5.5vw, 5rem);
+      font-weight: 700;
+      font-variation-settings: "wdth" 75, "opsz" 72;
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      color: var(--mc-color-yellow);
+    }
+
+    .rv-body {
+      margin: 0;
+      font-size: clamp(1.15rem, 1.7vw, 1.45rem);
+      line-height: 1.65;
+      max-width: 34em;
+    }
+
+    .rv-subhead {
+      margin: 0 0 1.75rem;
+      font-family: var(--display);
+      font-size: clamp(1.5rem, 2.6vw, 2.25rem);
+      font-weight: 600;
+      font-variation-settings: "wdth" 85, "opsz" 48;
+      color: var(--mc-color-muted);
+    }
+
+    .rv-list-item {
+      margin: 0;
+      padding: 0.6rem 0;
+      font-family: var(--display);
+      font-size: clamp(1.75rem, 4vw, 3.5rem);
+      font-weight: 700;
+      font-variation-settings: "wdth" 68, "opsz" 72;
+      line-height: 1.1;
+      letter-spacing: -0.015em;
+    }
+
+    .rv-list-item:nth-child(even) {
+      color: var(--mc-color-accent);
+    }
+
+    .rv-quote {
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(2.25rem, 6.5vw, 6.5rem);
+      font-weight: 300;
+      font-variation-settings: "wdth" 125, "opsz" 96;
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      max-width: 18ch;
+      margin-left: auto;
+      text-align: right;
+    }
+
+    @media (min-width: 721px) {
+      .rv-wide:has(.rv-quote) .sc-meta,
+      .rv-last .sc-meta {
+        justify-content: flex-end;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .rv-indent {
+        margin-left: 0;
+      }
+    }
+
+    .rv-orders {
+      display: flex;
+      flex-direction: column;
+      gap: 2.5rem;
+    }
+
+    .rv-order .sc-meta {
+      margin-top: 0.4rem;
+    }
+
+    .rv .rv-words {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0 clamp(0.75rem, 2vw, 1.75rem);
+      font-family: var(--display);
+      font-size: clamp(2rem, 5vw, 4.5rem);
+      font-weight: 800;
+      font-variation-settings: "wdth" 60, "opsz" 96;
+      line-height: 1.05;
+    }
+
+    .rv-words span:nth-child(3) {
+      color: var(--mc-color-yellow);
+    }
+  </style>
+</Layout>

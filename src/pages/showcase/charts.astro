@@ -1,0 +1,399 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ShowcaseFonts from "../../components/showcase/ShowcaseFonts.astro";
+import CategoryNav from "../../components/showcase/CategoryNav.astro";
+import ShowcaseCode from "../../components/showcase/ShowcaseCode.astro";
+import "../../styles/showcase.css";
+
+type Attrs = Record<string, string | boolean>;
+
+const months = "Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec";
+const revenue = {
+  2025: "6200, 5400, 6100, 7000, 7600, 8100, 8800, 8300, 7900, 8600, 9900, 12400",
+  2026: "8100, 7300, 8400, 11200, 12600, 14100, 15800, 15100, 13900, 14800, 17200, 21500",
+};
+
+// The page sets these as tokens on .ch-story; snippets carry the light-theme values so they paste anywhere.
+const palette = ["#2563eb", "#a16207", "#60608a", "#18181e", "#9db7f4"];
+const colors = (n: number) => palette.slice(0, n).map((c, i) => `--mc-chart-${i + 1}: ${c}`).join("; ");
+
+const orders: Attrs = {
+  type: "line",
+  label: "Orders per month in 2026",
+  values: "310, 280, 340, 520, 610, 690, 760, 740, 700, 780, 920, 1240",
+  labels: months,
+};
+const channels: Attrs = {
+  type: "bar",
+  label: "Orders by channel per quarter",
+  values: "620, 460, 480, 510; 380, 1320, 2200, 2940; 0, 0, 180, 420",
+  labels: "Q1, Q2, Q3, Q4",
+  series: "Shop counter, Online, Wholesale",
+};
+const season: Attrs = {
+  type: "line",
+  label: "Drinks sold per month, hot and cold",
+  values:
+    "1900, 1820, 1760, 1500, 1240, 980, 860, 900, 1180, 1560, 1840, 2050; 120, 140, 260, 520, 890, 1260, 1480, 1390, 1010, 540, 260, 150",
+  labels: months,
+  series: "Hot drinks, Cold brew",
+};
+const roasted: Attrs = {
+  donut: true,
+  label: "Coffee roasted in 2026, in kilos",
+  values: "1320, 540, 360, 180",
+  labels: "House blend, Single origin, Decaf, Espresso",
+  "total-label": "kilos roasted",
+};
+const price: Attrs = {
+  label: "Where the price of a bag goes",
+  values: "6.2, 3.1, 2.4, 2.1, 2.2",
+  labels: "Green beans, Wages, Rent, Packaging, Profit",
+  format: "currency:EUR",
+};
+const revenueChart: Attrs = {
+  type: "bar",
+  label: "Revenue per month",
+  values: revenue[2026],
+  labels: months,
+  format: "currency:EUR",
+  "data-2025": revenue[2025],
+  "data-2026": revenue[2026],
+};
+const sparks: Attrs[] = [
+  { values: "40, 52, 61, 98, 140, 171, 198, 214, 232, 251, 280, 310", label: "Subscribers per month, from 40 to 310", area: true },
+  { values: "210, 198, 220, 214, 230, 236, 241, 228, 219, 224, 232, 240", label: "Café walk-ins per week, from 210 to 240" },
+  { values: "9, 8, 8, 6, 6, 5, 4, 4, 3, 3, 2, 2", label: "Returned orders per month, from 9 to 2" },
+];
+const sparkColors = ["#2563eb", "#60608a", "#a16207"];
+
+const tag = (name: string, attrs: Attrs, extra: Attrs = {}) => {
+  const lines = Object.entries({ ...extra, ...attrs })
+    .filter(([, v]) => v !== false)
+    .map(([k, v]) => (v === true ? `  ${k}` : `  ${k}="${v}"`));
+  return `<${name}\n${lines.join("\n")}\n></${name}>`;
+};
+
+const code = {
+  orders: tag("motion-chart", orders, { style: colors(1) }),
+  channels: tag("motion-chart", channels, { style: colors(3) }),
+  season: tag("motion-chart", season, { style: colors(2) }),
+  roasted: tag("motion-pie", roasted, { style: colors(4) }),
+  price: tag("motion-pie", price, { style: colors(5) }),
+  sparks: `<p>
+  Subscribers grew from 40 to 310
+  ${tag("motion-sparkline", sparks[0], { style: `--mc-sparkline-color: ${sparkColors[0]}` }).replace(/\n/g, "\n  ")}
+  while café walk-ins stayed almost flat
+  ${tag("motion-sparkline", sparks[1], { style: `--mc-sparkline-color: ${sparkColors[1]}` }).replace(/\n/g, "\n  ")}
+  and returns kept falling
+  ${tag("motion-sparkline", sparks[2], { style: `--mc-sparkline-color: ${sparkColors[2]}` }).replace(/\n/g, "\n  ")}.
+</p>`,
+  revenue: `<div role="group" aria-label="Year shown in the revenue chart">
+  <button type="button" data-year="2025" aria-pressed="false">2025</button>
+  <button type="button" data-year="2026" aria-pressed="true">2026</button>
+</div>
+
+${tag("motion-chart", revenueChart, { id: "revenue", style: colors(1) })}
+
+<script type="module">
+  const chart = document.getElementById("revenue");
+  const buttons = [...document.querySelectorAll("[data-year]")];
+  for (const button of buttons) {
+    button.addEventListener("click", () => {
+      chart.values = chart.getAttribute("data-" + button.dataset.year);
+      for (const b of buttons) b.setAttribute("aria-pressed", String(b === button));
+    });
+  }
+</script>`,
+};
+---
+
+<Layout
+  title="Charts showcase — Motion Components"
+  description="A short data story told with motion-chart, motion-pie and motion-sparkline: bars that grow, lines that draw in, a donut that sweeps, and values that spring to new numbers."
+  noMain>
+  <ShowcaseFonts />
+
+  <main id="main" class="sc">
+    <header class="sc-cat-hero">
+      <h1 class="sc-cat-title" style="--len: 6">charts</h1>
+      <p class="sc-cat-lede">
+        Three tags for numbers. Below is the year of Ember Hill, a small and entirely made-up coffee roastery, told as a short
+        report. Every chart draws itself as you reach it, and the data is plain HTML.
+      </p>
+    </header>
+
+    <article class="ch-story">
+      <section class="ch-part" aria-labelledby="ch-year">
+        <h2 class="ch-h" id="ch-year">The year in one line</h2>
+        <p class="ch-p">
+          Ember Hill opened its web shop in January with one roast and a hand-labelled bag. Orders were slow through the winter,
+          then a subscription launched in April and the line never looked back.
+        </p>
+        <figure class="ch-fig">
+          <motion-chart {...orders}></motion-chart>
+          <figcaption class="sc-meta">
+            <a href="/docs/charts/motion-chart/"><code>&lt;motion-chart&gt;</code></a>
+            <span>a line that draws in when it scrolls into view</span>
+          </figcaption>
+        </figure>
+        <ShowcaseCode tags={["motion-chart"]} code={code.orders} />
+      </section>
+
+      <section class="ch-part" aria-labelledby="ch-small">
+        <h2 class="ch-h" id="ch-small">Small lines, big stories</h2>
+        <p class="ch-p ch-spark">
+          Subscribers grew from 40 to 310
+          <motion-sparkline {...sparks[0]}></motion-sparkline>
+          while café walk-ins stayed almost flat
+          <motion-sparkline class="ch-spark-muted" {...sparks[1]}></motion-sparkline>
+          and returns kept falling
+          <motion-sparkline class="ch-spark-down" {...sparks[2]}></motion-sparkline>.
+        </p>
+        <p class="sc-meta">
+          <a href="/docs/charts/motion-sparkline/"><code>&lt;motion-sparkline&gt;</code></a>
+          <span>a trend the size of a word, drawn inside a sentence</span>
+        </p>
+        <ShowcaseCode tags={["motion-sparkline"]} code={code.sparks} />
+      </section>
+
+      <section class="ch-part" aria-labelledby="ch-channels">
+        <h2 class="ch-h" id="ch-channels">Where the orders came from</h2>
+        <p class="ch-p">
+          The shop counter carried the first quarter. By summer, online orders had passed it, and two local restaurants started
+          buying beans wholesale in the autumn.
+        </p>
+        <figure class="ch-fig">
+          <motion-chart {...channels}></motion-chart>
+          <figcaption class="sc-meta">
+            <a href="/docs/charts/motion-chart/"><code>&lt;motion-chart type="bar"&gt;</code></a>
+            <span>three series, bars that grow in one after another</span>
+          </figcaption>
+        </figure>
+        <ShowcaseCode tags={["motion-chart"]} code={code.channels} />
+      </section>
+
+      <section class="ch-part" aria-labelledby="ch-season">
+        <h2 class="ch-h" id="ch-season">Hot coffee, cold brew</h2>
+        <p class="ch-p">
+          Summer turned the menu upside down. Cold brew overtook hot drinks in June and handed the lead back in September, right on
+          schedule.
+        </p>
+        <figure class="ch-fig">
+          <motion-chart {...season}></motion-chart>
+          <figcaption class="sc-meta">
+            <a href="/docs/charts/motion-chart/"><code>&lt;motion-chart&gt;</code></a>
+            <span>two lines with a legend, a tooltip and arrow-key navigation</span>
+          </figcaption>
+        </figure>
+        <ShowcaseCode tags={["motion-chart"]} code={code.season} />
+      </section>
+
+      <section class="ch-part" aria-labelledby="ch-parts">
+        <h2 class="ch-h" id="ch-parts">Parts of the whole</h2>
+        <p class="ch-p">
+          The roaster ran 2,400 kilos of green coffee this year. Most of it went into the house blend. A bag sells for 16 euros,
+          and the beans are the biggest part of that price.
+        </p>
+        <div class="ch-pair">
+          <div class="ch-col">
+            <figure class="ch-fig">
+              <motion-pie {...roasted}></motion-pie>
+              <figcaption class="sc-meta">
+                <a href="/docs/charts/motion-pie/"><code>&lt;motion-pie donut&gt;</code></a>
+                <span>sweeps in, with the total in the middle</span>
+              </figcaption>
+            </figure>
+            <ShowcaseCode tags={["motion-pie"]} code={code.roasted} />
+          </div>
+          <div class="ch-col">
+            <figure class="ch-fig">
+              <motion-pie {...price}></motion-pie>
+              <figcaption class="sc-meta">
+                <a href="/docs/charts/motion-pie/"><code>&lt;motion-pie&gt;</code></a>
+                <span>hover a slice and it springs outward</span>
+              </figcaption>
+            </figure>
+            <ShowcaseCode tags={["motion-pie"]} code={code.price} />
+          </div>
+        </div>
+      </section>
+
+      <section class="ch-part" aria-labelledby="ch-compare">
+        <h2 class="ch-h" id="ch-compare">This year against last</h2>
+        <p class="ch-p">
+          Switch the year. The bars don't redraw from zero. Each one springs from its current height to the new value, so you can
+          watch every month grow.
+        </p>
+        <div class="ch-switch" role="group" aria-label="Year shown in the revenue chart">
+          <button type="button" class="ch-year" data-year="2025" aria-pressed="false">2025</button>
+          <button type="button" class="ch-year" data-year="2026" aria-pressed="true">2026</button>
+        </div>
+        <figure class="ch-fig">
+          <motion-chart id="ch-revenue" {...revenueChart}></motion-chart>
+          <figcaption class="sc-meta">
+            <a href="/docs/charts/motion-chart/"><code>&lt;motion-chart&gt;</code></a>
+            <span>new values spring in from wherever the bars are</span>
+          </figcaption>
+        </figure>
+        <ShowcaseCode tags={["motion-chart"]} code={code.revenue} />
+        <p class="ch-p ch-close">
+          Revenue for the year came to <strong class="ch-num">€160,000</strong>, two thirds more than the year before.
+        </p>
+      </section>
+    </article>
+
+    <CategoryNav current="charts" />
+  </main>
+
+  <script>
+    import "motion-components/motion-chart";
+    import "motion-components/motion-pie";
+    import "motion-components/motion-sparkline";
+
+    const chart = document.getElementById("ch-revenue") as (HTMLElement & { values: string }) | null;
+    const buttons = [...document.querySelectorAll<HTMLButtonElement>(".ch-year")];
+    for (const button of buttons) {
+      button.addEventListener("click", () => {
+        const year = button.dataset.year;
+        const values = year && chart?.getAttribute(`data-${year}`);
+        if (!chart || !values) return;
+        chart.values = values;
+        for (const b of buttons) b.setAttribute("aria-pressed", String(b === button));
+      });
+    }
+  </script>
+
+  <style>
+    .ch-story {
+      --mc-chart-1: var(--mc-color-accent);
+      --mc-chart-2: var(--mc-color-yellow);
+      --mc-chart-3: var(--mc-color-muted);
+      --mc-chart-4: var(--mc-color-text);
+      --mc-chart-5: color-mix(in srgb, var(--mc-color-accent) 45%, var(--mc-color-bg));
+      --mc-chart-surface: var(--mc-color-bg);
+      --mc-chart-height: clamp(16rem, 32vw, 24rem);
+      padding: clamp(1rem, 4vh, 3rem) var(--gutter) clamp(4rem, 10vh, 7rem);
+      display: flex;
+      flex-direction: column;
+      gap: clamp(5rem, 14vh, 9rem);
+    }
+
+    .ch-part {
+      max-width: 64rem;
+    }
+
+    .ch-h {
+      margin: 0 0 1.25rem;
+      font-family: var(--display);
+      font-size: clamp(2.25rem, 5.5vw, 4.5rem);
+      font-weight: 700;
+      font-variation-settings: "wdth" 75, "opsz" 72;
+      line-height: 1;
+      letter-spacing: -0.02em;
+    }
+
+    .ch-p {
+      max-width: 38rem;
+      margin: 0 0 2rem;
+      font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+      line-height: 1.7;
+      color: var(--mc-color-muted);
+    }
+
+    .ch-spark {
+      max-width: 44rem;
+      font-family: var(--display);
+      font-size: clamp(1.5rem, 3.2vw, 2.5rem);
+      font-weight: 600;
+      line-height: 1.45;
+      color: var(--mc-color-text);
+    }
+
+    .ch-spark motion-sparkline {
+      --mc-sparkline-width: 3.2em;
+      --mc-sparkline-height: 0.9em;
+      --mc-sparkline-color: var(--mc-color-accent);
+      --mc-sparkline-accent: var(--mc-color-yellow);
+      vertical-align: -0.05em;
+      margin-inline: 0.15em;
+    }
+
+    .ch-spark motion-sparkline:last-of-type {
+      margin-right: 0;
+    }
+
+    .ch-spark .ch-spark-muted {
+      --mc-sparkline-color: var(--mc-color-muted);
+      --mc-sparkline-accent: var(--mc-color-muted);
+    }
+
+    .ch-spark .ch-spark-down {
+      --mc-sparkline-color: var(--mc-color-yellow);
+      --mc-sparkline-accent: var(--mc-color-yellow);
+    }
+
+    .ch-fig {
+      margin: 0;
+      min-width: 0;
+    }
+
+    .ch-col {
+      min-width: 0;
+    }
+
+    .ch-fig motion-chart,
+    .ch-fig motion-pie {
+      display: block;
+    }
+
+    .ch-pair {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(2rem, 5vw, 4rem);
+    }
+
+    .ch-switch {
+      display: flex;
+      gap: 0.5rem;
+      margin: 0 0 1.5rem;
+    }
+
+    .ch-year {
+      font: 600 1.1rem / 1 var(--display);
+      padding: 0.6rem 1.1rem;
+      border-radius: 999px;
+      border: 1px solid var(--mc-color-border);
+      background: transparent;
+      color: var(--mc-color-muted);
+      cursor: pointer;
+    }
+
+    .ch-year[aria-pressed="true"] {
+      background: var(--mc-color-yellow);
+      border-color: var(--mc-color-yellow);
+      color: var(--mc-color-bg);
+    }
+
+    .ch-year:focus-visible {
+      outline: 2px solid var(--mc-color-accent);
+      outline-offset: 3px;
+    }
+
+    .ch-close {
+      margin-top: 2.5rem;
+    }
+
+    .ch-num {
+      font-family: var(--display);
+      font-weight: 700;
+      color: var(--mc-color-text);
+    }
+
+    @media (max-width: 720px) {
+      .ch-pair {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</Layout>

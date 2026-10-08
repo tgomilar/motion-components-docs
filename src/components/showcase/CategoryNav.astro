@@ -1,0 +1,28 @@
+---
+import { categories, categoryHref } from "../../data/showcase";
+
+interface Props {
+  current: string;
+}
+
+const { current } = Astro.props;
+const i = categories.findIndex((c) => c.slug === current);
+const prev = categories[(i - 1 + categories.length) % categories.length];
+const next = categories[(i + 1) % categories.length];
+---
+
+<nav class="sc-catnav" aria-label="Showcase categories">
+  <a class="sc-catnav-side" href={categoryHref(prev)}>
+    <span class="sc-catnav-dir">Previous</span>
+    <span class="sc-catnav-name">{prev.name}</span>
+  </a>
+  <a class="sc-catnav-all" href="/showcase/"><motion-underline>All categories</motion-underline></a>
+  <a class="sc-catnav-side sc-catnav-next" href={categoryHref(next)}>
+    <span class="sc-catnav-dir">Next</span>
+    <span class="sc-catnav-name">{next.name}</span>
+  </a>
+</nav>
+
+<script>
+  import "motion-components/motion-underline";
+</script>

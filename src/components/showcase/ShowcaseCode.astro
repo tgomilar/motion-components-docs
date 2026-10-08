@@ -1,0 +1,43 @@
+---
+interface Props {
+  code: string;
+  tags?: string[];
+  filename?: string;
+}
+
+const { code, tags = [], filename = "index.html" } = Astro.props;
+
+const imports = tags.length
+  ? `<script type="module">\n${tags.map((t) => `  import "motion-components/${t}";`).join("\n")}\n</script>\n\n`
+  : "";
+
+const escape = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+const svg = (d: string) =>
+  `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.25" stroke-linecap="round" stroke-linejoin="round">${d}</svg>`;
+const DOWN = svg(`<path d="M12 5v14"/><path d="m19 12-7 7-7-7"/>`);
+const UP = svg(`<path d="M12 19V5"/><path d="m5 12 7-7 7 7"/>`);
+const block = `<motion-code filename="${filename}" copy copy-label><pre>${escape(imports + code.trim())}</pre></motion-code>`;
+---
+
+<details class="sc-code">
+  <summary
+    ><motion-underline><span class="sc-code-show">Show the code</span><span class="sc-code-hide">Hide the code</span></motion-underline>
+    <motion-icon icon={DOWN} data-down={DOWN} data-up={UP} animation="draw nudge-down" trigger="mount"></motion-icon></summary
+  >
+  <div class="sc-code-body" set:html={block} />
+</details>
+
+<script>
+  import "motion-components/motion-code";
+  import "motion-components/motion-underline";
+  import "motion-components/motion-icon";
+
+  for (const details of document.querySelectorAll<HTMLDetailsElement>("details.sc-code")) {
+    const icon = details.querySelector("motion-icon") as (HTMLElement & { icon: string; animation: string }) | null;
+    details.addEventListener("toggle", () => {
+      if (!icon) return;
+      icon.animation = details.open ? "draw nudge-up" : "draw nudge-down";
+      icon.icon = (details.open ? icon.dataset.up : icon.dataset.down) ?? "";
+    });
+  }
+</script>

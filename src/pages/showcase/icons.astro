@@ -1,0 +1,355 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ShowcaseFonts from "../../components/showcase/ShowcaseFonts.astro";
+import CategoryNav from "../../components/showcase/CategoryNav.astro";
+import ShowcaseCode from "../../components/showcase/ShowcaseCode.astro";
+import "../../styles/showcase.css";
+
+const lucide = (name: string) => `https://cdn.jsdelivr.net/npm/lucide-static@1/icons/${name}.svg`;
+
+const wall = [
+  ["heart", "draw pulse"], ["bell", "draw wiggle"], ["rocket", "draw bounce"], ["star", "draw pop"],
+  ["sun", "draw rotate"], ["mail", "draw nudge-right"], ["zap", "draw wiggle"], ["music", "draw nudge-up"],
+  ["camera", "draw pop"], ["cloud", "draw bounce"], ["coffee", "draw"], ["gift", "draw wiggle"],
+  ["moon", "draw rotate"], ["send", "draw nudge-right"], ["anchor", "draw bounce"], ["compass", "draw rotate"],
+  ["flame", "draw pulse"], ["leaf", "draw wiggle"], ["key", "draw rotate"], ["map", "draw pop"],
+  ["umbrella", "draw bounce"], ["feather", "draw nudge-up"], ["globe", "draw rotate"], ["sparkles", "draw pop"],
+];
+
+const animations = [
+  { name: "draw", icon: "pen-tool", what: "strokes draw themselves in" },
+  { name: "pop", icon: "thumbs-up", what: "dips and springs back" },
+  { name: "bounce", icon: "rocket", what: "hops up and lands" },
+  { name: "rotate", icon: "settings", what: "turns a full circle" },
+  { name: "wiggle", icon: "bell", what: "wobbles on a bouncy spring" },
+  { name: "pulse", icon: "heart", what: "beats once" },
+  { name: "draw wiggle", icon: "zap", what: "draws and wobbles at once" },
+  { name: "draw pulse", icon: "flame", what: "draws and beats at once" },
+];
+
+const icon = (name: string, attrs: string) => `<motion-icon src="${lucide(name)}" ${attrs}></motion-icon>`;
+
+const wallCode = [
+  ["heart", "draw pulse", 0],
+  ["bell", "draw wiggle", 0.07],
+  ["rocket", "draw bounce", 0.14],
+  ["star", "draw pop", 0.21],
+]
+  .map(([name, animation, delay]) => icon(String(name), `animation="${animation}" trigger="view" once="false" delay="${delay}"`))
+  .join("\n");
+
+const animationsCode = [
+  ["pen-tool", "draw"],
+  ["thumbs-up", "pop"],
+  ["rocket", "bounce"],
+  ["settings", "rotate"],
+  ["bell", "wiggle"],
+  ["heart", "pulse"],
+  ["zap", "draw wiggle"],
+]
+  .map(([name, animation]) => icon(name, `animation="${animation}" trigger="loop" interval="1.4"`))
+  .join("\n");
+
+const triggersCode = `<a href="/next">
+  Hover this link
+  ${icon("arrow-right", `animation="bounce"`)}
+</a>
+
+<button type="button">
+  ${icon("refresh-cw", `animation="rotate" trigger="click" duration="0.9"`)}
+  Click to refresh
+</button>
+
+${icon("eye", `trigger="view" once="false"`)}
+${icon("party-popper", `animation="draw pop" trigger="mount"`)}
+${icon("bell-ring", `animation="wiggle" trigger="loop" interval="0.8"`)}`;
+
+const states = [
+  { name: "menu", label: "Menu", what: "menu and close" },
+  { name: "play", label: "Play", what: "play and pause" },
+  { name: "copy", label: "Copy", what: "copy and a check" },
+  { name: "plus", label: "Expand", what: "plus and minus" },
+  { name: "chevron", label: "Details", what: "chevron down and up" },
+  { name: "heart", label: "Like", what: "empty and filled heart" },
+  { name: "loading", label: "Load", what: "spinner and done" },
+  { name: "eye", label: "Show password", what: "eye and eye off" },
+];
+const statesCode = states.map((st) => `<motion-state-icon name="${st.name}" toggle label="${st.label}"></motion-state-icon>`).join("\n");
+---
+
+<Layout
+  title="Icons showcase — Motion Components"
+  description="Every motion-components icon effect live: any SVG icon drawn in, popped, bounced, rotated, wiggled or pulsed, and eight icons that morph between two states."
+  noMain>
+  <ShowcaseFonts />
+
+  <main id="main" class="sc">
+    <header class="sc-cat-hero">
+      <h1 class="sc-cat-title" style="--len: 5">icons</h1>
+      <p class="sc-cat-lede">
+        Two tags. <code>motion-icon</code> takes any SVG icon and draws it in or moves it on a spring.
+        <code>motion-state-icon</code> morphs between two states, such as play and pause. Scroll the wall below and it draws itself
+        again each time you return.
+      </p>
+    </header>
+
+    <section class="ic-wall-wrap" aria-labelledby="ic-wall-title">
+      <h2 class="ic-h" id="ic-wall-title">Twenty-four icons, drawn as you arrive</h2>
+      <div class="ic-wall">
+        {
+          wall.map(([name, animation], i) => (
+            <motion-icon src={lucide(name)} animation={animation} trigger="view" once="false" delay={String((i % 8) * 0.07)} />
+          ))
+        }
+      </div>
+      <p class="sc-meta">
+        <a href="/docs/icons/motion-icon/"><code>&lt;motion-icon trigger="view"&gt;</code></a>
+        <span>draws in each time it scrolls into view, with a motion on top</span>
+      </p>
+      <ShowcaseCode tags={["motion-icon"]} code={wallCode} />
+    </section>
+
+    <section class="ic-section" aria-labelledby="ic-anim-title">
+      <h2 class="ic-h" id="ic-anim-title">Every animation, on repeat</h2>
+      <ul class="ic-specimens">
+        {
+          animations.map((a, i) => (
+            <li class="ic-specimen">
+              <motion-icon src={lucide(a.icon)} animation={a.name} trigger="loop" interval="1.4" delay={String(i * 0.12)} />
+              <span class="ic-name">{a.name}</span>
+              <span class="ic-what">{a.what}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="sc-meta">
+        <a href="/docs/icons/motion-icon/"><code>&lt;motion-icon animation="…"&gt;</code></a>
+        <span>pick one motion, or put <code>draw</code> in front of it to run both</span>
+      </p>
+      <ShowcaseCode tags={["motion-icon"]} code={animationsCode} />
+    </section>
+
+    <section class="ic-section" aria-labelledby="ic-trig-title">
+      <h2 class="ic-h" id="ic-trig-title">Five ways to start it</h2>
+      <div class="ic-triggers">
+        <div class="ic-trigger">
+          <a class="ic-btn" href="#ic-trig-title">
+            Hover this link
+            <motion-icon src={lucide("arrow-right")} animation="bounce" />
+          </a>
+          <span class="ic-what"><strong>hover</strong> follows the whole link and springs back on leave</span>
+        </div>
+        <div class="ic-trigger">
+          <button class="ic-btn" type="button">
+            <motion-icon src={lucide("refresh-cw")} animation="rotate" trigger="click" duration="0.9" />
+            Click to refresh
+          </button>
+          <span class="ic-what"><strong>click</strong> runs on every press of the button</span>
+        </div>
+        <div class="ic-trigger">
+          <span class="ic-solo"><motion-icon src={lucide("eye")} trigger="view" once="false" /></span>
+          <span class="ic-what"><strong>view</strong> draws in when it scrolls into view</span>
+        </div>
+        <div class="ic-trigger">
+          <span class="ic-solo"><motion-icon src={lucide("party-popper")} animation="draw pop" trigger="mount" /></span>
+          <span class="ic-what"><strong>mount</strong> plays once when the page loads</span>
+        </div>
+        <div class="ic-trigger">
+          <span class="ic-solo"><motion-icon src={lucide("bell-ring")} animation="wiggle" trigger="loop" interval="0.8" /></span>
+          <span class="ic-what"><strong>loop</strong> repeats with a pause between runs</span>
+        </div>
+      </div>
+      <p class="sc-meta">
+        <a href="/docs/icons/motion-icon/"><code>&lt;motion-icon trigger="…"&gt;</code></a>
+        <span>inside a button or link, hover and click follow that button or link</span>
+      </p>
+      <ShowcaseCode tags={["motion-icon"]} code={triggersCode} />
+    </section>
+
+    <section class="ic-section ic-states" aria-labelledby="ic-state-title">
+      <h2 class="ic-h" id="ic-state-title">Eight icons with two states. Press them.</h2>
+      <ul class="ic-state-list">
+        {
+          states.map((s) => (
+            <li class="ic-state">
+              <motion-state-icon name={s.name} toggle label={s.label} />
+              <span class="ic-name">{s.name}</span>
+              <span class="ic-what">{s.what}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="sc-meta">
+        <a href="/docs/icons/motion-state-icon/"><code>&lt;motion-state-icon toggle&gt;</code></a>
+        <span>a real toggle button: Space and Enter switch it, and it reports its state to screen readers</span>
+      </p>
+      <ShowcaseCode tags={["motion-state-icon"]} code={statesCode} />
+    </section>
+
+    <CategoryNav current="icons" />
+  </main>
+
+  <script>
+    import "motion-components/motion-icon";
+    import "motion-components/motion-state-icon";
+  </script>
+
+  <style>
+    .ic-h {
+      margin: 0 0 clamp(2rem, 5vh, 3rem);
+      font-family: var(--display);
+      font-size: clamp(1.75rem, 4vw, 3.25rem);
+      font-weight: 700;
+      font-variation-settings: "wdth" 75, "opsz" 72;
+      line-height: 1.05;
+      letter-spacing: -0.015em;
+      max-width: 22ch;
+    }
+
+    .ic-wall-wrap,
+    .ic-section {
+      padding: clamp(3.5rem, 10vh, 7rem) var(--gutter);
+    }
+
+    .ic-section {
+      border-top: 1px solid var(--mc-color-border);
+    }
+
+    .ic-wall {
+      display: grid;
+      grid-template-columns: repeat(8, 1fr);
+      gap: clamp(1.25rem, 3.5vw, 3.5rem) clamp(0.75rem, 2vw, 2rem);
+      justify-items: center;
+      --mc-icon-size: clamp(2.5rem, 7vw, 6.5rem);
+      color: var(--mc-color-text);
+    }
+
+    .ic-wall motion-icon:nth-child(5n + 1) {
+      color: var(--mc-color-yellow);
+    }
+
+    .ic-wall motion-icon:nth-child(7n + 3) {
+      color: var(--mc-color-accent);
+    }
+
+    .ic-specimens,
+    .ic-state-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+      gap: clamp(2rem, 5vh, 3.5rem) clamp(1rem, 3vw, 2.5rem);
+    }
+
+    .ic-specimen,
+    .ic-state {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.35rem;
+      --mc-icon-size: clamp(3rem, 5vw, 4rem);
+    }
+
+    .ic-specimen motion-icon,
+    .ic-state motion-state-icon {
+      margin-bottom: 0.75rem;
+    }
+
+    .ic-specimen:nth-child(3n + 1) motion-icon {
+      color: var(--mc-color-yellow);
+    }
+
+    .ic-specimen:nth-child(4n + 2) motion-icon {
+      color: var(--mc-color-accent);
+    }
+
+    .ic-name {
+      font-family: var(--display);
+      font-size: 1.35rem;
+      font-weight: 700;
+      font-variation-settings: "wdth" 75, "opsz" 48;
+      line-height: 1.1;
+    }
+
+    .ic-what {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      color: var(--mc-color-muted);
+    }
+
+    .ic-what strong {
+      color: var(--mc-color-text);
+      font-weight: 600;
+    }
+
+    .ic-triggers {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(14rem, 1fr));
+      gap: clamp(2rem, 5vh, 3rem) clamp(1.5rem, 4vw, 3rem);
+      align-items: start;
+    }
+
+    .ic-trigger {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+
+    .sc .ic-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      min-height: 3.5rem;
+      padding: 0 1.25rem;
+      border: 0;
+      border-radius: 999px;
+      background: var(--mc-color-yellow);
+      color: var(--mc-color-bg);
+      font: 600 1.05rem/1 var(--display);
+      cursor: pointer;
+      text-decoration: none;
+      --mc-icon-size: 1.3em;
+    }
+
+    .sc .ic-btn:hover {
+      text-decoration: none;
+    }
+
+    .ic-btn:focus-visible {
+      outline: 2px solid var(--mc-color-accent);
+      outline-offset: 3px;
+    }
+
+    .ic-solo {
+      display: flex;
+      align-items: center;
+      min-height: 3.5rem;
+      --mc-icon-size: 3.25rem;
+      color: var(--mc-color-accent);
+    }
+
+    .ic-states {
+      background: var(--mc-color-surface);
+    }
+
+    .ic-state motion-state-icon {
+      --mc-icon-size: clamp(3.5rem, 6vw, 4.75rem);
+      --mc-icon-accent: var(--mc-color-yellow);
+      color: var(--mc-color-text);
+      border-radius: 0.5rem;
+    }
+
+    .ic-wall-wrap .sc-meta,
+    .ic-section .sc-meta {
+      margin-top: clamp(2rem, 5vh, 3rem);
+    }
+
+    @media (max-width: 720px) {
+      .ic-wall {
+        grid-template-columns: repeat(4, 1fr);
+      }
+    }
+  </style>
+</Layout>
