@@ -5,8 +5,9 @@ interface Props {
 }
 
 import { SECTION_ORDER, SECTION_LABELS } from '../data/docs'
+import ArrowLink from './ArrowLink.astro'
 
-const { backHref = '/docs/', backLabel = '← Docs' } = Astro.props
+const { backHref = '/docs/', backLabel = 'Docs' } = Astro.props
 
 type NavItem = { name: string; href: string }
 
@@ -32,7 +33,7 @@ const activeSection = SECTION_ORDER.find(s => sections[s]?.some(item => item.hre
 
 <aside id="docs-sidebar" data-pagefind-ignore="all">
   <div class="sidebar-header">
-    <a href={backHref} class="back">{backLabel}</a>
+    <ArrowLink href={backHref} class="back" back>{backLabel}</ArrowLink>
     <button class="sidebar-close" id="sidebar-close" aria-label="Close menu">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
     </button>
@@ -117,16 +118,12 @@ const activeSection = SECTION_ORDER.find(s => sections[s]?.some(item => item.hre
   .back {
     display: inline-flex;
     align-items: center;
-    gap: 0.3rem;
+    gap: 0.4rem;
     font-size: 0.85rem;
-    color: var(--mc-color-muted);
-    text-decoration: none;
+    font-weight: 500;
     margin-bottom: 1.5rem;
-    transition: color 0.15s;
     flex-shrink: 0;
   }
-
-  .back:hover { color: var(--mc-color-text); }
 
   nav {
     display: flex;
