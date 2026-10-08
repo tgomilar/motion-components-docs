@@ -20,6 +20,8 @@
 <p align="center">
   <a href="https://www.motion-components.dev/"><strong>Explore the docs →</strong></a>
   ·
+  <a href="https://www.motion-components.dev/showcase/"><strong>See the showcase →</strong></a>
+  ·
   <a href="https://github.com/tgomilar/motion-components"><strong>View on GitHub →</strong></a>
 </p>
 
@@ -93,12 +95,16 @@ npm install motion-components
 | [`motion-swap`](https://www.motion-components.dev/docs/text/motion-swap/)               | Per-character vertical swap on hover or reveal   |
 | [`motion-text-mask`](https://www.motion-components.dev/docs/text/motion-text-mask/)     | Standalone mask-clip reveal primitive            |
 | [`motion-font`](https://www.motion-components.dev/docs/text/motion-font/)               | Variable font axis animation (weight/width/opsz) |
+| [`motion-marker`](https://www.motion-components.dev/docs/text/motion-marker/)           | Highlighter stroke that sweeps behind a phrase   |
+| [`motion-underline`](https://www.motion-components.dev/docs/text/motion-underline/)     | Line that draws itself under a phrase            |
+| [`motion-strike`](https://www.motion-components.dev/docs/text/motion-strike/)           | Line that draws itself through a phrase          |
+| [`motion-ring`](https://www.motion-components.dev/docs/text/motion-ring/)               | Ellipse or box that draws itself around a word   |
 
 ### Icons — animated icons
 
-| Component | Does |
-| --- | --- |
-| [`motion-icon`](https://www.motion-components.dev/docs/icons/motion-icon/) | Animates any SVG icon: draw-in, pop, bounce, rotate, wiggle, pulse |
+| Component                                                                              | Does                                                                  |
+| -------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| [`motion-icon`](https://www.motion-components.dev/docs/icons/motion-icon/)             | Animates any SVG icon: draw-in, pop, bounce, rotate, wiggle, pulse    |
 | [`motion-state-icon`](https://www.motion-components.dev/docs/icons/motion-state-icon/) | Icons that morph between two states: menu, play, copy, heart and more |
 
 ### Scroll — scroll-driven animation
@@ -110,26 +116,26 @@ npm install motion-components
 
 ### Components — interactive widgets
 
-| Component                                                                                                       | Does                                        |
-| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------- |
-| [`motion-slider`](https://www.motion-components.dev/docs/components/motion-slider/)                             | Gesture-driven carousel with spring snap    |
-| [`motion-gallery`](https://www.motion-components.dev/docs/components/motion-gallery/)                           | CSS grid gallery with FLIP lightbox expand  |
-| [`motion-dialog`](https://www.motion-components.dev/docs/components/motion-dialog/)                             | Spring-animated modal on native `<dialog>`  |
-| [`motion-countdown`](https://www.motion-components.dev/docs/components/motion-countdown/)                       | Animated timer — flip or slot-machine roll  |
-| [`motion-spotlight`](https://www.motion-components.dev/docs/components/motion-spotlight/)                       | Mouse-tracked radial gradient overlay       |
-| [`motion-progress`](https://www.motion-components.dev/docs/components/motion-progress/)                         | Spring-eased scroll progress bar            |
-| [`motion-image-compare`](https://www.motion-components.dev/docs/components/motion-image-compare/)               | Before/after slider, drag or keyboard       |
-| [`motion-flip-card`](https://www.motion-components.dev/docs/components/motion-flip-card/)                       | Two-sided flip card (hover or click)        |
-| [`motion-theme-toggle`](https://www.motion-components.dev/docs/components/motion-theme-toggle/)                 | Light/dark/system toggle, optional wipe     |
-| [`motion-theme-icon`](https://www.motion-components.dev/docs/components/motion-theme-toggle/#motion-theme-icon) | Spring sun, moon and system glyph           |
+| Component                                                                                                       | Does                                       |
+| --------------------------------------------------------------------------------------------------------------- | ------------------------------------------ |
+| [`motion-slider`](https://www.motion-components.dev/docs/components/motion-slider/)                             | Gesture-driven carousel with spring snap   |
+| [`motion-gallery`](https://www.motion-components.dev/docs/components/motion-gallery/)                           | CSS grid gallery with FLIP lightbox expand |
+| [`motion-dialog`](https://www.motion-components.dev/docs/components/motion-dialog/)                             | Spring-animated modal on native `<dialog>` |
+| [`motion-countdown`](https://www.motion-components.dev/docs/components/motion-countdown/)                       | Animated timer — flip or slot-machine roll |
+| [`motion-spotlight`](https://www.motion-components.dev/docs/components/motion-spotlight/)                       | Mouse-tracked radial gradient overlay      |
+| [`motion-progress`](https://www.motion-components.dev/docs/components/motion-progress/)                         | Spring-eased scroll progress bar           |
+| [`motion-image-compare`](https://www.motion-components.dev/docs/components/motion-image-compare/)               | Before/after slider, drag or keyboard      |
+| [`motion-flip-card`](https://www.motion-components.dev/docs/components/motion-flip-card/)                       | Two-sided flip card (hover or click)       |
+| [`motion-theme-toggle`](https://www.motion-components.dev/docs/components/motion-theme-toggle/)                 | Light/dark/system toggle, optional wipe    |
+| [`motion-theme-icon`](https://www.motion-components.dev/docs/components/motion-theme-toggle/#motion-theme-icon) | Spring sun, moon and system glyph          |
 
 ### Charts — data that springs
 
-| Component | Does |
-| --- | --- |
-| [`motion-chart`](https://www.motion-components.dev/docs/charts/motion-chart/) | Bar and line charts from attributes or a table; data changes spring into place |
-| [`motion-pie`](https://www.motion-components.dev/docs/charts/motion-pie/) | Pie and donut charts; slices sweep in and spring to new sizes |
-| [`motion-sparkline`](https://www.motion-components.dev/docs/charts/motion-sparkline/) | Small inline trend line for text, tables and stat tiles |
+| Component                                                                             | Does                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| [`motion-chart`](https://www.motion-components.dev/docs/charts/motion-chart/)         | Bar and line charts from attributes or a table; data changes spring into place |
+| [`motion-pie`](https://www.motion-components.dev/docs/charts/motion-pie/)             | Pie and donut charts; slices sweep in and spring to new sizes                  |
+| [`motion-sparkline`](https://www.motion-components.dev/docs/charts/motion-sparkline/) | Small inline trend line for text, tables and stat tiles                        |
 
 ### Code — syntax-highlighted display
 
@@ -138,7 +144,7 @@ npm install motion-components
 | [`motion-code`](https://www.motion-components.dev/docs/code/motion-code/)               | Code window with chrome bar & typing animation |
 | [`motion-code-inline`](https://www.motion-components.dev/docs/code/motion-code-inline/) | Inline `<code>` tag with copy button           |
 
-**40 components and counting.** → [Browse the full docs](https://www.motion-components.dev/docs/)
+**49 components and counting.** → [Browse the full docs](https://www.motion-components.dev/docs/) or [see them all live in the showcase](https://www.motion-components.dev/showcase/)
 
 Every component is also scriptable — play, pause, and inspect instances from JavaScript, or control everything at once with `pauseAll()` / `resumeAll()` / `cancelAll()`. → [JS API guide](https://www.motion-components.dev/docs/js-api/)
 
