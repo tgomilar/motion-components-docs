@@ -1,0 +1,171 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ShowcaseFonts from "../../components/showcase/ShowcaseFonts.astro";
+import CategoryNav from "../../components/showcase/CategoryNav.astro";
+import ShowcaseCode from "../../components/showcase/ShowcaseCode.astro";
+import "../../styles/showcase.css";
+
+type Row = { tag: string; word: string; how: string; html: string; kind?: "object" | "bleed" };
+
+const rows: Row[] = [
+  { tag: "gravity", word: "gravity", how: "drops in when it scrolls into view", html: `<motion-gravity height="120" interval="0.06">gravity</motion-gravity>` },
+  { tag: "stretch", word: "stretch", how: "hover it", html: `<motion-stretch spread="28">stretch</motion-stretch>` },
+  { tag: "font", word: "font", how: "breathes between thin and heavy", html: `<motion-font axis="wght" from="200" to="800" duration="1.2" loop hold="0.4" gap="0.4">font</motion-font>` },
+  { tag: "swap", word: "swap", how: "swaps its letters on a loop", html: `<motion-swap trigger="view" loop hold="1.2" gap="0.4">swap</motion-swap>` },
+  { tag: "liquid", word: "liquid", how: "never stops flowing", html: `<motion-liquid intensity="14" duration="6">liquid</motion-liquid>` },
+  { tag: "glitch", word: "glitch", how: "glitches every few seconds", html: `<motion-glitch trigger="loop" intensity="8">glitch</motion-glitch>` },
+  {
+    tag: "circle",
+    word: "circle",
+    how: "wraps text around a full circle and turns it",
+    kind: "object",
+    html: `<motion-circle text="text set around a full circle, turning slowly, " radius="120" duration="16"><span class="tx-core">circle</span></motion-circle>`,
+  },
+  { tag: "perspective", word: "perspective", how: "recedes and returns on a loop", html: `<motion-perspective depth="0.7" vanish="right" loop duration="3">perspective</motion-perspective>` },
+  { tag: "curve", word: "curve", how: "rides a travelling wave", html: `<motion-curve amplitude="40" wave-length="520" wave-duration="3">curve</motion-curve>` },
+  { tag: "ring", word: "ring", how: "circles itself, again and again", html: `<motion-ring loop hold="1.4" gap="0.6">ring</motion-ring>` },
+  { tag: "marker", word: "marker", how: "highlights itself on a loop", html: `<motion-marker loop hold="1.4" gap="0.6">marker</motion-marker>` },
+  { tag: "typewriter", word: "typewriter", how: "types, holds and erases", html: `<motion-typewriter interval="0.12" loop cursor>typewriter</motion-typewriter>` },
+  {
+    tag: "ticker",
+    word: "ticker",
+    how: "scrolls forever, and pauses on hover",
+    kind: "bleed",
+    html: `<motion-ticker speed="70" gap="64" pause-on-hover><span>ticker</span><span class="tx-ghost">ticker</span><span>ticker</span><span class="tx-ghost">ticker</span></motion-ticker>`,
+  },
+  { tag: "scramble", word: "scramble", how: "decodes itself over and over", html: `<motion-scramble loop hold="1.4" gap="0.3" iterations="3">scramble</motion-scramble>` },
+  { tag: "split", word: "split", how: "letters rise in, leave, and rise again", html: `<motion-split by="chars" interval="0.06" y="60" loop hold="1.2" gap="0.4">split</motion-split>` },
+  { tag: "headline", word: "headline", how: "letters slide up out of a mask, on a loop", html: `<motion-headline by="chars" interval="0.04" loop hold="1.4" gap="0.4">headline</motion-headline>` },
+  { tag: "text-mask", word: "text-mask", how: "rises from behind a clip line, on a loop", html: `<motion-text-mask loop hold="1.4" gap="0.4">text-mask</motion-text-mask>` },
+  { tag: "underline", word: "underline", how: "draws a wave under itself, on a loop", html: `<motion-underline shape="wave" loop hold="1.4" gap="0.6">underline</motion-underline>` },
+  { tag: "strike", word: "strike", how: "strikes itself through, on a loop", html: `<motion-strike loop hold="1.4" gap="0.6">strike</motion-strike>` },
+  { tag: "words", word: "words", how: "rotates through a list of words", html: `<motion-words words="words, rotate, repeat, again" interval="1.8"></motion-words>` },
+  { tag: "counter", word: "22", how: "counts up to the number of text components, again and again", html: `<motion-counter to="22" duration="1.8" loop hold="1.6" gap="0.4"></motion-counter>` },
+  {
+    tag: "arc",
+    word: "arc",
+    how: "bends text along half a circle and orbits",
+    kind: "object",
+    html: `<motion-arc text="text that bends along a slice of a circle" radius="160" arc="180" duration="14"><span class="tx-core">arc</span></motion-arc>`,
+  },
+];
+---
+
+<Layout
+  title="Text showcase — Motion Components"
+  description="All 22 motion-components text effects on one page: gravity, stretch, liquid, glitch, perspective, waves, rings, markers, typewriters, tickers and more, each set by one HTML tag."
+  noMain>
+  <ShowcaseFonts />
+
+  <main id="main" class="sc">
+    <header class="sc-cat-hero">
+      <h1 class="sc-cat-title" style="--len: 4">text</h1>
+      <p class="sc-cat-lede">
+        Twenty-two tags for type. Each word below is set by the tag it names, and almost all of them keep moving. Gravity drops in
+        as you reach it, and stretch waits for your pointer. For variable fonts in depth, see the <a href="/showcase/motion-font/">variable font showcase</a>.
+      </p>
+    </header>
+
+    <section class="sc-wall" aria-label="Every text component, each setting its own name">
+      {
+        rows.map((row) => (
+          <div class:list={["sc-row", row.kind && `sc-row-${row.kind}`]}>
+            <div class="sc-row-word" style={`--len: ${row.word.length}`} set:html={row.html} />
+            <p class="sc-meta">
+              <a href={`/docs/text/motion-${row.tag}/`}>
+                <code>&lt;motion-{row.tag}&gt;</code>
+              </a>
+              <span>{row.how}</span>
+            </p>
+            <ShowcaseCode tags={[`motion-${row.tag}`]} code={row.html} />
+          </div>
+        ))
+      }
+    </section>
+
+    <CategoryNav current="text" />
+  </main>
+
+  <script>
+    import "motion-components/motion-arc";
+    import "motion-components/motion-circle";
+    import "motion-components/motion-counter";
+    import "motion-components/motion-curve";
+    import "motion-components/motion-font";
+    import "motion-components/motion-glitch";
+    import "motion-components/motion-gravity";
+    import "motion-components/motion-headline";
+    import "motion-components/motion-liquid";
+    import "motion-components/motion-marker";
+    import "motion-components/motion-perspective";
+    import "motion-components/motion-ring";
+    import "motion-components/motion-scramble";
+    import "motion-components/motion-split";
+    import "motion-components/motion-stretch";
+    import "motion-components/motion-strike";
+    import "motion-components/motion-swap";
+    import "motion-components/motion-text-mask";
+    import "motion-components/motion-ticker";
+    import "motion-components/motion-typewriter";
+    import "motion-components/motion-underline";
+    import "motion-components/motion-words";
+  </script>
+
+  <style>
+    .sc-row-word :global(motion-underline),
+    .sc-row-word :global(motion-strike) {
+      --mc-mark-color: var(--mc-color-yellow);
+      --mc-mark-thickness: 0.06em;
+    }
+
+    .sc-row-word :global(motion-ring) {
+      --mc-mark-color: var(--mc-color-accent);
+    }
+
+    .sc-row-object .sc-row-word {
+      color: var(--mc-color-muted);
+    }
+
+    .sc-row-object .sc-row-word :global(motion-circle) {
+      color: var(--mc-color-text);
+    }
+
+    .sc-row-word :global(.tx-core) {
+      font-family: var(--display);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 800;
+      font-variation-settings: "wdth" 60, "opsz" 96;
+      color: var(--mc-color-yellow);
+      letter-spacing: 0;
+    }
+
+    .sc-row-object:has(motion-arc) .sc-row-word {
+      height: 23rem;
+      align-items: flex-start;
+      color: var(--mc-color-text);
+    }
+
+    .sc-row-object:has(motion-circle) .sc-row-word {
+      padding-block: 1.5rem;
+    }
+
+    .sc-row:has(motion-ring) .sc-meta {
+      margin-top: clamp(1.75rem, 4vw, 3rem);
+    }
+
+    .sc-row-bleed .sc-row-word {
+      --len: 7;
+      justify-content: flex-start;
+    }
+
+    .sc-row-word :global(.tx-ghost) {
+      color: transparent;
+      -webkit-text-stroke: 2px var(--mc-color-text);
+    }
+
+    .sc-row-word :global(motion-counter) {
+      font-variant-numeric: tabular-nums;
+      color: var(--mc-color-yellow);
+    }
+  </style>
+</Layout>

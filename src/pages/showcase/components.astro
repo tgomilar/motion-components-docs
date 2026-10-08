@@ -1,0 +1,584 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ShowcaseFonts from "../../components/showcase/ShowcaseFonts.astro";
+import CategoryNav from "../../components/showcase/CategoryNav.astro";
+import ShowcaseCode from "../../components/showcase/ShowcaseCode.astro";
+import "../../styles/showcase.css";
+
+type Scene = { bg: string; desk: string; body: string; glow: string; on: boolean; tilt: number };
+
+const lamp = ({ bg, desk, body, glow, on, tilt }: Scene) => {
+  const light = on
+    ? `<defs><radialGradient id="g"><stop offset="0" stop-color="${glow}" stop-opacity="0.6"/><stop offset="1" stop-color="${glow}" stop-opacity="0"/></radialGradient></defs>
+       <ellipse cx="520" cy="470" rx="330" ry="120" fill="url(#g)"/>
+       <polygon points="${500 + tilt},300 ${560 + tilt},285 690,470 340,470" fill="${glow}" fill-opacity="0.16"/>`
+    : "";
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+    <rect width="800" height="600" fill="${bg}"/>
+    ${light}
+    <rect y="470" width="800" height="130" fill="${desk}"/>
+    <ellipse cx="300" cy="470" rx="92" ry="16" fill="${body}"/>
+    <line x1="300" y1="462" x2="370" y2="290" stroke="${body}" stroke-width="16" stroke-linecap="round"/>
+    <circle cx="370" cy="290" r="14" fill="${body}"/>
+    <line x1="370" y1="290" x2="${500 + tilt}" y2="240" stroke="${body}" stroke-width="14" stroke-linecap="round"/>
+    <g transform="translate(${500 + tilt} 240) rotate(${28 + tilt / 2})">
+      <path d="M-14 -22 L82 6 L58 70 L-36 30 Z" fill="${body}"/>
+      <ellipse cx="22" cy="54" rx="34" ry="9" fill="${on ? glow : body}" fill-opacity="${on ? 1 : 0.6}"/>
+    </g>
+  </svg>`;
+  return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+};
+
+const shots = [
+  { name: "Coil in graphite", src: lamp({ bg: "#1a1a22", desk: "#0f0f13", body: "#e8e8f0", glow: "#facc15", on: true, tilt: 0 }) },
+  { name: "Coil in signal blue", src: lamp({ bg: "#222230", desk: "#1a1a22", body: "#60a5fa", glow: "#facc15", on: true, tilt: 20 }) },
+  { name: "Coil in paper", src: lamp({ bg: "#f0f0f8", desk: "#dddde8", body: "#18181e", glow: "#a16207", on: true, tilt: -10 }) },
+  { name: "Coil in ochre", src: lamp({ bg: "#0f0f13", desk: "#1a1a22", body: "#facc15", glow: "#facc15", on: true, tilt: 35 }) },
+];
+
+const off = lamp({ bg: "#0f0f13", desk: "#1a1a22", body: "#2e2e3e", glow: "#facc15", on: false, tilt: 0 });
+const on = lamp({ bg: "#1a1a22", desk: "#0f0f13", body: "#e8e8f0", glow: "#facc15", on: true, tilt: 0 });
+
+const gallery = [
+  ...shots,
+  { name: "Coil switched off", src: off },
+  { name: "Coil, low and wide", src: lamp({ bg: "#222230", desk: "#0f0f13", body: "#e8e8f0", glow: "#60a5fa", on: true, tilt: 45 }) },
+];
+
+const faq = [
+  { q: "How does it dim?", a: "Turn the head. The light eases down on a spring instead of stepping." },
+  { q: "Does it remember?", a: "It keeps your last brightness and colour for each time of day." },
+  { q: "Is Coil real?", a: "No. It is a made-up product, built to show the components on this page." },
+];
+
+const launch = "2027-03-01T09:00:00";
+
+const heroCode = `<motion-progress thickness="3"></motion-progress>
+
+<motion-spotlight size="620" style="--mc-spotlight-color: rgb(250 204 21 / 0.22)">
+  <section>
+    <h2>A desk lamp that dims on a spring.</h2>
+    <motion-countdown to="2027-03-01T09:00:00" format="days hours minutes seconds" roll></motion-countdown>
+    <button type="button" id="open-waitlist">Join the waitlist</button>
+  </section>
+</motion-spotlight>
+
+<motion-dialog id="waitlist" light-dismiss>
+  <h2>You found the waitlist</h2>
+  <p>Press Escape, click outside, or use the button.</p>
+  <button type="button" id="close-waitlist">Close</button>
+</motion-dialog>
+
+<script>
+  const dialog = document.querySelector("#waitlist");
+  document.querySelector("#open-waitlist").addEventListener("click", () => dialog.show());
+  document.querySelector("#close-waitlist").addEventListener("click", () => dialog.close());
+</script>`;
+
+const sliderCode = `<motion-slider gap="0" role="region" aria-label="Coil finishes">
+  <figure>
+    <img src="coil-graphite.jpg" alt="Coil in graphite" />
+    <figcaption>Coil in graphite</figcaption>
+  </figure>
+  <figure>
+    <img src="coil-blue.jpg" alt="Coil in signal blue" />
+    <figcaption>Coil in signal blue</figcaption>
+  </figure>
+  <figure>
+    <img src="coil-paper.jpg" alt="Coil in paper" />
+    <figcaption>Coil in paper</figcaption>
+  </figure>
+</motion-slider>`;
+
+const compareCode = `<motion-image-compare start="50" style="aspect-ratio: 4 / 3">
+  <img slot="before" src="desk-off.jpg" alt="The desk at night with Coil switched off" />
+  <img slot="after" src="desk-on.jpg" alt="The same desk with Coil switched on" />
+</motion-image-compare>`;
+
+const galleryCode = `<motion-gallery columns="3" gap="12" aspect-ratio="4/3">
+  <img src="coil-graphite.jpg" alt="Coil in graphite" data-caption="Coil in graphite" />
+  <img src="coil-blue.jpg" alt="Coil in signal blue" data-caption="Coil in signal blue" />
+  <img src="coil-paper.jpg" alt="Coil in paper" data-caption="Coil in paper" />
+  <img src="coil-off.jpg" alt="Coil switched off" data-caption="Coil switched off" />
+</motion-gallery>`;
+
+const flipCode = `<motion-flip-card trigger="click" axis="y" style="width: 16rem; height: 12rem">
+  <div slot="front">How does it dim?</div>
+  <div slot="back">Turn the head. The light eases down on a spring instead of stepping.</div>
+</motion-flip-card>`;
+
+const themeCode = `<article id="page">
+  <header class="bar">
+    <p class="logo">
+      <motion-theme-icon id="logo-icon" mode="light" aria-hidden="true"></motion-theme-icon>
+      Coil
+    </p>
+    <motion-theme-toggle id="page-toggle" appearance="toggle" icon-only wipe target="#page"></motion-theme-toggle>
+  </header>
+  <!-- the rest of the page -->
+</article>
+
+<style>
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 0.75rem 1.25rem; }
+  .logo { display: flex; align-items: center; gap: 0.5rem; margin: 0; font-weight: 700; }
+  #page[data-theme="dark"] { background: #1a1a22; color: #e8e8f0; }
+</style>
+
+<script>
+  const icon = document.querySelector("#logo-icon");
+  document.querySelector("#page-toggle").addEventListener("colorschemechange", (e) => {
+    icon.mode = e.detail.colorScheme;
+  });
+</script>`;
+---
+
+<Layout
+  title="Components showcase — Motion Components"
+  description="A launch page for a made-up desk lamp, built only from motion-components widgets: spotlight, countdown, dialog, slider, image compare, gallery, flip cards, progress and theme toggle."
+  noMain>
+  <ShowcaseFonts />
+
+  <main id="main" class="sc">
+    <motion-progress thickness="3" style="--mc-progress-color: var(--mc-color-yellow)"></motion-progress>
+
+    <header class="sc-cat-hero">
+      <h1 class="sc-cat-title" style="--len: 10">components</h1>
+      <p class="sc-cat-lede">
+        Ten ready-made widgets with the springs already inside. Below, they build a launch page for Coil, a desk lamp that does
+        not exist. Every moving part is a single tag, and the notes under each part say which one.
+      </p>
+    </header>
+
+    <article class="pc" id="pc" aria-label="Demo launch page for Coil, a made-up desk lamp">
+      <header class="pc-bar">
+        <p class="pc-logo">
+          <motion-theme-icon id="pc-icon" mode="light" aria-hidden="true"></motion-theme-icon>
+          <span>Coil</span>
+        </p>
+        <nav class="pc-links" aria-label="Coil page">
+          <a href="#pc-shots-title">Finishes</a>
+          <a href="#pc-compare-title">Light</a>
+          <a href="#pc-faq-title">Questions</a>
+        </nav>
+        <motion-theme-toggle id="pc-toggle" appearance="toggle" icon-only wipe target="#pc"></motion-theme-toggle>
+        <script is:inline>
+          (function () {
+            var root = document.documentElement.getAttribute("data-theme");
+            var dark = root ? root === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+            var mode = dark ? "dark" : "light";
+            document.getElementById("pc-toggle").setAttribute("mode", mode);
+            document.getElementById("pc-icon").setAttribute("mode", mode);
+          })();
+        </script>
+      </header>
+      <motion-spotlight class="pc-spot" size="620" style="--mc-spotlight-color: color-mix(in srgb, var(--mc-color-yellow) 22%, transparent)">
+        <section class="pc-hero">
+          <div class="pc-hero-copy">
+          <h2 class="pc-headline">A desk lamp that dims on a spring.</h2>
+          <p class="pc-sub">Launching 1 March 2027. Move your pointer over this panel to light it.</p>
+          <div class="pc-launch">
+            <motion-countdown to={launch} format="days hours minutes seconds" roll></motion-countdown>
+          </div>
+          <button class="pc-btn" type="button" id="pc-open">Join the waitlist</button>
+          </div>
+          <img class="pc-hero-art" src={on} alt="Coil, a jointed desk lamp, lighting a desk" width="800" height="600" />
+        </section>
+      </motion-spotlight>
+      <div class="pc-notes">
+        <p class="sc-meta"><a href="/docs/components/motion-spotlight/"><code>&lt;motion-spotlight&gt;</code></a> <span>the light that follows your pointer over the panel</span></p>
+        <p class="sc-meta"><a href="/docs/components/motion-countdown/"><code>&lt;motion-countdown&gt;</code></a> <span>rolls each digit to the launch date</span></p>
+        <p class="sc-meta"><a href="/docs/components/motion-dialog/"><code>&lt;motion-dialog&gt;</code></a> <span>opens from the waitlist button</span></p>
+        <p class="sc-meta"><a href="/docs/components/motion-progress/"><code>&lt;motion-progress&gt;</code></a> <span>the yellow bar along the top of the window</span></p>
+        <ShowcaseCode tags={["motion-progress", "motion-spotlight", "motion-countdown", "motion-dialog"]} code={heroCode} />
+        <p class="sc-meta"><a href="/docs/components/motion-theme-toggle/"><code>&lt;motion-theme-toggle&gt;</code></a> <span>in the header, wipes this whole launch page between light and dark in a circle from the switch, without changing the site</span></p>
+        <p class="sc-meta"><a href="/docs/components/motion-theme-icon/"><code>&lt;motion-theme-icon&gt;</code></a> <span>Coil's logo, morphing between sun and moon to match</span></p>
+        <ShowcaseCode tags={["motion-theme-toggle", "motion-theme-icon"]} code={themeCode} />
+      </div>
+
+      <section class="pc-block" aria-labelledby="pc-shots-title">
+        <h3 class="pc-title" id="pc-shots-title">Four finishes</h3>
+        <motion-slider class="pc-slider" gap="0" role="region" aria-label="Coil finishes">
+          {
+            shots.map((s) => (
+              <figure class="pc-slide">
+                <img src={s.src} alt={s.name} width="800" height="600" />
+                <figcaption>{s.name}</figcaption>
+              </figure>
+            ))
+          }
+        </motion-slider>
+      </section>
+      <div class="pc-notes">
+        <p class="sc-meta"><a href="/docs/components/motion-slider/"><code>&lt;motion-slider&gt;</code></a> <span>drag it, use the arrows, or the arrow keys</span></p>
+        <ShowcaseCode tags={["motion-slider"]} code={sliderCode} />
+      </div>
+
+      <section class="pc-block" aria-labelledby="pc-compare-title">
+        <h3 class="pc-title" id="pc-compare-title">Off, then on</h3>
+        <motion-image-compare class="pc-compare" start="50">
+          <img slot="before" src={off} alt="The desk at night with Coil switched off" />
+          <img slot="after" src={on} alt="The same desk with Coil switched on" />
+        </motion-image-compare>
+      </section>
+      <div class="pc-notes">
+        <p class="sc-meta"><a href="/docs/components/motion-image-compare/"><code>&lt;motion-image-compare&gt;</code></a> <span>drag the handle, or focus it and press the arrow keys</span></p>
+        <ShowcaseCode tags={["motion-image-compare"]} code={compareCode} />
+      </div>
+
+      <section class="pc-block" aria-labelledby="pc-gallery-title">
+        <h3 class="pc-title" id="pc-gallery-title">Gallery</h3>
+        <motion-gallery class="pc-gallery" columns="3" gap="12" aspect-ratio="4/3">
+          {gallery.map((g) => <img class="pc-gallery-item" src={g.src} alt={g.name} data-caption={g.name} />)}
+        </motion-gallery>
+      </section>
+      <div class="pc-notes">
+        <p class="sc-meta"><a href="/docs/components/motion-gallery/"><code>&lt;motion-gallery&gt;</code></a> <span>open any picture, then step through with the arrows</span></p>
+        <ShowcaseCode tags={["motion-gallery"]} code={galleryCode} />
+      </div>
+
+      <section class="pc-block" aria-labelledby="pc-faq-title">
+        <h3 class="pc-title" id="pc-faq-title">Questions</h3>
+        <div class="pc-faq">
+          {
+            faq.map((f) => (
+              <motion-flip-card class="pc-flip" trigger="click" axis="y">
+                <div slot="front" class="pc-face pc-face-front">{f.q}</div>
+                <div slot="back" class="pc-face pc-face-back">{f.a}</div>
+              </motion-flip-card>
+            ))
+          }
+        </div>
+      </section>
+      <div class="pc-notes">
+        <p class="sc-meta"><a href="/docs/components/motion-flip-card/"><code>&lt;motion-flip-card&gt;</code></a> <span>click a question to flip it to the answer</span></p>
+        <ShowcaseCode tags={["motion-flip-card"]} code={flipCode} />
+      </div>
+
+    </article>
+
+    <motion-dialog id="pc-dialog" light-dismiss>
+      <div class="pc-dialog">
+        <h2 class="pc-dialog-title">You found the waitlist</h2>
+        <p>
+          Coil is a made-up lamp, so there is nothing to sign up for. This panel shows how <code>&lt;motion-dialog&gt;</code> springs
+          open and closed. Press Escape, click outside, or use the button.
+        </p>
+        <button class="pc-btn" type="button" id="pc-close">Close</button>
+      </div>
+    </motion-dialog>
+
+    <CategoryNav current="components" />
+  </main>
+
+  <script>
+    import "motion-components/motion-progress";
+    import "motion-components/motion-spotlight";
+    import "motion-components/motion-countdown";
+    import "motion-components/motion-dialog";
+    import "motion-components/motion-slider";
+    import "motion-components/motion-image-compare";
+    import "motion-components/motion-gallery";
+    import "motion-components/motion-flip-card";
+    import "motion-components/motion-theme-toggle";
+    import "motion-components/motion-theme-icon";
+
+    const dialog = document.querySelector("#pc-dialog") as HTMLElement & { show(): void; close(): void };
+    document.querySelector("#pc-open")?.addEventListener("click", () => dialog.show());
+    document.querySelector("#pc-close")?.addEventListener("click", () => dialog.close());
+
+    const icon = document.querySelector("#pc-icon") as HTMLElement & { mode: string };
+    document.querySelector("#pc-toggle")?.addEventListener("colorschemechange", (e) => {
+      icon.mode = (e as CustomEvent<{ colorScheme: string }>).detail.colorScheme;
+    });
+  </script>
+
+  <style>
+    .pc {
+      margin: 0 var(--gutter) clamp(4rem, 10vh, 7rem);
+      border: 1px solid var(--mc-color-border);
+      border-radius: 1.5rem;
+      background: var(--mc-color-surface);
+      color: var(--mc-color-text);
+      overflow: hidden;
+    }
+
+    .pc[data-theme="light"] {
+      --mc-color-bg: #f8f8fc;
+      --mc-color-surface: #ffffff;
+      --mc-color-surface-2: #f0f0f8;
+      --mc-color-border: #dddde8;
+      --mc-color-text: #18181e;
+      --mc-color-muted: #60608a;
+      --mc-color-accent: #2563eb;
+      --mc-color-accent-dim: #2563eb18;
+      --mc-color-yellow: #a16207;
+    }
+
+    .pc[data-theme="dark"] {
+      --mc-color-bg: #0f0f13;
+      --mc-color-surface: #1a1a22;
+      --mc-color-surface-2: #222230;
+      --mc-color-border: #2e2e3e;
+      --mc-color-text: #e8e8f0;
+      --mc-color-muted: #8888a8;
+      --mc-color-accent: #60a5fa;
+      --mc-color-accent-dim: #60a5fa18;
+      --mc-color-yellow: #facc15;
+    }
+
+    .pc-bar {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0.85rem clamp(1rem, 4vw, 2.5rem);
+      border-bottom: 1px solid var(--mc-color-border);
+      background: var(--mc-color-surface);
+    }
+
+    .pc-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.55rem;
+      margin: 0;
+      font-family: var(--display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      font-variation-settings: "wdth" 75;
+      color: var(--mc-color-yellow);
+      --mc-theme-icon-size: 1.6rem;
+    }
+
+    .pc-links {
+      display: flex;
+      gap: 1.5rem;
+      margin-left: auto;
+      font-weight: 500;
+    }
+
+    .sc .pc-links a {
+      color: var(--mc-color-muted);
+    }
+
+    .sc .pc-links a:hover {
+      color: var(--mc-color-text);
+    }
+
+    .pc-bar motion-theme-toggle {
+      flex: none;
+    }
+
+    @media (max-width: 640px) {
+      .pc-links {
+        display: none;
+      }
+
+      .pc-bar motion-theme-toggle {
+        margin-left: auto;
+      }
+    }
+
+    .pc-spot {
+      display: block;
+    }
+
+    .pc-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+      align-items: center;
+      gap: clamp(2rem, 5vw, 4rem);
+      padding: clamp(3rem, 9vw, 7rem) clamp(1.25rem, 5vw, 4.5rem);
+      background: var(--mc-color-surface-2);
+    }
+
+    .pc-hero-art {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 1.25rem;
+    }
+
+    @media (max-width: 860px) {
+      .pc-hero {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .pc-headline {
+      max-width: 14ch;
+      margin: 0.75rem 0 0;
+      font-family: var(--display);
+      font-size: clamp(2.5rem, 7vw, 6.5rem);
+      font-weight: 800;
+      font-variation-settings: "wdth" 68, "opsz" 96;
+      line-height: 0.95;
+      letter-spacing: -0.02em;
+    }
+
+    .pc-sub {
+      margin: 1.25rem 0 0;
+      color: var(--mc-color-muted);
+      line-height: 1.6;
+    }
+
+    .pc-launch {
+      margin: 2rem 0;
+      --mc-countdown-size: clamp(2rem, 5vw, 3.5rem);
+      --mc-countdown-label-color: var(--mc-color-muted);
+      font-family: var(--display);
+      font-weight: 700;
+      overflow-x: auto;
+    }
+
+    .pc-btn {
+      font: inherit;
+      font-family: var(--display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 0.85rem 1.5rem;
+      border: 0;
+      border-radius: 999px;
+      background: var(--mc-color-yellow);
+      color: var(--mc-color-bg);
+      cursor: pointer;
+    }
+
+    .pc-btn:focus-visible {
+      outline: 2px solid var(--mc-color-accent);
+      outline-offset: 3px;
+    }
+
+    .pc-block {
+      padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1.25rem, 5vw, 4.5rem) 1.5rem;
+      border-top: 1px solid var(--mc-color-border);
+    }
+
+    .pc-title {
+      margin: 0 0 1.5rem;
+      font-family: var(--display);
+      font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+      font-weight: 700;
+      font-variation-settings: "wdth" 75, "opsz" 72;
+      letter-spacing: -0.015em;
+    }
+
+    .pc-notes {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
+      padding: 0.25rem clamp(1.25rem, 5vw, 4.5rem) 1.5rem;
+    }
+
+    .pc-notes .sc-meta {
+      margin-top: 0.35rem;
+    }
+
+    .pc-slider {
+      display: block;
+      border-radius: 1rem;
+      overflow: hidden;
+    }
+
+    .pc-slide {
+      margin: 0;
+      position: relative;
+    }
+
+    .pc-slide img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      -webkit-user-drag: none;
+    }
+
+    .pc-slide figcaption {
+      position: absolute;
+      left: 1rem;
+      top: 1rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      background: color-mix(in srgb, var(--mc-color-bg) 75%, transparent);
+      color: var(--mc-color-text);
+      font-size: 0.9rem;
+    }
+
+    .pc-compare img {
+      -webkit-user-select: none;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .pc-compare {
+      display: block;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      border-radius: 1rem;
+    }
+
+    .pc-gallery-item {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 0.75rem;
+    }
+
+    .pc-faq {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr));
+      gap: 1rem;
+    }
+
+    .pc-flip {
+      display: block;
+      height: 13rem;
+    }
+
+    .pc-face {
+      display: grid;
+      place-items: center;
+      width: 100%;
+      height: 100%;
+      box-sizing: border-box;
+      padding: 1.5rem;
+      border-radius: 1rem;
+      text-align: center;
+      line-height: 1.4;
+      cursor: pointer;
+    }
+
+    .pc-face-front {
+      background: var(--mc-color-surface-2);
+      border: 1px solid var(--mc-color-border);
+      font-family: var(--display);
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .pc-face-back {
+      background: var(--mc-color-accent);
+      color: var(--mc-color-bg);
+      font-size: 1.05rem;
+    }
+
+    .pc-dialog {
+      max-width: 28rem;
+    }
+
+    .pc-dialog-title {
+      margin: 0 0 0.75rem;
+      font-family: var(--display);
+      font-size: 1.75rem;
+      font-weight: 800;
+      font-variation-settings: "wdth" 75, "opsz" 72;
+    }
+
+    .pc-dialog p {
+      margin: 0 0 1.5rem;
+      color: var(--mc-color-muted);
+      line-height: 1.6;
+    }
+
+  </style>
+</Layout>

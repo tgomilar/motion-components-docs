@@ -1,0 +1,381 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ShowcaseFonts from "../../components/showcase/ShowcaseFonts.astro";
+import CategoryNav from "../../components/showcase/CategoryNav.astro";
+import ShowcaseCode from "../../components/showcase/ShowcaseCode.astro";
+import "../../styles/showcase.css";
+
+const lanes = [
+  { word: "near", depth: "3", cls: "lane-near" },
+  { word: "middle", depth: "-1.6", cls: "lane-mid" },
+  { word: "far away", depth: "0.6", cls: "lane-far" },
+];
+
+const letters = [..."scroll"];
+const scatter = [
+  { x: -38, y: -30, r: -40, s: 2.4 },
+  { x: 24, y: -42, r: 30, s: 0.4 },
+  { x: -18, y: 36, r: 70, s: 1.8 },
+  { x: 40, y: 28, r: -25, s: 0.5 },
+  { x: -44, y: 8, r: 15, s: 3 },
+  { x: 34, y: -6, r: -60, s: 0.3 },
+];
+const from = (i: number) =>
+  JSON.stringify({ opacity: 0, x: `${scatter[i].x}vw`, y: `${scatter[i].y}vh`, rotate: `${scatter[i].r}deg`, scale: scatter[i].s });
+const to = JSON.stringify({ opacity: 1, x: "0vw", y: "0vh", rotate: "0deg", scale: 1 });
+
+const parallaxCode = `<div class="depth-stage">
+  <motion-parallax class="orb orb-yellow" depth="-2.2"></motion-parallax>
+  <motion-parallax class="orb orb-blue" depth="1.4"></motion-parallax>
+  <motion-parallax class="orb orb-ring" depth="3.2"></motion-parallax>
+  <div class="lanes">
+${lanes
+  .map(
+    (lane) =>
+      `    <motion-parallax axis="x" depth="${lane.depth}" class="lane ${lane.cls}">\n      <span>${Array.from({ length: 6 }, () => lane.word).join("  ")}</span>\n    </motion-parallax>`,
+  )
+  .join("\n")}
+  </div>
+</div>
+
+<style>
+  .depth-stage { position: relative; height: 70vh; }
+  .orb { position: absolute; display: block; border-radius: 50%; }
+  .orb-yellow { width: 22vw; aspect-ratio: 1; top: 4%; right: 6%; background: #facc15; }
+  .orb-blue { width: 14vw; aspect-ratio: 1; bottom: 6%; left: 4%; background: #60a5fa; }
+  .orb-ring { width: 26vw; aspect-ratio: 1; top: 30%; left: 34%; border: 2px solid #2e2e3e; }
+  .lanes {
+    position: absolute; inset: 0; overflow: hidden;
+    display: flex; flex-direction: column; justify-content: center; gap: 2vh;
+  }
+  .lane { display: block; white-space: pre; line-height: 1; margin-left: -30vw; }
+  .lane-near { font-size: 14vw; font-weight: 800; }
+  .lane-mid { font-size: 8vw; font-weight: 300; opacity: 0.8; }
+  .lane-far { font-size: 4vw; font-weight: 600; color: #8888a8; }
+</style>`;
+
+const sceneCode = `<motion-scene height="420vh" class="scene">
+  <div class="ring ring-1" data-from='{"scale":0.2,"opacity":0}' data-to='{"scale":2.6,"opacity":0.9}' data-start="0" data-end="0.7"></div>
+  <div class="ring ring-2" data-from='{"scale":0.1,"opacity":0}' data-to='{"scale":1.8,"opacity":0.8}' data-start="0.1" data-end="0.8"></div>
+  <div class="ring ring-3" data-from='{"scale":0.05,"opacity":0}' data-to='{"scale":1.1,"opacity":1}' data-start="0.2" data-end="0.9"></div>
+
+  <div class="word" data-from='{"scale":1,"opacity":1}' data-to='{"scale":9,"opacity":0}' data-start="0.62" data-end="0.92" aria-label="scroll">
+${letters
+  .map(
+    (ch, i) =>
+      `    <span class="letter" aria-hidden="true" data-from='${from(i)}' data-to='${to}' data-start="${0.04 + i * 0.05}" data-end="${0.36 + i * 0.04}">${ch}</span>`,
+  )
+  .join("\n")}
+  </div>
+
+  <p class="scene-end" data-from='{"opacity":0,"y":"30px"}' data-to='{"opacity":1,"y":"0px"}' data-start="0.86" data-end="1">
+    Scroll back up to take it apart.
+  </p>
+</motion-scene>
+
+<style>
+  .scene { display: block; position: relative; }
+  .ring {
+    position: absolute; top: 50%; left: 50%;
+    width: min(70vw, 70vh); aspect-ratio: 1;
+    margin: calc(min(70vw, 70vh) / -2) 0 0 calc(min(70vw, 70vh) / -2);
+    border-radius: 50%; pointer-events: none;
+  }
+  .ring-1 { border: 2px solid #2e2e3e; }
+  .ring-2 { border: 2px solid #60a5fa; }
+  .ring-3 { border: 3px solid #facc15; }
+  .word {
+    position: relative; display: flex;
+    font-size: 25vw; font-weight: 800; line-height: 1; color: #facc15;
+  }
+  .letter { display: inline-block; }
+  .scene-end {
+    position: absolute; left: 0; right: 0; bottom: 14vh; margin: 0;
+    text-align: center; font-size: 2rem; font-weight: 600;
+  }
+</style>`;
+---
+
+<Layout
+  title="Scroll showcase — Motion Components"
+  description="motion-parallax and motion-scene in one scroll story: layered depth that drifts on both axes, then a pinned stage where a word assembles from the edges of the screen and flies past you."
+  noMain>
+  <ShowcaseFonts />
+
+  <main id="main" class="sc">
+    <header class="sc-cat-hero">
+      <h1 class="sc-cat-title" style="--len: 6">scroll</h1>
+      <p class="sc-cat-lede">
+        Two tags that turn the scrollbar into a timeline. Layers drift at their own depth, and a pinned stage plays a scene as you
+        scroll through it. Scroll back up and everything runs in reverse.
+      </p>
+    </header>
+
+    <section class="depth" aria-labelledby="depth-title">
+      <div class="depth-stage" aria-hidden="true">
+        <motion-parallax class="orb orb-yellow" depth="-2.2"></motion-parallax>
+        <motion-parallax class="orb orb-blue" depth="1.4"></motion-parallax>
+        <motion-parallax class="orb orb-ring" depth="3.2"></motion-parallax>
+        <div class="lanes">
+          {
+            lanes.map((lane) => (
+              <motion-parallax axis="x" depth={lane.depth} class:list={["lane", lane.cls]}>
+                <span>
+                  {Array.from({ length: 6 }, () => lane.word).join("  ")}
+                </span>
+              </motion-parallax>
+            ))
+          }
+        </div>
+      </div>
+      <h2 id="depth-title" class="depth-title">Same scroll, different speeds.</h2>
+      <p class="sc-meta">
+        <a href="/docs/scroll/motion-parallax/"><code>&lt;motion-parallax&gt;</code></a>
+        <span>moves each layer by its own depth, up, down or sideways</span>
+      </p>
+      <ShowcaseCode tags={["motion-parallax"]} code={parallaxCode} />
+    </section>
+
+    <section class="scene-wrap" aria-labelledby="scene-title">
+      <h2 id="scene-title" class="scene-intro">Now keep scrolling. The stage stays put while the scene plays.</h2>
+
+      <motion-scene height="420vh" class="scene">
+        <div class="ring ring-1" data-from='{"scale":0.2,"opacity":0}' data-to='{"scale":2.6,"opacity":0.9}' data-start="0" data-end="0.7"></div>
+        <div class="ring ring-2" data-from='{"scale":0.1,"opacity":0}' data-to='{"scale":1.8,"opacity":0.8}' data-start="0.1" data-end="0.8"></div>
+        <div class="ring ring-3" data-from='{"scale":0.05,"opacity":0}' data-to='{"scale":1.1,"opacity":1}' data-start="0.2" data-end="0.9"></div>
+
+        <div class="word" data-from='{"scale":1,"opacity":1}' data-to='{"scale":9,"opacity":0}' data-start="0.62" data-end="0.92" aria-label="scroll">
+          {
+            letters.map((ch, i) => (
+              <span class="letter" aria-hidden="true" data-from={from(i)} data-to={to} data-start={String(0.04 + i * 0.05)} data-end={String(0.36 + i * 0.04)}>
+                {ch}
+              </span>
+            ))
+          }
+        </div>
+
+        <p class="scene-end" data-from='{"opacity":0,"y":"30px"}' data-to='{"opacity":1,"y":"0px"}' data-start="0.86" data-end="1">
+          Scroll back up to take it apart.
+        </p>
+      </motion-scene>
+
+      <p class="sc-meta scene-meta">
+        <a href="/docs/scroll/motion-scene/"><code>&lt;motion-scene&gt;</code></a>
+        <span>pins a stage and moves, scales and fades its children with the scroll</span>
+      </p>
+      <div class="scene-code">
+        <ShowcaseCode tags={["motion-scene"]} code={sceneCode} />
+      </div>
+    </section>
+
+    <section class="deep" aria-labelledby="deep-title">
+      <h2 id="deep-title" class="deep-title">Go deeper</h2>
+      <p class="deep-text">
+        Two longer pages take each tag further: <a href="/showcase/parallax/">a full parallax showcase</a> with speed spectra and depth
+        planes, and <a href="/showcase/scene/">three pinned scenes</a> built from data attributes.
+      </p>
+    </section>
+
+    <CategoryNav current="scroll" />
+  </main>
+
+  <script>
+    import "motion-components/motion-parallax";
+    import "motion-components/motion-scene";
+  </script>
+
+  <style>
+    /* Parallax depth */
+    .depth {
+      position: relative;
+      padding: clamp(3rem, 10vh, 6rem) var(--gutter) clamp(4rem, 12vh, 8rem);
+    }
+
+    .depth-stage {
+      position: relative;
+      height: clamp(26rem, 70vh, 44rem);
+    }
+
+    .orb {
+      position: absolute;
+      display: block;
+      border-radius: 50%;
+    }
+
+    .orb-yellow {
+      width: clamp(9rem, 22vw, 20rem);
+      aspect-ratio: 1;
+      top: 4%;
+      right: 6%;
+      background: var(--mc-color-yellow);
+    }
+
+    .orb-blue {
+      width: clamp(6rem, 14vw, 13rem);
+      aspect-ratio: 1;
+      bottom: 6%;
+      left: 4%;
+      background: var(--mc-color-accent);
+    }
+
+    .orb-ring {
+      width: clamp(10rem, 26vw, 24rem);
+      aspect-ratio: 1;
+      top: 30%;
+      left: 34%;
+      border: 2px solid var(--mc-color-border);
+    }
+
+    .lanes {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: clamp(0.5rem, 2vh, 1.5rem);
+      margin-inline: calc(var(--gutter) * -1);
+      overflow: hidden;
+    }
+
+    .lane {
+      display: block;
+      white-space: pre;
+      font-family: var(--display);
+      line-height: 1;
+      margin-left: -30vw;
+    }
+
+    .lane-near {
+      font-size: clamp(4.5rem, 14vw, 13rem);
+      font-weight: 800;
+      font-variation-settings: "wdth" 60, "opsz" 96;
+      color: var(--mc-color-text);
+    }
+
+    .lane-mid {
+      font-size: clamp(3rem, 8vw, 7.5rem);
+      font-weight: 300;
+      font-variation-settings: "wdth" 125, "opsz" 96;
+      color: var(--mc-color-text);
+      opacity: 0.8;
+    }
+
+    .lane-far {
+      font-size: clamp(1.75rem, 4vw, 3.5rem);
+      font-weight: 600;
+      font-variation-settings: "wdth" 75, "opsz" 72;
+      color: var(--mc-color-muted);
+    }
+
+    .depth-title {
+      margin: clamp(2rem, 6vh, 3.5rem) 0 0;
+      font-family: var(--display);
+      font-size: clamp(2rem, 4.5vw, 4rem);
+      font-weight: 700;
+      font-variation-settings: "wdth" 75, "opsz" 72;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+
+    /* Pinned scene */
+    .scene-intro {
+      max-width: 22ch;
+      margin: 0;
+      padding: clamp(3rem, 10vh, 6rem) var(--gutter) 0;
+      font-family: var(--display);
+      font-size: clamp(1.75rem, 3.6vw, 3.25rem);
+      font-weight: 700;
+      font-variation-settings: "wdth" 75, "opsz" 72;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    .scene {
+      display: block;
+      position: relative;
+    }
+
+    .ring {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: min(70vw, 70vh);
+      aspect-ratio: 1;
+      margin: calc(min(70vw, 70vh) / -2) 0 0 calc(min(70vw, 70vh) / -2);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .ring-1 {
+      border: 2px solid var(--mc-color-border);
+    }
+
+    .ring-2 {
+      border: 2px solid var(--mc-color-accent);
+    }
+
+    .ring-3 {
+      border: 3px solid var(--mc-color-yellow);
+    }
+
+    .word {
+      position: relative;
+      display: flex;
+      font-family: var(--display);
+      font-size: clamp(4.5rem, 25vw, 18rem);
+      font-weight: 800;
+      font-variation-settings: "wdth" 60, "opsz" 96;
+      line-height: 1;
+      letter-spacing: -0.01em;
+      color: var(--mc-color-yellow);
+    }
+
+    .letter {
+      display: inline-block;
+    }
+
+    .scene-end {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 14vh;
+      margin: 0;
+      padding-inline: var(--gutter);
+      text-align: center;
+      font-family: var(--display);
+      font-size: clamp(1.25rem, 2.6vw, 2.25rem);
+      font-weight: 600;
+      color: var(--mc-color-text);
+    }
+
+    .scene-meta {
+      padding: 1.5rem var(--gutter) 0;
+    }
+
+    .scene-code {
+      padding: 0 var(--gutter);
+    }
+
+    /* Deep dives */
+    .deep {
+      padding: clamp(4rem, 12vh, 8rem) var(--gutter);
+    }
+
+    .deep-title {
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(2rem, 4.5vw, 4rem);
+      font-weight: 700;
+      font-variation-settings: "wdth" 75, "opsz" 72;
+      letter-spacing: -0.02em;
+    }
+
+    .deep-text {
+      max-width: 40rem;
+      margin: 1.25rem 0 0;
+      font-size: 1.1rem;
+      line-height: 1.6;
+      color: var(--mc-color-muted);
+    }
+  </style>
+</Layout>

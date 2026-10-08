@@ -1,0 +1,503 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ShowcaseFonts from "../../components/showcase/ShowcaseFonts.astro";
+import CategoryNav from "../../components/showcase/CategoryNav.astro";
+import ShowcaseCode from "../../components/showcase/ShowcaseCode.astro";
+import "../../styles/showcase.css";
+
+const hoverCode = `<div class="table">
+  <motion-hover scale="1.18" bounce="0.5">
+    <div class="disc">grow</div>
+  </motion-hover>
+  <motion-hover scale="1.06" rotate="-12" bounce="0.55">
+    <div class="tile">turn</div>
+  </motion-hover>
+  <motion-hover scale="1" skew="-10" y="-18" bounce="0.45">
+    <div class="slab">lean</div>
+  </motion-hover>
+  <motion-hover scale="1.04" x="28" bounce="0.6">
+    <div class="pill">slide</div>
+  </motion-hover>
+</div>
+
+<style>
+  .table { display: flex; flex-wrap: wrap; align-items: center; gap: 3rem; }
+  .table div { display: grid; place-items: center; font-weight: 700; user-select: none; }
+  .disc { width: 10rem; aspect-ratio: 1; border-radius: 50%; background: var(--mc-color-yellow, #facc15); color: #0f0f13; }
+  .tile { width: 9rem; aspect-ratio: 1; border-radius: 1.25rem; background: var(--mc-color-accent, #2563eb); color: #fff; }
+  .slab { width: 6rem; height: 13rem; border-radius: 0.5rem; background: var(--mc-color-surface-2, #f0f0f8); border: 1px solid var(--mc-color-border, #dddde8); }
+  .pill { width: 12rem; height: 4.5rem; border-radius: 999px; border: 2px solid var(--mc-color-yellow, #facc15); color: var(--mc-color-yellow, #a16207); }
+</style>`;
+
+const magneticCode = `<div class="table">
+  <motion-magnetic strength="0.25">
+    <div class="dot small">0.25</div>
+  </motion-magnetic>
+  <motion-magnetic strength="0.5" bounce="0.5">
+    <div class="dot medium">0.5</div>
+  </motion-magnetic>
+  <motion-magnetic strength="0.9" bounce="0.6" duration="0.8">
+    <div class="dot large">0.9</div>
+  </motion-magnetic>
+</div>
+
+<style>
+  .table { display: flex; flex-wrap: wrap; align-items: center; gap: 3rem; }
+  .table motion-magnetic { padding: 2rem; }
+  .dot { display: grid; place-items: center; aspect-ratio: 1; border-radius: 50%; font-weight: 700; user-select: none; }
+  .small { width: 5.5rem; background: var(--mc-color-surface-2, #f0f0f8); border: 1px solid var(--mc-color-border, #dddde8); }
+  .medium { width: 8rem; background: var(--mc-color-accent, #2563eb); color: #fff; }
+  .large { width: 11rem; background: var(--mc-color-yellow, #facc15); color: #0f0f13; font-size: 2rem; }
+</style>`;
+
+const pressCode = `<p aria-live="polite"><span data-count>0</span> presses</p>
+<div class="keys">
+  <motion-press scale="0.94">
+    <button type="button" class="key" data-add="1">+1</button>
+  </motion-press>
+  <motion-press scale="0.86" bounce="0.6">
+    <button type="button" class="key big" data-add="10">+10</button>
+  </motion-press>
+  <motion-press scale="0.9">
+    <button type="button" class="key quiet" data-reset>reset</button>
+  </motion-press>
+</div>
+
+<style>
+  .keys { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem; }
+  .key {
+    width: 8rem; aspect-ratio: 1; border: 0; border-radius: 1.5rem; cursor: pointer;
+    background: var(--mc-color-accent, #2563eb); color: #fff; font-size: 2rem; font-weight: 800;
+    box-shadow: 0 6px 0 #1e40af; touch-action: manipulation;
+  }
+  .key.big { width: 10.5rem; background: var(--mc-color-yellow, #facc15); color: #0f0f13; box-shadow: 0 6px 0 #a16207; }
+  .key.quiet { background: var(--mc-color-surface-2, #f0f0f8); color: inherit; font-size: 1.25rem; box-shadow: 0 6px 0 #dddde8; }
+</style>
+
+<script>
+  const out = document.querySelector("[data-count]");
+  let count = 0;
+  document.querySelectorAll(".key").forEach((key) =>
+    key.addEventListener("click", () => {
+      count = key.hasAttribute("data-reset") ? 0 : count + Number(key.dataset.add);
+      out.textContent = String(count);
+    }),
+  );
+</script>`;
+
+const tiltCode = `<div class="table">
+  <motion-tilt max="25" gloss>
+    <div class="card yellow"><strong>25°</strong><span>with gloss</span></div>
+  </motion-tilt>
+  <motion-tilt max="10" scale="1.02">
+    <div class="card blue"><strong>10°</strong><span>no gloss</span></div>
+  </motion-tilt>
+  <motion-tilt max="6" scale="1.03" gloss>
+    <div class="card wide"><strong>6°</strong><span>a wide poster, barely tilting</span></div>
+  </motion-tilt>
+</div>
+
+<style>
+  .table { display: flex; flex-wrap: wrap; align-items: stretch; gap: 3rem; }
+  .card {
+    box-sizing: border-box; display: grid; align-content: space-between; gap: 1rem;
+    padding: 1.25rem; border-radius: 1rem; font-weight: 600; user-select: none;
+  }
+  .card strong { font-size: 3.5rem; line-height: 1; }
+  .yellow { width: 12rem; aspect-ratio: 5 / 7; background: var(--mc-color-yellow, #facc15); color: #0f0f13; }
+  .blue { width: 12rem; aspect-ratio: 5 / 7; background: var(--mc-color-accent, #2563eb); color: #fff; }
+  .wide { width: 24rem; height: 100%; min-height: 12rem; background: var(--mc-color-surface-2, #f0f0f8); border: 1px solid var(--mc-color-border, #dddde8); }
+</style>`;
+---
+
+<Layout
+  title="Respond showcase — Motion Components"
+  description="A touch table for the four motion-components respond primitives: hover, magnetic, press and tilt, each on big physical objects that answer your pointer with spring physics."
+  noMain>
+  <ShowcaseFonts />
+
+  <main id="main" class="sc">
+    <header class="sc-cat-hero">
+      <h1 class="sc-cat-title" style="--len: 7">respond</h1>
+      <p class="sc-cat-lede">
+        Four tags that make surfaces answer your pointer like objects on a table. Move over them, pull them around, press them.
+        On a phone, the keypad under press is the one made for your thumb.
+      </p>
+    </header>
+
+    <section class="rs-station" aria-labelledby="rs-hover">
+      <motion-blur-in intensity="12" y="16">
+        <h2 class="rs-name" id="rs-hover">hover</h2>
+      </motion-blur-in>
+      <div class="rs-table rs-hover">
+        <motion-hover scale="1.18" bounce="0.5">
+          <div class="rs-obj rs-disc">grow</div>
+        </motion-hover>
+        <motion-hover scale="1.06" rotate="-12" bounce="0.55">
+          <div class="rs-obj rs-tile">turn</div>
+        </motion-hover>
+        <motion-hover scale="1" skew="-10" y="-18" bounce="0.45">
+          <div class="rs-obj rs-slab">lean</div>
+        </motion-hover>
+        <motion-hover scale="1.04" x="28" bounce="0.6">
+          <div class="rs-obj rs-pill">slide</div>
+        </motion-hover>
+      </div>
+      <p class="sc-meta">
+        <a href="/docs/respond/motion-hover/"><code>&lt;motion-hover&gt;</code></a>
+        <span>move over each shape: scale, rotate, skew and slide, then it springs back</span>
+      </p>
+      <ShowcaseCode tags={["motion-hover"]} code={hoverCode} />
+    </section>
+
+    <section class="rs-station rs-station-flip" aria-labelledby="rs-magnetic">
+      <motion-blur-in intensity="12" y="16">
+        <h2 class="rs-name" id="rs-magnetic">magnetic</h2>
+      </motion-blur-in>
+      <div class="rs-table rs-magnetic">
+        <motion-magnetic strength="0.25">
+          <div class="rs-obj rs-dot rs-dot-s">0.25</div>
+        </motion-magnetic>
+        <motion-magnetic strength="0.5" bounce="0.5">
+          <div class="rs-obj rs-dot rs-dot-m">0.5</div>
+        </motion-magnetic>
+        <motion-magnetic strength="0.9" bounce="0.6" duration="0.8">
+          <div class="rs-obj rs-dot rs-dot-l">0.9</div>
+        </motion-magnetic>
+      </div>
+      <p class="sc-meta">
+        <a href="/docs/respond/motion-magnetic/"><code>&lt;motion-magnetic&gt;</code></a>
+        <span>drag your pointer across each dot; the number is its strength</span>
+      </p>
+      <ShowcaseCode tags={["motion-magnetic"]} code={magneticCode} />
+    </section>
+
+    <section class="rs-station" aria-labelledby="rs-press">
+      <motion-blur-in intensity="12" y="16">
+        <h2 class="rs-name" id="rs-press">press</h2>
+      </motion-blur-in>
+      <div class="rs-table rs-press">
+        <p class="rs-count" aria-live="polite"><span class="rs-count-n" data-count>0</span> presses</p>
+        <div class="rs-keys">
+          <motion-press scale="0.94">
+            <button type="button" class="rs-key" data-add="1">+1</button>
+          </motion-press>
+          <motion-press scale="0.86" bounce="0.6">
+            <button type="button" class="rs-key rs-key-big" data-add="10">+10</button>
+          </motion-press>
+          <motion-press scale="0.9">
+            <button type="button" class="rs-key rs-key-quiet" data-reset>reset</button>
+          </motion-press>
+        </div>
+      </div>
+      <p class="sc-meta">
+        <a href="/docs/respond/motion-press/"><code>&lt;motion-press&gt;</code></a>
+        <span>press and hold a key; deeper keys squash further and bounce back harder</span>
+      </p>
+      <ShowcaseCode tags={["motion-press"]} code={pressCode} />
+    </section>
+
+    <section class="rs-station rs-station-flip" aria-labelledby="rs-tilt">
+      <motion-blur-in intensity="12" y="16">
+        <h2 class="rs-name" id="rs-tilt">tilt</h2>
+      </motion-blur-in>
+      <div class="rs-table rs-tilt">
+        <motion-tilt max="25" gloss>
+          <div class="rs-obj rs-card rs-card-yellow"><span class="rs-card-glyph">25°</span><span>with gloss</span></div>
+        </motion-tilt>
+        <motion-tilt max="10" scale="1.02">
+          <div class="rs-obj rs-card rs-card-blue"><span class="rs-card-glyph">10°</span><span>no gloss</span></div>
+        </motion-tilt>
+        <motion-tilt max="6" scale="1.03" gloss>
+          <div class="rs-obj rs-card rs-card-wide"><span class="rs-card-glyph">6°</span><span>a wide poster, barely tilting</span></div>
+        </motion-tilt>
+      </div>
+      <p class="sc-meta">
+        <a href="/docs/respond/motion-tilt/"><code>&lt;motion-tilt&gt;</code></a>
+        <span>move across each card; the number is how far it can turn</span>
+      </p>
+      <ShowcaseCode tags={["motion-tilt"]} code={tiltCode} />
+    </section>
+
+    <CategoryNav current="respond" />
+  </main>
+
+  <script>
+    import "motion-components/motion-hover";
+    import "motion-components/motion-magnetic";
+    import "motion-components/motion-press";
+    import "motion-components/motion-tilt";
+    import "motion-components/motion-blur-in";
+
+    const out = document.querySelector<HTMLElement>("[data-count]");
+    let count = 0;
+    document.querySelectorAll<HTMLButtonElement>(".rs-key").forEach((key) =>
+      key.addEventListener("click", () => {
+        count = key.hasAttribute("data-reset") ? 0 : count + Number(key.dataset.add);
+        if (out) out.textContent = String(count);
+      }),
+    );
+  </script>
+
+  <style>
+    .rs-station {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: clamp(1.5rem, 4vh, 2.5rem);
+      padding: clamp(4rem, 12vh, 8rem) var(--gutter);
+      border-top: 1px solid var(--mc-color-border);
+    }
+
+    .rs-station-flip {
+      justify-items: end;
+      text-align: right;
+    }
+
+    .rs-station-flip .sc-meta {
+      flex-direction: row-reverse;
+    }
+
+    .rs-station-flip :global(.sc-code) {
+      justify-self: end;
+      text-align: right;
+    }
+
+    .rs-station-flip :global(.sc-code .sc-code-body) {
+      text-align: left;
+    }
+
+    .rs-name {
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(3.5rem, 13vw, 12rem);
+      font-weight: 800;
+      font-variation-settings: "wdth" 60, "opsz" 96;
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+    }
+
+    .rs-table {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: clamp(2rem, 6vw, 5rem);
+      width: 100%;
+      min-height: 16rem;
+      padding-block: 1rem;
+    }
+
+    .rs-station-flip .rs-table {
+      justify-content: flex-end;
+    }
+
+    .rs-obj {
+      display: grid;
+      place-items: center;
+      font-family: var(--display);
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      font-weight: 700;
+      user-select: none;
+    }
+
+    /* hover */
+    .rs-disc {
+      width: clamp(7rem, 12vw, 11rem);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: var(--mc-color-yellow);
+      color: var(--mc-color-bg);
+    }
+
+    .rs-tile {
+      width: clamp(7rem, 11vw, 10rem);
+      aspect-ratio: 1;
+      border-radius: 1.25rem;
+      background: var(--mc-color-accent);
+      color: var(--mc-color-bg);
+    }
+
+    .rs-slab {
+      width: clamp(5rem, 7vw, 6.5rem);
+      height: clamp(10rem, 16vw, 14rem);
+      border-radius: 0.5rem;
+      background: var(--mc-color-surface-2);
+      border: 1px solid var(--mc-color-border);
+      color: var(--mc-color-text);
+    }
+
+    .rs-pill {
+      width: clamp(9rem, 15vw, 13rem);
+      height: clamp(4rem, 6vw, 5rem);
+      border-radius: 999px;
+      border: 2px solid var(--mc-color-yellow);
+      color: var(--mc-color-yellow);
+    }
+
+    /* magnetic */
+    .rs-magnetic motion-magnetic {
+      padding: clamp(1rem, 3vw, 2.5rem);
+    }
+
+    .rs-dot {
+      aspect-ratio: 1;
+      border-radius: 50%;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .rs-dot-s {
+      width: clamp(4.5rem, 7vw, 6rem);
+      background: var(--mc-color-surface-2);
+      border: 1px solid var(--mc-color-border);
+      color: var(--mc-color-text);
+    }
+
+    .rs-dot-m {
+      width: clamp(6rem, 10vw, 8.5rem);
+      background: var(--mc-color-accent);
+      color: var(--mc-color-bg);
+    }
+
+    .rs-dot-l {
+      width: clamp(8rem, 14vw, 12rem);
+      background: var(--mc-color-yellow);
+      color: var(--mc-color-bg);
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+    }
+
+    /* press */
+    .rs-press {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1.5rem;
+    }
+
+    .rs-count {
+      margin: 0;
+      font-family: var(--display);
+      font-size: clamp(1.25rem, 2.5vw, 2rem);
+      font-weight: 600;
+      color: var(--mc-color-muted);
+    }
+
+    .rs-count-n {
+      display: inline-block;
+      min-width: 3ch;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 800;
+      font-variation-settings: "wdth" 60, "opsz" 96;
+      font-variant-numeric: tabular-nums;
+      color: var(--mc-color-text);
+    }
+
+    .rs-keys {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: clamp(1rem, 3vw, 2rem);
+    }
+
+    .rs-key {
+      width: clamp(6.5rem, 10vw, 9rem);
+      aspect-ratio: 1;
+      border: 0;
+      border-radius: 1.5rem;
+      background: var(--mc-color-accent);
+      color: var(--mc-color-bg);
+      font-family: var(--display);
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 6px 0 color-mix(in srgb, var(--mc-color-accent) 55%, var(--mc-color-bg));
+      touch-action: manipulation;
+    }
+
+    .rs-key-big {
+      width: clamp(8rem, 13vw, 11.5rem);
+      background: var(--mc-color-yellow);
+      box-shadow: 0 6px 0 color-mix(in srgb, var(--mc-color-yellow) 55%, var(--mc-color-bg));
+    }
+
+    .rs-key-quiet {
+      background: var(--mc-color-surface-2);
+      color: var(--mc-color-text);
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      box-shadow: 0 6px 0 var(--mc-color-border);
+    }
+
+    .rs-key:focus-visible {
+      outline: 3px solid var(--mc-color-accent);
+      outline-offset: 4px;
+    }
+
+    /* tilt */
+    .rs-tilt {
+      align-items: stretch;
+    }
+
+    .rs-card {
+      box-sizing: border-box;
+      align-content: space-between;
+      justify-items: start;
+      gap: 1rem;
+      padding: 1.25rem;
+      border-radius: 1rem;
+      text-align: left;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+
+    .rs-card-glyph {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      font-variation-settings: "wdth" 60, "opsz" 96;
+      line-height: 1;
+    }
+
+    .rs-card-yellow {
+      width: clamp(9rem, 14vw, 12rem);
+      aspect-ratio: 5 / 7;
+      background: var(--mc-color-yellow);
+      color: var(--mc-color-bg);
+    }
+
+    .rs-card-blue {
+      width: clamp(9rem, 14vw, 12rem);
+      aspect-ratio: 5 / 7;
+      background: var(--mc-color-accent);
+      color: var(--mc-color-bg);
+    }
+
+    .rs-card-wide {
+      width: clamp(16rem, 30vw, 26rem);
+      height: 100%;
+      min-height: 12rem;
+      background: var(--mc-color-surface-2);
+      border: 1px solid var(--mc-color-border);
+      color: var(--mc-color-text);
+    }
+
+    @media (max-width: 720px) {
+      .rs-station-flip {
+        justify-items: start;
+        text-align: left;
+      }
+
+      .rs-station-flip .sc-meta {
+        flex-direction: row;
+      }
+
+      .rs-station-flip :global(.sc-code) {
+        justify-self: start;
+        text-align: left;
+      }
+
+      .rs-station-flip .rs-table {
+        justify-content: flex-start;
+      }
+
+      .rs-table {
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</Layout>

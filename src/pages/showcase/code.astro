@@ -1,0 +1,383 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ShowcaseFonts from "../../components/showcase/ShowcaseFonts.astro";
+import CategoryNav from "../../components/showcase/CategoryNav.astro";
+import ShowcaseCode from "../../components/showcase/ShowcaseCode.astro";
+import "../../styles/showcase.css";
+
+const code = (attrs: string, src: string) => `<motion-code ${attrs}><script type="text/plain">${src}<\/script></motion-code>`;
+
+const indent = (src: string) =>
+  src
+    .split("\n")
+    .map((line) => `    ${line}`)
+    .join("\n");
+
+const snippet = (attrs: string, src: string) =>
+  `<motion-code ${attrs}>\n  <script type="text/plain">\n${indent(src)}\n  <\/script>\n</motion-code>`;
+
+const spec = (attrs: string, src: string) => ({ html: code(attrs, src), snippet: snippet(attrs, src) });
+
+const once = `typing typing-loop="false" typing-speed="55" copy`;
+
+const steps = [
+  {
+    title: "Install the package",
+    text: `One package, no peer dependencies to wire up. Run it in your project folder.`,
+    block: spec(`filename="terminal" code-lang="sh" ${once}`, `npm install motion-components`),
+    feature: "types itself once when it scrolls into view, with a copy button",
+  },
+  {
+    title: "Import the tags you use",
+    text: `Each tag has its own import, so the bundle only carries what the page renders.`,
+    block: spec(
+      `filename="main.js" ${once}`,
+      `import 'motion-components/motion-press'
+import 'motion-components/motion-reveal'`,
+    ),
+    feature: "highlights JavaScript from the file name",
+  },
+  {
+    title: "Wrap your HTML",
+    text: `Put the tag around the element that should move. The button keeps its own markup and styles.`,
+    block: spec(
+      `filename="index.html" ${once}`,
+      `<motion-press>
+  <button class="buy">Add to cart</button>
+</motion-press>`,
+    ),
+    feature: "highlights HTML, next to the result",
+    result: `<motion-press><button class="cd-buy" type="button">Add to cart</button></motion-press>`,
+  },
+  {
+    title: "Tune it with attributes",
+    text: `Attributes set the spring. A deeper press and more bounce make the same button feel softer.`,
+    block: spec(
+      `filename="index.html" ${once}`,
+      `<motion-press scale="0.86" bounce="0.7">
+  <button class="buy">Add to cart</button>
+</motion-press>`,
+    ),
+    feature: "the same block, tuned, next to the result",
+    result: `<motion-press scale="0.86" bounce="0.7"><button class="cd-buy" type="button">Add to cart</button></motion-press>`,
+  },
+];
+
+const looping = spec(
+  `filename="hero.html" typing typing-speed="40" typing-hold="2"`,
+  `<motion-headline by="words">
+  Motion that feels physical
+</motion-headline>`,
+);
+
+const bare = spec(
+  `hide-chrome`,
+  `.card {
+  --mc-spotlight-color: rgb(250 204 21 / 0.25);
+  border-radius: 1rem;
+}`,
+);
+
+const compact = spec(
+  `filename="theme.css" compact copy copy-label`,
+  `:root {
+  --mc-color-accent: #2563eb;
+  --mc-color-yellow: #a16207;
+}`,
+);
+
+const json = spec(
+  `filename="package.json" compact`,
+  `{
+  "dependencies": {
+    "motion-components": "^1.2.0"
+  }
+}`,
+);
+
+const python = spec(
+  `filename="build.py" compact`,
+  `for page in pages:
+    render(page, theme="dark")`,
+);
+const inlineSnippet = `<p>
+  Install with <motion-code-inline copy-visible>npm install motion-components</motion-code-inline>,
+  then wrap any button in <motion-code-inline copy>motion-press</motion-code-inline>
+  and set <motion-code-inline>scale="0.9"</motion-code-inline> for a deeper press.
+</p>`;
+---
+
+<Layout
+  title="Code showcase — Motion Components"
+  description="motion-code and motion-code-inline in a four-step tutorial: highlighted code that types itself in as you scroll, with copy buttons, file names and a live result next to the code."
+  noMain>
+  <ShowcaseFonts />
+
+  <main id="main" class="sc">
+    <header class="sc-cat-hero">
+      <h1 class="sc-cat-title" style="--len: 4">code</h1>
+      <p class="sc-cat-lede">
+        Two tags for showing code. This page is a short tutorial built with them: each step types itself in as you reach it, and
+        the last two steps show the result next to the code.
+      </p>
+    </header>
+
+    <section class="cd-steps" aria-labelledby="cd-steps-title">
+      <h2 class="cd-section-title" id="cd-steps-title">Add motion to a page in four steps</h2>
+      <ol class="cd-list">
+        {
+          steps.map((step, i) => (
+            <li class="cd-step">
+              <div class="cd-step-text">
+                <span class="cd-num" aria-hidden="true">
+                  {i + 1}
+                </span>
+                <h3 class="cd-step-title">{step.title}</h3>
+                <p class="cd-step-body">{step.text}</p>
+              </div>
+              <div class="cd-step-demo">
+                <div class:list={["cd-pair", step.result && "cd-pair-result"]}>
+                  <div class="cd-block" set:html={step.block.html} />
+                  {step.result && (
+                    <div class="cd-result">
+                      <span class="cd-result-label">Result, press it</span>
+                      <div set:html={step.result} />
+                    </div>
+                  )}
+                </div>
+                <p class="sc-meta">
+                  <a href="/docs/code/motion-code/">
+                    <code>&lt;motion-code&gt;</code>
+                  </a>
+                  <span>{step.feature}</span>
+                </p>
+                <ShowcaseCode
+                  tags={step.result ? ["motion-code", "motion-press"] : ["motion-code"]}
+                  code={step.result ? `${step.block.snippet}\n\n${step.result.replace("cd-buy", "buy")}` : step.block.snippet}
+                />
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section class="cd-more" aria-labelledby="cd-more-title">
+      <h2 class="cd-section-title" id="cd-more-title">Everything else a code block can do</h2>
+      <div class="cd-grid">
+        <div class="cd-spec cd-spec-wide">
+          <div class="cd-block cd-block-loop" set:html={looping.html} />
+          <p class="sc-meta">
+            <a href="/docs/code/motion-code/"><code>&lt;motion-code&gt;</code></a>
+            <span>types, holds and starts again</span>
+          </p>
+          <ShowcaseCode tags={["motion-code"]} code={looping.snippet} />
+        </div>
+        <div class="cd-spec">
+          <div class="cd-block" set:html={bare.html} />
+          <p class="sc-meta">
+            <a href="/docs/code/motion-code/"><code>&lt;motion-code&gt;</code></a>
+            <span>without the window chrome</span>
+          </p>
+          <ShowcaseCode tags={["motion-code"]} code={bare.snippet} />
+        </div>
+        <div class="cd-spec">
+          <div class="cd-block" set:html={compact.html} />
+          <p class="sc-meta">
+            <a href="/docs/code/motion-code/"><code>&lt;motion-code&gt;</code></a>
+            <span>compact, with a labelled copy button</span>
+          </p>
+          <ShowcaseCode tags={["motion-code"]} code={compact.snippet} />
+        </div>
+        <div class="cd-spec">
+          <div class="cd-block" set:html={json.html} />
+          <p class="sc-meta">
+            <a href="/docs/code/motion-code/"><code>&lt;motion-code&gt;</code></a>
+            <span>highlights JSON</span>
+          </p>
+          <ShowcaseCode tags={["motion-code"]} code={json.snippet} />
+        </div>
+        <div class="cd-spec">
+          <div class="cd-block" set:html={python.html} />
+          <p class="sc-meta">
+            <a href="/docs/code/motion-code/"><code>&lt;motion-code&gt;</code></a>
+            <span>highlights Python</span>
+          </p>
+          <ShowcaseCode tags={["motion-code"]} code={python.snippet} />
+        </div>
+      </div>
+    </section>
+
+    <section class="cd-inline" aria-labelledby="cd-inline-title">
+      <h2 class="cd-section-title" id="cd-inline-title">Code inside a sentence</h2>
+      <p class="cd-prose">
+        Install with <motion-code-inline copy-visible>npm install motion-components</motion-code-inline>, then wrap any button
+        in <motion-code-inline copy>motion-press</motion-code-inline> and set <motion-code-inline>scale="0.9"</motion-code-inline>
+        for a deeper press. Colours come from <motion-code-inline>--mc-color-accent</motion-code-inline>.
+      </p>
+      <p class="sc-meta">
+        <a href="/docs/code/motion-code-inline/"><code>&lt;motion-code-inline&gt;</code></a>
+        <span>the install command always shows its copy button, motion-press shows it on hover or focus, the rest have none</span>
+      </p>
+      <ShowcaseCode tags={["motion-code-inline"]} code={inlineSnippet} />
+    </section>
+
+    <CategoryNav current="code" />
+  </main>
+
+  <script>
+    import "motion-components/motion-code";
+    import "motion-components/motion-code-inline";
+    import "motion-components/motion-press";
+  </script>
+
+  <style>
+    .cd-section-title {
+      margin: 0 0 clamp(2rem, 5vh, 3.5rem);
+      font-family: var(--display);
+      font-size: clamp(2rem, 5vw, 4rem);
+      font-weight: 700;
+      font-variation-settings: "wdth" 75, "opsz" 72;
+      line-height: 1.02;
+      letter-spacing: -0.02em;
+      max-width: 18ch;
+    }
+
+    .cd-steps,
+    .cd-more,
+    .cd-inline {
+      padding: clamp(3rem, 10vh, 6rem) var(--gutter);
+    }
+
+    .cd-more,
+    .cd-inline {
+      border-top: 1px solid var(--mc-color-border);
+    }
+
+    .cd-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: clamp(3.5rem, 10vh, 6rem);
+    }
+
+    .cd-step {
+      display: grid;
+      grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+      gap: clamp(1.5rem, 5vw, 4.5rem);
+      align-items: start;
+    }
+
+    .cd-num {
+      display: block;
+      font-family: var(--display);
+      font-size: clamp(4rem, 9vw, 8rem);
+      font-weight: 800;
+      font-variation-settings: "wdth" 60, "opsz" 96;
+      line-height: 0.85;
+      color: var(--mc-color-yellow);
+    }
+
+    .cd-step-title {
+      margin: 1rem 0 0.75rem;
+      font-family: var(--display);
+      font-size: clamp(1.5rem, 2.4vw, 2rem);
+      font-weight: 700;
+      line-height: 1.1;
+    }
+
+    .cd-step-body {
+      margin: 0;
+      color: var(--mc-color-muted);
+      line-height: 1.6;
+    }
+
+    .cd-step-demo {
+      min-width: 0;
+    }
+
+    .cd-pair {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .cd-pair-result {
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+      align-items: stretch;
+    }
+
+    .cd-block {
+      min-width: 0;
+    }
+
+    .cd-result {
+      display: grid;
+      place-items: center;
+      align-content: center;
+      gap: 1.25rem;
+      min-height: 10rem;
+      padding: 1.5rem;
+      border-radius: 16px;
+      border: 1px dashed var(--mc-color-border);
+    }
+
+    .cd-result-label {
+      font-size: 0.9rem;
+      color: var(--mc-color-muted);
+    }
+
+    .cd-result :global(.cd-buy) {
+      padding: 0.85rem 1.6rem;
+      border: 0;
+      border-radius: 999px;
+      background: var(--mc-color-accent);
+      color: var(--mc-color-bg);
+      font-family: var(--display);
+      font-size: 1.15rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .cd-result :global(.cd-buy:focus-visible) {
+      outline: 2px solid var(--mc-color-text);
+      outline-offset: 3px;
+    }
+
+    .cd-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: clamp(2rem, 4vw, 3.5rem);
+      align-items: start;
+    }
+
+    .cd-spec {
+      min-width: 0;
+    }
+
+    .cd-spec-wide {
+      grid-column: 1 / -1;
+      max-width: 44rem;
+    }
+
+    .cd-prose {
+      max-width: 44rem;
+      margin: 0;
+      font-size: clamp(1.1rem, 1.6vw, 1.35rem);
+      line-height: 1.9;
+    }
+
+    @media (max-width: 860px) {
+      .cd-step,
+      .cd-pair-result,
+      .cd-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .cd-num {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+</Layout>
