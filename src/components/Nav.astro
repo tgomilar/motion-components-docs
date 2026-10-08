@@ -18,6 +18,7 @@ const { pathname } = Astro.url;
     </button>
     <div class="links" id="nav-links">
       <a href="/docs/" class:list={["link", { active: pathname.startsWith("/docs") }]}>Docs</a>
+      <a href="/showcase/" class:list={["link", { active: pathname.startsWith("/showcase") }]}>Showcase</a>
       <a href="/blog/" class:list={["link", { active: pathname.startsWith("/blog") }]}>Blog</a>
       <a href="/about/" class:list={["link", { active: pathname === "/about" || pathname === "/about/" }]}>About</a>
       <a href="https://github.com/tgomilar/motion-components" class="link" target="_blank" rel="noopener">GitHub</a>

@@ -1,0 +1,31 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"a"> & { href: string; back?: boolean };
+
+const { class: className, back = false, ...rest } = Astro.props;
+
+const ARROW = back
+  ? `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>`
+  : `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>`;
+---
+
+<a class:list={["arrow-link", className]} {...rest}
+  >{back && <motion-icon icon={ARROW} animation="nudge-left" />}
+  <motion-underline><slot /></motion-underline>
+  {!back && <motion-icon icon={ARROW} animation="nudge-right" />}</a
+>
+
+<script>
+  import "motion-components/motion-underline";
+  import "motion-components/motion-icon";
+</script>
+
+<style>
+  .arrow-link {
+    --mc-mark-color: var(--mc-color-yellow);
+    color: var(--mc-color-accent);
+    --mc-icon-size: 1em;
+    text-decoration: none;
+  }
+</style>
