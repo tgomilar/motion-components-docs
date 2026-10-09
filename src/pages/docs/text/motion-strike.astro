@@ -44,7 +44,7 @@ to <motion-marker delay="0.6">fully automated</motion-marker>.`} />
       <h2>Loop</h2>
       <p>
         Add <code>loop</code> to draw, hold, undraw and draw again. <code>hold</code> sets how long the line stays through
-        the text, <code>gap</code> how long it stays away.
+        the text, <code>gap</code> how long it stays away. The line erases from its start, so it leaves at its end.
       </p>
       <DocsPreview replayId="strike-loop">
         <p class="sentence">
@@ -78,7 +78,8 @@ to <motion-marker delay="0.6">fully automated</motion-marker>.`} />
       ]} />
 
       <h2>JavaScript API</h2>
-      <p>The mark has the shared playback API: <code>play()</code> draws it, <code>cancel()</code> removes it, <code>finish()</code> shows it fully drawn and <code>replay()</code> draws it again from the start. It fires <code>motion-start</code>, <code>motion-finish</code> and <code>motion-cancel</code>. See the <a href="/docs/js-api/">JavaScript API</a>.</p>
+      <p>The mark has the shared playback API: <code>play()</code> draws it, <code>cancel()</code> removes it, <code>finish()</code> shows it fully drawn and <code>replay()</code> draws it again from the start. It fires <code>motion-start</code>, <code>motion-finish</code> and <code>motion-cancel</code>. With <code>trigger="hover"</code>, each draw and undraw is a playback run too, so it fires <code>motion-start</code> and <code>motion-finish</code>. See the <a href="/docs/js-api/">JavaScript API</a>.</p>
+      <p><code>sweep()</code> runs a fully drawn mark across once: it erases from its start, so it leaves at its end, then draws in again. It is a playback run, so it fires <code>motion-start</code> and <code>motion-finish</code>, and <code>pause()</code>, <code>finish()</code> and <code>cancel()</code> act on it. It does nothing under reduced motion or while the mark is not fully drawn.</p>
 
       <h2>Accessibility</h2>
       <p>The mark is decoration: the text stays real, selectable and read by screen readers exactly as written. The line alone does not tell screen readers the text is removed; wrap it in <code>&lt;del&gt;</code> when it is. Respects <code>prefers-reduced-motion</code>: the mark appears fully drawn at once, with no animation, and <code>loop</code> never starts.</p>

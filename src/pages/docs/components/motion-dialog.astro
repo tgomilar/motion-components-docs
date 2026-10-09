@@ -103,14 +103,18 @@ import 'motion-components'               // or the whole library`}
 </motion-dialog>`}
       />
 
-      <h2>Listening for close</h2>
-      <p>The <code>motion-close</code> event fires after the exit animation completes. Use it to sync state:</p>
+      <h2>Listening for open and close</h2>
+      <p>The <code>motion-open</code> event fires when the dialog opens, as the entrance animation starts. The <code>motion-close</code> event fires after the exit animation completes. Use them to sync state:</p>
       <CodeWindow
         filename="app.ts"
         copy
         code={`import type { MotionDialog } from 'motion-components'
 
 const dialog = document.querySelector<MotionDialog>('motion-dialog')!
+
+dialog.addEventListener('motion-open', () => {
+  console.log('dialog opened')
+})
 
 dialog.addEventListener('motion-close', () => {
   console.log('dialog closed')
@@ -176,7 +180,10 @@ dialog.addEventListener('motion-close', () => {
       <h2>Events</h2>
       <DocsTable
         columns={[{ label: "Event" }, { label: "Description" }]}
-        rows={[[{ code: "motion-close" }, "Fired after the close animation completes. Bubbles and is composed."]]}
+        rows={[
+          [{ code: "motion-open" }, "Fired when the dialog opens, as the entrance animation starts. Not fired when the dialog is reopened during its exit animation. Bubbles and is composed."],
+          [{ code: "motion-close" }, "Fired after the close animation completes. Bubbles and is composed."],
+        ]}
         copy
       />
 

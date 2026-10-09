@@ -32,7 +32,7 @@ const snippets: Record<string, { tags: string[]; code: string }> = {
     tags: ["motion-curve", "motion-glitch", "motion-perspective", "motion-liquid"],
     code: `<motion-curve amplitude="22" wave-length="360" wave-duration="2.6">curve</motion-curve>
 <motion-glitch trigger="loop" intensity="7">glitch</motion-glitch>
-<motion-perspective depth="0.7" vanish="right" loop duration="3">perspective</motion-perspective>
+<motion-perspective depth="0.7" vanish="right" loop>perspective</motion-perspective>
 <motion-liquid intensity="12" duration="6">liquid</motion-liquid>`,
   },
   reveal: {
@@ -189,7 +189,7 @@ const snippets: Record<string, { tags: string[]; code: string }> = {
               <div class="st-text">
                 <span class="st-text-row st-text-light"><motion-curve amplitude="22" wave-length="360" wave-duration="2.6">curve</motion-curve></span>
                 <span class="st-text-row st-text-heavy st-text-end"><motion-glitch trigger="loop" intensity="7">glitch</motion-glitch></span>
-                <span class="st-text-row"><motion-perspective depth="0.7" vanish="right" loop duration="3">perspective</motion-perspective></span>
+                <span class="st-text-row"><motion-perspective depth="0.7" vanish="right" loop>perspective</motion-perspective></span>
                 <span class="st-text-row st-text-heavy st-text-end"><motion-liquid intensity="12" duration="6">liquid</motion-liquid></span>
               </div>
             )}

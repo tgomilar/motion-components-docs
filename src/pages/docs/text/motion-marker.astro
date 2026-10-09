@@ -68,7 +68,7 @@ import 'motion-components'               // or the whole library`}
       <p>
         Add <code>loop</code> to draw, hold, undraw and draw again. <code>hold</code> sets how long the highlight stays on
         the text, <code>gap</code> how long it stays away. Add <code>pause-on-hover</code> to freeze it while the reader
-        points at it.
+        points at it. The highlight erases from its start, so it leaves at its end.
       </p>
       <DocsPreview replayId="marker-loop">
         <p class="sentence">Makes <motion-marker id="marker-loop" loop hold="2">the code</motion-marker> feel alive.</p>
@@ -100,7 +100,8 @@ import 'motion-components'               // or the whole library`}
       ]} />
 
       <h2>JavaScript API</h2>
-      <p>The mark has the shared playback API: <code>play()</code> draws it, <code>cancel()</code> removes it, <code>finish()</code> shows it fully drawn and <code>replay()</code> draws it again from the start. It fires <code>motion-start</code>, <code>motion-finish</code> and <code>motion-cancel</code>. See the <a href="/docs/js-api/">JavaScript API</a>.</p>
+      <p>The mark has the shared playback API: <code>play()</code> draws it, <code>cancel()</code> removes it, <code>finish()</code> shows it fully drawn and <code>replay()</code> draws it again from the start. It fires <code>motion-start</code>, <code>motion-finish</code> and <code>motion-cancel</code>. With <code>trigger="hover"</code>, each draw and undraw is a playback run too, so it fires <code>motion-start</code> and <code>motion-finish</code>. See the <a href="/docs/js-api/">JavaScript API</a>.</p>
+      <p><code>sweep()</code> runs a fully drawn mark across once: it erases from its start, so it leaves at its end, then draws in again. It is a playback run, so it fires <code>motion-start</code> and <code>motion-finish</code>, and <code>pause()</code>, <code>finish()</code> and <code>cancel()</code> act on it. It does nothing under reduced motion or while the mark is not fully drawn.</p>
 
       <h2>Accessibility</h2>
       <p>The mark is decoration: the text stays real, selectable and read by screen readers exactly as written. If the highlight carries meaning, wrap the component in <code>&lt;mark&gt;</code>. Respects <code>prefers-reduced-motion</code>: the mark appears fully drawn at once, with no animation, and <code>loop</code> never starts.</p>

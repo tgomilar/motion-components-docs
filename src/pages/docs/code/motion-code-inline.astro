@@ -44,7 +44,7 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Copy on hover</h2>
-      <p>Add <code>copy</code>. A copy icon appears on hover and copies the text content on click. The icon briefly switches to a checkmark as feedback.</p>
+      <p>Add <code>copy</code>. A copy icon appears on hover and copies the text content on click. The icon is a <a href="/docs/icons/motion-icon-state/"><code>motion-icon-state</code></a> that morphs into a check after copying. It scales with the text, so it follows the font size around it.</p>
       <DocsPreview>
         <motion-code-inline copy>npm install motion-components</motion-code-inline>
       </DocsPreview>
@@ -76,6 +76,7 @@ import 'motion-components'               // or the whole library`}
         { name: '--mc-color-accent', type: 'color', default: '#2563eb', description: 'Text colour and icon hover colour' },
         { name: '--mc-color-accent-dim', type: 'color', default: '#2563eb18', description: 'Background fill behind the code text' },
         { name: '--mc-color-muted', type: 'color', default: '#60608a', description: 'Copy icon default colour' },
+        { name: '--mc-icon-color-active', type: 'color', default: 'copy button colour', description: 'Colour of the check after copying' },
       ]} />
 
       <h2>Theming</h2>
@@ -100,7 +101,7 @@ import 'motion-components'               // or the whole library`}
         />
       </div>
       <h2>Accessibility</h2>
-      <p>No motion or animation. The component is purely visual and fully functional with all accessibility settings. Respects system colours via CSS custom properties.</p>
+      <p>The copy button is a native <code>&lt;button&gt;</code> named "Copy", which changes to "Copied" after a click. With <code>prefers-reduced-motion</code>, the copy icon switches to the check at once, with no morph. Respects system colours via CSS custom properties.</p>
       <DocsPagination />
     </main>
       <DocsTOC />

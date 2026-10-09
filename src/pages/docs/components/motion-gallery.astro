@@ -6,6 +6,7 @@ import DocsTOC from "../../../components/DocsTOC.astro";
 import DocsPagination from "../../../components/DocsPagination.astro";
 import CodeWindow from "../../../components/CodeWindow.astro";
 import PropsTable from "../../../components/PropsTable.astro";
+import DocsTable from "../../../components/DocsTable.astro";
 import "../../../styles/docs.css";
 ---
 
@@ -82,6 +83,50 @@ import 'motion-components'               // or the whole library`}
 
       <h2>Dismiss &amp; navigate</h2>
       <p>Click the expanded item, the backdrop, or the ✕ button to collapse. Use the ← → buttons or arrow keys to move between items.</p>
+
+      <h2>Methods</h2>
+      <DocsTable
+        columns={[{ label: "Method" }, { label: "Description" }]}
+        rows={[
+          [{ code: "open(index)" }, "Opens the lightbox on the item at <code>index</code> (default <code>0</code>). If the lightbox is already open, moves to that item."],
+          [{ code: "close()" }, "Closes the lightbox."],
+          [{ code: "next()" }, "Moves to the next item. Does nothing on the last item or while closed."],
+          [{ code: "prev()" }, "Moves to the previous item. Does nothing on the first item or while closed."],
+          [{ code: "index" }, "Read-only. Index of the item open in the lightbox, or <code>-1</code> while it is closed."],
+        ]}
+        copy
+      />
+
+      <h2>Events</h2>
+      <DocsTable
+        columns={[
+          { label: "Event" },
+          { label: "Detail", nowrap: true },
+          { label: "Description" },
+        ]}
+        rows={[
+          [{ code: "motion-open" }, { code: "index" }, "Fired when the lightbox opens."],
+          [{ code: "motion-change" }, { code: "index" }, "Fired when the lightbox moves to another item."],
+          [{ code: "motion-close" }, "—", "Fired when the lightbox closes."],
+        ]}
+        copy
+      />
+      <p>All three events bubble and are composed. Other components also fire a bubbling <code>motion-change</code>, so a listener on a parent element should check <code>event.target</code>.</p>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import type { MotionGallery } from 'motion-components'
+
+const gallery = document.querySelector<MotionGallery>('motion-gallery')!
+
+document.querySelector('#open')!.addEventListener('click', () => gallery.open(0))
+document.querySelector('#next')!.addEventListener('click', () => gallery.next())
+
+gallery.addEventListener('motion-change', (event) => {
+  if (event.target !== gallery) return
+  console.log('now showing', event.detail.index)
+})`}
+      />
 
       <h2>Accessibility</h2>
       <p>When <code>prefers-reduced-motion</code> is set, expand and collapse are instant. The backdrop and UI still appear normally.</p>

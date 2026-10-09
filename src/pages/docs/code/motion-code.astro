@@ -252,6 +252,7 @@ animate(".hero", {
         { name: 'typing-delay',    type: 'number',  default: '0',          description: 'Seconds to wait before typing starts, on every pass' },
         { name: 'typing-loop',     type: 'boolean', default: 'true',       description: 'Repeat the typing. Set <motion-code-inline copy>typing-loop="false"</motion-code-inline> to type once when the block scrolls into view' },
         { name: 'typing-hold',     type: 'number',  default: '1.5',        description: 'Seconds to hold the finished code before typing it again' },
+        { name: 'code',            type: 'string',  default: '""',         description: 'Property only: reads or replaces the source, before highlighting. Same as <code>setCode()</code>, and it works when set before the element is connected' },
       ]} />
 
       <h2>CSS variables</h2>
@@ -271,7 +272,7 @@ animate(".hero", {
 
       <h2>Methods</h2>
       <PropsTable nameLabel="Method" rows={[
-        { name: 'setCode(raw)',  type: 'void', default: '—', description: 'Set code programmatically. Triggers typing if typing is enabled.' },
+        { name: 'setCode(raw)',  type: 'void', default: '—', description: 'Replace the code. A typing run in progress is cancelled with <code>motion-cancel</code>, and typing starts again if typing is enabled.' },
         { name: 'replay()',      type: 'void', default: '—', description: 'Restart the typing animation from the beginning.' },
       ]} />
       <h2>JavaScript API</h2>

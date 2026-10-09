@@ -86,7 +86,7 @@ import 'motion-components'`}
 
       <h2>Properties</h2>
       <PropsTable nameLabel="Attribute" rows={[
-        { name: 'to', type: 'string', default: '—', description: 'Target date/time. Any value parseable by <code>new Date()</code>' },
+        { name: 'to', type: 'string', default: '—', description: 'Target date/time. Any value parseable by <code>new Date()</code>. After the countdown finishes, setting <code>to</code> to a future time starts it counting again' },
         { name: 'format', type: 'string', default: '"days hours minutes seconds"', description: 'Space-separated list of units to display' },
         { name: 'labels', type: 'boolean', default: 'true', description: 'Show unit labels below each digit group. Set it to <code>"false"</code> to hide them' },
         { name: 'roll', type: 'boolean', default: 'false', description: 'Use slot-machine roll instead of flip animation' },

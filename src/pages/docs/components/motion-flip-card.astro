@@ -69,14 +69,20 @@ import 'motion-components'               // or the whole library`}
       />
 
       <h2>Programmatic flip</h2>
-      <p>Call <code>flip()</code> on the element to toggle from script:</p>
+      <p>Call <code>flip()</code> on the element to toggle from script. It fires <code>motion-change</code>. To show a face without an event, set the <code>flipped</code> property or attribute instead.</p>
       <CodeWindow
         filename="app.ts"
         copy
         code={`import type { MotionFlipCard } from 'motion-components'
 
 const card = document.querySelector<MotionFlipCard>('motion-flip-card')!
-card.flip()`}
+card.flip()          // turns the card and fires motion-change
+card.flipped = true  // shows the back, no event
+
+card.addEventListener('motion-change', (event) => {
+  if (event.target !== card) return
+  console.log(event.detail.flipped ? 'back' : 'front')
+})`}
       />
 
       <h2>Properties</h2>
@@ -86,6 +92,7 @@ card.flip()`}
         { name: 'duration', type: 'number', default: '0.7', description: 'Spring duration of the flip, in seconds' },
         { name: 'bounce', type: 'number', default: '0.2', description: 'Spring bounciness (0 = critically damped, higher = more elastic)' },
         { name: 'perspective', type: 'number', default: '1000', description: 'CSS perspective applied to the host, in pixels' },
+        { name: 'flipped', type: 'boolean', default: 'false', description: 'Whether the back is showing. Reflects to the attribute. Setting it turns the card without firing <code>motion-change</code>' },
       ]} />
 
       <h2>Slots</h2>
@@ -97,13 +104,27 @@ card.flip()`}
       <h2>Methods</h2>
       <DocsTable
         columns={[{ label: "Method" }, { label: "Description" }]}
-        rows={[[{ code: "flip()" }, "Toggles the card between front and back."]]}
+        rows={[[{ code: "flip()" }, "Toggles the card between front and back and fires <code>motion-change</code>."]]}
         copy
       />
 
+      <h2>Events</h2>
+      <DocsTable
+        columns={[
+          { label: "Event" },
+          { label: "Detail", nowrap: true },
+          { label: "Description" },
+        ]}
+        rows={[
+          [{ code: "motion-change" }, { code: "flipped" }, "Fired when a hover, click, key press or <code>flip()</code> turns the card. Not fired when you set <code>flipped</code>. Bubbles and is composed."],
+        ]}
+        copy
+      />
+      <p>Other components also fire a bubbling <code>motion-change</code>. A listener on a parent element should check <code>event.target</code>.</p>
+
       <h2>Accessibility</h2>
       <p>
-        When <motion-code-inline copy>trigger="click"</motion-code-inline> the host is given <code>role="button"</code>, <code>tabindex="0"</code>, and responds to <kbd>Space</kbd> / <kbd>Enter</kbd>.
+        When <motion-code-inline copy>trigger="click"</motion-code-inline> the host is given <code>role="button"</code>, <code>tabindex="0"</code>, and responds to <kbd>Space</kbd> / <kbd>Enter</kbd>. It also gets <code>aria-pressed</code>, which is <code>"true"</code> while the back is showing.
         Both faces stay in the DOM at all times. The back face is rotated 180° and hidden via <code>backface-visibility</code>, so screen readers can still find its content.
       </p>
       <DocsPagination />

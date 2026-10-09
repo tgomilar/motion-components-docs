@@ -5,14 +5,6 @@
   color: var(--mc-color-text);
 }
 
-/* Until a release ships them in preloadCSS: hide text whose first frame differs from plain text */
-.sc motion-gravity:not(:defined),
-.sc motion-perspective:not(:defined),
-.sc motion-curve:not(:defined),
-.sc motion-text-mask:not(:defined) {
-  opacity: 0;
-}
-
 .sc a {
   color: var(--mc-color-accent);
   text-decoration: none;
