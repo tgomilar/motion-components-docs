@@ -9,11 +9,11 @@ const lucide = (name: string) => `https://cdn.jsdelivr.net/npm/lucide-static@1/i
 
 const wall = [
   ["heart", "draw pulse"], ["bell", "draw wiggle"], ["rocket", "draw bounce"], ["star", "draw pop"],
-  ["sun", "draw rotate"], ["mail", "draw nudge-right"], ["zap", "draw wiggle"], ["music", "draw nudge-up"],
+  ["sun", "draw rotate"], ["mail", "draw slide-right"], ["zap", "draw wiggle"], ["music", "draw slide-up"],
   ["camera", "draw pop"], ["cloud", "draw bounce"], ["coffee", "draw"], ["gift", "draw wiggle"],
-  ["moon", "draw rotate"], ["send", "draw nudge-right"], ["anchor", "draw bounce"], ["compass", "draw rotate"],
+  ["moon", "draw rotate"], ["send", "draw slide-right"], ["anchor", "draw bounce"], ["compass", "draw rotate"],
   ["flame", "draw pulse"], ["leaf", "draw wiggle"], ["key", "draw rotate"], ["map", "draw pop"],
-  ["umbrella", "draw bounce"], ["feather", "draw nudge-up"], ["globe", "draw rotate"], ["sparkles", "draw pop"],
+  ["umbrella", "draw bounce"], ["feather", "draw slide-up"], ["globe", "draw rotate"], ["sparkles", "draw pop"],
 ];
 
 const animations = [
@@ -23,8 +23,21 @@ const animations = [
   { name: "rotate", icon: "settings", what: "turns a full circle" },
   { name: "wiggle", icon: "bell", what: "wobbles on a bouncy spring" },
   { name: "pulse", icon: "heart", what: "beats once" },
+  { name: "slide-up", icon: "arrow-up", what: "slides up and springs back" },
+  { name: "slide-down", icon: "arrow-down", what: "slides down and springs back" },
+  { name: "slide-left", icon: "arrow-left", what: "slides left and springs back" },
+  { name: "slide-right", icon: "arrow-right", what: "slides right and springs back" },
   { name: "draw wiggle", icon: "zap", what: "draws and wobbles at once" },
   { name: "draw pulse", icon: "flame", what: "draws and beats at once" },
+];
+
+const filled = [
+  { icon: "heart", name: "draw pulse", tint: "accent", what: "draws the line, fills, then beats" },
+  { icon: "star", name: "draw pop", tint: "yellow", what: "draws the line, fills, then pops" },
+  { icon: "bell", name: "draw wiggle", tint: "yellow", what: "draws the line, fills, then wobbles" },
+  { icon: "cloud", name: "draw bounce", tint: "accent", what: "draws the line, fills, then hops" },
+  { icon: "droplet", name: "draw", tint: "accent", what: "draws the line, then the fill fades in" },
+  { icon: "shield", name: "pop", tint: "yellow", what: "stays filled and pops" },
 ];
 
 const icon = (name: string, attrs: string) => `<motion-icon src="${lucide(name)}" ${attrs}></motion-icon>`;
@@ -45,10 +58,24 @@ const animationsCode = [
   ["settings", "rotate"],
   ["bell", "wiggle"],
   ["heart", "pulse"],
+  ["arrow-up", "slide-up"],
+  ["arrow-down", "slide-down"],
+  ["arrow-left", "slide-left"],
+  ["arrow-right", "slide-right"],
   ["zap", "draw wiggle"],
+  ["flame", "draw pulse"],
 ]
   .map(([name, animation]) => icon(name, `animation="${animation}" trigger="loop" interval="1.4"`))
   .join("\n");
+
+const filledCode = `<style>
+  .filled-blue { --mc-icon-fill: #bfdbfe; }
+  .filled-amber { --mc-icon-fill: #fde68a; }
+</style>
+
+${filled
+  .map((f) => icon(f.icon, `class="filled-${f.tint === "accent" ? "blue" : "amber"}" animation="${f.name}" trigger="loop" interval="1.4"`))
+  .join("\n")}`;
 
 const triggersCode = `<a href="/next">
   Hover this link
@@ -74,27 +101,34 @@ const states = [
   { name: "loading", label: "Load", what: "spinner and done" },
   { name: "eye", label: "Show password", what: "eye and eye off" },
 ];
-const statesCode = states.map((st) => `<motion-state-icon name="${st.name}" toggle label="${st.label}"></motion-state-icon>`).join("\n");
+const statesCode = `<style>
+  motion-icon-state {
+    --mc-icon-color: #18181b;         /* the first state */
+    --mc-icon-color-active: #a16207;  /* the second state */
+  }
+</style>
+
+${states.map((st) => `<motion-icon-state name="${st.name}" toggle label="${st.label}"></motion-icon-state>`).join("\n")}`;
 ---
 
 <Layout
   title="Icons showcase — Motion Components"
-  description="Every motion-components icon effect live: any SVG icon drawn in, popped, bounced, rotated, wiggled or pulsed, and eight icons that morph between two states."
+  description="Every motion-components icon effect live: any SVG icon drawn in, popped, bounced, rotated, wiggled or pulsed, and icons that morph between two states."
   noMain>
   <ShowcaseFonts />
 
   <main id="main" class="sc">
     <header class="sc-cat-hero">
-      <h1 class="sc-cat-title" style="--len: 5">icons</h1>
+      <h1 class="sc-cat-title" style="--len: 5"><motion-headline by="chars" interval="0.05" duration="0.9">icons</motion-headline></h1>
       <p class="sc-cat-lede">
-        Two tags. <code>motion-icon</code> takes any SVG icon and draws it in or moves it on a spring.
-        <code>motion-state-icon</code> morphs between two states, such as play and pause. Scroll the wall below and it draws itself
+        <code>motion-icon</code> takes any SVG icon and draws it in or moves it on a spring.
+        <code>motion-icon-state</code> morphs between two states, such as play and pause. Scroll the wall below and it draws itself
         again each time you return.
       </p>
     </header>
 
     <section class="ic-wall-wrap" aria-labelledby="ic-wall-title">
-      <h2 class="ic-h" id="ic-wall-title">Twenty-four icons, drawn as you arrive</h2>
+      <h2 class="ic-h" id="ic-wall-title">A wall of icons, drawn as you arrive</h2>
       <div class="ic-wall">
         {
           wall.map(([name, animation], i) => (
@@ -127,6 +161,23 @@ const statesCode = states.map((st) => `<motion-state-icon name="${st.name}" togg
         <span>pick one motion, or put <code>draw</code> in front of it to run both</span>
       </p>
       <ShowcaseCode tags={["motion-icon"]} code={animationsCode} />
+
+      <ul class="ic-specimens ic-filled">
+        {
+          filled.map((f, i) => (
+            <li class="ic-specimen">
+              <motion-icon src={lucide(f.icon)} animation={f.name} trigger="loop" interval="1.4" delay={String(i * 0.12)} class={`ic-fill-${f.tint}`} />
+              <span class="ic-name">{f.name}</span>
+              <span class="ic-what">{f.what}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="sc-meta">
+        <a href="/docs/icons/motion-icon/"><code>--mc-icon-fill</code></a>
+        <span>fills the inside of an outline icon; with <code>draw</code>, the fill fades in after the line</span>
+      </p>
+      <ShowcaseCode tags={["motion-icon"]} code={filledCode} />
     </section>
 
     <section class="ic-section" aria-labelledby="ic-trig-title">
@@ -167,12 +218,12 @@ const statesCode = states.map((st) => `<motion-state-icon name="${st.name}" togg
     </section>
 
     <section class="ic-section ic-states" aria-labelledby="ic-state-title">
-      <h2 class="ic-h" id="ic-state-title">Eight icons with two states. Press them.</h2>
+      <h2 class="ic-h" id="ic-state-title">Icons with two states. Press them.</h2>
       <ul class="ic-state-list">
         {
           states.map((s) => (
             <li class="ic-state">
-              <motion-state-icon name={s.name} toggle label={s.label} />
+              <motion-icon-state name={s.name} toggle label={s.label} />
               <span class="ic-name">{s.name}</span>
               <span class="ic-what">{s.what}</span>
             </li>
@@ -180,18 +231,19 @@ const statesCode = states.map((st) => `<motion-state-icon name="${st.name}" togg
         }
       </ul>
       <p class="sc-meta">
-        <a href="/docs/icons/motion-state-icon/"><code>&lt;motion-state-icon toggle&gt;</code></a>
-        <span>a real toggle button: Space and Enter switch it, and it reports its state to screen readers</span>
+        <a href="/docs/icons/motion-icon-state/"><code>&lt;motion-icon-state toggle&gt;</code></a>
+        <span>a real toggle button: Space and Enter switch it, and it reports its state to screen readers. <code>--mc-icon-color-active</code> colors each icon in its second state.</span>
       </p>
-      <ShowcaseCode tags={["motion-state-icon"]} code={statesCode} />
+      <ShowcaseCode tags={["motion-icon-state"]} code={statesCode} />
     </section>
 
     <CategoryNav current="icons" />
   </main>
 
   <script>
+    import "motion-components/motion-headline";
     import "motion-components/motion-icon";
-    import "motion-components/motion-state-icon";
+    import "motion-components/motion-icon-state";
   </script>
 
   <style>
@@ -252,7 +304,7 @@ const statesCode = states.map((st) => `<motion-state-icon name="${st.name}" togg
     }
 
     .ic-specimen motion-icon,
-    .ic-state motion-state-icon {
+    .ic-state motion-icon-state {
       margin-bottom: 0.75rem;
     }
 
@@ -334,9 +386,25 @@ const statesCode = states.map((st) => `<motion-state-icon name="${st.name}" togg
       background: var(--mc-color-surface);
     }
 
-    .ic-state motion-state-icon {
+    .ic-filled {
+      margin-top: clamp(3rem, 8vh, 5rem);
+    }
+
+    .ic-filled .ic-specimen motion-icon {
+      color: var(--mc-color-text);
+    }
+
+    .ic-filled .ic-specimen .ic-fill-accent {
+      --mc-icon-fill: color-mix(in srgb, var(--mc-color-accent) 30%, transparent);
+    }
+
+    .ic-filled .ic-specimen .ic-fill-yellow {
+      --mc-icon-fill: color-mix(in srgb, var(--mc-color-yellow) 35%, transparent);
+    }
+
+    .ic-state motion-icon-state {
       --mc-icon-size: clamp(3.5rem, 6vw, 4.75rem);
-      --mc-icon-accent: var(--mc-color-yellow);
+      --mc-icon-color-active: var(--mc-color-yellow);
       color: var(--mc-color-text);
       border-radius: 0.5rem;
     }

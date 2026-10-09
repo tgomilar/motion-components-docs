@@ -31,7 +31,7 @@ export const categories: ShowcaseCategory[] = [
   {
     slug: "icons",
     name: "Icons",
-    tags: ["icon", "state-icon"],
+    tags: ["icon", "icon-state"],
     blurb: "Any SVG icon, drawn in and moved on a spring.",
     built: true,
   },

@@ -1,5 +1,6 @@
 ---
 import { categories, categoryHref } from "../../data/showcase";
+import UnderlineHover from "./UnderlineHover.astro";
 
 interface Props {
   current: string;
@@ -12,17 +13,29 @@ const next = categories[(i + 1) % categories.length];
 ---
 
 <nav class="sc-catnav" aria-label="Showcase categories">
-  <a class="sc-catnav-side" href={categoryHref(prev)}>
-    <span class="sc-catnav-dir">Previous</span>
-    <span class="sc-catnav-name">{prev.name}</span>
-  </a>
+  <motion-hover class="sc-catnav-hover" x="-10" scale="1" duration="0.45" bounce="0.35">
+    <motion-font axes="wdth:68:95" trigger="hover" duration="0.5" bounce="0.2">
+      <a class="sc-catnav-side" href={categoryHref(prev)}>
+        <span class="sc-catnav-dir">Previous</span>
+        <span class="sc-catnav-name">{prev.name}</span>
+      </a>
+    </motion-font>
+  </motion-hover>
   <a class="sc-catnav-all" href="/showcase/"><motion-underline>All categories</motion-underline></a>
-  <a class="sc-catnav-side sc-catnav-next" href={categoryHref(next)}>
-    <span class="sc-catnav-dir">Next</span>
-    <span class="sc-catnav-name">{next.name}</span>
-  </a>
+  <motion-hover class="sc-catnav-hover sc-catnav-hover-next" x="10" scale="1" duration="0.45" bounce="0.35">
+    <motion-font axes="wdth:68:95" trigger="hover" duration="0.5" bounce="0.2">
+      <a class="sc-catnav-side sc-catnav-next" href={categoryHref(next)}>
+        <span class="sc-catnav-dir">Next</span>
+        <span class="sc-catnav-name">{next.name}</span>
+      </a>
+    </motion-font>
+  </motion-hover>
 </nav>
+
+<UnderlineHover />
 
 <script>
   import "motion-components/motion-underline";
+  import "motion-components/motion-hover";
+  import "motion-components/motion-font";
 </script>

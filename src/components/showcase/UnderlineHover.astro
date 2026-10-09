@@ -1,0 +1,7 @@
+<script>
+  import "motion-components/motion-underline";
+
+  for (const underline of document.querySelectorAll<HTMLElement & { sweep(): void }>(".sc a > motion-underline")) {
+    underline.closest("a")?.addEventListener("pointerenter", () => underline.sweep());
+  }
+</script>

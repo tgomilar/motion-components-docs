@@ -59,11 +59,11 @@ document.querySelector('#simulate').addEventListener('click', notify)`,
     title: "Like button with a count",
     intro: "The heart fills on a spring and the count goes up or down. The button keeps <code>aria-pressed</code> in sync, so screen readers know the state.",
     html: `<button id="like" aria-pressed="false" aria-label="Like">
-  <motion-state-icon name="heart"></motion-state-icon>
+  <motion-icon-state name="heart"></motion-icon-state>
   <span id="like-count">128</span>
 </button>`,
     js: `const button = document.querySelector('#like')
-const heart = button.querySelector('motion-state-icon')
+const heart = button.querySelector('motion-icon-state')
 const count = document.querySelector('#like-count')
 
 button.addEventListener('click', () => {
@@ -76,15 +76,15 @@ button.addEventListener('click', () => {
   {
     id: "download-button",
     title: "Download button: arrow, spinner, check",
-    intro: "Two components work together. <code>motion-icon</code> shows the arrow and bounces on hover. On click, <code>motion-state-icon</code> takes over with a spinner that turns into a check.",
+    intro: "Two components work together. <code>motion-icon</code> shows the arrow and bounces on hover. On click, <code>motion-icon-state</code> takes over with a spinner that turns into a check.",
     html: `<button id="download">
   <motion-icon src="${icon("download")}" animation="bounce"></motion-icon>
-  <motion-state-icon name="loading" hidden></motion-state-icon>
+  <motion-icon-state name="loading" hidden></motion-icon-state>
   Download
 </button>`,
     js: `const button = document.querySelector('#download')
 const arrow = button.querySelector('motion-icon')
-const status = button.querySelector('motion-state-icon')
+const status = button.querySelector('motion-icon-state')
 const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms))
 
 button.addEventListener('click', async () => {
@@ -100,7 +100,7 @@ button.addEventListener('click', async () => {
   button.disabled = false
 })`,
     css: `motion-icon[hidden],
-motion-state-icon[hidden] {
+motion-icon-state[hidden] {
   display: none;
 }`,
     note: "The <code>[hidden]</code> rule is needed because a component's own <code>display</code> style is stronger than the browser's default for <code>hidden</code>.",
@@ -184,7 +184,7 @@ motion-state-icon[hidden] {
       <h1>Icon Recipes</h1>
       <p class="lead">
         Everyday interface patterns built with <a href="/docs/icons/motion-icon/"><code>motion-icon</code></a> and
-        <a href="/docs/icons/motion-state-icon/"><code>motion-state-icon</code></a>. Each snippet is complete: copy it into a page that loads the library.
+        <a href="/docs/icons/motion-icon-state/"><code>motion-icon-state</code></a>. Each snippet is complete: copy it into a page that loads the library.
       </p>
       <CodeWindow filename="index.html" copy code={`<script type="module" src="https://cdn.jsdelivr.net/npm/motion-components@1/+esm"></script>`} />
 
@@ -192,7 +192,7 @@ motion-state-icon[hidden] {
 
       <h2 id="more">More recipes</h2>
       <p>
-        The <a href="/docs/icons/motion-state-icon/#recipes">motion-state-icon page</a> has five more: a menu button, a copy button, a save button with
+        The <a href="/docs/icons/motion-icon-state/#recipes">motion-icon-state page</a> has five more: a menu button, a copy button, a save button with
         a spinner, a show password button and an accordion.
       </p>
 
@@ -204,5 +204,5 @@ motion-state-icon[hidden] {
 
 <script>
   import "motion-components/motion-icon";
-  import "motion-components/motion-state-icon";
+  import "motion-components/motion-icon-state";
 </script>

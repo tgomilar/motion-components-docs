@@ -116,9 +116,9 @@ ${tag("motion-chart", revenueChart, { id: "revenue", style: colors(1) })}
 
   <main id="main" class="sc">
     <header class="sc-cat-hero">
-      <h1 class="sc-cat-title" style="--len: 6">charts</h1>
+      <h1 class="sc-cat-title" style="--len: 6"><motion-headline by="chars" interval="0.05" duration="0.9">charts</motion-headline></h1>
       <p class="sc-cat-lede">
-        Three tags for numbers. Below is the year of Ember Hill, a small and entirely made-up coffee roastery, told as a short
+        Tags for numbers. Below is the year of Ember Hill, a small and entirely made-up coffee roastery, told as a short
         report. Every chart draws itself as you reach it, and the data is plain HTML.
       </p>
     </header>
@@ -247,6 +247,7 @@ ${tag("motion-chart", revenueChart, { id: "revenue", style: colors(1) })}
   </main>
 
   <script>
+    import "motion-components/motion-headline";
     import "motion-components/motion-chart";
     import "motion-components/motion-pie";
     import "motion-components/motion-sparkline";

@@ -160,6 +160,16 @@
       "source": "/docs/primitives/motion-tilt/",
       "destination": "/docs/respond/motion-tilt/",
       "permanent": true
+    },
+    {
+      "source": "/docs/icons/motion-state-icon",
+      "destination": "/docs/icons/motion-icon-state/",
+      "permanent": true
+    },
+    {
+      "source": "/docs/icons/motion-state-icon/",
+      "destination": "/docs/icons/motion-icon-state/",
+      "permanent": true
     }
   ]
 }

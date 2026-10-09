@@ -46,8 +46,7 @@ import 'motion-components/motion-reveal'`,
   <button class="buy">Add to cart</button>
 </motion-press>`,
     ),
-    feature: "highlights HTML, next to the result",
-    result: `<motion-press><button class="cd-buy" type="button">Add to cart</button></motion-press>`,
+    feature: "highlights HTML",
   },
   {
     title: "Tune it with attributes",
@@ -58,8 +57,7 @@ import 'motion-components/motion-reveal'`,
   <button class="buy">Add to cart</button>
 </motion-press>`,
     ),
-    feature: "the same block, tuned, next to the result",
-    result: `<motion-press scale="0.86" bounce="0.7"><button class="cd-buy" type="button">Add to cart</button></motion-press>`,
+    feature: "the same block, tuned",
   },
 ];
 
@@ -100,6 +98,12 @@ const python = spec(
   `for page in pages:
     render(page, theme="dark")`,
 );
+const styled = spec(
+  `filename="settings" code-lang="js" compact style="--mc-code-keyword: #f472b6; --mc-code-string: #4ade80; --mc-code-num: #facc15"`,
+  `const spring = { stiffness: 320, damping: 24 }
+export default { theme: "dark", spring }`,
+);
+
 const inlineSnippet = `<p>
   Install with <motion-code-inline copy-visible>npm install motion-components</motion-code-inline>,
   then wrap any button in <motion-code-inline copy>motion-press</motion-code-inline>
@@ -109,16 +113,15 @@ const inlineSnippet = `<p>
 
 <Layout
   title="Code showcase — Motion Components"
-  description="motion-code and motion-code-inline in a four-step tutorial: highlighted code that types itself in as you scroll, with copy buttons, file names and a live result next to the code."
+  description="motion-code and motion-code-inline in a four-step tutorial: highlighted code that types itself in as you scroll, with copy buttons, file names, language and colour settings."
   noMain>
   <ShowcaseFonts />
 
   <main id="main" class="sc">
     <header class="sc-cat-hero">
-      <h1 class="sc-cat-title" style="--len: 4">code</h1>
+      <h1 class="sc-cat-title" style="--len: 4"><motion-headline by="chars" interval="0.05" duration="0.9">code</motion-headline></h1>
       <p class="sc-cat-lede">
-        Two tags for showing code. This page is a short tutorial built with them: each step types itself in as you reach it, and
-        the last two steps show the result next to the code.
+        Tags for showing code. This page is a short tutorial built with them: each step types itself in as you reach it.
       </p>
     </header>
 
@@ -136,14 +139,8 @@ const inlineSnippet = `<p>
                 <p class="cd-step-body">{step.text}</p>
               </div>
               <div class="cd-step-demo">
-                <div class:list={["cd-pair", step.result && "cd-pair-result"]}>
+                <div class="cd-pair">
                   <div class="cd-block" set:html={step.block.html} />
-                  {step.result && (
-                    <div class="cd-result">
-                      <span class="cd-result-label">Result, press it</span>
-                      <div set:html={step.result} />
-                    </div>
-                  )}
                 </div>
                 <p class="sc-meta">
                   <a href="/docs/code/motion-code/">
@@ -151,10 +148,7 @@ const inlineSnippet = `<p>
                   </a>
                   <span>{step.feature}</span>
                 </p>
-                <ShowcaseCode
-                  tags={step.result ? ["motion-code", "motion-press"] : ["motion-code"]}
-                  code={step.result ? `${step.block.snippet}\n\n${step.result.replace("cd-buy", "buy")}` : step.block.snippet}
-                />
+                <ShowcaseCode tags={["motion-code"]} code={step.block.snippet} />
               </div>
             </li>
           ))
@@ -205,6 +199,14 @@ const inlineSnippet = `<p>
           </p>
           <ShowcaseCode tags={["motion-code"]} code={python.snippet} />
         </div>
+        <div class="cd-spec cd-spec-wide">
+          <div class="cd-block" set:html={styled.html} />
+          <p class="sc-meta">
+            <a href="/docs/code/motion-code/"><code>&lt;motion-code&gt;</code></a>
+            <span>sets its language with <code>code-lang</code> and its colours with <code>--mc-code-*</code> properties</span>
+          </p>
+          <ShowcaseCode tags={["motion-code"]} code={styled.snippet} />
+        </div>
       </div>
     </section>
 
@@ -226,9 +228,9 @@ const inlineSnippet = `<p>
   </main>
 
   <script>
+    import "motion-components/motion-headline";
     import "motion-components/motion-code";
     import "motion-components/motion-code-inline";
-    import "motion-components/motion-press";
   </script>
 
   <style>
@@ -303,46 +305,8 @@ const inlineSnippet = `<p>
       gap: 1.25rem;
     }
 
-    .cd-pair-result {
-      grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
-      align-items: stretch;
-    }
-
     .cd-block {
       min-width: 0;
-    }
-
-    .cd-result {
-      display: grid;
-      place-items: center;
-      align-content: center;
-      gap: 1.25rem;
-      min-height: 10rem;
-      padding: 1.5rem;
-      border-radius: 16px;
-      border: 1px dashed var(--mc-color-border);
-    }
-
-    .cd-result-label {
-      font-size: 0.9rem;
-      color: var(--mc-color-muted);
-    }
-
-    .cd-result :global(.cd-buy) {
-      padding: 0.85rem 1.6rem;
-      border: 0;
-      border-radius: 999px;
-      background: var(--mc-color-accent);
-      color: var(--mc-color-bg);
-      font-family: var(--display);
-      font-size: 1.15rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .cd-result :global(.cd-buy:focus-visible) {
-      outline: 2px solid var(--mc-color-text);
-      outline-offset: 3px;
     }
 
     .cd-grid {
@@ -370,7 +334,6 @@ const inlineSnippet = `<p>
 
     @media (max-width: 860px) {
       .cd-step,
-      .cd-pair-result,
       .cd-grid {
         grid-template-columns: minmax(0, 1fr);
       }

@@ -22,7 +22,7 @@ const block = `<motion-code filename="${filename}" copy copy-label><pre>${escape
 <details class="sc-code">
   <summary
     ><motion-underline><span class="sc-code-show">Show the code</span><span class="sc-code-hide">Hide the code</span></motion-underline>
-    <motion-icon icon={DOWN} data-down={DOWN} data-up={UP} animation="draw nudge-down" trigger="mount"></motion-icon></summary
+    <motion-icon icon={DOWN} data-down={DOWN} data-up={UP} animation="slide-down"></motion-icon></summary
   >
   <div class="sc-code-body" set:html={block} />
 </details>
@@ -33,11 +33,15 @@ const block = `<motion-code filename="${filename}" copy copy-label><pre>${escape
   import "motion-components/motion-icon";
 
   for (const details of document.querySelectorAll<HTMLDetailsElement>("details.sc-code")) {
-    const icon = details.querySelector("motion-icon") as (HTMLElement & { icon: string; animation: string }) | null;
-    details.addEventListener("toggle", () => {
+    const icon = details.querySelector("motion-icon") as
+      | (HTMLElement & { icon: string; animation: string; updateComplete: Promise<boolean>; replay(): void })
+      | null;
+    details.addEventListener("toggle", async () => {
       if (!icon) return;
-      icon.animation = details.open ? "draw nudge-up" : "draw nudge-down";
+      icon.animation = details.open ? "slide-up" : "slide-down";
       icon.icon = (details.open ? icon.dataset.up : icon.dataset.down) ?? "";
+      await icon.updateComplete;
+      icon.replay();
     });
   }
 </script>

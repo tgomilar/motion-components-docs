@@ -23,21 +23,21 @@ const icons = [
   { name: "eye", label: "Show password", off: "eye", on: "eye-off" },
 ];
 
-const allIcons = icons.map((i) => `<motion-state-icon name="${i.name}" toggle label="${i.label}"></motion-state-icon>`).join("\n");
+const allIcons = icons.map((i) => `<motion-icon-state name="${i.name}" toggle label="${i.label}"></motion-icon-state>`).join("\n");
 
 const quickStart = `<!doctype html>
 <html>
   <head>
-    <script type="module" src="${CDN}/motion-state-icon.js/+esm"></script>
+    <script type="module" src="${CDN}/motion-icon-state.js/+esm"></script>
   </head>
   <body>
-    <motion-state-icon name="heart" toggle label="Like"></motion-state-icon>
+    <motion-icon-state name="heart" toggle label="Like"></motion-icon-state>
   </body>
 </html>`;
 
 const recipes = {
   menu: `<button id="menu-button" aria-label="Menu" aria-expanded="false">
-  <motion-state-icon name="menu"></motion-state-icon>
+  <motion-icon-state name="menu"></motion-icon-state>
 </button>
 
 <script type="module">
@@ -46,17 +46,17 @@ const recipes = {
   button.addEventListener('click', () => {
     const open = button.getAttribute('aria-expanded') !== 'true'
     button.setAttribute('aria-expanded', open)
-    button.querySelector('motion-state-icon').active = open
+    button.querySelector('motion-icon-state').active = open
   })
 </script>`,
   copy: `<button id="copy-button">
-  <motion-state-icon name="copy"></motion-state-icon>
+  <motion-icon-state name="copy"></motion-icon-state>
   Copy
 </button>
 
 <script type="module">
   const button = document.querySelector('#copy-button')
-  const icon = button.querySelector('motion-state-icon')
+  const icon = button.querySelector('motion-icon-state')
 
   button.addEventListener('click', async () => {
     await navigator.clipboard.writeText('Text to copy')
@@ -65,13 +65,13 @@ const recipes = {
   })
 </script>`,
   save: `<button id="save-button">
-  <motion-state-icon name="loading" active></motion-state-icon>
+  <motion-icon-state name="loading" active></motion-icon-state>
   Save
 </button>
 
 <script type="module">
   const button = document.querySelector('#save-button')
-  const icon = button.querySelector('motion-state-icon')
+  const icon = button.querySelector('motion-icon-state')
 
   button.addEventListener('click', async () => {
     icon.active = false   // spinner
@@ -81,7 +81,7 @@ const recipes = {
 </script>`,
   password: `<input id="password" type="password" value="secret" />
 <button id="password-button" aria-label="Show password">
-  <motion-state-icon name="eye"></motion-state-icon>
+  <motion-icon-state name="eye"></motion-icon-state>
 </button>
 
 <script type="module">
@@ -92,13 +92,13 @@ const recipes = {
     const visible = input.type === 'password'
     input.type = visible ? 'text' : 'password'
     button.setAttribute('aria-label', visible ? 'Hide password' : 'Show password')
-    button.querySelector('motion-state-icon').active = visible
+    button.querySelector('motion-icon-state').active = visible
   })
 </script>`,
   details: `<details id="faq">
   <summary>
     What is motion-components?
-    <motion-state-icon name="chevron"></motion-state-icon>
+    <motion-icon-state name="chevron"></motion-icon-state>
   </summary>
   Web components with spring-based motion.
 </details>
@@ -107,10 +107,10 @@ const recipes = {
   const details = document.querySelector('#faq')
 
   details.addEventListener('toggle', () => {
-    details.querySelector('motion-state-icon').active = details.open
+    details.querySelector('motion-icon-state').active = details.open
   })
 </script>`,
-  like: `<motion-state-icon id="like" name="heart" toggle label="Like"></motion-state-icon>
+  like: `<motion-icon-state id="like" name="heart" toggle label="Like"></motion-icon-state>
 
 <script type="module">
   document.querySelector('#like').addEventListener('motion-change', (event) => {
@@ -125,9 +125,9 @@ const frameworkTabs = [
     label: "HTML / Astro / Svelte",
     desc: "Set the <code>active</code> attribute, or the <code>active</code> property from a script.",
     filename: "index.html",
-    code: `<script type="module" src="${CDN}/motion-state-icon.js/+esm"></script>
+    code: `<script type="module" src="${CDN}/motion-icon-state.js/+esm"></script>
 
-<motion-state-icon name="heart" toggle label="Like"></motion-state-icon>`,
+<motion-icon-state name="heart" toggle label="Like"></motion-icon-state>`,
   },
   {
     id: "react",
@@ -135,14 +135,14 @@ const frameworkTabs = [
     desc: "React 19 sets <code>active</code> as a property, so pass a boolean from state.",
     filename: "LikeButton.jsx",
     code: `import { useState } from 'react'
-import 'motion-components/motion-state-icon'
+import 'motion-components/motion-icon-state'
 
 export function LikeButton() {
   const [liked, setLiked] = useState(false)
 
   return (
     <button aria-pressed={liked} onClick={() => setLiked(!liked)}>
-      <motion-state-icon name="heart" active={liked}></motion-state-icon>
+      <motion-icon-state name="heart" active={liked}></motion-icon-state>
       Like
     </button>
   )
@@ -155,14 +155,14 @@ export function LikeButton() {
     filename: "LikeButton.vue",
     code: `<script setup>
 import { ref } from 'vue'
-import 'motion-components/motion-state-icon'
+import 'motion-components/motion-icon-state'
 
 const liked = ref(false)
 </script>
 
 <template>
   <button :aria-pressed="liked" @click="liked = !liked">
-    <motion-state-icon name="heart" :active="liked"></motion-state-icon>
+    <motion-icon-state name="heart" :active="liked"></motion-icon-state>
     Like
   </button>
 </template>`,
@@ -171,7 +171,7 @@ const liked = ref(false)
 ---
 
 <Layout
-  title="motion-state-icon — Motion Components"
+  title="motion-icon-state — Motion Components"
   description="Icons that morph between two states on a spring: menu and close, play and pause, copy and check, plus and minus, chevron, heart, loading and done, eye and eye-off."
   noMain
 >
@@ -179,10 +179,14 @@ const liked = ref(false)
     <DocsSidebar />
 
     <main id="main">
-      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-state-icon</motion-split></h1>
+      <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-icon-state</motion-split></h1>
       <p class="lead">
         Icons that morph between two states on a spring, and can be interrupted midway. Set <code>name</code> to pick the icon and <code>active</code> for
         the second state. They are drawn on a 24&nbsp;px grid with 2&nbsp;px round strokes, so they sit next to Lucide, Tabler and Heroicons icons.
+      </p>
+      <p class="note">
+        This component used to be called <code>motion-state-icon</code>. The old tag and the
+        <code>motion-components/motion-state-icon</code> import still work, with a warning in the console, until version 2.0.
       </p>
 
       <h2>Preview</h2>
@@ -191,7 +195,7 @@ const liked = ref(false)
         <div class="grid">
           {icons.map((i) => (
             <div class="cell">
-              <motion-state-icon name={i.name} toggle label={i.label}></motion-state-icon>
+              <motion-icon-state name={i.name} toggle label={i.label}></motion-icon-state>
               <span>{i.name}</span>
             </div>
           ))}
@@ -204,7 +208,7 @@ const liked = ref(false)
       <CodeWindow filename="index.html" copy code={quickStart} />
       <p>In a project with a bundler, install the package and import the component once:</p>
       <CodeWindow filename="terminal" copy code={`npm install motion-components`} />
-      <CodeWindow filename="app.js" copy code={`import 'motion-components/motion-state-icon'`} />
+      <CodeWindow filename="app.js" copy code={`import 'motion-components/motion-icon-state'`} />
 
       <h2>Icons</h2>
       <p>Without <code>active</code>, the icon shows its first state. With <code>active</code>, it shows the second.</p>
@@ -225,7 +229,7 @@ const liked = ref(false)
       </p>
       <DocsPreview compact>
         <div class="grid">
-          <div class="cell"><motion-state-icon id="like" name="heart" toggle label="Like"></motion-state-icon><span id="like-state">not liked</span></div>
+          <div class="cell"><motion-icon-state id="like" name="heart" toggle label="Like"></motion-icon-state><span id="like-state">not liked</span></div>
         </div>
       </DocsPreview>
       <CodeWindow filename="index.html" copy code={recipes.like} />
@@ -242,7 +246,7 @@ const liked = ref(false)
       <h3>Menu button</h3>
       <DocsPreview compact>
         <div class="grid">
-          <button class="demo-action icon-only" id="menu-button" type="button" aria-label="Menu" aria-expanded="false"><motion-state-icon name="menu"></motion-state-icon></button>
+          <button class="demo-action icon-only" id="menu-button" type="button" aria-label="Menu" aria-expanded="false"><motion-icon-state name="menu"></motion-icon-state></button>
         </div>
       </DocsPreview>
       <CodeWindow filename="index.html" copy code={recipes.menu} />
@@ -250,7 +254,7 @@ const liked = ref(false)
       <h3>Copy button</h3>
       <DocsPreview compact>
         <div class="grid">
-          <button class="demo-action" id="copy-button" type="button"><motion-state-icon name="copy"></motion-state-icon>Copy</button>
+          <button class="demo-action" id="copy-button" type="button"><motion-icon-state name="copy"></motion-icon-state>Copy</button>
         </div>
       </DocsPreview>
       <CodeWindow filename="index.html" copy code={recipes.copy} />
@@ -258,7 +262,7 @@ const liked = ref(false)
       <h3>Save button</h3>
       <DocsPreview compact>
         <div class="grid">
-          <button class="demo-action" id="save-button" type="button"><motion-state-icon name="loading" active></motion-state-icon>Save</button>
+          <button class="demo-action" id="save-button" type="button"><motion-icon-state name="loading" active></motion-icon-state>Save</button>
         </div>
       </DocsPreview>
       <CodeWindow filename="index.html" copy code={recipes.save} />
@@ -268,7 +272,7 @@ const liked = ref(false)
         <div class="grid">
           <div class="password">
             <input id="password" type="password" value="secret" aria-label="Password" />
-            <button class="demo-action icon-only" id="password-button" type="button" aria-label="Show password"><motion-state-icon name="eye"></motion-state-icon></button>
+            <button class="demo-action icon-only" id="password-button" type="button" aria-label="Show password"><motion-icon-state name="eye"></motion-icon-state></button>
           </div>
         </div>
       </DocsPreview>
@@ -277,7 +281,7 @@ const liked = ref(false)
       <h3>Accordion</h3>
       <DocsPreview compact>
         <details id="faq" class="faq">
-          <summary>What is motion-components?<motion-state-icon name="chevron"></motion-state-icon></summary>
+          <summary>What is motion-components?<motion-icon-state name="chevron"></motion-icon-state></summary>
           <p>Web components with spring-based motion.</p>
         </details>
       </DocsPreview>
@@ -290,20 +294,23 @@ const liked = ref(false)
 
       <h2>Colors</h2>
       <p>
-        Lines use <code>--mc-icon-color</code>, which defaults to the text color. <code>--mc-icon-accent</code> colors the filled heart and the copy and loading
-        checks. By default the heart is red and the checks are green.
+        Lines use <code>--mc-icon-color</code>, which defaults to the text color. <code>--mc-icon-color-active</code> colors the icon in its second
+        state, such as the close cross of <code>menu</code>, the filled heart or the copy check. It defaults to the line color, so set it when the second
+        state should stand out.
       </p>
       <DocsPreview compact>
         <div class="grid">
-          <div class="cell"><motion-state-icon name="heart" toggle label="Like" active></motion-state-icon><span>default</span></div>
-          <div class="cell"><motion-state-icon name="heart" toggle label="Like" active style="--mc-icon-accent: #f59e0b"></motion-state-icon><span>--mc-icon-accent</span></div>
-          <div class="cell"><motion-state-icon name="copy" toggle label="Copy" active style="--mc-icon-color: #6366f1; --mc-icon-accent: #6366f1"></motion-state-icon><span>both</span></div>
-          <div class="cell"><motion-state-icon name="eye" toggle label="Show" style="--mc-icon-color: #0ea5e9; --mc-icon-size: 2rem"></motion-state-icon><span>--mc-icon-color</span></div>
+          <div class="cell"><motion-icon-state name="heart" toggle label="Like" active></motion-icon-state><span>default</span></div>
+          <div class="cell"><motion-icon-state name="heart" toggle label="Like" active style="--mc-icon-color-active: #f59e0b"></motion-icon-state><span>--mc-icon-color-active</span></div>
+          <div class="cell"><motion-icon-state name="copy" toggle label="Copy" active style="--mc-icon-color: #6366f1"></motion-icon-state><span>--mc-icon-color</span></div>
+          <div class="cell"><motion-icon-state name="eye" toggle label="Show" style="--mc-icon-color: #0ea5e9; --mc-icon-size: 2rem"></motion-icon-state><span>--mc-icon-size</span></div>
+          <div class="cell"><motion-icon-state name="menu" toggle label="Menu" active style="--mc-icon-color-active: #e11d48"></motion-icon-state><span>--mc-icon-color-active</span></div>
         </div>
       </DocsPreview>
-      <CodeWindow filename="index.html" copy code={`<motion-state-icon name="heart" active style="--mc-icon-accent: #f59e0b"></motion-state-icon>
-<motion-state-icon name="copy" active style="--mc-icon-color: #6366f1; --mc-icon-accent: #6366f1"></motion-state-icon>
-<motion-state-icon name="eye" style="--mc-icon-color: #0ea5e9; --mc-icon-size: 2rem"></motion-state-icon>`} />
+      <CodeWindow filename="index.html" copy code={`<motion-icon-state name="heart" active style="--mc-icon-color-active: #f59e0b"></motion-icon-state>
+<motion-icon-state name="copy" active style="--mc-icon-color: #6366f1"></motion-icon-state>
+<motion-icon-state name="eye" style="--mc-icon-color: #0ea5e9; --mc-icon-size: 2rem"></motion-icon-state>
+<motion-icon-state name="menu" active style="--mc-icon-color-active: #e11d48"></motion-icon-state>`} />
 
       <h2>Properties</h2>
       <PropsTable
@@ -323,7 +330,7 @@ const liked = ref(false)
         nameLabel="Property"
         rows={[
           { name: "--mc-icon-color", type: "color", default: "currentColor", description: "Line color" },
-          { name: "--mc-icon-accent", type: "color", default: "red heart, green checks", description: "Accent for the filled heart and the copy and loading checks" },
+          { name: "--mc-icon-color-active", type: "color", default: "--mc-icon-color", description: "Color of the icon in its second state, when <code>active</code> is set, including the filled heart and the copy and loading checks" },
           { name: "--mc-icon-size", type: "length", default: "1.5em", description: "Width and height of the icon" },
         ]}
       />
@@ -359,11 +366,11 @@ const liked = ref(false)
 
 <script>
   import "motion-components/motion-split";
-  import "motion-components/motion-state-icon";
+  import "motion-components/motion-icon-state";
 
   type StateIcon = HTMLElement & { active: boolean };
   const $ = <T extends Element = HTMLElement>(selector: string) => document.querySelector<T>(selector);
-  const iconIn = (el: Element | null) => el?.querySelector<StateIcon>("motion-state-icon");
+  const iconIn = (el: Element | null) => el?.querySelector<StateIcon>("motion-icon-state");
 
   $("#like")?.addEventListener("motion-change", (event) => {
     const state = $("#like-state");

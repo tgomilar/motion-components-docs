@@ -104,9 +104,9 @@ ${letters
 
   <main id="main" class="sc">
     <header class="sc-cat-hero">
-      <h1 class="sc-cat-title" style="--len: 6">scroll</h1>
+      <h1 class="sc-cat-title" style="--len: 6"><motion-headline by="chars" interval="0.05" duration="0.9">scroll</motion-headline></h1>
       <p class="sc-cat-lede">
-        Two tags that turn the scrollbar into a timeline. Layers drift at their own depth, and a pinned stage plays a scene as you
+        Tags that turn the scrollbar into a timeline. Layers drift at their own depth, and a pinned stage plays a scene as you
         scroll through it. Scroll back up and everything runs in reverse.
       </p>
     </header>
@@ -180,6 +180,7 @@ ${letters
   </main>
 
   <script>
+    import "motion-components/motion-headline";
     import "motion-components/motion-parallax";
     import "motion-components/motion-scene";
   </script>

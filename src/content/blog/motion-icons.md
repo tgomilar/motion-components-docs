@@ -1,6 +1,6 @@
 ---
 title: "motion-components 1.1: Animate Any SVG Icon With One HTML Tag"
-description: motion-icon draws in, pops, bounces, rotates, wiggles or pulses any SVG icon from Lucide, Tabler, Heroicons, Material Symbols, Font Awesome and more. motion-state-icon morphs between two states on a spring.
+description: motion-icon draws in, pops, bounces, rotates, wiggles or pulses any SVG icon from Lucide, Tabler, Heroicons, Material Symbols, Font Awesome and more. motion-icon-state morphs between two states on a spring.
 pubDate: 2026-10-03T00:00:00.000Z
 author: Tanja Gomilar
 tags:
@@ -8,7 +8,7 @@ tags:
   - components
   - icons
 ---
-Version 1.1 of [motion-components](https://github.com/tgomilar/motion-components) adds a new category: Icons. It has two elements. `<motion-icon>` animates any SVG icon you already use. `<motion-state-icon>` morphs between two states, such as menu and close, or play and pause. Both use spring physics, and both can be interrupted at any moment.
+Version 1.1 of [motion-components](https://github.com/tgomilar/motion-components) adds a new category: Icons. It has two elements. `<motion-icon>` animates any SVG icon you already use. `<motion-icon-state>` morphs between two states, such as menu and close, or play and pause. Both use spring physics, and both can be interrupted at any moment.
 
 You can try them now on the [home page](/). Click any icon in the icon grid to see a preview and copy its code.
 
@@ -183,7 +183,7 @@ Three CSS custom properties control how an icon looks:
 
 ## Icons with two states
 
-`<motion-state-icon>` is for icons that show a state. Set `name` to choose the icon. Set `active` to show the second state.
+`<motion-icon-state>` is for icons that show a state. Set `name` to choose the icon. Set `active` to show the second state.
 
 | `name` | Without `active` | With `active` |
 |---|---|---|
@@ -199,14 +199,14 @@ Three CSS custom properties control how an icon looks:
 There are two ways to switch the state. In the first way, the icon is the button. Add `toggle` and a `label`. The icon then switches itself on a click, or on the Space or Enter key:
 
 ```html
-<motion-state-icon name="heart" toggle label="Like"></motion-state-icon>
+<motion-icon-state name="heart" toggle label="Like"></motion-icon-state>
 ```
 
 In the second way, your own button controls the icon. This menu button changes to a close icon when it opens:
 
 ```html
 <button id="menu-button" aria-label="Menu" aria-expanded="false">
-  <motion-state-icon name="menu"></motion-state-icon>
+  <motion-icon-state name="menu"></motion-icon-state>
 </button>
 
 <script type="module">
@@ -215,14 +215,14 @@ In the second way, your own button controls the icon. This menu button changes t
   button.addEventListener('click', () => {
     const open = button.getAttribute('aria-expanded') !== 'true'
     button.setAttribute('aria-expanded', open)
-    button.querySelector('motion-state-icon').active = open
+    button.querySelector('motion-icon-state').active = open
   })
 </script>
 ```
 
 The state changes on a spring. If you click again in the middle of a change, the icon turns around from where it is. It does not jump to the end first.
 
-[State Icons: Menu to Close, Play to Pause, on a Spring](/blog/motion-state-icons/) explains this element in detail. It has complete recipes for a copy button, a save button with a spinner, a show password button and an accordion.
+[State Icons: Menu to Close, Play to Pause, on a Spring](/blog/motion-icon-states/) explains this element in detail. It has complete recipes for a copy button, a save button with a spinner, a show password button and an accordion.
 
 ## React and Vue
 
@@ -230,14 +230,14 @@ Both elements work in every framework. React 19 passes properties to custom elem
 
 ```jsx
 import { useState } from 'react'
-import 'motion-components/motion-state-icon'
+import 'motion-components/motion-icon-state'
 
 export function LikeButton() {
   const [liked, setLiked] = useState(false)
 
   return (
     <button aria-pressed={liked} onClick={() => setLiked(!liked)}>
-      <motion-state-icon name="heart" active={liked}></motion-state-icon>
+      <motion-icon-state name="heart" active={liked}></motion-icon-state>
       Like
     </button>
   )
@@ -266,8 +266,8 @@ An SVG file can contain more than drawing instructions. It can contain scripts, 
 | Element | Default | How to give it a name |
 |---|---|---|
 | `motion-icon` | Decorative and hidden from screen readers | Add `label`. The icon then gets `role="img"`. |
-| `motion-state-icon` with `toggle` | A button with `aria-pressed` | Add `label`. |
-| `motion-state-icon` without `toggle` | Decorative | Give the surrounding button a name. |
+| `motion-icon-state` with `toggle` | A button with `aria-pressed` | Add `label`. |
+| `motion-icon-state` without `toggle` | Decorative | Give the surrounding button a name. |
 
 When a user turns on reduced motion in their system settings, both elements skip the animation. They show the final state at once, and the loading spinner stands still.
 
@@ -279,7 +279,7 @@ npm install motion-components@latest
 
 ```js
 import 'motion-components/motion-icon'
-import 'motion-components/motion-state-icon'
+import 'motion-components/motion-icon-state'
 ```
 
-Read the [motion-icon docs](/docs/icons/motion-icon/) and the [motion-state-icon docs](/docs/icons/motion-state-icon/). Every code example on those pages works when you paste it into a page.
+Read the [motion-icon docs](/docs/icons/motion-icon/) and the [motion-icon-state docs](/docs/icons/motion-icon-state/). Every code example on those pages works when you paste it into a page.

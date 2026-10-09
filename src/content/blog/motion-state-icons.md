@@ -1,6 +1,6 @@
 ---
 title: "State Icons: Menu to Close, Play to Pause, on a Spring"
-description: motion-state-icon morphs an icon between two states with spring physics. Eight icons, two ways to switch them, and complete recipes for menu, copy, save, password and accordion buttons.
+description: motion-icon-state morphs an icon between two states with spring physics. Eight icons, two ways to switch them, and complete recipes for menu, copy, save, password and accordion buttons.
 pubDate: 2026-10-04T10:00:00.000Z
 author: Tanja Gomilar
 tags:
@@ -8,7 +8,10 @@ tags:
   - icons
   - recipes
 ---
-Many icons show a state. A menu button shows three lines when the menu is closed and a cross when it is open. A play button turns into a pause button. A copy button shows a check after it copies. `<motion-state-icon>`, new in [motion-components](https://github.com/tgomilar/motion-components) 1.1, handles this change for you. The icon morphs from one state to the other on a spring, and it can turn around in the middle of a change.
+
+> `motion-state-icon` has since been renamed to `motion-icon-state`. The examples below use the new name. The old name still works until version 2.0.
+
+Many icons show a state. A menu button shows three lines when the menu is closed and a cross when it is open. A play button turns into a pause button. A copy button shows a check after it copies. `<motion-icon-state>`, new in [motion-components](https://github.com/tgomilar/motion-components) 1.1, handles this change for you. The icon morphs from one state to the other on a spring, and it can turn around in the middle of a change.
 
 This article explains how the element works and gives five complete recipes that you can paste into a page.
 
@@ -28,12 +31,12 @@ Save this as `index.html` and open it in a browser:
 <!doctype html>
 <html>
   <head>
-    <script type="module" src="https://cdn.jsdelivr.net/npm/motion-components@1/dist/motion-state-icon.js/+esm"></script>
+    <script type="module" src="https://cdn.jsdelivr.net/npm/motion-components@1/dist/motion-icon-state.js/+esm"></script>
   </head>
   <body>
-    <motion-state-icon name="heart" toggle label="Like"></motion-state-icon>
-    <motion-state-icon name="menu" toggle label="Menu"></motion-state-icon>
-    <motion-state-icon name="play" toggle label="Play"></motion-state-icon>
+    <motion-icon-state name="heart" toggle label="Like"></motion-icon-state>
+    <motion-icon-state name="menu" toggle label="Menu"></motion-icon-state>
+    <motion-icon-state name="play" toggle label="Play"></motion-icon-state>
   </body>
 </html>
 ```
@@ -64,7 +67,7 @@ All eight icons use a 24 pixel grid and 2 pixel round lines. This is the same st
 Add `toggle` and a `label`. The icon becomes a button. It switches itself on a click, or on the Space or Enter key, and it fires a `motion-change` event:
 
 ```html
-<motion-state-icon id="like" name="heart" toggle label="Like"></motion-state-icon>
+<motion-icon-state id="like" name="heart" toggle label="Like"></motion-icon-state>
 
 <script type="module">
   document.querySelector('#like').addEventListener('motion-change', (event) => {
@@ -87,7 +90,7 @@ The button tells screen readers whether the menu is open with `aria-expanded`. T
 
 ```html
 <button id="menu-button" aria-label="Menu" aria-expanded="false">
-  <motion-state-icon name="menu"></motion-state-icon>
+  <motion-icon-state name="menu"></motion-icon-state>
 </button>
 
 <script type="module">
@@ -96,7 +99,7 @@ The button tells screen readers whether the menu is open with `aria-expanded`. T
   button.addEventListener('click', () => {
     const open = button.getAttribute('aria-expanded') !== 'true'
     button.setAttribute('aria-expanded', open)
-    button.querySelector('motion-state-icon').active = open
+    button.querySelector('motion-icon-state').active = open
   })
 </script>
 ```
@@ -107,13 +110,13 @@ The icon shows a check for 1.5 seconds after the copy, then returns to the copy 
 
 ```html
 <button id="copy-button">
-  <motion-state-icon name="copy"></motion-state-icon>
+  <motion-icon-state name="copy"></motion-icon-state>
   Copy
 </button>
 
 <script type="module">
   const button = document.querySelector('#copy-button')
-  const icon = button.querySelector('motion-state-icon')
+  const icon = button.querySelector('motion-icon-state')
 
   button.addEventListener('click', async () => {
     await navigator.clipboard.writeText('Text to copy')
@@ -129,13 +132,13 @@ The `loading` icon spins while it is not active. When you set `active`, the spin
 
 ```html
 <button id="save-button">
-  <motion-state-icon name="loading" active></motion-state-icon>
+  <motion-icon-state name="loading" active></motion-icon-state>
   Save
 </button>
 
 <script type="module">
   const button = document.querySelector('#save-button')
-  const icon = button.querySelector('motion-state-icon')
+  const icon = button.querySelector('motion-icon-state')
 
   button.addEventListener('click', async () => {
     icon.active = false   // spinner
@@ -152,7 +155,7 @@ When the password is visible, the icon shows the eye with a line through it. The
 ```html
 <input id="password" type="password" value="secret" />
 <button id="password-button" aria-label="Show password">
-  <motion-state-icon name="eye"></motion-state-icon>
+  <motion-icon-state name="eye"></motion-icon-state>
 </button>
 
 <script type="module">
@@ -163,7 +166,7 @@ When the password is visible, the icon shows the eye with a line through it. The
     const visible = input.type === 'password'
     input.type = visible ? 'text' : 'password'
     button.setAttribute('aria-label', visible ? 'Hide password' : 'Show password')
-    button.querySelector('motion-state-icon').active = visible
+    button.querySelector('motion-icon-state').active = visible
   })
 </script>
 ```
@@ -176,7 +179,7 @@ The native `<details>` element fires a `toggle` event when it opens or closes. T
 <details id="faq">
   <summary>
     What is motion-components?
-    <motion-state-icon name="chevron"></motion-state-icon>
+    <motion-icon-state name="chevron"></motion-icon-state>
   </summary>
   Web components with spring-based motion.
 </details>
@@ -185,7 +188,7 @@ The native `<details>` element fires a `toggle` event when it opens or closes. T
   const details = document.querySelector('#faq')
 
   details.addEventListener('toggle', () => {
-    details.querySelector('motion-state-icon').active = details.open
+    details.querySelector('motion-icon-state').active = details.open
   })
 </script>
 ```
@@ -195,11 +198,11 @@ The native `<details>` element fires a `toggle` event when it opens or closes. T
 | Property | What it changes | Default |
 |---|---|---|
 | `--mc-icon-color` | The color of the lines | The text color |
-| `--mc-icon-accent` | The filled heart and the checks in `copy` and `loading` | Red for the heart, green for the checks |
+| `--mc-icon-color-active` | The icon in its second state, including the filled heart and the checks in `copy` and `loading` | `--mc-icon-color` |
 | `--mc-icon-size` | The width and height | `1.5em` |
 
 ```html
-<motion-state-icon name="heart" active style="--mc-icon-accent: #f59e0b"></motion-state-icon>
+<motion-icon-state name="heart" active style="--mc-icon-color-active: #f59e0b"></motion-icon-state>
 ```
 
 Two attributes change how the morph feels:
@@ -217,14 +220,14 @@ React 19 sets `active` as a property, so you can pass a boolean from state:
 
 ```jsx
 import { useState } from 'react'
-import 'motion-components/motion-state-icon'
+import 'motion-components/motion-icon-state'
 
 export function LikeButton() {
   const [liked, setLiked] = useState(false)
 
   return (
     <button aria-pressed={liked} onClick={() => setLiked(!liked)}>
-      <motion-state-icon name="heart" active={liked}></motion-state-icon>
+      <motion-icon-state name="heart" active={liked}></motion-icon-state>
       Like
     </button>
   )
@@ -235,7 +238,7 @@ In Vue, bind `:active` after you tell the compiler that `motion-*` tags are cust
 
 ```vue
 <button :aria-pressed="liked" @click="liked = !liked">
-  <motion-state-icon name="heart" :active="liked"></motion-state-icon>
+  <motion-icon-state name="heart" :active="liked"></motion-icon-state>
   Like
 </button>
 ```
@@ -252,4 +255,4 @@ When a user turns on reduced motion in their system settings, the icon changes s
 
 ## Next steps
 
-Read the [motion-state-icon docs](/docs/icons/motion-state-icon/) for live versions of every recipe in this article. For icons that do not show a state, such as a bell that wiggles or a heart that draws itself in, read [motion-components 1.1: Animate Any SVG Icon With One HTML Tag](/blog/motion-icons/).
+Read the [motion-icon-state docs](/docs/icons/motion-icon-state/) for live versions of every recipe in this article. For icons that do not show a state, such as a bell that wiggles or a heart that draws itself in, read [motion-components 1.1: Animate Any SVG Icon With One HTML Tag](/blog/motion-icons/).

@@ -133,6 +133,24 @@ p {
   margin-bottom: 1rem;
 }
 
+main > ul {
+  color: var(--mc-color-muted);
+  font-size: 0.95rem;
+  line-height: 1.75;
+  max-width: 64ch;
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+}
+
+main > ul > li + li {
+  margin-top: 0.5rem;
+}
+
+main > ul strong {
+  color: var(--mc-color-text);
+  font-weight: 600;
+}
+
 code,
 motion-code-inline:not(:defined) {
   font-family: var(--font-mono);
