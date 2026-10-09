@@ -96,6 +96,13 @@ el.text = 'UPDATED'   // animation restarts`}
 <motion-gravity delay="0.5">SECOND</motion-gravity>`}
       />
 
+      <h2>Trigger</h2>
+      <p>
+        By default the letters drop as soon as the element renders. Set <code>trigger="view"</code> for text further down the page. The text stays hidden and drops
+        the first time half of it is in view. Under reduced motion it shows at once.
+      </p>
+      <CodeWindow filename="motion-gravity.html" copy code={`<motion-gravity trigger="view">DROPS ON SCROLL</motion-gravity>`} />
+
       <h2>How it works</h2>
       <p>
         Each character is wrapped in an inline-block <code>span</code>. On first render (and whenever <code>text</code> changes), all characters are set to <code
@@ -113,6 +120,7 @@ el.text = 'UPDATED'   // animation restarts`}
           { name: "duration", type: "number", default: "0.6", description: "Spring duration of each character's fall, in seconds" },
           { name: "bounce", type: "number", default: "0.45", description: "Spring bounciness of the landing (0 = no overshoot)" },
           { name: "delay", type: "number", default: "0", description: "Seconds to wait before the first character falls" },
+          { name: "trigger", type: "'mount' | 'view'", default: "'mount'", description: "When the letters drop: as soon as it renders, or the first time half of it is in view" },
         ]}
       />
 

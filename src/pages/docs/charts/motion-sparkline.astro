@@ -102,7 +102,7 @@ const tileCode = `<div class="stat">
 }`} />
 
       <h2>Live data</h2>
-      <p>Change <code>values</code> and the line springs to the new shape.</p>
+      <p>Change <code>values</code> and the line springs to the new shape. From JavaScript you can also set <code>data</code> to an array of numbers, such as <code>spark.data = [12, 14, 13]</code>. It takes precedence over <code>values</code>.</p>
       <DocsPreview>
         <div class="demo">
           <p class="sentence">Active users <motion-sparkline id="live-spark" values="12, 14, 13, 15, 17, 16, 18, 20" style="--mc-sparkline-width: 9em"></motion-sparkline></p>
@@ -127,6 +127,7 @@ const tileCode = `<div class="stat">
         nameLabel="Attribute"
         rows={[
           { name: "values", type: "string", default: "''", description: "Comma-separated numbers. At least two" },
+          { name: "data", type: "number[]", default: "null", description: "Property only: the numbers as an array, set from JavaScript. Takes precedence over <code>values</code>" },
           { name: "area", type: "boolean", default: "false", description: "Fills the area under the line with a light wash" },
           { name: "label", type: "string", default: "''", description: "Accessible name. Without it, the name describes the trend" },
           { name: "trigger", type: "string", default: "'view'", description: "When the draw-in runs: <code>'view'</code> or <code>'mount'</code>" },

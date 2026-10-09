@@ -103,6 +103,7 @@ el.text = 'UPDATED'   // animation restarts`}
         { name: 'spread', type: 'number', default: '12', description: 'Max displacement of the outermost character on each side (px)' },
         { name: 'duration', type: 'number', default: '0.77', description: 'Spring duration of the spread and release, in seconds' },
         { name: 'bounce', type: 'number', default: '0.55', description: 'Spring bounciness: <code>0</code> settles without overshoot, higher is more elastic' },
+        { name: 'disabled', type: 'boolean', default: 'false', description: 'Ignores the pointer and settles back. <code>pauseAll()</code> sets it and <code>resumeAll()</code> clears it' },
       ]} />
       <DocsPagination />
     </main>

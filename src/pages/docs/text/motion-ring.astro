@@ -49,7 +49,7 @@ import 'motion-components'               // or the whole library`}
       <h2>Loop</h2>
       <p>
         Add <code>loop</code> to draw, hold, undraw and draw again, like a pen that keeps circling the word.
-        <code>hold</code> sets how long the ring stays around the text, <code>gap</code> how long it stays away.
+        <code>hold</code> sets how long the ring stays around the text, <code>gap</code> how long it stays away. The ring erases from its start, so it leaves at its end.
       </p>
       <DocsPreview replayId="ring-loop">
         <p class="sentence">Watch it <motion-ring id="ring-loop" loop hold="2">again and again</motion-ring>.</p>
@@ -79,7 +79,8 @@ import 'motion-components'               // or the whole library`}
       ]} />
 
       <h2>JavaScript API</h2>
-      <p>The mark has the shared playback API: <code>play()</code> draws it, <code>cancel()</code> removes it, <code>finish()</code> shows it fully drawn and <code>replay()</code> draws it again from the start. It fires <code>motion-start</code>, <code>motion-finish</code> and <code>motion-cancel</code>. See the <a href="/docs/js-api/">JavaScript API</a>.</p>
+      <p>The mark has the shared playback API: <code>play()</code> draws it, <code>cancel()</code> removes it, <code>finish()</code> shows it fully drawn and <code>replay()</code> draws it again from the start. It fires <code>motion-start</code>, <code>motion-finish</code> and <code>motion-cancel</code>. With <code>trigger="hover"</code>, each draw and undraw is a playback run too, so it fires <code>motion-start</code> and <code>motion-finish</code>. See the <a href="/docs/js-api/">JavaScript API</a>.</p>
+      <p><code>sweep()</code> runs a fully drawn mark across once: it erases from its start, so it leaves at its end, then draws in again. It is a playback run, so it fires <code>motion-start</code> and <code>motion-finish</code>, and <code>pause()</code>, <code>finish()</code> and <code>cancel()</code> act on it. It does nothing under reduced motion or while the mark is not fully drawn.</p>
 
       <h2>Accessibility</h2>
       <p>The mark is decoration: the text stays real, selectable and read by screen readers exactly as written. The drawing is hidden from screen readers. Respects <code>prefers-reduced-motion</code>: the mark appears fully drawn at once, with no animation, and <code>loop</code> never starts.</p>

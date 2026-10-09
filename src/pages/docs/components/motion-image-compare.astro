@@ -6,6 +6,7 @@ import DocsTOC from "../../../components/DocsTOC.astro";
 import DocsPagination from "../../../components/DocsPagination.astro";
 import CodeWindow from "../../../components/CodeWindow.astro";
 import PropsTable from "../../../components/PropsTable.astro";
+import DocsTable from "../../../components/DocsTable.astro";
 import "../../../styles/docs.css";
 ---
 
@@ -88,6 +89,43 @@ import 'motion-components'               // or the whole library`}
         rows={[
           { name: "--mc-color-accent", type: "color", default: "#2563eb", description: "Color of the keyboard focus ring on the knob" },
         ]}
+      />
+
+      <h2>JavaScript properties</h2>
+      <DocsTable
+        columns={[{ label: "Property" }, { label: "Description" }]}
+        rows={[
+          [{ code: "position" }, "Split position as a percentage (0 to 100). Reading it gives where the split is going. Setting it springs the split there without firing <code>motion-change</code>. Set before the first render, it sets the position the split starts at."],
+        ]}
+        copy
+      />
+
+      <h2>Events</h2>
+      <DocsTable
+        columns={[
+          { label: "Event" },
+          { label: "Detail", nowrap: true },
+          { label: "Description" },
+        ]}
+        rows={[
+          [{ code: "motion-change" }, { code: "position" }, "Fired when a drag, click or key moves the split. <code>position</code> is the percentage it moves to. Not fired when you set <code>position</code>. Bubbles and is composed."],
+        ]}
+        copy
+      />
+      <p>Other components also fire a bubbling <code>motion-change</code>. A listener on a parent element should check <code>event.target</code>.</p>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import type { MotionImageCompare } from 'motion-components'
+
+const compare = document.querySelector<MotionImageCompare>('motion-image-compare')!
+
+compare.position = 75 // springs to 75%, no event
+
+compare.addEventListener('motion-change', (event) => {
+  if (event.target !== compare) return
+  console.log('split at', event.detail.position)
+})`}
       />
 
       <h2>Accessibility</h2>

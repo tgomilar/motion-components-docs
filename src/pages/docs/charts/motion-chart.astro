@@ -214,6 +214,11 @@ chart.data = {
         </div>
       </DocsPreview>
       <CodeWindow filename="index.html" copy code={liveCode} />
+      <p>
+        When the range changes, the scale and its grid lines spring to the new range. Old grid lines fade out and new ones fade in. Set
+        <code>animate-scale="false"</code> to switch the scale at once.
+      </p>
+      <CodeWindow filename="index.html" copy code={`<motion-chart type="line" values="40, 42, 45, 43" animate-scale="false"></motion-chart>`} />
 
       <h2>Number format</h2>
       <p><code>format</code> formats the axis, the tooltip and the screen reader text in the reader's language.</p>
@@ -262,6 +267,7 @@ chart.data = {
           { name: "format", type: "string", default: "''", description: "<code>'compact'</code>, <code>'percent'</code>, <code>'currency:EUR'</code> or <code>'unit:kilometer'</code>" },
           { name: "min", type: "number", default: "auto", description: "Lowest value on the axis. Defaults to the lower of 0 and the smallest value" },
           { name: "max", type: "number", default: "auto", description: "Highest value on the axis. Defaults to the largest value, rounded up" },
+          { name: "animate-scale", type: "boolean", default: "true", description: "Springs the scale and grid lines to the new range when the data changes. Set <motion-code-inline copy>animate-scale=\"false\"</motion-code-inline> to switch the scale at once" },
           { name: "label", type: "string", default: "''", description: "Accessible name of the chart" },
           { name: "trigger", type: "string", default: "'view'", description: "When the entrance runs: <code>'view'</code> or <code>'mount'</code>" },
           { name: "duration", type: "number", default: "0.8", description: "Spring duration in seconds" },
@@ -278,7 +284,7 @@ chart.data = {
         rows={[
           { name: "--mc-chart-height", type: "length", default: "16rem", description: "Height of the chart, including the legend" },
           { name: "--mc-chart-1 … --mc-chart-8", type: "color", default: "blue, orange, aqua, yellow, magenta, green, violet, red", description: "Series colors, in order" },
-          { name: "--mc-chart-surface", type: "color", default: "Canvas", description: "Background behind the chart. Used for the tooltip and the ring around points" },
+          { name: "--mc-chart-surface", type: "color", default: "Canvas", description: "Background of the tooltip" },
         ]}
       />
 

@@ -117,7 +117,7 @@ document.querySelector('#like-icon').icon = heart`,
 
 <Layout
   title="motion-icon — Motion Components"
-  description="Animate any SVG icon on a spring: draw its strokes in, or pop, bounce, rotate, wiggle or pulse it on hover, click, scroll or load. Lucide, Heroicons and more."
+  description="Animate any SVG icon on a spring: draw its strokes in, or pop, bounce, rotate, wiggle, pulse or slide it on hover, click, scroll or load. Lucide, Heroicons and more."
   noMain
 >
   <div class="layout">
@@ -127,7 +127,7 @@ document.querySelector('#like-icon').icon = heart`,
       <h1><motion-split by="chars" interval="0.025" duration="0.5">motion-icon</motion-split></h1>
       <p class="lead">
         Animate any SVG icon on a spring. Load it with <code>src</code> from Lucide, Tabler, Heroicons, Material Symbols, Font Awesome or your own folder,
-        or put an <code>&lt;svg&gt;</code> inside. Stroke icons draw their lines in, and every icon can pop, bounce, rotate, wiggle or pulse.
+        or put an <code>&lt;svg&gt;</code> inside. Stroke icons draw their lines in, and every icon can pop, bounce, rotate, wiggle, pulse or slide in any direction.
         Combine both with <code>animation="draw wiggle"</code>. It plays on hover, click, scroll or page load, or in a loop, and inside a button
         or link it reacts to the whole button.
       </p>
@@ -249,7 +249,7 @@ document.querySelector('#like-icon').icon = heart`,
         <div class="row">
           <button class="demo-btn"><motion-icon src={lucide("send")} animation="bounce"></motion-icon>Send</button>
           <button class="demo-btn"><motion-icon src={lucide("refresh-cw")} animation="rotate" trigger="click" duration="0.9"></motion-icon>Refresh</button>
-          <a class="demo-btn" href="#inside-a-button"><motion-icon src={lucide("arrow-right")} animation="bounce"></motion-icon>Next</a>
+          <a class="demo-btn" href="#inside-a-button">Next<motion-icon src={lucide("arrow-right")} animation="slide-right"></motion-icon></a>
         </div>
       </DocsPreview>
       <CodeWindow filename="index.html" copy code={`<button>
@@ -260,7 +260,12 @@ document.querySelector('#like-icon').icon = heart`,
 <button>
   <motion-icon src="${lucide("refresh-cw")}" animation="rotate" trigger="click"></motion-icon>
   Refresh
-</button>`} />
+</button>
+
+<a href="/next">
+  Next
+  <motion-icon src="${lucide("arrow-right")}" animation="slide-right"></motion-icon>
+</a>`} />
 
       <p class="note">More patterns, such as a notification bell, a download button and icon navigation, are on the <a href="/docs/recipes/icons/">Icon Recipes</a> page.</p>
 
@@ -283,14 +288,34 @@ document.querySelector('#like-icon').icon = heart`,
 <motion-icon src="${lucide("bell")}" animation="wiggle"></motion-icon>
 <motion-icon src="${lucide("heart")}" animation="pulse"></motion-icon>`} />
 
+      <h3>Slide</h3>
+      <p>
+        <code>slide-up</code>, <code>slide-down</code>, <code>slide-left</code> and <code>slide-right</code> move the icon a quarter of its size in
+        that direction. On hover the icon stays there while the pointer is over it and springs back on leave, which suits arrows and chevrons in
+        links. With the other triggers it moves out and springs back, like <code>bounce</code>.
+      </p>
+      <DocsPreview compact>
+        <div class="row">
+          <div class="cell"><motion-icon src={lucide("arrow-up")} animation="slide-up"></motion-icon><span>slide-up</span></div>
+          <div class="cell"><motion-icon src={lucide("arrow-down")} animation="slide-down"></motion-icon><span>slide-down</span></div>
+          <div class="cell"><motion-icon src={lucide("arrow-left")} animation="slide-left"></motion-icon><span>slide-left</span></div>
+          <div class="cell"><motion-icon src={lucide("arrow-right")} animation="slide-right"></motion-icon><span>slide-right</span></div>
+        </div>
+      </DocsPreview>
+      <CodeWindow filename="index.html" copy code={`<motion-icon src="${lucide("arrow-up")}" animation="slide-up"></motion-icon>
+<motion-icon src="${lucide("arrow-down")}" animation="slide-down"></motion-icon>
+<motion-icon src="${lucide("arrow-left")}" animation="slide-left"></motion-icon>
+<motion-icon src="${lucide("arrow-right")}" animation="slide-right"></motion-icon>`} />
+
       <h3>Draw and move together</h3>
       <p>
         Put <code>draw</code> in front of another animation to run both: the outline draws in, the fill fades in, and the icon moves at the same
         time. On a filled icon, only the motion runs.
       </p>
       <p>
-        <code>draw</code> combines with any one motion. Two motions don't combine: in <code>animation="pop wiggle"</code> only the first
-        motion, <code>pop</code>, runs.
+        <code>draw</code> combines with any one motion, including the slides. With <code>draw slide-right</code> on hover, the arrow redraws as it
+        slides right, holds there, and slides back on leave without drawing again. Two motions don't combine: in <code>animation="pop wiggle"</code>
+        only the first motion, <code>pop</code>, runs.
       </p>
       <DocsPreview compact>
         <div class="row">
@@ -298,13 +323,16 @@ document.querySelector('#like-icon').icon = heart`,
           <div class="cell"><motion-icon src={lucide("heart")} animation="draw pulse" style="--mc-icon-color: #e11d48; --mc-icon-fill: #e11d484d"></motion-icon><span>draw pulse</span></div>
           <div class="cell"><motion-icon src={lucide("sun")} animation="draw rotate" duration="0.9" style="--mc-icon-color: #f59e0b; --mc-icon-fill: #f59e0b4d"></motion-icon><span>draw rotate</span></div>
           <div class="cell"><motion-icon src={lucide("star")} animation="draw pop" style="--mc-icon-color: #f59e0b; --mc-icon-fill: #f59e0b4d"></motion-icon><span>draw pop</span></div>
+          <div class="cell"><motion-icon src={lucide("arrow-right")} animation="draw slide-right"></motion-icon><span>draw slide-right</span></div>
         </div>
       </DocsPreview>
       <CodeWindow filename="index.html" copy code={`<motion-icon
   src="${lucide("zap")}"
   animation="draw wiggle"
   style="--mc-icon-color: #eab308; --mc-icon-fill: #eab3084d"
-></motion-icon>`} />
+></motion-icon>
+
+<motion-icon src="${lucide("arrow-right")}" animation="draw slide-right"></motion-icon>`} />
 
       <h2>Triggers</h2>
       <p><code>trigger</code> decides when the animation runs: <code>hover</code> (default), <code>click</code>, <code>view</code> (when it scrolls into view), <code>mount</code> or <code>loop</code>.</p>
@@ -371,10 +399,10 @@ document.querySelector('#like-icon').icon = heart`,
         rows={[
           { name: "src", type: "string", default: "''", description: "URL of an SVG file. Each URL is loaded once and cached" },
           { name: "icon", type: "string", default: "''", description: "SVG markup to render. Takes precedence over <code>src</code>. When both are empty, the child <code>&lt;svg&gt;</code> is used" },
-          { name: "animation", type: "string", default: "'draw'", description: "<code>'draw'</code>, <code>'pop'</code>, <code>'bounce'</code>, <code>'rotate'</code>, <code>'wiggle'</code> or <code>'pulse'</code>, or <code>draw</code> plus one of the others, such as <code>'draw wiggle'</code>, to run both. <code>draw</code> needs a stroke icon and falls back to <code>pop</code>" },
+          { name: "animation", type: "string", default: "'draw'", description: "<code>'draw'</code>, <code>'pop'</code>, <code>'bounce'</code>, <code>'rotate'</code>, <code>'wiggle'</code>, <code>'pulse'</code>, <code>'slide-up'</code>, <code>'slide-down'</code>, <code>'slide-left'</code> or <code>'slide-right'</code>, or <code>draw</code> plus one of the others, such as <code>'draw wiggle'</code>, to run both. <code>draw</code> needs a stroke icon and falls back to <code>pop</code>" },
           { name: "trigger", type: "string", default: "'hover'", description: "<code>'hover'</code>, <code>'click'</code>, <code>'view'</code>, <code>'mount'</code> or <code>'loop'</code>. Inside a button or link, <code>hover</code> and <code>click</code> follow the button or link" },
           { name: "duration", type: "number", default: "0.6", description: "Duration of one run, in seconds" },
-          { name: "bounce", type: "number", default: "0.4", description: "Spring bounciness for <code>pop</code>, <code>bounce</code> and <code>rotate</code>" },
+          { name: "bounce", type: "number", default: "0.4", description: "Spring bounciness as the icon settles (0 = no overshoot). <code>wiggle</code> always uses at least <code>0.6</code>" },
           { name: "delay", type: "number", default: "0", description: "Seconds to wait before the animation starts" },
           { name: "interval", type: "number", default: "1.2", description: "Seconds between runs with <motion-code-inline copy>trigger=\"loop\"</motion-code-inline>" },
           { name: "once", type: "boolean", default: "true", description: "With <motion-code-inline copy>trigger=\"view\"</motion-code-inline>, animate only the first time. Set <motion-code-inline copy>once=\"false\"</motion-code-inline> to replay on every entry" },

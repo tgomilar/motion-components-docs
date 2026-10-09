@@ -97,8 +97,43 @@ import 'motion-components'               // or the whole library`}
       <h2>Methods</h2>
       <DocsTable
         columns={[{ label: "Method" }, { label: "Description" }]}
-        rows={[[{ code: "goTo(index, velocity?)" }, "Animate to a specific slide index. Optional initial velocity in px/s."]]}
+        rows={[
+          [{ code: "goTo(index, initialVelocity?)" }, "Animates to the slide at <code>index</code>. The optional <code>initialVelocity</code> is in px/s. Called before the slider is built, it sets the starting slide instead. The index is clamped to the slide range."],
+          [{ code: "next()" }, "Moves to the next slide. Does nothing on the last one."],
+          [{ code: "prev()" }, "Moves to the previous slide. Does nothing on the first one."],
+          [{ code: "index" }, "Read-only. Index of the active slide."],
+        ]}
         copy
+      />
+
+      <h2>Events</h2>
+      <DocsTable
+        columns={[
+          { label: "Event" },
+          { label: "Detail", nowrap: true },
+          { label: "Description" },
+        ]}
+        rows={[
+          [{ code: "motion-change" }, { code: "index" }, "Fired when the active slide changes. Bubbles and is composed."],
+        ]}
+        copy
+      />
+      <p>Other components also fire a bubbling <code>motion-change</code>. A listener on a parent element should check <code>event.target</code>.</p>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import type { MotionSlider } from 'motion-components'
+
+const slider = document.querySelector<MotionSlider>('motion-slider')!
+slider.goTo(2)
+
+document.querySelector('#prev')!.addEventListener('click', () => slider.prev())
+document.querySelector('#next')!.addEventListener('click', () => slider.next())
+
+document.addEventListener('motion-change', (event) => {
+  if (event.target !== slider) return
+  console.log('slide', slider.index)
+})`}
       />
 
       <h2>Keyboard</h2>

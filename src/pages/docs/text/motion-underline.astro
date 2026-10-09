@@ -61,10 +61,20 @@ import 'motion-components'               // or the whole library`}
       </DocsPreview>
       <CodeWindow filename="index.html" copy code={`<a href="/guide/"><motion-underline trigger="hover">Read the guide</motion-underline></a>`} />
 
+      <h2>Sweep</h2>
+      <p>Call <code>sweep()</code> on a drawn line to run it across once: it erases from its start, leaves at its end and draws in again. For example, on hover over a link whose line is already drawn.</p>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`const link = document.querySelector('a.more')
+const underline = link.querySelector('motion-underline')
+link.addEventListener('pointerenter', () => underline.sweep())`}
+      />
+
       <h2>Loop</h2>
       <p>
         Add <code>loop</code> to draw, hold, undraw and draw again, like a hand that keeps underlining.
-        <code>hold</code> sets how long the line stays, <code>gap</code> how long it stays away.
+        <code>hold</code> sets how long the line stays, <code>gap</code> how long it stays away. The line erases from its start, so it leaves at its end.
       </p>
       <DocsPreview replayId="underline-loop">
         <p class="sentence">Still <motion-underline id="underline-loop" loop hold="2">spring physics</motion-underline>.</p>
@@ -97,7 +107,8 @@ import 'motion-components'               // or the whole library`}
       ]} />
 
       <h2>JavaScript API</h2>
-      <p>The mark has the shared playback API: <code>play()</code> draws it, <code>cancel()</code> removes it, <code>finish()</code> shows it fully drawn and <code>replay()</code> draws it again from the start. It fires <code>motion-start</code>, <code>motion-finish</code> and <code>motion-cancel</code>. See the <a href="/docs/js-api/">JavaScript API</a>.</p>
+      <p>The mark has the shared playback API: <code>play()</code> draws it, <code>cancel()</code> removes it, <code>finish()</code> shows it fully drawn and <code>replay()</code> draws it again from the start. It fires <code>motion-start</code>, <code>motion-finish</code> and <code>motion-cancel</code>. With <code>trigger="hover"</code>, each draw and undraw is a playback run too, so it fires <code>motion-start</code> and <code>motion-finish</code>. See the <a href="/docs/js-api/">JavaScript API</a>.</p>
+      <p><code>sweep()</code> runs a fully drawn mark across once: it erases from its start, so it leaves at its end, then draws in again. It is a playback run, so it fires <code>motion-start</code> and <code>motion-finish</code>, and <code>pause()</code>, <code>finish()</code> and <code>cancel()</code> act on it. It does nothing under reduced motion or while the mark is not fully drawn.</p>
 
       <h2>Accessibility</h2>
       <p>The mark is decoration: the text stays real, selectable and read by screen readers exactly as written. With <code>trigger="hover"</code> the line follows the pointer only; give links their own focus style. Respects <code>prefers-reduced-motion</code>: the mark appears fully drawn at once, with no animation, and <code>loop</code> never starts.</p>

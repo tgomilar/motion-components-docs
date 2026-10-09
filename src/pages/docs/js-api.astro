@@ -25,7 +25,7 @@ reveal.play()        // start, or resume after pause()
 reveal.pause()       // hold where it is
 reveal.finish()      // jump to the end
 reveal.cancel()      // stop and go back to the start
-reveal.replay()      // go back to the start and play again
+reveal.replay()      // cancel, then play
 
 reveal.playState     // 'idle' | 'running' | 'paused' | 'finished'
 await reveal.finished   // wait for the current run to end`}
@@ -51,12 +51,12 @@ await reveal.finished   // wait for the current run to end`}
           { name: "pause()", type: "() => void", default: "—", description: "Holds the animation where it is. <code>play()</code> continues it." },
           { name: "finish()", type: "() => void", default: "—", description: "Jumps to the end state." },
           { name: "cancel()", type: "() => void", default: "—", description: "Stops the animation and returns to the start state." },
-          { name: "replay()", type: "() => void", default: "—", description: "Returns to the start and plays again. Available on components with an animation that ends, such as the reveals, text effects, charts, icons and <code>motion-code</code>." },
+          { name: "replay()", type: "() => void", default: "—", description: "Cancels, then plays. It means the same on every component that has it. Available on components with an animation that ends, such as the reveals, text effects, charts, icons and <code>motion-code</code>." },
           { name: "playState", type: "PlaybackState", default: "'idle'", description: "<code>'idle'</code>, <code>'running'</code>, <code>'paused'</code> or <code>'finished'</code>." },
           { name: "finished", type: "Promise<void>", default: "—", description: "Resolves when the current run ends, by finishing or by <code>cancel()</code>. Each run gets a new promise. It never rejects." },
         ]}
       />
-      <p class="note"><code>motion-glitch</code> also has <code>glitch()</code>, which fires one extra burst.</p>
+      <p class="note">Some components add their own method. <code>motion-glitch</code> has <code>glitch()</code>, which fires one extra burst. <code>motion-underline</code>, <code>motion-marker</code>, <code>motion-strike</code> and <code>motion-ring</code> have <code>sweep()</code>, which erases the drawn mark from its start and draws it again. A sweep is a normal run, so it fires the same events and resolves the same promises.</p>
 
       <h2>Wait for an animation</h2>
       <p><code>play()</code> returns a promise, so you can run code after an animation ends.</p>
@@ -84,6 +84,9 @@ console.log('reveal complete')`}
           { name: "motion-start", type: "CustomEvent", default: "—", description: "A run starts, from its trigger or from <code>play()</code>." },
           { name: "motion-finish", type: "CustomEvent", default: "—", description: "A run reaches its end, or <code>finish()</code> jumps there." },
           { name: "motion-cancel", type: "CustomEvent", default: "—", description: "<code>cancel()</code> stops a run and resets it." },
+          { name: "motion-change", type: "CustomEvent", default: "—", description: "A widget changes state. <code>event.detail</code> holds the new state: <code>{ index }</code> on <code>motion-slider</code> and <code>motion-gallery</code>, <code>{ flipped }</code> on <code>motion-flip-card</code>, <code>{ position }</code> on <code>motion-image-compare</code> and <code>{ active }</code> on <code>motion-icon-state</code>." },
+          { name: "motion-open", type: "CustomEvent", default: "—", description: "<code>motion-dialog</code> or the <code>motion-gallery</code> lightbox opens. On the gallery, <code>event.detail</code> is <code>{ index }</code>." },
+          { name: "motion-close", type: "CustomEvent", default: "—", description: "<code>motion-dialog</code> or the <code>motion-gallery</code> lightbox closes." },
         ]}
       />
       <CodeWindow
@@ -93,7 +96,7 @@ console.log('reveal complete')`}
   console.log(event.target.localName, 'finished')
 })`}
       />
-      <p>Some components contain others. <code>motion-gallery</code> uses <code>motion-stagger</code> and <code>motion-hover</code>, so a listener on the gallery also hears the stagger's events. When you listen on an element that contains other components, check <code>event.target</code> first.</p>
+      <p>Some components contain others. <code>motion-gallery</code> uses <code>motion-stagger</code> and <code>motion-hover</code>, so a listener on the gallery also hears the stagger's events. When you listen on an element that contains other components, check <code>event.target</code> first. This matters most for <code>motion-change</code>: a flip card inside a slider fires one too, and it bubbles up to the slider.</p>
       <CodeWindow
         filename="app.js"
         copy
@@ -131,7 +134,7 @@ pauseAll(document.querySelector('#hero'))`}
       <PropsTable
         nameLabel="Export"
         rows={[
-          { name: "pauseAll(root?)", type: "(root?: Node) => void", default: "document", description: "Pauses every running component inside <code>root</code>, and disables the components that follow the pointer." },
+          { name: "pauseAll(root?)", type: "(root?: Node) => void", default: "document", description: "Pauses every running component inside <code>root</code>, and disables the components that follow the pointer. It also holds endless decorative loops, such as the <code>motion-icon-state</code> loading spinner." },
           { name: "resumeAll(root?)", type: "(root?: Node) => void", default: "document", description: "Resumes what <code>pauseAll()</code> paused, and enables only what it disabled." },
           { name: "cancelAll(root?)", type: "(root?: Node) => void", default: "document", description: "Cancels every component inside <code>root</code>." },
         ]}
@@ -140,6 +143,7 @@ pauseAll(document.querySelector('#hero'))`}
 
       <h2>TypeScript</h2>
       <p>Each component registers its tag, so <code>querySelector</code> returns the right type without a cast. Use <code>MotionControllable</code> for code that works with any component.</p>
+      <p>Events are typed too, so <code>addEventListener</code> knows the type of <code>event.detail</code>. The detail types are exported: <code>MotionChangeDetail</code>, <code>SliderChangeDetail</code>, <code>GalleryIndexDetail</code>, <code>FlipCardChangeDetail</code>, <code>ImageCompareChangeDetail</code> and <code>IconStateChangeDetail</code>.</p>
       <CodeWindow
         filename="app.ts"
         copy
@@ -152,7 +156,12 @@ function restart(el: MotionControllable) {
   void el.play()
 }
 
-const state: PlaybackState | undefined = reveal?.playState`}
+const state: PlaybackState | undefined = reveal?.playState
+
+const slider = document.querySelector('motion-slider')
+slider?.addEventListener('motion-change', (event) => {
+  console.log(event.detail)   // MotionChangeDetail
+})`}
       />
 
       <h2>Reduced motion</h2>
@@ -163,8 +172,8 @@ const state: PlaybackState | undefined = reveal?.playState`}
 
       <h2 id="without-playback">Components without these methods</h2>
       <ul>
-        <li><strong>Pointer-driven:</strong> <code>motion-hover</code>, <code>motion-press</code>, <code>motion-magnetic</code> and <code>motion-tilt</code> follow the pointer. Set <code>disabled</code> to turn them off; <code>pauseAll()</code> does it for you. <code>motion-stretch</code> also follows the pointer, but has no <code>disabled</code>.</li>
-        <li><strong>Widgets:</strong> <code>motion-dialog</code>, <code>motion-gallery</code>, <code>motion-slider</code>, <code>motion-flip-card</code>, <code>motion-image-compare</code>, <code>motion-spotlight</code>, <code>motion-icon-state</code>, <code>motion-theme-icon</code> and <code>motion-theme-toggle</code> have their own methods, such as <code>show()</code> on the dialog and <code>goTo()</code> on the slider. Each component's page lists them.</li>
+        <li><strong>Pointer-driven:</strong> <code>motion-hover</code>, <code>motion-press</code>, <code>motion-magnetic</code>, <code>motion-tilt</code> and <code>motion-stretch</code> follow the pointer. Set <code>disabled</code> to turn them off. <code>pauseAll()</code> does it for you.</li>
+        <li><strong>Widgets:</strong> <code>motion-dialog</code>, <code>motion-gallery</code>, <code>motion-slider</code>, <code>motion-flip-card</code>, <code>motion-image-compare</code>, <code>motion-spotlight</code>, <code>motion-icon-state</code>, <code>motion-theme-icon</code> and <code>motion-theme-toggle</code> have their own methods: <code>show()</code> and <code>close()</code> on the dialog, <code>open()</code> and <code>next()</code> on the gallery, <code>goTo()</code> and <code>next()</code> on the slider, and <code>flip()</code> on the flip card and on <code>motion-icon-state</code>. The <code>motion-icon-state</code> loading spinner is an endless loop, and <code>pauseAll()</code> holds it. Each component's page lists the full set.</li>
         <li><strong>Static:</strong> <code>motion-code-inline</code> does not animate.</li>
       </ul>
     </main>
