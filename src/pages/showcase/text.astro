@@ -8,7 +8,7 @@ import "../../styles/showcase.css";
 type Row = { tag: string; word: string; how: string; html: string; kind?: "object" | "bleed" };
 
 const rows: Row[] = [
-  { tag: "gravity", word: "gravity", how: "drops in when it scrolls into view", html: `<motion-gravity height="120" interval="0.06">gravity</motion-gravity>` },
+  { tag: "gravity", word: "gravity", how: "drops in when it scrolls into view", html: `<motion-gravity trigger="view" height="120" interval="0.06">gravity</motion-gravity>` },
   { tag: "stretch", word: "stretch", how: "hover it", html: `<motion-stretch spread="28">stretch</motion-stretch>` },
   { tag: "font", word: "font", how: "breathes between thin and heavy", html: `<motion-font axis="wght" from="200" to="800" duration="1.2" loop hold="0.4" gap="0.4">font</motion-font>` },
   { tag: "swap", word: "swap", how: "swaps its letters on a loop", html: `<motion-swap trigger="view" loop hold="1.2" gap="0.4">swap</motion-swap>` },
@@ -40,7 +40,7 @@ const rows: Row[] = [
   { tag: "underline", word: "underline", how: "draws a wave under itself, on a loop", html: `<motion-underline shape="wave" loop hold="1.4" gap="0.6">underline</motion-underline>` },
   { tag: "strike", word: "strike", how: "strikes itself through, on a loop", html: `<motion-strike loop hold="1.4" gap="0.6">strike</motion-strike>` },
   { tag: "words", word: "words", how: "rotates through a list of words", html: `<motion-words words="words, rotate, repeat, again" interval="1.8"></motion-words>` },
-  { tag: "counter", word: "22", how: "counts up to the number of text components, again and again", html: `<motion-counter to="22" duration="1.8" loop hold="1.6" gap="0.4"></motion-counter>` },
+  { tag: "counter", word: "100", how: "counts up from zero, again and again", html: `<motion-counter to="100" duration="1.8" loop hold="1.6" gap="0.4"></motion-counter>` },
   {
     tag: "arc",
     word: "arc",
@@ -59,9 +59,9 @@ const rows: Row[] = [
 
   <main id="main" class="sc">
     <header class="sc-cat-hero">
-      <h1 class="sc-cat-title" style="--len: 4">text</h1>
+      <h1 class="sc-cat-title" style="--len: 4"><motion-headline by="chars" interval="0.05" duration="0.9">text</motion-headline></h1>
       <p class="sc-cat-lede">
-        Twenty-two tags for type. Each word below is set by the tag it names, and almost all of them keep moving. Gravity drops in
+        Tags for type. Each word below is set by the tag it names, and almost all of them keep moving. Gravity drops in
         as you reach it, and stretch waits for your pointer. For variable fonts in depth, see the <a href="/showcase/motion-font/">variable font showcase</a>.
       </p>
     </header>
@@ -147,6 +147,10 @@ const rows: Row[] = [
 
     .sc-row-object:has(motion-circle) .sc-row-word {
       padding-block: 1.5rem;
+    }
+
+    .sc-row:has(motion-underline) .sc-row-word {
+      margin-bottom: 0.3em;
     }
 
     .sc-row:has(motion-ring) .sc-meta {

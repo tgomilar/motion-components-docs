@@ -31,7 +31,7 @@ export const COMPONENT_TOPICS: Record<string, string> = {
   "motion-strike": "Animated Strikethrough Text",
   "motion-ring": "Hand-Drawn Circle Around Text",
   "motion-icon": "Animated SVG Icons",
-  "motion-state-icon": "Morphing State Icons",
+  "motion-icon-state": "Morphing State Icons",
   "motion-parallax": "Parallax Scroll Effect",
   "motion-scene": "Scroll-Driven Scenes",
   "motion-countdown": "Animated Countdown Timer",

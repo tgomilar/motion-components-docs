@@ -7,41 +7,66 @@ import JsApiDemo from "../../components/JsApiDemo.astro";
 import "../../styles/docs.css";
 ---
 
-<Layout title="JavaScript API — Motion Components" description="Trigger, pause, resume, finish, and cancel any motion component programmatically with a Web-Animations-style playback API." noMain>
+<Layout title="JavaScript API — Motion Components" description="Play, pause, finish and cancel any motion component from JavaScript, wait for it to end, listen for its events, and control every component at once." noMain>
   <div class="layout">
     <DocsSidebar />
 
     <main id="main">
       <h1><motion-split by="chars" interval="0.025" duration="0.5">JavaScript API</motion-split></h1>
-      <p class="lead">Every animating component exposes a Web-Animations-style playback surface: <code>play()</code>, <code>pause()</code>, <code>finish()</code>, <code>cancel()</code>, a <code>playState</code> getter, and a <code>finished</code> promise. It also exposes package-level helpers to control everything at once.</p>
+      <p class="lead">Every component is an HTML element, so you control it the way you control any element: find it, call a method, listen for an event.</p>
 
-      <h2>Controlling playback</h2>
+      <h2>Quick start</h2>
+      <CodeWindow
+        filename="app.js"
+        copy
+        code={`const reveal = document.querySelector('motion-reveal')
+
+reveal.play()        // start, or resume after pause()
+reveal.pause()       // hold where it is
+reveal.finish()      // jump to the end
+reveal.cancel()      // stop and go back to the start
+reveal.replay()      // go back to the start and play again
+
+reveal.playState     // 'idle' | 'running' | 'paused' | 'finished'
+await reveal.finished   // wait for the current run to end`}
+      />
+      <p>Try the methods on a ticker:</p>
       <JsApiDemo target="api-ticker" wide>
         <motion-ticker id="api-ticker" speed="60">
-          <span>motion-components</span>
+          <span class="api-chip"><code>play()</code> starts or resumes</span>
+          <span class="api-chip"><code>pause()</code> holds in place</span>
+          <span class="api-chip"><code>finish()</code> jumps to the end</span>
+          <span class="api-chip"><code>cancel()</code> resets to the start</span>
+          <span class="api-chip"><code>replay()</code> plays again</span>
+          <span class="api-chip"><code>playState</code> says where it is</span>
+          <span class="api-chip"><code>finished</code> waits for the end</span>
         </motion-ticker>
       </JsApiDemo>
-      <CodeWindow
-        filename="app.ts"
-        copy
-        code={`const ticker = document.querySelector('motion-ticker')
 
-ticker.pause()                  // freeze mid-phase
-await ticker.play()             // resume; resolves when the run finishes
-ticker.finish()                 // jump to the end state
-ticker.cancel()                 // hard reset to the initial state
-
-console.log(ticker.playState)   // 'idle' | 'running' | 'paused' | 'finished'`}
+      <h2>Methods and properties</h2>
+      <PropsTable
+        nameLabel="Member"
+        rows={[
+          { name: "play()", type: "() => Promise<void>", default: "—", description: "Starts the animation, or resumes it after <code>pause()</code>. Does nothing while it runs. The promise resolves when the run ends." },
+          { name: "pause()", type: "() => void", default: "—", description: "Holds the animation where it is. <code>play()</code> continues it." },
+          { name: "finish()", type: "() => void", default: "—", description: "Jumps to the end state." },
+          { name: "cancel()", type: "() => void", default: "—", description: "Stops the animation and returns to the start state." },
+          { name: "replay()", type: "() => void", default: "—", description: "Returns to the start and plays again. Available on components with an animation that ends, such as the reveals, text effects, charts, icons and <code>motion-code</code>." },
+          { name: "playState", type: "PlaybackState", default: "'idle'", description: "<code>'idle'</code>, <code>'running'</code>, <code>'paused'</code> or <code>'finished'</code>." },
+          { name: "finished", type: "Promise<void>", default: "—", description: "Resolves when the current run ends, by finishing or by <code>cancel()</code>. Each run gets a new promise. It never rejects." },
+        ]}
       />
+      <p class="note"><code>motion-glitch</code> also has <code>glitch()</code>, which fires one extra burst.</p>
 
-      <h2>Triggering a one-shot and awaiting it</h2>
+      <h2>Wait for an animation</h2>
+      <p><code>play()</code> returns a promise, so you can run code after an animation ends.</p>
       <JsApiDemo target="api-reveal" mode="one-shot" wide>
         <motion-reveal id="api-reveal" duration="0.8" y="32">
           <div class="demo-card">Triggered from JavaScript</div>
         </motion-reveal>
       </JsApiDemo>
       <CodeWindow
-        filename="app.ts"
+        filename="app.js"
         copy
         code={`const reveal = document.querySelector('motion-reveal')
 
@@ -49,54 +74,16 @@ reveal.cancel()
 await reveal.play()
 console.log('reveal complete')`}
       />
-
-      <h2>Controlling everything at once</h2>
-      <p>The package exports registry-backed helpers that operate on every live instance, or only those inside a container you pass. Input-driven components (<code>motion-hover</code>, <code>motion-press</code>, <code>motion-magnetic</code>, <code>motion-tilt</code>) have no timeline; <code>pauseAll()</code> disables them and <code>resumeAll()</code> re-enables only the ones it disabled.</p>
-      <JsApiDemo target="pause-all-scope" mode="pause-all" wide>
-        <div id="pause-all-scope">
-          <div class="loop-row">
-            <motion-circle text="orbit · orbit · orbit ·" duration="14"></motion-circle>
-            <motion-typewriter loop>typing along…</motion-typewriter>
-          </div>
-        </div>
-      </JsApiDemo>
-      <CodeWindow
-        filename="app.ts"
-        copy
-        code={`import { pauseAll, resumeAll } from 'motion-components'
-
-document.addEventListener('visibilitychange', () => {
-  document.hidden ? pauseAll() : resumeAll()
-})
-
-pauseAll(document.querySelector('#hero'))   // or scope to a subtree`}
-      />
-
-      <h2>Instance members</h2>
-      <PropsTable
-        nameLabel="Member"
-        rows={[
-          { name: "play()", type: "() => Promise<void>", default: "—", description: "Start if idle or finished, resume if paused, no-op if running" },
-          { name: "pause()", type: "() => void", default: "—", description: "Freeze in place; resumable with play()" },
-          { name: "finish()", type: "() => void", default: "—", description: "Jump to the end state immediately" },
-          { name: "cancel()", type: "() => void", default: "—", description: "Hard terminate and reset to the initial state" },
-          { name: "replay()", type: "() => void", default: "—", description: "Reset and run again from the start. On components with a one-shot animation, such as the reveals, text effects, charts, icons and <code>motion-code</code>" },
-          { name: "playState", type: "PlaybackState", default: "'idle'", description: "'idle' | 'running' | 'paused' | 'finished'" },
-          { name: "finished", type: "Promise<void>", default: "—", description: "Fresh per run; resolves on finish or cancel, never rejects" },
-        ]}
-      />
+      <p class="note">An endless effect, such as <code>motion-ticker</code>, <code>motion-circle</code> or any component with <code>loop</code>, never ends by itself. Its promise resolves only when you call <code>finish()</code> or <code>cancel()</code>, so don't await it.</p>
 
       <h2 id="events">Events</h2>
-      <p>
-        Every controllable component fires these events. They bubble and are composed, so one listener on a parent or on
-        <code>document</code> hears every component inside it, including components inside another shadow root.
-      </p>
+      <p>Components fire these events. They bubble and cross shadow roots, so one listener on <code>document</code> hears every component on the page.</p>
       <PropsTable
         nameLabel="Event"
         rows={[
-          { name: "motion-start", type: "CustomEvent", default: "—", description: "A run starts, from a trigger or from <code>play()</code>" },
-          { name: "motion-finish", type: "CustomEvent", default: "—", description: "A run reaches its end, or <code>finish()</code> jumps there" },
-          { name: "motion-cancel", type: "CustomEvent", default: "—", description: "<code>cancel()</code> stops a run and resets it" },
+          { name: "motion-start", type: "CustomEvent", default: "—", description: "A run starts, from its trigger or from <code>play()</code>." },
+          { name: "motion-finish", type: "CustomEvent", default: "—", description: "A run reaches its end, or <code>finish()</code> jumps there." },
+          { name: "motion-cancel", type: "CustomEvent", default: "—", description: "<code>cancel()</code> stops a run and resets it." },
         ]}
       />
       <CodeWindow
@@ -106,24 +93,80 @@ pauseAll(document.querySelector('#hero'))   // or scope to a subtree`}
   console.log(event.target.localName, 'finished')
 })`}
       />
+      <p>Some components contain others. <code>motion-gallery</code> uses <code>motion-stagger</code> and <code>motion-hover</code>, so a listener on the gallery also hears the stagger's events. When you listen on an element that contains other components, check <code>event.target</code> first.</p>
+      <CodeWindow
+        filename="app.js"
+        copy
+        code={`const card = document.querySelector('#card')
 
-      <h2>Package exports</h2>
+card.addEventListener('motion-finish', (event) => {
+  if (event.target !== card) return
+  console.log('the card finished')
+})`}
+      />
+
+      <h2>Control every component at once</h2>
+      <p>Import these helpers to pause, resume or cancel every component on the page, or only the ones inside an element you pass.</p>
+      <JsApiDemo target="pause-all-scope" mode="pause-all" wide>
+        <div id="pause-all-scope">
+          <div class="loop-row">
+            <motion-circle text="orbit · orbit · orbit ·" duration="14"></motion-circle>
+            <motion-typewriter loop>typing along…</motion-typewriter>
+          </div>
+        </div>
+      </JsApiDemo>
+      <CodeWindow
+        filename="app.js"
+        copy
+        code={`import { pauseAll, resumeAll } from 'motion-components'
+
+// Pause everything while the tab is hidden
+document.addEventListener('visibilitychange', () => {
+  document.hidden ? pauseAll() : resumeAll()
+})
+
+// Or only the components inside one element
+pauseAll(document.querySelector('#hero'))`}
+      />
       <PropsTable
         nameLabel="Export"
         rows={[
-          { name: "pauseAll(root?)", type: "(root?: Node) => void", default: "document", description: "Pause running instances inside root; disable input-reactive components" },
-          { name: "resumeAll(root?)", type: "(root?: Node) => void", default: "document", description: "Resume paused instances; re-enable only what pauseAll disabled" },
-          { name: "cancelAll(root?)", type: "(root?: Node) => void", default: "document", description: "Cancel every instance inside root" },
-          { name: "MotionControllable", type: "interface", default: "—", description: "TypeScript type for controllable element refs" },
-          { name: "PlaybackState", type: "type", default: "—", description: "The four-state playback union" },
+          { name: "pauseAll(root?)", type: "(root?: Node) => void", default: "document", description: "Pauses every running component inside <code>root</code>, and disables the components that follow the pointer." },
+          { name: "resumeAll(root?)", type: "(root?: Node) => void", default: "document", description: "Resumes what <code>pauseAll()</code> paused, and enables only what it disabled." },
+          { name: "cancelAll(root?)", type: "(root?: Node) => void", default: "document", description: "Cancels every component inside <code>root</code>." },
         ]}
       />
+      <p class="note"><code>pauseAll()</code> also reaches components inside other components, such as the stagger inside a gallery.</p>
+
+      <h2>TypeScript</h2>
+      <p>Each component registers its tag, so <code>querySelector</code> returns the right type without a cast. Use <code>MotionControllable</code> for code that works with any component.</p>
+      <CodeWindow
+        filename="app.ts"
+        copy
+        code={`import type { MotionControllable, PlaybackState } from 'motion-components'
+
+const reveal = document.querySelector('motion-reveal')   // MotionReveal | null
+
+function restart(el: MotionControllable) {
+  el.cancel()
+  void el.play()
+}
+
+const state: PlaybackState | undefined = reveal?.playState`}
+      />
+
+      <h2>Reduced motion</h2>
+      <p>When the visitor asks for reduced motion, <code>play()</code> shows the end state at once. It still resolves, and it still fires <code>motion-start</code> and <code>motion-finish</code>, so your code needs no special case. <code>motion-words</code> and <code>motion-countdown</code> keep running without animation, because changing words and counting are their job.</p>
 
       <h2>Scroll-driven components</h2>
-      <p>For <code>motion-parallax</code>, <code>motion-scene</code>, <code>motion-progress</code>, and <code>motion-blur</code>, the verbs adapt because these components track scroll position instead of a timeline. <code>pause()</code> unbinds the scroll listener and freezes the effect at its current progress. <code>play()</code> rebinds. <code>finish()</code> applies the end-of-scroll state. <code>cancel()</code> unbinds and resets styles. While bound, <code>playState</code> is <code>'running'</code>.</p>
+      <p><code>motion-parallax</code>, <code>motion-scene</code>, <code>motion-progress</code> and <code>motion-blur</code> follow the scroll position instead of a clock. <code>playState</code> is <code>'running'</code> while they follow it. <code>pause()</code> stops following and holds the current state, <code>play()</code> follows again, <code>finish()</code> shows the end state, and <code>cancel()</code> stops and resets.</p>
 
-      <h2>Accessibility</h2>
-      <p>The API always respects <code>prefers-reduced-motion</code>. A programmatic <code>play()</code> applies the final state instantly, still resolves <code>finished</code>, and still fires <code>motion-start</code> and <code>motion-finish</code>. So calling code never needs a reduced-motion branch. Two components keep running instead, because their job is ongoing: <code>motion-words</code> keeps changing words and <code>motion-countdown</code> keeps counting, both without animation, and the playback methods control them as usual.</p>
+      <h2 id="without-playback">Components without these methods</h2>
+      <ul>
+        <li><strong>Pointer-driven:</strong> <code>motion-hover</code>, <code>motion-press</code>, <code>motion-magnetic</code> and <code>motion-tilt</code> follow the pointer. Set <code>disabled</code> to turn them off; <code>pauseAll()</code> does it for you. <code>motion-stretch</code> also follows the pointer, but has no <code>disabled</code>.</li>
+        <li><strong>Widgets:</strong> <code>motion-dialog</code>, <code>motion-gallery</code>, <code>motion-slider</code>, <code>motion-flip-card</code>, <code>motion-image-compare</code>, <code>motion-spotlight</code>, <code>motion-icon-state</code>, <code>motion-theme-icon</code> and <code>motion-theme-toggle</code> have their own methods, such as <code>show()</code> on the dialog and <code>goTo()</code> on the slider. Each component's page lists them.</li>
+        <li><strong>Static:</strong> <code>motion-code-inline</code> does not animate.</li>
+      </ul>
     </main>
   </div>
 </Layout>
@@ -148,12 +191,34 @@ pauseAll(document.querySelector('#hero'))   // or scope to a subtree`}
     text-align: center;
   }
 
+  #api-ticker {
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(to right, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .api-chip {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    padding: 0.5rem 0.9rem;
+    border: 1px solid var(--mc-color-border);
+    border-radius: 999px;
+    background: var(--mc-color-surface-2);
+    color: var(--mc-color-muted);
+    font-size: 0.9rem;
+    white-space: nowrap;
+  }
+
+  .api-chip code {
+    color: var(--mc-color-text);
+    font-weight: 600;
+  }
+
   .loop-row {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    gap: 2rem;
-    flex-wrap: wrap;
+    gap: 1.5rem;
     font-weight: 600;
   }
 </style>

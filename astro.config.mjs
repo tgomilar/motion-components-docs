@@ -88,5 +88,7 @@ export default defineConfig({
     "/docs/primitives/motion-magnetic": "/docs/respond/motion-magnetic/",
     "/docs/primitives/motion-press": "/docs/respond/motion-press/",
     "/docs/primitives/motion-tilt": "/docs/respond/motion-tilt/",
+    // motion-state-icon was renamed to motion-icon-state
+    "/docs/icons/motion-state-icon": "/docs/icons/motion-icon-state/",
   },
 });

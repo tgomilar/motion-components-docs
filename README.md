@@ -144,7 +144,7 @@ npm install motion-components
 | [`motion-code`](https://www.motion-components.dev/docs/code/motion-code/)               | Code window with chrome bar & typing animation |
 | [`motion-code-inline`](https://www.motion-components.dev/docs/code/motion-code-inline/) | Inline `<code>` tag with copy button           |
 
-**49 components and counting.** → [Browse the full docs](https://www.motion-components.dev/docs/) or [see them all live in the showcase](https://www.motion-components.dev/showcase/)
+[Browse the full docs](https://www.motion-components.dev/docs/) or [see every component live in the showcase](https://www.motion-components.dev/showcase/).
 
 Every component is also scriptable — play, pause, and inspect instances from JavaScript, or control everything at once with `pauseAll()` / `resumeAll()` / `cancelAll()`. → [JS API guide](https://www.motion-components.dev/docs/js-api/)
 

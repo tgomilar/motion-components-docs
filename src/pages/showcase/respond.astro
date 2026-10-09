@@ -118,9 +118,9 @@ const tiltCode = `<div class="table">
 
   <main id="main" class="sc">
     <header class="sc-cat-hero">
-      <h1 class="sc-cat-title" style="--len: 7">respond</h1>
+      <h1 class="sc-cat-title" style="--len: 7"><motion-headline by="chars" interval="0.05" duration="0.9">respond</motion-headline></h1>
       <p class="sc-cat-lede">
-        Four tags that make surfaces answer your pointer like objects on a table. Move over them, pull them around, press them.
+        Tags that make surfaces answer your pointer like objects on a table. Move over them, pull them around, press them.
         On a phone, the keypad under press is the one made for your thumb.
       </p>
     </header>
@@ -223,6 +223,7 @@ const tiltCode = `<div class="table">
   </main>
 
   <script>
+    import "motion-components/motion-headline";
     import "motion-components/motion-hover";
     import "motion-components/motion-magnetic";
     import "motion-components/motion-press";

@@ -1,13 +1,13 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import ShowcaseFonts from "../../components/showcase/ShowcaseFonts.astro";
+import UnderlineHover from "../../components/showcase/UnderlineHover.astro";
 import { categories, categoryHref } from "../../data/showcase";
 import ShowcaseCode from "../../components/showcase/ShowcaseCode.astro";
 import "../../styles/showcase.css";
 
 const allTags = categories.flatMap((c) => c.tags.map((t) => `motion-${t}`));
 const byslug = Object.fromEntries(categories.map((c) => [c.slug, c]));
-const total = categories.reduce((n, c) => n + c.tags.length, 0);
 
 const lucide = (name: string) => `https://cdn.jsdelivr.net/npm/lucide-static@1/icons/${name}.svg`;
 const icons = [
@@ -18,7 +18,7 @@ const icons = [
   ["sun", "draw rotate"],
   ["mail", "draw"],
   ["zap", "draw wiggle"],
-  ["music", "draw nudge-up"],
+  ["music", "draw slide-up"],
 ];
 
 const code = `<motion-code filename="index.html" typing typing-speed="45"><script type="text/plain"><motion-tilt max="12" gloss>
@@ -84,13 +84,20 @@ const snippets: Record<string, { tags: string[]; code: string }> = {
 <motion-countdown to="2027-01-01T00:00:00" format="days hours minutes seconds" roll></motion-countdown>`,
   },
   charts: {
-    tags: ["motion-chart", "motion-sparkline"],
+    tags: ["motion-chart", "motion-pie", "motion-sparkline"],
     code: `<motion-chart
   type="line"
   label="Weekly downloads"
   values="1200, 1850, 1600, 2400, 2900, 3300, 4100, 4800"
   labels="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug"
 ></motion-chart>
+
+<motion-pie
+  donut
+  label="Visitors by source"
+  values="46, 27, 17, 10"
+  labels="Search, Direct, Social, Other"
+></motion-pie>
 
 <p>
   Downloads grew every month
@@ -118,6 +125,7 @@ const snippets: Record<string, { tags: string[]; code: string }> = {
   description="A tour of every motion-components category: text, reveal, respond, icons, scroll, components, charts and code, each live on the page with spring physics."
   noMain>
   <ShowcaseFonts />
+  <UnderlineHover />
 
   <main id="main" class="sc">
     <motion-progress thickness="3" style="--mc-progress-color: var(--mc-color-yellow)"></motion-progress>
@@ -126,8 +134,8 @@ const snippets: Record<string, { tags: string[]; code: string }> = {
       <div class="hero-top">
         <motion-blur-in intensity="16" y="10" duration="1" delay="0.9">
           <p class="hero-lede">
-            A tour of {total} HTML tags with real spring physics, in {categories.length} categories. Each section below is live: hover
-            it, press it, scroll it. Open a category to see every component in it.
+            A tour of every component, grouped by what it does, each with real spring physics. Every section below is live: hover it,
+            press it, scroll it. Open a category to see all of its components.
           </p>
         </motion-blur-in>
         <nav class="hero-links" aria-label="Get started">
@@ -169,12 +177,9 @@ const snippets: Record<string, { tags: string[]; code: string }> = {
               </h2>
             </motion-parallax>
             <motion-stagger class="gl-details" interval="0.1" y="18" once="false">
-              <p class="gl-count">
-                {c.tags.length} {c.tags.length === 1 ? "component" : "components"}
-              </p>
               <p class="gl-blurb">{c.blurb}</p>
               <a class="gl-link" href={categoryHref(c)}>
-                <motion-underline>{c.built ? `See all ${c.tags.length}` : `Read the ${c.name.toLowerCase()} docs`}</motion-underline>
+                <motion-underline>{c.built ? "See them all" : `Read the ${c.name.toLowerCase()} docs`}</motion-underline>
               </a>
             </motion-stagger>
             <ShowcaseCode tags={snippets[c.slug].tags} code={snippets[c.slug].code} />
@@ -243,12 +248,15 @@ const snippets: Record<string, { tags: string[]; code: string }> = {
             )}
             {c.slug === "charts" && (
               <div class="st-charts">
-                <motion-chart
-                  type="line"
-                  label="Weekly downloads"
-                  values="1200, 1850, 1600, 2400, 2900, 3300, 4100, 4800"
-                  labels="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug"
-                />
+                <div class="st-charts-row">
+                  <motion-chart
+                    type="line"
+                    label="Weekly downloads"
+                    values="1200, 1850, 1600, 2400, 2900, 3300, 4100, 4800"
+                    labels="Jan, Feb, Mar, Apr, May, Jun, Jul, Aug"
+                  />
+                  <motion-pie donut label="Visitors by source" values="46, 27, 17, 10" labels="Search, Direct, Social, Other" />
+                </div>
                 <p class="st-spark">
                   Downloads grew every month <motion-sparkline values="12, 18, 16, 24, 29, 33, 41, 48" /> since January.
                 </p>
@@ -301,6 +309,7 @@ const snippets: Record<string, { tags: string[]; code: string }> = {
     import "motion-components/motion-flip-card";
     import "motion-components/motion-countdown";
     import "motion-components/motion-chart";
+    import "motion-components/motion-pie";
     import "motion-components/motion-sparkline";
     import "motion-components/motion-code";
     import "motion-components/motion-code-inline";
@@ -413,13 +422,6 @@ const snippets: Record<string, { tags: string[]; code: string }> = {
       display: block;
     }
 
-    .gl-count {
-      margin: 0.75rem 0 0;
-      font-family: var(--display);
-      font-size: 1.15rem;
-      font-weight: 600;
-      color: var(--mc-color-yellow);
-    }
 
     .gl-blurb {
       max-width: 26rem;
@@ -641,10 +643,33 @@ const snippets: Record<string, { tags: string[]; code: string }> = {
     }
 
     /* Charts */
+    .st-charts-row {
+      display: grid;
+      grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+      align-items: center;
+      gap: clamp(1.5rem, 3vw, 2.5rem);
+    }
+
     .st-charts motion-chart {
       display: block;
       width: 100%;
       --mc-chart-color: var(--mc-color-accent);
+    }
+
+    .st-charts motion-pie {
+      display: block;
+      width: 100%;
+      --mc-chart-1: var(--mc-color-accent);
+      --mc-chart-2: var(--mc-color-yellow);
+      --mc-chart-3: var(--mc-color-muted);
+      --mc-chart-4: var(--mc-color-text);
+      --mc-chart-surface: var(--mc-color-bg);
+    }
+
+    @media (max-width: 860px) {
+      .st-charts-row {
+        grid-template-columns: 1fr;
+      }
     }
 
     .st-spark {

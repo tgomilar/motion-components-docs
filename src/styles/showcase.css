@@ -130,6 +130,12 @@
   padding-inline: var(--gutter);
 }
 
+.sc-meta,
+.sc-code {
+  position: relative;
+  z-index: 1;
+}
+
 .sc-meta {
   display: flex;
   flex-wrap: wrap;
@@ -183,11 +189,23 @@
   color: var(--mc-color-muted);
 }
 
+.sc-catnav-hover {
+  display: block;
+}
+
+.sc-catnav-hover-next {
+  justify-self: end;
+}
+
+.sc-catnav-hover motion-font {
+  display: block;
+  font-variation-settings: "wdth" 68;
+}
+
 .sc-catnav-name {
   font-family: var(--display);
   font-size: clamp(2rem, 6vw, 4.5rem);
   font-weight: 700;
-  font-variation-settings: "wdth" 68, "opsz" 96;
   line-height: 1;
   letter-spacing: -0.02em;
 }

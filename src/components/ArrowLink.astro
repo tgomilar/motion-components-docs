@@ -11,9 +11,9 @@ const ARROW = back
 ---
 
 <a class:list={["arrow-link", className]} {...rest}
-  >{back && <motion-icon icon={ARROW} animation="nudge-left" />}
+  >{back && <motion-icon icon={ARROW} animation="slide-left" />}
   <motion-underline><slot /></motion-underline>
-  {!back && <motion-icon icon={ARROW} animation="nudge-right" />}</a
+  {!back && <motion-icon icon={ARROW} animation="slide-right" />}</a
 >
 
 <script>

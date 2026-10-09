@@ -47,7 +47,7 @@ const iconWall = [
           <motion-icon class="hero-circle-icon" set:html={iconFiles["../assets/home-icons/lucide-sparkle.svg"]} trigger="mount" duration="1" data-hover-animation="rotate"></motion-icon>
         </motion-circle>
       </a>
-      <div class="hero-badge">Declarative motion · Spring physics · Interruptible</div>
+      <div class="hero-badge">Declarative motion <span class="hero-badge-dot">·</span> Spring physics <span class="hero-badge-dot">·</span> Interruptible</div>
       <h1>
         <motion-stretch text="Animate" spread="20" duration="1.11" bounce="0.75">Animate</motion-stretch>
         <span class="accent">
@@ -396,7 +396,7 @@ import 'motion-components'
         <h2>Icons that move.</h2>
         <p class="section-sub">
           <motion-code-inline>&lt;motion-icon&gt;</motion-code-inline> draws in, pops or wiggles any SVG icon from Lucide, Tabler, Heroicons, Material
-          Symbols, Font Awesome and more. <motion-code-inline>&lt;motion-state-icon&gt;</motion-code-inline> morphs between two states on a spring.
+          Symbols, Font Awesome and more. <motion-code-inline>&lt;motion-icon-state&gt;</motion-code-inline> morphs between two states on a spring.
         </p>
       </div>
       <div class="icons-showcase">
@@ -429,7 +429,7 @@ import 'motion-components'
       <p class="icons-hint">Hover the icons. Click one to preview it and copy its code.</p>
       <div class="icons-links">
         <ArrowLink href="/docs/icons/motion-icon/" class="view-all-link">motion-icon docs</ArrowLink>
-        <ArrowLink href="/docs/icons/motion-state-icon/" class="view-all-link">motion-state-icon docs</ArrowLink>
+        <ArrowLink href="/docs/icons/motion-icon-state/" class="view-all-link">motion-icon-state docs</ArrowLink>
       </div>
     </div>
   </section>
@@ -876,11 +876,12 @@ import 'motion-components'
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: var(--mc-color-accent);
-      background: var(--mc-color-accent-dim);
-      padding: 0.3rem 0.85rem;
-      border-radius: 99px;
+      color: var(--mc-color-yellow);
       margin-bottom: 2rem;
+    }
+
+    .hero-badge-dot {
+      color: var(--mc-color-text);
     }
 
     h1 {

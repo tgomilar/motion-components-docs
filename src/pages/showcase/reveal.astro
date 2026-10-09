@@ -59,9 +59,9 @@ ${signals.map((t) => `  <p>${t}</p>`).join("\n")}
 
   <main id="main" class="sc">
     <header class="sc-cat-hero">
-      <h1 class="sc-cat-title" style="--len: 6">reveal</h1>
+      <h1 class="sc-cat-title" style="--len: 6"><motion-headline by="chars" interval="0.05" duration="0.9">reveal</motion-headline></h1>
       <p class="sc-cat-lede">
-        Four tags for how content arrives. This page is a short essay, and each part of it enters in its own way. The caption under
+        Tags for how content arrives. This page is a short essay, and each part of it enters in its own way. The caption under
         each part names the tag and the setting. Scroll back up and most of it plays again.
       </p>
     </header>
@@ -186,6 +186,7 @@ ${signals.map((t) => `  <p>${t}</p>`).join("\n")}
   </main>
 
   <script>
+    import "motion-components/motion-headline";
     import "motion-components/motion-blur";
     import "motion-components/motion-blur-in";
     import "motion-components/motion-reveal";
