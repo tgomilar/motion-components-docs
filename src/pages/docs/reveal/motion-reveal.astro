@@ -42,11 +42,35 @@ import 'motion-components'               // or the whole library`}
 </motion-reveal>`}
       />
 
+      <h2 id="sequence-with-delay">Sequence with delay</h2>
+      <p>Give each reveal a different <code>delay</code> to bring a block in one piece after another.</p>
+      <DocsPreview replayId="reveal-sequence">
+        <div class="demo-sequence" id="reveal-sequence">
+          <motion-reveal><div class="seq-title">Motion that feels alive</div></motion-reveal>
+          <motion-reveal delay="0.15"><p class="seq-text">Spring-based components for the web.</p></motion-reveal>
+          <motion-reveal delay="0.3"><span class="seq-button">Get started</span></motion-reveal>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-reveal-sequence.html"
+        copy
+        code={`<motion-reveal>
+  <h2>Motion that feels alive</h2>
+</motion-reveal>
+<motion-reveal delay="0.15">
+  <p>Spring-based components for the web.</p>
+</motion-reveal>
+<motion-reveal delay="0.3">
+  <a href="/docs">Get started</a>
+</motion-reveal>`}
+      />
+
       <h2>Properties</h2>
       <PropsTable
         nameLabel="Attribute"
         rows={[
           { name: "duration", type: "number", default: "0.6", description: "Spring duration hint in seconds" },
+          { name: "delay", type: "number", default: "0", description: "Seconds to wait before the reveal starts. Set different values on several reveals to bring them in one after another" },
           { name: "y", type: "number", default: "24", description: "Initial vertical offset in px" },
           { name: "threshold", type: "number", default: "0.1", description: "IntersectionObserver visibility threshold (0–1)" },
           { name: "once", type: "boolean", default: "true", description: "Animate only on first intersection. Set it to <code>\"false\"</code> to replay on every entry" },
@@ -83,5 +107,35 @@ import 'motion-components'               // or the whole library`}
     font-weight: 600;
     color: var(--mc-color-text);
     text-align: center;
+  }
+
+  .demo-sequence {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .seq-title {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--mc-color-text);
+  }
+
+  .seq-text {
+    margin: 0;
+    color: var(--mc-color-muted);
+  }
+
+  .seq-button {
+    display: inline-block;
+    padding: 0.5rem 1.1rem;
+    border-radius: 8px;
+    background: var(--mc-color-accent);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
   }
 </style>

@@ -47,6 +47,7 @@ import 'motion-components'               // or the whole library`}
         nameLabel="Attribute"
         rows={[
           { name: "duration", type: "number", default: "0.7", description: "Spring duration of the reveal animation, in seconds" },
+          { name: "delay", type: "number", default: "0", description: "Seconds to wait before the reveal starts. See the <a href=\"/docs/reveal/motion-reveal/#sequence-with-delay\">motion-reveal sequence example</a>" },
           { name: "intensity", type: "number", default: "10", description: "Initial blur in pixels; animates to 0 on reveal" },
           { name: "y", type: "number", default: "12", description: "Initial vertical offset in pixels; animates to 0 on reveal" },
           { name: "threshold", type: "number", default: "0.1", description: "IntersectionObserver threshold (0–1) at which the reveal triggers" },

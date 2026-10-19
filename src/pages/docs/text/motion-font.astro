@@ -167,6 +167,7 @@ import "../../../styles/docs.css";
         { name: 'duration', type: 'number',  default: '0.6',    description: 'Spring duration hint in seconds.' },
         { name: 'bounce',   type: 'number',  default: '0',      description: 'Spring bounciness 0–1. 0 = no overshoot, 1 = very bouncy.' },
         { name: 'delay',    type: 'number',  default: '0',      description: 'Delay before animation starts in seconds.' },
+        { name: 'threshold', type: 'number', default: '0.2', description: 'With <code>trigger="view"</code>, share of the text (0–1) that must be in view before the animation starts' },
         { name: 'trigger',  type: 'string',  default: "'view'", description: "<code>'view'</code>: on viewport entry &nbsp;|&nbsp; <code>'hover'</code>: on mouseenter / focusin &nbsp;|&nbsp; <code>'scroll'</code>: axis tracks scroll position" },
         { name: 'once',     type: 'boolean', default: 'true',   description: "For <motion-code-inline copy>trigger='view'</motion-code-inline>: animate only on the first intersection. Set it to <code>\"false\"</code> to animate on every entry. Ignored with <code>loop</code>." },
         { name: 'loop',     type: 'boolean', default: 'false',   description: 'Spring to <code>to</code>, hold, spring back to <code>from</code> and repeat. With <motion-code-inline copy>trigger="view"</motion-code-inline> the cycle runs while the text is on screen' },

@@ -252,6 +252,7 @@ animate(".hero", {
         { name: 'typing-delay',    type: 'number',  default: '0',          description: 'Seconds to wait before typing starts, on every pass' },
         { name: 'typing-loop',     type: 'boolean', default: 'true',       description: 'Repeat the typing. Set <motion-code-inline copy>typing-loop="false"</motion-code-inline> to type once when the block scrolls into view' },
         { name: 'typing-hold',     type: 'number',  default: '1.5',        description: 'Seconds to hold the finished code before typing it again' },
+        { name: 'threshold', type: 'number', default: '0.2', description: 'With <code>typing-loop="false"</code>, share of the block (0–1) that must be in view before typing starts' },
         { name: 'code',            type: 'string',  default: '""',         description: 'Property only: reads or replaces the source, before highlighting. Same as <code>setCode()</code>, and it works when set before the element is connected' },
       ]} />
 

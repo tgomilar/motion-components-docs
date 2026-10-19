@@ -66,6 +66,7 @@ import 'motion-components'               // or the whole library`}
       <PropsTable nameLabel="Attribute" rows={[
         { name: 'interval', type: 'number', default: '0.04', description: 'Time between scramble frames, in seconds' },
         { name: 'delay', type: 'number', default: '0', description: 'Delay before starting, in seconds' },
+        { name: 'threshold', type: 'number', default: '0.2', description: 'With <code>trigger="view"</code>, share of the text (0–1) that must be in view before the scramble starts' },
         { name: 'iterations', type: 'number', default: '2', description: 'Scramble frames per character before revealing' },
         { name: 'trigger', type: 'string', default: "'view'", description: "What starts the scramble: <code>'view'</code> on viewport entry or <code>'hover'</code> on mouseenter" },
         { name: 'once', type: 'boolean', default: 'true', description: 'Animate only on first intersection. Set <motion-code-inline copy>once="false"</motion-code-inline> to animate on every entry. Ignored with <code>loop</code>' },

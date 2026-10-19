@@ -204,6 +204,8 @@ document.querySelector('#new-data').addEventListener('click', () => {
           { name: "label", type: "string", default: "''", description: "Accessible name of the chart" },
           { name: "trigger", type: "string", default: "'view'", description: "When the sweep-in runs: <code>'view'</code> or <code>'mount'</code>" },
           { name: "duration", type: "number", default: "0.8", description: "Spring duration in seconds" },
+          { name: "delay", type: "number", default: "0", description: "Seconds to wait before the entrance starts. Later data changes animate at once" },
+          { name: "threshold", type: "number", default: "0.3", description: "With <code>trigger=\"view\"</code>, share of the chart (0–1) that must be in view before the entrance starts" },
           { name: "bounce", type: "number", default: "0.25", description: "Spring bounciness when the values change" },
           { name: "tooltip", type: "boolean", default: "true", description: "Set <motion-code-inline copy>tooltip=\"false\"</motion-code-inline> to hide the tooltip. A donut uses its center instead" },
           { name: "legend", type: "boolean", default: "true", description: "Set <motion-code-inline copy>legend=\"false\"</motion-code-inline> to hide the legend" },

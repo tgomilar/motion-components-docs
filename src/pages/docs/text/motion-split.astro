@@ -95,6 +95,8 @@ import 'motion-components'               // or the whole library`}
           { name: "by", type: "string", default: "'words'", description: "<code>'words'</code>, <code>'chars'</code>, or <code>'lines'</code>: granularity of the split" },
           { name: "interval", type: "number", default: "0.05", description: "Delay between each unit in seconds" },
           { name: "duration", type: "number", default: "0.6", description: "Spring duration hint in seconds" },
+          { name: "delay", type: "number", default: "0", description: "Seconds to wait before the first unit reveals. With <code>loop</code>, only the first reveal waits" },
+          { name: "threshold", type: "number", default: "0.1", description: "Share of the first unit (0–1) that must be in view before the reveal starts" },
           { name: "y", type: "number", default: "20", description: "Initial vertical offset in px" },
           { name: "once", type: "boolean", default: "true", description: "Animate only on first intersection. Ignored with <code>loop</code>" },
           { name: "loop", type: "boolean", default: "false", description: "Reveal, hold, hide and reveal again on repeat. The cycle runs while the text is on screen" },

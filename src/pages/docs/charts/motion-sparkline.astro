@@ -132,6 +132,8 @@ const tileCode = `<div class="stat">
           { name: "label", type: "string", default: "''", description: "Accessible name. Without it, the name describes the trend" },
           { name: "trigger", type: "string", default: "'view'", description: "When the draw-in runs: <code>'view'</code> or <code>'mount'</code>" },
           { name: "duration", type: "number", default: "1", description: "Spring duration in seconds" },
+          { name: "delay", type: "number", default: "0", description: "Seconds to wait before the entrance starts. Later data changes animate at once" },
+          { name: "threshold", type: "number", default: "0.5", description: "With <code>trigger=\"view\"</code>, share of the sparkline (0–1) that must be in view before the entrance starts" },
           { name: "bounce", type: "number", default: "0.2", description: "Spring bounciness when the values change" },
         ]}
       />

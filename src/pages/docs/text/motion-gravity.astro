@@ -120,6 +120,7 @@ el.text = 'UPDATED'   // animation restarts`}
           { name: "duration", type: "number", default: "0.6", description: "Spring duration of each character's fall, in seconds" },
           { name: "bounce", type: "number", default: "0.45", description: "Spring bounciness of the landing (0 = no overshoot)" },
           { name: "delay", type: "number", default: "0", description: "Seconds to wait before the first character falls" },
+          { name: "threshold", type: "number", default: "0.5", description: "With <code>trigger=\"view\"</code>, share of the text (0–1) that must be in view before the characters fall" },
           { name: "trigger", type: "'mount' | 'view'", default: "'mount'", description: "When the letters drop: as soon as it renders, or the first time half of it is in view" },
         ]}
       />

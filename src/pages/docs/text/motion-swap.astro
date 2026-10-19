@@ -65,6 +65,7 @@ import 'motion-components'               // or the whole library`}
         { name: 'bounce', type: 'number', default: '0.3', description: 'Spring bounciness: <code>0</code> settles without overshoot, higher is more elastic' },
         { name: 'once', type: 'boolean', default: 'true', description: 'Animate only on first intersection (<motion-code-inline copy>trigger="view"</motion-code-inline>). Set <motion-code-inline copy>once="false"</motion-code-inline> to animate on every entry. Ignored with <code>loop</code>' },
         { name: 'delay', type: 'number', default: '0', description: 'Delay in seconds before animation starts' },
+        { name: 'threshold', type: 'number', default: '0.1', description: 'With <code>trigger="view"</code>, share of the text (0–1) that must be in view before the swap starts' },
         { name: 'loop', type: 'boolean', default: 'false', description: 'Swap in, hold, swap out and swap in again on repeat. With <motion-code-inline copy>trigger="view"</motion-code-inline> the cycle runs while the text is on screen' },
         { name: 'hold', type: 'number', default: '1.6', description: 'With <code>loop</code>, seconds the swapped word stays before it swaps back' },
         { name: 'gap', type: 'number', default: '0.5', description: 'With <code>loop</code>, seconds the word stays swapped back before it swaps in again' },

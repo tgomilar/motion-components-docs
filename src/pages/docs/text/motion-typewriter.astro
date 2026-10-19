@@ -46,6 +46,7 @@ import 'motion-components'               // or the whole library`}
       <PropsTable nameLabel="Attribute" rows={[
         { name: 'interval', type: 'number', default: '0.05', description: 'Time between characters while typing, in seconds' },
         { name: 'delay', type: 'number', default: '0', description: 'Delay before typing starts after viewport entry, in seconds' },
+        { name: 'threshold', type: 'number', default: '0.2', description: 'Share of the text (0–1) that must be in view before typing starts' },
         { name: 'hold', type: 'number', default: '1.8', description: 'Time to hold the finished line before erasing, in seconds (loop only)' },
         { name: 'loop', type: 'boolean', default: 'false', description: 'Erase and retype continuously' },
         { name: 'gap', type: 'number', default: '0.5', description: 'With <code>loop</code>, seconds the line stays empty after erasing before typing starts again' },

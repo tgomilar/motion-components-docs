@@ -98,12 +98,42 @@ import 'motion-components'               // or the whole library`}
 </motion-stagger>`}
       />
 
+      <h2>delay</h2>
+      <p>
+        <code>delay</code> holds back the whole sequence, so a list can follow its heading. The gap between items stays
+        <code>interval</code>.
+      </p>
+      <DocsPreview replayId="stagger-delay">
+        <div class="demo-list" id="stagger-delay">
+          <motion-reveal y="12"><div class="demo-heading">Release notes</div></motion-reveal>
+          <motion-stagger delay="0.3" interval="0.07">
+            <div class="demo-item">Item one</div>
+            <div class="demo-item">Item two</div>
+            <div class="demo-item">Item three</div>
+          </motion-stagger>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-stagger-delay.html"
+        copy
+        code={`<motion-reveal y="12">
+  <h3>Release notes</h3>
+</motion-reveal>
+<motion-stagger delay="0.3" interval="0.07">
+  <div>Item one</div>
+  <div>Item two</div>
+  <div>Item three</div>
+</motion-stagger>`}
+      />
+
       <h2>Properties</h2>
       <PropsTable
         nameLabel="Attribute"
         rows={[
           { name: "interval", type: "number", default: "0.06", description: "Delay between each child animation in seconds" },
           { name: "duration", type: "number", default: "0.5", description: "Spring duration hint in seconds" },
+          { name: "delay", type: "number", default: "0", description: "Seconds to wait before the first child starts. The gap between children stays <code>interval</code>" },
+          { name: "threshold", type: "number", default: "0.1", description: "Share of the first child (0–1) that must be in view before the sequence starts" },
           { name: "y", type: "number", default: "16", description: "Initial vertical offset per child in px" },
           {
             name: "from",
@@ -131,6 +161,7 @@ import 'motion-components'               // or the whole library`}
 <script>
   import "motion-components/motion-split";
   import "motion-components/motion-stagger";
+  import "motion-components/motion-reveal";
 </script>
 
 <style>
@@ -149,6 +180,12 @@ import 'motion-components'               // or the whole library`}
     padding: 0.875rem 1.25rem;
     font-size: 0.9rem;
     font-weight: 500;
+    color: var(--mc-color-text);
+  }
+
+  .demo-heading {
+    font-size: 1.1rem;
+    font-weight: 700;
     color: var(--mc-color-text);
   }
 

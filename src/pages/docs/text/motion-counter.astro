@@ -78,6 +78,32 @@ import 'motion-components'               // or the whole library`}
         code={`<motion-counter from="0" to="4.87" decimals="2" suffix=" GB"></motion-counter>`}
       />
 
+      <h2>Stat row</h2>
+      <p>Give each counter a slightly longer <code>delay</code> so a row of numbers counts up one after another.</p>
+      <DocsPreview replayId="counter-delay">
+        <div class="stats-grid" id="counter-delay">
+          <div class="stat">
+            <motion-counter class="stat-num" from="0" to="120" duration="1.5" suffix="+"></motion-counter>
+            <span class="stat-label">Projects</span>
+          </div>
+          <div class="stat">
+            <motion-counter class="stat-num" from="0" to="34" duration="1.5" delay="0.2"></motion-counter>
+            <span class="stat-label">Countries</span>
+          </div>
+          <div class="stat">
+            <motion-counter class="stat-num accent" from="0" to="99.9" duration="1.5" decimals="1" suffix="%" delay="0.4"></motion-counter>
+            <span class="stat-label">Uptime</span>
+          </div>
+        </div>
+      </DocsPreview>
+      <CodeWindow
+        filename="motion-counter-delay.html"
+        copy
+        code={`<motion-counter to="120" suffix="+"></motion-counter>
+<motion-counter to="34" delay="0.2"></motion-counter>
+<motion-counter to="99.9" decimals="1" suffix="%" delay="0.4"></motion-counter>`}
+      />
+
       <h2>Repeat on re-entry</h2>
       <p>
         <code>once</code> defaults to <code>true</code>. Set <motion-code-inline copy>once="false"</motion-code-inline> to count again every
@@ -139,6 +165,8 @@ counter.replay()`}
         { name: 'from', type: 'number', default: '0', description: 'Starting value' },
         { name: 'to', type: 'number', default: '100', description: 'End value' },
         { name: 'duration', type: 'number', default: '1.5', description: 'Spring duration hint in seconds' },
+        { name: 'delay', type: 'number', default: '0', description: 'Seconds to hold at <code>from</code> before counting starts. With <code>loop</code>, only the first count waits' },
+        { name: 'threshold', type: 'number', default: '0.2', description: 'Share of the counter (0–1) that must be in view before counting starts' },
         { name: 'decimals', type: 'number', default: '0', description: 'Number of decimal places to display' },
         { name: 'prefix', type: 'string', default: "''", description: 'Static text prepended to the number' },
         { name: 'suffix', type: 'string', default: "''", description: 'Static text appended to the number' },
