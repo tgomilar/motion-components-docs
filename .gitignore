@@ -19,3 +19,6 @@ node_modules/
 
 # logs
 npm-debug.log*
+
+# directory submission draft, kept local
+submit.json
