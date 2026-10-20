@@ -48,7 +48,7 @@ function scriptGraph(entry, seen = new Set()) {
 }
 
 for (const page of pages) {
-  const body = page.html.replace(/<pre[\s\S]*?<\/pre>/g, "");
+  const body = page.html.replace(/<pre[\s\S]*?<\/pre>/g, "").replace(/<script type="text\/plain">[\s\S]*?<\/script>/g, "");
   const tags = new Set([...body.matchAll(/<(motion-[a-z-]+)[\s>]/g)].map((m) => m[1]));
   if (!tags.size) continue;
   let code = [...page.html.matchAll(/<script type="module">([\s\S]*?)<\/script>/g)].map((m) => m[1]).join("\n");

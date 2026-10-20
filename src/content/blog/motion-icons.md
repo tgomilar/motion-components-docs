@@ -222,7 +222,7 @@ In the second way, your own button controls the icon. This menu button changes t
 
 The state changes on a spring. If you click again in the middle of a change, the icon turns around from where it is. It does not jump to the end first.
 
-[State Icons: Menu to Close, Play to Pause, on a Spring](/blog/motion-icon-states/) explains this element in detail. It has complete recipes for a copy button, a save button with a spinner, a show password button and an accordion.
+[State Icons: Menu to Close, Play to Pause, on a Spring](/blog/motion-state-icons/) explains this element in detail. It has complete recipes for a copy button, a save button with a spinner, a show password button and an accordion.
 
 ## React and Vue
 
