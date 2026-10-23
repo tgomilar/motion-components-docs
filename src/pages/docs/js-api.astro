@@ -134,7 +134,7 @@ pauseAll(document.querySelector('#hero'))`}
       <PropsTable
         nameLabel="Export"
         rows={[
-          { name: "pauseAll(root?)", type: "(root?: Node) => void", default: "document", description: "Pauses every running component inside <code>root</code>, and disables the components that follow the pointer. It also holds endless decorative loops, such as the <code>motion-icon-state</code> loading spinner." },
+          { name: "pauseAll(root?)", type: "(root?: Node) => void", default: "document", description: "Pauses every running component inside <code>root</code>, and disables the components that follow the pointer. It also holds endless decorative loops, such as the <code>motion-icon-state</code> loading spinner and playing equalizer." },
           { name: "resumeAll(root?)", type: "(root?: Node) => void", default: "document", description: "Resumes what <code>pauseAll()</code> paused, and enables only what it disabled." },
           { name: "cancelAll(root?)", type: "(root?: Node) => void", default: "document", description: "Cancels every component inside <code>root</code>." },
         ]}
@@ -173,7 +173,7 @@ slider?.addEventListener('motion-change', (event) => {
       <h2 id="without-playback">Components without these methods</h2>
       <ul>
         <li><strong>Pointer-driven:</strong> <code>motion-hover</code>, <code>motion-press</code>, <code>motion-magnetic</code>, <code>motion-tilt</code> and <code>motion-stretch</code> follow the pointer. Set <code>disabled</code> to turn them off. <code>pauseAll()</code> does it for you.</li>
-        <li><strong>Widgets:</strong> <code>motion-dialog</code>, <code>motion-gallery</code>, <code>motion-slider</code>, <code>motion-flip-card</code>, <code>motion-image-compare</code>, <code>motion-spotlight</code>, <code>motion-icon-state</code>, <code>motion-theme-icon</code> and <code>motion-theme-toggle</code> have their own methods: <code>show()</code> and <code>close()</code> on the dialog, <code>open()</code> and <code>next()</code> on the gallery, <code>goTo()</code> and <code>next()</code> on the slider, and <code>flip()</code> on the flip card and on <code>motion-icon-state</code>. The <code>motion-icon-state</code> loading spinner is an endless loop, and <code>pauseAll()</code> holds it. Each component's page lists the full set.</li>
+        <li><strong>Widgets:</strong> <code>motion-dialog</code>, <code>motion-gallery</code>, <code>motion-slider</code>, <code>motion-flip-card</code>, <code>motion-image-compare</code>, <code>motion-spotlight</code>, <code>motion-icon-state</code>, <code>motion-theme-icon</code> and <code>motion-theme-toggle</code> have their own methods: <code>show()</code> and <code>close()</code> on the dialog, <code>open()</code> and <code>next()</code> on the gallery, <code>goTo()</code> and <code>next()</code> on the slider, and <code>flip()</code> on the flip card and on <code>motion-icon-state</code>. The <code>motion-icon-state</code> loading spinner and playing equalizer are endless loops, and <code>pauseAll()</code> holds them. Each component's page lists the full set.</li>
         <li><strong>Static:</strong> <code>motion-code-inline</code> does not animate.</li>
       </ul>
     </main>
